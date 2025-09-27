@@ -1,0 +1,300 @@
+// Simple Waitlist Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  ipAddress String   @map("ip_address")
+  userAgent String   @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("waitlist")
+}
+
+
+// NextAuth required tables
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?   // <-- Optional, only filled for credentials-based users
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  subscriptions Subscription[]
+  payments      Payment[]
+}
+
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// VPS Plans with flexible pricing
+model Plan {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  
+  // VPS Specifications
+  cpu         Int      // vCPUs
+  ram         Int      // RAM in GB
+  storage     Int      // Storage in GB
+  bandwidth   Int      // Monthly bandwidth in GB
+  
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations - Plans have multiple pricing tiers
+  pricingTiers  PricingTier[]
+  subscriptions Subscription[]
+
+  @@index([isActive])
+}
+
+// Flexible pricing for different billing cycles
+model PricingTier {
+  id            String      @id @default(cuid())
+  planId        String
+  billingCycle  BillingCycle
+  price         Float       // Price for this billing cycle
+  currency      String      @default("USD")
+  discountPercent Float?    // Discount for longer commitments
+  
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Relations
+  plan          Plan         @relation(fields: [planId], references: [id], onDelete: Cascade)
+  subscriptions Subscription[]
+
+  @@unique([planId, billingCycle])
+  @@index([isActive])
+}
+
+// Main subscription entity (replaces VPSOrder)
+model Subscription {
+  id                String            @id @default(cuid())
+  userId            String
+  planId            String
+  pricingTierId     String
+  
+  // VPS Details
+  serverName        String?           // User-chosen server name
+  serverIP          String?           // Assigned IP after provisioning
+  serverPassword    String?           // Root password (encrypted)
+  
+  // Subscription lifecycle
+  status            SubscriptionStatus @default(PENDING)
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  canceledAt        DateTime?
+  cancelAtPeriodEnd Boolean           @default(false)
+  autoRenew         Boolean           @default(true)
+  
+  // Metadata
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  activatedAt       DateTime?         // When VPS was actually created
+  suspendedAt       DateTime?         // When suspended for non-payment
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        Plan         @relation(fields: [planId], references: [id])
+  pricingTier PricingTier  @relation(fields: [pricingTierId], references: [id])
+  payments    Payment[]
+  invoices    Invoice[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([currentPeriodEnd])
+  @@index([serverIP])
+}
+
+// Invoices for better billing management
+model Invoice {
+  id             String        @id @default(cuid())
+  subscriptionId String
+  userId         String
+  invoiceNumber  String        @unique
+  
+  // Invoice details
+  subtotal       Float
+  taxAmount      Float         @default(0)
+  total          Float
+  currency       String        @default("USD")
+  
+  // Billing period this invoice covers
+  periodStart    DateTime
+  periodEnd      DateTime
+  
+  status         InvoiceStatus @default(DRAFT)
+  dueDate        DateTime
+  paidAt         DateTime?
+  
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Relations
+  subscription   Subscription  @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  payments       Payment[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+// Payment transactions - now linked to invoices
+model Payment {
+  id                String        @id @default(cuid())
+  userId            String
+  subscriptionId    String?
+  invoiceId         String?
+  
+  // Payment details
+  paymentUrl        String?     
+  amount            Float
+  currency          String        @default("USD")
+  payoneerPaymentId String?       @unique
+  status            PaymentStatus @default(PENDING)
+  paymentMethod     PaymentMethod @default(CARD)
+  
+  // Metadata
+  description       String?
+  metadata          Json?         // Store additional payment gateway data
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  paidAt            DateTime?
+  failedAt          DateTime?
+  refundedAt        DateTime?
+  refundAmount      Float?
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  invoice      Invoice?      @relation(fields: [invoiceId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([payoneerPaymentId])
+}
+
+// Email notifications log
+model EmailLog {
+  id             String    @id @default(cuid())
+  userId         String
+  subscriptionId String?
+  type           EmailType
+  subject        String
+  sentAt         DateTime  @default(now())
+  success        Boolean   @default(true)
+  error          String?
+
+  @@index([userId])
+  @@index([type])
+  @@index([sentAt])
+}
+
+// Enums
+enum BillingCycle {
+  MONTHLY
+  SEMI_ANNUAL // 6 months
+  ANNUAL     // 12 months
+}
+
+enum SubscriptionStatus {
+  PENDING      // Waiting for first payment
+  ACTIVE       // Paid and running
+  SUSPENDED    // Suspended for non-payment
+  CANCELED     // Canceled but still active until period end
+  EXPIRED      // Grace period expired
+  TERMINATED   // Permanently deleted
+}
+
+enum InvoiceStatus {
+  DRAFT        // Not yet sent
+  OPEN         // Sent, awaiting payment
+  PAID         // Payment received
+  OVERDUE      // Past due date
+  VOID         // Canceled/voided
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum PaymentMethod {
+  CARD
+  BANK_TRANSFER
+  PAYPAL
+  CRYPTO
+}
+
+enum EmailType {
+  WELCOME
+  RENEWAL_REMINDER_7D
+  RENEWAL_REMINDER_3D
+  RENEWAL_REMINDER_1D
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+  INVOICE_CREATED
+  INVOICE_OVERDUE
+  SERVICE_SUSPENDED
+  SERVICE_TERMINATED
+  SUBSCRIPTION_CANCELED
+}
+
+
