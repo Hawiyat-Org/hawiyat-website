@@ -19,10 +19,10 @@ import FloatingElements from "@/components/floating-elements"
 export default function Home() {
   return (
     <>
-      <FloatingElements />
+   
       <ScrollAnimations />
       <Header />
-      <main>
+      <main className=""> 
         <HeroSection />
         <TrustedBrands />
         <BuildAIApps />

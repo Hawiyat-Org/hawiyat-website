@@ -3,49 +3,54 @@ import Image from "next/image"
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Mante",
-      company: "Glu, cto",
-      avatar: "/placeholder.svg?height=50&width=50&text=M",
+      name: "Amine K.",
+      company: "DevOps Lead, Algotech",
+      avatar: "/placeholder.svg?height=50&width=50&text=A",
       content:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolore deleniti iusto Numquam!",
+        "With Hawiyat’s one-click deployment, we cut release times from hours to minutes. Our team can now ship updates daily without worrying about downtime.",
     },
     {
-      name: "Trich B",
-      company: "AMI, ceo",
-      avatar: "/placeholder.svg?height=50&width=50&text=T",
-      content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, vero. Lorem ipsum dolor sit amet.",
-    },
-    {
-      name: "John B",
-      company: "Benz, ceo",
-      avatar: "/placeholder.svg?height=50&width=50&text=J",
+      name: "Sarah M.",
+      company: "CTO, Innovexa",
+      avatar: "/placeholder.svg?height=50&width=50&text=S",
       content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, expedita nihil repellendus accusamus itaque facere labore, suscipit tempore in harum repellat. Doloribus, dolor facere dolorem impedit facilis rerum beatae exercitationem aliquid porro ea architecto similique illo omnis odio consequatur modi.",
+        "GitHub integration works like magic—push your code and Hawiyat takes care of testing and deployment automatically. It just feels seamless.",
     },
     {
-      name: "Ben Alfert B",
-      company: "XZ tech, cto",
-      avatar: "/placeholder.svg?height=50&width=50&text=B",
-      content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, vero.",
+      name: "Yacine L.",
+      company: "Founder, CloudNest",
+      avatar: "/placeholder.svg?height=50&width=50&text=Y",
+      content:
+        "Automated backups saved us more than once. Knowing our data is secure and recoverable with Hawiyat gives us complete peace of mind.",
     },
     {
-      name: "Rachel",
-      company: "Gem, cto",
+      name: "Rania B.",
+      company: "Product Manager, NextWave",
       avatar: "/placeholder.svg?height=50&width=50&text=R",
-      content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, vero. Lorem, ipsum dolor.",
+      content:
+        "The unified dashboard is a game-changer. From deployment to monitoring, everything is in one place—easy to track and easy to manage.",
     },
     {
-      name: "Jamie",
-      company: "SnapFist.ai, ceo",
-      avatar: "/placeholder.svg?height=50&width=50&text=J2",
+      name: "Houssem T.",
+      company: "CEO, BrightApps",
+      avatar: "/placeholder.svg?height=50&width=50&text=H",
       content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nihil vitae fuga ab reiciendis optio et corporis dolorem alias deserunt, molestias in iusto! Ratione, quisquam incidunt. Reprehenderit ipsam officiis enim.",
+        "We scaled from a few users to thousands without touching infrastructure. Hawiyat handled everything in the background, flawlessly.",
+    },
+    {
+      name: "Nadia F.",
+      company: "Data Engineer, Flowlytics",
+      avatar: "/placeholder.svg?height=50&width=50&text=N",
+      content:
+        "The analytics and monitoring tools are super insightful. We now spot issues before they impact users—something we never had before Hawiyat.",
     },
   ]
 
   return (
     <section className="flex min-h-[100vh] w-full flex-col place-content-center place-items-center p-[2%]">
-      <h3 className="reveal-up text-4xl font-medium text-center max-md:text-2xl">Join the professionals using Pixa</h3>
+      <h3 className="reveal-up text-4xl font-medium text-center max-md:text-2xl">
+        Trusted by professionals building on Hawiyat
+      </h3>
 
       <div className="mt-20 gap-10 space-y-8 max-md:columns-1 lg:columns-2 xl:columns-3">
         {testimonials.map((testimonial, index) => (

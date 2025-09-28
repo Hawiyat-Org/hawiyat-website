@@ -12,7 +12,7 @@ const TrustedBrands = () => {
 
   return (
     <section className="relative flex w-full max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden p-8">
-      <h2 className="reveal-up text-3xl max-md:text-xl">Trusted by brands you love</h2>
+      <h2 className="reveal-up text-3xl max-md:text-xl">Trusted by  </h2>
 
       <div className="reveal-up carousel-container">
         <div className="carousel lg:place-content-center mt-10 flex w-full gap-5 max-md:gap-2">

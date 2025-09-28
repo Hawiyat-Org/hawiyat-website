@@ -4,22 +4,23 @@ import Link from "next/link"
 const BenefitsSection = () => {
   const benefits = [
     {
-      title: "Unified interface",
+      title: "CI/CD ",
       description:
-        "Our's is the only unified AI Interface tool brings together all your favorite chat models into one seamless platform. No more juggling between different AI systems—easily manage and interact with multiple chatbots from a single interface.",
-      image: "/placeholder.svg?height=180&width=350&text=Unified+Interface",
+        "Automate your build, test, and deployment workflows with a powerful CI/CD pipeline. Deliver updates faster, reduce errors, and ensure smooth releases with every commit.",
+      image: "/benf/domains.png?height=180&width=350&text=CI+CD+Pipeline",
+    },
+    
+    {
+      title: " GitHub Integration",
+      description:
+        "Connect your projects directly with GitHub for effortless version control. Deploy, track changes, and collaborate with your team without leaving the platform.",
+      image: "/benf/git.png?height=180&width=350&text=GitHub+Integration",
     },
     {
-      title: "API Access",
+      title: "1 Click Deployment",
       description:
-        "Pixa's LLM API offers advanced summarization, text generation, and question-answering. Easily integrate with support for JSON, HTML, Markdown, and plain text, enhancing your applications with powerful language tools.",
-      image: "/placeholder.svg?height=180&width=350&text=API+Access",
-    },
-    {
-      title: "Pre-built Tools",
-      description:
-        "Pixa offers pre-built AI integrations for diverse creative tasks including image, video, music, and PDF generation, simplifying advanced feature integration into your apps.",
-      image: "/placeholder.svg?height=180&width=350&text=Pre-built+Tools",
+        "Deploy your apps with a single click. From staging to production, our platform ensures fast, secure, and reliable deployments—backed by automated monitoring and rollbacks.",
+      image: "/benf/back.png?height=180&width=350&text=One-Click+Deployment",
     },
   ]
 
@@ -27,7 +28,7 @@ const BenefitsSection = () => {
     <section className="relative flex max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden">
       <div className="mt-8 flex flex-col w-full h-full place-items-center gap-5">
         <div className="reveal-up mt-5 flex flex-col gap-3 text-center">
-          <h2 className="text-6xl font-medium max-md:text-3xl p-2">Experience all the benefits of AI</h2>
+          <h2 className="text-6xl font-medium max-md:text-3xl p-2">Everything you need, in one place</h2>
         </div>
 
         <div className="mt-6 flex flex-col max-w-[1150px] max-lg:max-w-full h-full p-4 max-lg:place-content-center gap-8">
@@ -65,18 +66,18 @@ const BenefitsSection = () => {
             >
               <div className="text-6xl overflow-hidden rounded-xl w-full h-full max-md:h-[180px]">
                 <Image
-                  src="/placeholder.svg?height=350&width=500&text=Multiple+AI+Models"
+                  src="/benf/back.png?height=350&width=500&text=Automatic+Backups"
                   width={500}
                   height={350}
                   className="w-full object-contain h-full"
-                  alt="AI models"
+                  alt="Automatic Backups"
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-3xl max-md:text-2xl font-medium">Multiple AI models</h2>
+                <h2 className="text-3xl max-md:text-2xl font-medium">Automatic Backups</h2>
                 <p className="leading-normal text-gray-800 dark:text-gray-200">
-                  Pixa supports various AI models, including ChatGPT, Gemini, Claude, Mistral and more, providing a
-                  range of advanced capabilities for various language and creative tasks.
+                  Keep your data safe with regular automated backups. Restore your projects anytime with just a click,
+                  ensuring peace of mind and uninterrupted workflows.
                 </p>
                 <div className="flex items-center gap-2 mt-auto">
                   <span>Learn more</span>

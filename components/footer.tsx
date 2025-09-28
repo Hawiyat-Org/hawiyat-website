@@ -34,9 +34,9 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { name: "Github", href: "https://github.com/PaulleDemon/", icon: "bi-github" },
+    { name: "Github", href: "https://github.com/hawiyat-corp/", icon: "bi-github" },
     { name: "Twitter", href: "https://twitter.com/pauls_freeman", icon: "bi-twitter" },
-    { name: "LinkedIn", href: "https://www.linkedin.com/", icon: "bi-linkedin" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", icon: "bi-linkedin" },
   ]
 
   return (
@@ -45,8 +45,8 @@ const Footer = () => {
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
           <Link href="#" className="w-full place-items-center flex flex-col gap-6">
-            <Image src="/pixa-logo.jpg" alt="logo" width={120} height={120} className="max-w-[120px] dark:invert" />
-            <div className="max-w-[120px] text-center text-3xl h-fit">PIXA</div>
+            <Image src="/logo.png" alt="logo" width={120} height={120} className="max-w-[120px] " />
+            <div className="max-w-[120px] text-center text-3xl h-fit">Hawiyat</div>
           </Link>
 
           <div className="flex gap-4 text-lg">

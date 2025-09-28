@@ -62,7 +62,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero-section relative mt-20 flex min-h-[100vh] w-full max-w-[100vw] flex-col overflow-hidden max-lg:mt-[100px]"
+      className="hero-section  relative mt-20 flex min-h-[100vh] w-full max-w-[100vw] flex-col overflow-hidden max-lg:mt-[100px]"
       id="hero-section"
     >
       <VideoModal isOpen={showVideoModal} onClose={closeVideo} />
@@ -71,8 +71,8 @@ const HeroSection = () => {
         <div className="purple-bg-grad reveal-up absolute left-1/2 -translate-x-1/2 top-[10%] h-[120px] w-[120px]"></div>
 
         <div className="flex flex-col min-h-[60vh] place-content-center items-center">
-          <h2 className="reveal-up text-center text-7xl font-semibold uppercase leading-[90px] max-lg:text-4xl max-md:leading-snug">
-            All your Infra Structer
+          <h2 className="reveal-up text-center text-7xl font-medium uppercase leading-[90px] max-lg:text-4xl max-md:leading-snug">
+            All of your InfraStructer
             <br />
             <span className="font-thin font-serif">
               in one place

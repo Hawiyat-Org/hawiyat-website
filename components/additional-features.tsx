@@ -3,37 +3,40 @@ import Image from "next/image"
 const AdditionalFeatures = () => {
   const features = [
     {
-      title: "Prompt Library",
-      description: "Forget about writing your own prompt, use the prompt templates and supercharge your workflow.",
-      image: "/placeholder.svg?height=250&width=350&text=Prompt+Library",
-    },
-    {
-      title: "Real-time web search",
+      title: "One-Click Deployment",
       description:
-        "Our Real-time web search AI Bot provides instant, live search results directly within the AI chat playground.",
-      image: "/placeholder.svg?height=250&width=350&text=Web+Search",
+        "Deploy your apps with a single click. Hawiyat automates build, testing, and release so you can focus on innovation, not infrastructure.",
+      image: "/placeholder.svg?height=250&width=350&text=Deployment",
     },
     {
-      title: "Image Generation",
-      description: "Generate Image instantly from multiple models, create visuals from text descriptions or templates.",
-      image: "/placeholder.svg?height=250&width=350&text=Image+Generation",
-    },
-    {
-      title: "History",
+      title: "GitHub Integration",
       description:
-        "All of the models can recall previous topic, so you can continue your conversation at any point of time.",
-      image: "/placeholder.svg?height=250&width=350&text=History",
+        "Seamlessly connect your repositories with Hawiyat. Push code, trigger CI/CD pipelines, and watch your changes go live instantly.",
+      image: "/placeholder.svg?height=250&width=350&text=GitHub+Integration",
     },
     {
-      title: "Import content",
+      title: "Automated Backups",
       description:
-        "Effortlessly import PDFs, images, and documents. Use AI to ask questions, extract information, and summarize documents.",
-      image: "/placeholder.svg?height=250&width=350&text=Import+Content",
+        "Keep your data and applications safe with automated daily backups and quick recovery options, all managed within the dashboard.",
+      image: "/placeholder.svg?height=250&width=350&text=Backups",
     },
     {
-      title: "Multilingual support",
-      description: "ChatGPT, and Gemini can understand and respond in over 100 languages.",
-      image: "/placeholder.svg?height=250&width=350&text=Multilingual",
+      title: "Unified Identity",
+      description:
+        "Manage authentication and permissions with ease. Hawiyat provides secure, centralized identity management for teams and applications.",
+      image: "/placeholder.svg?height=250&width=350&text=Identity",
+    },
+    {
+      title: "Scalable Hosting",
+      description:
+        "Start small and grow big—Hawiyat’s infrastructure scales with your needs, ensuring performance and reliability at every stage.",
+      image: "/placeholder.svg?height=250&width=350&text=Scalability",
+    },
+    {
+      title: "Smart Analytics",
+      description:
+        "Get real-time insights into your deployments and usage. Track performance, detect issues, and make data-driven decisions with AI-powered analytics.",
+      image: "/placeholder.svg?height=250&width=350&text=Analytics",
     },
   ]
 
@@ -41,7 +44,7 @@ const AdditionalFeatures = () => {
     <section className="relative flex w-full min-h-[110vh] max-md:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden">
       <div className="w-full max-lg:max-w-full place-content-center items-center flex flex-col max-w-[80%] gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
-          Additional Features
+          Additional Hawiyat Features
         </h3>
 
         <div className="mt-8 relative gap-10 p-4 grid place-items-center grid-cols-3 max-lg:flex max-lg:flex-col">

@@ -21,7 +21,7 @@
   --footer-link-hover: #000;
   --header-bg: #edececa5;
   --hero-gradient: #fcfcfc;
-  --hero-bg-img: url("/placeholder.svg?height=100&width=100");
+  --hero-bg-img: url("/dots-dark.svg?height=100&width=100");
   
   /* Fixed HSL values for proper Tailwind integration */
   --background: 0 0% 100%;
@@ -68,7 +68,7 @@
   --footer-link-hover: #ffffff;
   --header-bg: #232323a5;
   --hero-gradient: #000;
-  --hero-bg-img: url("/placeholder.svg?height=100&width=100");
+  --hero-bg-img: url("/dots.svg?height=100&width=100");
   
   /* Fixed HSL values for dark mode */
   --background: 0 0% 3.9%;
@@ -114,6 +114,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
 
 /* Rest of your custom styles */
 html {
@@ -272,12 +273,12 @@ body.modal-open {
   width: 30%;
   height: 100%;
   border-radius: inherit;
-  background-color: #6366f1;
+  background-color: black;
   background-repeat: no-repeat;
   background-position: 0% 0%;
   filter: blur(1.5rem);
   opacity: 0.8;
-  box-shadow: inset 0px 0px 20px 5px #6366f1;
+  box-shadow: inset 0px 0px 20px 5px black;
   z-index: -2;
   pointer-events: none;
   animation: slide 10s ease-in-out infinite;

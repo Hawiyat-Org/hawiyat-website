@@ -4,16 +4,71 @@ import type React from "react"
 
 import { useState } from "react"
 import Image from "next/image"
-import AIModelDropdown from "./ai-model-dropdown"
 
 interface AIPlaygroundProps {
   typedText: string
 }
 
+// AI Model Dropdown Component
+const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: string, onModelChange: (model: string) => void }) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const aiModels = [
+    { name: "Hawiyat CLI", icon: "bi-terminal", color: "text-cyan-600" },
+    { name: "Claude Sonnet", icon: "bi-robot", color: "text-orange-600"},
+    { name: "GPT 4o", icon: "bi-lightning", color: "text-green-600" },
+    { name: "Gemini", icon: "bi-gem", color: "text-purple-600" },
+ 
+  ]
+
+  const currentModel = aiModels.find(model => model.name === selectedModel) || aiModels[0]
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 p-2  dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 min-w-[140px]"
+      >
+        <i className={`${currentModel.icon} ${currentModel.color}`}></i>
+        <div className="flex flex-col items-start">
+          <span className="text-sm font-medium truncate">{currentModel.name}</span>
+    
+        </div>
+        <i className={`bi bi-chevron-down ml-auto transition-transform ${isOpen ? "rotate-180" : ""}`}></i>
+      </button>
+
+      {isOpen && (
+        <div className="absolute bottom-full mb-2 left-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg z-20 min-w-[200px]">
+          {aiModels.map((model) => (
+            <button
+              key={model.name}
+              type="button"
+              onClick={() => {
+                onModelChange(model.name)
+                setIsOpen(false)
+              }}
+              className={`flex items-center gap-3 w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-left ${
+                selectedModel === model.name ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+              }`}
+            >
+              <i className={`${model.icon} ${model.color}`}></i>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium">{model.name}</span>
+               
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
   const [prompts, setPrompts] = useState<string[]>([])
   const [currentPrompt, setCurrentPrompt] = useState("")
-  const [selectedModel, setSelectedModel] = useState("GPT 4o")
+  const [selectedModel, setSelectedModel] = useState("Hawiyat CLI")
   const [showSignup, setShowSignup] = useState(false)
   const MAX_PROMPTS = 3
 
@@ -28,14 +83,20 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
     // Simulate AI response
     setTimeout(() => {
-      const responses = {
-        "gpt 4o": "Hello from GPT 4o, add 3 prompts",
-        gemini: "Hello from Gemini, add 3 prompts",
-        "llama 3": "Hello from Meta Llama 3, add 3 prompts",
-        claude: "Hello from Claude, add 3 prompts",
-      }
+      const responses: Record<string, string> = {
+        "hawiyat cli": [
+          "Hawiyat CLI at your service. I can help you deploy apps, manage agents, and inspect logs.",
+          "Common commands: `hawiyat deploy --app <name>`, `hawiyat agents create <agent-name>`, `hawiyat agents run <agent-name>`, `hawiyat logs --app <name>`.",
+          "To create an AI agent: `hawiyat agents create <agent-name> --from template:assistant`. Example: `hawiyat agents create summarizer --from-template:docs`.",
+          "Need CI/CD? Try `hawiyat pipeline create --app <name> --git <repo-url>`."
+        ].join(" "),
+        "claude sonnet": "Hello from Claude Sonnet! I'm here to help with writing, coding, analysis and creative tasks. (Switch to Hawiyat CLI to get deployment commands.)",
+        "gpt 4o": "Hello from GPT 4o! I can assist with complex reasoning, coding, and creative problem-solving. Ask how Hawiyat can integrate with your CI/CD pipeline.",
+        "gemini": "Hello from Gemini! I can help with research, code, and multimodal tasks. Use Hawiyat CLI to deploy multimodal endpoints.",
+        "llama 3": "Hello from Llama 3! Open-source model assistance — can help you prototype agents you might later deploy with Hawiyat."
+      } as Record<string, string>
 
-      const response = responses[selectedModel.toLowerCase() as keyof typeof responses] || responses["gpt 4o"]
+      const response = responses[selectedModel.toLowerCase()] || responses["hawiyat cli"]
       setPrompts((prev) => [...prev, response])
     }, 500)
 
@@ -52,9 +113,10 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
     <>
       {/* Sign-up popup */}
       <div
-        className={`absolute rounded-xl text-center transition-transform duration-300 ${showSignup ? "scale-100" : "scale-0"} backdrop-blur-lg flex flex-col p-10 place-items-center gap-4 w-full h-full dark:bg-[#000000b4] bg-[#ffffff6a] top-0 left-0 z-20`}
+        className={`absolute rounded-xl text-center transition-transform duration-300
+           ${showSignup ? "scale-100" : "scale-0"} backdrop-blur-lg flex flex-col p-10 place-items-center gap-4 w-full h-full dark:bg-[#000000b4] bg-[#ffffff6a] top-0 left-0 z-20`}
       >
-        <h4 className="mt-6 text-3xl max-md:text-xl">Signup to continue your conversation</h4>
+        <h4 className="mt-6 text-3xl max-md:text-xl">Signup to continue using Hawiyat CLI</h4>
 
         <div className="flex gap-1 place-items-center">
           <div className="flex -space-x-4">
@@ -87,17 +149,17 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
               alt="Avatar 4"
             />
             <Image
-              className="z-[1] w-10 h-10 object-cover rounded-full border-2 border-white"
+              className="z-[1] w-10 h-10 object-cover rounded-full border-2 border-the"
               src="/placeholder.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 5"
             />
           </div>
-          <p>+20,000</p>
+          <p>+25,000</p>
         </div>
 
-        <div className="mt-3 text-lg">Join Ben and 20,000+ users using Pixa</div>
+        <div className="mt-3 text-lg">Join developers using Hawiyat to deploy and run agents</div>
 
         <a href="#" className="btn">
           Sign up
@@ -108,29 +170,29 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
       <div className="min-w-[250px] max-lg:hidden p-2 gap-2 flex flex-col bg-gray-100 dark:bg-[#171717] h-full">
         <div className="h-[30px] w-fit max-w-[100px]">
           <Image
-            src="/pixa-logo.jpg"
+            src="/logo.png"
             alt="logo"
             width={100}
             height={30}
-            className="object-contain opacity-80 h-full w-full dark:invert"
+            className="object-contain opacity-80 h-full w-full "
           />
         </div>
 
         <div className="flex mt-2 gap-2 flex-col">
           <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
-            <i className="bi bi-image"></i>
-            <span>Image generator</span>
+            <i className="bi bi-cloud-upload"></i>
+            <span>Deployments</span>
           </a>
           <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
-            <i className="bi bi-file-pdf"></i>
-            <span>Pdf generator</span>
+            <i className="bi bi-robot"></i>
+            <span>Agents</span>
           </a>
           <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
-            <i className="bi bi-code-square"></i>
-            <span>Code generator</span>
+            <i className="bi bi-book"></i>
+            <span>Docs & CLI</span>
           </a>
           <a href="#" className="flex rounded-sm group gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
-            <span>Show all</span>
+            <span>Explore More</span>
             <i className="bi bi-arrow-right transform transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
         </div>
@@ -138,7 +200,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         <div className="mt-auto w-full flex px-6 place-content-center">
           <a
             href="#"
-            className="btn !w-full !bg-transparent duration-[0.3s] hover:!bg-black hover:!text-white dark:hover:!bg-white dark:hover:!text-black !border-[1px] !border-black !text-black dark:!border-white dark:!text-white"
+            className="btn !w-full py-2 !bg-transparent duration-[0.3s] hover:!bg-black hover:!text-white dark:hover:!bg-white dark:hover:!text-black !border-[1px] !border-black !text-black dark:!border-white dark:!text-white"
           >
             Signup
           </a>
@@ -150,18 +212,18 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         <div className="relative w-full flex place-content-center h-full">
           <div className="absolute top-[20%] max-lg:top-[30%] left-1/2 -translate-x-1/2 w-[150px] h-[150px]">
             <Image
-              src="/pixa-logo.jpg"
+              src="/logo.png"
               width={150}
               height={150}
-              className="w-full h-full dark:invert object-contain opacity-20"
-              alt="Pixa logo"
+              className="w-full h-full object-contain opacity-20"
+              alt="AI Assistant logo"
             />
           </div>
 
           <div className="overflow-y-auto px-[5%] max-lg:px-2 scrollbar max-lg:max-h-[80%] max-h-[550px] max-lg:mt-12 w-full h-full z-10 flex flex-col">
             {prompts.length === 0 ? (
               <div className="w-full flex text-center flex-col place-content-center">
-                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Try Prompts</h2>
+                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat CLI — interactive helper</h2>
                 <div className="inline mt-6 max-md:mt-3">
                   <span>{typedText}</span>
                   <span className="animate-pulse">|</span>
@@ -192,9 +254,9 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           </div>
 
           <input
-            placeholder="How to develop a saas app?"
+            placeholder="Ask the Hawiyat CLI (e.g. 'how do I deploy my app?')"
             type="text"
-            className="p-2 !outline-none bg-transparent border-none w-full placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
+            className="p-2 !outline-none pl-4 bg-transparent border-none w-full placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
             value={currentPrompt}
             onChange={(e) => setCurrentPrompt(e.target.value)}
             disabled={prompts.length >= MAX_PROMPTS}
@@ -202,7 +264,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
           <button
             type="submit"
-            className="btn !bg-[#6366f1] !p-2 !px-3 !text-white"
+            className="btn !bg-black   !p-2 !px-3 !text-white"
             title="submit"
             disabled={prompts.length >= MAX_PROMPTS}
           >
