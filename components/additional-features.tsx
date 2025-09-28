@@ -51,7 +51,7 @@ const AdditionalFeatures = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="reveal-up w-[350px] border-[1px] h-[400px] rounded-md place-items-center p-4 bg-[#f2f3f4] max-md:w-[320px] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-3"
+              className="reveal-up w-[350px] px-2 border-[1px] h-[400px] rounded-md place-items-center p-4 bg-[#f2f3f4] max-md:w-[320px] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-3"
             >
               <div className="w-full h-[250px] p-4 rounded-xl backdrop-blur-2xl overflow-hidden flex place-content-center">
                 <Image

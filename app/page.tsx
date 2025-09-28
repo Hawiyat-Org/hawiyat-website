@@ -21,7 +21,7 @@ export default function Home() {
     <>
    
       <ScrollAnimations />
-      <Header />
+     
       <main className=""> 
         <HeroSection />
         <TrustedBrands />

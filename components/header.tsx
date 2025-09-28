@@ -52,7 +52,7 @@ const Header = () => {
         {/* Main Header Row */}
         <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 min-h-[64px] sm:min-h-[80px]">
           {/* Logo */}
-          <Link href="#" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
             <Image 
               src="/logo.png" 
               alt="Hawiyat Logo" 
@@ -108,10 +108,10 @@ const Header = () => {
             </button>
 
             <Link
-              href="#"
+              href="/auth"
               className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
             >
-              Try playground
+              Sign in
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

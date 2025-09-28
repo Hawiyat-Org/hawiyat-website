@@ -253,10 +253,12 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
             <AIModelDropdown selectedModel={selectedModel} onModelChange={handleModelChange} />
           </div>
 
+
           <input
             placeholder="Ask the Hawiyat CLI (e.g. 'how do I deploy my app?')"
             type="text"
-            className="p-2 !outline-none pl-4 bg-transparent border-none w-full placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
+            className="p-2 !outline-none pl-4 bg-transparent border-none w-full
+             placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
             value={currentPrompt}
             onChange={(e) => setCurrentPrompt(e.target.value)}
             disabled={prompts.length >= MAX_PROMPTS}

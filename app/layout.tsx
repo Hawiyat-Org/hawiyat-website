@@ -9,7 +9,7 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
-
+import Header from "@/components/header";
 const space = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -95,7 +95,9 @@ export default function RootLayout({
         >
           {/* main content anchor for skip-link */}
           <main id="content" className="flex-1">
-            <LayoutWrapper>{children}</LayoutWrapper>
+            <LayoutWrapper>
+            <Header />
+              {children}</LayoutWrapper>
           </main>
 
           <noscript>
