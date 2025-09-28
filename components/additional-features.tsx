@@ -17,7 +17,7 @@ const AdditionalFeatures = () => {
     {
       title: "Automated Backups",
       description:
-        "Keep your data and applications safe with automated daily backups and quick recovery options, all managed within the dashboard.",
+        "Keep your data and applications safe with automated daily backups and quick recovery options, all managed within the dashbpakrd.",
       image: "/placeholder.svg?height=250&width=350&text=Backups",
     },
     {
