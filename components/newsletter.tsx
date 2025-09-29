@@ -16,7 +16,7 @@ const Newsletter = () => {
 
   return (
     <section className="flex w-full flex-col place-content-center place-items-center gap-[10%] p-[5%] px-[10%] max-md:px-2">
-      <div className="flex w-full max-w-[80%] place-content-center place-items-center justify-between gap-3 rounded-lg bg-[#F6F7FB] dark:bg-[#171717] p-6 max-md:max-w-full max-md:flex-col">
+      <div className="flex w-full max-w-6xl place-content-center place-items-center justify-between gap-3 rounded-lg bg-[#F6F7FB] dark:bg-[#171717] p-6 max-md:max-w-full max-md:flex-col">
         <div className="flex flex-col max-lg:text-center gap-1">
           <h2 className="text-2xl text-gray-800 dark:text-gray-200 max-md:text-xl">Join our newsletter</h2>
           <div className="text-gray-700 dark:text-gray-300">Get product insights and updates.</div>

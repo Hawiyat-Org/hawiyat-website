@@ -22,7 +22,7 @@ export default function Home() {
    
       <ScrollAnimations />
      
-      <main className=""> 
+      <main className="hero-bg-gradient"> 
         <HeroSection />
         <TrustedBrands />
         <BuildAIApps />

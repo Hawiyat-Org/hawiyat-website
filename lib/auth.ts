@@ -7,7 +7,30 @@ import bcrypt from "bcryptjs"
 import { prisma } from './prisma/prismaClient'
 import type { OAuthConfig, OAuthUserConfig } from "next-auth/providers/oauth"
 
+// Extend NextAuth types to include id in user
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string
+      name?: string | null
+      email?: string | null
+      image?: string | null
+    }
+  }
 
+  interface User {
+    id: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    sub: string
+  }
+}
 
 // Custom Bitbucket Provider (since it's not officially supported)
 interface BitbucketProfile {
@@ -172,11 +195,10 @@ export const authOptions: NextAuthOptions = {
 
           if (dbUser) {
             session.user = {
-              ...session.user,
               id: dbUser.id,
+              email: dbUser.email,
               name: dbUser.name,
-              image: dbUser.image,
-              email: dbUser.email
+              image: dbUser.image
             };
           }
         } catch (error) {

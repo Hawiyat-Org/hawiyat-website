@@ -78,7 +78,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="min-h-screen flex flex-col hero-bg-gradient text-black dark:bg-black dark:text-white font-app-sans">
+      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
         {/* accessibility: skip link */}
         <a
           href="#content"
@@ -94,8 +94,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* main content anchor for skip-link */}
-          <main id="content" className="flex-1">
+          <main id="content" className="flex-1 hero-bg-gradient">
             <LayoutWrapper>
+         
             <Header />
               {children}</LayoutWrapper>
           </main>

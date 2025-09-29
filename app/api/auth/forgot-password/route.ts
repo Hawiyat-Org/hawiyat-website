@@ -1,10 +1,9 @@
 // app/api/auth/forgot-password/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
 import { randomBytes } from 'crypto';
 import { sendPasswordResetEmail } from '@/lib/third_partty/email';
+import { prisma } from '@/lib/prisma/prismaClient';
 
-const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
@@ -83,7 +82,5 @@ export async function POST(request: NextRequest) {
       { error: 'Something went wrong. Please try again later.' },
       { status: 500 }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }

@@ -42,15 +42,17 @@ const Header = () => {
   if (!mounted) return null
 
   return (
-    <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
+    <>
+       <div className="h-[100px] hero-bg-gradient w-full"></div>
+       <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/20 dark:border-gray-700/20 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-white/80 dark:bg-[#17181b]  backdrop-blur-lg rounded-xl sm:rounded-2xl shadow-md dark:shadow-white/20 border border-gray-200/20 dark:border-gray-700/20 transition-all duration-500 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
         
         {/* Main Header Row */}
-        <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 min-h-[64px] sm:min-h-[80px]">
+        <div className="flex items-center justify-between px-3 sm:px-6   min-h-[64px] ">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
             <Image 
@@ -97,7 +99,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200"
+              className="p-2 rounded-lg border border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -120,7 +122,7 @@ const Header = () => {
           <div className="lg:hidden flex items-center gap-2 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 touch-manipulation"
+              className="p-3 rounded-lg border border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200 touch-manipulation"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -204,6 +206,8 @@ const Header = () => {
         </div>
       </div>
     </header>
+    </>
+    
   )
 }
 
