@@ -1,6 +1,8 @@
 
+
+export const dynamic = "force-dynamic";
 "use client"
-export const dynamic = "force-dynamic"; // disable static export
+
 import { useState, useEffect } from "react"
 import { Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
