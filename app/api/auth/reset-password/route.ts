@@ -2,10 +2,10 @@ export const dynamic = "force-dynamic"; // disable static prerendering
 
 // app/api/auth/reset-password/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma/prismaClient';
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+
 
 export async function POST(request: NextRequest) {
   try {
