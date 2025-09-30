@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // disable static prerendering
+
 // app/api/auth/reset-password/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';

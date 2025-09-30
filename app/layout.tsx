@@ -42,7 +42,7 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   title: "All your AI models in one place - Try Pixa Playground",
   description: "Get all your AI models and tools in one place",
-  generator: "v0.app",
+  
   colorScheme: "light dark",
   openGraph: {
     title: "All your AI models in one place - Try Pixa Playground",
