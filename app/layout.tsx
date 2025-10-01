@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "All your AI models in one place - Try Hawiyat Playground",
     description: "Get all your AI models and tools in one place",
     type: "website",
-    url: "https://github.com/PaulleDemon",
+    url: "https://github.com/Hawiyat-Corp",
   },
   icons: {
     icon: "/favicon.svg",

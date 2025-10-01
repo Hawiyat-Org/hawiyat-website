@@ -6,8 +6,8 @@ const Footer = () => {
     {
       title: "Resources",
       links: [
-        { name: "Getting started", href: "#" },
-        { name: "API Docs", href: "#" },
+        { name: "Getting started", href: "https://app.hawiyat.org" },
+        { name: "API Docs", href: "https://docs.hawiyat.org" },
         { name: "API Endpoints", href: "#" },
         { name: "Health status", href: "#" },
         { name: "Pricing", href: "#pricing" },
@@ -20,7 +20,7 @@ const Footer = () => {
         { name: "Systems", href: "#" },
         { name: "Blog", href: "https://blog.hawiyat.org" },
         { name: "Twitter", href: "https://twitter.com/pauls_freeman" },
-        { name: "Github", href: "https://github.com/PaulleDemon" },
+        { name: "Github", href: "https://github.com/Haiwyat-Corp" },
       ],
     },
     {
