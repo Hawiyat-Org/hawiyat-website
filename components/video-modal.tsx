@@ -25,7 +25,7 @@ const VideoModal = ({ isOpen, onClose }: VideoModalProps) => {
           <div className="relative bg-black min-w-full min-h-full overflow-clip rounded-md">
             <iframe
               className="absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] w-full h-full"
-              src="https://www.youtube.com/embed/2enmHr0dcTc?si=llcTrXPRM-MRXDZB&controls=0&rel=0&showinfo=0&autoplay=1&loop=1&mute=0"
+              src="https://www.youtube.com/embed/1a161BJ3X_g?si=llcTrXPRM-MRXDZB&controls=0&rel=0&showinfo=0&autoplay=1&loop=1&mute=0"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
