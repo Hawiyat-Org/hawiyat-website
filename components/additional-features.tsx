@@ -6,37 +6,37 @@ const AdditionalFeatures = () => {
       title: "One-Click Deployment",
       description:
         "Deploy your apps with a single click. Hawiyat automates build, testing, and release so you can focus on innovation, not infrastructure.",
-      image: "/placeholder.svg?height=250&width=350&text=Deployment",
+      image: "/benf/deploy.png?height=250&width=350&text=Deployment",
     },
     {
       title: "GitHub Integration",
       description:
         "Seamlessly connect your repositories with Hawiyat. Push code, trigger CI/CD pipelines, and watch your changes go live instantly.",
-      image: "/placeholder.svg?height=250&width=350&text=GitHub+Integration",
+      image: "/benf/git.svg?height=250&width=350&text=GitHub+Integration",
     },
     {
       title: "Automated Backups",
       description:
         "Keep your data and applications safe with automated daily backups and quick recovery options, all managed within the dashbpakrd.",
-      image: "/placeholder.svg?height=250&width=350&text=Backups",
+      image: "/benf/back.png?height=250&width=350&text=Backups",
     },
     {
       title: "Unified Identity",
       description:
         "Manage authentication and permissions with ease. Hawiyat provides secure, centralized identity management for teams and applications.",
-      image: "/placeholder.svg?height=250&width=350&text=Identity",
+      image: "/benf/secret.png?height=250&width=350&text=Identity",
     },
     {
       title: "Scalable Hosting",
       description:
         "Start small and grow big—Hawiyat’s infrastructure scales with your needs, ensuring performance and reliability at every stage.",
-      image: "/placeholder.svg?height=250&width=350&text=Scalability",
+      image: "/benf/scale.png?height=250&width=350&text=Scalability",
     },
     {
       title: "Smart Analytics",
       description:
         "Get real-time insights into your deployments and usage. Track performance, detect issues, and make data-driven decisions with AI-powered analytics.",
-      image: "/placeholder.svg?height=250&width=350&text=Analytics",
+      image: "/benf/monitor.png?height=250&width=350&text=Analytics",
     },
   ]
 
@@ -55,7 +55,7 @@ const AdditionalFeatures = () => {
             >
               <div className="w-full h-[250px] p-4 rounded-xl backdrop-blur-2xl overflow-hidden flex place-content-center">
                 <Image
-                  src={feature.image || "/placeholder.svg"}
+                  src={feature.image || "/benf/deploy.png"}
                   alt={feature.title}
                   width={350}
                   height={250}

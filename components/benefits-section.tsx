@@ -7,20 +7,20 @@ const BenefitsSection = () => {
       title: "CI/CD ",
       description:
         "Automate your build, test, and deployment workflows with a powerful CI/CD pipeline. Deliver updates faster, reduce errors, and ensure smooth releases with every commit.",
-      image: "/benf/domains.png?height=180&width=350&text=CI+CD+Pipeline",
+      image: "/benf/cicd.svg",
     },
     
     {
       title: " GitHub Integration",
       description:
         "Connect your projects directly with GitHub for effortless version control. Deploy, track changes, and collaborate with your team without leaving the platform.",
-      image: "/benf/git.png?height=180&width=350&text=GitHub+Integration",
+      image: "/benf/git.svg",
     },
     {
       title: "1 Click Deployment",
       description:
         "Deploy your apps with a single click. From staging to production, our platform ensures fast, secure, and reliable deployments—backed by automated monitoring and rollbacks.",
-      image: "/benf/back.png?height=180&width=350&text=One-Click+Deployment",
+      image: "/benf/deploy.png",
     },
   ]
 
@@ -39,12 +39,12 @@ const BenefitsSection = () => {
                   href="#"
                   className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
                 >
-                  <div className="overflow-hidden w-full min-h-[180px] h-[180px]">
+                  <div className="overflow-hidden w-full min-h-[200px] h-[180px]">
                     <Image
                       src={benefit.image || "/placeholder.svg"}
-                      width={350}
-                      height={180}
-                      className="w-full object-contain h-auto"
+                      width={180}
+                      height={220}
+                      className="w-full z-10 object-contain "
                       alt={benefit.title}
                     />
                   </div>
@@ -66,15 +66,15 @@ const BenefitsSection = () => {
             >
               <div className="text-6xl overflow-hidden rounded-xl w-full h-full max-md:h-[180px]">
                 <Image
-                  src="/benf/back.png?height=350&width=500&text=Automatic+Backups"
+                  src="/benf/back.png?height=350&width=500&text=Backups"
                   width={500}
                   height={350}
                   className="w-full object-contain h-full"
-                  alt="Automatic Backups"
+                  alt=" Backups"
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-3xl max-md:text-2xl font-medium">Automatic Backups</h2>
+                <h2 className="text-3xl max-md:text-2xl font-medium"> Backups</h2>
                 <p className="leading-normal text-gray-800 dark:text-gray-200">
                   Keep your data safe with regular automated backups. Restore your projects anytime with just a click,
                   ensuring peace of mind and uninterrupted workflows.
