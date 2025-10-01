@@ -13,9 +13,9 @@ const HeroSection = () => {
 
   const strings = [
     "How to solve a rubik's cube? Step by step guide",
-    "What's Pixa playground?",
+    "What's Hawiyat playground?",
     "How to build an AI SaaS App?",
-    "How to integrate Pixa API?",
+    "How to integrate Hawiyat API?",
   ]
 
   useEffect(() => {

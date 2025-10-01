@@ -4,33 +4,40 @@ import Link from "next/link"
 const Resources = () => {
   const articles = [
     {
-      title: "Latest DevOps tools",
-      date: "Jul, 17, 2024",
-      image: "/assets/images/home/article1.png",
+      title: "Getting started with Hawiyat CLI",
+      category: "Developer Tools",
+      date: "Aug 5, 2025",
+       image: "/assets/images/home/article1.png",
+       
+      href: "/docs/cli-getting-started",
     },
     {
-      title: "Hawiyat Unveils new Technology",
-      category: "Announcement",
-      date: "June, 22, 2024",
+      title: "Optimizing container deployments on Hawiyat",
+      category: "Deployment",
+      date: "Jul 20, 2025",
       image: "/assets/images/home/article2.jpg",
+       href: "/blog/optimizing-containers",
     },
     {
-      title: "Launching Hawiyat playground",
-      category: "Announcement",
-      date: "Apr, 27, 2024",
-      image: "/assets/images/home/article3.png",
+      title: "Auto-scale architectures: Theory & practice",
+      category: "Infrastructure",
+      date: "Jun 15, 2025",
+       image: "/assets/images/home/article3.png",
+       href: "/blog/auto-scale-architectures",
     },
   ]
 
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
-      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">Read Resources by Experts</h3>
+      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">
+        Hawiyat Resources by Our Engineers 🚀
+      </h3>
 
       <div className="reveal-up mt-10 flex flex-wrap place-content-center gap-10 max-lg:flex-col">
         {articles.map((article, index) => (
           <Link
             key={index}
-            href="#"
+            href={article.href}
             className="flex h-[500px] w-[400px] flex-col gap-2 overflow-clip rounded-lg p-4 max-lg:w-[350px]"
           >
             <div className="h-[350px] min-h-[350px] w-full overflow-hidden rounded-2xl">
@@ -47,7 +54,9 @@ const Resources = () => {
               <div className="text-gray-800 dark:text-gray-200">{article.category}</div>
               <div className="text-gray-600 dark:text-gray-400">{article.date}</div>
             </div>
-            <h3 className="mt-1 font-medium text-xl max-md:text-xl">{article.title}</h3>
+            <h3 className="mt-1 font-medium text-xl max-md:text-xl">
+              {article.title}
+            </h3>
           </Link>
         ))}
       </div>

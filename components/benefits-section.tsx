@@ -65,15 +65,15 @@ const BenefitsSection = () => {
             >
               <div className="text-6xl overflow-hidden rounded-xl w-full h-full max-md:h-[180px]">
                 <Image
-                  src="/benf/back.png?height=350&width=500&text=Automatic+Backups"
+                  src="/benf/back.png?height=350&width=500&text=Backups"
                   width={500}
                   height={350}
                   className="w-full object-contain h-full"
-                  alt="Automatic Backups"
+                  alt=" Backups"
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-3xl max-md:text-2xl font-medium">Automatic Backups</h2>
+                <h2 className="text-3xl max-md:text-2xl font-medium"> Backups</h2>
                 <p className="leading-normal text-gray-800 dark:text-gray-200">
                   Keep your data safe with regular automated backups. Restore your projects anytime with just a click,
                   ensuring peace of mind and uninterrupted workflows.
