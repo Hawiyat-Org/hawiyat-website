@@ -136,6 +136,7 @@ body.modal-open {
   background: linear-gradient(180deg, var(--hero-gradient) 23%, rgba(0, 0, 0, 0) 87%, var(--hero-gradient) 97%);
 }
 
+
 .gradient-text {
   background: rgb(215, 215, 215);
   background: linear-gradient(90deg, rgba(215, 215, 215, 1) 18%, rgba(136, 136, 136, 1) 71%);
@@ -148,6 +149,19 @@ body.modal-open {
   background: linear-gradient(90deg, #7e22ce91 8%, #625aafae 31%, #7badbbbc 76%, #54d2d0ca 89%);
   filter: blur(50px);
   opacity: 0.5;
+}
+.purple-bg-grad-text{
+   background: linear-gradient(
+    90deg,
+    #7e22ce91 8%,
+    #625aafae 31%,
+    #7badbbbc 76%,
+    #54d2d0ca 89%
+  );
+  -webkit-background-clip: text;  /* for Chrome/Safari */
+  -webkit-text-fill-color: transparent;
+  background-clip: text;          /* for Firefox */
+  color: transparent;
 }
 
 #dashboard {
