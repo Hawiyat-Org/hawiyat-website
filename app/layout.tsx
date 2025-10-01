@@ -98,7 +98,8 @@ export default function RootLayout({
             <LayoutWrapper>
          
             <Header />
-              {children}</LayoutWrapper>
+              {children}
+              </LayoutWrapper>
           </main>
 
           <noscript>

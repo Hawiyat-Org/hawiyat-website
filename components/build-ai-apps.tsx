@@ -14,7 +14,7 @@ const BuildAIApps = () => {
 
         <p className="reveal-up mt-8 max-w-[650px] text-gray-900 dark:text-gray-200 text-center max-md:text-sm">
           Build, deploy, and scale your applications faster than ever.  
-          Hawiyat Cloud provides an all-in-one playground for developers, combining  
+          <span className="font-semibold"> Hawiyat Cloud</span> provides an all-in-one playground for developers, combining  
           seamless app hosting, AI-powered integrations, and enterprise-grade scalability.  
           From idea to production, we’ve got you covered.
         </p>

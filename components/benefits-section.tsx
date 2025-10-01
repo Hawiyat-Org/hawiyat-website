@@ -1,26 +1,31 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
+import { useTheme } from "next-themes"
+import { GitMerge, Infinity, RocketIcon } from "lucide-react"
 
 const BenefitsSection = () => {
+  const {theme} = useTheme();
   const benefits = [
     {
       title: "CI/CD ",
       description:
         "Automate your build, test, and deployment workflows with a powerful CI/CD pipeline. Deliver updates faster, reduce errors, and ensure smooth releases with every commit.",
-      image: "/benf/cicd.svg",
+      image:  Infinity ,
+      light: "/card-icons/ci-cd-white.svg"
     },
     
     {
       title: " GitHub Integration",
       description:
         "Connect your projects directly with GitHub for effortless version control. Deploy, track changes, and collaborate with your team without leaving the platform.",
-      image: "/benf/git.svg",
+      image: GitMerge
     },
     {
       title: "1 Click Deployment",
       description:
         "Deploy your apps with a single click. From staging to production, our platform ensures fast, secure, and reliable deployments—backed by automated monitoring and rollbacks.",
-      image: "/benf/deploy.png",
+      image: RocketIcon
     },
   ]
 
@@ -39,15 +44,9 @@ const BenefitsSection = () => {
                   href="#"
                   className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
                 >
-                  <div className="overflow-hidden w-full min-h-[200px] h-[180px]">
-                    <Image
-                      src={benefit.image || "/placeholder.svg"}
-                      width={180}
-                      height={220}
-                      className="w-full z-10 object-contain "
-                      alt={benefit.title}
-                    />
-                  </div>
+                  
+                    <benefit.image className="w-20 h-20 text-black dark:text-white m-auto"/>
+                  
                   <h2 className="text-3xl max-md:text-2xl font-medium">{benefit.title}</h2>
                   <p className="text-base leading-normal text-gray-800 dark:text-gray-200">{benefit.description}</p>
                   <div className="flex items-center gap-2 mt-auto">
