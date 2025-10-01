@@ -18,7 +18,7 @@ const Footer = () => {
       links: [
         { name: "Support channels", href: "#" },
         { name: "Systems", href: "#" },
-        { name: "Blog", href: "#" },
+        { name: "Blog", href: "https://blog.hawiyat.org" },
         { name: "Twitter", href: "https://twitter.com/pauls_freeman" },
         { name: "Github", href: "https://github.com/PaulleDemon" },
       ],

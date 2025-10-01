@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: "https://github.com/PaulleDemon",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
     apple: "/apple-touch-icon.png",
   },
 };

@@ -98,7 +98,7 @@ const HeroSection = () => {
 
             <a
               className="btn group max-lg:!w-[160px] flex gap-2 shadow-lg !w-[170px] !rounded-xl !py-4 max-lg:!py-2 transition-transform duration-[0.3s] hover:scale-x-[1.03]"
-              href="#"
+              href="https://app.hawiyat.org"
             >
               <span>Get started</span>
               <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300"></i>

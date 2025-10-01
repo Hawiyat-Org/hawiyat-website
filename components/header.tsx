@@ -76,7 +76,7 @@ const Header = () => {
               API
             </Link>
             <Link
-              href="#"
+              href="https://blog.hawiyat.org"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Blog
@@ -164,7 +164,7 @@ const Header = () => {
               </Link>
               
               <Link 
-                href="#" 
+                href="https://blog.hawiyat.org" 
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >

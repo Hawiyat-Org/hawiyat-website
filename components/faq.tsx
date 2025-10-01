@@ -12,11 +12,6 @@ const FAQ = () => {
         "Hawiyat is a VPS hosting provider offering affordable, fast, and reliable cloud servers with one-click deployment, GitHub integration, backups, and CI/CD support.",
     },
     {
-      question: "What VPS plans do you offer?",
-      answer:
-        "We currently offer three plans: \n- 4GB RAM, 2 vCores, 100GB storage for 3000 DA/mo \n- 8GB RAM, 4 vCores, 200GB storage for 5000 DA/mo \n- 16GB RAM, 8 vCores, 400GB storage for 8000 DA/mo.",
-    },
-    {
       question: "Can I upgrade my plan later?",
       answer:
         "Yes! You can easily upgrade or downgrade your VPS plan at any time with minimal downtime.",

@@ -10,38 +10,38 @@ const AdditionalFeatures = () => {
     {
       title: "One-Click Deployment",
       description:
-        "Deploy your apps with a single click. Hawiyat automates build, testing, and release so you can focus on innovation, not infrastructure.",
+        "Deploy your apps with a single click. Hawiyat automatically builds, tests, and releases. So you can focus on innovating, not infrastrucre.",
       image: RocketIcon
     },
     {
       title: "GitHub Integration",
       description:
-        "Seamlessly connect your repositories with Hawiyat. Push code, trigger CI/CD pipelines, and watch your changes go live instantly.",
+        "From push to production with CI/CD pipelines. Connect your repos to Hawiyat, modify the code, ship in no time.",
       image: GitFork,
     },
     {
       title: "Automated Backups",
       description:
-        "Keep your data and applications safe with automated daily backups and quick recovery options, all managed within the dashbpakrd.",
+        "Always safe. Keep your data in store with automated backups. No risk of losing databases nor logs.",
       image: DatabaseBackupIcon
     },
     {
       title: "Unified Identity",
       description:
-        "Manage authentication and permissions with ease. Hawiyat provides secure, centralized identity management for teams and applications.",
+        "Authentication and permission were never easier. Hawiyat secures, centralizes identity management for teams and applications.",
       image: Fingerprint,
     },
     {
       title: "Scalable Hosting",
       description:
-        "Start small and grow big—Hawiyat’s infrastructure scales with your needs, ensuring performance and reliability at every stage.",
+        "We grow with you. Hawiyat's infrastructure scales to fit your needs, making sure you're up at all times.",
       image: Expand,
 
     },
     {
       title: "Smart Analytics",
       description:
-        "Get real-time insights into your deployments and usage. Track performance, detect issues, and make data-driven decisions with AI-powered analytics.",
+        "Real-time insights into your projects and deployments. Tracking performance and issues with AI-powered analytics.",
       image: TrendingUp,
 
     },
@@ -51,7 +51,7 @@ const AdditionalFeatures = () => {
     <section className="relative flex w-full min-h-[110vh] max-md:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden">
       <div className="w-full max-lg:max-w-full place-content-center items-center flex flex-col max-w-[80%] gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
-          <span className="purple-bg-grad-text ">Hawiyat </span>Features
+          Hawiyat Features
         </h3>
 
         <div className="mt-8 relative gap-12 p-4 grid  place-items-center grid-cols-3 max-lg:flex max-lg:flex-col">

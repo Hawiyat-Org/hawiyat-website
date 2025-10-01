@@ -4,19 +4,18 @@ import Link from "next/link"
 const Resources = () => {
   const articles = [
     {
-      title: "Latest AI tools",
-      category: "Machine learning",
+      title: "Latest DevOps tools",
       date: "Jul, 17, 2024",
       image: "/assets/images/home/article1.png",
     },
     {
-      title: "Pixa Unveils new technology",
+      title: "Hawiyat Unveils new Technology",
       category: "Announcement",
       date: "June, 22, 2024",
       image: "/assets/images/home/article2.jpg",
     },
     {
-      title: "Launching Pixa playground",
+      title: "Launching Hawiyat playground",
       category: "Announcement",
       date: "Apr, 27, 2024",
       image: "/assets/images/home/article3.png",
@@ -25,7 +24,7 @@ const Resources = () => {
 
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
-      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">Read resources by experts ✨</h3>
+      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">Read Resources by Experts</h3>
 
       <div className="reveal-up mt-10 flex flex-wrap place-content-center gap-10 max-lg:flex-col">
         {articles.map((article, index) => (

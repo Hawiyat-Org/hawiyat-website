@@ -4,7 +4,8 @@ const Pricing = () => {
   const plans = [
     {
       price: "3000 DA",
-      period: "/mo",
+      period: "/M",
+      vat: "no TVA",
       title: "Starter VPS – Perfect for small apps & projects",
       features: [
         { text: "4 GB RAM", included: true },
@@ -18,7 +19,8 @@ const Pricing = () => {
     },
     {
       price: "5000 DA",
-      period: "/mo",
+      period: "/M",
+      vat: "no TVA",
       title: "Growth VPS – Scalable resources for production workloads",
       features: [
         { text: "8 GB RAM", included: true },
@@ -32,7 +34,8 @@ const Pricing = () => {
     },
     {
       price: "8000 DA",
-      period: "/mo",
+      period: "/M",
+      vat: "no TVA",
       title: "Power VPS – High-performance for demanding apps",
       features: [
         { text: "16 GB RAM", included: true },
@@ -59,6 +62,7 @@ const Pricing = () => {
             <h3>
               <span className="text-4xl max-md:text-2xl font-semibold">{plan.price}</span>
               <span className="text-xl text-gray-600 dark:text-gray-300">{plan.period}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300"> {plan.vat}</span>
             </h3>
             <p className="mt-3 text-center text-gray-800 dark:text-gray-100">{plan.title}</p>
             <hr />

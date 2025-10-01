@@ -5,11 +5,11 @@ const CallToAction = () => {
     <section className="relative flex p-2 max-w-7xl  mx-auto w-full min-h-[60vh] flex-col place-content-center place-items-center overflow-hidden">
       <div className="reveal-up w-full h-full min-h-[450px] max-lg:max-w-full rounded-md lg:py-[5%] bg-[#f6f7fb] dark:bg-[#171717] place-content-center items-center flex flex-col max-w-[80%] gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
-          Access and compare multiple AI models
+          Visit the Platform Now & Start Deploying!
         </h3>
 
         <div className="mt-8 relative flex max-lg:flex-col gap-5">
-          <Link href="#" className="btn reveal-up !rounded-full !p-4 font-medium">
+          <Link href="https://app.hawiyat.org" className="btn reveal-up !rounded-full !p-4 font-medium">
             Launch Playground
           </Link>
         </div>
