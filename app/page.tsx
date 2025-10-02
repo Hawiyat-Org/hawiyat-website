@@ -26,8 +26,9 @@ export default function Home() {
         <HeroSection />
         <Templates />
         <BenefitsSection />
-        <BuildAIApps />
         <TrustedBrands />
+        <BuildAIApps />
+      
       
         <PrebuiltTools />
         <AdditionalFeatures />

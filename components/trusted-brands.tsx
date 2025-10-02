@@ -11,23 +11,30 @@ const TrustedBrands = () => {
   ]
 
   return (
-    <section className="relative flex w-full max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden p-8">
-      <h2 className="reveal-up text-3xl max-md:text-xl">Trusted by  </h2>
+    <section className="relative w-full overflow-hidden px-6 py-20 md:py-32">
+      <div className="mx-auto max-w-7xl">
+        <div className="reveal-up mb-16 text-center md:mb-24">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl">Trusted by</h2>
+        </div>
 
-      <div className="reveal-up carousel-container overflow-hidden">
-        {/* <div className="carousel lg:place-content-center mt-10 flex w-full gap-5 max-md:gap-2"> */}
-         <div className="carousel grid grid-cols-4 gap-5 max-md:grid-cols-2 mt-10">
-          {brands.map((brand, index) => (
-            <div key={index} className="carousel-img h-[30px] w-[150px]">
-              <Image
-                src={brand.logo || "/placeholder.svg"}
-                alt={brand.name}
-                width={150}
-                height={30}
-                className="h-full w-full object-contain transition-colors hover:grayscale-0"
-              />
-            </div>
-          ))}
+        <div className="reveal-up relative">
+          <div className="grid grid-cols-2 gap-12 md:grid-cols-3 md:gap-16 lg:gap-20">
+            {brands.map((brand, index) => (
+              <div
+                key={index}
+                className="group relative flex items-center justify-center"
+              >
+                <div className="relative h-24 w-full transition-transform duration-500 ease-out group-hover:scale-110 md:h-32 lg:h-40">
+                  <Image
+                    src={brand.logo || "/placeholder.svg"}
+                    alt={brand.name}
+                    fill
+                    className="object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
