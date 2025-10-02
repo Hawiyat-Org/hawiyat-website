@@ -1,17 +1,45 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 
 const Newsletter = () => {
   const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [position, setPosition] = useState<number | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle newsletter signup
-    console.log("Newsletter signup:", email)
-    setEmail("")
+    setLoading(true)
+    setMessage(null)
+    setError(null)
+    setPosition(null)
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong")
+        if (data.position) setPosition(data.position)
+      } else {
+        setMessage(data.message || "Successfully joined waitlist!")
+        if (data.position) setPosition(data.position)
+        setEmail("")
+      }
+    } catch (err) {
+      console.error("Waitlist signup error:", err)
+      setError("Failed to join waitlist. Please try again later.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -22,23 +50,60 @@ const Newsletter = () => {
           <div className="text-gray-700 dark:text-gray-300">Get product insights and updates.</div>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex h-[60px] place-items-center gap-2 overflow-hidden p-2">
-          <input
+        <form
+          onSubmit={handleSubmit}
+          className="flex h-[60px] place-items-center gap-2 overflow-hidden p-2 max-md:w-full"
+        >
+            <input
             type="email"
             className="input h-full w-full !border-gray-600 p-2 outline-none"
             placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
           <button
             type="submit"
-            className="btn !rounded-full !border-[1px] !text-black !border-solid !border-black dark:!text-white dark:!border-gray-300 !bg-transparent transition-colors duration-[0.3s]"
+            disabled={loading}
+            className="btn !rounded-lg !border-[1px] !text-black !border-solid !border-black dark:!text-white dark:!border-gray-300 !bg-transparent transition-all duration-[0.3s] disabled:opacity-60 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black min-w-[100px]"
           >
-            Signup
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Joining...
+              </span>
+            ) : (
+              "Join"
+            )}
           </button>
         </form>
       </div>
+
+      {/* ✅ feedback messages */}
+      {message && (
+        <div className="mt-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-green-700 dark:text-green-400 text-center animate-fadeIn">
+          <div className="font-medium">{message}</div>
+          {position && (
+            <div className="mt-2 text-sm text-green-600 dark:text-green-500">
+              You are <span className="font-bold">#{position}</span> on the waitlist 🎉
+            </div>
+          )}
+        </div>
+      )}
+      {error && (
+        <div className="mt-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 text-red-700 dark:text-red-400 text-center animate-fadeIn">
+          <div className="font-medium">{error}</div>
+          {position && (
+            <div className="mt-2 text-sm text-red-600 dark:text-red-500">
+              Your current position is <span className="font-bold">#{position}</span>.
+            </div>
+          )}
+        </div>
+      )}
     </section>
   )
 }

@@ -7,23 +7,22 @@ const Resources = () => {
       title: "Getting started with Hawiyat CLI",
       category: "Developer Tools",
       date: "Aug 5, 2025",
-       image: "/assets/images/home/article1.png",
-       
+      image: "/assets/images/home/article1.webp",
       href: "/docs/cli-getting-started",
     },
     {
       title: "Optimizing container deployments on Hawiyat",
       category: "Deployment",
       date: "Jul 20, 2025",
-      image: "/assets/images/home/article2.jpg",
-       href: "/blog/optimizing-containers",
+      image: "/assets/images/home/article2.webp",
+      href: "/blog/optimizing-containers",
     },
     {
       title: "Auto-scale architectures: Theory & practice",
       category: "Infrastructure",
       date: "Jun 15, 2025",
-       image: "/assets/images/home/article3.png",
-       href: "/blog/auto-scale-architectures",
+      image: "/assets/images/home/article3.webp",
+      href: "/blog/auto-scale-architectures",
     },
   ]
 
@@ -33,12 +32,13 @@ const Resources = () => {
         Hawiyat Resources by Our Engineers 🚀
       </h3>
 
-      <div className="reveal-up mt-10 flex flex-wrap place-content-center gap-10 max-lg:flex-col">
+      {/* 🔥 changed flex-wrap to grid */}
+      <div className="reveal-up mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-[1200px]">
         {articles.map((article, index) => (
           <Link
             key={index}
             href={article.href}
-            className="flex h-[500px] w-[400px] flex-col gap-2 overflow-clip rounded-lg p-4 max-lg:w-[350px]"
+            className="flex h-[500px] flex-col gap-2 overflow-clip rounded-lg p-4 duration-300"
           >
             <div className="h-[350px] min-h-[350px] w-full overflow-hidden rounded-2xl">
               <Image

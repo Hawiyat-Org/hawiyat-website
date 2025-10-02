@@ -35,7 +35,7 @@ const OneSubscription = () => {
         </div>
 
         <Link href="#" className="reveal-up group shadow-xl btn flex gap-2 mt-10">
-          <span>Start Chat</span>
+          <span>Start Now</span>
           <i className="bi bi-arrow-right duration-300 group-hover:translate-x-1"></i>
         </Link>
       </div>

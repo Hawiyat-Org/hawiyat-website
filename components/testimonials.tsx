@@ -3,11 +3,11 @@ import Image from "next/image"
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Amine K.",
-      company: "DevOps Lead, Algotech",
+      name: "BoudNoureddine Bouderbala",
+      company: "Full stack developer",
       avatar: "/placeholder.svg?height=50&width=50&text=A",
       content:
-        "With Hawiyat’s one-click deployment, we cut release times from hours to minutes. Our team can now ship updates daily without worrying about downtime.",
+        "With Hawiyat one-click deployment, we cut release times from hours to minutes. Our team can now ship updates daily without worrying about downtime.",
     },
     {
       name: "Sarah M.",

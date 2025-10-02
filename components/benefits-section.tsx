@@ -2,7 +2,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { GitMerge, Infinity, RocketIcon } from "lucide-react"
+import { GitMerge, Infinity, RocketIcon ,DatabaseBackup } from "lucide-react"
 
 const BenefitsSection = () => {
   const {theme} = useTheme();
@@ -41,7 +41,7 @@ const BenefitsSection = () => {
             {benefits.map((benefit, index) => (
               <div key={index} className="reveal-up w-[350px] h-[540px] flex max-md:w-full">
                 <Link
-                  href="#"
+                  href="https://docs.hawiyat.org/"
                   className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
                 >
                   
@@ -59,32 +59,28 @@ const BenefitsSection = () => {
           </div>
 
           <div className="reveal-up w-full md:h-[350px] max-md:min-h-[350px] flex">
-            <Link
-              href="#"
-              className="relative p-10 transition-all duration-300 group/card gap-5 flex max-md:flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
-            >
-              <div className="text-6xl overflow-hidden rounded-xl w-full h-full max-md:h-[180px]">
-                <Image
-                  src="/benf/back.png?height=350&width=500&text=Backups"
-                  width={500}
-                  height={350}
-                  className="w-full object-contain h-full"
-                  alt=" Backups"
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <h2 className="text-3xl max-md:text-2xl font-medium"> Backups</h2>
-                <p className="leading-normal text-gray-800 dark:text-gray-200">
-                  Keep your data safe with regular automated backups. Restore your projects anytime with just a click,
-                  ensuring peace of mind and uninterrupted workflows.
-                </p>
-                <div className="flex items-center gap-2 mt-auto">
-                  <span>Learn more</span>
-                  <i className="bi bi-arrow-right transform transition-transform duration-300 group-hover/card:translate-x-2"></i>
-                </div>
-              </div>
-            </Link>
-          </div>
+  <Link
+    href="https://docs.hawiyat.org/"
+    className="relative p-10 transition-all duration-300 group/card gap-5 flex max-md:flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
+  >
+    <div className="flex justify-center items-center w-full max-md:h-[180px]">
+      <DatabaseBackup className="w-32 h-32 text-black dark:text-white" />
+    </div>
+    <div className="flex flex-col gap-4">
+      <h2 className="text-3xl max-md:text-2xl font-medium">Backups</h2>
+      <p className="leading-normal text-gray-800 dark:text-gray-200">
+        Keep your data safe with regular automated backups. Restore your projects anytime with just a click,
+        ensuring peace of mind and uninterrupted workflows.
+      </p>
+      <div className="flex items-center gap-2 mt-auto">
+        <span>Learn more</span>
+        <i className="bi bi-arrow-right transform transition-transform duration-300 group-hover/card:translate-x-2"></i>
+      </div>
+    </div>
+  </Link>
+</div>
+
+
         </div>
       </div>
     </section>

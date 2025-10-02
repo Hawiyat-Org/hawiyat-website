@@ -40,20 +40,104 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "All your AI models in one place - Try Hawiyat Playground",
-  description: "Get all your AI models and tools in one place",
+  metadataBase: new URL('https://hawiyat.org'),
+  title: {
+    default: 'Hawiyat Deploy & Scale Your Apps',
+    template: '%s | Hawiyat',
+  },
+  description: 'Hawiyat is an all-in-one platform for developers to deploy, manage, and scale applications globally with serverless functions, managed databases, CI/CD, and edge networking.',
+  applicationName: 'Hawiyat Platform',
+  keywords: [
+    'vps algerie', 'vps dz', 'hebergement agl', 'Hawiyat', 'cloud deployment',
+    'serverless', 'CI/CD', 'edge network', 'managed databases', 'DevOps',
+    'web applications', 'global deployment', 'developer tools',
+    'hebergement algerie', 'hebergement web algerie', 'hebergeur algerien',
+    'serveur vps algerie', 'vps pas cher algerie', 'hebergement site web algerie',
+    'serveur dedie algerie', 'vps algerie prix', 'cloud vps algerie',
+    'hebergement professionnel algerie', 'hebergeur vps algerien',
+    'machine virtuelle algerie', 'hebergement vps algerie', 'vps local algerie',
+    'hebergement web local', 'vps illimité algerie', 'hebergement vps web',
+    'heberger site en algerie'
+  ],
   
-  colorScheme: "light dark",
+  authors: [
+    { name: 'Hawiyat Team', url: 'https://hawiyat.org' }
+  ],
+  creator: 'Hawiyat Team',
+  publisher: 'Hawiyat',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  },
   openGraph: {
-    title: "All your AI models in one place - Try Hawiyat Playground",
-    description: "Get all your AI models and tools in one place",
-    type: "website",
-    url: "https://github.com/Hawiyat-Corp",
+    title: 'Hawiyat Deploy & Scale Your Apps',
+    description: 'All-in-one platform for deploying, managing, and scaling web applications with global edge infrastructure.',
+    url: 'https://hawiyat.org',
+    siteName: 'Hawiyat',
+    images: [
+      {
+        url: 'https://hawiyat.org/hawiyat.png',
+        width: 2000,
+        height: 2000,
+        alt: 'Hawiyat Platform',
+      }
+    ],
+    locale: 'en_DZ',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hawiyat Deploy & Scale Your Apps',
+    description: 'Your central hub for cloud deployments, serverless functions, and edge scaling.',
+    images: ['https://hawiyat.org/hawiyat.png'],
+    creator: '@hawiyat',
+  },
+  alternates: {
+    canonical: 'https://hawiyat.org',
+    languages: {
+      'en-US': 'https://hawiyat.org',
+      'fr-DZ': 'https://hawiyat.org/fr'
+    }
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/apple-touch-icon.png",
+    icon: '/logo.ico',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
   },
+  manifest: '/site.webmanifest',
+  other: {
+    'application/ld+json': JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Hawiyat",
+      "url": "https://hawiyat.org",
+      "logo": "https://hawiyat.org/logo.svg",
+      "sameAs": [
+        "https://twitter.com/hawiyat",
+        "https://github.com/Hawiyat-Corp"
+      ],
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+213-XX-XXX-XXXX",
+        "contactType": "Customer Support",
+        "areaServed": "DZ"
+      }]
+    })
+  },
+  viewport: 'width=device-width, initial-scale=1.0'
 };
 
 export default function RootLayout({
@@ -74,6 +158,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -26,7 +26,7 @@ const BuildAIApps = () => {
             rel="noopener"
             className="shadow-md hover:shadow-xl dark:shadow-gray-800 transition-all duration-300 border-[1px] p-3 px-4 border-black dark:border-white rounded-md"
           >
-            Explore Hawiyat APIs
+            Explore Hawiyat Cloud
           </Link>
         </div>
       </div>

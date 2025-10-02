@@ -3,10 +3,10 @@ import Link from "next/link"
 const Pricing = () => {
   const plans = [
     {
-      price: "3000 DA",
+      price: "2999 DA",
       period: "/M",
       vat: "no TVA",
-      title: "Starter VPS – Perfect for small apps & projects",
+      title: "Starter – Perfect for small apps & projects",
       features: [
         { text: "4 GB RAM", included: true },
         { text: "2 vCores", included: true },
@@ -14,14 +14,15 @@ const Pricing = () => {
         { text: "1 Gbps Bandwidth", included: true },
         { text: "Free Backups & Monitoring", included: true },
       ],
-      buttonStyle: "!text-black !bg-transparent !border-[1px] border-black dark:border-white dark:!text-white",
+      buttonStyle:
+        "!text-black !bg-transparent !border-[1px] border-black dark:border-white dark:!text-white",
       borderStyle: "border-[1px]",
     },
     {
-      price: "5000 DA",
+      price: "4999 DA",
       period: "/M",
       vat: "no TVA",
-      title: "Growth VPS – Scalable resources for production workloads",
+      title: "Growth – Scalable resources for production workloads",
       features: [
         { text: "8 GB RAM", included: true },
         { text: "4 vCores", included: true },
@@ -33,10 +34,10 @@ const Pricing = () => {
       borderStyle: "border-2 dark:border-[#595858]",
     },
     {
-      price: "8000 DA",
+      price: "7999 DA",
       period: "/M",
       vat: "no TVA",
-      title: "Power VPS – High-performance for demanding apps",
+      title: "Power – High-performance for demanding apps",
       features: [
         { text: "16 GB RAM", included: true },
         { text: "8 vCores", included: true },
@@ -44,49 +45,53 @@ const Pricing = () => {
         { text: "1 Gbps Bandwidth", included: true },
         { text: "Free Backups & Monitoring", included: true },
       ],
-      buttonStyle: "!text-black !bg-transparent !border-[1px] border-black dark:border-white dark:!text-white",
+      buttonStyle:
+        "!text-black !bg-transparent !border-[1px] border-black dark:border-white dark:!text-white",
       borderStyle: "border-[1px]",
     },
   ]
 
   return (
-    <section className="mt-5 flex w-full flex-col gap-6 place-items-center p-[2%]" id="pricing">
-      <h3 className="reveal-up text-5xl font-medium max-md:text-2xl">Choose your VPS plan</h3>
+    <section className="mt-10 flex w-full flex-col gap-12 items-center p-[5%]" id="pricing">
+      <h3 className="text-5xl font-semibold tracking-tight max-md:text-3xl text-center">
+        Choose your plan
+      </h3>
 
-      <div className="mt-10 flex flex-wrap place-content-center gap-8 max-lg:flex-col">
-        {plans.map((plan, index) => (
-          <div
-            key={index}
-            className={`reveal-up flex w-[350px] flex-col place-items-center gap-2 rounded-lg ${plan.borderStyle} border-outlineColor bg-white dark:bg-[#080808] dark:border-[#1f2123] p-8 shadow-xl max-lg:w-[320px]`}
-          >
-            <h3>
-              <span className="text-4xl max-md:text-2xl font-semibold">{plan.price}</span>
-              <span className="text-xl text-gray-600 dark:text-gray-300">{plan.period}</span>
-              <span className="text-sm text-gray-600 dark:text-gray-300"> {plan.vat}</span>
-            </h3>
-            <p className="mt-3 text-center text-gray-800 dark:text-gray-100">{plan.title}</p>
-            <hr />
-            <ul className="mt-4 flex flex-col gap-4 text-base text-gray-800 dark:text-gray-200">
-              {plan.features.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex gap-2">
-                  <i
-                    className={`bi bi-check-circle-fill ${
-                      !feature.included ? "text-gray-400 dark:text-gray-500" : ""
-                    }`}
-                  ></i>
-                  <span>{feature.text}</span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="#"
-              className={`btn mt-auto !w-full transition-transform duration-[0.3s] hover:scale-x-[1.02] ${plan.buttonStyle}`}
-            >
-              Choose plan
-            </Link>
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-[1100px] w-full">
+  {plans.map((plan, index) => (
+    <div
+      key={index}
+      className={`flex flex-col items-center rounded-lg ${plan.borderStyle} border-outlineColor bg-white dark:bg-[#0a0a0a] dark:border-[#1f2123] p-10 shadow-sm hover:shadow-md transition-shadow duration-300`}
+    >
+      <h3 className="mb-4 text-center">
+        <span className="text-5xl font-bold">{plan.price}</span>
+        <span className="ml-1 text-lg text-gray-500 dark:text-gray-400">{plan.period}</span>
+        <span className="ml-2 text-sm text-gray-400">{plan.vat}</span>
+      </h3>
+
+      <p className="text-lg text-center text-gray-800 dark:text-gray-100 font-medium leading-relaxed">
+        {plan.title}
+      </p>
+
+      <ul className="mt-8 flex flex-col gap-3 text-gray-700 dark:text-gray-300 w-full">
+        {plan.features.map((feature, featureIndex) => (
+          <li key={featureIndex} className="flex items-center gap-3">
+            <i className="bi bi-check-circle-fill text-black-500"></i>
+            <span>{feature.text}</span>
+          </li>
         ))}
-      </div>
+      </ul>
+
+      <Link
+        href="https://app.hawiyat.org"
+        className={`btn mt-4 !w-full transition-transform duration-[0.3s] hover:scale-x-[1.02] ${plan.buttonStyle}`}
+      >
+        Choose plan
+      </Link>
+    </div>
+  ))}
+</div>
+
     </section>
   )
 }

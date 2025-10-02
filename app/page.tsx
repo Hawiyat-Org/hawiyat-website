@@ -1,4 +1,4 @@
-import Header from "@/components/header"
+
 import HeroSection from "@/components/hero-section"
 import TrustedBrands from "@/components/trusted-brands"
 import BuildAIApps from "@/components/build-ai-apps"
@@ -14,7 +14,7 @@ import CallToAction from "@/components/call-to-action"
 import Newsletter from "@/components/newsletter"
 import Footer from "@/components/footer"
 import ScrollAnimations from "@/components/scroll-animations"
-import FloatingElements from "@/components/floating-elements"
+// import Templates from "@/components/templates"
 
 export default function Home() {
   return (
@@ -24,6 +24,7 @@ export default function Home() {
      
       <main className="hero-bg-gradient"> 
         <HeroSection />
+        {/* <Templates /> */}
         <TrustedBrands />
         <BuildAIApps />
         <BenefitsSection />
