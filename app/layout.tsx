@@ -39,16 +39,23 @@ const dancingScript = Dancing_Script({
   display: "swap",
 });
 
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? 'Hawiyat';
+const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.hawiyat.org';
+const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? 'https://docs.hawiyat.org';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hawiyat.org'),
+  metadataBase: new URL(NEXT_URL),
   title: {
-    default: 'Hawiyat Deploy & Scale Your Apps',
-    template: '%s | Hawiyat',
+    default: `${APP_NAME} Deploy & Scale Your Apps`,
+    template: '%s | ' + APP_NAME,
   },
   description: 'Hawiyat is an all-in-one platform for developers to deploy, manage, and scale applications globally with serverless functions, managed databases, CI/CD, and edge networking.',
-  applicationName: 'Hawiyat Platform',
+  applicationName: APP_NAME,
   keywords: [
-    'vps algerie', 'vps dz', 'hebergement agl', 'Hawiyat', 'cloud deployment',
+    'paas ', 'platform as service','paas algerien','paas dz','dz paas','platform as a service in algeria',
+    'platform as a service dz','scalability dz','scalability soltion in algeri','deploy dz',
+    'vps algerie', 'vps dz', 'hebergement agl', APP_NAME, 'cloud deployment',
     'serverless', 'CI/CD', 'edge network', 'managed databases', 'DevOps',
     'web applications', 'global deployment', 'developer tools',
     'hebergement algerie', 'hebergement web algerie', 'hebergeur algerien',
@@ -61,10 +68,10 @@ export const metadata: Metadata = {
   ],
   
   authors: [
-    { name: 'Hawiyat Team', url: 'https://hawiyat.org' }
+    { name: `${APP_NAME} Team`, url: NEXT_URL }
   ],
-  creator: 'Hawiyat Team',
-  publisher: 'Hawiyat',
+  creator: `${APP_NAME} Team`,
+  publisher: APP_NAME,
   robots: {
     index: true,
     follow: true,
@@ -78,33 +85,34 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'Hawiyat Deploy & Scale Your Apps',
+    title: `${APP_NAME} Deploy & Scale Your Apps`,
     description: 'All-in-one platform for deploying, managing, and scaling web applications with global edge infrastructure.',
-    url: 'https://hawiyat.org',
-    siteName: 'Hawiyat',
+    url: NEXT_URL,
+    siteName: APP_NAME,
     images: [
       {
-        url: 'https://hawiyat.org/hawiyat.png',
+        url: `${NEXT_URL}/hawiyat.png`,
         width: 2000,
         height: 2000,
-        alt: 'Hawiyat Platform',
+        alt: `${APP_NAME} Platform`,
       }
     ],
-    locale: 'en_DZ',
+    // use dash in locale to match common format
+    locale: 'en-DZ',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hawiyat Deploy & Scale Your Apps',
+    title: `${APP_NAME} Deploy & Scale Your Apps`,
     description: 'Your central hub for cloud deployments, serverless functions, and edge scaling.',
-    images: ['https://hawiyat.org/hawiyat.png'],
+    images: [`${NEXT_URL}/hawiyat.png`],
     creator: '@hawiyat',
   },
   alternates: {
-    canonical: 'https://hawiyat.org',
+    canonical: NEXT_URL,
     languages: {
-      'en-US': 'https://hawiyat.org',
-      'fr-DZ': 'https://hawiyat.org/fr'
+      'en-US': NEXT_URL,
+      'fr-DZ': `${NEXT_URL}/fr`
     }
   },
   formatDetection: {
@@ -113,18 +121,18 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/logo.ico',
-    shortcut: '/logo.svg',
-    apple: '/logo.svg',
+    icon: `${NEXT_URL}/logo.ico`,
+    shortcut: `${NEXT_URL}/logo.svg`,
+    apple: `${NEXT_URL}/logo.svg`,
   },
-  manifest: '/site.webmanifest',
+  manifest: `${NEXT_URL}/site.webmanifest`,
   other: {
     'application/ld+json': JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Hawiyat",
-      "url": "https://hawiyat.org",
-      "logo": "https://hawiyat.org/logo.svg",
+      "name": APP_NAME,
+      "url": NEXT_URL,
+      "logo": `${NEXT_URL}/logo.svg`,
       "sameAs": [
         "https://twitter.com/hawiyat",
         "https://github.com/Hawiyat-Corp"
@@ -136,8 +144,13 @@ export const metadata: Metadata = {
         "areaServed": "DZ"
       }]
     })
-  },
-  viewport: 'width=device-width, initial-scale=1.0'
+  }
+};
+
+// Export viewport separately so Next.js App Router won't warn about unsupported viewport in metadata
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -161,7 +174,7 @@ export default function RootLayout({
         
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
       </head>
       <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
         {/* accessibility: skip link */}

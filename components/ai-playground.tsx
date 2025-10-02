@@ -122,41 +122,41 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           <div className="flex -space-x-4">
             <Image
               className="z-10 w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/placeholder.svg?height=40&width=40"
+              src="/logo.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 1"
             />
             <Image
               className="z-[4] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/placeholder.svg?height=40&width=40"
+              src="/logo.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 2"
             />
             <Image
               className="z-[3] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/placeholder.svg?height=40&width=40"
+              src="/logo.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 3"
             />
             <Image
               className="z-[2] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/placeholder.svg?height=40&width=40"
+              src="/logo.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 4"
             />
             <Image
               className="z-[1] w-10 h-10 object-cover rounded-full border-2 border-the"
-              src="/placeholder.svg?height=40&width=40"
+              src="/logo.svg?height=40&width=40"
               width={40}
               height={40}
               alt="Avatar 5"
             />
           </div>
-          <p>+25,000</p>
+          <p>+250</p>
         </div>
 
         <div className="mt-3 text-lg">Join developers using Hawiyat to deploy and run agents</div>

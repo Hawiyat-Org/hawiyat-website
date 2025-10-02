@@ -52,7 +52,7 @@ const Testimonials = () => {
         Trusted by professionals building on Hawiyat
       </h3>
 
-      <div className="mt-20 gap-10 space-y-8 max-md:columns-1 lg:columns-2 xl:columns-3">
+      <div className="mt-20 gap-10 space-y-8  max-md:columns-1 lg:columns-2 xl:columns-3">
         {testimonials.map((testimonial, index) => (
           <div
             key={index}

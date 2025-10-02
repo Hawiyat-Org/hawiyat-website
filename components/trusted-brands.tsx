@@ -2,19 +2,19 @@ import Image from "next/image"
 
 const TrustedBrands = () => {
   const brands = [
-    { name: "Itihad", logo: "/itihad-logo.jpg" },
+    { name: "Itihad", logo: "/itihad-logo.png" },
     { name: "ESTIN", logo: "/estin-logo.png" },
-    { name: "Adobe", logo: "/itihad-logo.jpg" },
-    { name: "Airbnb", logo: "/itihad-logo.jpg" },
-    { name: "Stripe", logo: "/itihad-logo.jpg" },
-    { name: "Reddit", logo: "/itihad-logo.jpg" },
+    { name: "Adobe", logo: "/itihad-logo.png" },
+    { name: "Airbnb", logo: "/itihad-logo.png" },
+    { name: "Stripe", logo: "/itihad-logo.png" },
+    { name: "Reddit", logo: "/itihad-logo.png" },
   ]
 
   return (
     <section className="relative w-full overflow-hidden px-6 py-20 md:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="reveal-up mb-16 text-center md:mb-24">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl">Trusted by</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold lg:text-5xl">Trusted by</h2>
         </div>
 
         <div className="reveal-up relative">

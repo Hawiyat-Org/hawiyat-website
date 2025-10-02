@@ -73,19 +73,19 @@ const Header = () => {
               href="#"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              API
+            Solutions  
             </Link>
             <Link
               href="https://blog.hawiyat.org"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              Blog
+              Features
             </Link>
             <Link
               href="#"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              Solutions
+              testimonies
             </Link>
             <Link
               href="#pricing"

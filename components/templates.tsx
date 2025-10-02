@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useAnimationFrame, useInView } from "framer-motion"
+import Link from "next/link"
+
 
 export default function Templates() {
   const [isPaused, setIsPaused] = useState(false)
@@ -213,9 +215,12 @@ export default function Templates() {
         <p className="text-sm md:text-base text-gray-500 dark:text-gray-500 mb-4">
           {isMobile ? 'Tap any template to deploy' : 'Hover over any template to deploy instantly'}
         </p>
+        <Link href="/templates">
         <button className="px-6 py-2.5 md:px-8 md:py-3 rounded-lg md:rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm md:text-base transition-all duration-300 hover:scale-105 active:scale-95">
           Browse All Templates
         </button>
+        </Link>
+   
       </motion.div>
     </section>
   )
