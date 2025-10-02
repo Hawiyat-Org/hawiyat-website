@@ -16,7 +16,7 @@ const OneSubscription = () => {
         <div className="mt-8 relative flex max-lg:flex-col gap-5">
           <div className="reveal-up flex w-full max-w-[650px] max-md:max-w-full flex-col place-items-center gap-2 rounded-lg border-[1px] border-outlineColor bg-white dark:bg-[#080808] dark:border-[#1f2123] p-2 shadow-xl max-lg:w-[320px]">
             <Image
-              src="/oneSub/cost.png"
+              src="/oneSub/cost.webp"
               alt="Multi sub"
               width={650}
               height={400}
@@ -26,7 +26,7 @@ const OneSubscription = () => {
 
           <div className="reveal-up flex w-full max-w-[650px] flex-col place-items-center gap-2 rounded-lg border-[1px] border-outlineColor bg-white dark:bg-[#080808] dark:border-[#1f2123] p-2 shadow-xl max-lg:w-[320px]">
             <Image
-              src="/oneSub/hawiyat.png"
+              src="/oneSub/hawiyat.webp"
               alt="Single sub"
               width={650}
               height={400}
