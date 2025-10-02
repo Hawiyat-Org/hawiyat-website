@@ -21,7 +21,7 @@ const BuildAIApps = () => {
 
         <div className="reveal-up flex mt-8">
           <Link
-            href="#"
+            href="https://app.hawiyat.org/"
             target="_blank"
             rel="noopener"
             className="shadow-md hover:shadow-xl dark:shadow-gray-800 transition-all duration-300 border-[1px] p-3 px-4 border-black dark:border-white rounded-md"
