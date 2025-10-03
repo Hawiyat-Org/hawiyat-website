@@ -5,19 +5,19 @@ const TrustedBrands = () => {
   const brands = [
     { 
       name: "Itihad", 
-      logo: "/brands/itihad-logo.svg", 
+      logo: "/trust/itihad-logo.svg", 
       url: "https://itihad.group", 
       large: true 
     },
     { 
       name: "ESTIN", 
-      logo: "/brands/estin-logo.svg", 
+      logo: "/trust/estin-logo.svg", 
       url: "https://estin.dz/" , large: true 
       
     },
     { 
       name: "IT Solutions", 
-      logo: "/brands/itsol.svg", 
+      logo: "/trust/itsol.svg", 
       url: "https://itsolutions.dz/", 
       large: true 
     },
