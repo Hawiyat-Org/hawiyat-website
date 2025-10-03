@@ -1,13 +1,26 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const TrustedBrands = () => {
   const brands = [
-    { name: "Itihad", logo: "/itihad-logo.png" },
-    { name: "ESTIN", logo: "/estin-logo.png" },
-    { name: "Adobe", logo: "/itihad-logo.png" },
-    { name: "Airbnb", logo: "/itihad-logo.png" },
-    { name: "Stripe", logo: "/itihad-logo.png" },
-    { name: "Reddit", logo: "/itihad-logo.png" },
+    { 
+      name: "Itihad", 
+      logo: "/brands/itihad-logo.svg", 
+      url: "https://itihad.group", 
+      large: true 
+    },
+    { 
+      name: "ESTIN", 
+      logo: "/brands/estin-logo.svg", 
+      url: "https://estin.dz/" , large: true 
+      
+    },
+    { 
+      name: "IT Solutions", 
+      logo: "/brands/itsol.svg", 
+      url: "https://itsolutions.dz/", 
+      large: true 
+    },
   ]
 
   return (
@@ -24,14 +37,27 @@ const TrustedBrands = () => {
                 key={index}
                 className="group relative flex items-center justify-center"
               >
-                <div className="relative h-24 w-full transition-transform duration-500 ease-out group-hover:scale-110 md:h-32 lg:h-40">
-                  <Image
-                    src={brand.logo || "/placeholder.svg"}
-                    alt={brand.name}
-                    fill
-                    className="object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
-                  />
-                </div>
+                <Link 
+                  href={brand.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="block w-full h-full"
+                >
+                  <div
+                    className={`relative w-full transition-transform duration-500 ease-out group-hover:scale-110 ${
+                      brand.large
+                        ? "h-32 md:h-40 lg:h-52"
+                        : "h-24 md:h-32 lg:h-40"
+                    }`}
+                  >
+                    <Image
+                      src={brand.logo || "/placeholder.svg"}
+                      alt={brand.name}
+                      fill
+                      className="object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
+                    />
+                  </div>
+                </Link>
               </div>
             ))}
           </div>

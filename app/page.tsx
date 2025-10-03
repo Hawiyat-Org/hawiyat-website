@@ -24,9 +24,10 @@ export default function Home() {
      
       <main className="hero-bg-gradient"> 
         <HeroSection />
-        <Templates />
-        <BenefitsSection />
+        {/* <Templates /> */}
         <TrustedBrands />
+        <BenefitsSection />
+     
         <BuildAIApps />
       
       

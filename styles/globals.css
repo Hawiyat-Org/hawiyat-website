@@ -392,3 +392,20 @@ hr {
         color: var(--he);
     } */
 }
+
+
+/* Light mode */
+.img-cost {
+  content: url("/oneSub/cost.webp");
+}
+.img-hawiyat {
+  content: url("/oneSub/hawiyat.webp");
+}
+
+/* Dark mode */
+.tw-dark .img-cost {
+  content: url("/oneSub/cost-dark.webp");
+}
+.tw-dark .img-hawiyat {
+  content: url("/oneSub/hawiyat-dark.webp");
+}
