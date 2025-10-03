@@ -9,6 +9,12 @@ interface AIPlaygroundProps {
   typedText: string
 }
 
+interface ConversationMessage {
+  role: "user" | "assistant"
+  content: string
+  title?: string
+}
+
 // AI Model Dropdown Component
 const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: string, onModelChange: (model: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -66,42 +72,70 @@ const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: stri
 }
 
 const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
-  const [prompts, setPrompts] = useState<string[]>([])
+  const [conversation, setConversation] = useState<ConversationMessage[]>([])
   const [currentPrompt, setCurrentPrompt] = useState("")
   const [selectedModel, setSelectedModel] = useState("Hawiyat CLI")
   const [showSignup, setShowSignup] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const MAX_PROMPTS = 3
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (prompts.length >= MAX_PROMPTS || !currentPrompt.trim()) return
+    if (conversation.length >= MAX_PROMPTS * 2 || !currentPrompt.trim() || isLoading) return
 
-    const newPrompts = [...prompts, currentPrompt]
-    setPrompts(newPrompts)
+    const userMessage = currentPrompt.trim()
     setCurrentPrompt("")
+    setIsLoading(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const responses: Record<string, string> = {
-        "hawiyat cli": [
-          "Hawiyat CLI at your service. I can help you deploy apps, manage agents, and inspect logs.",
-          "Common commands: `hawiyat deploy --app <name>`, `hawiyat agents create <agent-name>`, `hawiyat agents run <agent-name>`, `hawiyat logs --app <name>`.",
-          "To create an AI agent: `hawiyat agents create <agent-name> --from template:assistant`. Example: `hawiyat agents create summarizer --from-template:docs`.",
-          "Need CI/CD? Try `hawiyat pipeline create --app <name> --git <repo-url>`."
-        ].join(" "),
-        "claude sonnet": "Hello from Claude Sonnet! I'm here to help with writing, coding, analysis and creative tasks. (Switch to Hawiyat CLI to get deployment commands.)",
-        "gpt 4o": "Hello from GPT 4o! I can assist with complex reasoning, coding, and creative problem-solving. Ask how Hawiyat can integrate with your CI/CD pipeline.",
-        "gemini": "Hello from Gemini! I can help with research, code, and multimodal tasks. Use Hawiyat CLI to deploy multimodal endpoints.",
-        "llama 3": "Hello from Llama 3! Open-source model assistance — can help you prototype agents you might later deploy with Hawiyat."
-      } as Record<string, string>
+    // Add user message to conversation
+    const updatedConversation: ConversationMessage[] = [
+      ...conversation,
+      { role: "user", content: userMessage }
+    ]
+    setConversation(updatedConversation)
 
-      const response = responses[selectedModel.toLowerCase()] || responses["hawiyat cli"]
-      setPrompts((prev) => [...prev, response])
-    }, 500)
+    try {
+      // Call the API endpoint
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          conversation: conversation
+        }),
+      })
 
-    if (newPrompts.length >= MAX_PROMPTS) {
-      setShowSignup(true)
+      if (!response.ok) {
+        throw new Error('Failed to get response from API')
+      }
+
+      const data = await response.json()
+      
+      // Update conversation with API response
+      setConversation(data.conversation || [
+        ...updatedConversation,
+        { role: "assistant", content: data.text, title: data.title }
+      ])
+
+      // Show signup popup after reaching limit
+      if (data.conversation.length >= MAX_PROMPTS * 2) {
+        setShowSignup(true)
+      }
+    } catch (error) {
+      console.error('Error calling chat API:', error)
+      
+      // Fallback response on error
+      const errorResponse: ConversationMessage = {
+        role: "assistant",
+        content: "Please try again in a moment.",
+        title: "Connection Error 🔄"
+      }
+      setConversation([...updatedConversation, errorResponse])
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -161,7 +195,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
         <div className="mt-3 text-lg">Join developers using Hawiyat to deploy and run agents</div>
 
-        <a href="#" className="btn">
+        <a href="https://app.hawiyat.org/" className="btn">
           Sign up
         </a>
       </div>
@@ -179,19 +213,19 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         </div>
 
         <div className="flex mt-2 gap-2 flex-col">
-          <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-cloud-upload"></i>
             <span>Deployments</span>
           </a>
-          <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-robot"></i>
             <span>Agents</span>
           </a>
-          <a href="#" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-book"></i>
             <span>Docs & CLI</span>
           </a>
-          <a href="#" className="flex rounded-sm group gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="https://app.hawiyat.org/" className="flex rounded-sm group gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <span>Explore More</span>
             <i className="bi bi-arrow-right transform transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
@@ -199,7 +233,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
         <div className="mt-auto w-full flex px-6 place-content-center">
           <a
-            href="#"
+            href="https://app.hawiyat.org/"
             className="btn !w-full py-2 !bg-transparent duration-[0.3s] hover:!bg-black hover:!text-white dark:hover:!bg-white dark:hover:!text-black !border-[1px] !border-black !text-black dark:!border-white dark:!text-white"
           >
             Signup
@@ -221,7 +255,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           </div>
 
           <div className="overflow-y-auto px-[5%] max-lg:px-2 scrollbar max-lg:max-h-[80%] max-h-[550px] max-lg:mt-12 w-full h-full z-10 flex flex-col">
-            {prompts.length === 0 ? (
+            {conversation.length === 0 ? (
               <div className="w-full flex text-center flex-col place-content-center">
                 <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat CLI — interactive helper</h2>
                 <div className="inline mt-6 max-md:mt-3">
@@ -230,16 +264,34 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-2">
-                {prompts.map((prompt, index) => (
+              <div className="flex flex-col gap-4">
+                {conversation.map((msg, index) => (
                   <div key={index} className="w-full flex p-2">
                     <div
-                      className={`w-fit p-2 rounded-xl ${index % 2 === 0 ? "ml-auto bg-gray-100 dark:bg-[#171717]" : "mr-auto"}`}
+                      className={`w-fit max-w-[80%] p-4 rounded-xl ${
+                        msg.role === "user" 
+                          ? "ml-auto bg-gray-100 dark:bg-[#171717]" 
+                          : "mr-auto bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 border border-cyan-100 dark:border-cyan-800/30"
+                      }`}
                     >
-                      {prompt}
+                      {msg.role === "assistant" && msg.title && (
+                        <div className="text-xl font-bold mb-3 text-cyan-700 dark:text-cyan-400">
+                          {msg.title}
+                        </div>
+                      )}
+                      <div className={`whitespace-pre-wrap ${msg.role === "assistant" ? "text-sm leading-relaxed" : ""}`}>
+                        {msg.content}
+                      </div>
                     </div>
                   </div>
                 ))}
+                {isLoading && (
+                  <div className="w-full flex p-2">
+                    <div className="w-fit p-4 rounded-xl mr-auto bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 border border-cyan-100 dark:border-cyan-800/30">
+                      <span className="animate-pulse text-cyan-700 dark:text-cyan-400">Thinking...</span>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -261,16 +313,20 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
              placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
             value={currentPrompt}
             onChange={(e) => setCurrentPrompt(e.target.value)}
-            disabled={prompts.length >= MAX_PROMPTS}
+            disabled={conversation.length >= MAX_PROMPTS * 2 || isLoading}
           />
 
           <button
             type="submit"
-            className="btn !bg-black   !p-2 !px-3 !text-white"
+            className="btn !bg-black !p-2 !px-3 !text-white disabled:opacity-50 disabled:cursor-not-allowed"
             title="submit"
-            disabled={prompts.length >= MAX_PROMPTS}
+            disabled={conversation.length >= MAX_PROMPTS * 2 || isLoading}
           >
-            <i className="bi bi-arrow-up"></i>
+            {isLoading ? (
+              <i className="bi bi-hourglass-split animate-spin"></i>
+            ) : (
+              <i className="bi bi-arrow-up"></i>
+            )}
           </button>
         </form>
       </div>
