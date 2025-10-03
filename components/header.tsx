@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 import Link from "next/link"
 import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
-
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <>
-       <div className="h-[100px] hero-bg-gradient w-full"></div>
+       <div className="h-[100px]  hero-bg-gradient w-full"></div>
        <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
@@ -52,11 +52,11 @@ const Header = () => {
       }`}>
         
         {/* Main Header Row */}
-        <div className="flex items-center justify-between px-3 sm:px-6   min-h-[64px] ">
+        <div className="flex  items-center justify-between px-3 sm:px-6   min-h-[64px] ">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
             <Image 
-              src="/logo.png" 
+              src="/logo.svg" 
               alt="Hawiyat Logo" 
               width={60} 
               height={40} 
@@ -70,25 +70,25 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
-              href="#"
+              href="/#Solutions"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
             Solutions  
             </Link>
             <Link
-              href="https://blog.hawiyat.org"
+              href="/#Features"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Features
             </Link>
             <Link
-              href="#"
+              href="/#testimonies"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               testimonies
             </Link>
             <Link
-              href="#pricing"
+              href="/#pricing"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Pricing
@@ -110,7 +110,7 @@ const Header = () => {
             </button>
 
             <Link
-              href="/auth"
+              href={appUrl || "https://app.hawiyat.org/"}
               className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
             >
               Sign in

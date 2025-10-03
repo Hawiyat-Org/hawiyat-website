@@ -1,10 +1,10 @@
 "use client"
-import { DatabaseBackupIcon, Expand, Fingerprint, GitFork, GitGraphIcon, Rocket, RocketIcon, TrendingUp } from "lucide-react";
+import { DatabaseBackupIcon, Expand, Fingerprint, GitFork, Layers, Database,Users, RocketIcon, TrendingUp } from "lucide-react";
 import { useTheme } from "next-themes"
-import Image from "next/image"
+
 
 const AdditionalFeatures = () => {
-  const { theme } = useTheme();
+
 
   const features = [
     {
@@ -43,10 +43,28 @@ const AdditionalFeatures = () => {
         "Real-time insights into your projects and deployments. Track performance and issues with AI-powered analytics.",
       image: TrendingUp,
     },
+    {
+      title: "300+ Ready-to-Use Templates",
+      description:
+        "Start faster with over 300 pre-configured templates for popular stacks, frameworks, and services — no setup headaches.",
+      image: Layers,
+    },
+    {
+      title: "Built-in Databases",
+      description:
+        "Provision and manage databases in seconds. PostgreSQL, MySQL, and MongoDB are ready to plug into your apps.",
+      image: Database,
+    },
+    {
+      title: "Team Collaboration",
+      description:
+        "Invite teammates, assign roles, and collaborate securely on deployments — all within a single dashboard.",
+      image: Users,
+    }
   ]
 
   return (
-    <section className="relative w-full flex flex-col items-center overflow-hidden py-12">
+    <section id="Features" className=" relative w-full flex flex-col items-center overflow-hidden py-12">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
           Hawiyat Features

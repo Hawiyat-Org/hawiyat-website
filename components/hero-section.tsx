@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import AIPlayground from "./ai-playground"
 import VideoModal from "./video-modal"
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 
 const HeroSection = () => {
   const [showVideoModal, setShowVideoModal] = useState(false)
@@ -98,7 +99,7 @@ const HeroSection = () => {
 
             <a
               className="btn group max-lg:!w-[160px] flex gap-2 shadow-lg !w-[170px] !rounded-xl !py-4 max-lg:!py-2 transition-transform duration-[0.3s] hover:scale-x-[1.03]"
-              href="https://app.hawiyat.org"
+              href={appUrl || "https://app.hawiyat.org/"}
             >
               <span>Get started</span>
               <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300"></i>

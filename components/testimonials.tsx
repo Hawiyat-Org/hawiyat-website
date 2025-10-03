@@ -1,74 +1,74 @@
-import { Server, GitBranch, DatabaseBackup, Gauge, ShieldCheck, Cloud } from "lucide-react"
+import { User } from "lucide-react"
 
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "BoudNoureddine Bouderbala",
-      company: "Full stack developer",
-      icon: <GitBranch className="h-10 w-10 text-green-500" />,
+      name: "DZ DEVELOPER ADMIN",
+      company: "CTO at Charjily",
       content:
-        "With Hawiyat one-click deployment and CI/CD, we cut release times from hours to minutes. Our team ships updates daily with zero downtime.",
+        "With Hawiyat’s VPS, our infrastructure became rock-solid. Deployment is seamless, uptime is guaranteed, and we scale resources instantly. Hawiyat has transformed our operations.",
     },
     {
-      name: "Sarah M.",
-      company: "CTO, Innovexa",
-      icon: <Server className="h-10 w-10 text-blue-500" />,
+      name: "Sofiane Fzeghouli",
+      company: "IT Solutions Lead",
       content:
-        "Running our applications on Hawiyat VPS is effortless. The performance is unmatched, and scaling is literally one click away.",
+        "Thanks to Hawiyat’s automated backup and recovery tools, we’ve eliminated data loss risk. Our backups are reliable, instantaneous, and fully managed — we sleep easier now.",
     },
     {
-      name: "Yacine L.",
-      company: "Founder, CloudNest",
-      icon: <DatabaseBackup className="h-10 w-10 text-purple-500" />,
+      name: "Chekroune",
+      company: "Engineer at ESTIN",
       content:
-        "Automated backups saved us more than once. Knowing our data is secure and recoverable with Hawiyat gives us complete peace of mind.",
+        "In an academic environment with high load, Hawiyat’s performance and resource management ensured no downtime — even during peak periods. It’s a game changer for education systems.",
     },
     {
-      name: "Rania B.",
-      company: "Product Manager, NextWave",
-      icon: <Gauge className="h-10 w-10 text-pink-500" />,
+      name: "Khalil",
+      company: "IT Operations Manager",
       content:
-        "The unified dashboard is a game-changer. From deployment to monitoring, everything is centralized—making management super easy.",
+        "We’ve streamlined our delivery cycles with Hawiyat’s tools. Features like environment snapshots and scalable infrastructure helped us cut lead time by half.",
     },
     {
-      name: "Houssem T.",
-      company: "CEO, BrightApps",
-      icon: <Cloud className="h-10 w-10 text-cyan-500" />,
+      name: "Azouaou Faical",
+      company: "Professor at ESTIN",
       content:
-        "We scaled from a few users to thousands without touching infrastructure. Hawiyat handled everything in the background, flawlessly.",
+        "Teaching, research, and real-world projects demand reliable infrastructure. Hawiyat gives me predictability, performance, and control — so I can focus on innovation, not servers.",
     },
     {
-      name: "Nadia F.",
-      company: "Data Engineer, Flowlytics",
-      icon: <ShieldCheck className="h-10 w-10 text-orange-500" />,
+      name: "Djawer Hacker",
+      company: "Cybersecurity Expert (10+ years)",
       content:
-        "The identity management and monitoring tools are super insightful. We now spot issues before they impact users—something we never had before Hawiyat.",
+        "From a security perspective, Hawiyat is outstanding. Granular access, encryption, and real-time alerts make it feel like our data center is always under 24/7 protection.",
     },
   ]
 
   return (
-    <section className="flex min-h-[100vh] w-full flex-col place-content-center place-items-center p-[2%]">
+    <section className="flex min-h-[100vh] w-full flex-col items-center justify-center p-[2%]">
       <h3 className="reveal-up text-4xl font-medium text-center max-md:text-2xl">
         Trusted by professionals building on Hawiyat
       </h3>
 
-      <div className="mt-20 gap-10 space-y-8  max-md:columns-1 lg:columns-2 xl:columns-3">
+      <div id="testimonies" className="mt-20 grid w-full max-w-6xl gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch">
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="reveal-up flex h-fit w-[350px] break-inside-avoid flex-col gap-4 rounded-lg border-[1px] bg-[#f6f7fb] dark:bg-[#080808] dark:border-[#1f2123] p-4 max-lg:w-[320px]"
+            className="reveal-up flex flex-col justify-between rounded-lg border bg-[#f6f7fb] dark:bg-[#080808] dark:border-[#1f2123] p-6 shadow-md"
           >
-            <div className="flex place-items-center gap-3">
+            {/* Header */}
+            <div className="flex items-center gap-3">
               <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                {testimonial.icon}
+                <User className="h-8 w-8 text-gray-600 dark:text-gray-300" />
               </div>
-              <div className="flex flex-col gap-1">
-                <div className="font-semibold">{testimonial.name}</div>
-                <div className="text-gray-700 dark:text-gray-300">{testimonial.company}</div>
+              <div className="flex flex-col">
+                <span className="font-semibold">{testimonial.name}</span>
+                <span className="text-gray-700 dark:text-gray-300 text-sm">
+                  {testimonial.company}
+                </span>
               </div>
             </div>
 
-            <p className="mt-4 text-gray-800 dark:text-gray-200">{testimonial.content}</p>
+            {/* Content */}
+            <p className="mt-4 text-gray-800 dark:text-gray-200 text-sm leading-relaxed flex-1">
+              {testimonial.content}
+            </p>
           </div>
         ))}
       </div>

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const OneSubscription = () => {
   return (
     <section className="relative flex w-full min-h-[100vh] max-md:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden">
@@ -53,7 +53,7 @@ const OneSubscription = () => {
         </div>
 
         <Link
-          href="https://app.hawiyat.org/"
+          href={appUrl || "https://app.hawiyat.org/"}
           className="reveal-up group shadow-xl btn flex gap-2 mt-10"
         >
           <span>Start Now</span>

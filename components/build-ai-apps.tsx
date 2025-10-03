@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const BuildAIApps = () => {
   return (
     <section className="relative flex w-full min-h-[100vh] max-lg:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden">
@@ -21,7 +23,7 @@ const BuildAIApps = () => {
 
         <div className="reveal-up flex mt-8">
           <Link
-            href="https://app.hawiyat.org/"
+            href={appUrl || "https://app.hawiyat.org/"}
             target="_blank"
             rel="noopener"
             className="shadow-md hover:shadow-xl dark:shadow-gray-800 transition-all duration-300 border-[1px] p-3 px-4 border-black dark:border-white rounded-md"

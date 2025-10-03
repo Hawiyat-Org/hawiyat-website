@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-
+const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const Resources = () => {
   const articles = [
     {
@@ -8,21 +9,21 @@ const Resources = () => {
       category: "Developer Tools",
       date: "Aug 5, 2025",
       image: "/assets/images/home/article1.webp",
-      href: "/docs/cli-getting-started",
+      href: {docsUrl},
     },
     {
       title: "Optimizing container deployments on Hawiyat",
       category: "Deployment",
       date: "Jul 20, 2025",
       image: "/assets/images/home/article2.webp",
-      href: "/blog/optimizing-containers",
+      href: {docsUrl},
     },
     {
       title: "Auto-scale architectures: Theory & practice",
       category: "Infrastructure",
       date: "Jun 15, 2025",
       image: "/assets/images/home/article3.webp",
-      href: "/blog/auto-scale-architectures",
+      href: {docsUrl},
     },
   ]
 

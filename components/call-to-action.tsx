@@ -1,6 +1,6 @@
-"use client"
 
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const CallToAction = () => {
 
 
@@ -50,7 +50,7 @@ const CallToAction = () => {
 
           <div className="mt-6 relative flex max-lg:flex-col gap-5">
             <a
-              href="https://app.hawiyat.org/"
+              href={appUrl || "https://app.hawiyat.org/"}
            
               className="btn reveal-up !rounded-lg !px-6 !py-3 font-medium group relative overflow-hidden transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
             >

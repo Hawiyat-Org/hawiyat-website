@@ -50,12 +50,13 @@ const TrustedBrands = () => {
                         : "h-24 md:h-32 lg:h-40"
                     }`}
                   >
-                    <Image
-                      src={brand.logo || "/placeholder.svg"}
-                      alt={brand.name}
-                      fill
-                      className="object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
-                    />
+                <Image
+  src={brand.logo || "/placeholder.svg"}
+  alt={brand.name}
+  fill
+  className="object-contain  transition-all duration-500 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)]  dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+/>
+
                   </div>
                 </Link>
               </div>

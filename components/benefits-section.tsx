@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { GitMerge, Infinity, RocketIcon ,DatabaseBackup } from "lucide-react"
-
+const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL || "https://docs.hawiyat.org/"
 const BenefitsSection = () => {
   const {theme} = useTheme();
   const benefits = [
@@ -30,18 +30,18 @@ const BenefitsSection = () => {
   ]
 
   return (
-    <section className="relative flex max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden">
+    <section id="Solutions" className="relative flex max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden">
       <div className="mt-8 flex flex-col w-full h-full place-items-center gap-5">
         <div className="reveal-up mt-5 flex flex-col gap-3 text-center">
           <h2 className="text-6xl font-medium max-md:text-3xl p-2">Everything you need, in one place</h2>
         </div>
 
-        <div className="mt-6 flex flex-col max-w-[1150px] max-lg:max-w-full h-full p-4 max-lg:place-content-center gap-8">
+        <div  className="mt-6 flex flex-col max-w-[1150px] max-lg:max-w-full h-full p-4 max-lg:place-content-center gap-8">
           <div className="max-xl:flex max-xl:flex-col place-items-center grid grid-cols-3 gap-8 place-content-center auto-rows-auto">
             {benefits.map((benefit, index) => (
               <div key={index} className="reveal-up w-[350px] h-[540px] flex max-md:w-full">
                 <Link
-                  href="https://docs.hawiyat.org/"
+                  href={docsUrl || "https://docs.hawiyat.org/"} 
                   className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
                 >
                   
@@ -60,7 +60,7 @@ const BenefitsSection = () => {
 
           <div className="reveal-up w-full md:h-[350px] max-md:min-h-[350px] flex">
   <Link
-    href="https://docs.hawiyat.org/"
+    href={docsUrl || "https://docs.hawiyat.org/"} 
     className="relative p-10 transition-all duration-300 group/card gap-5 flex max-md:flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#171717] rounded-3xl hover:scale-[1.02]"
   >
     <div className="flex justify-center items-center w-full max-md:h-[180px]">

@@ -1,5 +1,5 @@
 import Link from "next/link"
-
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const Pricing = () => {
   const plans = [
     {
@@ -83,7 +83,7 @@ const Pricing = () => {
       </ul>
 
       <Link
-        href="https://app.hawiyat.org"
+        href={appUrl || "https://app.hawiyat.org/"}
         className={`btn mt-4 !w-full transition-transform duration-[0.3s] hover:scale-x-[1.02] ${plan.buttonStyle}`}
       >
         Choose plan

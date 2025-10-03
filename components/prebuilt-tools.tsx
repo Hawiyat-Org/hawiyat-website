@@ -1,5 +1,5 @@
 import Link from "next/link"
-
+const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
 const PrebuiltTools = () => {
   const tools = [
     {
@@ -50,7 +50,7 @@ const PrebuiltTools = () => {
             </h2>
 
             <Link
-              href="https://docs.hawiyat.org/"
+              href={docsUrl || "https://docs.hawiyat.org/"}
               className="btn !mt-8 !bg-transparent !text-black !border-[1px] !border-black dark:!border-white dark:!text-white"
             >
               Explore Tools
@@ -62,7 +62,7 @@ const PrebuiltTools = () => {
           {tools.map((tool, index) => (
             <div key={index} className="reveal-up h-[240px] w-[450px] max-md:w-full">
               <Link
-                href="https://docs.hawiyat.org/"
+                href={docsUrl || "https://docs.hawiyat.org/"}
                 className="flex w-full h-full gap-8 rounded-xl  dark:shadow-[#171717] duration-300 transition-all p-8 group/card"
               >
                 <div className="text-4xl max-md:text-2xl">

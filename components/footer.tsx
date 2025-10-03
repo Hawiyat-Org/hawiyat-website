@@ -1,13 +1,15 @@
 import Image from "next/image"
 import Link from "next/link"
-
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
+const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
+const blogUrl = process.env.NEXT_PUBLIC_Blog_URL
 const Footer = () => {
   const footerSections = [
     {
       title: "Resources",
       links: [
-        { name: "Getting started", href: "https://app.hawiyat.org" },
-        { name: "API Docs", href: "https://docs.hawiyat.org" },
+        { name: "Getting started", href: {} },
+        { name: "API Docs", href: {} },
         { name: "API Endpoints", href: "#" },
         { name: "Health status", href: "#" },
         { name: "Pricing", href: "#pricing" },
