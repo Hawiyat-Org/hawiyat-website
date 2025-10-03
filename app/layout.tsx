@@ -40,7 +40,7 @@ const dancingScript = Dancing_Script({
 });
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? 'Hawiyat';
-const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000';
+const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? 'https://hawiyat.org';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.hawiyat.org';
 const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? 'https://docs.hawiyat.org';
 
@@ -98,7 +98,9 @@ export const metadata: Metadata = {
       }
     ],
     // use dash in locale to match common format
-    locale: 'en-DZ',
+    locale: 'en_US',
+    alternateLocale: ['fr_DZ'],
+
     type: 'website',
   },
   twitter: {
@@ -121,7 +123,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: `${NEXT_URL}/logo.ico`,
+    icon: `${NEXT_URL}/favlogo.ico`,
     shortcut: `${NEXT_URL}/logo.svg`,
     apple: `${NEXT_URL}/logo.svg`,
   },
@@ -129,17 +131,22 @@ export const metadata: Metadata = {
   other: {
     'application/ld+json': JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "WebSite",
       "name": APP_NAME,
       "url": NEXT_URL,
       "logo": `${NEXT_URL}/logo.svg`,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://hawiyat.org/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
       "sameAs": [
-        "https://twitter.com/hawiyat",
+        "https://www.linkedin.com/company/hawiyat",
         "https://github.com/Hawiyat-Corp"
       ],
       "contactPoint": [{
         "@type": "ContactPoint",
-        "telephone": "+213-XX-XXX-XXXX",
+        "telephone": "+213-55-955-5951",
         "contactType": "Customer Support",
         "areaServed": "DZ"
       }]
