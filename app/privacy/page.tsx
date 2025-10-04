@@ -150,23 +150,7 @@ const PrivacyPolicyPage = () => {
         <div className="flex flex-col max-w-7xl mx-auto justify-start items-start min-h-screen">
           <header className="border-b w-full border-gray-200 dark:border-gray-800 bg-white dark:bg-black  top-0 z-30 lg:static backdrop-blur-lg lg:backdrop-blur-none bg-white/95 dark:bg-black/95 lg:bg-white lg:dark:bg-black">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 lg:py-12 xl:py-16">
-              <div className="flex items-center justify-between lg:hidden mb-6">
-                <a
-                  href="https://app.hawiyat.org/"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors active:scale-95"
-                >
-                  <i className="bi bi-arrow-left text-base" />
-                  <span>Back</span>
-                </a>
-
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-900 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-800 transition-all active:scale-95"
-                >
-                  <i className={`bi ${isMobileMenuOpen ? "bi-x-lg" : "bi-list"} text-lg`} />
-                  <span>Menu</span>
-                </button>
-              </div>
+          
 
               <a
                 href="https://app.hawiyat.org/"
@@ -204,73 +188,7 @@ const PrivacyPolicyPage = () => {
             </div>
           </header>
 
-          {isMobileMenuOpen && (
-            <div
-              className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <div
-                className="absolute inset-x-0 top-0 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800 shadow-2xl max-h-[80vh] overflow-y-auto scrollbar"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between  top-0 bg-white dark:bg-black z-10">
-                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">Sections</h3>
-                  <button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors active:scale-95"
-                  >
-                    <i className="bi bi-x-lg text-xl" />
-                  </button>
-                </div>
-                <nav className="p-4 space-y-2">
-                  {sections.map((section) => (
-                    <a
-                      key={section.id}
-                      href={`#${section.id}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex items-center rounded-xl gap-3 px-4 py-4 text-base transition-all active:scale-98 ${
-                        activeSection === section.id
-                          ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-medium shadow-sm"
-                          : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900/50"
-                      }`}
-                    >
-                      <i className={`${section.icon} text-xl flex-shrink-0`} />
-                      <span className="leading-tight">{section.title}</span>
-                    </a>
-                  ))}
-                </nav>
-                <div className="p-4 border-t border-gray-200 dark:border-gray-800  bottom-0 bg-white dark:bg-black">
-                  <a
-                    href="https://app.hawiyat.org/"
-                    className="flex items-center justify-center w-full px-4 py-4 text-base font-medium text-white bg-black dark:bg-white dark:text-black rounded-xl active:scale-98 transition-all shadow-lg"
-                  >
-                    <i className="bi bi-arrow-left mr-2" />
-                    Back to App
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <nav className="lg:hidden  top-[180px] sm:top-[200px] z-20 backdrop-blur-lg bg-white/95 dark:bg-black/95 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-            <div className="px-4 py-3 overflow-x-auto scrollbar">
-              <div className="flex gap-2 min-w-max pb-1">
-                {sections.map((section) => (
-                  <a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all active:scale-95 ${
-                      activeSection === section.id
-                        ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 shadow-sm"
-                        : "bg-gray-100 dark:bg-gray-900/50 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"
-                    }`}
-                  >
-                    {section.title}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </nav>
+         
 
           <div className="flex-1 bg-white dark:bg-black w-full">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 xl:py-20 space-y-12 sm:space-y-16 lg:space-y-20 xl:space-y-24">
