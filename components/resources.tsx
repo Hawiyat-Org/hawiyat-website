@@ -38,7 +38,7 @@ const Resources = () => {
         {articles.map((article, index) => (
           <Link
             key={index}
-            href={article.href}
+            href={docsUrl || "https://docs.hawiyat.org/"}
             className="flex h-[500px] flex-col gap-2 overflow-clip rounded-lg p-4 duration-300"
           >
             <div className="h-[350px] min-h-[350px] w-full overflow-hidden rounded-2xl">
