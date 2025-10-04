@@ -30,7 +30,7 @@ const Resources = () => {
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
       <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">
-        Hawiyat Resources by Our Engineers 🚀
+        Hawiyat Resources
       </h3>
 
       {/* 🔥 changed flex-wrap to grid */}

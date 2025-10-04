@@ -47,7 +47,7 @@ const FAQ = () => {
               onClick={() => toggleItem(index)}
               aria-expanded={openIndex === index}
             >
-              <span className="font-medium">{faq.question}</span>
+              <span className="font-medium ">{faq.question}</span>
               <i
                 className={`bi bi-plus text-xl origin-center duration-300 transition-transform font-semibold flex-shrink-0 ml-4 ${
                   openIndex === index ? "rotate-45" : ""
@@ -63,7 +63,7 @@ const FAQ = () => {
               }`}
             >
               <div className="px-4">
-                <p className="whitespace-pre-line text-gray-700 max-lg:text-sm leading-relaxed">
+                <p className="whitespace-pre-line text-gray-700 dark:text-white/60 max-lg:text-sm leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

@@ -1,7 +1,17 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 const TrustedBrands = () => {
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const brands = [
     { 
       name: "Itihad", 
@@ -17,7 +27,9 @@ const TrustedBrands = () => {
     },
     { 
       name: "IT Solutions", 
-      logo: "/trust/itsol.svg", 
+      logo: mounted && (resolvedTheme === "dark" || theme === "dark") 
+        ? "/trust/itsol-dark.svg" 
+        : "/trust/itsol.svg", 
       url: "https://itsolutions.dz/", 
       large: true 
     },

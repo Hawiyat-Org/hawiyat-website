@@ -64,7 +64,7 @@ const PrebuiltTools = () => {
             <div key={index} className="reveal-up h-[240px] max-md:h-auto w-[450px] max-md:w-full">
               <Link
                 href={docsUrl || "https://docs.hawiyat.org/"}
-                className="flex w-full h-full gap-8 max-md:gap-4 rounded-xl max-md:rounded-lg dark:shadow-[#171717] duration-300 transition-all p-8 max-md:p-5 group/card max-md:bg-[#f6f7fb] max-md:dark:bg-[#080808] max-md:border max-md:border-gray-200 max-md:dark:border-[#1f2123] max-md:shadow-sm active:scale-[0.98]"
+                className="flex w-full h-full gap-8 max-md:gap-4 rounded-xl max-md:rounded-lg dark:shadow-[#171717] duration-300 transition-all p-8 max-md:p-5 group/card  max-md:dark:bg-[#080808]  max-md:border-gray-200 max-md:dark:border-[#1f2123]  active:scale-[0.98]"
               >
                 <div className="text-4xl max-md:text-3xl max-md:flex-shrink-0">
                   <i className={`bi ${tool.icon}`}></i>
