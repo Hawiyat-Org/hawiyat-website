@@ -64,7 +64,7 @@ const AdditionalFeatures = () => {
   ]
 
   return (
-    <section id="Features" className=" relative w-full flex flex-col items-center overflow-hidden py-12">
+    <section id="features" className=" relative w-full flex flex-col items-center overflow-hidden py-12">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
           Hawiyat Features

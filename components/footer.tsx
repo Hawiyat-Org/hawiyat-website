@@ -1,43 +1,48 @@
 import Image from "next/image"
 import Link from "next/link"
+
 const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
-const blogUrl = process.env.NEXT_PUBLIC_Blog_URL
+const blogUrl = process.env.NEXT_PUBLIC_BLOG_URL
+
 const Footer = () => {
   const footerSections = [
     {
       title: "Resources",
       links: [
-        { name: "Getting started", href: {} },
-        { name: "API Docs", href: {} },
-        { name: "API Endpoints", href: "#" },
-        { name: "Health status", href: "#" },
-        { name: "Pricing", href: "#pricing" },
+        { name: "Blog", href: blogUrl || "https://blog.hawiyat.org" },
+        { name: "Docs", href: docsUrl || "https://docs.hawiyat.org" },
+        { name: "Templates", href: "/templates" },
+        { name: "Features", href: "/#features" },
+        { name: "Pricing", href: "/#pricing" },
       ],
     },
     {
       title: "Company",
       links: [
-        { name: "Support channels", href: "#" },
-        { name: "Systems", href: "#" },
-        { name: "Blog", href: "https://blog.hawiyat.org" },
-        { name: "Twitter", href: "https://twitter.com/pauls_freeman" },
-        { name: "Github", href: "https://github.com/Haiwyat-Corp" },
+        { name: "Support", href: "tel:+213559555951" },
+        { name: "Github", href: "https://github.com/hawiyat-corp" },
       ],
+      
     },
     {
       title: "Legal",
       links: [
-        { name: "Terms of service", href: "#" },
-        { name: "Privacy Policy", href: "#" },
-        { name: "DCMA - Content Takedown", href: "#" },
+        { name: "Terms of Service", href: "/terms" },
+        { name: "Privacy Policy", href: "/privacy" },
+        { name: "DCMA - Content Takedown", href: "/dcma" },
       ],
     },
   ]
 
   const socialLinks = [
-    { name: "Github", href: "https://github.com/hawiyat-corp/", icon: "bi-github" },
-    { name: "Twitter", href: "https://twitter.com/pauls_freeman", icon: "bi-twitter" },
+    { name: "Github", href: "https://github.com/hawiyat-corp", icon: "bi-github" },
+    { name: "Discord", href: "https://discord.gg/yourinvite", icon: "bi-discord" },
+    { name: "Instagram", href: "https://instagram.com/hawiyat", icon: "bi-instagram" },
+    { name: "Facebook", href: "https://facebook.com/hawiyat", icon: "bi-facebook" },
+    { name: "TikTok", href: "https://tiktok.com/@hawiyat", icon: "bi-tiktok" },
+    { name: "Email", href: "mailto:support@hawiyat.org", icon: "bi-envelope" },
+    { name: "X (Twitter)", href: "https://x.com/hawiyat", icon: "bi-twitter-x" },
     { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", icon: "bi-linkedin" },
   ]
 
@@ -46,8 +51,8 @@ const Footer = () => {
       <div className="flex max-md:flex-col max-md:gap-6 gap-3 w-full place-content-around">
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
-          <Link href="#" className="w-full place-items-center flex flex-col gap-6">
-            <Image src="/logo.png" alt="logo" width={120} height={120} className="max-w-[120px] " />
+          <Link href={appUrl || "https://blog.hawiyat.org"} className="w-full place-items-center flex flex-col gap-6">
+            <Image src="/logo.png" alt="logo" width={120} height={120} className="max-w-[120px]" />
             <div className="max-w-[120px] text-center text-3xl h-fit">Hawiyat</div>
           </Link>
 
@@ -89,7 +94,7 @@ const Footer = () => {
       <hr className="mt-8" />
 
       <div className="mt-2 flex gap-2 flex-col text-gray-700 dark:text-gray-300 place-items-center text-[12px] w-full text-center place-content-around">
-        <span>Copyright © 2023-2025</span>
+        <span>Copyright © 2023-2025 Hawiyat</span>
         <span>All trademarks and copyrights belong to their respective owners.</span>
       </div>
     </footer>

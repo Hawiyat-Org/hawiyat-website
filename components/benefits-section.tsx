@@ -30,7 +30,7 @@ const BenefitsSection = () => {
   ]
 
   return (
-    <section id="Solutions" className="relative flex max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden">
+    <section id="solutions" className="relative flex max-w-[100vw] flex-col place-content-center place-items-center overflow-hidden">
       <div className="mt-8 flex flex-col w-full h-full place-items-center gap-5">
         <div className="reveal-up mt-5 flex flex-col gap-3 text-center">
           <h2 className="text-6xl font-medium max-md:text-3xl p-2">Everything you need, in one place</h2>

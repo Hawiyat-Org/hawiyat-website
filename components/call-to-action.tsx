@@ -36,10 +36,10 @@ const CallToAction = () => {
           </div>
 
           <h3 className="reveal-up text-5xl dark:text-white/80 text-black/80 font-light max-md:text-3xl text-center leading-relaxed px-4">
-            <span className="dark:text-white text-black font-semibold">click</span>
-            {' '}the button{' '}
-            <span className="dark:text-white text-black font-semibold">ship</span>
-            {' '}the app{' '}
+            <span className="dark:text-white text-black font-semibold">Click </span>
+            {' '}the button,{' '}
+            <span className="dark:text-white text-black font-semibold">Ship</span>
+            {' '}the app,{' '}
             <span className="dark:text-white text-black font-semibold">Done</span>
           </h3>
 

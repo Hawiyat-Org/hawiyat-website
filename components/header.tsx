@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <>
-       <div className="h-[100px]  hero-bg-gradient w-full"></div>
+       <div className="h-[70px] md:h-[100px]  hero-bg-gradient w-full"></div>
        <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
@@ -70,13 +70,13 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
-              href="/#Solutions"
+              href="/#solutions"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
             Solutions  
             </Link>
             <Link
-              href="/#Features"
+              href="/#features"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Features
@@ -85,7 +85,7 @@ const Header = () => {
               href="/#testimonies"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              testimonies
+              Testimonies
             </Link>
             <Link
               href="/#pricing"
@@ -155,29 +155,29 @@ const Header = () => {
             {/* Mobile Navigation Links */}
             <nav className="p-4 space-y-1">
               <Link 
-                href="#" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
-                onClick={closeMobileMenu}
-              >
-                <span className="font-medium">API</span>
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </Link>
-              
-              <Link 
-                href="https://blog.hawiyat.org" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
-                onClick={closeMobileMenu}
-              >
-                <span className="font-medium">Blog</span>
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </Link>
-              
-              <Link 
-                href="#" 
+                href="/#solutions" 
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Solutions</span>
+                <ArrowRight className="w-4 h-4 opacity-60" />
+              </Link>
+              
+              <Link 
+                href="/#features" 
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                onClick={closeMobileMenu}
+              >
+                <span className="font-medium">Features</span>
+                <ArrowRight className="w-4 h-4 opacity-60" />
+              </Link>
+              
+              <Link 
+                href="/#testimonies" 
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                onClick={closeMobileMenu}
+              >
+                <span className="font-medium">Testimonies</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
               
@@ -198,7 +198,7 @@ const Header = () => {
                 className="flex items-center justify-center w-full bg-black dark:bg-white text-white dark:text-black px-6 py-4 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >
-                <span>Try playground</span>
+                <span>Sign in</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
