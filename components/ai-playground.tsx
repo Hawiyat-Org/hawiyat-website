@@ -30,7 +30,7 @@ const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: stri
   const currentModel = aiModels.find(model => model.name === selectedModel) || aiModels[0]
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -45,7 +45,7 @@ const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: stri
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-full mb-2 left-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg z-20 min-w-[200px]">
+        <div className="absolute z-30 md:bottom-full mb-2 md:left-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg  min-w-[200px]">
           {aiModels.map((model) => (
             <button
               key={model.name}
