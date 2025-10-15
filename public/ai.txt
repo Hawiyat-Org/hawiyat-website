@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hawiyat.org/sitemap.xml
+Sitemap: https://www.hawiyat.org/sitemap.xml
 Contact: contact@hawiyat.org
