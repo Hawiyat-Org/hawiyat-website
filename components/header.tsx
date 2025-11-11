@@ -71,25 +71,25 @@ const Header = () => {
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
               href="/#solutions"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
             Solutions  
             </Link>
             <Link
               href="/#features"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
               Features
             </Link>
             <Link
               href="/#testimonies"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
               Testimonies
             </Link>
             <Link
               href="/#pricing"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
               Pricing
             </Link>
@@ -99,7 +99,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200"
+              className="p-2 rounded-lg  border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -133,7 +133,7 @@ const Header = () => {
             </button>
 
             <button 
-              className="p-3 touch-manipulation rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200" 
+              className="p-3 touch-manipulation rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200" 
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
             >
@@ -156,7 +156,7 @@ const Header = () => {
             <nav className="p-4 space-y-1">
               <Link 
                 href="/#solutions" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Solutions</span>
@@ -165,7 +165,7 @@ const Header = () => {
               
               <Link 
                 href="/#features" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Features</span>
@@ -174,7 +174,7 @@ const Header = () => {
               
               <Link 
                 href="/#testimonies" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Testimonies</span>
@@ -183,7 +183,7 @@ const Header = () => {
               
               <Link 
                 href="#pricing" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Pricing</span>
