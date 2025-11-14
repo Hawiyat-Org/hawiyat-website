@@ -69,7 +69,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
         setTimeSlots(simplifiedSlots);
 
         if (!selectedTime) {
-          const firstAvailable = simplifiedSlots.find((slot: TimeSlot) => 
+          const firstAvailable = simplifiedSlots.find((slot: TimeSlot) =>
             slot.status !== 'unavailable' && !isPastTime(slot.time)
           );
           if (firstAvailable) {
@@ -192,7 +192,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
         alert('Please fill in all required fields');
         return;
       }
-      
+
       console.log('Sending verification to:', bookingData.email);
       setVerificationSent(true);
     } else {
@@ -203,11 +203,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
           setBookingSuccess(false);
           setVerificationSent(false);
           setVerificationCode('');
-          setBookingData({
-            company: '',
-            email: '',
-            platform: 'Zoom'
-          });
+          setBookingData({ company: '', email: '', platform: 'Zoom' });
         }, 3000);
       } else {
         alert('Invalid verification code. Please enter a 6-digit code.');
@@ -220,11 +216,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     setBookingSuccess(false);
     setVerificationSent(false);
     setVerificationCode('');
-    setBookingData({
-      company: '',
-      email: '',
-      platform: 'Zoom'
-    });
+    setBookingData({ company: '', email: '', platform: 'Zoom' });
   };
 
   const groupedTimeSlots = [];
@@ -233,31 +225,33 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
   }
 
   return (
-    <div className="rounded-2xl bg-transparent p-8 shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col h-full">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Friday, {selectedDate.toLocaleDateString()}</p>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Available times</h3>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Friday, {selectedDate.toLocaleDateString()}
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Available times</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 bg-gray-100 dark:bg-[#17181b] rounded-lg p-1">
           <button
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              timeFormat === '12h'
-                ? 'bg-gray-900 dark:bg-white text-white dark:text-black'
-                : 'bg-gray-100 dark:bg-[#17181b] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
             onClick={() => setTimeFormat('12h')}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              timeFormat === '12h'
+                ? 'bg-white dark:bg-black text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
           >
             12h
           </button>
           <button
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              timeFormat === '24h'
-                ? 'bg-gray-900 dark:bg-white text-white dark:text-black'
-                : 'bg-gray-100 dark:bg-[#17181b] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
             onClick={() => setTimeFormat('24h')}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              timeFormat === '24h'
+                ? 'bg-white dark:bg-black text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
           >
             24h
           </button>
@@ -265,18 +259,48 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       </div>
 
       {/* Time Slots */}
-      <div className="flex-grow overflow-y-auto max-h-[400px] pr-2">
+      <div className="space-y-3">
         {loading ? (
-          <div className="text-center py-4">Loading time slots...</div>
+          <>
+            {[
+              ['9:00 am', '9:30 am'],
+              ['10:00 am', '10:30 am'],
+              ['11:00 am', '11:30 am'],
+              ['12:00 pm', '12:30 pm'],
+              ['1:00 pm', '1:30 pm'],
+              ['2:00 pm', '2:30 pm'],
+              ['3:00 pm', '3:30 pm'],
+              ['4:00 pm', '4:30 pm'],
+              ['5:00 pm']
+            ].map((pair, pairIndex) => (
+              <div key={pairIndex} className="grid grid-cols-2 gap-3">
+                {Array.isArray(pair) ? (
+                  pair.map((time, slotIndex) => (
+                    <div
+                      key={slotIndex}
+                      className="flex items-center justify-center py-3 rounded-lg bg-gray-100 dark:bg-[#17181b] animate-pulse"
+                    >
+                      <span className="text-gray-400 dark:text-gray-600">{time}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center py-3 rounded-lg bg-gray-100 dark:bg-[#17181b] animate-pulse">
+                    <span className="text-gray-400 dark:text-gray-600">{pair}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
         ) : error ? (
-          <div className="text-center py-4 text-red-500 dark:text-red-400">{error}</div>
+          <div className="col-span-2 text-center py-8 text-red-500 dark:text-red-400">
+            {error}
+          </div>
         ) : groupedTimeSlots.length > 0 ? (
           groupedTimeSlots.map((pair, pairIndex) => (
-            <div key={pairIndex} className="grid grid-cols-2 gap-3 mb-3">
+            <div key={pairIndex} className="grid grid-cols-2 gap-3">
               {pair.map((slot) => {
                 const isSlotInPast = isPastTime(slot.time);
                 const isDisabled = slot.status === 'unavailable' || isSlotInPast;
-                
                 return (
                   <button
                     key={slot.time}
@@ -292,56 +316,51 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
                       }
                     `}
                   >
-                    <span className={`font-medium ${
-                      isDisabled
-                        ? 'text-gray-300 dark:text-gray-500'
-                        : selectedTime === slot.time
-                          ? 'text-white dark:text-black'
-                          : 'text-gray-700 dark:text-gray-300'
-                    }`}>
-                      {formatTime(slot.time, timeFormat)}
-                    </span>
+                    {formatTime(slot.time, timeFormat)}
                   </button>
-                )
+                );
               })}
             </div>
           ))
         ) : (
-          <div className="text-center py-4 text-gray-700 dark:text-gray-300">No time slots available for this date</div>
+          <div className="col-span-2 text-center py-8 text-gray-500 dark:text-gray-400">
+            No time slots available for this date
+          </div>
         )}
       </div>
 
       {/* Complete Booking Button */}
       <button
-        className="w-full mt-6 bg-gray-900 dark:bg-white dark:text-black hover:bg-gray-800  text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={handleBooking}
-        disabled={!selectedTime || loading}
+        disabled={!selectedTime || (selectedTime && isPastTime(selectedTime))}
+        className="w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Complete Booking
       </button>
 
       {/* Booking Form Modal - Single Popup */}
       {showBookingForm && !bookingSuccess && (
-        <div className="  absolute  inset-0 backdrop-blur-[2px] backdrop-saturate-150 dark:bg-black/70 flex items-center justify-center p-4 z-[9999]">
-          <div className="bg-white dark:bg-[#17181b] rounded-2xl p-8 max-w-md w-full shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Complete Your Booking</h3>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-[#0d0e11] rounded-2xl p-6 max-w-md w-full shadow-2xl">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              Complete Your Booking
+            </h3>
 
             {verificationSent && (
-              <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg">
-                <p className="text-sm text-green-800 dark:text-green-300">
-                  ✓ Verification code sent to <span className="font-semibold">{bookingData.email}</span>
+              <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                <p className="text-sm text-green-800 dark:text-green-200">
+                  ✓ Verification code sent to {bookingData.email}
                 </p>
               </div>
             )}
 
-            <div>
-              <div className="mb-4">
-                <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Company Name
                 </label>
                 <input
                   type="text"
-                  id="company"
                   value={bookingData.company}
                   onChange={(e) => setBookingData({...bookingData, company: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
@@ -350,13 +369,12 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
                 />
               </div>
 
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Email Address
                 </label>
                 <input
                   type="email"
-                  id="email"
                   value={bookingData.email}
                   onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
@@ -365,12 +383,11 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
                 />
               </div>
 
-              <div className={`mb-${verificationSent ? '4' : '6'}`}>
-                <label htmlFor="platform" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Preferred Meeting Platform
                 </label>
                 <select
-                  id="platform"
                   value={bookingData.platform}
                   onChange={(e) => setBookingData({...bookingData, platform: e.target.value as any})}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
@@ -383,13 +400,12 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
               </div>
 
               {verificationSent && (
-                <div className="mb-6">
-                  <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Verification Code
                   </label>
                   <input
                     type="text"
-                    id="verificationCode"
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, ''))}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent text-center text-2xl tracking-widest bg-white dark:bg-black text-gray-900 dark:text-white"
@@ -398,23 +414,21 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
                   />
                 </div>
               )}
+            </div>
 
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={handleCancel}
-                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={handleBookingSubmit}
-                  className="flex-[2] px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-semibold"
-                >
-                  {verificationSent ? 'Confirm Booking' : 'Complete Booking'}
-                </button>
-              </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={handleCancel}
+                className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleBookingSubmit}
+                className="flex-1 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+              >
+                {verificationSent ? 'Confirm Booking' : 'Complete Booking'}
+              </button>
             </div>
           </div>
         </div>
@@ -422,25 +436,37 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
 
       {/* Success Modal */}
       {bookingSuccess && (
-        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-[9999]">
-          <div className="bg-white dark:bg-[#17181b] rounded-2xl p-8 max-w-md w-full shadow-lg text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-500 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-[#0d0e11] rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
+            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Booking Confirmed!</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              Booking Confirmed!
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               Your meeting has been scheduled for {formatTime(selectedTime || '', timeFormat)} on {selectedDate.toLocaleDateString()}.
             </p>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-500 dark:text-gray-500">
               A confirmation email with meeting details has been sent to {bookingData.email}.
             </p>
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+export default function App() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  
+  return (
+    <div className="min-h-screen bg-white dark:bg-black p-8">
+      <div className="max-w-2xl mx-auto">
+        <TimeSlotsList selectedDate={selectedDate} />
+      </div>
     </div>
   );
 }

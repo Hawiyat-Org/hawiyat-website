@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <>
-       <div className="h-[10vh] md:h-[16vh]  hero-bg-gradient w-full"></div>
+       <div className="h-[10vh] md:h-[15vh]  hero-bg-gradient w-full"></div>
        <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
