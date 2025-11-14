@@ -125,6 +125,29 @@ body.modal-open {
   overflow: hidden;
 }
 
+body.booking-modal-open {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Create an overlay that affects the whole page when booking modal is open */
+body.booking-modal-open::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998; /* Just below the modals */
+  pointer-events: none; /* Allow clicks to pass through to modals */
+}
+
+/* Ensure modals appear above the overlay */
+body.booking-modal-open .fixed.inset-0 {
+  z-index: 9999 !important; /* Highest z-index for modals */
+}
+
 .hero-section {
   background-image: var(--hero-bg-img);
   background-position: center;
