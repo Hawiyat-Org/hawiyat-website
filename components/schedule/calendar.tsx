@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -16,22 +16,75 @@ function getFirstDayOfMonth(date: Date) {
 }
 
 export function Calendar() {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 5)) // June 2025
-  const [selectedDate, setSelectedDate] = useState(24)
+  const [currentDate, setCurrentDate] = useState(new Date()) // Start with current date
+  const [selectedDate, setSelectedDate] = useState<number | null>(null)
 
-  const daysInMonth = getDaysInMonth(currentDate)
-  const firstDay = getFirstDayOfMonth(currentDate)
+  // Calculate closest available day on initial load
+  useEffect(() => {
+    const today = new Date();
+    const daysInCurrentMonth = getDaysInMonth(today);
+    const firstDay = getFirstDayOfMonth(today);
+
+    // Generate days array for current month
+    const days = Array.from({ length: firstDay }, () => null).concat(
+      Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1)
+    );
+
+    // Find the closest available day (today or future, skipping hardcoded unavailable days)
+    const unavailableDays = [15, 20, 21, 22, 23]; // From the original code
+
+    // Find the first available day starting from today
+    const todayDate = today.getDate();
+    let closestDay: number | null = null;
+
+    // First check from today's date onwards in the current month
+    for (let day = todayDate; day <= daysInCurrentMonth; day++) {
+      if (!unavailableDays.includes(day)) {
+        closestDay = day;
+        break;
+      }
+    }
+
+    // If no available day found from today onwards, check from beginning of month after today
+    if (closestDay === null) {
+      for (let day = 1; day <= todayDate; day++) {
+        if (!unavailableDays.includes(day)) {
+          closestDay = day;
+          break;
+        }
+      }
+    }
+
+    // If still no day found, just select the first available day
+    if (closestDay === null) {
+      for (let day = 1; day <= daysInCurrentMonth; day++) {
+        if (!unavailableDays.includes(day)) {
+          closestDay = day;
+          break;
+        }
+      }
+    }
+
+    if (closestDay !== null) {
+      setSelectedDate(closestDay);
+    }
+  }, []);
+
+  const daysInMonth = getDaysInMonth(currentDate);
+  const firstDay = getFirstDayOfMonth(currentDate);
   const days = Array.from({ length: firstDay }, () => null).concat(
     Array.from({ length: daysInMonth }, (_, i) => i + 1)
-  )
+  );
 
   const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
-  }
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+  };
 
   const handleNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))
-  }
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+  };
+
+  const unavailableDays = [15, 20, 21, 22, 23]; // From the original code
 
   return (
     <Card className="border-slate-800 dark:border-gray-700 bg-slate-900/50 dark:bg-gray-800/50 backdrop-blur-sm">
@@ -71,20 +124,20 @@ export function Calendar() {
           {days.map((day, index) => (
             <button
               key={index}
-              onClick={() => day && setSelectedDate(day)}
+              onClick={() => day && !unavailableDays.includes(day) && setSelectedDate(day)}
               className={`
                 aspect-square rounded-lg p-2 text-sm font-medium transition-all
                 ${!day ? 'bg-transparent' : ''}
                 ${day && day === selectedDate
                   ? 'bg-blue-500 dark:bg-white text-white dark:text-black shadow-lg'
-                  : day && (day === 15 || day === 20 || day === 21 || day === 22 || day === 23)
+                  : day && unavailableDays.includes(day)
                   ? 'bg-slate-800 dark:bg-black text-slate-400 dark:text-gray-500 cursor-not-allowed'
                   : day
                   ? 'bg-slate-800 dark:bg-[#17181b] text-slate-300 dark:text-gray-300 hover:bg-slate-700 dark:hover:bg-gray-700'
                   : ''
                 }
               `}
-              disabled={!day}
+              disabled={!day || unavailableDays.includes(day)}
             >
               {day}
             </button>

@@ -1,4 +1,4 @@
-// Simple Waitlist Schema
+// Enhanced Booking & Waitlist Schema
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,7 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ==================== ENUMS ====================
 
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+// ==================== WAITLIST ====================
 
 model Waitlist {
   id        String   @id @default(cuid())
@@ -16,60 +26,112 @@ model Waitlist {
   ipAddress String   @map("ip_address")
   userAgent String   @map("user_agent")
   createdAt DateTime @default(now()) @map("created_at")
-
+  
+  @@index([email])
   @@map("waitlist")
 }
 
+// ==================== SERVICES ====================
 
-// NextAuth required tables
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  password      String?   // <-- Optional, only filled for credentials-based users
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relations
-  accounts      Account[]
-  sessions      Session[]
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  duration    Int      // Duration in minutes (e.g., 30, 60)
+  isActive    Boolean  @default(true) @map("is_active")
   
+  // Metadata
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  bookings    Booking[]
+  
+  @@index([isActive])
+  @@map("services")
 }
 
+// ==================== BOOKINGS ====================
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+model Booking {
+  id        String        @id @default(cuid())
+  
+  // Appointment timing
+  startTime DateTime      @map("start_time")
+  endTime   DateTime      @map("end_time")
+  timezone  String        @default("UTC")
+  
+  // Status
+  status    BookingStatus @default(CONFIRMED)
+  
+  // Customer information
+  customerName  String    @map("customer_name")
+  customerEmail String    @map("customer_email")
+  customerPhone String?   @map("customer_phone")
+  
+  // Additional details
+  notes         String?   @db.Text
+  internalNotes String?   @db.Text @map("internal_notes") // Staff-only notes
+  
+  // Cancellation tracking
+  cancelledAt        DateTime? @map("cancelled_at")
+  cancellationReason String?   @db.Text @map("cancellation_reason")
+  
+  // Metadata
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  serviceId String?
+  service   Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  
+  @@index([startTime, endTime])
+  @@index([customerEmail])
+  @@index([status])
+  @@index([serviceId])
+  @@map("bookings")
+}
 
-  @@unique([identifier, token])
+// ==================== BUSINESS HOURS ====================
+// Defines default weekly schedule
+// Default: Mon-Thu, Sat-Sun 9am-5pm, Friday CLOSED
+
+model BusinessHours {
+  id          String   @id @default(cuid())
+  
+  dayOfWeek   Int      @map("day_of_week") // 0=Sunday, 1=Monday... 5=Friday, 6=Saturday
+  isOpen      Boolean  @default(true) @map("is_open") // Friday should be false
+  startTime   String   @map("start_time")  // "09:00"
+  endTime     String   @map("end_time")    // "17:00"
+  
+  // Metadata
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  @@unique([dayOfWeek])
+  @@map("business_hours")
+}
+
+// ==================== BLOCKED DATES ====================
+// Block specific dates (holidays, vacations, etc.)
+
+model BlockedDate {
+  id          String   @id @default(cuid())
+  
+  // Date to block (full day)
+  date        DateTime @db.Date
+  
+  // Optional: Block specific time range instead of full day
+  startTime   String?  @map("start_time") // "09:00" - if null, blocks entire day
+  endTime     String?  @map("end_time")   // "12:00" - if null, blocks entire day
+  
+  // Details
+  reason      String?  @db.Text // "Christmas", "Vacation", "Company Event"
+  
+  // Metadata
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  @@index([date])
+  @@map("blocked_dates")
 }

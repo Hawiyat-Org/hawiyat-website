@@ -1,6 +1,6 @@
 // app/api/schedule/availability/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma/prismaClient';
+import { prisma } from './prismaClient';
 
 export async function GET(request: NextRequest) {
   try {
@@ -35,6 +35,12 @@ export async function GET(request: NextRequest) {
     const businessHours = await prisma.businessHours.findMany({
       orderBy: { dayOfWeek: 'asc' }
     });
+
+    // Log for debugging
+    console.log('Business hours found:', businessHours.length);
+    if (businessHours.length === 0) {
+      console.warn('⚠️  No business hours configured! Run: npm run db:seed');
+    }
 
     // Fetch blocked dates for the month
     const blockedDates = await prisma.blockedDate.findMany({
@@ -84,10 +90,12 @@ export async function GET(request: NextRequest) {
       const businessHour = businessHoursMap[dayOfWeek];
       const isOpen = businessHour?.isOpen ?? false;
 
-      // Check if date is in the past
+      // Check if date is in the past (compare dates only, not time)
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const isPast = dateObj < today;
+      const checkDate = new Date(dateStr);
+      checkDate.setHours(0, 0, 0, 0);
+      const isPast = checkDate < today;
 
       const hasBookings = bookings.some((booking: any) => {
         const bookingDate = booking.startTime.toISOString().split('T')[0];
@@ -105,11 +113,16 @@ export async function GET(request: NextRequest) {
     // If specific date is requested, generate time slots
     let timeSlots = null;
     if (date) {
+      console.log('Generating time slots for date:', date);
       const dateObj = new Date(date);
       const dayOfWeek = dateObj.getDay();
       const businessHour = businessHoursMap[dayOfWeek];
 
+      console.log('Day of week:', dayOfWeek);
+      console.log('Business hour:', businessHour);
+
       if (!businessHour || !businessHour.isOpen) {
+        console.log('Business closed on this day');
         timeSlots = [];
       } else {
         // Check if date is blocked

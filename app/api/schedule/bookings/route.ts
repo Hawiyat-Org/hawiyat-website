@@ -1,193 +1,212 @@
+// ================================================================
+// app/api/schedule/bookings/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient, BookingStatus } from '@prisma/client';
+import { sendBookingConfirmationEmail } from '@/lib/email-utils';
 
-// Mock bookings data
-let mockBookings: Array<{
-  id: string;
-  date: string;
-  time: string;
-  user: string;
-  createdAt: string;
-  status: string;
-}> = [
-  {
-    id: 'booking_1',
-    date: '2025-06-24',
-    time: '10:00 am',
-    user: 'John Doe',
-    createdAt: '2025-06-01T10:30:00.000Z',
-    status: 'confirmed'
-  },
-  {
-    id: 'booking_2',
-    date: '2025-06-25',
-    time: '2:30 pm',
-    user: 'Jane Smith',
-    createdAt: '2025-06-02T14:15:00.000Z',
-    status: 'confirmed'
-  }
-];
-
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const user = searchParams.get('user');
-    const date = searchParams.get('date');
-    
-    // Filter bookings based on query parameters
-    let filteredBookings = [...mockBookings];
-    
-    if (user) {
-      filteredBookings = filteredBookings.filter(booking => 
-        booking.user.toLowerCase().includes(user.toLowerCase())
-      );
-    }
-    
-    if (date) {
-      filteredBookings = filteredBookings.filter(booking => booking.date === date);
-    }
-    
-    return NextResponse.json({
-      bookings: filteredBookings,
-      total: filteredBookings.length
-    });
-  } catch (error) {
-    console.error('Error fetching bookings:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch bookings' },
-      { status: 500 }
-    );
-  }
-}
+const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { date, time, user, email } = body;
     
-    // Validate required fields
-    if (!date || !time || (!user && !email)) {
+    const {
+      startTime,
+      endTime,
+      customerName,
+      customerEmail,
+      customerPhone,
+      notes,
+      timezone = 'UTC',
+      serviceId
+    } = body;
+
+    // Validation
+    if (!startTime || !endTime || !customerName || !customerEmail) {
       return NextResponse.json(
-        { error: 'Date, time, and either user or email are required' },
+        { error: 'Missing required fields: startTime, endTime, customerName, customerEmail' },
         { status: 400 }
       );
     }
-    
-    // Check for existing booking at the same date and time for the same user
-    const existingBooking = mockBookings.find(booking => 
-      booking.date === date && booking.time === time
-    );
-    
-    if (existingBooking) {
+
+    // Parse dates
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+
+    // Validate dates
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
       return NextResponse.json(
-        { error: 'Time slot already booked for this date' },
+        { error: 'Invalid date format' },
+        { status: 400 }
+      );
+    }
+
+    if (start >= end) {
+      return NextResponse.json(
+        { error: 'End time must be after start time' },
+        { status: 400 }
+      );
+    }
+
+    // Check if time slot is in the past
+    const now = new Date();
+    if (start < now) {
+      return NextResponse.json(
+        { error: 'Cannot book time slots in the past' },
+        { status: 400 }
+      );
+    }
+
+    // Check for overlapping bookings
+    const overlappingBooking = await prisma.booking.findFirst({
+      where: {
+        status: {
+          in: ['CONFIRMED', 'PENDING']
+        },
+        OR: [
+          {
+            AND: [
+              { startTime: { lte: start } },
+              { endTime: { gt: start } }
+            ]
+          },
+          {
+            AND: [
+              { startTime: { lt: end } },
+              { endTime: { gte: end } }
+            ]
+          },
+          {
+            AND: [
+              { startTime: { gte: start } },
+              { endTime: { lte: end } }
+            ]
+          }
+        ]
+      }
+    });
+
+    if (overlappingBooking) {
+      return NextResponse.json(
+        { error: 'This time slot is already booked' },
         { status: 409 }
       );
     }
+
+    // Check if date is blocked
+    const dateStr = start.toISOString().split('T')[0];
+    const blockedDate = await prisma.blockedDate.findFirst({
+      where: {
+        date: new Date(dateStr)
+      }
+    });
+
+    if (blockedDate) {
+      // If specific time range is blocked
+      if (blockedDate.startTime && blockedDate.endTime) {
+        const [blockStartHour, blockStartMin] = blockedDate.startTime.split(':').map(Number);
+        const [blockEndHour, blockEndMin] = blockedDate.endTime.split(':').map(Number);
+        
+        const blockStart = new Date(start);
+        blockStart.setHours(blockStartHour, blockStartMin, 0, 0);
+        
+        const blockEnd = new Date(start);
+        blockEnd.setHours(blockEndHour, blockEndMin, 0, 0);
+
+        // Check if booking falls within blocked time range
+        if (
+          (start >= blockStart && start < blockEnd) ||
+          (end > blockStart && end <= blockEnd) ||
+          (start <= blockStart && end >= blockEnd)
+        ) {
+          return NextResponse.json(
+            { error: `This date is blocked: ${blockedDate.reason || 'Unavailable'}` },
+            { status: 400 }
+          );
+        }
+      } else {
+        // Entire day is blocked
+        return NextResponse.json(
+          { error: `This date is blocked: ${blockedDate.reason || 'Unavailable'}` },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Check business hours
+    const dayOfWeek = start.getDay();
+    const businessHour = await prisma.businessHours.findUnique({
+      where: { dayOfWeek }
+    });
+
+    if (!businessHour || !businessHour.isOpen) {
+      return NextResponse.json(
+        { error: 'Business is closed on this day' },
+        { status: 400 }
+      );
+    }
+
+    // Verify booking is within business hours
+    const [bhStartHour, bhStartMin] = businessHour.startTime.split(':').map(Number);
+    const [bhEndHour, bhEndMin] = businessHour.endTime.split(':').map(Number);
     
-    // Create new booking
-    const newBooking = {
-      id: `booking_${Date.now()}`,
-      date,
-      time,
-      user: user || email,
-      email: email || null,
-      createdAt: new Date().toISOString(),
-      status: 'confirmed'
-    };
+    const bhStart = new Date(start);
+    bhStart.setHours(bhStartHour, bhStartMin, 0, 0);
     
-    mockBookings.push(newBooking);
-    
-    return NextResponse.json(
-      { 
-        message: 'Booking created successfully',
-        booking: newBooking 
+    const bhEnd = new Date(start);
+    bhEnd.setHours(bhEndHour, bhEndMin, 0, 0);
+
+    if (start < bhStart || end > bhEnd) {
+      return NextResponse.json(
+        { error: 'Booking time is outside business hours' },
+        { status: 400 }
+      );
+    }
+
+    // Create the booking
+    const booking = await prisma.booking.create({
+      data: {
+        startTime: start,
+        endTime: end,
+        customerName,
+        customerEmail,
+        customerPhone,
+        notes,
+        timezone,
+        status: BookingStatus.CONFIRMED,
+        serviceId
       },
-      { status: 201 }
-    );
+      include: {
+        service: true
+      }
+    });
+
+    // Send confirmation email to the customer
+    const emailSent = await sendBookingConfirmationEmail({
+      to: customerEmail,
+      bookingDetails: {
+        customerName,
+        startTime: start,
+        endTime: end,
+        timezone,
+        service: booking.service,
+        notes
+      }
+    });
+
+    if (!emailSent) {
+      console.warn('Failed to send booking confirmation email to:', customerEmail);
+    }
+
+    return NextResponse.json({
+      booking,
+      message: 'Booking confirmed successfully'
+    }, { status: 201 });
+
   } catch (error) {
     console.error('Error creating booking:', error);
     return NextResponse.json(
       { error: 'Failed to create booking' },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PUT(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Booking ID is required' },
-        { status: 400 }
-      );
-    }
-    
-    const body = await request.json();
-    const { status } = body;
-    
-    // Find the booking to update
-    const bookingIndex = mockBookings.findIndex(booking => booking.id === id);
-    
-    if (bookingIndex === -1) {
-      return NextResponse.json(
-        { error: 'Booking not found' },
-        { status: 404 }
-      );
-    }
-    
-    // Update the booking status
-    mockBookings[bookingIndex] = {
-      ...mockBookings[bookingIndex],
-      status
-    };
-    
-    return NextResponse.json({
-      message: 'Booking updated successfully',
-      booking: mockBookings[bookingIndex]
-    });
-  } catch (error) {
-    console.error('Error updating booking:', error);
-    return NextResponse.json(
-      { error: 'Failed to update booking' },
-      { status: 500 }
-    );
-  }
-}
-
-export async function DELETE(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Booking ID is required' },
-        { status: 400 }
-      );
-    }
-    
-    const bookingIndex = mockBookings.findIndex(booking => booking.id === id);
-    
-    if (bookingIndex === -1) {
-      return NextResponse.json(
-        { error: 'Booking not found' },
-        { status: 404 }
-      );
-    }
-    
-    const deletedBooking = mockBookings.splice(bookingIndex, 1)[0];
-    
-    return NextResponse.json({
-      message: 'Booking cancelled successfully',
-      booking: deletedBooking
-    });
-  } catch (error) {
-    console.error('Error deleting booking:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete booking' },
       { status: 500 }
     );
   }

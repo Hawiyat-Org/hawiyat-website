@@ -63,7 +63,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero-section relative flex min-h-[100vh] w-full max-w-[100vw] flex-col overflow-hidden"
+      className="hero-section mt-[70px] md:mt-[100px]   relative flex min-h-[100vh] w-full max-w-[100vw] flex-col overflow-hidden"
       id="hero-section"
     >
       <VideoModal isOpen={showVideoModal} onClose={closeVideo} />
