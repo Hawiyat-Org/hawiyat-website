@@ -39,7 +39,7 @@ const Footer = () => {
     { name: "Github", href: "https://github.com/hawiyat-corp", icon: "bi-github" },
     { name: "Discord", href: "https://discord.gg/yourinvite", icon: "bi-discord" },
     { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", icon: "bi-instagram" },
-    { name: "Facebook", href: "https://facebook.com/hawiyat",https://www.facebook.com/people/Hawiyat/61577698462110/ icon: "bi-facebook" },
+    { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", icon: "bi-facebook" },
     { name: "TikTok", href: "https://www.tiktok.com/@hawiyat5", icon: "bi-tiktok" },
     { name: "Email", href: "mailto:contact@hawiyat.org", icon: "bi-envelope" },
     { name: "X (Twitter)", href: "https://x.com/hawiyat", icon: "bi-twitter-x" },
