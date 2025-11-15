@@ -135,3 +135,14 @@ model BlockedDate {
   @@index([date])
   @@map("blocked_dates")
 }
+
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}

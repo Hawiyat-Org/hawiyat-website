@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma/prismaClient';
 import { createTransport } from 'nodemailer';
-
-const prisma = new PrismaClient();
-
-// In-memory storage for verification codes (in production, use Redis or database)
-const verificationCodes = new Map<string, { code: string; expiresAt: Date }>();
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,6 +13,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+
     // Generate a 6-digit verification code
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     
@@ -25,7 +29,22 @@ export async function POST(req: NextRequest) {
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + 10);
     
-    verificationCodes.set(email, { code, expiresAt });
+    // Store in database (upsert to handle duplicate emails)
+    await prisma.verificationCode.upsert({
+      where: { email },
+      update: { 
+        code, 
+        expiresAt,
+        createdAt: new Date() // Update timestamp on resend
+      },
+      create: { 
+        email, 
+        code, 
+        expiresAt 
+      }
+    });
+
+    console.log('Stored verification code for:', email);
 
     // Create transporter (using environment variables for configuration)
     const transporter = createTransport({
@@ -64,7 +83,11 @@ export async function POST(req: NextRequest) {
     // Send email
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ message: 'Verification code sent successfully' });
+    console.log('Verification email sent successfully to:', email);
+
+    return NextResponse.json({ 
+      message: 'Verification code sent successfully' 
+    });
   } catch (error) {
     console.error('Error sending verification email:', error);
     return NextResponse.json(

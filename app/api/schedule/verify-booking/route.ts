@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// In-memory storage for verification codes (in production, use Redis or database)
-// This is the same map used in the send-verification route
-// In a real application, this would be shared across the application
-const verificationCodes = new Map<string, { code: string; expiresAt: Date }>();
+import { prisma } from '@/lib/prisma/prismaClient';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,29 +12,47 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if the verification code exists and is valid
-    const storedData = verificationCodes.get(email);
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      );
+    }
+
+    console.log('Attempting verification for:', email, 'with code:', verificationCode);
+
+    // Find the verification code in the database
+    const storedData = await prisma.verificationCode.findUnique({
+      where: { email }
+    });
 
     if (!storedData) {
+      console.log('No verification code found for:', email);
       return NextResponse.json(
         { error: 'No verification code found for this email' },
         { status: 400 }
       );
     }
 
+    console.log('Found stored code:', storedData.code, 'expires at:', storedData.expiresAt);
+
     // Check if the code has expired
     const now = new Date();
     if (storedData.expiresAt < now) {
+      console.log('Code expired for:', email);
       // Remove the expired code
-      verificationCodes.delete(email);
+      await prisma.verificationCode.delete({ where: { email } });
       return NextResponse.json(
         { error: 'Verification code has expired' },
         { status: 400 }
       );
     }
 
-    // Check if the code matches
-    if (storedData.code !== verificationCode) {
+    // Check if the code matches (trim whitespace for safety)
+    if (storedData.code.trim() !== verificationCode.trim()) {
+      console.log('Code mismatch. Expected:', storedData.code, 'Got:', verificationCode);
       return NextResponse.json(
         { error: 'Invalid verification code' },
         { status: 400 }
@@ -46,10 +60,13 @@ export async function POST(req: NextRequest) {
     }
 
     // Verification successful - remove the code so it can't be used again
-    verificationCodes.delete(email);
+    await prisma.verificationCode.delete({ where: { email } });
+
+    console.log('Verification successful for:', email);
 
     return NextResponse.json({ 
-      message: 'Verification successful' 
+      message: 'Verification successful',
+      verified: true
     });
   } catch (error) {
     console.error('Error verifying booking:', error);

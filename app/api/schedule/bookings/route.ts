@@ -1,10 +1,79 @@
-// ================================================================
 // app/api/schedule/bookings/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient, BookingStatus } from '@prisma/client';
+import { prisma } from '@/lib/prisma/prismaClient';
+import { BookingStatus } from '@prisma/client';
 import { sendBookingConfirmationEmail } from '@/lib/email-utils';
 
-const prisma = new PrismaClient();
+// Escape special characters for Telegram Markdown
+const escapeMarkdown = (text: string) => {
+  return text.replace(/[_*[\]()~`>#+=|{}.!-]/g, "\\$&");
+};
+
+// Telegram notification function
+async function sendTelegramNotification(booking: any) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.warn('Telegram credentials not configured');
+    return false;
+  }
+
+  try {
+    const startTimeFormatted = new Date(booking.startTime).toLocaleString('en-US', { 
+      dateStyle: 'full', 
+      timeStyle: 'short',
+      timeZone: booking.timezone 
+    });
+    
+    const endTimeFormatted = new Date(booking.endTime).toLocaleString('en-US', { 
+      timeStyle: 'short',
+      timeZone: booking.timezone 
+    });
+
+    const message = `
+🔔 *New Booking Received*
+
+👤 *Customer:* ${escapeMarkdown(booking.customerName)}
+📧 *Email:* ${escapeMarkdown(booking.customerEmail)}
+📱 *Phone:* ${booking.customerPhone ? escapeMarkdown(booking.customerPhone) : 'N/A'}
+
+📅 *Start:* ${escapeMarkdown(startTimeFormatted)}
+📅 *End:* ${escapeMarkdown(endTimeFormatted)}
+
+${booking.service ? `🎯 *Service:* ${escapeMarkdown(booking.service.name)}\n` : ''}${booking.notes ? `📝 *Notes:* ${escapeMarkdown(booking.notes)}\n` : ''}
+✅ *Status:* ${escapeMarkdown(booking.status)}
+🆔 *Booking ID:* ${escapeMarkdown(booking.id)}
+    `.trim();
+
+    const response = await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown',
+        }),
+      }
+    );
+
+    const data = await response.json();
+    
+    if (!data.ok) {
+      console.error('Telegram API error:', data);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error sending Telegram notification:', error);
+    return false;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -61,7 +130,7 @@ export async function POST(request: NextRequest) {
     const overlappingBooking = await prisma.booking.findFirst({
       where: {
         status: {
-          in: ['CONFIRMED', 'PENDING']
+          in: [BookingStatus.CONFIRMED, BookingStatus.PENDING]
         },
         OR: [
           {
@@ -182,20 +251,37 @@ export async function POST(request: NextRequest) {
     });
 
     // Send confirmation email to the customer
-    const emailSent = await sendBookingConfirmationEmail({
-      to: customerEmail,
-      bookingDetails: {
-        customerName,
-        startTime: start,
-        endTime: end,
-        timezone,
-        service: booking.service,
-        notes
-      }
-    });
+    try {
+      const emailSent = await sendBookingConfirmationEmail({
+        to: customerEmail,
+        bookingDetails: {
+          customerName,
+          startTime: start,
+          endTime: end,
+          timezone,
+          service: booking.service || undefined,
+          notes
+        }
+      });
 
-    if (!emailSent) {
-      console.warn('Failed to send booking confirmation email to:', customerEmail);
+      if (!emailSent) {
+        console.warn('Failed to send booking confirmation email to:', customerEmail);
+      }
+    } catch (emailError) {
+      console.error('Error sending confirmation email:', emailError);
+      // Don't fail the booking if email fails
+    }
+
+    // Send Telegram notification
+    try {
+      const telegramSent = await sendTelegramNotification(booking);
+      
+      if (!telegramSent) {
+        console.warn('Failed to send Telegram notification');
+      }
+    } catch (telegramError) {
+      console.error('Error sending Telegram notification:', telegramError);
+      // Don't fail the booking if Telegram notification fails
     }
 
     return NextResponse.json({

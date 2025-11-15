@@ -32,14 +32,14 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
   });
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [showVerificationInput, setShowVerificationInput] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
-  const [isSendingVerification, setIsSendingVerification] = useState(false);
   const [verificationError, setVerificationError] = useState('');
+  const [isSendingVerification, setIsSendingVerification] = useState(false);
 
   // Effect to handle body overflow when modal is open
   useEffect(() => {
-    if (showBookingForm || bookingSuccess || showVerificationModal) {
+    if (showBookingForm || bookingSuccess) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -49,17 +49,15 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [showBookingForm, bookingSuccess, showVerificationModal]);
+  }, [showBookingForm, bookingSuccess]);
 
   const fetchTimeSlots = async () => {
     try {
       setLoading(true);
       setError(null);
       
-
       const formattedDate = selectedDate.toISOString().split('T')[0];
       
-      // Use the new /api//schedule/availability endpoint with date parameter
       const response = await fetch(`/api/schedule/availability?date=${formattedDate}`);
 
       if (!response.ok) {
@@ -67,20 +65,16 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       }
 
       const data = await response.json();
-      
-      // Extract time slots from the response
       const slots = data.timeSlots || [];
       
       setTimeSlots(slots);
 
-      // Update error state if no slots are available
       if (slots.length === 0) {
         setError('No time slots available for this date. Business hours may not be configured for this day.');
       } else {
         setError(null);
       }
 
-      // Auto-select first available slot
       if (!selectedTime) {
         const firstAvailable = slots.find((slot: TimeSlot) =>
           slot.status === 'available' && !isPastTime(slot.time)
@@ -109,18 +103,15 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     const todayDateOnly = new Date(today);
     todayDateOnly.setHours(0, 0, 0, 0);
 
-    // If not today, it's not in the past
     if (selectedDateOnly.getTime() !== todayDateOnly.getTime()) {
       return false;
     }
 
-    // Parse time string (could be 12h or 24h format)
     const timeComponents = timeStr.toLowerCase().split(' ');
     let hours: number;
     let minutes: number;
 
     if (timeComponents.length === 2) {
-      // 12-hour format
       const [timePart, period] = timeComponents;
       const [hoursStr, minutesStr] = timePart.split(':');
       hours = parseInt(hoursStr);
@@ -132,7 +123,6 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
         hours = 0;
       }
     } else {
-      // 24-hour format
       const [hoursStr, minutesStr] = timeStr.split(':');
       hours = parseInt(hoursStr);
       minutes = parseInt(minutesStr);
@@ -162,7 +152,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     setShowBookingForm(true);
   };
 
-  const handleBookingSubmit = async () => {
+  const handleSendVerification = async () => {
     if (!bookingData.company || !bookingData.email) {
       alert('Please fill in all required fields');
       return;
@@ -172,7 +162,6 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     setVerificationError('');
 
     try {
-      // Send verification email
       const response = await fetch('/api/schedule/send-verification', {
         method: 'POST',
         headers: {
@@ -185,9 +174,7 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       });
 
       if (response.ok) {
-        // Show the verification modal
-        setShowVerificationModal(true);
-        setShowBookingForm(false);
+        setShowVerificationInput(true);
       } else {
         const errorData = await response.json();
         setVerificationError(errorData.error || 'Failed to send verification email');
@@ -200,12 +187,12 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     }
   };
 
-  const handleVerificationSubmit = async () => {
+  const handleConfirmBooking = async () => {
     setSubmitting(true);
     setVerificationError('');
 
     try {
-      // Verify the code with the backend
+      // Verify the code
       const response = await fetch('/api/schedule/verify-booking', {
         method: 'POST',
         headers: {
@@ -218,24 +205,19 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       });
 
       if (response.ok) {
-        // Find the selected time slot to get 24h format
         const selectedSlot = timeSlots.find(slot => slot.time === selectedTime);
         if (!selectedSlot) {
           throw new Error('Selected time slot not found');
         }
 
-        // Parse 24h time
         const [hours, minutes] = selectedSlot.time24h.split(':').map(Number);
-
-        // Create start time
         const startTime = new Date(selectedDate);
         startTime.setHours(hours, minutes, 0, 0);
 
-        // Calculate end time (30 minutes later)
         const endTime = new Date(startTime);
         endTime.setMinutes(endTime.getMinutes() + 30);
 
-        // Now create the actual booking
+        // Create the booking
         const bookingResponse = await fetch('/api/schedule/bookings', {
           method: 'POST',
           headers: {
@@ -255,22 +237,20 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
           console.log('Booking created:', result);
 
           setBookingSuccess(true);
-          setShowVerificationModal(false);
+          setShowBookingForm(false);
 
-          // Update the time slots to reflect the new booking
           setTimeSlots(prevSlots =>
             prevSlots.map(slot =>
               slot.time === selectedTime ? { ...slot, status: 'unavailable' as const } : slot
             )
           );
 
-          // Reset form after success
           setTimeout(() => {
             setBookingSuccess(false);
             setBookingData({ company: '', email: '', platform: 'Zoom' });
             setSelectedTime(null);
-
-            // Optionally refetch time slots to ensure sync with server
+            setShowVerificationInput(false);
+            setVerificationCode('');
             fetchTimeSlots();
           }, 3000);
         } else {
@@ -293,12 +273,38 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     setShowBookingForm(false);
     setBookingSuccess(false);
     setBookingData({ company: '', email: '', platform: 'Zoom' });
+    setShowVerificationInput(false);
+    setVerificationCode('');
+    setVerificationError('');
+  };
 
-    // Also close verification modal if open
-    if (showVerificationModal) {
-      setShowVerificationModal(false);
-      setVerificationCode('');
-      setVerificationError('');
+  const handleResendCode = async () => {
+    setIsSendingVerification(true);
+    setVerificationError('');
+    
+    try {
+      const response = await fetch('/api/schedule/send-verification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: bookingData.email,
+          customerName: bookingData.company,
+        }),
+      });
+
+      if (response.ok) {
+        alert('New verification code sent!');
+      } else {
+        const errorData = await response.json();
+        setVerificationError(errorData.error || 'Failed to resend verification code');
+      }
+    } catch (error) {
+      console.error('Error resending verification:', error);
+      setVerificationError('Error resending verification code');
+    } finally {
+      setIsSendingVerification(false);
     }
   };
 
@@ -307,7 +313,6 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
     groupedTimeSlots.push(timeSlots.slice(i, i + 2));
   }
 
-  // Get day name
   const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const dayName = dayNames[selectedDate.getDay()];
 
@@ -349,7 +354,6 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       <div className="space-y-3">
         {loading ? (
           <>
-            {/* Enhanced skeleton UI for time slots */}
             {Array.from({ length: 8 }).map((_, pairIndex) => (
               <div key={pairIndex} className="grid grid-cols-2 gap-3">
                 {Array.from({ length: 2 }).map((_, slotIndex) => (
@@ -418,170 +422,146 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
         Complete Booking
       </button>
 
-      {/* Booking Form Modal */}
+      {/* Unified Booking Modal */}
       {showBookingForm && !bookingSuccess && (
-        <div className="absolute  inset-0 backdrop-blur-[2px] flex items-center justify-center z-50 scale-110">
+        <div className="absolute  inset-0 backdrop-blur-[2px] scale-110 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-[#0d0e11] rounded-2xl p-6 max-w-md w-full shadow-2xl">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Complete Your Booking
+              {showVerificationInput ? 'Verify Your Email' : 'Complete Your Booking'}
             </h3>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  value={bookingData.company}
-                  onChange={(e) => setBookingData({...bookingData, company: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
-                  placeholder="Enter your company name"
-                  disabled={submitting}
-                />
-              </div>
+            {!showVerificationInput ? (
+              <>
+                {/* Booking Form */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      value={bookingData.company}
+                      onChange={(e) => setBookingData({...bookingData, company: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
+                      placeholder="Enter your company name"
+                      disabled={isSendingVerification}
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  value={bookingData.email}
-                  onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
-                  placeholder="Enter your email"
-                  disabled={submitting}
-                />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      value={bookingData.email}
+                      onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
+                      placeholder="Enter your email"
+                      disabled={isSendingVerification}
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Preferred Meeting Platform
-                </label>
-                <select
-                  value={bookingData.platform}
-                  onChange={(e) => setBookingData({...bookingData, platform: e.target.value as any})}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
-                  disabled={submitting}
-                >
-                  <option value="Microsoft Teams">Microsoft Teams</option>
-                  <option value="Google Meet">Google Meet</option>
-                  <option value="Zoom">Zoom</option>
-                </select>
-              </div>
-            </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Preferred Meeting Platform
+                    </label>
+                    <select
+                      value={bookingData.platform}
+                      onChange={(e) => setBookingData({...bookingData, platform: e.target.value as any})}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
+                      disabled={isSendingVerification}
+                    >
+                      <option value="Microsoft Teams">Microsoft Teams</option>
+                      <option value="Google Meet">Google Meet</option>
+                      <option value="Zoom">Zoom</option>
+                    </select>
+                  </div>
 
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={handleCancel}
-                disabled={submitting}
-                className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleBookingSubmit}
-                disabled={submitting}
-                className="flex-1 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {submitting ? 'Booking...' : 'Complete Booking'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+                  {verificationError && (
+                    <p className="text-sm text-red-600 dark:text-red-400">{verificationError}</p>
+                  )}
+                </div>
 
-      {/* Verification Code Modal */}
-      {showVerificationModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-[#0d0e11] rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Verify Your Email
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              A verification code has been sent to {bookingData.email}. Please enter it below.
-            </p>
+                <div className="flex gap-3 mt-6">
+                  <button
+                    onClick={handleCancel}
+                    disabled={isSendingVerification}
+                    className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSendVerification}
+                    disabled={isSendingVerification}
+                    className="flex-1 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSendingVerification ? 'Verifying...' : 'Complete Booking'}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Verification Input */}
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  A verification code has been sent to <strong>{bookingData.email}</strong>. Please enter it below.
+                </p>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Verification Code
-                </label>
-                <input
-                  type="text"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white"
-                  placeholder="Enter verification code"
-                  maxLength={6}
-                  disabled={submitting}
-                />
-                {verificationError && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{verificationError}</p>
-                )}
-              </div>
-            </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Verification Code
+                    </label>
+                    <input
+                      type="text"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-black text-gray-900 dark:text-white text-center text-2xl tracking-widest font-mono"
+                      placeholder="000000"
+                      maxLength={6}
+                      disabled={submitting}
+                    />
+                    {verificationError && (
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-400">{verificationError}</p>
+                    )}
+                  </div>
+                </div>
 
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={handleCancel}
-                disabled={submitting}
-                className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleVerificationSubmit}
-                disabled={submitting || verificationCode.length !== 6}
-                className="flex-1 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {submitting ? 'Verifying...' : 'Verify'}
-              </button>
-            </div>
+                <div className="flex gap-3 mt-6">
+                  <button
+                    onClick={handleCancel}
+                    disabled={submitting}
+                    className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleConfirmBooking}
+                    disabled={submitting || verificationCode.length !== 6}
+                    className="flex-1 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? 'Confirming...' : 'Confirm Booking'}
+                  </button>
+                </div>
 
-            <div className="mt-4 text-center">
-              <button
-                onClick={async () => {
-                  setIsSendingVerification(true);
-                  try {
-                    const response = await fetch('/api/schedule/send-verification', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({
-                        email: bookingData.email,
-                        customerName: bookingData.company,
-                      }),
-                    });
-
-                    if (response.ok) {
-                      alert('New verification code sent!');
-                    } else {
-                      const errorData = await response.json();
-                      setVerificationError(errorData.error || 'Failed to resend verification code');
-                    }
-                  } catch (error) {
-                    console.error('Error resending verification:', error);
-                    setVerificationError('Error resending verification code');
-                  } finally {
-                    setIsSendingVerification(false);
-                  }
-                }}
-                disabled={isSendingVerification}
-                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50"
-              >
-                {isSendingVerification ? 'Sending...' : 'Resend verification code'}
-              </button>
-            </div>
+                <div className="mt-4 text-center">
+                  <button
+                    onClick={handleResendCode}
+                    disabled={isSendingVerification}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50"
+                  >
+                    {isSendingVerification ? 'Sending...' : 'Resend verification code'}
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
 
       {/* Success Modal */}
       {bookingSuccess && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="absolute  inset-0 backdrop-blur-[2px] scale-110 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-[#0d0e11] rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
             <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -602,4 +582,4 @@ export function TimeSlotsList({ selectedDate }: TimeSlotsListProps) {
       )}
     </div>
   );
-}
+}   
