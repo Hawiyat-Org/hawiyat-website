@@ -37,7 +37,7 @@ export default function Pricing() {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-32">
+    <section id="pricing" ref={sectionRef} className="py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <motion.div 
           ref={headerRef}
