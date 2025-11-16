@@ -2,6 +2,35 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma/prismaClient';
 import { createTransport } from 'nodemailer';
 
+// Configure for serverless
+export const config = {
+  maxDuration: 10, // 10 seconds timeout
+};
+
+// Create transporter outside handler for connection reuse
+let transporter: ReturnType<typeof createTransport> | null = null;
+
+function getTransporter() {
+  if (!transporter) {
+    transporter = createTransport({
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: process.env.SMTP_SECURE === 'true', // false for 587, true for 465
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+      // Important for serverless: reduce connection pool
+      pool: false,
+      // Add timeout settings
+      connectionTimeout: 5000, // 5 seconds
+      greetingTimeout: 5000,
+      socketTimeout: 5000,
+    });
+  }
+  return transporter;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { email, customerName } = await req.json();
@@ -22,6 +51,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate SMTP configuration
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('SMTP credentials not configured');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
+
     // Generate a 6-digit verification code
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     
@@ -29,13 +67,13 @@ export async function POST(req: NextRequest) {
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + 10);
     
-    // Store in database (upsert to handle duplicate emails)
+    // Store in database first (faster operation)
     await prisma.verificationCode.upsert({
       where: { email },
       update: { 
         code, 
         expiresAt,
-        createdAt: new Date() // Update timestamp on resend
+        createdAt: new Date()
       },
       create: { 
         email, 
@@ -46,16 +84,8 @@ export async function POST(req: NextRequest) {
 
     console.log('Stored verification code for:', email);
 
-    // Create transporter (using environment variables for configuration)
-    const transporter = createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    // Get transporter
+    const transport = getTransporter();
 
     // Email content
     const mailOptions = {
@@ -78,10 +108,17 @@ export async function POST(req: NextRequest) {
           <p style="color: #6b7280; font-size: 12px;">This is an automated message from Hawiyat. Please do not reply to this email.</p>
         </div>
       `,
+      // Add plain text fallback
+      text: `Hello ${customerName},\n\nYour verification code for your booking on Hawiyat is: ${code}\n\nThis code will expire in 10 minutes.\n\nIf you didn't request this verification, please ignore this email.`,
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    // Send email with timeout protection
+    await Promise.race([
+      transport.sendMail(mailOptions),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Email send timeout')), 8000)
+      )
+    ]);
 
     console.log('Verification email sent successfully to:', email);
 
@@ -90,9 +127,30 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error('Error sending verification email:', error);
+    
+    // More specific error messages
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    
+    if (errorMessage.includes('timeout')) {
+      return NextResponse.json(
+        { error: 'Email service timeout. Please try again.' },
+        { status: 504 }
+      );
+    }
+    
+    if (errorMessage.includes('auth') || errorMessage.includes('authentication')) {
+      return NextResponse.json(
+        { error: 'Email service authentication failed' },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
       { error: 'Failed to send verification email' },
       { status: 500 }
     );
+  } finally {
+    // Don't close the transporter in serverless - let it be reused
+    // The connection will be cleaned up when the function terminates
   }
 }
