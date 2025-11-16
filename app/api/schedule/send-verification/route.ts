@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma/prismaClient';
 import { createTransport } from 'nodemailer';
 
-// Configure for serverless
-export const config = {
-  maxDuration: 10, // 10 seconds timeout
-};
+// Remove or update this config - use new syntax for Next.js 14.2+
+export const maxDuration = 10; // 10 seconds timeout
+export const dynamic = 'force-dynamic'; // Ensure it's treated as dynamic route
 
 // Create transporter outside handler for connection reuse
 let transporter: ReturnType<typeof createTransport> | null = null;
@@ -15,15 +14,13 @@ function getTransporter() {
     transporter = createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true', // false for 587, true for 465
+      secure: process.env.SMTP_SECURE === 'true',
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      // Important for serverless: reduce connection pool
       pool: false,
-      // Add timeout settings
-      connectionTimeout: 5000, // 5 seconds
+      connectionTimeout: 5000,
       greetingTimeout: 5000,
       socketTimeout: 5000,
     });
@@ -108,7 +105,6 @@ export async function POST(req: NextRequest) {
           <p style="color: #6b7280; font-size: 12px;">This is an automated message from Hawiyat. Please do not reply to this email.</p>
         </div>
       `,
-      // Add plain text fallback
       text: `Hello ${customerName},\n\nYour verification code for your booking on Hawiyat is: ${code}\n\nThis code will expire in 10 minutes.\n\nIf you didn't request this verification, please ignore this email.`,
     };
 
@@ -128,7 +124,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Error sending verification email:', error);
     
-    // More specific error messages
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
     if (errorMessage.includes('timeout')) {
@@ -149,8 +144,5 @@ export async function POST(req: NextRequest) {
       { error: 'Failed to send verification email' },
       { status: 500 }
     );
-  } finally {
-    // Don't close the transporter in serverless - let it be reused
-    // The connection will be cleaned up when the function terminates
   }
 }

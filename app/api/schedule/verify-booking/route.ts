@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma/prismaClient';
 
-// Configure for serverless
-export const config = {
-  maxDuration: 5, // 5 seconds timeout
-};
+// New Next.js 14.2+ syntax
+export const maxDuration = 5; // 5 seconds timeout
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
@@ -65,7 +64,7 @@ export async function POST(req: NextRequest) {
       
       return NextResponse.json(
         { error: 'Verification code has expired. Please request a new code.' },
-        { status: 410 } // 410 Gone
+        { status: 410 }
       );
     }
 
@@ -96,7 +95,6 @@ export async function POST(req: NextRequest) {
     if (error && typeof error === 'object' && 'code' in error) {
       const prismaError = error as { code: string };
       if (prismaError.code === 'P2025') {
-        // Record not found during delete
         return NextResponse.json(
           { error: 'Verification code not found or already used' },
           { status: 404 }
