@@ -115,7 +115,7 @@ export async function sendBookingConfirmationEmail({
               <p style="color: #92400e; margin: 10px 0 0 0; line-height: 1.6;">Please join the meeting 5 minutes before the scheduled time. Meeting links will be sent closer to the meeting time.</p>
             </div>
             
-            <p style="color: #475569; line-height: 1.6;">Thank you for choosing our service. If you have any questions or need to reschedule, please contact us at <a href="mailto:hawiyat0@gmail.com" style="color: #3b82f6;">hawiyat0@gmail.com</a>.</p>
+            <p style="color: #475569; line-height: 1.6;">Thank you for choosing our service. If you have any questions or need to reschedule, please contact us at <a href="mailto:contact@hawiyat.org" style="color: #3b82f6;">contact@hawiyat.org</a>.</p>
           </div>
           
           <div style="text-align: center; margin-top: 30px; color: #94a3b8; font-size: 14px;">
@@ -142,7 +142,7 @@ export async function sendBookingConfirmationEmail({
       Important:
       Please join the meeting 5 minutes before the scheduled time. Meeting links will be sent closer to the meeting time.
       
-      Thank you for choosing our service. If you have any questions or need to reschedule, please contact us at hawiyat0@gmail.com.
+      Thank you for choosing our service. If you have any questions or need to reschedule, please contact us at contact@hawiyat.org.
     `;
 
     // Send email
