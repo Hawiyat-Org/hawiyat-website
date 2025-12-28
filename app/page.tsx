@@ -34,7 +34,7 @@ export default function Home() {
         <PrebuiltTools />
         <AdditionalFeatures />
         <OneSubscription />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Pricing />
         <Resources />
         <FAQ />
