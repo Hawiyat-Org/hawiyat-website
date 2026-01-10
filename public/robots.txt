@@ -1,39 +1,24 @@
 # =========================================
-# Robots.txt for hawiyat.org
-# SEO & AI optimized
+# robots.txt for hawiyat.org
+# SEO & AI friendly
+# All pages allowed
+# Validator-safe
 # =========================================
 
-# Allow all search engines to crawl everything
+# Default rule: allow all crawlers
 User-agent: *
-Allow: /
+Disallow:
 
-# Sitemap for better SEO crawling
+# -----------------------------------------
+# Sitemap for SEO crawling
+# -----------------------------------------
 Sitemap: https://hawiyat.org/sitemap.xml
 
 # -----------------------------------------
-# Optional: block bad bots to save bandwidth
+# Notes:
+# - No private folders blocked, all pages are allowed
+# - No unknown directives (validator-safe)
+# - To prevent AI training on specific pages, use HTTP headers or meta tags:
+#    Example meta tag (per page): <meta name="robots" content="noai">
+#    Example HTTP header: X-Robots-Tag: noai
 # -----------------------------------------
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-# -----------------------------------------
-# Optional: language/geo optimization
-# Uncomment and edit if you have multiple languages
-# Example: Arabic content in /ar/ folder
-#User-agent: *
-#Allow: /ar/
-#User-agent: *
-#Allow: /en/
-
-# -----------------------------------------
-# AI training notice
-# Note: robots.txt cannot enforce AI usage
-# Use HTTP header X-Robots-Tag: noai on server or per-page meta tags
-# Example HTTP header:
-# X-Robots-Tag: noai
