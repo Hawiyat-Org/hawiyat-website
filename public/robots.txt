@@ -1,5 +1,39 @@
+# =========================================
+# Robots.txt for hawiyat.org
+# SEO & AI optimized
+# =========================================
+
+# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
 
+# Sitemap for better SEO crawling
 Sitemap: https://hawiyat.org/sitemap.xml
-Contact: contact@hawiyat.org
+
+# -----------------------------------------
+# Optional: block bad bots to save bandwidth
+# -----------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# -----------------------------------------
+# Optional: language/geo optimization
+# Uncomment and edit if you have multiple languages
+# Example: Arabic content in /ar/ folder
+#User-agent: *
+#Allow: /ar/
+#User-agent: *
+#Allow: /en/
+
+# -----------------------------------------
+# AI training notice
+# Note: robots.txt cannot enforce AI usage
+# Use HTTP header X-Robots-Tag: noai on server or per-page meta tags
+# Example HTTP header:
+# X-Robots-Tag: noai
