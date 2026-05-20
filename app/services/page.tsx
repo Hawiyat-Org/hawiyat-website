@@ -203,7 +203,7 @@ const services = [
   shortDesc: "Open-source Calendly alternative for scheduling",
   description: "Cal.com is scheduling platform that lets users create custom booking pages,  Perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.",
   image: "/services/cal.png",
-  price: "10000 DA/year",
+  price: "10000 DA/Month",
   priceLabel: "Open Source",
   cta: "Get Started",
   link: "https://github.com/calcom/cal.com",
