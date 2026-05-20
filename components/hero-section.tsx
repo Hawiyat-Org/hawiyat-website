@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import AIPlayground from "./ai-playground"
 import VideoModal from "./video-modal"
 const appUrl = process.env.NEXT_PUBLIC_APP_URL
@@ -97,13 +98,13 @@ const HeroSection = () => {
               <span className="max-md:text-[15px] max-md:font-medium">Watch video</span>
             </button>
 
-            <a
+            <Link
+              href="/services"
               className="btn group max-lg:!w-[160px] max-md:!w-full flex gap-2 place-content-center shadow-lg !w-[170px] !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 transition-all duration-[0.3s] hover:scale-x-[1.03] active:scale-95"
-              href={appUrl || "https://app.hawiyat.org/"}
             >
-              <span className="max-md:text-[15px] max-md:font-medium">Get started</span>
+              <span className="max-md:text-[15px] max-md:font-medium">Browse Services</span>
               <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300 max-md:text-lg"></i>
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import TrustedBrands from "@/components/trusted-brands"
 import BuildAIApps from "@/components/build-ai-apps"
 import BenefitsSection from "@/components/benefits-section"
 import PrebuiltTools from "@/components/prebuilt-tools"
+import ServicesTeaser from "@/components/services-teaser"
 import AdditionalFeatures from "@/components/additional-features"
 import OneSubscription from "@/components/one-subscription"
 import Testimonials from "@/components/testimonials"
@@ -32,6 +33,7 @@ export default function Home() {
         <BenefitsSection />
         <BuildAIApps />
         <PrebuiltTools />
+        <ServicesTeaser />
         <AdditionalFeatures />
         <OneSubscription />
         {/* <Testimonials /> */}
