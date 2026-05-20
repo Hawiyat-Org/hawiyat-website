@@ -48,7 +48,7 @@ function StatCard({ value, label, description, icon: Icon, delay }: { value: num
     >
       <Icon className="w-16 h-16 text-black dark:text-white mx-auto" />
       <div className="text-center">
-        <div className="text-4xl font-semibold tracking-tight">
+        <div className="text-4xl tracking-tight">
           {prefix}{count}
         </div>
         <h3 className="text-2xl mt-2">{label}</h3>
@@ -140,7 +140,7 @@ const TrustedBrands = () => {
           transition={{ duration: 0.6 }}
           className="mt-20 md:mt-28 max-md:mt-12 mb-16 md:mb-24 max-md:mb-8 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold lg:text-5xl max-md:text-2xl">Trusted by</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl max-md:text-2xl">Trusted by</h2>
         </motion.div>
 
         <motion.div 
