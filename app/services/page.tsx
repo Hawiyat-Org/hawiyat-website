@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect, useCallback } from "react"
+import { useState, useMemo, useEffect, useCallback, Suspense } from "react"
 import { ArrowRight, Search, Zap, Clock, Shield,Calendar, Users  , Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -425,6 +425,14 @@ function FlipCard({
 }
 
 export default function ServicesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-32 flex items-center justify-center">Loading...</div>}>
+      <ServicesContent />
+    </Suspense>
+  )
+}
+
+function ServicesContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "")
