@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const BuildAIApps = () => {
   return (
-    <section className="relative flex w-full min-h-[100vh] max-lg:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden bg-[#f6f7fb] dark:bg-[#2A2A2F]">
+    <section className="relative flex w-full min-h-[100vh] max-lg:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden ">
       <div className="w-full place-content-center items-center flex flex-col max-w-[900px] gap-4 p-4">
         <div className="purple-bg-grad reveal-up absolute right-[20%] top-[20%] h-[200px] w-[200px]"></div>
 
