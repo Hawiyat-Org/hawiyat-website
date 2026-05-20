@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X, Loader2, CheckCircle2 } from "lucide-react"
+import { X, Loader2, CheckCircle2, Package, CreditCard } from "lucide-react"
 
 interface OrderFormProps {
   service: {
@@ -18,6 +18,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     customerName: "",
     customerEmail: "",
     customerPhone: "",
+    paymentMethod: "",
     notes: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -56,7 +57,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -84,6 +85,9 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             <p className="text-muted-foreground text-sm mb-1">
               Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
             </p>
+            <p className="text-xs text-muted-foreground mb-1">
+              Payment method: {formData.paymentMethod === "ccp" ? "CCP" : formData.paymentMethod === "baridi-mob" ? "Baridi Mob" : "USD"}
+            </p>
             {orderId && (
               <p className="text-xs text-muted-foreground mb-4">Order ID: {orderId}</p>
             )}
@@ -96,11 +100,19 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
           </div>
         ) : (
           <>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold">Order {service.name}</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {service.price} {service.priceLabel}
-              </p>
+            <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
+              <div className="flex items-start gap-3">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Package className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-base">{service.name}</h3>
+                  <div className="flex items-baseline gap-1 mt-1">
+                    <span className="text-xl font-bold">{service.price}</span>
+                    <span className="text-sm text-muted-foreground">{service.priceLabel}</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {error && (
@@ -144,17 +156,45 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
 
               <div>
                 <label htmlFor="customerPhone" className="block text-sm font-medium mb-1">
-                  Phone <span className="text-muted-foreground">(optional)</span>
+                  Phone <span className="text-destructive">*</span>
                 </label>
                 <input
                   id="customerPhone"
                   name="customerPhone"
                   type="tel"
+                  required
                   value={formData.customerPhone}
                   onChange={handleChange}
                   className="w-full h-10 px-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   placeholder="+213 ..."
                 />
+              </div>
+
+              <div>
+                <label htmlFor="paymentMethod" className="block text-sm font-medium mb-1">
+                  Payment Method <span className="text-destructive">*</span>
+                </label>
+                <div className="relative">
+                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                  <select
+                    id="paymentMethod"
+                    name="paymentMethod"
+                    required
+                    value={formData.paymentMethod}
+                    onChange={handleChange}
+                    className="w-full h-10 pl-10 pr-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary appearance-none"
+                  >
+                    <option value="" disabled>Select payment method</option>
+                    <option value="ccp">CCP</option>
+                    <option value="baridi-mob">Baridi Mob</option>
+                    <option value="usd">USD</option>
+                  </select>
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
 
               <div>

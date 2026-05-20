@@ -42,7 +42,7 @@ const BenefitsSection = () => {
               <div key={index} className="reveal-up w-[350px] h-[540px] flex max-md:w-full">
                 <Link
                   href={docsUrl || "https://docs.hawiyat.org/"} 
-                  className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#3A3A40] rounded-3xl hover:scale-[1.02]"
+                  className="relative p-10 transition-all duration-300 group/card gap-5 flex flex-col w-full h-full bg-[#f6f7fb] dark: dark:bg-[#141414] rounded-3xl hover:scale-[1.02]"
                 >
                   
                     <benefit.image className="w-20 h-20 text-black dark:text-white m-auto"/>
@@ -61,7 +61,7 @@ const BenefitsSection = () => {
           <div className="reveal-up w-full md:h-[350px] max-md:min-h-[350px] flex">
   <Link
     href={docsUrl || "https://docs.hawiyat.org/"} 
-    className="relative p-10 transition-all duration-300 group/card gap-5 flex max-md:flex-col w-full h-full bg-[#f6f7fb] dark:bg-[#3A3A40] rounded-3xl hover:scale-[1.02]"
+    className="relative p-10 transition-all duration-300 group/card gap-5 flex max-md:flex-col w-full h-full bg-[#f6f7fb] dark: dark:bg-[#141414] rounded-3xl hover:scale-[1.02]"
   >
     <div className="flex justify-center items-center w-full max-md:h-[180px]">
       <DatabaseBackup className="w-32 h-32 text-black dark:text-white" />

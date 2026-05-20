@@ -9,12 +9,12 @@ const FAQ = () => {
     {
       question: "What is Hawiyat?",
       answer:
-        "Hawiyat is a VPS hosting provider offering affordable, fast, and reliable cloud servers with one-click deployment, GitHub integration, backups, and CI/CD support.",
+        "Hawiyat is a hosting Cloud provider offering affordable, fast, and reliable cloud Hosting with one-click deployment, GitHub integration, backups, and CI/CD support.",
     },
     {
       question: "Can I upgrade my plan later?",
       answer:
-        "Yes! You can easily upgrade or downgrade your VPS plan at any time with minimal downtime.",
+        "Yes! You can easily upgrade your hosting plan at any time with minimal downtime.",
     },
     {
       question: "Do you provide backups?",
