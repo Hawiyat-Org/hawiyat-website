@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { X, Loader2, CheckCircle2, Package, CreditCard } from "lucide-react"
+import { X, Loader2, CheckCircle2, CreditCard } from "lucide-react"
+import Image from "next/image"
 
 interface OrderFormProps {
   service: {
@@ -9,6 +10,7 @@ interface OrderFormProps {
     name: string
     price: string
     priceLabel: string
+    image: string
   }
   onClose: () => void
 }
@@ -102,8 +104,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
           <>
             <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
               <div className="flex items-start gap-3">
-                <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Package className="w-5 h-5 text-primary" />
+                <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    width={48}
+                    height={48}
+                    className="object-contain w-10 h-10"
+                  />
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-base">{service.name}</h3>

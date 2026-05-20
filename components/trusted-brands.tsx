@@ -2,7 +2,63 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import { Users, Handshake, LayoutGrid } from "lucide-react"
+
+function useCounter(end: number, duration: number = 2000, start: boolean = false) {
+  const [count, setCount] = useState(0)
+  const frameRef = useRef<number>(0)
+
+  useEffect(() => {
+    if (!start) return
+
+    const startTime = Date.now()
+    const animate = () => {
+      const elapsed = Date.now() - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.floor(eased * end))
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(animate)
+      }
+    }
+
+    frameRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(frameRef.current)
+  }, [end, duration, start])
+
+  return count
+}
+
+function StatCard({ value, label, description, icon: Icon, delay }: { value: number; label: string; description: string; icon: React.ElementType; delay: number }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const count = useCounter(value, 2000, inView)
+  const prefix = "+"
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border"
+    >
+      <Icon className="w-16 h-16 text-black dark:text-white mx-auto" />
+      <div className="text-center">
+        <div className="text-4xl font-semibold tracking-tight">
+          {prefix}{count}
+        </div>
+        <h3 className="text-2xl mt-2">{label}</h3>
+      </div>
+      <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">
+        {description}
+      </p>
+    </motion.div>
+  )
+}
 
 const TrustedBrands = () => {
   const { theme, resolvedTheme } = useTheme()
@@ -35,14 +91,65 @@ const TrustedBrands = () => {
     },
   ]
 
+  const stats = [
+    {
+      value: 100,
+      label: "Clients",
+      description: "Trusted by businesses, developers, and teams across Algeria and beyond.",
+      icon: Users,
+    },
+    {
+      value: 10,
+      label: "Resellers",
+      description: "Growing partner network delivering Hawiyat solutions to local markets.",
+      icon: Handshake,
+    },
+    {
+      value: 300,
+      label: "Templates",
+      description: "Pre-configured stacks and services ready to deploy in seconds.",
+      icon: LayoutGrid,
+    },
+  ]
+
   return (
     <section className="relative w-full overflow-hidden px-6 max-md:px-4 py-20 md:py-32 max-md:py-12">
       <div className="mx-auto max-w-7xl">
-        <div className="reveal-up mb-16 md:mb-24 max-md:mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold lg:text-5xl max-md:text-2xl">Trusted by</h2>
+        <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4 mx-auto">
+          <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
+            Our Numbers
+          </h3>
+          <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
+            {stats.map((stat, index) => (
+              <StatCard
+                key={index}
+                value={stat.value}
+                label={stat.label}
+                description={stat.description}
+                icon={stat.icon}
+                delay={index * 0.15}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="reveal-up relative">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 md:mt-28 max-md:mt-12 mb-16 md:mb-24 max-md:mb-8 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl font-semibold lg:text-5xl max-md:text-2xl">Trusted by</h2>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative"
+        >
           <div className="grid grid-cols-3 gap-12 md:grid-cols-3 md:gap-16 lg:gap-20 max-md:gap-8">
             {brands.map((brand, index) => (
               <div
@@ -73,7 +180,7 @@ const TrustedBrands = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

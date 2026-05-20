@@ -239,7 +239,7 @@ function FlipCard({
   index: number
   isMobile: boolean
   isVisible: boolean
-  onOrderClick: (service: { id: string; name: string; price: string; priceLabel: string }) => void
+  onOrderClick: (service: { id: string; name: string; price: string; priceLabel: string; image: string }) => void
 }) {
   const [isFlipped, setIsFlipped] = useState(false)
 
@@ -407,6 +407,7 @@ function FlipCard({
                       name: service.name,
                       price: service.price,
                       priceLabel: service.priceLabel,
+                      image: service.image,
                     })
                   }}
                   className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors duration-200"
@@ -434,6 +435,7 @@ export default function ServicesPage() {
     name: string
     price: string
     priceLabel: string
+    image: string
   } | null>(null)
 
   useEffect(() => {
