@@ -6,20 +6,47 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.hawiyat.org"
+const appUrl = process.env.NEXTAUTH_URL || "https://hawiyat.org"
 
 const services = [
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    shortDesc: "AI-powered coding assistant",
+    description: "AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions and automated code reviews.",
+    image: "/assets/images/brand-logos/claude.svg",
+    price: "2,000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: `${appUrl}/services/claude`,
+    category: "Managed Services",
+    tag: "Best Value",
+    useCases: "Context-aware suggestions, automated code reviews, documentation generation, bug detection & fixes.",
+    features: [
+      "Context-aware suggestions",
+      "Automated code reviews",
+      "Documentation generation",
+      "Bug detection & fixes",
+      "Multi-language support",
+    ],
+    bulletPoints: [
+      { icon: Zap, text: "AI-Powered" },
+      { icon: Shield, text: "Code Reviews" },
+      { icon: Clock, text: "Multi-Language" },
+    ],
+  },
   {
     id: "n8n-hosting",
     name: "n8n Hosting",
     shortDesc: "Managed workflow automation platform",
-    description: "A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code. Hawiyat hosts it, keeps it running, and handles all updates and maintenance.",
+    description: "A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.",
     image: "/logos/n8n_n8n.png",
     price: "8,000",
     priceLabel: "DA/year",
     cta: "Get Started",
     link: `${appUrl}/services/n8n`,
     category: "Managed Services",
+    tag: "Most Popular",
     useCases: "Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.",
     features: [
       "Fully managed instances",
@@ -38,7 +65,7 @@ const services = [
     id: "evolution-api",
     name: "Evolution API",
     shortDesc: "WhatsApp Business API solution",
-    description: "A fully managed WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, order confirmations, and sales automation.",
+    description: "A fully managed WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.",
     image: "/logos/evolutionapi_evolutionapi.png",
     price: "7,000",
     priceLabel: "DA/year",
@@ -63,7 +90,7 @@ const services = [
     id: "whatsapp-api",
     name: "Hawiyat WhatsApp API",
     shortDesc: "Official WhatsApp Business API",
-    description: "Official WhatsApp Business API. Send notifications, build chatbots, engage customers at scale with Hawiyat's managed infrastructure. Hawiyat manages the infrastructure so you only integrate your system.",
+    description: "Official WhatsApp Business API. Send notifications, build chatbots, engage customers at scale with Hawiyat's managed infrastructure.",
     image: "/services/whatsapp-api.svg",
     price: "4,000",
     priceLabel: "DA/year",
@@ -88,7 +115,7 @@ const services = [
     id: "monitoring",
     name: "Hawiyat Monitoring",
     shortDesc: "Managed reliability service",
-    description: "A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails. Includes server health monitoring, website uptime checks, SSL expiry alerts, public status page, and monthly reliability reports.",
+    description: "A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.",
     image: "/services/monitoring.svg",
     price: "4,900",
     priceLabel: "DA/month",
@@ -115,55 +142,65 @@ const services = [
       { name: "Guardian", price: "25,900", servers: "5 VPS", websites: "10 sites", frequency: "Every 30 sec" },
     ],
   },
-  {
-    id: "claude-code",
-    name: "Claude Code",
-    shortDesc: "AI-powered coding assistant",
-    description: "AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions and automated code reviews.",
-    image: "/assets/images/brand-logos/claude.svg",
-    price: "2,000",
-    priceLabel: "DA/month",
-    cta: "Get Started",
-    link: `${appUrl}/services/claude`,
-    category: "Managed Services",
-    useCases: "Context-aware suggestions, automated code reviews, documentation generation, bug detection & fixes.",
-    features: [
-      "Context-aware suggestions",
-      "Automated code reviews",
-      "Documentation generation",
-      "Bug detection & fixes",
-      "Multi-language support",
-    ],
-    bulletPoints: [
-      { icon: Zap, text: "AI-Powered" },
-      { icon: Shield, text: "Code Reviews" },
-      { icon: Clock, text: "Multi-Language" },
-    ],
-  },
 ]
 
-function FlipCard({ service, index, isMobile, isVisible }: { service: typeof services[0]; index: number; isMobile: boolean; isVisible: boolean }) {
+function FlipCard({
+  service,
+  index,
+  isMobile,
+  isVisible,
+}: {
+  service: (typeof services)[0]
+  index: number
+  isMobile: boolean
+  isVisible: boolean
+}) {
   const [isFlipped, setIsFlipped] = useState(false)
 
   const handleInteraction = useCallback(() => {
-    if (isMobile) {
-      setIsFlipped(prev => !prev)
-    }
+    if (isMobile) setIsFlipped((prev) => !prev)
   }, [isMobile])
 
   return (
     <div
-      className={`group h-[420px] [perspective:1000px] ${isMobile ? "cursor-pointer" : ""} ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-      style={{ animationDelay: `${index * 80}ms` }}
+      // No fixed height — let the card define its own size via min-h
+      // perspective is set for the 3D flip effect
+      className={`group [perspective:1000px] ${isMobile ? "cursor-pointer" : ""} transition-all duration-700 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+      style={{ transitionDelay: `${index * 80}ms` }}
       onClick={handleInteraction}
     >
-      <div className={`relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] ${!isMobile ? "group-hover:[transform:rotateY(180deg)]" : ""} ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}>
-        {/* Front Face */}
+      {/* Inner wrapper — must have a defined height for backface to work */}
+      {/* We use min-h + h-full trick: outer sets min-h, inner fills it */}
+      <div
+        className={`relative min-h-[480px] h-full w-full transition-transform duration-500 [transform-style:preserve-3d] ${
+          !isMobile ? "group-hover:[transform:rotateY(180deg)]" : ""
+        } ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
+      >
+        {/* ── FRONT FACE ── */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
-          <div className="relative h-full rounded-2xl border border-border/40 bg-white/40 dark:bg-white/[0.03] backdrop-blur-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            
-            <div className="relative h-48 w-full bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/10 dark:to-muted/5 flex items-center justify-center p-6">
+          <div className="relative h-full rounded-2xl border border-border/40 bg-white/40 dark:bg-secondary dark:border-border/60 backdrop-blur-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+            {/* Image area */}
+            <div className="relative h-48 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center p-6">
+              {service.tag && (
+                <div className="absolute top-3 right-3 z-10">
+                  <span
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
+                      service.tag === "Most Popular"
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
+                        : service.tag === "Best Value"
+                        ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
+                        : "bg-primary text-white"
+                    }`}
+                  >
+                    {service.tag}
+                  </span>
+                </div>
+              )}
+
               <div className="relative w-32 h-32">
                 <Image
                   src={service.image}
@@ -173,72 +210,91 @@ function FlipCard({ service, index, isMobile, isVisible }: { service: typeof ser
                   loading="lazy"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20 pointer-events-none" />
             </div>
 
-            <div className="relative p-5 space-y-3">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+            {/* Content */}
+            <div className="relative p-5  flex flex-col flex-1">
+              <span className="inline-flex mb-1 items-center self-start px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
                 {service.category}
               </span>
 
               <h3 className="text-xl font-semibold">{service.name}</h3>
 
-              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
                 {service.shortDesc}
               </p>
-
-              <div className="flex items-baseline gap-1 pt-2">
+            
+            <div className="flex items-baseline gap-1 mt-auto">
                 <span className="text-2xl font-bold">{service.price}</span>
                 <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-border/30">
-                <span className="text-xs text-muted-foreground">{isMobile ? "Tap for details" : "Hover for details"}</span>
+              {/* Pushed to bottom */}
+              <div className="flex items-center justify-between pt-3 border-t border-border/30 ">
+                <span className="text-xs text-muted-foreground">
+                  {isMobile ? "Tap for details" : "Hover for details"}
+                </span>
                 <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform duration-200" />
               </div>
+           
             </div>
+            
           </div>
         </div>
 
-        {/* Back Face */}
+        {/* ── BACK FACE ── */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <div className="relative h-full rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/95 to-primary dark:from-primary/90 dark:to-primary/80 backdrop-blur-xl overflow-hidden shadow-lg shadow-primary/20">
-            <div className="absolute inset-0 bg-white/10 dark:bg-white/5" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/10" />
-            
-            <div className="relative h-full p-6 flex flex-col text-white">
-              <div className="mb-4">
-                <h3 className="text-xl font-bold mb-1">{service.name}</h3>
-                <p className="text-sm text-white/80 line-clamp-2">{service.description}</p>
+          <div className="relative h-full rounded-2xl border border-border/60 bg-gradient-to-br from-foreground to-foreground/95 dark:from-secondary dark:to-secondary/95 backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+
+            {/* Scrollable content area so nothing overflows */}
+            <div className="relative flex flex-col flex-1 p-6 text-foreground">
+              {/* Header */}
+              <div className="mb-4 shrink-0">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <h3 className="text-xl font-bold">{service.name}</h3>
+                  {service.tag && (
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                        service.tag === "Most Popular"
+                          ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                          : service.tag === "Best Value"
+                          ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                          : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      {service.tag}
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
               </div>
 
-              <div className="space-y-3 mb-4 flex-1">
+              {/* Bullet points */}
+              <div className="space-y-2.5 mb-4 shrink-0">
                 {service.bulletPoints.map((bullet, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <bullet.icon className="w-4 h-4" />
+                    <div className="shrink-0 w-8 h-8 rounded-lg bg-primary/10 backdrop-blur-sm flex items-center justify-center">
+                      <bullet.icon className="w-4 h-4 text-primary" />
                     </div>
                     <span className="text-sm font-medium">{bullet.text}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mb-4 p-3 rounded-lg bg-white/10 backdrop-blur-sm">
-                <p className="text-xs text-white/90 font-medium mb-1">Use Cases:</p>
-                <p className="text-xs text-white/80 leading-relaxed">{service.useCases}</p>
-              </div>
-
-              <div className="space-y-3">
+              {/* Price + CTA — always at bottom, never clipped */}
+              <div className="mt-auto shrink-0 space-y-3">
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold">{service.price}</span>
-                  <span className="text-xs text-white/80">{service.priceLabel}</span>
+                  <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
                 </div>
                 <Link
                   href={service.link}
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-white text-primary font-medium text-sm hover:bg-white/90 transition-colors duration-200"
+                  className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors duration-200"
                 >
                   {service.cta}
                   <ArrowRight className="w-4 h-4" />
@@ -282,24 +338,26 @@ export default function ServicesPage() {
   }, [searchQuery])
 
   return (
-    <div className="relative min-h-screen pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
+    <div className="  relative min-h-screen pt-32 pb-20 overflow-hidden">
+      {/* Background blobs */}
+      <div className="absolute  hero-section dark:opacity-80 opacity-10 inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-foreground/[0.03] to-transparent rounded-full blur-3xl" />
         <div className="absolute top-1/4 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className={`text-center mb-16 transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-          <h1 className="text-4xl md:text-6xl font-semibold mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
-            Our Services
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Fully managed tools and APIs to accelerate your development, automate workflows, and scale your business.
-          </p>
-        </div>
+      
 
-        <div className={`max-w-md mx-auto mb-16 transition-all duration-500 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+      <div className="relative  mx-auto max-w-7xl px-6">
+        {/* Heading */}
+  
+
+        {/* Search */}
+        <div
+          className={`max-w-md  mx-auto mb-16 transition-all duration-500 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
@@ -307,30 +365,34 @@ export default function ServicesPage() {
               placeholder="Search services..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-12 pl-12 text-sm bg-white/50 dark:bg-white/[0.03] backdrop-blur-xl border-border/60 focus:border-primary/50 rounded-xl"
+              className="h-12 pl-12 text-sm bg-white/50 dark:bg-secondary backdrop-blur-xl border-border/60 focus:border-primary/50 rounded-xl"
             />
           </div>
         </div>
 
+        {/* Grid */}
         {filteredServices.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-muted-foreground mb-3">No services found.</p>
-            <button
-              onClick={() => setSearchQuery("")}
-              className="text-sm underline hover:no-underline"
-            >
+            <button onClick={() => setSearchQuery("")} className="text-sm underline hover:no-underline">
               Clear search
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          // gap-y-8 instead of gap-y-24 — cards now naturally size themselves
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {filteredServices.map((service, i) => (
               <FlipCard key={service.id} service={service} index={i} isMobile={isMobile} isVisible={isVisible} />
             ))}
           </div>
         )}
 
-        <div className={`mt-20 max-w-4xl mx-auto transition-all duration-500 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        {/* Why Choose Hawiyat */}
+        <div
+          className={`mt-20 max-w-4xl mx-auto transition-all duration-500 delay-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <h2 className="text-2xl font-semibold text-center mb-10">Why Choose Hawiyat</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -343,7 +405,7 @@ export default function ServicesPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="p-6 rounded-xl border border-border/40 bg-white/30 dark:bg-white/[0.02] backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/[0.05] transition-all duration-200"
+                className="p-6 rounded-xl border border-border/40 bg-white/30 dark:bg-secondary dark:border-border/60 backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/[0.05] transition-all duration-200"
               >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <item.icon className="w-5 h-5 text-primary" />
