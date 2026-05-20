@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma/prismaClient"
+import { sendOrderNotification, sendOrderConfirmation } from "@/lib/email-utils"
 
 async function sendTelegramNotification(message: string) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN
@@ -68,6 +69,22 @@ ${customerPhone ? `<b>Phone:</b> ${customerPhone}\n` : ""}${notes ? `<b>Notes:</
 <b>Date:</b> ${new Date(order.createdAt).toLocaleString()}`
 
     await sendTelegramNotification(telegramMessage)
+
+    sendOrderNotification({ order }).catch(err =>
+      console.error("Failed to send admin notification:", err)
+    )
+    sendOrderConfirmation({
+      to: customerEmail,
+      order: {
+        id: order.id,
+        serviceName: order.serviceName,
+        customerName: order.customerName,
+        notes: order.notes,
+        createdAt: order.createdAt,
+      },
+    }).catch(err =>
+      console.error("Failed to send customer confirmation:", err)
+    )
 
     return NextResponse.json(
       { success: true, order: { id: order.id, status: order.status, createdAt: order.createdAt } },
