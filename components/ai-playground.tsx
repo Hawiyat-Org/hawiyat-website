@@ -195,7 +195,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
         <div className="mt-3 text-lg">Join developers using Hawiyat to deploy and run agents</div>
 
-        <a href="https://app.hawiyat.org/" className="btn">
+        <a href="/services" className="btn">
           Sign up
         </a>
       </div>
@@ -213,19 +213,19 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         </div>
 
         <div className="flex mt-2 gap-2 flex-col">
-          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="/services" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-cloud-upload"></i>
             <span>Deployments</span>
           </a>
-          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="/services" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-robot"></i>
             <span>Agents</span>
           </a>
-          <a href="https://app.hawiyat.org/" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="/services" className="flex rounded-sm gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <i className="bi bi-book"></i>
             <span>Docs & CLI</span>
           </a>
-          <a href="https://app.hawiyat.org/" className="flex rounded-sm group gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
+          <a href="/services" className="flex rounded-sm group gap-2 p-2 dark:hover:bg-[#2d2d2ddb] hover:bg-gray-200">
             <span>Explore More</span>
             <i className="bi bi-arrow-right transform transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
@@ -233,7 +233,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
 
         <div className="mt-auto w-full flex px-6 place-content-center">
           <a
-            href="https://app.hawiyat.org/"
+            href="/services"
             className="btn !w-full py-2 !bg-transparent duration-[0.3s] hover:!bg-black hover:!text-white dark:hover:!bg-white dark:hover:!text-black !border-[1px] !border-black !text-black dark:!border-white dark:!text-white"
           >
             Signup

@@ -12,7 +12,6 @@ export default function Pricing() {
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 })
   const cardsInView = useInView(cardsRef, { once: true, amount: 0.2 })
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://app.hawiyat.org'
   const enterpriseScheduleUrl = process.env.NEXT_PUBLIC_ENTERPRISE_SCHEDULE_URL || 'https://hawiyat.org/schedule'
 
   const containerVariants = {
@@ -89,7 +88,7 @@ export default function Pricing() {
                 variants={itemVariants}
                 className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
-                <Link href={appUrl} target="_blank" rel="noreferrer">Get Started</Link>
+                <Link href="/services">Get Started</Link>
               </motion.button>
 
               <motion.hr variants={itemVariants} className="border-dashed mt-6" />

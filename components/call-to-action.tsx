@@ -1,6 +1,5 @@
 
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const CallToAction = () => {
 
 
@@ -10,7 +9,7 @@ const CallToAction = () => {
    
       className="relative flex px-2 sm:px-4 py-8 max-w-6xl mx-auto w-full min-h-[60vh] flex-col place-content-center place-items-center overflow-hidden"
     >
-      <div className="relative w-full rounded-xl sm:rounded-2xl lg:py-16 py-12 px-4 sm:px-8 bg-[#f6f7fb] dark:bg-[#171717] place-content-center items-center flex flex-col gap-8 shadow-md dark:shadow-white/20 border border-gray-200/20 dark:border-gray-700/20 backdrop-blur-lg transition-all duration-300">
+      <div className="relative w-full rounded-xl sm:rounded-2xl lg:py-16 py-12 px-4 sm:px-8 bg-[#f6f7fb] dark:bg-[#3A3A40] place-content-center items-center flex flex-col gap-8 shadow-md dark:shadow-white/20 border border-gray-200/20 dark:border-gray-700/20 backdrop-blur-lg transition-all duration-300">
         
     
 
@@ -50,7 +49,7 @@ const CallToAction = () => {
 
           <div className="mt-6 relative flex max-lg:flex-col gap-5">
             <a
-              href={appUrl || "https://app.hawiyat.org/"}
+              href="/services"
            
               className="btn reveal-up !rounded-lg !px-6 !py-3 font-medium group relative overflow-hidden transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
             >
@@ -59,7 +58,7 @@ const CallToAction = () => {
               
               {/* Button text */}
               <span className="relative z-10 flex items-center gap-2 text-base">
-                Deploy APP
+                Get Started
                 <svg 
                   className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" 
                   fill="none" 

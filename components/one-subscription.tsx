@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
 
 const OneSubscription = () => {
   return (
@@ -54,7 +53,7 @@ const OneSubscription = () => {
         </div>
 
         <Link
-          href={appUrl || "https://app.hawiyat.org/"}
+          href="/services"
           className="reveal-up group shadow-xl btn flex gap-2 justify-center mt-10 max-md:mt-6 max-md:w-[90%] max-md:!rounded-lg max-md:!py-3.5 max-md:text-[15px] max-md:font-medium transition-all duration-300 active:scale-95"
         >
           <span>Start Now</span>

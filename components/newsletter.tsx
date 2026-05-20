@@ -8,17 +8,15 @@ const Newsletter = () => {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [position, setPosition] = useState<number | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setMessage(null)
     setError(null)
-    setPosition(null)
 
     try {
-      const res = await fetch("/api/waitlist", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -28,15 +26,13 @@ const Newsletter = () => {
 
       if (!res.ok) {
         setError(data.error || "Something went wrong")
-        if (data.position) setPosition(data.position)
       } else {
-        setMessage(data.message || "Successfully joined waitlist!")
-        if (data.position) setPosition(data.position)
+        setMessage("Successfully subscribed to our newsletter!")
         setEmail("")
       }
     } catch (err) {
-      console.error("Waitlist signup error:", err)
-      setError("Failed to join waitlist. Please try again later.")
+      console.error("Subscription error:", err)
+      setError("Failed to subscribe. Please try again later.")
     } finally {
       setLoading(false)
     }
@@ -44,7 +40,7 @@ const Newsletter = () => {
 
   return (
     <section className="flex w-full flex-col place-content-center place-items-center gap-[10%] p-[5%] px-[10%] max-md:px-2">
-      <div className="flex w-full max-w-6xl place-content-center place-items-center justify-between gap-3 rounded-lg bg-[#F6F7FB] dark:bg-[#171717] p-6 max-md:max-w-full max-md:flex-col">
+      <div className="flex w-full max-w-6xl place-content-center place-items-center justify-between gap-3 rounded-lg bg-[#F6F7FB] dark:bg-[#3A3A40] p-6 max-md:max-w-full max-md:flex-col">
         <div className="flex flex-col max-lg:text-center gap-1">
           <h2 className="text-2xl text-gray-800 dark:text-gray-200 max-md:text-xl">Join our newsletter</h2>
           <div className="text-gray-700 dark:text-gray-300">Get product insights and updates.</div>
@@ -83,25 +79,14 @@ const Newsletter = () => {
         </form>
       </div>
 
-      {/* ✅ feedback messages */}
       {message && (
         <div className="mt-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-green-700 dark:text-green-400 text-center animate-fadeIn">
           <div className="font-medium">{message}</div>
-          {position && (
-            <div className="mt-2 text-sm text-green-600 dark:text-green-500">
-              You are <span className="font-bold">#{position}</span> on the waitlist 🎉
-            </div>
-          )}
         </div>
       )}
       {error && (
         <div className="mt-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 text-red-700 dark:text-red-400 text-center animate-fadeIn">
           <div className="font-medium">{error}</div>
-          {position && (
-            <div className="mt-2 text-sm text-red-600 dark:text-red-500">
-              Your current position is <span className="font-bold">#{position}</span>.
-            </div>
-          )}
         </div>
       )}
     </section>

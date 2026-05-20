@@ -5,7 +5,6 @@ import { useTheme } from "next-themes"
 import Link from "next/link"
 import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -47,7 +46,7 @@ const Header = () => {
        <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-white/80 dark:bg-[#17181b]  backdrop-blur-lg rounded-xl sm:rounded-2xl shadow-md  border border-gray-200/20 dark:border-gray-700/20 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-white/60 dark:bg-[#3A3A40]/50 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 border border-gray-200/50 dark:border-white/10 transition-all duration-500 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
         
@@ -110,7 +109,7 @@ const Header = () => {
             </button>
 
             <Link
-              href={appUrl || "https://app.hawiyat.org/"}
+              href="/services"
               className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
             >
               Sign in
@@ -150,7 +149,7 @@ const Header = () => {
         <div className={`lg:hidden transition-all duration-500 ease-out ${
           isMobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
         } overflow-y-auto`}>
-          <div className="border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 dark:border-white/10">
             
             {/* Mobile Navigation Links */}
             <nav className="p-4 space-y-1">
@@ -192,9 +191,9 @@ const Header = () => {
             </nav>
 
             {/* Mobile CTA Section - Enhanced */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/30">
+            <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-white/5">
               <Link
-                href="#"
+                href="/services"
                 className="flex items-center justify-center w-full bg-black dark:bg-white text-white dark:text-black px-6 py-4 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >

@@ -1,4 +1,3 @@
-// Enhanced Booking & Waitlist Schema
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,141 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ==================== ENUMS ====================
-
-enum BookingStatus {
+enum OrderStatus {
   PENDING
   CONFIRMED
   CANCELLED
   COMPLETED
-  NO_SHOW
 }
 
-// ==================== WAITLIST ====================
-
-model Waitlist {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  ipAddress String   @map("ip_address")
-  userAgent String   @map("user_agent")
-  createdAt DateTime @default(now()) @map("created_at")
+model Order {
+  id            String      @id @default(cuid())
+  serviceId     String      @map("service_id")
+  serviceName   String      @map("service_name")
+  customerName  String      @map("customer_name")
+  customerEmail String      @map("customer_email")
+  customerPhone String?     @map("customer_phone")
+  notes         String?     @db.Text
+  status        OrderStatus @default(PENDING)
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
   
-  @@index([email])
-  @@map("waitlist")
-}
-
-// ==================== SERVICES ====================
-
-model Service {
-  id          String   @id @default(cuid())
-  name        String
-  description String?  @db.Text
-  duration    Int      // Duration in minutes (e.g., 30, 60)
-  isActive    Boolean  @default(true) @map("is_active")
-  
-  // Metadata
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  
-  // Relations
-  bookings    Booking[]
-  
-  @@index([isActive])
-  @@map("services")
-}
-
-// ==================== BOOKINGS ====================
-
-model Booking {
-  id        String        @id @default(cuid())
-  
-  // Appointment timing
-  startTime DateTime      @map("start_time")
-  endTime   DateTime      @map("end_time")
-  timezone  String        @default("UTC")
-  
-  // Status
-  status    BookingStatus @default(CONFIRMED)
-  
-  // Customer information
-  customerName  String    @map("customer_name")
-  customerEmail String    @map("customer_email")
-  customerPhone String?   @map("customer_phone")
-  
-  // Additional details
-  notes         String?   @db.Text
-  internalNotes String?   @db.Text @map("internal_notes") // Staff-only notes
-  
-  // Cancellation tracking
-  cancelledAt        DateTime? @map("cancelled_at")
-  cancellationReason String?   @db.Text @map("cancellation_reason")
-  
-  // Metadata
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  
-  // Relations
-  serviceId String?
-  service   Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
-  
-  @@index([startTime, endTime])
   @@index([customerEmail])
   @@index([status])
   @@index([serviceId])
-  @@map("bookings")
+  @@map("orders")
 }
 
-// ==================== BUSINESS HOURS ====================
-// Defines default weekly schedule
-// Default: Mon-Thu, Sat-Sun 9am-5pm, Friday CLOSED
-
-model BusinessHours {
-  id          String   @id @default(cuid())
+model EmailSubscription {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  createdAt  DateTime @default(now()) @map("created_at")
   
-  dayOfWeek   Int      @map("day_of_week") // 0=Sunday, 1=Monday... 5=Friday, 6=Saturday
-  isOpen      Boolean  @default(true) @map("is_open") // Friday should be false
-  startTime   String   @map("start_time")  // "09:00"
-  endTime     String   @map("end_time")    // "17:00"
-  
-  // Metadata
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  
-  @@unique([dayOfWeek])
-  @@map("business_hours")
-}
-
-// ==================== BLOCKED DATES ====================
-// Block specific dates (holidays, vacations, etc.)
-
-model BlockedDate {
-  id          String   @id @default(cuid())
-  
-  // Date to block (full day)
-  date        DateTime @db.Date
-  
-  // Optional: Block specific time range instead of full day
-  startTime   String?  @map("start_time") // "09:00" - if null, blocks entire day
-  endTime     String?  @map("end_time")   // "12:00" - if null, blocks entire day
-  
-  // Details
-  reason      String?  @db.Text // "Christmas", "Vacation", "Company Event"
-  
-  // Metadata
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  
-  @@index([date])
-  @@map("blocked_dates")
-}
-
-
-model VerificationCode {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  code      String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-
   @@index([email])
+  @@map("email_subscriptions")
 }

@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useMemo, useEffect, useCallback } from "react"
-import { ArrowRight, Search, Zap, Clock, Shield, Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
-import Link from "next/link"
+import { ArrowRight, Search, Zap, Clock, Shield,Calendar, Users  , Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
+import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
+import { OrderForm } from "@/components/services/order-form"
 
 const appUrl = process.env.NEXTAUTH_URL || "https://hawiyat.org"
 
@@ -14,8 +15,9 @@ const services = [
     name: "Claude Code",
     shortDesc: "AI-powered coding assistant",
     description: "AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions and automated code reviews.",
-    image: "/assets/images/brand-logos/claude.svg",
-    price: "2,000",
+    image: "services/claude-code.png",
+    originalPrice: "20000 DA",
+    price: "15000",
     priceLabel: "DA/month",
     cta: "Get Started",
     link: `${appUrl}/services/claude`,
@@ -40,13 +42,13 @@ const services = [
     name: "n8n Hosting",
     shortDesc: "Managed workflow automation platform",
     description: "A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.",
-    image: "/logos/n8n_n8n.png",
-    price: "8,000",
+    image: "/services/n8n-hosting.png",
+    price: "8000",
     priceLabel: "DA/year",
     cta: "Get Started",
     link: `${appUrl}/services/n8n`,
     category: "Managed Services",
-    tag: "Most Popular",
+    tag: "Popular",
     useCases: "Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.",
     features: [
       "Fully managed instances",
@@ -61,13 +63,66 @@ const services = [
       { icon: Shield, text: "Fully Managed" },
     ],
   },
+   {
+    id: "hosting-basic",
+    name: "Hosting Basic",
+    shortDesc: "Single app hosting with basic resources",
+    description: "Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites. Includes SSL, automatic deployments, and basic monitoring.",
+    image: "/logo.svg",
+    price: "1000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: "/services",
+    category: "Hosting",
+    tag: "Starter",
+    useCases: "Personal portfolios, small websites, demo projects, single-page applications.",
+    features: [
+      "1 application",
+      "Free SSL certificate",
+      "Automatic deployments",
+      "Basic monitoring",
+      "512MB RAM",
+    ],
+    bulletPoints: [
+      { icon: Server, text: "1 App" },
+      { icon: Shield, text: "Free SSL" },
+      { icon: Zap, text: "Auto Deploy" },
+    ],
+  },
+  {
+    id: "hosting-vip",
+    name: "Hosting VIP",
+    shortDesc: "Premium hosting with 2 apps + database",
+    description: "Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power, a database, and priority support.",
+    image: "/logo.svg",
+    price: "2000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: "/services",
+    category: "Hosting",
+    tag: "VIP",
+    useCases: "Full-stack apps, SaaS projects, apps with databases, e-commerce sites.",
+    features: [
+      "2 applications",
+      "Managed database included",
+      "Free SSL certificate",
+      "Automatic deployments",
+      "Priority support",
+      "1GB RAM",
+    ],
+    bulletPoints: [
+      { icon: Server, text: "2 Apps + DB" },
+      { icon: Shield, text: "Free SSL" },
+      { icon: Clock, text: "Priority Support" },
+    ],
+  },
   {
     id: "evolution-api",
     name: "Evolution API",
     shortDesc: "WhatsApp Business API solution",
-    description: "A fully managed WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.",
+    description: "WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.",
     image: "/logos/evolutionapi_evolutionapi.png",
-    price: "7,000",
+    price: "7000",
     priceLabel: "DA/year",
     cta: "Get Started",
     link: `${appUrl}/services/evolution`,
@@ -91,8 +146,8 @@ const services = [
     name: "Hawiyat WhatsApp API",
     shortDesc: "Official WhatsApp Business API",
     description: "Official WhatsApp Business API. Send notifications, build chatbots, engage customers at scale with Hawiyat's managed infrastructure.",
-    image: "/services/whatsapp-api.svg",
-    price: "4,000",
+    image: "/services/whatsapp-api.png",
+    price: "7000",
     priceLabel: "DA/year",
     cta: "Get Started",
     link: `${appUrl}/services/whatsapp`,
@@ -116,8 +171,8 @@ const services = [
     name: "Hawiyat Monitoring",
     shortDesc: "Managed reliability service",
     description: "A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.",
-    image: "/services/monitoring.svg",
-    price: "4,900",
+    image: "/services/monitoring.png",
+    price: "4900",
     priceLabel: "DA/month",
     cta: "Get Started",
     link: `${appUrl}/services/monitoring`,
@@ -136,12 +191,41 @@ const services = [
       { icon: Shield, text: "24/7 Alerts" },
     ],
     tiers: [
-      { name: "Starter", price: "4,900", servers: "1 VPS", websites: "3 sites", frequency: "Every 15 min" },
-      { name: "Pro", price: "9,900", servers: "3 VPS", websites: "5 sites", frequency: "Every 5 min" },
-      { name: "Premium", price: "17,900", servers: "5 VPS", websites: "10 sites", frequency: "Every 1 min" },
-      { name: "Guardian", price: "25,900", servers: "5 VPS", websites: "10 sites", frequency: "Every 30 sec" },
+      { name: "Starter", price: "4900", servers: "1 VPS", websites: "3 sites", frequency: "Every 15 min" },
+      { name: "Pro", price: "9900", servers: "3 VPS", websites: "5 sites", frequency: "Every 5 min" },
+      { name: "Premium", price: "17900", servers: "5 VPS", websites: "10 sites", frequency: "Every 1 min" },
+      { name: "Guardian", price: "25900", servers: "5 VPS", websites: "10 sites", frequency: "Every 30 sec" },
     ],
   },
+  {
+  id: "cal-com",
+  name: "Cal.com",
+  shortDesc: "Open-source Calendly alternative for scheduling",
+  description: "Cal.com is scheduling platform that lets users create custom booking pages,  Perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.",
+  image: "/services/cal.png",
+  price: "Free / Self-hosted",
+  priceLabel: "Open Source",
+  cta: "Get Started",
+  link: "https://github.com/calcom/cal.com",
+  category: "Open Source SaaS",
+  tag: "Starter",
+  useCases: "Booking pages, SaaS appointment systems, team scheduling, coaching sessions, interview scheduling, client meetings automation.",
+  features: [
+    "Open-source and self-hostable",
+    "Multi-user team scheduling",
+    "Google Calendar / Outlook sync",
+    "Zoom / Google Meet integrations",
+    "Custom booking pages",
+    "Availability & timezone management",
+    "API for automation & integrations"
+  ],
+  bulletPoints: [
+    { icon: Calendar, text: "Smart Scheduling" },
+    { icon: Users, text: "Team Support" },
+    { icon: Globe, text: "Multi-Calendar Sync" }
+  ],
+}
+ 
 ]
 
 function FlipCard({
@@ -149,11 +233,13 @@ function FlipCard({
   index,
   isMobile,
   isVisible,
+  onOrderClick,
 }: {
   service: (typeof services)[0]
   index: number
   isMobile: boolean
   isVisible: boolean
+  onOrderClick: (service: { id: string; name: string; price: string; priceLabel: string }) => void
 }) {
   const [isFlipped, setIsFlipped] = useState(false)
 
@@ -189,10 +275,14 @@ function FlipCard({
                 <div className="absolute top-3 right-3 z-10">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
-                      service.tag === "Most Popular"
+                      service.tag === "Popular"
                         ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
                         : service.tag === "Best Value"
                         ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
+                        : service.tag === "VIP"
+                        ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30"
+                        : service.tag === "Starter"
+                        ? "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
                         : "bg-primary text-white"
                     }`}
                   >
@@ -225,9 +315,17 @@ function FlipCard({
                 {service.shortDesc}
               </p>
             
-            <div className="flex items-baseline gap-1 mt-auto">
-                <span className="text-2xl font-bold">{service.price}</span>
-                <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
+            <div className="mt-auto">
+                {service.originalPrice && (
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-sm text-muted-foreground line-through">{service.originalPrice}</span>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 font-medium">Save</span>
+                  </div>
+                )}
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold">{service.price}</span>
+                  <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
+                </div>
               </div>
 
               {/* Pushed to bottom */}
@@ -245,7 +343,7 @@ function FlipCard({
 
         {/* ── BACK FACE ── */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <div className="relative h-full rounded-2xl border border-border/60 bg-gradient-to-br from-foreground to-foreground/95 dark:from-secondary dark:to-secondary/95 backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col">
+          <div className="relative h-full rounded-2xl border border-border/60 bg-card dark:bg-secondary backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
 
             {/* Scrollable content area so nothing overflows */}
@@ -261,6 +359,10 @@ function FlipCard({
                           ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
                           : service.tag === "Best Value"
                           ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                          : service.tag === "VIP"
+                          ? "bg-amber-500/30 text-amber-700 dark:text-amber-300"
+                          : service.tag === "Starter"
+                          ? "bg-gray-200/50 dark:bg-gray-600/30 text-gray-500 dark:text-gray-400"
                           : "bg-primary/10 text-primary"
                       }`}
                     >
@@ -285,20 +387,33 @@ function FlipCard({
 
               {/* Price + CTA — always at bottom, never clipped */}
               <div className="mt-auto shrink-0 space-y-3">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-bold">{service.price}</span>
-                  <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
+                <div>
+                  {service.originalPrice && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm text-muted-foreground line-through">{service.originalPrice}</span>
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 font-medium">Save</span>
+                    </div>
+                  )}
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-bold">{service.price}</span>
+                    <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
+                  </div>
                 </div>
-                <Link
-                  href={service.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onOrderClick({
+                      id: service.id,
+                      name: service.name,
+                      price: service.price,
+                      priceLabel: service.priceLabel,
+                    })
+                  }}
                   className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors duration-200"
                 >
                   {service.cta}
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -309,9 +424,17 @@ function FlipCard({
 }
 
 export default function ServicesPage() {
-  const [searchQuery, setSearchQuery] = useState("")
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "")
   const [isMobile, setIsMobile] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [selectedService, setSelectedService] = useState<{
+    id: string
+    name: string
+    price: string
+    priceLabel: string
+  } | null>(null)
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768)
@@ -354,18 +477,28 @@ export default function ServicesPage() {
 
         {/* Search */}
         <div
-          className={`max-w-md  mx-auto mb-16 transition-all duration-500 delay-100 ${
+          className={`max-w-lg  mx-auto mb-16 transition-all duration-500 delay-100 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/60 z-10 pointer-events-none" />
             <Input
               type="search"
               placeholder="Search services..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-12 pl-12 text-sm bg-white/50 dark:bg-secondary backdrop-blur-xl border-border/60 focus:border-primary/50 rounded-xl"
+              onChange={(e) => {
+                const value = e.target.value
+                setSearchQuery(value)
+                const params = new URLSearchParams(searchParams.toString())
+                if (value) {
+                  params.set("q", value)
+                } else {
+                  params.delete("q")
+                }
+                router.replace(`/services?${params.toString()}`, { scroll: false })
+              }}
+              className="h-14 pl-12 text-base bg-white/80 dark:bg-secondary/80 backdrop-blur-xl border-2 border-border/60 focus:border-primary rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
             />
           </div>
         </div>
@@ -382,19 +515,30 @@ export default function ServicesPage() {
           // gap-y-8 instead of gap-y-24 — cards now naturally size themselves
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {filteredServices.map((service, i) => (
-              <FlipCard key={service.id} service={service} index={i} isMobile={isMobile} isVisible={isVisible} />
+              <FlipCard
+                key={service.id}
+                service={service}
+                index={i}
+                isMobile={isMobile}
+                isVisible={isVisible}
+                onOrderClick={(svc) => setSelectedService(svc)}
+              />
             ))}
           </div>
         )}
 
+        {selectedService && (
+          <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
+        )}
+
         {/* Why Choose Hawiyat */}
         <div
-          className={`mt-20 max-w-4xl mx-auto transition-all duration-500 delay-300 ${
+          className={`mt-20 max-w-6xl mx-auto transition-all duration-500 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <h2 className="text-2xl font-semibold text-center mb-10">Why Choose Hawiyat</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-4xl font-medium text-center mb-12 max-md:text-3xl">Why Choose Hawiyat</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
             {[
               { icon: Globe, title: "Local Team", desc: "Based in Algeria, same timezone, support in Arabic and French" },
               { icon: Shield, title: "Flat Pricing", desc: "Fixed monthly price, no usage surprises or hidden fees" },
@@ -405,13 +549,13 @@ export default function ServicesPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="p-6 rounded-xl border border-border/40 bg-white/30 dark:bg-secondary dark:border-border/60 backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/[0.05] transition-all duration-200"
+                className="rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-base font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
+                <h3 className="text-2xl text-center">{item.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>

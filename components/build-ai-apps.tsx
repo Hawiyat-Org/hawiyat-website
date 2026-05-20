@@ -1,10 +1,8 @@
 import Link from "next/link"
 
-
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
 const BuildAIApps = () => {
   return (
-    <section className="relative flex w-full min-h-[100vh] max-lg:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden">
+    <section className="relative flex w-full min-h-[100vh] max-lg:min-h-[80vh] flex-col place-content-center place-items-center overflow-hidden bg-[#2A2A2F] dark:bg-[#2A2A2F]">
       <div className="w-full place-content-center items-center flex flex-col max-w-[900px] gap-4 p-4">
         <div className="purple-bg-grad reveal-up absolute right-[20%] top-[20%] h-[200px] w-[200px]"></div>
 
@@ -23,12 +21,10 @@ const BuildAIApps = () => {
 
         <div className="reveal-up flex mt-8">
           <Link
-            href={appUrl || "https://app.hawiyat.org/"}
-            target="_blank"
-            rel="noopener"
+            href="/services"
             className="shadow-md hover:shadow-xl dark:shadow-gray-800 transition-all duration-300 border-[1px] p-3 px-4 border-black dark:border-white rounded-md"
           >
-            Explore Hawiyat Cloud
+            Explore Services
           </Link>
         </div>
       </div>
