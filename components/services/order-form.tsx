@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { X, Loader2, CheckCircle2, CreditCard } from "lucide-react"
+import { X, Loader2, CheckCircle2, CreditCard, Building2, Wallet, DollarSign } from "lucide-react"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 interface OrderFormProps {
   service: {
@@ -30,6 +31,10 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!formData.paymentMethod) {
+      setError("Please select a payment method")
+      return
+    }
     setIsSubmitting(true)
     setError(null)
 
@@ -179,29 +184,34 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
               </div>
 
               <div>
-                <label htmlFor="paymentMethod" className="block text-sm font-medium mb-1">
+                <label className="block text-sm font-medium mb-2">
                   Payment Method <span className="text-destructive">*</span>
                 </label>
-                <div className="relative">
-                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-                  <select
-                    id="paymentMethod"
-                    name="paymentMethod"
-                    required
-                    value={formData.paymentMethod}
-                    onChange={handleChange}
-                    className="w-full h-10 pl-10 pr-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary appearance-none"
-                  >
-                    <option value="" disabled>Select payment method</option>
-                    <option value="ccp">CCP</option>
-                    <option value="baridi-mob">Baridi Mob</option>
-                    <option value="usd">USD</option>
-                  </select>
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { value: "ccp", label: "CCP", icon: Building2 },
+                    { value: "baridi-mob", label: "Baridi Mob", icon: Wallet },
+                    { value: "usd", label: "USD", icon: DollarSign },
+                  ].map((option) => {
+                    const Icon = option.icon
+                    const isSelected = formData.paymentMethod === option.value
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, paymentMethod: option.value }))}
+                        className={cn(
+                          "flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-sm font-medium transition-all",
+                          isSelected
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border/40 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/50"
+                        )}
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span>{option.label}</span>
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
 
