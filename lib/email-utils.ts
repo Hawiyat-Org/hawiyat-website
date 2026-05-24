@@ -1,7 +1,7 @@
 import { createTransport } from 'nodemailer';
 import juice from 'juice';
 
-async function sendWhatsAppNotification(message: string): Promise<boolean> {
+export async function sendWhatsAppNotification(message: string): Promise<boolean> {
   const apiUrl = process.env.WHATSAPP_API_URL;
   const basicAuth = process.env.WHATSAPP_BASIC_AUTH;
 

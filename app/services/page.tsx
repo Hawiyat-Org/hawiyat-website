@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect, useCallback, Suspense } from "react"
+import { useState, useMemo, useEffect, Suspense } from "react"
 import { ArrowRight, Search, Zap, Clock, Shield,Calendar, Users  , Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -425,9 +425,16 @@ function FlipCard({
 }
 
 export default function ServicesPage() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
     <Suspense fallback={<div className="min-h-screen pt-32 flex items-center justify-center">Loading...</div>}>
-      <ServicesContent />
+      {!mounted ? (
+        <div className="min-h-screen pt-32 flex items-center justify-center">Loading...</div>
+      ) : (
+        <ServicesContent />
+      )}
     </Suspense>
   )
 }
