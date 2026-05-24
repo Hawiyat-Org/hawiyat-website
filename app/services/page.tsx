@@ -1,13 +1,11 @@
 "use client"
 
-import { useState, useMemo, useEffect, Suspense } from "react"
+import { useState, useMemo, useEffect, useCallback, Suspense } from "react"
 import { ArrowRight, Search, Zap, Clock, Shield,Calendar, Users  , Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { OrderForm } from "@/components/services/order-form"
-
-const appUrl = process.env.NEXTAUTH_URL || "https://hawiyat.org"
 
 const services = [
   {
@@ -20,7 +18,7 @@ const services = [
     price: "15000",
     priceLabel: "DA/month",
     cta: "Get Started",
-    link: `${appUrl}/services/claude`,
+    link: "/services/claude",
     category: "Managed Services",
     tag: "Best Value",
     useCases: "Context-aware suggestions, automated code reviews, documentation generation, bug detection & fixes.",
@@ -46,7 +44,7 @@ const services = [
     price: "8000",
     priceLabel: "DA/year",
     cta: "Get Started",
-    link: `${appUrl}/services/n8n`,
+    link: "/services/n8n",
     category: "Managed Services",
     tag: "Popular",
     useCases: "Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.",
@@ -125,7 +123,7 @@ const services = [
     price: "7000",
     priceLabel: "DA/year",
     cta: "Get Started",
-    link: `${appUrl}/services/evolution`,
+    link: "/services/evolution",
     category: "Managed Services",
     useCases: "WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.",
     features: [
@@ -150,7 +148,7 @@ const services = [
     price: "7000",
     priceLabel: "DA/year",
     cta: "Get Started",
-    link: `${appUrl}/services/whatsapp`,
+    link: "/services/whatsapp",
     category: "Managed Services",
     useCases: "Bulk messaging, chatbot builder, message templates, analytics & reporting.",
     features: [
@@ -175,7 +173,7 @@ const services = [
     price: "4900",
     priceLabel: "DA/month",
     cta: "Get Started",
-    link: `${appUrl}/services/monitoring`,
+    link: "/services/monitoring",
     category: "Managed Services",
     useCases: "Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.",
     features: [
