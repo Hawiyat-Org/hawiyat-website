@@ -1,6 +1,42 @@
 import { createTransport } from 'nodemailer';
 import juice from 'juice';
 
+async function sendWhatsAppNotification(message: string): Promise<boolean> {
+  const apiUrl = process.env.WHATSAPP_API_URL;
+  const basicAuth = process.env.WHATSAPP_BASIC_AUTH;
+
+  if (!apiUrl || !basicAuth) {
+    console.error('WhatsApp API credentials not configured');
+    return false;
+  }
+
+  try {
+    const response = await fetch(`${apiUrl}/send/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${Buffer.from(basicAuth).toString('base64')}`,
+      },
+      body: JSON.stringify({
+        to: '213559555951',
+        message: message,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('WhatsApp API error:', response.status, errorText);
+      return false;
+    }
+
+    console.log('WhatsApp notification sent successfully');
+    return true;
+  } catch (error) {
+    console.error('Error sending WhatsApp notification:', error);
+    return false;
+  }
+}
+
 interface SendBookingConfirmationEmailProps {
   to: string;
   bookingDetails: {

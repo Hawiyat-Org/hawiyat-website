@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma/prismaClient"
-import { sendOrderNotification, sendOrderConfirmation } from "@/lib/email-utils"
+import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification } from "@/lib/email-utils"
 
 async function sendTelegramNotification(message: string) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN
@@ -77,7 +77,18 @@ ${customerPhone ? `<b>Phone:</b> ${customerPhone}\n` : ""}${notes ? `<b>Notes:</
 <b>Order ID:</b> ${order.id}
 <b>Date:</b> ${new Date(order.createdAt).toLocaleString()}`
 
+    const whatsappMessage = `🔔 *New Order Received!*
+
+📦 *Service:* ${serviceName}
+👤 *Customer:* ${customerName}
+📧 *Email:* ${customerEmail}
+${customerPhone ? `📱 *Phone:* ${customerPhone}\n` : ""}💳 *Payment:* ${preferredPayment ? preferredPayment.toUpperCase() : 'Not specified'}
+${notes ? `📝 *Notes:* ${notes}\n` : ""}
+🆔 *Order ID:* ${order.id}
+📅 *Date:* ${new Date(order.createdAt).toLocaleString()}`
+
     await sendTelegramNotification(telegramMessage)
+    await sendWhatsAppNotification(whatsappMessage)
 
     const [emailNotificationResult, emailConfirmationResult] = await Promise.allSettled([
       sendOrderNotification({ order }),
