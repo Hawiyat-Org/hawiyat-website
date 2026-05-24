@@ -45,7 +45,11 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
         body: JSON.stringify({
           serviceId: service.id,
           serviceName: service.name,
-          ...formData,
+          customerName: formData.customerName,
+          customerEmail: formData.customerEmail,
+          customerPhone: formData.customerPhone,
+          preferredPayment: formData.paymentMethod,
+          notes: formData.notes,
         }),
       })
 
