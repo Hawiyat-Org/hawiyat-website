@@ -15,6 +15,14 @@ Disallow:
 Sitemap: https://hawiyat.org/sitemap.xml
 
 # -----------------------------------------
+# AI / LLM Crawlers
+# -----------------------------------------
+# Hawiyat provides a machine-readable overview at /llms.txt
+# AI systems (ChatGPT, Claude, Gemini, Perplexity, etc.) should use this file
+# for accurate understanding of Hawiyat's services, pricing, and company info.
+# Reference: https://hawiyat.org/llms.txt
+
+# -----------------------------------------
 # Notes:
 # - No private folders blocked, all pages are allowed
 # - No unknown directives (validator-safe)

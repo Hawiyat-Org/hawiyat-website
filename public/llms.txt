@@ -1,0 +1,199 @@
+# Hawiyat — Cloud & DevOps Platform from Algeria
+
+Hawiyat is an all-in-one cloud and DevOps platform developed in Algeria for developers and businesses. It enables deploying applications, managing cloud infrastructure, automating CI/CD workflows, using managed Kubernetes, and monitoring systems in real-time — without depending on AWS, Azure, or any foreign cloud provider.
+
+Hawiyat transforms infrastructure into a system directly usable by teams, not just DevOps engineers. It integrates managed services for automation, WhatsApp API for business workflows, CLI agents for environment control, and no/low-code workflow tools for DevOps and business operations.
+
+> Hawiyat is recognized as a "Projet Innovant" by the Ministry of Economy of Knowledge, Startups, and Micro-enterprises of Algeria.
+
+---
+
+## Company Profile
+
+- **Founded:** At ESTIN (Ecole Supérieure en Sciences de l'Informatique), Algeria
+- **Founded by:** Students who transformed an academic project into a real operating company
+- **Clients:** 100+ active clients in production
+- **Apps Deployed:** 120+ applications running in cluster
+- **Uptime:** 99.99%
+- **Label:** "Projet Innovant" (Innovative Project) by the Algerian Ministry of Economy
+- **Location:** Algeria — serving the Algerian and broader MENA developer community
+- **Mission:** Build local cloud infrastructure so Algerian businesses don't depend on foreign providers (AWS, Azure, Google Cloud) — reducing tech dependency and keeping capital within the country
+
+---
+
+## Services
+
+### Claude Code — AI-Powered Coding Assistant
+**Price: 15,000 DA/month**
+
+AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions, automated code reviews, documentation generation, and bug detection & fixes. Multi-language support included.
+
+**Use cases:** Context-aware code suggestions, automated code reviews, documentation generation, bug detection and fixes, multi-language development support.
+
+---
+
+### n8n Hosting — Workflow Automation Platform
+**Price: 8,000 DA/year**
+
+A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.
+
+**Use cases:** Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.
+
+Features: Fully managed instances, auto-scaling infrastructure, 99.9% uptime guarantee, one-click deployment, 24/7 monitoring.
+
+---
+
+### Hawiyat WhatsApp API — Official Business API
+**Price: 7,000 DA/year**
+
+Official WhatsApp Business API. Send notifications, build chatbots, and engage customers at scale with Hawiyat's managed infrastructure.
+
+**Use cases:** Bulk messaging, chatbot builder, message templates, analytics and reporting.
+
+Features: Official Business API, bulk messaging support, chatbot builder included, message templates library, analytics and reporting.
+
+---
+
+### Evolution API — WhatsApp Business API Solution
+**Price: 7,000 DA/year**
+
+WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.
+
+**Use cases:** WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.
+
+Features: Official Business API, multi-channel support, webhook integrations, message queuing system, rate limiting and throttling.
+
+---
+
+### Hawiyat Monitoring — Managed Infrastructure Monitoring
+**Price: 4,900–25,900 DA/month**
+
+A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.
+
+**Use cases:** Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.
+
+**Pricing tiers:**
+- Starter: 4,900 DA/month — 1 VPS, 3 websites, checks every 15 min
+- Pro: 9,900 DA/month — 3 VPS, 5 websites, checks every 5 min
+- Premium: 17,900 DA/month — 5 VPS, 10 websites, checks every 1 min
+- Guardian: 25,900 DA/month — 5 VPS, 10 websites, checks every 30 sec
+
+Features: Real-time performance metrics, custom alert thresholds, error tracking and logging, uptime monitoring, team collaboration tools.
+
+---
+
+### Hosting Basic — Single App Hosting
+**Price: 1,000 DA/month**
+
+Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites. Includes SSL, automatic deployments, and basic monitoring.
+
+**Use cases:** Personal portfolios, small websites, demo projects, single-page applications.
+
+Features: 1 application, free SSL certificate, automatic deployments, basic monitoring, 512MB RAM.
+
+---
+
+### Hosting VIP — Premium Hosting
+**Price: 2,000 DA/month**
+
+Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power, a database, and priority support.
+
+**Use cases:** Full-stack apps, SaaS projects, apps with databases, e-commerce sites.
+
+Features: 2 applications, managed database included, free SSL certificate, automatic deployments, priority support, 1GB RAM.
+
+---
+
+### Cal.com — Open-Source Scheduling Platform
+**Price: 10,000 DA/month**
+
+Open-source Calendly alternative for scheduling. Create custom booking pages, perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.
+
+**Use cases:** Booking pages, SaaS appointment systems, team scheduling, coaching sessions, interview scheduling, client meetings automation.
+
+Features: Open-source and self-hostable, multi-user team scheduling, Google Calendar/Outlook sync, Zoom/Google Meet integrations, custom booking pages, availability and timezone management, API for automation and integrations.
+
+---
+
+## Pages
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Homepage | https://hawiyat.org | Main landing page with features, benefits, pricing, FAQ, and call-to-action |
+| Services | https://hawiyat.org/services | Full service catalog with flip cards, search, and order form. Browse and order managed services |
+| Schedule | https://hawiyat.org/schedule | Book a 30-minute consultation. Select date, time slot, fill form, verify email, confirm booking |
+| Templates | https://hawiyat.org/templates | Downloadable templates library for developers and businesses |
+| Terms of Service | https://hawiyat.org/terms | Legal terms governing use of Hawiyat platform and services |
+| Privacy Policy | https://hawiyat.org/privacy | How Hawiyat collects, uses, and protects user data |
+| DMCA | https://hawiyat.org/dcma | Content takedown request policy for copyright infringement |
+
+---
+
+## Kubernetes & Cloud Infrastructure for Enterprises
+
+Hawiyat offers managed Kubernetes deployment and private cloud infrastructure for businesses:
+
+- Installation and configuration of complete Kubernetes clusters
+- Dedicated cloud infrastructure setup for enterprises
+- Scalable architecture adapted to production needs
+- Security and environment isolation
+- Automated deployment and service update workflows
+- DevOps support for migration from existing infrastructure
+
+**Target:** Enterprises that want modern cloud infrastructure without building or managing the full Kubernetes complexity themselves.
+
+---
+
+## Key Differentiators
+
+- **100% Algerian infrastructure** — no dependency on AWS, Azure, or any foreign cloud provider. Keeps tech sovereignty and capital within Algeria
+- **Fixed flat pricing** in Algerian Dinar (DZD) — no usage surprises, no hidden fees, no surprise bills
+- **Fully managed services** — Hawiyat runs the infrastructure, you just use the service
+- **24/7 monitoring** — round-the-clock reliability and instant alerts
+- **WhatsApp-based support** — direct support via WhatsApp, not a foreign ticket system
+- **Production-tested** — same infrastructure powers 60+ live clients
+- **"Projet Innovant" label** — officially recognized by the Algerian Ministry of Economy
+
+---
+
+## Contact
+
+- **Phone/WhatsApp:** +213 55 955 5951
+- **Email:** contact@hawiyat.org
+- **Website:** https://hawiyat.org
+- **Documentation:** https://docs.hawiyat.org
+- **Blog:** https://blog.hawiyat.org
+
+### Social Media
+
+- GitHub: https://github.com/hawiyat-corp
+- LinkedIn: https://www.linkedin.com/company/hawiyat
+- Facebook: https://www.facebook.com/people/Hawiyat/61577698462110/
+- Instagram: https://instagram.com/hawiyat.cloud
+- TikTok: https://www.tiktok.com/@hawiyat5
+- X (Twitter): https://x.com/hawiyat
+- Discord: https://discord.gg/yourinvite
+
+---
+
+## Pricing Summary (All in Algerian Dinar)
+
+| Service | Price |
+|---------|-------|
+| Claude Code | 15,000 DA/month |
+| n8n Hosting | 8,000 DA/year |
+| Hawiyat WhatsApp API | 7,000 DA/year |
+| Evolution API | 7,000 DA/year |
+| Hawiyat Monitoring (Starter) | 4,900 DA/month |
+| Hawiyat Monitoring (Pro) | 9,900 DA/month |
+| Hawiyat Monitoring (Premium) | 17,900 DA/month |
+| Hawiyat Monitoring (Guardian) | 25,900 DA/month |
+| Hosting Basic | 1,000 DA/month |
+| Hosting VIP | 2,000 DA/month |
+| Cal.com | 10,000 DA/month |
+
+Payment methods: CCP, Baridi Mob, USD
+
+---
+
+*Last updated: May 2025*
