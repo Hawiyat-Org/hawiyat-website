@@ -18,7 +18,7 @@ async function sendWhatsAppNotification(message: string): Promise<boolean> {
         'Authorization': `Basic ${Buffer.from(basicAuth).toString('base64')}`,
       },
       body: JSON.stringify({
-        to: '213559555951',
+        phone: '120363427220233404@g.us',
         message: message,
       }),
     });
