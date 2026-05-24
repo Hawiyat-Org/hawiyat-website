@@ -59,6 +59,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
         throw new Error(data.error || "Failed to submit order")
       }
 
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Purchase', {
+          value: Number(service.price),
+          currency: 'DZD',
+          content_name: service.name,
+        })
+      }
+
       setOrderId(data.order.id)
       setIsSuccess(true)
     } catch (err) {

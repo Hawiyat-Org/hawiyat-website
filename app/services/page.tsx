@@ -226,6 +226,13 @@ const services = [
  
 ]
 
+const tagStyleMap: Record<string, string> = {
+  Popular: "bg-gradient-to-r from-amber-500 to-orange-500 text-white",
+  "Best Value": "bg-gradient-to-r from-emerald-500 to-green-500 text-white",
+  VIP: "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30",
+  Starter: "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300",
+}
+
 function FlipCard({
   service,
   index,
@@ -271,19 +278,7 @@ function FlipCard({
             <div className="relative h-48 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center p-6">
               {service.tag && (
                 <div className="absolute top-3 right-3 z-10">
-                  <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
-                      service.tag === "Popular"
-                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
-                        : service.tag === "Best Value"
-                        ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
-                        : service.tag === "VIP"
-                        ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30"
-                        : service.tag === "Starter"
-                        ? "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
-                        : "bg-primary text-white"
-                    }`}
-                  >
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${tagStyleMap[service.tag] || "bg-primary text-white"}`}>
                     {service.tag}
                   </span>
                 </div>
@@ -351,19 +346,7 @@ function FlipCard({
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <h3 className="text-xl font-bold">{service.name}</h3>
                   {service.tag && (
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                        service.tag === "Most Popular"
-                          ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
-                          : service.tag === "Best Value"
-                          ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
-                          : service.tag === "VIP"
-                          ? "bg-amber-500/30 text-amber-700 dark:text-amber-300"
-                          : service.tag === "Starter"
-                          ? "bg-gray-200/50 dark:bg-gray-600/30 text-gray-500 dark:text-gray-400"
-                          : "bg-primary/10 text-primary"
-                      }`}
-                    >
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${tagStyleMap[service.tag]?.replace("shadow-lg", "") || "bg-primary/10 text-primary"}`}>
                       {service.tag}
                     </span>
                   )}
