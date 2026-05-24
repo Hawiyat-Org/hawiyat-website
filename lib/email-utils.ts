@@ -171,6 +171,7 @@ interface SendOrderNotificationProps {
     customerName: string;
     customerEmail: string;
     customerPhone?: string | null;
+    preferredPayment?: string | null;
     notes?: string | null;
     status: string;
     createdAt: Date;
@@ -235,6 +236,7 @@ export async function sendOrderNotification({
               <tr><td class="label">Customer:</td><td class="value">${order.customerName}</td></tr>
               <tr><td class="label">Email:</td><td class="value"><a href="mailto:${order.customerEmail}">${order.customerEmail}</a></td></tr>
               ${order.customerPhone ? `<tr><td class="label">Phone:</td><td class="value">${order.customerPhone}</td></tr>` : ''}
+              <tr><td class="label">Preferred Payment:</td><td class="value">${order.preferredPayment ? order.preferredPayment.toUpperCase() : 'Not specified'}</td></tr>
               <tr><td class="label">Status:</td><td class="value">${order.status}</td></tr>
               <tr><td class="label">Date:</td><td class="value">${new Date(order.createdAt).toLocaleString()}</td></tr>
               ${order.notes ? `<tr><td class="label">Notes:</td><td class="value">${order.notes}</td></tr>` : ''}

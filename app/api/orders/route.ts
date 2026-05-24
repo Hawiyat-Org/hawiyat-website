@@ -31,11 +31,19 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    const { serviceId, serviceName, customerName, customerEmail, customerPhone, notes } = body
+    const { serviceId, serviceName, customerName, customerEmail, customerPhone, notes, preferredPayment } = body
 
     if (!serviceId || !serviceName || !customerName || !customerEmail) {
       return NextResponse.json(
         { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
+        { status: 400 }
+      )
+    }
+
+    const validPaymentMethods = ["ccp", "baridi-mob", "usd"]
+    if (preferredPayment && !validPaymentMethods.includes(preferredPayment)) {
+      return NextResponse.json(
+        { error: "Invalid payment method. Must be one of: ccp, baridi-mob, usd" },
         { status: 400 }
       )
     }
@@ -56,6 +64,7 @@ export async function POST(request: NextRequest) {
         customerEmail,
         customerPhone: customerPhone || null,
         notes: notes || null,
+        preferredPayment: preferredPayment || null,
       },
     })
 
@@ -70,21 +79,31 @@ ${customerPhone ? `<b>Phone:</b> ${customerPhone}\n` : ""}${notes ? `<b>Notes:</
 
     await sendTelegramNotification(telegramMessage)
 
-    sendOrderNotification({ order }).catch(err =>
-      console.error("Failed to send admin notification:", err)
-    )
-    sendOrderConfirmation({
-      to: customerEmail,
-      order: {
-        id: order.id,
-        serviceName: order.serviceName,
-        customerName: order.customerName,
-        notes: order.notes,
-        createdAt: order.createdAt,
-      },
-    }).catch(err =>
-      console.error("Failed to send customer confirmation:", err)
-    )
+    const [emailNotificationResult, emailConfirmationResult] = await Promise.allSettled([
+      sendOrderNotification({ order }),
+      sendOrderConfirmation({
+        to: customerEmail,
+        order: {
+          id: order.id,
+          serviceName: order.serviceName,
+          customerName: order.customerName,
+          notes: order.notes,
+          createdAt: order.createdAt,
+        },
+      }),
+    ])
+
+    if (emailNotificationResult.status === 'rejected') {
+      console.error('CRITICAL: Admin notification email failed:', emailNotificationResult.reason)
+    } else if (!emailNotificationResult.value) {
+      console.error('CRITICAL: Admin notification email returned false (SMTP config likely missing)')
+    }
+
+    if (emailConfirmationResult.status === 'rejected') {
+      console.error('CRITICAL: Customer confirmation email failed:', emailConfirmationResult.reason)
+    } else if (!emailConfirmationResult.value) {
+      console.error('CRITICAL: Customer confirmation email returned false (SMTP config likely missing)')
+    }
 
     return NextResponse.json(
       { success: true, order: { id: order.id, status: order.status, createdAt: order.createdAt } },
