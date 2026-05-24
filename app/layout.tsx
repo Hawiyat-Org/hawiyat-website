@@ -184,7 +184,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
         {/* Meta Pixel Base Script */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
