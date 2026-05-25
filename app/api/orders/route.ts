@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma/prismaClient"
+import { PaymentMethod } from "@prisma/client"
 import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification } from "@/lib/email-utils"
 import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
 
@@ -67,10 +68,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const validPaymentMethods = ["ccp", "baridi-mob", "usd"]
-    if (preferredPayment && !validPaymentMethods.includes(preferredPayment)) {
+    const validPaymentMethods = [PaymentMethod.CCP, PaymentMethod.BARIDI_MOB, PaymentMethod.USD]
+    if (preferredPayment && !validPaymentMethods.includes(preferredPayment as PaymentMethod)) {
       return NextResponse.json(
-        { error: "Invalid payment method. Must be one of: ccp, baridi-mob, usd" },
+        { error: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD" },
         { status: 400 }
       )
     }
@@ -91,7 +92,7 @@ export async function POST(request: NextRequest) {
         customerEmail,
         customerPhone: customerPhone || null,
         notes: notes || null,
-        preferredPayment: preferredPayment || null,
+        preferredPayment: preferredPayment ? preferredPayment as PaymentMethod : null,
       },
     })
 

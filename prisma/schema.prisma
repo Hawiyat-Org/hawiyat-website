@@ -14,18 +14,24 @@ enum OrderStatus {
   COMPLETED
 }
 
+enum PaymentMethod {
+  CCP
+  BARIDI_MOB
+  USD
+}
+
 model Order {
-  id               String      @id @default(cuid())
-  serviceId        String      @map("service_id")
-  serviceName      String      @map("service_name")
-  customerName     String      @map("customer_name")
-  customerEmail    String      @map("customer_email")
-  customerPhone    String?     @map("customer_phone")
-  preferredPayment String?     @map("preferred_payment")
-  notes            String?     @db.Text
-  status           OrderStatus @default(PENDING)
-  createdAt        DateTime    @default(now()) @map("created_at")
-  updatedAt        DateTime    @updatedAt @map("updated_at")
+  id               String         @id @default(cuid())
+  serviceId        String         @map("service_id")
+  serviceName      String         @map("service_name")
+  customerName     String         @map("customer_name")
+  customerEmail    String         @map("customer_email")
+  customerPhone    String?        @map("customer_phone")
+  preferredPayment PaymentMethod? @map("preferred_payment")
+  notes            String?        @db.Text
+  status           OrderStatus    @default(PENDING)
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
   
   @@index([customerEmail])
   @@index([status])
