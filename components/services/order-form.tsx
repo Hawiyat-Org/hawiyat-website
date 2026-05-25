@@ -61,15 +61,21 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
 
       const price = Number(service.price) || 0
 
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'Purchase', {
-          value: price,
-          currency: 'USD',
-          content_type: 'product',
-          content_ids: [service.id],
-        })
+      const firePixel = () => {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Purchase', {
+            value: price,
+            currency: 'USD',
+            content_type: 'product',
+            content_ids: [service.id],
+          })
+          console.log('Meta Pixel Purchase fired:', { value: price, currency: 'USD', service: service.name })
+        } else {
+          console.warn('Meta Pixel fbq not available')
+        }
       }
 
+      firePixel()
       setOrderId(data.order.id)
       setIsSuccess(true)
     } catch (err) {
