@@ -1,6 +1,5 @@
 import type React from "react";
 import type { Metadata } from "next";
-import Script from "next/script";
 import {
   Space_Grotesk,
   Playfair_Display,
@@ -11,7 +10,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
 import Header from "@/components/header";
-import MetaPixel from "@/components/meta-pixel";
 const space = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -124,12 +122,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  additionalMetaTags: [
-    {
-      tagName: 'script',
-      children: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`,
-    },
-  ],
   icons: {
     icon: `${NEXT_URL}/favlogo.ico`,
     shortcut: `${NEXT_URL}/logo.svg`,
@@ -189,6 +181,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
+        {/* Meta Pixel — directly in head for server-side rendering */}
+        <script dangerouslySetInnerHTML={{
+          __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`
+        }} />
       </head>
       <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
         {/* accessibility: skip link */}
@@ -198,8 +194,6 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-
-        <MetaPixel />
 
         <ThemeProvider
           attribute="class"
