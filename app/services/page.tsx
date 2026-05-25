@@ -275,7 +275,7 @@ const services = [
     bulletPoints: [
       { icon: MessageSquare, text: "SMS OTP" },
       { icon: Users, text: "10 Devices" },
-      { icon: Shield, text: "Premium Support" },
+      { icon: BarChart3, text: "Analytics" },
     ],
   }
  
