@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   Space_Grotesk,
   Playfair_Display,
@@ -183,10 +184,9 @@ export default function RootLayout({
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
       </head>
       <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
-        {/* Meta Pixel Base Script — raw script in body for browser execution and Meta tool detection */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        {/* Meta Pixel Base Script — lazyOnload for proper script execution */}
+        <Script id="meta-pixel" strategy="lazyOnload">
+          {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -197,9 +197,8 @@ export default function RootLayout({
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '1489709689056564');
             fbq('track', 'PageView');
-            `
-          }}
-        />
+          `}
+        </Script>
         {/* accessibility: skip link */}
         <a
           href="#content"
