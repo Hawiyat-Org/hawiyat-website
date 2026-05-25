@@ -182,7 +182,9 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
-        {/* Meta Pixel Base Script */}
+      </head>
+      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
+        {/* Meta Pixel Base Script — beforeInteractive must be in body */}
         <Script id="meta-pixel" strategy="beforeInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -197,8 +199,6 @@ export default function RootLayout({
             fbq('track', 'PageView');
           `}
         </Script>
-      </head>
-      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
         {/* accessibility: skip link */}
         <a
           href="#content"
