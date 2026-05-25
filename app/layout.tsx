@@ -182,10 +182,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
-        {/* Meta Pixel Base Script */}
-        <Script id="meta-pixel" src="/meta-pixel.js" strategy="afterInteractive" />
       </head>
       <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
+        {/* Meta Pixel Base Script — loads after page is interactive so it executes properly */}
+        <Script id="meta-pixel" src="/meta-pixel.js" strategy="afterInteractive" />
         {/* accessibility: skip link */}
         <a
           href="#content"
