@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma/prismaClient"
 import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification } from "@/lib/email-utils"
+import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
+
+const IP_RATE_LIMIT = { maxRequests: 5, windowMs: 60 * 60 * 1000 }
+const EMAIL_RATE_LIMIT = { maxRequests: 4, windowMs: 60 * 60 * 1000 }
 
 async function sendTelegramNotification(message: string) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN
@@ -29,6 +33,7 @@ async function sendTelegramNotification(message: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = getClientIP(request)
     const body = await request.json()
 
     const { serviceId, serviceName, customerName, customerEmail, customerPhone, notes, preferredPayment } = body
@@ -37,6 +42,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
         { status: 400 }
+      )
+    }
+
+    const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
+    if (!ipLimit.allowed) {
+      return NextResponse.json(
+        {
+          error: `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
+          retryAfter: ipLimit.retryAfter,
+        },
+        { status: 429 }
+      )
+    }
+
+    const emailLimit = checkRateLimit(`email:${customerEmail}`, EMAIL_RATE_LIMIT.maxRequests, EMAIL_RATE_LIMIT.windowMs)
+    if (!emailLimit.allowed) {
+      return NextResponse.json(
+        {
+          error: `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
+          retryAfter: emailLimit.retryAfter,
+        },
+        { status: 429 }
       )
     }
 
