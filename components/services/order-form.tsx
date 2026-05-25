@@ -59,11 +59,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
         throw new Error(data.error || "Failed to submit order")
       }
 
+      const price = Number(service.price) || 0
+
       if (typeof window !== 'undefined' && (window as any).fbq) {
         (window as any).fbq('track', 'Purchase', {
-          value: Number(service.price),
-          currency: 'DZD',
-          content_name: service.name,
+          value: price,
+          currency: 'USD',
+          content_type: 'product',
+          content_ids: [service.id],
         })
       }
 

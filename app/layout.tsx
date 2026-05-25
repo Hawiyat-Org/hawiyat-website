@@ -128,7 +128,6 @@ export const metadata: Metadata = {
     shortcut: `${NEXT_URL}/logo.svg`,
     apple: `${NEXT_URL}/logo.svg`,
   },
-  manifest: `${NEXT_URL}/site.webmanifest`,
   other: {
     'application/ld+json': JSON.stringify({
       "@context": "https://schema.org",
@@ -184,7 +183,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
         {/* Meta Pixel Base Script */}
-        <Script id="meta-pixel" strategy="lazyOnload">
+        <Script id="meta-pixel" strategy="beforeInteractive">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
