@@ -11,6 +11,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
 import Header from "@/components/header";
+import MetaPixel from "@/components/meta-pixel";
 const space = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -184,8 +185,6 @@ export default function RootLayout({
         {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
       </head>
       <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
-        {/* Meta Pixel Base Script — loads after page is interactive so it executes properly */}
-        <Script id="meta-pixel" src="/meta-pixel.js" strategy="afterInteractive" />
         {/* accessibility: skip link */}
         <a
           href="#content"
@@ -193,6 +192,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+
+        <MetaPixel />
 
         <ThemeProvider
           attribute="class"
