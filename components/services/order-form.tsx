@@ -210,11 +210,11 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                   Payment Method <span className="text-destructive">*</span>
                 </label>
                 <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { value: "ccp", label: "CCP", icon: Building2 },
-                    { value: "baridi-mob", label: "Baridi Mob", icon: Wallet },
-                    { value: "usd", label: "USD", icon: DollarSign },
-                  ].map((option) => {
+                    {[
+                      { value: "CCP", label: "CCP", icon: Building2 },
+                      { value: "BARIDI_MOB", label: "Baridi Mob", icon: Wallet },
+                      { value: "USD", label: "USD", icon: DollarSign },
+                    ].map((option) => {
                     const Icon = option.icon
                     const isSelected = formData.paymentMethod === option.value
                     return (
