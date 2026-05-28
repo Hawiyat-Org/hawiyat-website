@@ -68,18 +68,22 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const validPaymentMethods = [PaymentMethod.CCP, PaymentMethod.BARIDI_MOB, PaymentMethod.USD]
-    if (preferredPayment && !validPaymentMethods.includes(preferredPayment as PaymentMethod)) {
-      return NextResponse.json(
-        { error: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD" },
-        { status: 400 }
-      )
-    }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(customerEmail)) {
       return NextResponse.json(
         { error: "Invalid email format" },
+        { status: 400 }
+      )
+    }
+
+    const normalizedPayment = preferredPayment
+      ? (preferredPayment as string).toUpperCase().replace(/\s+/g, "_")
+      : null
+
+    const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
+    if (normalizedPayment && !validPaymentMethods.includes(normalizedPayment)) {
+      return NextResponse.json(
+        { error: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD" },
         { status: 400 }
       )
     }
@@ -92,7 +96,7 @@ export async function POST(request: NextRequest) {
         customerEmail,
         customerPhone: customerPhone || null,
         notes: notes || null,
-        preferredPayment: preferredPayment ? preferredPayment as PaymentMethod : null,
+        preferredPayment: normalizedPayment ? normalizedPayment as PaymentMethod : null,
       },
     })
 
@@ -110,7 +114,7 @@ ${customerPhone ? `<b>Phone:</b> ${customerPhone}\n` : ""}${notes ? `<b>Notes:</
 📦 *Service:* ${serviceName}
 👤 *Customer:* ${customerName}
 📧 *Email:* ${customerEmail}
-${customerPhone ? `📱 *Phone:* ${customerPhone}\n` : ""}💳 *Payment:* ${preferredPayment ? preferredPayment.toUpperCase() : 'Not specified'}
+${customerPhone ? `📱 *Phone:* ${customerPhone}\n` : ""}💳 *Payment:* ${normalizedPayment ?? 'Not specified'}
 ${notes ? `📝 *Notes:* ${notes}\n` : ""}
 🆔 *Order ID:* ${order.id}
 📅 *Date:* ${new Date(order.createdAt).toLocaleString()}`
@@ -132,16 +136,16 @@ ${notes ? `📝 *Notes:* ${notes}\n` : ""}
       }),
     ])
 
-    if (emailNotificationResult.status === 'rejected') {
-      console.error('CRITICAL: Admin notification email failed:', emailNotificationResult.reason)
+    if (emailNotificationResult.status === "rejected") {
+      console.error("CRITICAL: Admin notification email failed:", emailNotificationResult.reason)
     } else if (!emailNotificationResult.value) {
-      console.error('CRITICAL: Admin notification email returned false (SMTP config likely missing)')
+      console.error("CRITICAL: Admin notification email returned false (SMTP config likely missing)")
     }
 
-    if (emailConfirmationResult.status === 'rejected') {
-      console.error('CRITICAL: Customer confirmation email failed:', emailConfirmationResult.reason)
+    if (emailConfirmationResult.status === "rejected") {
+      console.error("CRITICAL: Customer confirmation email failed:", emailConfirmationResult.reason)
     } else if (!emailConfirmationResult.value) {
-      console.error('CRITICAL: Customer confirmation email returned false (SMTP config likely missing)')
+      console.error("CRITICAL: Customer confirmation email returned false (SMTP config likely missing)")
     }
 
     return NextResponse.json(
@@ -150,7 +154,7 @@ ${notes ? `📝 *Notes:* ${notes}\n` : ""}
     )
   } catch (error) {
     console.error("Order creation error:", error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
     return NextResponse.json(
       { error: "Failed to create order", details: errorMessage },
       { status: 500 }
