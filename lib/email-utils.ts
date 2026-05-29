@@ -487,79 +487,164 @@ export async function sendBootcampConfirmation({
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Confirmation d'inscription - Hawiyat AI Bootcamp</title>
+        <title>Bienvenue au Hawiyat AI Bootcamp</title>
       </head>
-      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc;">
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a;">
           <tr>
             <td align="center" style="padding: 40px 20px;">
-              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color: #141414; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4);">
+                <!-- Top Accent Line -->
+                <tr>
+                  <td style="height: 3px; background: linear-gradient(90deg, #ffffff, #a3a3a3, #ffffff);"></td>
+                </tr>
                 <!-- Header -->
                 <tr>
-                  <td style="background-color: #0a0a0a; padding: 40px 40px 30px; text-align: center;">
-                    <img src="https://hawiyat.org/logo.svg" alt="Hawiyat" width="60" height="60" style="display: block; margin: 0 auto 20px;" />
-                    <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">Hawiyat AI Bootcamp</h1>
-                    <p style="margin: 8px 0 0; color: #a3a3a3; font-size: 14px;">Inscription confirmée</p>
+                  <td style="padding: 48px 40px 32px; text-align: center;">
+                    <img src="https://hawiyat.org/logo.svg" alt="Hawiyat" width="56" height="56" style="display: block; margin: 0 auto 24px;" />
+                    <p style="margin: 0 0 8px; color: #737373; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Hawiyat</p>
+                    <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">AI Bootcamp</h1>
+                  </td>
+                </tr>
+                <!-- Confirmation Badge -->
+                <tr>
+                  <td style="padding: 0 40px 32px; text-align: center;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="display: inline-block; background-color: #22c55e; border-radius: 100px;">
+                      <tr>
+                        <td style="padding: 8px 20px;">
+                          <p style="margin: 0; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;">✓ Inscription Confirmée</p>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
                 <!-- Body -->
                 <tr>
-                  <td style="padding: 40px;">
-                    <h2 style="margin: 0 0 16px; color: #171717; font-size: 20px; font-weight: 600;">Bonjour ${registration.fullName},</h2>
-                    <p style="margin: 0 0 24px; color: #525252; font-size: 15px; line-height: 1.6;">
-                      Ton inscription au <strong style="color: #171717;">Hawiyat AI Bootcamp</strong> a été reçue avec succès. On te contactera bientôt via WhatsApp pour planifier le kickoff.
+                  <td style="padding: 0 40px 40px;">
+                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Bonjour ${registration.fullName},</h2>
+                    <p style="margin: 0 0 32px; color: #a3a3a3; font-size: 15px; line-height: 1.7;">
+                      Ton inscription au <strong style="color: #ffffff;">Hawiyat AI Bootcamp</strong> a été enregistrée avec succès. Prépare-toi à transformer ton mémoire en un vrai produit et à acquérir des compétences qui valent de l'argent.
                     </p>
                     <!-- Details Card -->
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; border-radius: 8px; margin-bottom: 24px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
                       <tr>
-                        <td style="padding: 20px 24px;">
-                          <h3 style="margin: 0 0 16px; color: #171717; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Tes informations</h3>
+                        <td style="padding: 24px;">
+                          <p style="margin: 0 0 16px; color: #737373; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;">Ton profil</p>
                           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
-                              <td style="padding: 6px 0; color: #737373; font-size: 13px; width: 120px;">Université</td>
-                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.university}</td>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px; width: 100px;">Université</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.university}</td>
+                                  </tr>
+                                </table>
+                              </td>
                             </tr>
                             <tr>
-                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Filière</td>
-                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.major}</td>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Filière</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.major}</td>
+                                  </tr>
+                                </table>
+                              </td>
                             </tr>
                             <tr>
-                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Graduation</td>
-                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.graduationYear}</td>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Graduation</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.graduationYear}</td>
+                                  </tr>
+                                </table>
+                              </td>
                             </tr>
                             <tr>
-                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Deadline</td>
-                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${deadlineStr}</td>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Deadline</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${deadlineStr}</td>
+                                  </tr>
+                                </table>
+                              </td>
                             </tr>
                             ${registration.topic ? `<tr>
-                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Sujet PFE</td>
-                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.topic}</td>
+                              <td style="padding: 10px 0;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px; vertical-align: top;">Sujet PFE</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${registration.topic}</td>
+                                  </tr>
+                                </table>
+                              </td>
                             </tr>` : ''}
                           </table>
                         </td>
                       </tr>
                     </table>
                     <!-- Next Steps -->
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafafa; border-radius: 8px; border-left: 3px solid #171717; margin-bottom: 24px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
                       <tr>
-                        <td style="padding: 16px 20px;">
-                          <p style="margin: 0 0 8px; color: #171717; font-size: 14px; font-weight: 600;">Prochaines étapes</p>
-                          <p style="margin: 0; color: #525252; font-size: 13px; line-height: 1.6;">
-                            Notre équipe te contactera sur WhatsApp au <strong style="color: #171717;">${registration.phone}</strong> dans les prochaines 48h pour organiser la session de kickoff gratuite.
-                          </p>
+                        <td style="padding: 24px;">
+                          <p style="margin: 0 0 12px; color: #ffffff; font-size: 14px; font-weight: 600;">Prochaines étapes</p>
+                          <table role="presentation" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">1</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
+                                On te contactera sur WhatsApp au <strong style="color: #ffffff;">${registration.phone}</strong> dans les prochaines 48h.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">2</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
+                                Session de kickoff gratuite pour clarifier ton projet et définir ton MVP.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">3</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6;">
+                                Début des sessions — mémoire, MVP, déploiement, et module freelance.
+                              </td>
+                            </tr>
+                          </table>
                         </td>
                       </tr>
                     </table>
-                    <p style="margin: 0; color: #525252; font-size: 14px; line-height: 1.6;">
-                      Si tu as des questions, n'hésite pas à nous écrire à <a href="mailto:contact@hawiyat.org" style="color: #171717; text-decoration: underline;">contact@hawiyat.org</a>.
+                    <!-- Contact -->
+                    <p style="margin: 0; color: #737373; font-size: 14px; line-height: 1.6; text-align: center;">
+                      Des questions ? Écris-nous à <a href="mailto:contact@hawiyat.org" style="color: #ffffff; text-decoration: none; border-bottom: 1px solid #404040;">contact@hawiyat.org</a>
                     </p>
                   </td>
                 </tr>
                 <!-- Footer -->
                 <tr>
-                  <td style="background-color: #fafafa; padding: 24px 40px; text-align: center; border-top: 1px solid #e5e5e5;">
-                    <p style="margin: 0; color: #a3a3a3; font-size: 12px;">
+                  <td style="background-color: #0f0f0f; padding: 24px 40px; text-align: center; border-top: 1px solid #1a1a1a;">
+                    <p style="margin: 0 0 4px; color: #525252; font-size: 12px;">
                       &copy; ${new Date().getFullYear()} Hawiyat. Tous droits réservés.
+                    </p>
+                    <p style="margin: 0; color: #404040; font-size: 11px;">
+                      Construis. Déploie. Scale.
                     </p>
                   </td>
                 </tr>
@@ -574,31 +659,41 @@ export async function sendBootcampConfirmation({
     const inlinedHtml = juice(htmlTemplate);
 
     const textContent = `
-Hawiyat AI Bootcamp - Inscription confirmée
+══════════════════════════════════════════╗
+║         HAWIYAT AI BOOTCAMP              ║
+║       Inscription Confirmée              ║
+╚══════════════════════════════════════════╝
 
 Bonjour ${registration.fullName},
 
-Ton inscription au Hawiyat AI Bootcamp a été reçue avec succès. On te contactera bientôt via WhatsApp pour planifier le kickoff.
+Ton inscription au Hawiyat AI Bootcamp a été enregistrée avec succès.
+Prépare-toi à transformer ton mémoire en un vrai produit.
 
-Tes informations:
-Université: ${registration.university}
-Filière: ${registration.major}
-Graduation: ${registration.graduationYear}
-Deadline: ${deadlineStr}
-${registration.topic ? `Sujet PFE: ${registration.topic}` : ''}
+──────────────────────────────────────────
+  TON PROFIL
+──────────────────────────────────────────
+  Université :  ${registration.university}
+  Filière    :  ${registration.major}
+  Graduation :  ${registration.graduationYear}
+  Deadline   :  ${deadlineStr}
+${registration.topic ? `  Sujet PFE  :  ${registration.topic}` : ''}
 
-Prochaines étapes:
-Notre équipe te contactera sur WhatsApp au ${registration.phone} dans les prochaines 48h.
+──────────────────────────────────────────
+  PROCHAINES ÉTAPES
+──────────────────────────────────────────
+  1. Contact WhatsApp au ${registration.phone} (sous 48h)
+  2. Session de kickoff gratuite
+  3. Début des sessions — mémoire, MVP, déploiement
 
-Si tu as des questions, écris-nous à contact@hawiyat.org.
+Des questions ? contact@hawiyat.org
 
-© ${new Date().getFullYear()} Hawiyat. Tous droits réservés.
+© ${new Date().getFullYear()} Hawiyat — Construis. Déploie. Scale.
     `;
 
     const info = await transporter.sendMail({
       from: SMTP_FROM,
       to,
-      subject: 'Inscription confirmée - Hawiyat AI Bootcamp',
+      subject: 'Bienvenue au Hawiyat AI Bootcamp',
       text: textContent,
       html: inlinedHtml
     });
