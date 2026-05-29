@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma/prismaClient'
+import { sendBootcampConfirmation } from '@/lib/email-utils'
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,6 +17,20 @@ export async function POST(req: NextRequest) {
 
     const registration = await prisma.bootcampRegistration.create({
       data: {
+        fullName,
+        email,
+        phone,
+        university,
+        major,
+        graduationYear,
+        topic: topic || null,
+        deadline: deadline ? new Date(deadline) : null,
+      },
+    })
+
+    await sendBootcampConfirmation({
+      to: email,
+      registration: {
         fullName,
         email,
         phone,

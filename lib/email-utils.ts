@@ -497,7 +497,7 @@ export async function sendBootcampConfirmation({
                 <!-- Header -->
                 <tr>
                   <td style="background-color: #0a0a0a; padding: 40px 40px 30px; text-align: center;">
-                    <img src="https://hawiyat.org/logo.png" alt="Hawiyat" width="60" height="60" style="display: block; margin: 0 auto 20px;" />
+                    <img src="https://hawiyat.org/logo.svg" alt="Hawiyat" width="60" height="60" style="display: block; margin: 0 auto 20px;" />
                     <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">Hawiyat AI Bootcamp</h1>
                     <p style="margin: 8px 0 0; color: #a3a3a3; font-size: 14px;">Inscription confirmée</p>
                   </td>
