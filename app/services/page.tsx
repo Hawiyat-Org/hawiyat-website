@@ -172,11 +172,12 @@ const services = [
     shortDesc: "Managed reliability service",
     description: "A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.",
     image: "/services/monitoring.png",
-    price: "4900",
+    price: "5000",
     priceLabel: "DA/month",
     cta: "Get Started",
     link: "/services/monitoring",
     category: "Managed Services",
+    tag: "Most Popular",
     useCases: "Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.",
     features: [
       "Real-time performance metrics",
@@ -191,10 +192,55 @@ const services = [
       { icon: Shield, text: "24/7 Alerts" },
     ],
     tiers: [
-      { name: "Starter", price: "4900", servers: "1 VPS", websites: "3 sites", frequency: "Every 15 min" },
-      { name: "Pro", price: "9900", servers: "3 VPS", websites: "5 sites", frequency: "Every 5 min" },
-      { name: "Premium", price: "17900", servers: "5 VPS", websites: "10 sites", frequency: "Every 1 min" },
-      { name: "Guardian", price: "25900", servers: "5 VPS", websites: "10 sites", frequency: "Every 30 sec" },
+      {
+        name: "Starter",
+        price: "5000",
+        label: "For solo founders & single-server projects",
+        servers: "1 VPS",
+        uptimeMonitors: "3 monitors",
+        websites: "1 website",
+        statusPage: "1 public page",
+        dockerMonitoring: true,
+        analytics: true,
+        shortLinks: true,
+        alerts: "Telegram + Email + Discord",
+        monthlyReport: false,
+        surveys: false,
+        prioritySupport: false,
+      },
+      {
+        name: "Pro",
+        price: "10000",
+        label: "For growing startups & small agencies",
+        servers: "3 VPS",
+        uptimeMonitors: "10 monitors",
+        websites: "3 websites",
+        statusPage: "1 public page",
+        dockerMonitoring: true,
+        analytics: true,
+        shortLinks: true,
+        alerts: "Telegram + Email + Discord",
+        monthlyReport: true,
+        surveys: false,
+        prioritySupport: false,
+        popular: true,
+      },
+      {
+        name: "Premium",
+        price: "18000",
+        label: "For established agencies & serious infrastructure",
+        servers: "5 VPS",
+        uptimeMonitors: "20 monitors",
+        websites: "10 websites",
+        statusPage: "Custom domain",
+        dockerMonitoring: true,
+        analytics: true,
+        shortLinks: true,
+        alerts: "Telegram + Email + Discord",
+        monthlyReport: true,
+        surveys: true,
+        prioritySupport: true,
+      },
     ],
   },
   {
@@ -283,6 +329,7 @@ const services = [
 
 const tagStyleMap: Record<string, string> = {
   Popular: "bg-gradient-to-r from-amber-500 to-orange-500 text-white",
+  "Most Popular": "bg-gradient-to-r from-violet-500 to-purple-600 text-white",
   "Best Value": "bg-gradient-to-r from-emerald-500 to-green-500 text-white",
   VIP: "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30",
   Starter: "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300",
@@ -423,6 +470,66 @@ function FlipCard({
                   </div>
                 ))}
               </div>
+
+              {/* Tiers (for services with multiple plans) */}
+              {"tiers" in service && service.tiers && (
+                <div className="mb-4 space-y-2 overflow-y-auto max-h-[200px] pr-1">
+                  {(service.tiers as Array<{
+                    name: string
+                    price: string
+                    label?: string
+                    servers: string
+                    uptimeMonitors?: string
+                    websites: string
+                    statusPage?: string
+                    monthlyReport?: boolean
+                    surveys?: boolean
+                    prioritySupport?: boolean
+                    popular?: boolean
+                  }>).map((tier, idx) => (
+                    <div
+                      key={idx}
+                      className={`rounded-lg border p-3 ${
+                        tier.popular
+                          ? "border-primary/50 bg-primary/5"
+                          : "border-border/40 bg-muted/20"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-sm">{tier.name}</span>
+                          {tier.popular && (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold">
+                              Most Popular
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-sm font-bold">{tier.price} DA</span>
+                      </div>
+                      {tier.label && (
+                        <p className="text-xs text-muted-foreground mb-1.5">{tier.label}</p>
+                      )}
+                      <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs">
+                        <span className="text-muted-foreground">Servers: <span className="text-foreground">{tier.servers}</span></span>
+                        <span className="text-muted-foreground">Uptime: <span className="text-foreground">{tier.uptimeMonitors}</span></span>
+                        <span className="text-muted-foreground">Websites: <span className="text-foreground">{tier.websites}</span></span>
+                        <span className="text-muted-foreground">Status: <span className="text-foreground">{tier.statusPage}</span></span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {tier.monthlyReport && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">Monthly Report</span>
+                        )}
+                        {tier.surveys && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">Surveys</span>
+                        )}
+                        {tier.prioritySupport && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">Priority Support</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Price + CTA — always at bottom, never clipped */}
               <div className="mt-auto shrink-0 space-y-3">
