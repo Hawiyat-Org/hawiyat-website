@@ -5,7 +5,7 @@ import BootcampRoadmap from '@/components/bootcamp-roadmap'
 import RegistrationModal from '@/components/registration-modal'
 import Footer from '@/components/footer'
 import Reveal from '@/components/ui/reveal'
-import { Check, X, ArrowRight, Zap, Users, Globe, Bot, BookOpen, Presentation, Code, Rocket, FileText, Briefcase, Box, Award, Video } from 'lucide-react'
+import { Check, X, ArrowRight, Zap, Users, Globe, Bot, FileText, Briefcase, Box, Award, Video, Presentation } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -76,117 +76,6 @@ const FORMAT_ITEMS = [
   { icon: Users, label: 'Contact direct WhatsApp', desc: 'Communication rapide et directe avec ton coach' },
   { icon: Users, label: '10 étudiants max', desc: 'Par cohorte pour que le coach puisse suivre chacun' },
   { icon: Bot, label: 'Darija + Anglais', desc: 'Coaching one-on-one personnalisé' },
-]
-
-const SESSIONS = [
-  {
-    icon: Zap,
-    session: 'Session 0',
-    title: 'Kickoff & Clarté',
-    subtitle: 'Gratuite, avant le début',
-    description: 'Avant même de commencer, on clarifie ton projet.',
-    items: [
-      'Appel de 30 min avec ton coach pour comprendre ton sujet, ton niveau, ta deadline',
-      'On définit ensemble les fonctionnalités de ton MVP',
-      'On structure ton plan de mémoire en amont',
-      'Tu arrives à la Session 1 sans confusion avec un plan clair',
-    ],
-    why: 'La plupart des étudiants perdent 2 semaines à tourner en rond sur leur sujet. On coupe ça dès le départ.',
-  },
-  {
-    icon: BookOpen,
-    session: 'Session 1',
-    title: 'Mémoire & Rapport',
-    subtitle: 'Rédaction avec l\'IA',
-    description: 'Objectif : Brouillon complet du mémoire à la fin de cette session.',
-    items: [
-      'Structurer ton mémoire selon les exigences exactes de l\'université algérienne introduction, problématique, revue de littérature, méthodologie, résultats, conclusion, bibliographie',
-      'Utiliser Claude Premium pour rédiger des sections complètes, cohérentes et académiques sans que ça sonne "généré par l\'IA"',
-      'Techniques de prompting pour le contenu académique comment obtenir du texte qui te ressemble',
-      'Générer des reformulations, transitions, et références automatiquement',
-      'Corriger, affiner et personnaliser chaque partie',
-    ],
-    deliverable: 'Brouillon de mémoire 80% complet',
-    template: 'Prompt réutilisable pour chaque section du mémoire. Tu remplis les variables, l\'IA génère, tu valides et ajustes.',
-  },
-  {
-    icon: Presentation,
-    session: 'Session 2',
-    title: 'Présentation & Soutenance',
-    subtitle: 'Slides finalisés + simulation',
-    description: 'Objectif : Slides finalisés + tu sais comment répondre aux questions du jury.',
-    items: [
-      'Créer des slides impactantes avec l\'IA contenu, structure, visuels',
-      'La structure narrative qui marche avec les jurys algériens : problème → solution → démo → résultats → perspectives',
-      'Générer le script oral avec l\'IA et l\'adapter à ta façon de parler',
-      'Les 10 questions que les jurys posent toujours et comment y répondre sans bloquer',
-      'Simulation de soutenance en live avec ton coach qui joue le rôle du jury',
-    ],
-    deliverable: 'Présentation finalisée + confiance à l\'oral',
-    why: 'La simulation. C\'est le seul moyen de ne pas avoir de mauvaise surprise le jour J. Ton coach te pose les questions dures avant que le vrai jury le fasse.',
-  },
-  {
-    icon: Code,
-    session: 'Session 3',
-    title: 'Architecture & Setup du MVP',
-    subtitle: 'Environnement configuré',
-    description: 'Objectif : Environnement configuré, architecture définie, premiers fichiers générés.',
-    items: [
-      'Ce qu\'est un MVP et pourquoi les étudiants le construisent mal (trop complexe, mauvaises priorités)',
-      'Comment définir exactement les fonctionnalités de ton projet ni trop, ni trop peu',
-      'Configurer Claude Code et ton environnement de développement from scratch',
-      'Générer la structure de base de ton application avec l\'IA',
-      'Comprendre ce que l\'IA génère tu n\'es pas un copier-coller, tu es le chef de projet',
-    ],
-    deliverable: 'Architecture définie + structure de base fonctionnelle',
-    why: 'Tu guides l\'IA, tu ne la suis pas aveuglément. À la fin de cette session, tu comprends chaque fichier de ton projet.',
-  },
-  {
-    icon: Rocket,
-    session: 'Session 4',
-    title: 'Développement Guidé',
-    subtitle: 'Fonctionnalités principales construites',
-    description: 'Objectif : Fonctionnalités principales construites et testées.',
-    items: [
-      'Construire les pages et fonctionnalités principales avec Claude Code',
-      'Déboguer avec l\'IA comment décrire une erreur pour obtenir la bonne solution',
-      'Connecter une base de données simple',
-      'Tester et valider chaque fonctionnalité au fur et à mesure',
-      'Itérer vite la méthode pour ne pas rester bloqué des heures sur un bug',
-    ],
-    deliverable: 'Application avec toutes les fonctionnalités principales qui marchent',
-    why: 'Pas de cours magistral. On code ensemble, en live. Quand tu bloques, ton coach est là.',
-  },
-  {
-    icon: Globe,
-    session: 'Session 5',
-    title: 'Déploiement & Finalisation',
-    subtitle: 'Ton app est en ligne',
-    description: 'Objectif : Ton app est en ligne. Tu as un lien à envoyer à ton jury.',
-    items: [
-      'Déployer sur Hawiyat SSL, domaine, configuration production',
-      'Préparer la démo pour la soutenance le parcours exact que tu vas montrer au jury',
-      'Documenter ton projet de façon professionnelle (README, description technique pour le mémoire)',
-      'Préparer les screenshots et captures pour le rapport',
-    ],
-    deliverable: 'MVP en production, accessible en ligne, demo-ready',
-    why: 'Un lien. Une vraie URL. Pas un projet qui tourne sur localhost. Quand tu envoies "voici mon application : https://monprojet.hawiyat.org" tu te démarques de 95% des étudiants.',
-  },
-  {
-    icon: Check,
-    session: 'Session Bonus',
-    title: 'Review Complète & Go-Live',
-    subtitle: 'Tout est parfait',
-    description: 'Objectif : Tout est parfait. Tu es prêt(e).',
-    items: [
-      'Relecture finale du mémoire avec le coach',
-      'Derniers ajustements de la présentation',
-      'Test final du MVP en conditions réelles',
-      'Simulation de soutenance complète (mémoire + présentation + questions)',
-      'Préparation mentale gérer le stress, les questions imprévues, les pannes techniques',
-    ],
-    deliverable: 'Dossier complet validé. Tu arrives à ta soutenance avec rien à improviser.',
-  },
 ]
 
 const FREELANCE_MODULES = [
@@ -337,74 +226,6 @@ export default function BootcampPage() {
                     <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">
                       {item.desc}
                     </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Sessions mobile only */}
-        <section id="sessions" className="py-20 px-4 sm:px-6 bg-background lg:hidden">
-          <div className="max-w-6xl mx-auto">
-            <Reveal direction="up" delay={0.2}>
-              <div className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-                  Le Programme Session par Session
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Chaque session a un objectif clair et un livrable concret. Tu ne sors pas les mains vides.
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {SESSIONS.map((session, i) => (
-                <Reveal key={i} direction="up" delay={0.1 + i * 0.05}>
-                  <div className="rounded-md p-6 bg-background border border-border flex flex-col gap-4 box-border">
-                    <div className="flex items-center gap-3 mb-2">
-                      <session.icon className="w-10 h-10 text-black dark:text-white flex-shrink-0" />
-                      <div>
-                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{session.session}</span>
-                        <h3 className="text-xl font-semibold text-foreground leading-tight">{session.title}</h3>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground italic">{session.subtitle}</p>
-                    <p className="text-sm text-foreground">{session.description}</p>
-
-                    <ul className="space-y-2">
-                      {session.items.map((item, j) => (
-                        <li key={j} className="flex gap-2 items-start text-sm text-muted-foreground">
-                          <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-foreground" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {session.deliverable && (
-                      <div className="mt-auto pt-4 border-t border-border">
-                        <p className="text-xs text-muted-foreground">
-                          <span className="text-foreground font-medium">Livrable : </span>
-                          {session.deliverable}
-                        </p>
-                      </div>
-                    )}
-
-                    {session.why && (
-                      <div className="mt-auto pt-4 border-t border-border">
-                        <p className="text-xs text-muted-foreground italic">{session.why}</p>
-                      </div>
-                    )}
-
-                    {session.template && (
-                      <div className="mt-auto pt-4 border-t border-border">
-                        <p className="text-xs text-muted-foreground">
-                          <span className="text-foreground font-medium">Template fourni : </span>
-                          {session.template}
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </Reveal>
               ))}

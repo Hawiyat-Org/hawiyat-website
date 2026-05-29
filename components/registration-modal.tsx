@@ -81,12 +81,14 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
             <p className="text-muted-foreground text-sm mb-6">
               Ton inscription a été enregistrée. On te contactera bientôt pour le kickoff.
             </p>
-            <button
-              onClick={onClose}
-              className="btn inline-flex"
-            >
-              Fermer
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={onClose}
+                className="btn"
+              >
+                Fermer
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
