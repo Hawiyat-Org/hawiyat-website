@@ -433,3 +433,180 @@ If you have any questions, please contact us at contact@hawiyat.org.
     return false;
   }
 }
+
+interface SendBootcampConfirmationProps {
+  to: string;
+  registration: {
+    fullName: string;
+    email: string;
+    phone: string;
+    university: string;
+    major: string;
+    graduationYear: string;
+    topic?: string | null;
+    deadline?: Date | null;
+  };
+}
+
+export async function sendBootcampConfirmation({
+  to,
+  registration
+}: SendBootcampConfirmationProps): Promise<boolean> {
+  try {
+    const {
+      SMTP_HOST,
+      SMTP_PORT,
+      SMTP_SECURE,
+      SMTP_USER,
+      SMTP_PASS,
+      SMTP_FROM
+    } = process.env;
+
+    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
+      console.error('Missing SMTP configuration in environment variables');
+      return false;
+    }
+
+    const transporter = createTransport({
+      host: SMTP_HOST,
+      port: parseInt(SMTP_PORT),
+      secure: SMTP_SECURE === 'true',
+      auth: {
+        user: SMTP_USER,
+        pass: SMTP_PASS
+      }
+    });
+
+    const deadlineStr = registration.deadline
+      ? new Date(registration.deadline).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
+      : 'Non spécifiée';
+
+    const htmlTemplate = `
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Confirmation d'inscription - Hawiyat AI Bootcamp</title>
+      </head>
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc;">
+          <tr>
+            <td align="center" style="padding: 40px 20px;">
+              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <!-- Header -->
+                <tr>
+                  <td style="background-color: #0a0a0a; padding: 40px 40px 30px; text-align: center;">
+                    <img src="https://hawiyat.org/logo.png" alt="Hawiyat" width="60" height="60" style="display: block; margin: 0 auto 20px;" />
+                    <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">Hawiyat AI Bootcamp</h1>
+                    <p style="margin: 8px 0 0; color: #a3a3a3; font-size: 14px;">Inscription confirmée</p>
+                  </td>
+                </tr>
+                <!-- Body -->
+                <tr>
+                  <td style="padding: 40px;">
+                    <h2 style="margin: 0 0 16px; color: #171717; font-size: 20px; font-weight: 600;">Bonjour ${registration.fullName},</h2>
+                    <p style="margin: 0 0 24px; color: #525252; font-size: 15px; line-height: 1.6;">
+                      Ton inscription au <strong style="color: #171717;">Hawiyat AI Bootcamp</strong> a été reçue avec succès. On te contactera bientôt via WhatsApp pour planifier le kickoff.
+                    </p>
+                    <!-- Details Card -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; border-radius: 8px; margin-bottom: 24px;">
+                      <tr>
+                        <td style="padding: 20px 24px;">
+                          <h3 style="margin: 0 0 16px; color: #171717; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Tes informations</h3>
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="padding: 6px 0; color: #737373; font-size: 13px; width: 120px;">Université</td>
+                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.university}</td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Filière</td>
+                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.major}</td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Graduation</td>
+                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.graduationYear}</td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Deadline</td>
+                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${deadlineStr}</td>
+                            </tr>
+                            ${registration.topic ? `<tr>
+                              <td style="padding: 6px 0; color: #737373; font-size: 13px;">Sujet PFE</td>
+                              <td style="padding: 6px 0; color: #171717; font-size: 13px; font-weight: 500;">${registration.topic}</td>
+                            </tr>` : ''}
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- Next Steps -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafafa; border-radius: 8px; border-left: 3px solid #171717; margin-bottom: 24px;">
+                      <tr>
+                        <td style="padding: 16px 20px;">
+                          <p style="margin: 0 0 8px; color: #171717; font-size: 14px; font-weight: 600;">Prochaines étapes</p>
+                          <p style="margin: 0; color: #525252; font-size: 13px; line-height: 1.6;">
+                            Notre équipe te contactera sur WhatsApp au <strong style="color: #171717;">${registration.phone}</strong> dans les prochaines 48h pour organiser la session de kickoff gratuite.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                    <p style="margin: 0; color: #525252; font-size: 14px; line-height: 1.6;">
+                      Si tu as des questions, n'hésite pas à nous écrire à <a href="mailto:contact@hawiyat.org" style="color: #171717; text-decoration: underline;">contact@hawiyat.org</a>.
+                    </p>
+                  </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                  <td style="background-color: #fafafa; padding: 24px 40px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0; color: #a3a3a3; font-size: 12px;">
+                      &copy; ${new Date().getFullYear()} Hawiyat. Tous droits réservés.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
+    `;
+
+    const inlinedHtml = juice(htmlTemplate);
+
+    const textContent = `
+Hawiyat AI Bootcamp - Inscription confirmée
+
+Bonjour ${registration.fullName},
+
+Ton inscription au Hawiyat AI Bootcamp a été reçue avec succès. On te contactera bientôt via WhatsApp pour planifier le kickoff.
+
+Tes informations:
+Université: ${registration.university}
+Filière: ${registration.major}
+Graduation: ${registration.graduationYear}
+Deadline: ${deadlineStr}
+${registration.topic ? `Sujet PFE: ${registration.topic}` : ''}
+
+Prochaines étapes:
+Notre équipe te contactera sur WhatsApp au ${registration.phone} dans les prochaines 48h.
+
+Si tu as des questions, écris-nous à contact@hawiyat.org.
+
+© ${new Date().getFullYear()} Hawiyat. Tous droits réservés.
+    `;
+
+    const info = await transporter.sendMail({
+      from: SMTP_FROM,
+      to,
+      subject: 'Inscription confirmée - Hawiyat AI Bootcamp',
+      text: textContent,
+      html: inlinedHtml
+    });
+
+    console.log('Bootcamp confirmation sent successfully:', info.messageId);
+    return true;
+  } catch (error) {
+    console.error('Error sending bootcamp confirmation:', error);
+    return false;
+  }
+}

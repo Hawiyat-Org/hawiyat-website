@@ -247,6 +247,23 @@ body.booking-modal-open .fixed.inset-0 {
   border-radius: 25px;
 }
 
+.modal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 25px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;

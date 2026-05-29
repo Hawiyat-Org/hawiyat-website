@@ -87,6 +87,12 @@ const Header = () => {
               Services
             </Link>
             <Link
+              href="/bootcamp"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
+            >
+              Bootcamp
+            </Link>
+            <Link
               href="/#pricing"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
@@ -177,6 +183,15 @@ const Header = () => {
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Services</span>
+                <ArrowRight className="w-4 h-4 opacity-60" />
+              </Link>
+              
+              <Link 
+                href="/bootcamp" 
+                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                onClick={closeMobileMenu}
+              >
+                <span className="font-medium">Bootcamp</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
               

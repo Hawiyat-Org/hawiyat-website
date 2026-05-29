@@ -47,3 +47,22 @@ model EmailSubscription {
   @@index([email])
   @@map("email_subscriptions")
 }
+
+model BootcampRegistration {
+  id          String   @id @default(cuid())
+  fullName    String   @map("full_name")
+  email       String
+  phone       String
+  university  String
+  major       String
+  graduationYear String @map("graduation_year")
+  topic       String?  @db.Text
+  deadline    DateTime?
+  status      OrderStatus @default(PENDING)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  @@index([email])
+  @@index([status])
+  @@map("bootcamp_registrations")
+}
