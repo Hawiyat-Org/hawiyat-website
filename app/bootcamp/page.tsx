@@ -148,10 +148,10 @@ export default function BootcampPage() {
 
             <Reveal direction="up" delay={0.4}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button onClick={() => setModalOpen(true)} className="btn group inline-flex items-center gap-2">
+                <a href="#cta" className="btn group inline-flex items-center gap-2">
                   <span>Rejoindre le Bootcamp</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </a>
                 <a href="#programme" className="btn !bg-transparent !text-foreground dark:!text-foreground border border-border">
                   Voir le Programme
                 </a>
@@ -411,7 +411,7 @@ export default function BootcampPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-24 px-4 sm:px-6 bg-background">
+        <section id="cta" className="py-24 px-4 sm:px-6 bg-background">
           <div className="max-w-3xl mx-auto text-center">
             <Reveal direction="up" delay={0.2}>
               <h2 className="text-3xl sm:text-5xl font-bold mb-6 tracking-tight">
