@@ -229,7 +229,7 @@ export default function BootcampRoadmap() {
       <div className="max-w-7xl mx-auto">
         <Reveal direction="up" delay={0.2}>
           <h2 className="text-3xl sm:text-5xl font-bold text-center mb-4 sm:mb-6 tracking-tight">
-            Le Programme — Session par Session
+            Le Programme Session par Session
           </h2>
           <p className="text-center text-muted-foreground text-base sm:text-lg mb-12 sm:mb-20 max-w-2xl mx-auto px-2">
             Chaque session a un objectif clair et un livrable concret. Tu ne sors pas les mains vides.

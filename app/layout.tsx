@@ -5,6 +5,7 @@ import {
   Playfair_Display,
   Dancing_Script,
   Ubuntu,
+  Aldrich,
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -36,6 +37,13 @@ const dancingScript = Dancing_Script({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-dancing",
+  display: "swap",
+});
+
+const aldrich = Aldrich({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-aldrich",
   display: "swap",
 });
 
@@ -167,7 +175,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${space.variable} ${playfair.variable} ${ubuntu.variable} ${dancingScript.variable} antialiased`}
+      className={`${space.variable} ${playfair.variable} ${ubuntu.variable} ${dancingScript.variable} ${aldrich.variable} antialiased`}
     >
       <head>
         <link
@@ -186,7 +194,7 @@ export default function RootLayout({
           __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`
         }} />
       </head>
-      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-app-sans">
+      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-sans">
         {/* accessibility: skip link */}
         <a
           href="#content"
