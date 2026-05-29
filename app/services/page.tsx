@@ -178,17 +178,17 @@ const services = [
     link: "/services/monitoring",
     category: "Managed Services",
     tag: "Starter",
-    useCases: "Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.",
+    useCases: "Solo founders & single-server projects. 1 VPS monitored, 3 uptime monitors, 1 website analytics.",
     features: [
-      "Real-time performance metrics",
-      "Custom alert thresholds",
-      "Error tracking & logging",
-      "Uptime monitoring",
-      "Team collaboration tools",
+      "1 VPS server monitored",
+      "3 uptime monitors",
+      "1 website analytics tracker",
+      "1 public status page",
+      "Telegram + Email + Discord alerts",
     ],
     bulletPoints: [
-      { icon: Server, text: "Server Health" },
-      { icon: Globe, text: "Uptime Checks" },
+      { icon: Server, text: "1 VPS" },
+      { icon: Globe, text: "3 Monitors" },
       { icon: Shield, text: "24/7 Alerts" },
     ],
   },
@@ -203,12 +203,13 @@ const services = [
     cta: "Get Started",
     link: "/services/monitoring",
     category: "Managed Services",
-    tag: "Most Popular",
+    tag: "Pro",
     useCases: "Multiple server monitoring, team status pages, monthly reliability reports, incident tracking.",
     features: [
       "3 VPS servers monitored",
       "10 uptime monitors",
       "3 website analytics trackers",
+      "1 public status page",
       "Monthly PDF report",
       "Telegram + Email + Discord alerts",
     ],
@@ -238,6 +239,7 @@ const services = [
       "Custom domain status page",
       "Surveys module",
       "Priority WhatsApp support",
+      "Detailed monthly PDF report",
     ],
     bulletPoints: [
       { icon: Server, text: "5 VPS" },
@@ -246,7 +248,7 @@ const services = [
     ],
   },
   {
-  id: "cal-com",
+    id: "cal-com",
   name: "Cal.com",
   shortDesc: "Open-source Calendly alternative for scheduling",
   description: "Cal.com is scheduling platform that lets users create custom booking pages,  Perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.",
@@ -377,20 +379,21 @@ function FlipCard({
           !isMobile ? "group-hover:[transform:rotateY(180deg)]" : ""
         } ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
       >
-        {/* ── FRONT FACE ── */}
+         {/* ── FRONT FACE ── */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
           <div className="relative h-full rounded-2xl border border-border/40 bg-white/40 dark:bg-secondary dark:border-border/60 backdrop-blur-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
+            {service.tag && (
+              <div className="absolute top-3 right-3 z-10">
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${tagStyleMap[service.tag] || "bg-primary text-white"}`}>
+                  {service.tag}
+                </span>
+              </div>
+            )}
+
             {/* Image area */}
             <div className="relative h-48 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center p-6">
-              {service.tag && (
-                <div className="absolute top-3 right-3 z-10">
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${tagStyleMap[service.tag] || "bg-primary text-white"}`}>
-                    {service.tag}
-                  </span>
-                </div>
-              )}
 
               <div className="relative w-32 h-32">
                 <Image
@@ -447,17 +450,20 @@ function FlipCard({
           <div className="relative h-full rounded-2xl border border-border/60 bg-card dark:bg-secondary backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
 
+            {service.tag && (
+              <div className="absolute top-3 right-3 z-10">
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-lg ${tagStyleMap[service.tag] || "bg-primary text-white"}`}>
+                  {service.tag}
+                </span>
+              </div>
+            )}
+
             {/* Scrollable content area so nothing overflows */}
             <div className="relative flex flex-col flex-1 p-6 text-foreground">
               {/* Header */}
               <div className="mb-4 shrink-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <h3 className="text-xl font-bold">{service.name}</h3>
-                  {service.tag && (
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${tagStyleMap[service.tag]?.replace("shadow-lg", "") || "bg-primary/10 text-primary"}`}>
-                      {service.tag}
-                    </span>
-                  )}
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
               </div>
@@ -473,66 +479,6 @@ function FlipCard({
                   </div>
                 ))}
               </div>
-
-              {/* Tiers (for services with multiple plans) */}
-              {"tiers" in service && service.tiers && (
-                <div className="mb-4 space-y-2 overflow-y-auto max-h-[200px] pr-1">
-                  {(service.tiers as Array<{
-                    name: string
-                    price: string
-                    label?: string
-                    servers: string
-                    uptimeMonitors?: string
-                    websites: string
-                    statusPage?: string
-                    monthlyReport?: boolean
-                    surveys?: boolean
-                    prioritySupport?: boolean
-                    popular?: boolean
-                  }>).map((tier, idx) => (
-                    <div
-                      key={idx}
-                      className={`rounded-lg border p-3 ${
-                        tier.popular
-                          ? "border-primary/50 bg-primary/5"
-                          : "border-border/40 bg-muted/20"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-sm">{tier.name}</span>
-                          {tier.popular && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold">
-                              Most Popular
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-sm font-bold">{tier.price} DA</span>
-                      </div>
-                      {tier.label && (
-                        <p className="text-xs text-muted-foreground mb-1.5">{tier.label}</p>
-                      )}
-                      <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs">
-                        <span className="text-muted-foreground">Servers: <span className="text-foreground">{tier.servers}</span></span>
-                        <span className="text-muted-foreground">Uptime: <span className="text-foreground">{tier.uptimeMonitors}</span></span>
-                        <span className="text-muted-foreground">Websites: <span className="text-foreground">{tier.websites}</span></span>
-                        <span className="text-muted-foreground">Status: <span className="text-foreground">{tier.statusPage}</span></span>
-                      </div>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {tier.monthlyReport && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">Monthly Report</span>
-                        )}
-                        {tier.surveys && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">Surveys</span>
-                        )}
-                        {tier.prioritySupport && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">Priority Support</span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
 
               {/* Price + CTA — always at bottom, never clipped */}
               <div className="mt-auto shrink-0 space-y-3">
