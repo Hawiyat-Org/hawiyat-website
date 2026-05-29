@@ -356,72 +356,206 @@ export async function sendOrderConfirmation({
     });
 
     const htmlTemplate = `
-      <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .container { background-color: #f8fafc; padding: 30px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        h1 { color: #1e293b; text-align: center; }
-        .card { background-color: white; padding: 25px; border-radius: 8px; margin-top: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        h2 { color: #334155; margin-top: 0; }
-        .details { background-color: #f1f5f9; padding: 15px; border-radius: 6px; margin: 20px 0; }
-        h3 { color: #1e293b; margin-top: 0; }
-        table { width: 100%; border-collapse: collapse; }
-        td { padding: 8px 0; }
-        .label { color: #64748b; }
-        .value { color: #1e293b; font-weight: 500; }
-        .info-box { background-color: #fffbeb; padding: 15px; border-radius: 6px; border-left: 4px solid #f59e0b; margin: 20px 0; }
-        .info-box p { color: #92400e; margin: 0; line-height: 1.6; }
-        .footer { text-align: center; margin-top: 30px; color: #94a3b8; font-size: 14px; }
-        a { color: #3b82f6; }
-      </style>
-      <div class="container">
-        <h1>Order Received</h1>
-        <div class="card">
-          <h2>Hello ${order.customerName},</h2>
-          <p style="color: #475569; line-height: 1.6;">Thank you for your order! We have received it and will contact you shortly.</p>
-          <div class="details">
-            <h3>Order Summary</h3>
-            <table>
-              <tr><td class="label">Order ID:</td><td class="value">${order.id}</td></tr>
-              <tr><td class="label">Service:</td><td class="value">${order.serviceName}</td></tr>
-              <tr><td class="label">Date:</td><td class="value">${new Date(order.createdAt).toLocaleString()}</td></tr>
-            </table>
-          </div>
-          <div class="info-box">
-            <p style="font-weight: 500;">What's next?</p>
-            <p style="margin-top: 10px;">Our team will review your order and contact you at <a href="mailto:${to}">${to}</a> with the next steps.</p>
-          </div>
-          <p style="color: #475569; line-height: 1.6;">If you have any questions, please contact us at <a href="mailto:contact@hawiyat.org">contact@hawiyat.org</a>.</p>
-        </div>
-        <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} Hawiyat. All rights reserved.</p>
-        </div>
-      </div>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order Received — Hawiyat</title>
+      </head>
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a;">
+          <tr>
+            <td align="center" style="padding: 40px 20px;">
+              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color: #141414; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4);">
+                <!-- Top Accent Line -->
+                <tr>
+                  <td style="height: 3px; background: linear-gradient(90deg, #ffffff, #a3a3a3, #ffffff);"></td>
+                </tr>
+                <!-- Header -->
+                <tr>
+                  <td style="padding: 48px 40px 32px; text-align: center;">
+                    <img src="https://hawiyat.org/logo.svg" alt="Hawiyat" width="56" height="56" style="display: block; margin: 0 auto 24px;" />
+                    <p style="margin: 0 0 8px; color: #737373; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Hawiyat</p>
+                    <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">Order Received</h1>
+                  </td>
+                </tr>
+                <!-- Confirmation Badge -->
+                <tr>
+                  <td style="padding: 0 40px 32px; text-align: center;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="display: inline-block; background-color: #22c55e; border-radius: 100px;">
+                      <tr>
+                        <td style="padding: 8px 20px;">
+                          <p style="margin: 0; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;">✓ Order Confirmed</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <!-- Body -->
+                <tr>
+                  <td style="padding: 0 40px 40px;">
+                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Hello ${order.customerName},</h2>
+                    <p style="margin: 0 0 32px; color: #a3a3a3; font-size: 15px; line-height: 1.7;">
+                      Thank you for your order! We've received it and our team will get back to you shortly with the next steps.
+                    </p>
+                    <!-- Order Details Card -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
+                      <tr>
+                        <td style="padding: 24px;">
+                          <p style="margin: 0 0 16px; color: #737373; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;">Order Summary</p>
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px; width: 100px;">Order ID</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; font-family: monospace;">${order.id}</td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Service</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${order.serviceName}</td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 10px 0;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Date</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            ${order.notes ? `<tr>
+                              <td style="padding: 10px 0;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px; vertical-align: top;">Notes</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${order.notes}</td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>` : ''}
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- Next Steps -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
+                      <tr>
+                        <td style="padding: 24px;">
+                          <p style="margin: 0 0 12px; color: #ffffff; font-size: 14px; font-weight: 600;">What's next?</p>
+                          <table role="presentation" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">1</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
+                                Our team will review your order and contact you at <strong style="color: #ffffff;">${to}</strong>.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">2</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
+                                We'll confirm the details and set up your service.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-right: 12px; vertical-align: top;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
+                                  <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">3</td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6;">
+                                Sit back — we'll handle the rest.
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- Contact -->
+                    <p style="margin: 0; color: #737373; font-size: 14px; line-height: 1.6; text-align: center;">
+                      Questions? Reach us at <a href="mailto:contact@hawiyat.org" style="color: #ffffff; text-decoration: none; border-bottom: 1px solid #404040;">contact@hawiyat.org</a>
+                    </p>
+                  </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                  <td style="background-color: #0f0f0f; padding: 24px 40px; text-align: center; border-top: 1px solid #1a1a1a;">
+                    <p style="margin: 0 0 4px; color: #525252; font-size: 12px;">
+                      &copy; ${new Date().getFullYear()} Hawiyat. All rights reserved.
+                    </p>
+                    <p style="margin: 0; color: #404040; font-size: 11px;">
+                      Build. Deploy. Scale.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
     `;
 
     const inlinedHtml = juice(htmlTemplate);
 
     const textContent = `
-Order Received - ${order.serviceName}
+══════════════════════════════════════════╗
+║            HAWIYAT                       ║
+║         Order Received                   ║
+══════════════════════════════════════════╝
 
 Hello ${order.customerName},
 
-Thank you for your order! We have received it and will contact you shortly.
+Thank you for your order! We've received it and our team will get back to you shortly.
 
-Order Summary:
-Order ID: ${order.id}
-Service: ${order.serviceName}
-Date: ${new Date(order.createdAt).toLocaleString()}
+──────────────────────────────────────────
+  ORDER SUMMARY
+──────────────────────────────────────────
+  Order ID :  ${order.id}
+  Service  :  ${order.serviceName}
+  Date     :  ${new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+${order.notes ? `  Notes    :  ${order.notes}` : ''}
 
-What's next?
-Our team will review your order and contact you at ${to} with the next steps.
+──────────────────────────────────────────
+  WHAT'S NEXT?
+──────────────────────────────────────────
+  1. Our team will review your order
+  2. We'll contact you at ${to}
+  3. Sit back — we'll handle the rest
 
-If you have any questions, please contact us at contact@hawiyat.org.
+Questions? contact@hawiyat.org
+
+© ${new Date().getFullYear()} Hawiyat — Build. Deploy. Scale.
     `;
 
     const info = await transporter.sendMail({
       from: SMTP_FROM,
       to,
-      subject: `Order Received - ${order.serviceName} | Hawiyat`,
+      subject: `Order Received — ${order.serviceName} | Hawiyat`,
       text: textContent,
       html: inlinedHtml
     });

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma/prismaClient'
-import { sendBootcampConfirmation } from '@/lib/email-utils'
+import { sendBootcampConfirmation, sendWhatsAppNotification } from '@/lib/email-utils'
 
 export async function POST(req: NextRequest) {
   try {
@@ -41,6 +41,23 @@ export async function POST(req: NextRequest) {
         deadline: deadline ? new Date(deadline) : null,
       },
     })
+
+    const deadlineStr = deadline
+      ? new Date(deadline).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
+      : 'Non spécifiée'
+
+    await sendWhatsAppNotification(
+      ` *Nouvelle inscription Bootcamp*\n\n` +
+      `👤 *Nom:* ${fullName}\n` +
+      `📧 *Email:* ${email}\n` +
+      ` *Téléphone:* ${phone}\n` +
+      `🏫 *Université:* ${university}\n` +
+      ` *Filière:* ${major}\n` +
+      `🎓 *Graduation:* ${graduationYear}\n` +
+      `📅 *Deadline:* ${deadlineStr}\n` +
+      `${topic ? `📝 *Sujet PFE:* ${topic}\n` : ''}` +
+      `\n🆔 *ID:* ${registration.id}`
+    )
 
     return NextResponse.json({ success: true, id: registration.id }, { status: 201 })
   } catch (error: any) {
