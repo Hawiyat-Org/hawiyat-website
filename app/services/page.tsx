@@ -118,7 +118,7 @@ const services = [
     id: "evolution-api",
     name: "Evolution API",
     shortDesc: "WhatsApp Business API solution",
-    description: "WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.",
+    description: "WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically  for customer support bots, notifications, and sales automation.",
     image: "/logos/evolutionapi_evolutionapi.png",
     price: "7000",
     priceLabel: "DA/year",
@@ -364,7 +364,7 @@ function FlipCard({
 
   return (
     <div
-      // No fixed height — let the card define its own size via min-h
+      // No fixed height  let the card define its own size via min-h
       // perspective is set for the 3D flip effect
       className={`group [perspective:1000px] ${isMobile ? "cursor-pointer" : ""} transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -372,7 +372,7 @@ function FlipCard({
       style={{ transitionDelay: `${index * 80}ms` }}
       onClick={handleInteraction}
     >
-      {/* Inner wrapper — must have a defined height for backface to work */}
+      {/* Inner wrapper  must have a defined height for backface to work */}
       {/* We use min-h + h-full trick: outer sets min-h, inner fills it */}
       <div
         className={`relative min-h-[480px] h-full w-full transition-transform duration-500 [transform-style:preserve-3d] ${
@@ -480,7 +480,7 @@ function FlipCard({
                 ))}
               </div>
 
-              {/* Price + CTA — always at bottom, never clipped */}
+              {/* Price + CTA  always at bottom, never clipped */}
               <div className="mt-auto shrink-0 space-y-3">
                 <div>
                   {service.originalPrice && (
@@ -624,7 +624,7 @@ function ServicesContent() {
             </button>
           </div>
         ) : (
-          // gap-y-8 instead of gap-y-24 — cards now naturally size themselves
+          // gap-y-8 instead of gap-y-24  cards now naturally size themselves
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {filteredServices.map((service, i) => (
               <FlipCard

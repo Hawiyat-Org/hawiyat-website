@@ -257,7 +257,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           <div className="overflow-y-auto px-[5%] max-lg:px-2 scrollbar max-lg:max-h-[80%] max-h-[550px] max-lg:mt-12 w-full h-full z-10 flex flex-col">
             {conversation.length === 0 ? (
               <div className="w-full flex text-center flex-col place-content-center">
-                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat CLI — interactive helper</h2>
+                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat CLI  interactive helper</h2>
                 <div className="inline mt-6 max-md:mt-3">
                   <span>{typedText}</span>
                   <span className="animate-pulse">|</span>

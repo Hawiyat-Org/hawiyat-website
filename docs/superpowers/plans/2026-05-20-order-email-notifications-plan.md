@@ -9,8 +9,8 @@
 **Tech Stack:** nodemailer, juice, Next.js API routes, TypeScript
 
 **Files to modify:**
-- `lib/email-utils.ts` — add `sendOrderNotification` and `sendOrderConfirmation` functions
-- `app/api/orders/route.ts` — import and call email functions after order creation
+- `lib/email-utils.ts`  add `sendOrderNotification` and `sendOrderConfirmation` functions
+- `app/api/orders/route.ts`  import and call email functions after order creation
 
 ---
 

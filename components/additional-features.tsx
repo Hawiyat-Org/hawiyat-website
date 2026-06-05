@@ -22,7 +22,7 @@ const AdditionalFeatures = () => {
     {
       title: "Automated Backups",
       description:
-        "Always safe. Keep your data in store with automated backups — no risk of losing databases or logs.",
+        "Always safe. Keep your data in store with automated backups  no risk of losing databases or logs.",
       image: DatabaseBackupIcon
     },
     {
@@ -46,7 +46,7 @@ const AdditionalFeatures = () => {
     {
       title: "300+ Ready-to-Use Templates",
       description:
-        "Start faster with over 300 pre-configured templates for popular stacks, frameworks, and services — no setup headaches.",
+        "Start faster with over 300 pre-configured templates for popular stacks, frameworks, and services  no setup headaches.",
       image: Layers,
     },
     {
@@ -58,7 +58,7 @@ const AdditionalFeatures = () => {
     {
       title: "Team Collaboration",
       description:
-        "Invite teammates, assign roles, and collaborate securely on deployments — all within a single dashboard.",
+        "Invite teammates, assign roles, and collaborate securely on deployments  all within a single dashboard.",
       image: Users,
     }
   ]

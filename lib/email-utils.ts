@@ -361,7 +361,7 @@ export async function sendOrderConfirmation({
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Order Received — Hawiyat</title>
+        <title>Order Received  Hawiyat</title>
       </head>
       <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a;">
@@ -488,7 +488,7 @@ export async function sendOrderConfirmation({
                                 </table>
                               </td>
                               <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6;">
-                                Sit back — we'll handle the rest.
+                                Sit back  we'll handle the rest.
                               </td>
                             </tr>
                           </table>
@@ -545,17 +545,17 @@ ${order.notes ? `  Notes    :  ${order.notes}` : ''}
 ──────────────────────────────────────────
   1. Our team will review your order
   2. We'll contact you at ${to}
-  3. Sit back — we'll handle the rest
+  3. Sit back  we'll handle the rest
 
 Questions? contact@hawiyat.org
 
-© ${new Date().getFullYear()} Hawiyat — Build. Deploy. Scale.
+© ${new Date().getFullYear()} Hawiyat  Build. Deploy. Scale.
     `;
 
     const info = await transporter.sendMail({
       from: SMTP_FROM,
       to,
-      subject: `Order Received — ${order.serviceName} | Hawiyat`,
+      subject: `Order Received  ${order.serviceName} | Hawiyat`,
       text: textContent,
       html: inlinedHtml
     });
@@ -758,7 +758,7 @@ export async function sendBootcampConfirmation({
                                 </table>
                               </td>
                               <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6;">
-                                Début des sessions — mémoire, MVP, déploiement, et module freelance.
+                                Début des sessions  mémoire, MVP, déploiement, et module freelance.
                               </td>
                             </tr>
                           </table>
@@ -817,11 +817,11 @@ ${registration.topic ? `  Sujet PFE  :  ${registration.topic}` : ''}
 ──────────────────────────────────────────
   1. Contact WhatsApp au ${registration.phone} (sous 48h)
   2. Session de kickoff gratuite
-  3. Début des sessions — mémoire, MVP, déploiement
+  3. Début des sessions  mémoire, MVP, déploiement
 
 Des questions ? contact@hawiyat.org
 
-© ${new Date().getFullYear()} Hawiyat — Construis. Déploie. Scale.
+© ${new Date().getFullYear()} Hawiyat  Construis. Déploie. Scale.
     `;
 
     const info = await transporter.sendMail({

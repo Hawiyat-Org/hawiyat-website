@@ -1392,7 +1392,7 @@
     "id": "blender",
     "name": "Blender",
     "version": "latest",
-    "description": "Blender is a free and open-source 3D creation suite. It supports the entire 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, video editing and 2D animation pipeline.",
+    "description": "Blender is a free and open-source 3D creation suite. It supports the entire 3D pipelinemodeling, rigging, animation, simulation, rendering, compositing and motion tracking, video editing and 2D animation pipeline.",
     "logo": "blender_blender.svg",
     "links": {
       "github": "https://github.com/linuxserver/docker-blender",
@@ -1675,7 +1675,7 @@
     "id": "huly",
     "name": "Huly",
     "version": "0.6.377",
-    "description": "Huly — All-in-One Project Management Platform (alternative to Linear, Jira, Slack, Notion, Motion)",
+    "description": "Huly  All-in-One Project Management Platform (alternative to Linear, Jira, Slack, Notion, Motion)",
     "logo": "huly_huly.svg",
     "links": {
       "github": "https://github.com/hcengineering/huly-selfhost",

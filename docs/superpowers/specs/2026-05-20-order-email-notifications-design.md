@@ -5,8 +5,8 @@
 ## Overview
 
 Add email notifications when a customer places an order via the services page. Two emails are sent:
-1. **Admin notification** — to `a_kadache@estin.dz` and `b_bouabca@estin.dz`
-2. **Customer confirmation** — to the customer's email address
+1. **Admin notification**  to `a_kadache@estin.dz` and `b_bouabca@estin.dz`
+2. **Customer confirmation**  to the customer's email address
 
 ## Architecture
 
@@ -14,8 +14,8 @@ Add email notifications when a customer places an order via the services page. T
 
 Add two new functions:
 
-- `sendOrderNotification(order)` — sends order details to both admin emails
-- `sendOrderConfirmation(order)` — sends order confirmation to customer
+- `sendOrderNotification(order)`  sends order details to both admin emails
+- `sendOrderConfirmation(order)`  sends order confirmation to customer
 
 Both use `nodemailer` for SMTP transport (Gmail) and `juice` for CSS inlining to ensure email client compatibility.
 
@@ -41,11 +41,11 @@ After successful order creation, call both email functions. Calls are fire-and-f
 
 ## Dependencies
 
-- `nodemailer` — already installed
-- `juice` — new dependency for CSS inlining
+- `nodemailer`  already installed
+- `juice`  new dependency for CSS inlining
 
 ## Files Changed
 
-1. `lib/email-utils.ts` — add `sendOrderNotification` and `sendOrderConfirmation`
-2. `app/api/orders/route.ts` — call email functions after order creation
-3. `package.json` — add `juice` dependency
+1. `lib/email-utils.ts`  add `sendOrderNotification` and `sendOrderConfirmation`
+2. `app/api/orders/route.ts`  call email functions after order creation
+3. `package.json`  add `juice` dependency

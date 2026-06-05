@@ -24,7 +24,7 @@ const BenefitsSection = () => {
     {
       title: "1 Click Deployment",
       description:
-        "Deploy your apps with a single click. From staging to production, our platform ensures fast, secure, and reliable deployments—backed by automated monitoring and rollbacks.",
+        "Deploy your apps with a single click. From staging to production, our platform ensures fast, secure, and reliable deploymentsbacked by automated monitoring and rollbacks.",
       image: RocketIcon
     },
   ]

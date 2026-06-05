@@ -625,7 +625,7 @@ Run:
 grep -r "app\.hawiyat\.org" components/ app/ --include="*.tsx" --include="*.ts"
 ```
 
-Expected: Only matches should be in `app/layout.tsx` (the `APP_URL` constant for metadata) — not in any clickable links.
+Expected: Only matches should be in `app/layout.tsx` (the `APP_URL` constant for metadata)  not in any clickable links.
 
 - [ ] **Step 8: Commit all link changes together**
 

@@ -125,7 +125,7 @@ export default function TermsPage() {
               <li>Email: <a href="mailto:legal@hawiyat.org" className="text-foreground underline">legal@hawiyat.org</a></li>
               <li>Billing: <a href="mailto:billing@hawiyat.org" className="text-foreground underline">billing@hawiyat.org</a></li>
               <li>Privacy: <a href="mailto:privacy@hawiyat.org" className="text-foreground underline">privacy@hawiyat.org</a></li>
-              <li>Mail: Legal Dept — Hawiyat, Algeria</li>
+              <li>Mail: Legal Dept  Hawiyat, Algeria</li>
             </ul>
           </section>
         </div>

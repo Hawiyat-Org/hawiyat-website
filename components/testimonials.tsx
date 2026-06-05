@@ -12,13 +12,13 @@ const Testimonials = () => {
       name: "Sofiane Fzeghouli",
       company: "IT Solutions Lead",
       content:
-        "Thanks to Hawiyat’s automated backup and recovery tools, we’ve eliminated data loss risk. Our backups are reliable, instantaneous, and fully managed — we sleep easier now.",
+        "Thanks to Hawiyat’s automated backup and recovery tools, we’ve eliminated data loss risk. Our backups are reliable, instantaneous, and fully managed  we sleep easier now.",
     },
     {
       name: "Chekroune",
       company: "Engineer at ESTIN",
       content:
-        "In an academic environment with high load, Hawiyat’s performance and resource management ensured no downtime — even during peak periods. It’s a game changer for education systems.",
+        "In an academic environment with high load, Hawiyat’s performance and resource management ensured no downtime  even during peak periods. It’s a game changer for education systems.",
     },
     {
       name: "Khalil",
@@ -30,7 +30,7 @@ const Testimonials = () => {
       name: "Azouaou Faical",
       company: "Professor at ESTIN",
       content:
-        "Teaching, research, and real-world projects demand reliable infrastructure. Hawiyat gives me predictability, performance, and control — so I can focus on innovation, not servers.",
+        "Teaching, research, and real-world projects demand reliable infrastructure. Hawiyat gives me predictability, performance, and control  so I can focus on innovation, not servers.",
     },
     {
       name: "Djawer Hacker",

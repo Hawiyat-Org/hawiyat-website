@@ -57,11 +57,11 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
     }
   }, [pathname])
 
-  // Auto-expand current section
+  // Auto-expand current section on navigation
   useEffect(() => {
     const current = SECTIONS.find((s) => pathname === `/guides/claude/${s.id}`)
     if (current) {
-      setExpandedSections((prev) => new Set(prev).add(current.id))
+      setExpandedSections(new Set([current.id]))
     }
   }, [pathname])
 

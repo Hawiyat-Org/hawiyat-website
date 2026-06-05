@@ -86,7 +86,7 @@ export default function ServicesTeaser() {
                 </span>
               )}
 
-              {/* Default card — hidden on hover */}
+              {/* Default card  hidden on hover */}
               <div
                 className={`flex w-full gap-8 max-md:gap-4 rounded-xl max-md:rounded-lg duration-300 transition-all p-8 max-md:p-5 active:scale-[0.98] group-hover:hidden
                   ${
@@ -121,7 +121,7 @@ export default function ServicesTeaser() {
                 </div>
               </div>
 
-              {/* Expanded hover card — shown on hover, fully self-contained, no fixed height */}
+              {/* Expanded hover card  shown on hover, fully self-contained, no fixed height */}
               <Link
                 href="/services"
                 className="hidden group-hover:flex flex-col w-full rounded-xl overflow-hidden bg-[#2a2a2a] text-white shadow-2xl duration-300 transition-all active:scale-[0.98]"
@@ -173,7 +173,7 @@ export default function ServicesTeaser() {
                   </div>
                 </div>
 
-                {/* Get Started — inside the card, never outside */}
+                {/* Get Started  inside the card, never outside */}
                 <div className="bg-white text-black font-semibold text-sm flex items-center justify-center gap-2 py-4">
                   Get Started <ArrowRight className="w-4 h-4" />
                 </div>

@@ -13,7 +13,7 @@ const PrebuiltTools = () => {
       icon: "bi-file-earmark-lock2-fill",
       title: "Secure Identity",
       description:
-        "Hawiyat provides a unified digital identity layer. Manage authentication, permissions, and privacy with full control—your data, secured and simplified.",
+        "Hawiyat provides a unified digital identity layer. Manage authentication, permissions, and privacy with full controlyour data, secured and simplified.",
     },
     {
       icon: "bi-cloud-arrow-up-fill",

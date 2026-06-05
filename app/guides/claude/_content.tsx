@@ -76,7 +76,12 @@ function InstallationContent() {
         <CodeBlock code="winget install OpenJS.NodeJS" language="bash" />
         <CodeBlock code="brew install node" language="bash" />
         <CodeBlock code="sudo apt install nodejs npm" language="bash" />
-        <p className="text-xs text-muted-foreground">Verify installation: <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">node --version</code></p>
+        <p className="text-xs text-muted-foreground mt-3">Verify installation: <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">node --version</code></p>
+        <div className="mt-4 p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 text-sm">
+          <p className="text-amber-500 font-medium mb-1">⚠ PowerShell Execution Policy</p>
+          <p className="text-muted-foreground">On Windows, you may get a security error when running scripts. Fix it by running PowerShell as Administrator and executing:</p>
+          <code className="block mt-2 px-3 py-1.5 rounded bg-black/10 dark:bg-white/5 text-xs font-mono">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+        </div>
       </SubStep>
 
       <SubStep id="installing-claude" title="Installing Claude Code">
@@ -103,7 +108,7 @@ function SkillsContent() {
   return (
     <>
       <SubStep title="What are Skills?">
-        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks — from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks  from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory.</p>
       </SubStep>
 
       <SubStep title="n8n Skill">
@@ -126,7 +131,7 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">App Router, server components, API routes, Prisma</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert — generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
+        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert  generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
         <CodeBlock code={"# Add to .claude/skills/nextjs-patterns.md\n\nNext.js 14 App Router conventions:\n- Server components by default\n- Use \"use client\" only when needed\n- API routes in app/api/[route]/route.ts\n- Use Prisma for database operations\n- Follow existing code style and conventions"} />
       </SubStep>
 
@@ -158,7 +163,7 @@ function MCPContent() {
   return (
     <>
       <SubStep title="What are MCP Servers?">
-        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) servers let Claude connect to external services directly. Instead of just chatting, Claude can query APIs, read databases, and interact with real-world tools — all through natural language.</p>
+        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) servers let Claude connect to external services directly. Instead of just chatting, Claude can query APIs, read databases, and interact with real-world tools  all through natural language.</p>
         <p className="text-sm text-muted-foreground">Add MCP servers to your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude.json</code> configuration file.</p>
       </SubStep>
 
@@ -190,7 +195,7 @@ function IntegrationsContent() {
   return (
     <>
       <SubStep title="Hawiyat × n8n">
-        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines — all from within your n8n workflows.</p>
+        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines  all from within your n8n workflows.</p>
         <h4 className="text-sm font-semibold mb-2">Webhook Payload</h4>
         <CodeBlock code={CODE_INTEGRATION_N8N} language="json" />
         <h4 className="text-sm font-semibold mb-2 mt-4">Common n8n Use Cases</h4>

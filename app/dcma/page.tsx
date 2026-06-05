@@ -32,7 +32,7 @@ export default function DMCAPage() {
             </p>
             <ul className="mt-3 space-y-1">
               <li>Email: <a href="mailto:copyright@hawiyat.org" className="text-foreground underline">copyright@hawiyat.org</a></li>
-              <li>Mail: Legal Dept — Hawiyat, Algeria</li>
+              <li>Mail: Legal Dept  Hawiyat, Algeria</li>
               <li>Subject line: "Copyright Notice"</li>
             </ul>
           </section>
@@ -91,7 +91,7 @@ export default function DMCAPage() {
             <ul className="mt-3 space-y-1">
               <li>Email: <a href="mailto:copyright@hawiyat.org" className="text-foreground underline">copyright@hawiyat.org</a></li>
               <li>Legal: <a href="mailto:legal@hawiyat.org" className="text-foreground underline">legal@hawiyat.org</a></li>
-              <li>Mail: Legal Dept — Hawiyat, Algeria</li>
+              <li>Mail: Legal Dept  Hawiyat, Algeria</li>
             </ul>
             <p className="mt-3">
               Note: This policy is a procedural tool to help rights-holders and users resolve copyright issues on our

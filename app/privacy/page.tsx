@@ -57,10 +57,10 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-medium text-foreground">3. How We Use Your Data</h2>
             <ul className="mt-3 list-disc pl-5 space-y-1">
-              <li><span className="text-foreground">Provide & Operate Services</span> — Provision VPSs, manage your account, deploy your PaaS configurations, and maintain platform availability.</li>
-              <li><span className="text-foreground">Billing & Account Management</span> — Process payments billed in Algerian Dinar (DZD), generate invoices, prevent fraud, and enforce our Terms.</li>
-              <li><span className="text-foreground">Analytics & Improvement</span> — Analyze usage to improve our products, detect abuse, and run diagnostics. Analytics may be aggregated and pseudonymized.</li>
-              <li><span className="text-foreground">Communications & Marketing</span> — Send account notices, security alerts, and — with your consent where required — promotional communications. You may opt out of marketing messages.</li>
+              <li><span className="text-foreground">Provide & Operate Services</span>  Provision VPSs, manage your account, deploy your PaaS configurations, and maintain platform availability.</li>
+              <li><span className="text-foreground">Billing & Account Management</span>  Process payments billed in Algerian Dinar (DZD), generate invoices, prevent fraud, and enforce our Terms.</li>
+              <li><span className="text-foreground">Analytics & Improvement</span>  Analyze usage to improve our products, detect abuse, and run diagnostics. Analytics may be aggregated and pseudonymized.</li>
+              <li><span className="text-foreground">Communications & Marketing</span>  Send account notices, security alerts, and  with your consent where required  promotional communications. You may opt out of marketing messages.</li>
             </ul>
             <p className="mt-3">
               Legal bases for processing include performance of contract, compliance with legal obligations,
@@ -75,8 +75,8 @@ export default function PrivacyPage() {
               extent necessary to operate the Service or comply with law.
             </p>
             <ul className="mt-3 list-disc pl-5 space-y-1">
-              <li><span className="text-foreground">Service Providers</span> — Payment processors, hosting and data center operators, monitoring and security providers, and professional advisors under written agreements.</li>
-              <li><span className="text-foreground">Legal & Safety</span> — When required by law, to respond to lawful requests from public authorities, to prevent fraud, or to protect the rights, property or safety of Hawiyat.</li>
+              <li><span className="text-foreground">Service Providers</span>  Payment processors, hosting and data center operators, monitoring and security providers, and professional advisors under written agreements.</li>
+              <li><span className="text-foreground">Legal & Safety</span>  When required by law, to respond to lawful requests from public authorities, to prevent fraud, or to protect the rights, property or safety of Hawiyat.</li>
             </ul>
             <p className="mt-3">
               Where data is transferred outside Algeria we will apply appropriate safeguards and will inform you where the transfer requires notice or consent under applicable law.
@@ -103,9 +103,9 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-medium text-foreground">6. Your Rights & Choices</h2>
             <ul className="mt-3 list-disc pl-5 space-y-1">
-              <li><span className="text-foreground">Access</span> — Request a copy of personal data we hold about you.</li>
-              <li><span className="text-foreground">Correction</span> — Request corrections to inaccurate or incomplete information.</li>
-              <li><span className="text-foreground">Deletion</span> — Request deletion of your personal data where permitted by law, subject to our legal obligations (e.g., tax/accounting retention).</li>
+              <li><span className="text-foreground">Access</span>  Request a copy of personal data we hold about you.</li>
+              <li><span className="text-foreground">Correction</span>  Request corrections to inaccurate or incomplete information.</li>
+              <li><span className="text-foreground">Deletion</span>  Request deletion of your personal data where permitted by law, subject to our legal obligations (e.g., tax/accounting retention).</li>
             </ul>
             <p className="mt-3">
               To exercise rights, contact us at <a href="mailto:privacy@hawiyat.org" className="text-foreground underline">privacy@hawiyat.org</a>. We may require identity verification before
@@ -118,8 +118,8 @@ export default function PrivacyPage() {
             <p className="mt-3">
               We retain personal data only as long as necessary to provide services, comply with legal obligations
               (including accounting and tax laws), resolve disputes and enforce our agreements. Typical retention
-              periods include: account and billing records — up to 7 years where required for tax purposes; support
-              logs and diagnostic data — up to 2 years; backup copies — limited and deleted as soon as feasible.
+              periods include: account and billing records  up to 7 years where required for tax purposes; support
+              logs and diagnostic data  up to 2 years; backup copies  limited and deleted as soon as feasible.
             </p>
           </section>
 
@@ -129,7 +129,7 @@ export default function PrivacyPage() {
               <li>Privacy: <a href="mailto:privacy@hawiyat.org" className="text-foreground underline">privacy@hawiyat.org</a></li>
               <li>Support: <a href="mailto:support@hawiyat.org" className="text-foreground underline">support@hawiyat.org</a></li>
               <li>Website: <a href="https://hawiyat.org" className="text-foreground underline">hawiyat.org</a></li>
-              <li>Mail: Legal Dept — Hawiyat, Algeria</li>
+              <li>Mail: Legal Dept  Hawiyat, Algeria</li>
             </ul>
           </section>
         </div>

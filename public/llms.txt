@@ -1,6 +1,6 @@
-# Hawiyat — Cloud & DevOps Platform from Algeria
+# Hawiyat  Cloud & DevOps Platform from Algeria
 
-Hawiyat is an all-in-one cloud and DevOps platform developed in Algeria for developers and businesses. It enables deploying applications, managing cloud infrastructure, automating CI/CD workflows, using managed Kubernetes, and monitoring systems in real-time — without depending on AWS, Azure, or any foreign cloud provider.
+Hawiyat is an all-in-one cloud and DevOps platform developed in Algeria for developers and businesses. It enables deploying applications, managing cloud infrastructure, automating CI/CD workflows, using managed Kubernetes, and monitoring systems in real-time  without depending on AWS, Azure, or any foreign cloud provider.
 
 Hawiyat transforms infrastructure into a system directly usable by teams, not just DevOps engineers. It integrates managed services for automation, WhatsApp API for business workflows, CLI agents for environment control, and no/low-code workflow tools for DevOps and business operations.
 
@@ -16,14 +16,14 @@ Hawiyat transforms infrastructure into a system directly usable by teams, not ju
 - **Apps Deployed:** 120+ applications running in cluster
 - **Uptime:** 99.99%
 - **Label:** "Projet Innovant" (Innovative Project) by the Algerian Ministry of Economy
-- **Location:** Algeria — serving the Algerian and broader MENA developer community
-- **Mission:** Build local cloud infrastructure so Algerian businesses don't depend on foreign providers (AWS, Azure, Google Cloud) — reducing tech dependency and keeping capital within the country
+- **Location:** Algeria  serving the Algerian and broader MENA developer community
+- **Mission:** Build local cloud infrastructure so Algerian businesses don't depend on foreign providers (AWS, Azure, Google Cloud)  reducing tech dependency and keeping capital within the country
 
 ---
 
 ## Services
 
-### Claude Code — AI-Powered Coding Assistant
+### Claude Code  AI-Powered Coding Assistant
 **Price: 15,000 DA/month**
 
 AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions, automated code reviews, documentation generation, and bug detection & fixes. Multi-language support included.
@@ -32,7 +32,7 @@ AI-powered coding assistant integration. Get Claude's intelligence in your devel
 
 ---
 
-### n8n Hosting — Workflow Automation Platform
+### n8n Hosting  Workflow Automation Platform
 **Price: 8,000 DA/year**
 
 A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.
@@ -43,7 +43,7 @@ Features: Fully managed instances, auto-scaling infrastructure, 99.9% uptime gua
 
 ---
 
-### Hawiyat WhatsApp API — Official Business API
+### Hawiyat WhatsApp API  Official Business API
 **Price: 7,000 DA/year**
 
 Official WhatsApp Business API. Send notifications, build chatbots, and engage customers at scale with Hawiyat's managed infrastructure.
@@ -54,10 +54,10 @@ Features: Official Business API, bulk messaging support, chatbot builder include
 
 ---
 
-### Evolution API — WhatsApp Business API Solution
+### Evolution API  WhatsApp Business API Solution
 **Price: 7,000 DA/year**
 
-WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically — for customer support bots, notifications, and sales automation.
+WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically  for customer support bots, notifications, and sales automation.
 
 **Use cases:** WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.
 
@@ -65,7 +65,7 @@ Features: Official Business API, multi-channel support, webhook integrations, me
 
 ---
 
-### Hawiyat Monitoring — Managed Infrastructure Monitoring
+### Hawiyat Monitoring  Managed Infrastructure Monitoring
 **Price: 4,900–25,900 DA/month**
 
 A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.
@@ -73,16 +73,16 @@ A fully managed infrastructure monitoring service. Hawiyat watches your servers 
 **Use cases:** Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.
 
 **Pricing tiers:**
-- Starter: 4,900 DA/month — 1 VPS, 3 websites, checks every 15 min
-- Pro: 9,900 DA/month — 3 VPS, 5 websites, checks every 5 min
-- Premium: 17,900 DA/month — 5 VPS, 10 websites, checks every 1 min
-- Guardian: 25,900 DA/month — 5 VPS, 10 websites, checks every 30 sec
+- Starter: 4,900 DA/month  1 VPS, 3 websites, checks every 15 min
+- Pro: 9,900 DA/month  3 VPS, 5 websites, checks every 5 min
+- Premium: 17,900 DA/month  5 VPS, 10 websites, checks every 1 min
+- Guardian: 25,900 DA/month  5 VPS, 10 websites, checks every 30 sec
 
 Features: Real-time performance metrics, custom alert thresholds, error tracking and logging, uptime monitoring, team collaboration tools.
 
 ---
 
-### Hosting Basic — Single App Hosting
+### Hosting Basic  Single App Hosting
 **Price: 1,000 DA/month**
 
 Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites. Includes SSL, automatic deployments, and basic monitoring.
@@ -93,7 +93,7 @@ Features: 1 application, free SSL certificate, automatic deployments, basic moni
 
 ---
 
-### Hosting VIP — Premium Hosting
+### Hosting VIP  Premium Hosting
 **Price: 2,000 DA/month**
 
 Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power, a database, and priority support.
@@ -104,7 +104,7 @@ Features: 2 applications, managed database included, free SSL certificate, autom
 
 ---
 
-### Cal.com — Open-Source Scheduling Platform
+### Cal.com  Open-Source Scheduling Platform
 **Price: 10,000 DA/month**
 
 Open-source Calendly alternative for scheduling. Create custom booking pages, perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.
@@ -146,13 +146,13 @@ Hawiyat offers managed Kubernetes deployment and private cloud infrastructure fo
 
 ## Key Differentiators
 
-- **100% Algerian infrastructure** — no dependency on AWS, Azure, or any foreign cloud provider. Keeps tech sovereignty and capital within Algeria
-- **Fixed flat pricing** in Algerian Dinar (DZD) — no usage surprises, no hidden fees, no surprise bills
-- **Fully managed services** — Hawiyat runs the infrastructure, you just use the service
-- **24/7 monitoring** — round-the-clock reliability and instant alerts
-- **WhatsApp-based support** — direct support via WhatsApp, not a foreign ticket system
-- **Production-tested** — same infrastructure powers 60+ live clients
-- **"Projet Innovant" label** — officially recognized by the Algerian Ministry of Economy
+- **100% Algerian infrastructure**  no dependency on AWS, Azure, or any foreign cloud provider. Keeps tech sovereignty and capital within Algeria
+- **Fixed flat pricing** in Algerian Dinar (DZD)  no usage surprises, no hidden fees, no surprise bills
+- **Fully managed services**  Hawiyat runs the infrastructure, you just use the service
+- **24/7 monitoring**  round-the-clock reliability and instant alerts
+- **WhatsApp-based support**  direct support via WhatsApp, not a foreign ticket system
+- **Production-tested**  same infrastructure powers 60+ live clients
+- **"Projet Innovant" label**  officially recognized by the Algerian Ministry of Economy
 
 ---
 
