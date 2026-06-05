@@ -1,0 +1,77 @@
+import { notFound } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
+import { SECTIONS } from "../_data"
+import { SectionContent } from "../_content"
+
+function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
+  return (
+    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-8">
+      <iframe
+        className="absolute inset-0 w-full h-full"
+        src={`https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0`}
+        title={title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  )
+}
+
+export function generateStaticParams() {
+  return SECTIONS.map((s) => ({ section: s.id }))
+}
+
+export default function SectionPage({ params }: { params: { section: string } }) {
+  const section = SECTIONS.find((s) => s.id === params.section)
+  if (!section) notFound()
+
+  const idx = SECTIONS.indexOf(section)
+  const prev = idx > 0 ? SECTIONS[idx - 1] : null
+  const next = idx < SECTIONS.length - 1 ? SECTIONS[idx + 1] : null
+
+  return (
+    <>
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 pt-8">
+        <Link href="/guides" className="hover:text-foreground transition-colors">Guides</Link>
+        <span>/</span>
+        <Link href="/guides/claude" className="hover:text-foreground transition-colors">Claude Code</Link>
+        <span>/</span>
+        <span className="text-foreground">{section.label}</span>
+      </div>
+
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <Image src="/services/claude-code.png" alt="" width={96} height={96} className="rounded" />
+        <div>
+          <h1 className="text-2xl font-bold">{section.title}</h1>
+          <p className="text-sm text-muted-foreground">{section.desc}</p>
+        </div>
+      </div>
+
+      {/* Video */}
+      <VideoEmbed videoId={section.videoId} title={section.title} />
+
+      {/* Content */}
+      <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6 sm:p-8 mb-8">
+        <SectionContent sectionId={section.id} />
+      </div>
+
+      {/* Prev / Next navigation */}
+      <div className="flex items-center justify-between border-t border-border pt-6">
+        {prev ? (
+          <Link href={`/guides/claude/${prev.id}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+            ← {prev.label}
+          </Link>
+        ) : <div />}
+        {next ? (
+          <Link href={`/guides/claude/${next.id}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+            {next.label} →
+          </Link>
+        ) : <div />}
+      </div>
+    </>
+  )
+}
