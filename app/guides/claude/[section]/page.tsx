@@ -55,7 +55,7 @@ export default function SectionPage({ params }: { params: { section: string } })
       <VideoEmbed videoId={section.videoId} title={section.title} />
 
       {/* Content */}
-      <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6 sm:p-8 mb-8">
+      <div className="mb-8">
         <SectionContent sectionId={section.id} />
       </div>
 

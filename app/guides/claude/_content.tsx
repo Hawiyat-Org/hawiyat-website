@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ChevronDown, ChevronUp, Github, Workflow, Code as CodeIcon, Cpu, Copy, Check } from "lucide-react"
 import { useState } from "react"
 
@@ -47,9 +48,11 @@ function StepTag({ children }: { children: React.ReactNode }) {
 
 function SubStep({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <div id={id} className="mb-8 scroll-mt-24">
+    <div id={id} className="mb-14 scroll-mt-24">
       <StepTag># {title}</StepTag>
-      {children}
+      <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm p-5 sm:p-6">
+        {children}
+      </div>
     </div>
   )
 }
@@ -95,6 +98,10 @@ function InstallationContent() {
         <p className="text-sm text-muted-foreground mb-2">Activate your Hawiyat subscription with your unique token:</p>
         <CodeBlock code="npx @hawiyat-team/hawiyat-claude install --token sk-xxxx" />
         <p className="text-sm text-muted-foreground mt-2">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">sk-xxxx</code> with the token from your receipt or Hawiyat dashboard.</p>
+        <div className="mt-4 rounded-lg overflow-hidden border border-border">
+          <Image src="/guides/claude/claude_hawiyat_composer.png" alt="Claude Code with Hawiyat Composer active" width={800} height={450} className="w-full h-auto" />
+        </div>
+        <p className="text-xs text-muted-foreground mt-2 text-center">You should see the Hawiyat Composer indicator in your Claude Code terminal.</p>
       </SubStep>
 
       <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground">
@@ -107,23 +114,35 @@ function InstallationContent() {
 function SkillsContent() {
   return (
     <>
-      <SubStep title="What are Skills?">
-        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks  from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory.</p>
+      <SubStep id="what-are-skills" title="What are Skills?">
+        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks — from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills work alongside your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">CLAUDE.md</code> file. While CLAUDE.md sets project-wide context, skills provide domain-specific expertise that Claude can reference when needed.</p>
+        <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Key difference:</strong> CLAUDE.md = project context. Skills = specialized capabilities.
+        </div>
       </SubStep>
 
-      <SubStep title="n8n Skill">
+      <SubStep id="n8n-skill" title="n8n Skill">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Workflow className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Workflow Automation & AI Agents</h4>
+            <h4 className="text-sm font-semibold">Workflow Automation &amp; AI Agents</h4>
             <p className="text-xs text-muted-foreground">Build complex n8n pipelines with Claude</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-3">This skill teaches Claude to generate valid n8n JSON workflows with proper node connections, error handling, and credential placeholders.</p>
-        <CodeBlock code={"# Add to .claude/skills/n8n-expert.md\n\nYou are an n8n workflow expert. Always output:\n1. Valid n8n JSON workflow definitions\n2. Proper node connections (connections object)\n3. Correct node type IDs (n8n-nodes-base.*)\n4. Error handling where appropriate\n5. Credential references as placeholders"} />
+        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
+        <CodeBlock code={"# .claude/skills/n8n-expert.md\n\nYou are an n8n workflow expert. When asked to create or modify workflows:\n\n## Output Format\n1. Always output valid n8n JSON workflow definitions\n2. Include proper node connections (connections object)\n3. Use correct node type IDs (n8n-nodes-base.*)\n4. Add error handling where appropriate\n5. Include credential references as placeholders\n\n## Common Node Types\n- HTTP Request: n8n-nodes-base.httpRequest\n- Webhook: n8n-nodes-base.webhook\n- Set: n8n-nodes-base.set\n- IF: n8n-nodes-base.if\n- Switch: n8n-nodes-base.switch\n- Code: n8n-nodes-base.code\n- Cron: n8n-nodes-base.cronTrigger\n\n## Best Practices\n- Use descriptive node names\n- Add notes to complex nodes\n- Include error workflows\n- Use environment variables for secrets"} />
+        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+          <li>&ldquo;Create an n8n workflow that fetches data from an API every hour&rdquo;</li>
+          <li>&ldquo;Add error handling to this workflow&rdquo;</li>
+          <li>&ldquo;Convert this workflow to use environment variables&rdquo;</li>
+          <li>&ldquo;Generate a webhook trigger for WooCommerce orders&rdquo;</li>
+        </ul>
       </SubStep>
 
-      <SubStep title="Next.js Full Stack Skill">
+      <SubStep id="nextjs-skill" title="Next.js Full Stack Skill">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><CodeIcon className="h-5 w-5" /></div>
           <div>
@@ -131,11 +150,19 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">App Router, server components, API routes, Prisma</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert  generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
-        <CodeBlock code={"# Add to .claude/skills/nextjs-patterns.md\n\nNext.js 14 App Router conventions:\n- Server components by default\n- Use \"use client\" only when needed\n- API routes in app/api/[route]/route.ts\n- Use Prisma for database operations\n- Follow existing code style and conventions"} />
+        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert — generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
+        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
+        <CodeBlock code={"# .claude/skills/nextjs-patterns.md\n\nNext.js 14+ App Router conventions:\n\n## Component Rules\n- Server components by default\n- Use \"use client\" only when needed (interactivity, browser APIs)\n- Keep client components leaf nodes in the tree\n\n## File Conventions\n- page.tsx — UI for a route\n- layout.tsx — Shared UI for a route segment\n- loading.tsx — Loading UI\n- error.tsx — Error boundary\n- not-found.tsx — Not found UI\n- route.ts — API route handler\n\n## Data Fetching\n- Use server components for data fetching\n- Use fetch() with caching options\n- Use React.cache() for deduplication\n- Use server actions for mutations\n\n## Database\n- Use Prisma for database operations\n- Run prisma generate after schema changes\n- Use transactions for related writes"} />
+        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+          <li>&ldquo;Create a product listing page with server components&rdquo;</li>
+          <li>&ldquo;Add a server action for form submission&rdquo;</li>
+          <li>&ldquo;Generate a Prisma schema for a blog&rdquo;</li>
+          <li>&ldquo;Create an API route for webhooks&rdquo;</li>
+        </ul>
       </SubStep>
 
-      <SubStep title="UI/UX Pro Max Skill">
+      <SubStep id="uiux-skill" title="UI/UX Pro Max Skill">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Cpu className="h-5 w-5" /></div>
           <div>
@@ -144,17 +171,16 @@ function SkillsContent() {
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-3">Claude generates production-grade UI components with responsive layouts, micro-interactions, and accessible design patterns.</p>
-        <CodeBlock code={"# Add to .claude/skills/ui-ux-pro-max.md\n\nUI/UX conventions:\n- Use Tailwind CSS for all styling\n- Use shadcn/ui components as base\n- Use cn() utility for className merging\n- Add Framer Motion for animations\n- Ensure responsive design (mobile-first)\n- Follow WCAG accessibility guidelines"} />
+        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
+        <CodeBlock code={"# .claude/skills/ui-ux-pro-max.md\n\nUI/UX conventions for modern web apps:\n\n## Styling\n- Use Tailwind CSS for all styling\n- Use shadcn/ui components as base\n- Use cn() utility for className merging\n- Follow mobile-first responsive design\n\n## Animations\n- Use Framer Motion for complex animations\n- Use CSS transitions for simple hover states\n- Respect prefers-reduced-motion\n- Keep animations under 300ms\n\n## Accessibility\n- Use semantic HTML elements\n- Add aria-labels to interactive elements\n- Ensure color contrast ratio ≥ 4.5:1\n- Test with keyboard navigation\n\n## Component Patterns\n- Compound components for complex UI\n- Render props for flexible composition\n- Custom hooks for shared logic"} />
+        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+          <li>&ldquo;Create a responsive pricing table with 3 tiers&rdquo;</li>
+          <li>&ldquo;Add a fade-in animation to this section&rdquo;</li>
+          <li>&ldquo;Make this form accessible with proper labels&rdquo;</li>
+          <li>&ldquo;Create a dark mode toggle with smooth transition&rdquo;</li>
+        </ul>
       </SubStep>
-
-      <SubStep title="Using Skills">
-        <p className="text-sm text-muted-foreground mb-2">Create a <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory in your project root:</p>
-        <CodeBlock code={".claude/skills/\n├── n8n-expert.md        # n8n workflow generation\n├── nextjs-patterns.md   # Next.js App Router patterns\n└── ui-ux-pro-max.md     # Design systems & animations"} />
-      </SubStep>
-
-      <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground">
-        <strong className="text-foreground">Pro tip:</strong> Keep your CLAUDE.md in version control. Share it with your team to ensure consistent AI behavior across all developers.
-      </div>
     </>
   )
 }
@@ -162,30 +188,94 @@ function SkillsContent() {
 function MCPContent() {
   return (
     <>
-      <SubStep title="What are MCP Servers?">
-        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) servers let Claude connect to external services directly. Instead of just chatting, Claude can query APIs, read databases, and interact with real-world tools  all through natural language.</p>
-        <p className="text-sm text-muted-foreground">Add MCP servers to your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude.json</code> configuration file.</p>
+      <SubStep id="what-are-mcp" title="What are MCP Servers?">
+        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Think of it like a USB-C port for AI — it provides a standardized way to connect Claude to data sources, tools, and workflows.</p>
+        <p className="text-sm text-muted-foreground mb-4">With MCP, Claude can:</p>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
+          <li>Access your Google Calendar, Notion, and databases</li>
+          <li>Query APIs and external services in real-time</li>
+          <li>Perform actions on your behalf (with approval)</li>
+          <li>Read and write files, search the web, and more</li>
+        </ul>
+        <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Key concept:</strong> MCP servers expose <em>tools</em> that Claude can use. Each tool has a name, description, and input schema.
+        </div>
       </SubStep>
 
-      <SubStep title="Meta Ads MCP">
+      <SubStep id="configuring-mcp" title="Configuring MCP Servers">
+        <p className="text-sm text-muted-foreground mb-4">MCP servers are configured in your Claude configuration file. The location depends on your platform:</p>
+        <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
+          <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">macOS / Linux</span></div>
+          <pre className="p-4 overflow-x-auto text-sm text-gray-200 font-mono">~/Library/Application Support/Claude/claude_desktop_config.json</pre>
+        </div>
+        <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
+          <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">Windows</span></div>
+          <pre className="p-4 overflow-x-auto text-sm text-gray-200 font-mono">%APPDATA%\Claude\claude_desktop_config.json</pre>
+        </div>
+        <p className="text-sm text-muted-foreground mt-2">Create the file if it doesn&apos;t exist. Claude will automatically detect and load MCP servers on restart.</p>
+      </SubStep>
+
+      <SubStep id="meta-ads-mcp" title="Meta Ads MCP">
         <p className="text-sm text-muted-foreground mb-2">Connect Claude to Meta Ads Manager for campaign analytics, audience insights, and ad performance monitoring.</p>
+        <h4 className="text-sm font-semibold mb-2">Configuration</h4>
         <CodeBlock code={CODE_MCP_META} language="json" />
-        <p className="text-sm text-muted-foreground mt-2">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">your-token</code> with your Meta Ads access token.</p>
-      </SubStep>
-
-      <SubStep title="Usage Examples">
-        <p className="text-sm text-muted-foreground mb-3">Once configured, ask Claude natural language questions:</p>
-        <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
-          <li><strong className="text-foreground">Campaign analytics:</strong> &ldquo;Show me last week&rsquo;s ad performance by campaign&rdquo;</li>
-          <li><strong className="text-foreground">Audience insights:</strong> &ldquo;What&rsquo;s our best-performing audience segment?&rdquo;</li>
-          <li><strong className="text-foreground">Optimization:</strong> &ldquo;Suggest budget reallocation across campaigns&rdquo;</li>
-          <li><strong className="text-foreground">Reports:</strong> &ldquo;Generate a weekly performance report&rdquo;</li>
+        <p className="text-sm text-muted-foreground mt-2">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">your-token</code> with your Meta Ads access token from the Meta Developer Portal.</p>
+        <h4 className="text-sm font-semibold mb-2 mt-4">Available Tools</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+          <li><strong>get_campaigns</strong> — List all active campaigns</li>
+          <li><strong>get_adset_insights</strong> — Get performance metrics for ad sets</li>
+          <li><strong>get_audience_insights</strong> — Analyze audience demographics</li>
+          <li><strong>get_ad_creatives</strong> — Fetch ad creative details</li>
         </ul>
       </SubStep>
 
-      <SubStep title="Adding More MCP Servers">
-        <p className="text-sm text-muted-foreground mb-2">You can add multiple MCP servers to the same configuration:</p>
-        <CodeBlock code={`{\n  "mcpServers": {\n    "meta-ads": { ... },\n    "google-sheets": { ... },\n    "github": { ... }\n  }\n}`} language="json" />
+      <SubStep id="popular-mcp-servers" title="Popular MCP Servers">
+        <p className="text-sm text-muted-foreground mb-4">Here are some popular MCP servers you can add to your configuration:</p>
+        <div className="space-y-3">
+          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Google Sheets</h4>
+            <p className="text-xs text-muted-foreground mb-2">Read and write spreadsheet data</p>
+            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-google-sheets"]\n}`} language="json" />
+          </div>
+          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Brave Search</h4>
+            <p className="text-xs text-muted-foreground mb-2">Web search capabilities</p>
+            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-brave-search"],\n  "env": { "BRAVE_API_KEY": "your-key" }\n}`} language="json" />
+          </div>
+          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">GitHub</h4>
+            <p className="text-xs text-muted-foreground mb-2">Access repositories, issues, and PRs</p>
+            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-github"],\n  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token" }\n}`} language="json" />
+          </div>
+          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">PostgreSQL</h4>
+            <p className="text-xs text-muted-foreground mb-2">Query databases directly</p>
+            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-postgres"],\n  "env": { "DATABASE_URL": "postgresql://..." }\n}`} language="json" />
+          </div>
+        </div>
+      </SubStep>
+
+      <SubStep id="mcp-best-practices" title="Best Practices & Tips">
+        <h4 className="text-sm font-semibold mb-2">Security</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
+          <li>Never commit API keys or tokens to version control</li>
+          <li>Use environment variables for sensitive configuration</li>
+          <li>Review tool permissions before granting access</li>
+          <li>Use separate tokens for development and production</li>
+        </ul>
+        <h4 className="text-sm font-semibold mb-2">Performance</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
+          <li>Only enable MCP servers you actively use</li>
+          <li>Each server adds startup time — keep it minimal</li>
+          <li>Use local servers when possible for faster response</li>
+        </ul>
+        <h4 className="text-sm font-semibold mb-2">Troubleshooting</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+          <li>Check Claude logs for server connection errors</li>
+          <li>Verify absolute paths in configuration</li>
+          <li>Ensure required environment variables are set</li>
+          <li>Restart Claude after configuration changes</li>
+        </ul>
       </SubStep>
     </>
   )
@@ -194,8 +284,8 @@ function MCPContent() {
 function IntegrationsContent() {
   return (
     <>
-      <SubStep title="Hawiyat × n8n">
-        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines  all from within your n8n workflows.</p>
+      <SubStep id="hawiyat-n8n" title="Hawiyat × n8n">
+        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines — all from within your n8n workflows.</p>
         <h4 className="text-sm font-semibold mb-2">Webhook Payload</h4>
         <CodeBlock code={CODE_INTEGRATION_N8N} language="json" />
         <h4 className="text-sm font-semibold mb-2 mt-4">Common n8n Use Cases</h4>
@@ -207,7 +297,7 @@ function IntegrationsContent() {
         </ul>
       </SubStep>
 
-      <SubStep title="Claude × Google Sheets">
+      <SubStep id="claude-sheets" title="Claude × Google Sheets">
         <p className="text-sm text-muted-foreground mb-4">Read and write Google Sheets data directly from Claude. Generate reports, automate spreadsheet tasks, and analyze data using natural language commands.</p>
         <h4 className="text-sm font-semibold mb-2">Setup</h4>
         <CodeBlock code={CODE_INTEGRATION_GSHEETS} />
@@ -220,7 +310,7 @@ function IntegrationsContent() {
         </ul>
       </SubStep>
 
-      <SubStep title="Combining Integrations">
+      <SubStep id="combining" title="Combining Integrations">
         <p className="text-sm text-muted-foreground mb-3">The real power comes from combining both integrations:</p>
         <div className="rounded-lg bg-muted/30 border border-border p-4 text-sm">
           <p className="text-muted-foreground mb-2"><strong className="text-foreground">Workflow:</strong></p>
