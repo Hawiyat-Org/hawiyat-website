@@ -20,7 +20,7 @@ export const SECTIONS: Section[] = [
     label: "Installation",
     title: "Installation",
     desc: "Install Node.js, Claude Code, and activate Hawiyat.",
-    videoId: "dQw4w9WgXcQ",
+    videoId: "ewzeM6sYT0E",
     subSections: [
       { id: "installing-node", label: "Installing Node.js" },
       { id: "installing-claude", label: "Installing Claude Code" },
