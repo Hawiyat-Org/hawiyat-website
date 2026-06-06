@@ -66,6 +66,8 @@ export function SectionContent({ sectionId }: { sectionId: string }) {
     case "installation": return <InstallationContent />
     case "skills": return <SkillsContent />
     case "mcp-servers": return <MCPContent />
+    case "mcp-usage": return <MCPContent />
+    case "mcp-adding": return <MCPContent />
     case "integrations": return <IntegrationsContent />
     default: return <div className="text-muted-foreground">Section not found.</div>
   }
@@ -102,6 +104,21 @@ function InstallationContent() {
           <Image src="/guides/claude/claude_hawiyat_composer.png" alt="Claude Code with Hawiyat Composer active" width={800} height={450} className="w-full h-auto" />
         </div>
         <p className="text-xs text-muted-foreground mt-2 text-center">You should see the Hawiyat Composer indicator in your Claude Code terminal.</p>
+      </SubStep>
+
+      <SubStep id="installing-vscode" title="Installing VS Code Extension">
+        <p className="text-sm text-muted-foreground mb-2">Install the Claude Code extension for VS Code to get a native editor experience:</p>
+        <CodeBlock code="code --install-extension anthropic.claude-code" language="bash" />
+        <p className="text-sm text-muted-foreground mb-2 mt-4">Alternatively, install from the VS Code marketplace:</p>
+        <ol className="list-decimal pl-5 space-y-1 text-sm text-muted-foreground mb-4">
+          <li>Open VS Code</li>
+          <li>Go to the Extensions view (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+Shift+X</code> / <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Cmd+Shift+X</code>)</li>
+          <li>Search for <strong>Claude Code</strong></li>
+          <li>Click <strong>Install</strong></li>
+        </ol>
+        <div className="mt-4 p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Pro tip:</strong> After installing, open the Command Palette (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+Shift+P</code> / <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Cmd+Shift+P</code>) and run <strong>Claude Code: Start Session</strong> to begin.
+        </div>
       </SubStep>
 
       <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground">

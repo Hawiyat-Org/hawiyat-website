@@ -9,7 +9,7 @@ export interface Section {
   label: string
   title: string
   desc: string
-  videoId: string
+  videoId?: string
   subSections: SubSection[]
 }
 
@@ -25,6 +25,7 @@ export const SECTIONS: Section[] = [
       { id: "installing-node", label: "Installing Node.js" },
       { id: "installing-claude", label: "Installing Claude Code" },
       { id: "activating-hawiyat", label: "Activating Hawiyat" },
+      { id: "installing-vscode", label: "Installing VS Code Extension" },
     ],
   },
   {
@@ -33,7 +34,6 @@ export const SECTIONS: Section[] = [
     label: "Skills",
     title: "Skills",
     desc: "n8n, Next.js Full Stack, and UI/UX Pro Max skills.",
-    videoId: "dQw4w9WgXcQ",
     subSections: [
       { id: "what-are-skills", label: "What are Skills?" },
       { id: "n8n-skill", label: "n8n Skill" },
@@ -48,7 +48,6 @@ export const SECTIONS: Section[] = [
     label: "MCP",
     title: "MCP Servers",
     desc: "Connect Claude to external APIs via MCP.",
-    videoId: "dQw4w9WgXcQ",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },
       { id: "meta-ads-mcp", label: "Meta Ads MCP" },
@@ -62,7 +61,6 @@ export const SECTIONS: Section[] = [
     label: "Integrations",
     title: "Integrations",
     desc: "Hawiyat × n8n and Claude × Google Sheets.",
-    videoId: "dQw4w9WgXcQ",
     subSections: [
       { id: "hawiyat-n8n", label: "Hawiyat × n8n" },
       { id: "claude-sheets", label: "Claude × Google Sheets" },
