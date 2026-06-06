@@ -34,10 +34,11 @@ export const SECTIONS: Section[] = [
     label: "Co Work",
     title: "Claude Co Work + Hawiyat Composer",
     desc: "Collaborate in real-time with Claude Co Work integrated with Hawiyat Composer.",
-    videoId: "rwyogxQ3wDY",
+    videoId: "2lto4OCnB2E",
     subSections: [
       { id: "what-is-co-work", label: "What is Claude Co Work?" },
       { id: "install-claude-desktop", label: "Install Claude Desktop" },
+      { id: "enable-developer-mode", label: "Enable Developer Mode" },
       { id: "integrate-hawiyat-composer", label: "Integrate Hawiyat Composer" },
     ],
   },

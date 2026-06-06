@@ -148,27 +148,42 @@ function CoWorkContent() {
       </SubStep>
 
       <SubStep id="install-claude-desktop" title="Install Claude Desktop">
-        <p className="text-sm text-muted-foreground mb-4">Claude Desktop provides a native app experience with Co Work support. Download and install it for your platform:</p>
+        <p className="text-sm text-muted-foreground mb-4">Claude Desktop provides a native app experience with Co Work support. Download and install it for your platform from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a>.</p>
         <div className="space-y-3">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-2">macOS</h4>
-            <CodeBlock code="brew install --cask claude" language="bash" />
-            <p className="text-xs text-muted-foreground mt-2">Or download from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
+            <h4 className="text-sm font-semibold mb-1">macOS</h4>
+            <p className="text-xs text-muted-foreground">Download the .dmg installer or use Homebrew.</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-2">Windows</h4>
-            <CodeBlock code="winget install Anthropic.Claude" language="bash" />
-            <p className="text-xs text-muted-foreground mt-2">Or download the installer from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
+            <h4 className="text-sm font-semibold mb-1">Windows</h4>
+            <p className="text-xs text-muted-foreground">Download the installer directly from the Claude download page.</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-2">Linux</h4>
-            <p className="text-xs text-muted-foreground mb-2">Download the AppImage or .deb package from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
-            <CodeBlock code="chmod +x Claude-Desktop.AppImage\n./Claude-Desktop.AppImage" language="bash" />
+            <h4 className="text-sm font-semibold mb-1">Linux</h4>
+            <p className="text-xs text-muted-foreground">Download the AppImage or .deb package from the Claude download page.</p>
           </div>
         </div>
         <div className="mt-4 p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">ℹ After Installation</p>
+          <p className="text-blue-500 font-medium mb-1">After Installation</p>
           <p className="text-muted-foreground">Sign in with your Anthropic account. Co Work features will be available once you&apos;re logged in.</p>
+        </div>
+      </SubStep>
+
+      <SubStep id="enable-developer-mode" title="Enable Developer Mode">
+        <p className="text-sm text-muted-foreground mb-4">Developer Mode unlocks advanced features in Claude Desktop, including third-party inference providers, custom MCP server configurations, and extended Co Work capabilities.</p>
+        <div className="space-y-3">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">macOS / Linux</h4>
+            <p className="text-xs text-muted-foreground">Open Claude Desktop settings and toggle Developer Mode in the Advanced section.</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Windows</h4>
+            <p className="text-xs text-muted-foreground">Access settings via the gear icon, then enable Developer Mode under Advanced preferences.</p>
+          </div>
+        </div>
+        <div className="mt-4 p-3 sm:p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 text-sm">
+          <p className="text-amber-500 font-medium mb-1">Note</p>
+          <p className="text-muted-foreground">Developer Mode is required to connect third-party providers like Hawiyat Composer and to configure custom MCP servers.</p>
         </div>
       </SubStep>
 
@@ -181,16 +196,9 @@ function CoWorkContent() {
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">Hawiyat Composer integrates with Claude Desktop as a third-party inference provider, extending Claude&apos;s capabilities with deployment, monitoring, and workflow automation.</p>
-        <h4 className="text-sm font-semibold mb-2">Step 1: Install Hawiyat Composer</h4>
-        <CodeBlock code="npx @hawiyat-team/hawiyat-claude install --token sk-xxxx" />
-        <p className="text-sm text-muted-foreground mt-2 mb-4">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">sk-xxxx</code> with your Hawiyat token.</p>
-        <h4 className="text-sm font-semibold mb-2">Step 2: Configure as Third-Party Inference</h4>
-        <p className="text-sm text-muted-foreground mb-2">Add Hawiyat Composer to your Claude Desktop configuration:</p>
-        <CodeBlock code={`{\n  "inferenceProviders": {\n    "hawiyat": {\n      "endpoint": "https://api.hawiyat.org/v1",\n      "apiKey": "sk-xxxx",\n      "models": ["hawiyat-composer-v1"]\n    }\n  }\n}`} language="json" />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Step 3: Verify Integration</h4>
-        <CodeBlock code="npx @hawiyat-team/hawiyat-claude verify" />
-        <p className="text-sm text-muted-foreground mt-2 mb-4">You should see a success message confirming the connection between Claude Desktop and Hawiyat Composer.</p>
-        <h4 className="text-sm font-semibold mb-2">What You Get</h4>
+        <h4 className="text-sm font-semibold mb-2">How to Connect</h4>
+        <p className="text-sm text-muted-foreground mb-3">Use your Hawiyat token to activate the integration. This links Claude Desktop with Hawiyat Composer&apos;s infrastructure.</p>
+        <h4 className="text-sm font-semibold mb-2 mt-4">What You Get</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Direct deployment from Claude Desktop to Hawiyat infrastructure</li>
           <li>Real-time monitoring and usage analytics</li>
