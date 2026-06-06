@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ChevronDown, ChevronUp, Github, Workflow, Code as CodeIcon, Cpu, Copy, Check, Users, Sparkles, Link2, GitBranch } from "lucide-react"
+import { ChevronDown, ChevronUp, Github, Workflow, Code as CodeIcon, Cpu, Copy, Check, Users, Sparkles } from "lucide-react"
 import { useState } from "react"
 
 export function CodeBlock({ code, language = "bash" }: { code: string; language?: string }) {
@@ -140,103 +140,67 @@ function CoWorkContent() {
             <p className="text-xs text-muted-foreground">Work together with Claude and your team</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-4">Claude Co Work enables multiple developers to collaborate with Claude Code simultaneously. Combined with Hawiyat Composer, it creates a powerful collaborative environment where AI-assisted development becomes a team experience.</p>
+        <p className="text-sm text-muted-foreground mb-4">Claude Co Work is a collaborative feature that allows multiple users to work with Claude simultaneously in shared sessions. It enables real-time pair programming, code reviews, and team brainstorming — all powered by Claude&apos;s AI capabilities.</p>
+        <p className="text-sm text-muted-foreground mb-4">When combined with Hawiyat Composer, you get a seamless development experience where AI-assisted coding, deployment, and project management work together in one unified environment.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
           <strong className="text-foreground">Key benefit:</strong> Share context, code suggestions, and deployment workflows across your team — all powered by Hawiyat Composer.
         </div>
       </SubStep>
 
-      <SubStep id="setting-up-co-work" title="Setting Up Co Work">
-        <p className="text-sm text-muted-foreground mb-2">Enable Co Work mode in your Claude Code configuration:</p>
-        <CodeBlock code="claude co-work init" />
-        <p className="text-sm text-muted-foreground mb-2 mt-4">This creates a shared session that team members can join:</p>
-        <CodeBlock code="claude co-work share" />
-        <p className="text-sm text-muted-foreground mt-2">A shareable link will be generated. Send it to your team members to invite them to the session.</p>
+      <SubStep id="install-claude-desktop" title="Install Claude Desktop">
+        <p className="text-sm text-muted-foreground mb-4">Claude Desktop provides a native app experience with Co Work support. Download and install it for your platform:</p>
+        <div className="space-y-3">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-2">macOS</h4>
+            <CodeBlock code="brew install --cask claude" language="bash" />
+            <p className="text-xs text-muted-foreground mt-2">Or download from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-2">Windows</h4>
+            <CodeBlock code="winget install Anthropic.Claude" language="bash" />
+            <p className="text-xs text-muted-foreground mt-2">Or download the installer from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-2">Linux</h4>
+            <p className="text-xs text-muted-foreground mb-2">Download the AppImage or .deb package from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a></p>
+            <CodeBlock code="chmod +x Claude-Desktop.AppImage\n./Claude-Desktop.AppImage" language="bash" />
+          </div>
+        </div>
         <div className="mt-4 p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">ℹ Session Management</p>
-          <p className="text-muted-foreground">You can manage active sessions with:</p>
-          <CodeBlock code="claude co-work list\nclaude co-work end <session-id>" />
+          <p className="text-blue-500 font-medium mb-1">ℹ After Installation</p>
+          <p className="text-muted-foreground">Sign in with your Anthropic account. Co Work features will be available once you&apos;re logged in.</p>
         </div>
       </SubStep>
 
-      <SubStep id="hawiyat-composer-integration" title="Hawiyat Composer Integration">
+      <SubStep id="integrate-hawiyat-composer" title="Integrate Hawiyat Composer">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Sparkles className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Composer + Co Work</h4>
+            <h4 className="text-sm font-semibold">Composer + Claude Desktop</h4>
             <p className="text-xs text-muted-foreground">Seamless AI-assisted collaboration</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-4">Hawiyat Composer integrates directly with Claude Co Work sessions, providing shared context, project templates, and deployment capabilities for all participants.</p>
-        <h4 className="text-sm font-semibold mb-2">Integration Setup</h4>
-        <CodeBlock code="npx @hawiyat-team/hawiyat-claude co-work enable --token sk-xxxx" />
-        <p className="text-sm text-muted-foreground mt-2 mb-4">Once enabled, all Co Work sessions will have access to:</p>
+        <p className="text-sm text-muted-foreground mb-4">Hawiyat Composer integrates with Claude Desktop as a third-party inference provider, extending Claude&apos;s capabilities with deployment, monitoring, and workflow automation.</p>
+        <h4 className="text-sm font-semibold mb-2">Step 1: Install Hawiyat Composer</h4>
+        <CodeBlock code="npx @hawiyat-team/hawiyat-claude install --token sk-xxxx" />
+        <p className="text-sm text-muted-foreground mt-2 mb-4">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">sk-xxxx</code> with your Hawiyat token.</p>
+        <h4 className="text-sm font-semibold mb-2">Step 2: Configure as Third-Party Inference</h4>
+        <p className="text-sm text-muted-foreground mb-2">Add Hawiyat Composer to your Claude Desktop configuration:</p>
+        <CodeBlock code={`{\n  "inferenceProviders": {\n    "hawiyat": {\n      "endpoint": "https://api.hawiyat.org/v1",\n      "apiKey": "sk-xxxx",\n      "models": ["hawiyat-composer-v1"]\n    }\n  }\n}`} language="json" />
+        <h4 className="text-sm font-semibold mb-2 mt-4">Step 3: Verify Integration</h4>
+        <CodeBlock code="npx @hawiyat-team/hawiyat-claude verify" />
+        <p className="text-sm text-muted-foreground mt-2 mb-4">You should see a success message confirming the connection between Claude Desktop and Hawiyat Composer.</p>
+        <h4 className="text-sm font-semibold mb-2">What You Get</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Shared Hawiyat Composer context and templates</li>
-          <li>Team-wide deployment permissions</li>
-          <li>Real-time code suggestions from all participants</li>
-          <li>Unified project configuration</li>
+          <li>Direct deployment from Claude Desktop to Hawiyat infrastructure</li>
+          <li>Real-time monitoring and usage analytics</li>
+          <li>Access to Hawiyat&apos;s managed services (n8n, Evolution API, etc.)</li>
+          <li>Unified token management and billing</li>
         </ul>
-        <div className="mt-4 rounded-lg overflow-hidden border border-border">
-          <Image src="/guides/claude/claude_hawiyat_composer.png" alt="Hawiyat Composer in Co Work mode" width={800} height={450} className="w-full h-auto" />
+        <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Tip:</strong> You can switch between Claude&apos;s native inference and Hawiyat Composer directly from the Claude Desktop settings.
         </div>
       </SubStep>
-
-      <SubStep id="collaborative-workflows" title="Collaborative Workflows">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><GitBranch className="h-5 w-5" /></div>
-          <div>
-            <h4 className="text-sm font-semibold">Team Development Patterns</h4>
-            <p className="text-xs text-muted-foreground">Efficient workflows for teams</p>
-          </div>
-        </div>
-        <p className="text-sm text-muted-foreground mb-4">Here are common collaborative workflows using Claude Co Work with Hawiyat Composer:</p>
-        <div className="space-y-3">
-          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Pair Programming with AI</h4>
-            <p className="text-xs text-muted-foreground mb-2">Two developers work together with Claude, one driving the code while the other reviews AI suggestions.</p>
-            <CodeBlock code="claude co-work join --role=driver\nclaude co-work join --role=reviewer" language="bash" />
-          </div>
-          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Code Review Sessions</h4>
-            <p className="text-xs text-muted-foreground mb-2">Team reviews PRs together with Claude providing automated suggestions and explanations.</p>
-            <CodeBlock code="claude co-work review --pr=123 --repo=my-org/my-app" language="bash" />
-          </div>
-          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Architecture Planning</h4>
-            <p className="text-xs text-muted-foreground mb-2">Use Claude to generate architecture diagrams and implementation plans collaboratively.</p>
-            <CodeBlock code="claude co-work plan --output=architecture.md" language="bash" />
-          </div>
-        </div>
-      </SubStep>
-
-      <SubStep id="best-practices" title="Best Practices">
-        <h4 className="text-sm font-semibold mb-2">Session Management</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Keep sessions focused — limit to 2-4 participants for best results</li>
-          <li>Use descriptive session names for easy identification</li>
-          <li>End sessions when done to free up resources</li>
-          <li>Set clear roles (driver, reviewer, observer) before starting</li>
-        </ul>
-        <h4 className="text-sm font-semibold mb-2">Hawiyat Composer Tips</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Ensure all team members have valid Hawiyat tokens</li>
-          <li>Use shared templates for consistent project structure</li>
-          <li>Configure deployment permissions per team member</li>
-          <li>Monitor usage through the Hawiyat dashboard</li>
-        </ul>
-        <h4 className="text-sm font-semibold mb-2">Security</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>Never share session links publicly</li>
-          <li>Use end-to-end encryption for sensitive projects</li>
-          <li>Review participant permissions regularly</li>
-          <li>Rotate Hawiyat tokens if a session is compromised</li>
-        </ul>
-      </SubStep>
-
-      <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground">
-        <strong className="text-foreground">Tip:</strong> Start with a small team (2-3 people) to get comfortable with Co Work before scaling to larger groups.
-      </div>
     </>
   )
 }

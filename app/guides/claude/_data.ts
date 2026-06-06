@@ -37,10 +37,8 @@ export const SECTIONS: Section[] = [
     videoId: "ewzeM6sYT0E",
     subSections: [
       { id: "what-is-co-work", label: "What is Claude Co Work?" },
-      { id: "setting-up-co-work", label: "Setting Up Co Work" },
-      { id: "hawiyat-composer-integration", label: "Hawiyat Composer Integration" },
-      { id: "collaborative-workflows", label: "Collaborative Workflows" },
-      { id: "best-practices", label: "Best Practices" },
+      { id: "install-claude-desktop", label: "Install Claude Desktop" },
+      { id: "integrate-hawiyat-composer", label: "Integrate Hawiyat Composer" },
     ],
   },
   {
