@@ -5,7 +5,7 @@ import Link from "next/link"
 import { SECTIONS } from "./_data"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Terminal, BookOpen, Database, Workflow, Moon, Sun, ChevronDown, Menu, X } from "lucide-react"
+import { Terminal, BookOpen, Database, Workflow, Moon, Sun, ChevronDown, Menu, X, Users } from "lucide-react"
 import { useTheme } from "next-themes"
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -13,6 +13,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   BookOpen,
   Database,
   Workflow,
+  Users,
 }
 
 export default function ClaudeGuideLayout({ children }: { children: React.ReactNode }) {

@@ -29,6 +29,21 @@ export const SECTIONS: Section[] = [
     ],
   },
   {
+    id: "co-work",
+    icon: "Users",
+    label: "Co Work",
+    title: "Claude Co Work + Hawiyat Composer",
+    desc: "Collaborate in real-time with Claude Co Work integrated with Hawiyat Composer.",
+    videoId: "ewzeM6sYT0E",
+    subSections: [
+      { id: "what-is-co-work", label: "What is Claude Co Work?" },
+      { id: "setting-up-co-work", label: "Setting Up Co Work" },
+      { id: "hawiyat-composer-integration", label: "Hawiyat Composer Integration" },
+      { id: "collaborative-workflows", label: "Collaborative Workflows" },
+      { id: "best-practices", label: "Best Practices" },
+    ],
+  },
+  {
     id: "skills",
     icon: "BookOpen",
     label: "Skills",
