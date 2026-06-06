@@ -34,19 +34,19 @@ export default function SectionPage({ params }: { params: { section: string } })
   return (
     <>
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 pt-8">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 pt-4 lg:pt-8 flex-wrap">
         <Link href="/guides" className="hover:text-foreground transition-colors">Guides</Link>
         <span>/</span>
         <Link href="/guides/claude" className="hover:text-foreground transition-colors">Claude Code</Link>
         <span>/</span>
-        <span className="text-foreground">{section.label}</span>
+        <span className="text-foreground truncate">{section.label}</span>
       </div>
 
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <Image src="/services/claude-code.png" alt="" width={96} height={96} className="rounded" />
+      <div className="flex flex-col sm:flex-row items-start gap-3 mb-6">
+        <Image src="/services/claude-code.png" alt="" width={96} height={96} className="rounded shrink-0 w-16 h-16 sm:w-24 sm:h-24" />
         <div>
-          <h1 className="text-2xl font-bold">{section.title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">{section.title}</h1>
           <p className="text-sm text-muted-foreground">{section.desc}</p>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function SectionPage({ params }: { params: { section: string } })
       </div>
 
       {/* Prev / Next navigation */}
-      <div className="flex items-center justify-between border-t border-border pt-6">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between border-t border-border pt-6 gap-3">
         {prev ? (
           <Link href={`/guides/claude/${prev.id}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
             ← {prev.label}

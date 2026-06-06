@@ -26,7 +26,7 @@ export function CodeBlock({ code, language = "bash" }: { code: string; language?
 }
 
 export function SectionCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6 sm:p-8 ${className}`}>{children}</div>
+  return <div className={`rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-6 lg:p-8 ${className}`}>{children}</div>
 }
 
 export function Accordion({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
@@ -48,9 +48,9 @@ function StepTag({ children }: { children: React.ReactNode }) {
 
 function SubStep({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <div id={id} className="mb-14 scroll-mt-24">
+    <div id={id} className="mb-10 sm:mb-14 scroll-mt-24">
       <StepTag># {title}</StepTag>
-      <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm p-5 sm:p-6">
+      <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-5 lg:p-6">
         {children}
       </div>
     </div>
@@ -82,10 +82,10 @@ function InstallationContent() {
         <CodeBlock code="brew install node" language="bash" />
         <CodeBlock code="sudo apt install nodejs npm" language="bash" />
         <p className="text-xs text-muted-foreground mt-3">Verify installation: <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">node --version</code></p>
-        <div className="mt-4 p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 text-sm">
+        <div className="mt-4 p-3 sm:p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 text-sm">
           <p className="text-amber-500 font-medium mb-1">⚠ PowerShell Execution Policy</p>
           <p className="text-muted-foreground">On Windows, you may get a security error when running scripts. Fix it by running PowerShell as Administrator and executing:</p>
-          <code className="block mt-2 px-3 py-1.5 rounded bg-black/10 dark:bg-white/5 text-xs font-mono">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+          <code className="block mt-2 px-3 py-1.5 rounded bg-black/10 dark:bg-white/5 text-xs font-mono break-all">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
         </div>
       </SubStep>
 
@@ -116,7 +116,7 @@ function InstallationContent() {
           <li>Search for <strong>Claude Code</strong></li>
           <li>Click <strong>Install</strong></li>
         </ol>
-        <div className="mt-4 p-4 rounded-lg bg-muted/50 border border-border text-sm">
+        <div className="mt-4 p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
           <strong className="text-foreground">Pro tip:</strong> After installing, open the Command Palette (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+Shift+P</code> / <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Cmd+Shift+P</code>) and run <strong>Claude Code: Start Session</strong> to begin.
         </div>
       </SubStep>
@@ -132,9 +132,9 @@ function SkillsContent() {
   return (
     <>
       <SubStep id="what-are-skills" title="What are Skills?">
-        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks — from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude/skills/</code> directory.</p>
-        <p className="text-sm text-muted-foreground mb-4">Skills work alongside your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">CLAUDE.md</code> file. While CLAUDE.md sets project-wide context, skills provide domain-specific expertise that Claude can reference when needed.</p>
-        <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm">
+        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks — from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">.claude/skills/</code> directory.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills work alongside your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">CLAUDE.md</code> file. While CLAUDE.md sets project-wide context, skills provide domain-specific expertise that Claude can reference when needed.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
           <strong className="text-foreground">Key difference:</strong> CLAUDE.md = project context. Skills = specialized capabilities.
         </div>
       </SubStep>
@@ -223,11 +223,11 @@ function MCPContent() {
         <p className="text-sm text-muted-foreground mb-4">MCP servers are configured in your Claude configuration file. The location depends on your platform:</p>
         <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
           <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">macOS / Linux</span></div>
-          <pre className="p-4 overflow-x-auto text-sm text-gray-200 font-mono">~/Library/Application Support/Claude/claude_desktop_config.json</pre>
+          <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm text-gray-200 font-mono break-all">~/Library/Application Support/Claude/claude_desktop_config.json</pre>
         </div>
         <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
           <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">Windows</span></div>
-          <pre className="p-4 overflow-x-auto text-sm text-gray-200 font-mono">%APPDATA%\Claude\claude_desktop_config.json</pre>
+          <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm text-gray-200 font-mono break-all">%APPDATA%\Claude\claude_desktop_config.json</pre>
         </div>
         <p className="text-sm text-muted-foreground mt-2">Create the file if it doesn&apos;t exist. Claude will automatically detect and load MCP servers on restart.</p>
       </SubStep>
@@ -249,22 +249,22 @@ function MCPContent() {
       <SubStep id="popular-mcp-servers" title="Popular MCP Servers">
         <p className="text-sm text-muted-foreground mb-4">Here are some popular MCP servers you can add to your configuration:</p>
         <div className="space-y-3">
-          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">Google Sheets</h4>
             <p className="text-xs text-muted-foreground mb-2">Read and write spreadsheet data</p>
             <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-google-sheets"]\n}`} language="json" />
           </div>
-          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">Brave Search</h4>
             <p className="text-xs text-muted-foreground mb-2">Web search capabilities</p>
             <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-brave-search"],\n  "env": { "BRAVE_API_KEY": "your-key" }\n}`} language="json" />
           </div>
-          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">GitHub</h4>
             <p className="text-xs text-muted-foreground mb-2">Access repositories, issues, and PRs</p>
             <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-github"],\n  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token" }\n}`} language="json" />
           </div>
-          <div className="p-4 rounded-lg bg-muted/30 border border-border">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">PostgreSQL</h4>
             <p className="text-xs text-muted-foreground mb-2">Query databases directly</p>
             <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-postgres"],\n  "env": { "DATABASE_URL": "postgresql://..." }\n}`} language="json" />
