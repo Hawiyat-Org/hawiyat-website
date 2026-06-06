@@ -258,8 +258,8 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-64 pt-16 lg:pt-12 pb-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="flex-1 lg:ml-64 pt-16 lg:pt-12 pb-20 overflow-x-hidden">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 w-full">
           {children}
         </div>
       </div>

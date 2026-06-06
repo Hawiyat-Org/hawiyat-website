@@ -6,7 +6,7 @@ import { SectionContent } from "../_content"
 
 function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
   return (
-    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-8">
+    <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-6 sm:mb-8">
       <iframe
         className="absolute inset-0 w-full h-full"
         src={`https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0`}
