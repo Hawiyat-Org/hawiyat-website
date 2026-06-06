@@ -44,8 +44,8 @@ export default function SectionPage({ params }: { params: { section: string } })
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start gap-3 mb-6">
-        <Image src="/services/claude-code.png" alt="" width={96} height={96} className="rounded shrink-0 w-16 h-16 sm:w-24 sm:h-24" />
-        <div>
+        <Image src="/services/claude-code.png" alt="" width={96} height={96} className="rounded  w-16 h-16 sm:w-24 sm:h-24" />
+        <div className="my-auto">
           <h1 className="text-xl sm:text-2xl font-bold">{section.title}</h1>
           <p className="text-sm text-muted-foreground">{section.desc}</p>
         </div>

@@ -140,10 +140,10 @@ function CoWorkContent() {
             <p className="text-xs text-muted-foreground">Work together with Claude and your team</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-4">Claude Co Work is a collaborative feature that allows multiple users to work with Claude simultaneously in shared sessions. It enables real-time pair programming, code reviews, and team brainstorming — all powered by Claude&apos;s AI capabilities.</p>
+        <p className="text-sm text-muted-foreground mb-4">Claude Co Work is a collaborative feature that allows multiple users to work with Claude simultaneously in shared sessions. It enables real-time pair programming, code reviews, and team brainstorming all powered by Claude&apos;s AI capabilities.</p>
         <p className="text-sm text-muted-foreground mb-4">When combined with Hawiyat Composer, you get a seamless development experience where AI-assisted coding, deployment, and project management work together in one unified environment.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
-          <strong className="text-foreground">Key benefit:</strong> Share context, code suggestions, and deployment workflows across your team — all powered by Hawiyat Composer.
+          <strong className="text-foreground">Key benefit:</strong> Share context, code suggestions, and deployment workflows across your team all powered by Hawiyat Composer.
         </div>
       </SubStep>
 
@@ -209,7 +209,7 @@ function SkillsContent() {
   return (
     <>
       <SubStep id="what-are-skills" title="What are Skills?">
-        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks — from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">.claude/skills/</code> directory.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">.claude/skills/</code> directory.</p>
         <p className="text-sm text-muted-foreground mb-4">Skills work alongside your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">CLAUDE.md</code> file. While CLAUDE.md sets project-wide context, skills provide domain-specific expertise that Claude can reference when needed.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
           <strong className="text-foreground">Key difference:</strong> CLAUDE.md = project context. Skills = specialized capabilities.
@@ -244,9 +244,9 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">App Router, server components, API routes, Prisma</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert — generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
+        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
         <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
-        <CodeBlock code={"# .claude/skills/nextjs-patterns.md\n\nNext.js 14+ App Router conventions:\n\n## Component Rules\n- Server components by default\n- Use \"use client\" only when needed (interactivity, browser APIs)\n- Keep client components leaf nodes in the tree\n\n## File Conventions\n- page.tsx — UI for a route\n- layout.tsx — Shared UI for a route segment\n- loading.tsx — Loading UI\n- error.tsx — Error boundary\n- not-found.tsx — Not found UI\n- route.ts — API route handler\n\n## Data Fetching\n- Use server components for data fetching\n- Use fetch() with caching options\n- Use React.cache() for deduplication\n- Use server actions for mutations\n\n## Database\n- Use Prisma for database operations\n- Run prisma generate after schema changes\n- Use transactions for related writes"} />
+        <CodeBlock code={"# .claude/skills/nextjs-patterns.md\n\nNext.js 14+ App Router conventions:\n\n## Component Rules\n- Server components by default\n- Use \"use client\" only when needed (interactivity, browser APIs)\n- Keep client components leaf nodes in the tree\n\n## File Conventions\n- page.tsx UI for a route\n- layout.tsx Shared UI for a route segment\n- loading.tsx Loading UI\n- error.tsx Error boundary\n- not-found.tsx Not found UI\n- route.ts API route handler\n\n## Data Fetching\n- Use server components for data fetching\n- Use fetch() with caching options\n- Use React.cache() for deduplication\n- Use server actions for mutations\n\n## Database\n- Use Prisma for database operations\n- Run prisma generate after schema changes\n- Use transactions for related writes"} />
         <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
           <li>&ldquo;Create a product listing page with server components&rdquo;</li>
@@ -283,7 +283,7 @@ function MCPContent() {
   return (
     <>
       <SubStep id="what-are-mcp" title="What are MCP Servers?">
-        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Think of it like a USB-C port for AI — it provides a standardized way to connect Claude to data sources, tools, and workflows.</p>
+        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Think of it like a USB-C port for AI it provides a standardized way to connect Claude to data sources, tools, and workflows.</p>
         <p className="text-sm text-muted-foreground mb-4">With MCP, Claude can:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Access your Google Calendar, Notion, and databases</li>
@@ -316,10 +316,10 @@ function MCPContent() {
         <p className="text-sm text-muted-foreground mt-2">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">your-token</code> with your Meta Ads access token from the Meta Developer Portal.</p>
         <h4 className="text-sm font-semibold mb-2 mt-4">Available Tools</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li><strong>get_campaigns</strong> — List all active campaigns</li>
-          <li><strong>get_adset_insights</strong> — Get performance metrics for ad sets</li>
-          <li><strong>get_audience_insights</strong> — Analyze audience demographics</li>
-          <li><strong>get_ad_creatives</strong> — Fetch ad creative details</li>
+          <li><strong>get_campaigns</strong> List all active campaigns</li>
+          <li><strong>get_adset_insights</strong> Get performance metrics for ad sets</li>
+          <li><strong>get_audience_insights</strong> Analyze audience demographics</li>
+          <li><strong>get_ad_creatives</strong> Fetch ad creative details</li>
         </ul>
       </SubStep>
 
@@ -360,7 +360,7 @@ function MCPContent() {
         <h4 className="text-sm font-semibold mb-2">Performance</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Only enable MCP servers you actively use</li>
-          <li>Each server adds startup time — keep it minimal</li>
+          <li>Each server adds startup time keep it minimal</li>
           <li>Use local servers when possible for faster response</li>
         </ul>
         <h4 className="text-sm font-semibold mb-2">Troubleshooting</h4>
@@ -379,7 +379,7 @@ function IntegrationsContent() {
   return (
     <>
       <SubStep id="hawiyat-n8n" title="Hawiyat × n8n">
-        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines — all from within your n8n workflows.</p>
+        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines all from within your n8n workflows.</p>
         <h4 className="text-sm font-semibold mb-2">Webhook Payload</h4>
         <CodeBlock code={CODE_INTEGRATION_N8N} language="json" />
         <h4 className="text-sm font-semibold mb-2 mt-4">Common n8n Use Cases</h4>

@@ -71,7 +71,10 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
       setTimeout(() => {
         const el = document.getElementById(hash)
         if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" })
+          const headerOffset = 80
+          const elementPosition = el.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" })
           setActiveSub(hash)
         }
       }, 100)
@@ -97,6 +100,18 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
     })
   }
 
+  const handleNavigateToSection = (sectionId: string) => {
+    setExpandedSections(new Set([sectionId]))
+    setActiveSub("")
+    setMobileMenuOpen(false)
+  }
+
+  const handleToggleOnly = (e: React.MouseEvent, sectionId: string) => {
+    e.stopPropagation()
+    e.preventDefault()
+    toggleSection(sectionId)
+  }
+
   const handleSubClick = (sectionId: string, subId: string) => {
     setActiveSub(subId)
     setMobileMenuOpen(false)
@@ -107,15 +122,12 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
     }
     const el = document.getElementById(subId)
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" })
+      const headerOffset = 80
+      const elementPosition = el.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" })
     }
     window.history.pushState(null, "", `#${subId}`)
-  }
-
-  const handleSectionClick = (sectionId: string) => {
-    toggleSection(sectionId)
-    setActiveSub("")
-    setMobileMenuOpen(false)
   }
 
   // Sidebar content (shared between desktop and mobile)
@@ -148,22 +160,33 @@ export default function ClaudeGuideLayout({ children }: { children: React.ReactN
 
           return (
             <div key={section.id} className="mb-1">
-              <button
-                onClick={() => isMobile ? handleSectionClick(section.id) : toggleSection(section.id)}
-                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 group ${
+              <div
+                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 group ${
                   isActive && !activeSub
                     ? "bg-foreground/[0.06] text-foreground font-medium"
                     : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.04]"
                 }`}
               >
-                {Icon && <Icon className="w-4 h-4 shrink-0 opacity-70" />}
-                <span className="flex-1 text-left truncate">{section.label}</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 shrink-0 opacity-40 transition-transform duration-200 ${
-                    isExpanded ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+                <Link
+                  href={`/guides/claude/${section.id}`}
+                  onClick={() => handleNavigateToSection(section.id)}
+                  className="flex items-center gap-2.5 flex-1 min-w-0"
+                >
+                  {Icon && <Icon className="w-4 h-4 shrink-0 opacity-70" />}
+                  <span className="flex-1 text-left truncate">{section.label}</span>
+                </Link>
+                <button
+                  onClick={(e) => handleToggleOnly(e, section.id)}
+                  className="p-0.5 rounded hover:bg-foreground/10 transition-colors shrink-0"
+                  aria-label={isExpanded ? "Collapse section" : "Expand section"}
+                >
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 opacity-40 transition-transform duration-200 ${
+                      isExpanded ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
 
               <div
                 className={`overflow-hidden transition-all duration-300 ease-out ${
