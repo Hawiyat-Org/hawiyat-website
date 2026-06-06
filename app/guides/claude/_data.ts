@@ -34,7 +34,7 @@ export const SECTIONS: Section[] = [
     label: "Co Work",
     title: "Claude Co Work + Hawiyat Composer",
     desc: "Collaborate in real-time with Claude Co Work integrated with Hawiyat Composer.",
-    videoId: "ewzeM6sYT0E",
+    videoId: "rwyogxQ3wDY",
     subSections: [
       { id: "what-is-co-work", label: "What is Claude Co Work?" },
       { id: "install-claude-desktop", label: "Install Claude Desktop" },
@@ -47,6 +47,7 @@ export const SECTIONS: Section[] = [
     label: "Skills",
     title: "Skills",
     desc: "n8n, Next.js Full Stack, and UI/UX Pro Max skills.",
+    videoId: "1a161BJ3X_g",
     subSections: [
       { id: "what-are-skills", label: "What are Skills?" },
       { id: "n8n-skill", label: "n8n Skill" },
@@ -61,6 +62,7 @@ export const SECTIONS: Section[] = [
     label: "MCP",
     title: "MCP Servers",
     desc: "Connect Claude to external APIs via MCP.",
+    videoId: "1a161BJ3X_g",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },
       { id: "meta-ads-mcp", label: "Meta Ads MCP" },
@@ -74,6 +76,7 @@ export const SECTIONS: Section[] = [
     label: "Integrations",
     title: "Integrations",
     desc: "Hawiyat × n8n and Claude × Google Sheets.",
+    videoId: "1a161BJ3X_g",
     subSections: [
       { id: "hawiyat-n8n", label: "Hawiyat × n8n" },
       { id: "claude-sheets", label: "Claude × Google Sheets" },
