@@ -54,6 +54,15 @@ GEMINI_API_KEY=your-key
 
 Copy `.env.example` to `.env` if it exists, or create from scratch.
 
+## Developing Apps Skills
+
+These skills help agents build full-stack applications with Next.js and shadcn/ui.
+
+- **`nextjs-developer`**  Expert Next.js 16.2.1 developer. App Router, Server Components, Server Actions, data fetching, middleware, metadata, deployment.
+- **`shadcn-ui`**  shadcn/ui component installation, theming, forms, data tables, charts, and composable UI patterns.
+
+> 🎥 **Video:** *"Build a Full-Stack App with Next.js + shadcn/ui"*  coming soon. Covers scaffolding, App Router, Server Components, auth, shadcn/ui theming, forms, and Vercel deployment. (Each skill in this collection has its own dedicated video.)
+
 ## Database & Booking System
 
 The app includes a booking/scheduling system with:

@@ -25,6 +25,32 @@ export function CodeBlock({ code, language = "bash" }: { code: string; language?
   )
 }
 
+export function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
+  if (!videoId) return null
+  if (videoId.startsWith("PLACEHOLDER_")) {
+    return (
+      <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-dashed border-border bg-muted/30 mb-6 sm:mb-8 flex items-center justify-center">
+        <div className="text-center">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-mono font-bold mb-3">▶ Video</span>
+          <p className="text-sm text-muted-foreground">{title}</p>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-6 sm:mb-8">
+      <iframe
+        className="absolute inset-0 w-full h-full"
+        src={`https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0`}
+        title={title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  )
+}
+
 export function SectionCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-6 lg:p-8 ${className}`}>{children}</div>
 }
@@ -56,10 +82,6 @@ function SubStep({ id, title, children }: { id: string; title: string; children:
     </div>
   )
 }
-
-const CODE_MCP_META = JSON.stringify({"mcpServers":{"meta-ads":{"command":"npx","args":["@hawiyat/mcp-meta-ads"],"env":{"META_ACCESS_TOKEN":"your-token"}}}}, null, 2)
-const CODE_INTEGRATION_N8N = '// n8n Webhook -> Hawiyat\n// POST https://api.hawiyat.org/webhooks/n8n\n\n{\n  "action": "deploy",\n  "service": "my-app",\n  "token": "sk-xxxx",\n  "config": {\n    "region": "dze-01",\n    "scale": "auto"\n  }\n}'
-const CODE_INTEGRATION_GSHEETS = '# Connect Claude to Google Sheets via MCP\nnpx @anthropic-ai/mcp-google-sheets --spreadsheet-id your-sheet-id\n\n# Then ask Claude:\n# "Add a new row to the sheet with todays sales data"\n# "Generate a monthly report from the Analytics sheet"\n# "Find all rows where conversion rate is below 2%"'
 
 export function SectionContent({ sectionId }: { sectionId: string }) {
   switch (sectionId) {
@@ -217,10 +239,10 @@ function SkillsContent() {
   return (
     <>
       <SubStep id="what-are-skills" title="What are Skills?">
-        <p className="text-sm text-muted-foreground mb-4">Skills are specialized instruction sets for Claude Code. They tell Claude how to behave for specific tasks from workflow automation to full-stack development. Each skill is a markdown file in your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">.claude/skills/</code> directory.</p>
-        <p className="text-sm text-muted-foreground mb-4">Skills work alongside your <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono break-all">CLAUDE.md</code> file. While CLAUDE.md sets project-wide context, skills provide domain-specific expertise that Claude can reference when needed.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills are like plug-ins for Claude. They give Claude specialized knowledge for specific tasks like building n8n workflows, creating Next.js apps, or designing UIs.</p>
+        <p className="text-sm text-muted-foreground mb-4">Instead of manually creating files, you can install skills globally with a single command. Once installed, Claude will automatically use them when relevant.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
-          <strong className="text-foreground">Key difference:</strong> CLAUDE.md = project context. Skills = specialized capabilities.
+          <strong className="text-foreground">How it works:</strong> Get the skill link from Hawiyat, run one command, and you&apos;re done.
         </div>
       </SubStep>
 
@@ -232,16 +254,15 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">Build complex n8n pipelines with Claude</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">This skill teaches Claude to generate valid n8n JSON workflows with proper node connections, error handling, and credential placeholders.</p>
-        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
-        <CodeBlock code={"# .claude/skills/n8n-expert.md\n\nYou are an n8n workflow expert. When asked to create or modify workflows:\n\n## Output Format\n1. Always output valid n8n JSON workflow definitions\n2. Include proper node connections (connections object)\n3. Use correct node type IDs (n8n-nodes-base.*)\n4. Add error handling where appropriate\n5. Include credential references as placeholders\n\n## Common Node Types\n- HTTP Request: n8n-nodes-base.httpRequest\n- Webhook: n8n-nodes-base.webhook\n- Set: n8n-nodes-base.set\n- IF: n8n-nodes-base.if\n- Switch: n8n-nodes-base.switch\n- Code: n8n-nodes-base.code\n- Cron: n8n-nodes-base.cronTrigger\n\n## Best Practices\n- Use descriptive node names\n- Add notes to complex nodes\n- Include error workflows\n- Use environment variables for secrets"} />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>&ldquo;Create an n8n workflow that fetches data from an API every hour&rdquo;</li>
-          <li>&ldquo;Add error handling to this workflow&rdquo;</li>
-          <li>&ldquo;Convert this workflow to use environment variables&rdquo;</li>
-          <li>&ldquo;Generate a webhook trigger for WooCommerce orders&rdquo;</li>
-        </ul>
+        <p className="text-sm text-muted-foreground mb-4">This skill teaches Claude to create valid n8n workflows with proper node connections, error handling, and best practices.</p>
+        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <p className="text-sm text-muted-foreground mb-2">Run this command in your terminal to install the skill globally:</p>
+        <CodeBlock code="claude skill install https://github.com/Hawiyat-Org/hawiyat-n8n-skill" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">This will download and configure the n8n skill for Claude automatically.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">After Installing</p>
+          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
+        </div>
       </SubStep>
 
       <SubStep id="nextjs-skill" title="Next.js Full Stack Skill">
@@ -252,16 +273,34 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">App Router, server components, API routes, Prisma</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">Claude becomes a Next.js expert generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
-        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
-        <CodeBlock code={"# .claude/skills/nextjs-patterns.md\n\nNext.js 14+ App Router conventions:\n\n## Component Rules\n- Server components by default\n- Use \"use client\" only when needed (interactivity, browser APIs)\n- Keep client components leaf nodes in the tree\n\n## File Conventions\n- page.tsx UI for a route\n- layout.tsx Shared UI for a route segment\n- loading.tsx Loading UI\n- error.tsx Error boundary\n- not-found.tsx Not found UI\n- route.ts API route handler\n\n## Data Fetching\n- Use server components for data fetching\n- Use fetch() with caching options\n- Use React.cache() for deduplication\n- Use server actions for mutations\n\n## Database\n- Use Prisma for database operations\n- Run prisma generate after schema changes\n- Use transactions for related writes"} />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>&ldquo;Create a product listing page with server components&rdquo;</li>
-          <li>&ldquo;Add a server action for form submission&rdquo;</li>
-          <li>&ldquo;Generate a Prisma schema for a blog&rdquo;</li>
-          <li>&ldquo;Create an API route for webhooks&rdquo;</li>
-        </ul>
+        <p className="text-sm text-muted-foreground mb-4">Claude becomes a Next.js expert generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
+        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <p className="text-sm text-muted-foreground mb-2">Run this command in your terminal to install the skill globally:</p>
+        <CodeBlock code="claude skill install https://github.com/Jeffallan/claude-skills" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">This installs the full skill collection from Jeffallan, which includes <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">nextjs-developer</code> along with 60+ other development skills.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">After Installing</p>
+          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
+        </div>
+      </SubStep>
+
+      <SubStep id="shadcn-skill" title="shadcn/ui Skill">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><CodeIcon className="h-5 w-5" /></div>
+          <div>
+            <h4 className="text-sm font-semibold">Component Library &amp; Theming</h4>
+            <p className="text-xs text-muted-foreground">Radix UI primitives, Tailwind CSS, dark mode</p>
+          </div>
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">Claude masters shadcn/ui component installation, theming with CSS variables, form building with React Hook Form + Zod, data tables with TanStack Table, and responsive composable UI patterns.</p>
+        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <p className="text-sm text-muted-foreground mb-2">Run this command in your terminal to install the skill globally:</p>
+        <CodeBlock code="claude skill install https://github.com/capraidev/shadcn-claude-skill" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">This installs the shadcn/ui skill directly from the community repo.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">After Installing</p>
+          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
+        </div>
       </SubStep>
 
       <SubStep id="uiux-skill" title="UI/UX Pro Max Skill">
@@ -272,16 +311,29 @@ function SkillsContent() {
             <p className="text-xs text-muted-foreground">Tailwind CSS, shadcn/ui, Framer Motion</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground mb-3">Claude generates production-grade UI components with responsive layouts, micro-interactions, and accessible design patterns.</p>
-        <h4 className="text-sm font-semibold mb-2">Skill File Content</h4>
-        <CodeBlock code={"# .claude/skills/ui-ux-pro-max.md\n\nUI/UX conventions for modern web apps:\n\n## Styling\n- Use Tailwind CSS for all styling\n- Use shadcn/ui components as base\n- Use cn() utility for className merging\n- Follow mobile-first responsive design\n\n## Animations\n- Use Framer Motion for complex animations\n- Use CSS transitions for simple hover states\n- Respect prefers-reduced-motion\n- Keep animations under 300ms\n\n## Accessibility\n- Use semantic HTML elements\n- Add aria-labels to interactive elements\n- Ensure color contrast ratio ≥ 4.5:1\n- Test with keyboard navigation\n\n## Component Patterns\n- Compound components for complex UI\n- Render props for flexible composition\n- Custom hooks for shared logic"} />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Useful Commands</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>&ldquo;Create a responsive pricing table with 3 tiers&rdquo;</li>
-          <li>&ldquo;Add a fade-in animation to this section&rdquo;</li>
-          <li>&ldquo;Make this form accessible with proper labels&rdquo;</li>
-          <li>&ldquo;Create a dark mode toggle with smooth transition&rdquo;</li>
+        <p className="text-sm text-muted-foreground mb-4">Claude generates production-grade UI components with responsive layouts, micro-interactions, and accessible design patterns.</p>
+        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <p className="text-sm text-muted-foreground mb-2">Run this command in your terminal to install the skill globally:</p>
+        <CodeBlock code="claude skill install https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">This installs the full UI/UX Pro Max skill bundle including banner design, brand identity, design systems, slides, and ui-styling sub-skills.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">After Installing</p>
+          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
+        </div>
+      </SubStep>
+
+      <SubStep id="using-skills" title="Using Skills">
+        <p className="text-sm text-muted-foreground mb-4">Once installed, skills work automatically. You don&apos;t need to activate them manually. Claude will recognize when a skill is relevant and apply it.</p>
+        <h4 className="text-sm font-semibold mb-2">Tips</h4>
+        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
+          <li>Skills are installed globally, so they work in any project</li>
+          <li>Quit Claude and enter again to reload after installing a new skill</li>
+          <li>You can ask Claude what skills are currently active</li>
+          <li>Skills update automatically when you update them via the CLI</li>
         </ul>
+        <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Need more skills?</strong> Check the Hawiyat dashboard or ask us for additional skill links.
+        </div>
       </SubStep>
     </>
   )
@@ -291,93 +343,74 @@ function MCPContent() {
   return (
     <>
       <SubStep id="what-are-mcp" title="What are MCP Servers?">
-        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Think of it like a USB-C port for AI it provides a standardized way to connect Claude to data sources, tools, and workflows.</p>
+        <p className="text-sm text-muted-foreground mb-4">MCP (Model Context Protocol) lets Claude talk to external services  databases, APIs, Google Sheets, Meta Ads, and more. Think of it as plugging a USB cable into Claude.</p>
         <p className="text-sm text-muted-foreground mb-4">With MCP, Claude can:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Access your Google Calendar, Notion, and databases</li>
-          <li>Query APIs and external services in real-time</li>
-          <li>Perform actions on your behalf (with approval)</li>
-          <li>Read and write files, search the web, and more</li>
+          <li>Read and write your Google Sheets</li>
+          <li>Query your PostgreSQL database</li>
+          <li>Pull Meta Ads campaign data</li>
+          <li>Search the web, manage GitHub, and more</li>
         </ul>
-        <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm">
-          <strong className="text-foreground">Key concept:</strong> MCP servers expose <em>tools</em> that Claude can use. Each tool has a name, description, and input schema.
-        </div>
       </SubStep>
 
-      <SubStep id="configuring-mcp" title="Configuring MCP Servers">
-        <p className="text-sm text-muted-foreground mb-4">MCP servers are configured in your Claude configuration file. The location depends on your platform:</p>
-        <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
-          <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">macOS / Linux</span></div>
-          <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm text-gray-200 font-mono break-all">~/Library/Application Support/Claude/claude_desktop_config.json</pre>
+      <SubStep id="easy-setup" title="Easiest Way to Add MCP">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-500"><Sparkles className="h-5 w-5" /></div>
+          <div>
+            <h4 className="text-sm font-semibold">No config files needed</h4>
+            <p className="text-xs text-muted-foreground">Just tell Claude what you want</p>
+          </div>
         </div>
-        <div className="rounded-lg bg-[#1e1e2e] dark:bg-[#0d0d0d] border border-border overflow-hidden mb-3">
-          <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] dark:bg-[#1a1a1a] border-b border-border/50"><span className="text-xs text-gray-400 font-mono">Windows</span></div>
-          <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm text-gray-200 font-mono break-all">%APPDATA%\Claude\claude_desktop_config.json</pre>
+        <p className="text-sm text-muted-foreground mb-4">Forget editing JSON files or hunting down config paths. Just tell Claude what you want to connect and give it the MCP link. Claude installs the MCP server automatically.</p>
+        <p className="text-sm text-muted-foreground mb-2">Paste something like this into Claude (replace the link with your MCP server URL):</p>
+        <CodeBlock code={`Set up the Meta Ads MCP server in this Next.js project. Use the official HTTP MCP endpoint at https://mcp.facebook.com/ads. Configure it in .mcp.json, run /mcp to trigger the OAuth login flow, and verify the tools are available. I have a Facebook Business Manager account with ads_management and ads_read permissions. If any scopes are missing, tell me exactly what to request.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude handles everything  configures the server, walks you through OAuth, and verifies the tools work.</p>
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">After it&apos;s done</p>
+          <p className="text-muted-foreground">Quit Claude (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+C</code>) and enter again. The MCP server will be active and ready to use.</p>
         </div>
-        <p className="text-sm text-muted-foreground mt-2">Create the file if it doesn&apos;t exist. Claude will automatically detect and load MCP servers on restart.</p>
       </SubStep>
 
       <SubStep id="meta-ads-mcp" title="Meta Ads MCP">
-        <p className="text-sm text-muted-foreground mb-2">Connect Claude to Meta Ads Manager for campaign analytics, audience insights, and ad performance monitoring.</p>
-        <h4 className="text-sm font-semibold mb-2">Configuration</h4>
-        <CodeBlock code={CODE_MCP_META} language="json" />
-        <p className="text-sm text-muted-foreground mt-2">Replace <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">your-token</code> with your Meta Ads access token from the Meta Developer Portal.</p>
-        <h4 className="text-sm font-semibold mb-2 mt-4">Available Tools</h4>
+        <p className="text-sm text-muted-foreground mb-4">Connect Claude to Meta Ads Manager for campaign analytics, audience insights, and ad performance monitoring.</p>
+        <p className="text-sm text-muted-foreground mb-2">Paste this into Claude to set up Meta Ads MCP:</p>
+        <CodeBlock code={`Set up the Meta Ads MCP server in this Next.js project. Use the official HTTP MCP endpoint at https://mcp.facebook.com/ads. Configure it in .mcp.json, run /mcp to trigger the OAuth login flow, and verify the tools are available. I have a Facebook Business Manager account with ads_management and ads_read permissions. If any scopes are missing, tell me exactly what to request.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude configures the MCP server, walks you through OAuth, and verifies the tools work. Then you can ask things like:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li><strong>get_campaigns</strong> List all active campaigns</li>
-          <li><strong>get_adset_insights</strong> Get performance metrics for ad sets</li>
-          <li><strong>get_audience_insights</strong> Analyze audience demographics</li>
-          <li><strong>get_ad_creatives</strong> Fetch ad creative details</li>
+          <li>&ldquo;Show me my top 5 campaigns this month&rdquo;</li>
+          <li>&ldquo;Which ad sets have the best ROI?&rdquo;</li>
+          <li>&ldquo;Pull audience insights for the last 30 days&rdquo;</li>
         </ul>
       </SubStep>
 
-      <SubStep id="popular-mcp-servers" title="Popular MCP Servers">
-        <p className="text-sm text-muted-foreground mb-4">Here are some popular MCP servers you can add to your configuration:</p>
+      <SubStep id="popular-mcp" title="Popular MCP Servers">
+        <p className="text-sm text-muted-foreground mb-4">Same approach for any service. Paste the prompt with the MCP link into Claude and it handles the setup:</p>
         <div className="space-y-3">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">Google Sheets</h4>
-            <p className="text-xs text-muted-foreground mb-2">Read and write spreadsheet data</p>
-            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-google-sheets"]\n}`} language="json" />
-          </div>
-          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Brave Search</h4>
-            <p className="text-xs text-muted-foreground mb-2">Web search capabilities</p>
-            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-brave-search"],\n  "env": { "BRAVE_API_KEY": "your-key" }\n}`} language="json" />
+            <p className="text-xs text-muted-foreground">Local only  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">github.com/xing5/mcp-google-sheets</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
             <h4 className="text-sm font-semibold mb-1">GitHub</h4>
-            <p className="text-xs text-muted-foreground mb-2">Access repositories, issues, and PRs</p>
-            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-github"],\n  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token" }\n}`} language="json" />
+            <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://api.githubcopilot.com/mcp/</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">PostgreSQL</h4>
-            <p className="text-xs text-muted-foreground mb-2">Query databases directly</p>
-            <CodeBlock code={`{\n  "command": "npx",\n  "args": ["-y", "@modelcontextprotocol/server-postgres"],\n  "env": { "DATABASE_URL": "postgresql://..." }\n}`} language="json" />
+            <h4 className="text-sm font-semibold mb-1">Notion</h4>
+            <p className="text-xs text-muted-foreground">Remote hosted, one-click OAuth  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.notion.com/mcp</code></p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Figma</h4>
+            <p className="text-xs text-muted-foreground">Remote hosted, OAuth via share link  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.figma.com/mcp</code></p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Canva</h4>
+            <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.canva.com/mcp</code></p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Supabase</h4>
+            <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.supabase.com/sse</code></p>
           </div>
         </div>
-      </SubStep>
-
-      <SubStep id="mcp-best-practices" title="Best Practices & Tips">
-        <h4 className="text-sm font-semibold mb-2">Security</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Never commit API keys or tokens to version control</li>
-          <li>Use environment variables for sensitive configuration</li>
-          <li>Review tool permissions before granting access</li>
-          <li>Use separate tokens for development and production</li>
-        </ul>
-        <h4 className="text-sm font-semibold mb-2">Performance</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
-          <li>Only enable MCP servers you actively use</li>
-          <li>Each server adds startup time keep it minimal</li>
-          <li>Use local servers when possible for faster response</li>
-        </ul>
-        <h4 className="text-sm font-semibold mb-2">Troubleshooting</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>Check Claude logs for server connection errors</li>
-          <li>Verify absolute paths in configuration</li>
-          <li>Ensure required environment variables are set</li>
-          <li>Restart Claude after configuration changes</li>
-        </ul>
       </SubStep>
     </>
   )
@@ -386,48 +419,103 @@ function MCPContent() {
 function IntegrationsContent() {
   return (
     <>
-      <SubStep id="hawiyat-n8n" title="Hawiyat × n8n">
-        <p className="text-sm text-muted-foreground mb-4">Trigger Hawiyat workflows from n8n via webhooks. Manage tokens, monitor usage, and automate deployment pipelines all from within your n8n workflows.</p>
-        <h4 className="text-sm font-semibold mb-2">Webhook Payload</h4>
-        <CodeBlock code={CODE_INTEGRATION_N8N} language="json" />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Common n8n Use Cases</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>Auto-deploy when a GitHub PR is merged</li>
-          <li>Scale services based on traffic alerts</li>
-          <li>Monitor usage and send Slack notifications</li>
-          <li>Rotate tokens on a schedule</li>
-        </ul>
-      </SubStep>
+      <SubStep id="hawiyat-n8n" title="Claude × Hawiyat × n8n">
+        <VideoEmbed videoId="1a161BJ3X_g" title="Claude × Hawiyat × n8n" />
+        <p className="text-sm text-muted-foreground mb-4">The n8n skill gives Claude deep knowledge of n8n workflow patterns, node configurations, webhook setups, and Hawiyat API integration. It should already be installed from the Skills section.</p>
 
-      <SubStep id="claude-sheets" title="Claude × Google Sheets">
-        <p className="text-sm text-muted-foreground mb-4">Read and write Google Sheets data directly from Claude. Generate reports, automate spreadsheet tasks, and analyze data using natural language commands.</p>
-        <h4 className="text-sm font-semibold mb-2">Setup</h4>
-        <CodeBlock code={CODE_INTEGRATION_GSHEETS} />
-        <h4 className="text-sm font-semibold mb-2 mt-4">Example Commands</h4>
-        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>&ldquo;Add a new row with today&rsquo;s sales data&rdquo;</li>
-          <li>&ldquo;Generate a monthly summary report&rdquo;</li>
-          <li>&ldquo;Find all rows where conversion rate is below 2%&rdquo;</li>
-          <li>&ldquo;Create a chart from column A and B&rdquo;</li>
-        </ul>
-      </SubStep>
+        <h4 className="text-sm font-semibold mb-2">How It Works</h4>
+        <p className="text-sm text-muted-foreground mb-4">You describe the automation you want  the workflow, the triggers, the actions. Claude uses the n8n skill to determine what nodes are needed, how to connect them, and what the Hawiyat integration requires. It will ask you for any missing details like API tokens, instance URLs, or specific configuration values.</p>
 
-      <SubStep id="combining" title="Combining Integrations">
-        <p className="text-sm text-muted-foreground mb-3">The real power comes from combining both integrations:</p>
-        <div className="rounded-lg bg-muted/30 border border-border p-4 text-sm">
-          <p className="text-muted-foreground mb-2"><strong className="text-foreground">Workflow:</strong></p>
-          <ol className="list-decimal pl-5 space-y-1 text-muted-foreground">
-            <li>n8n collects data from multiple sources (APIs, webhooks, databases)</li>
-            <li>Stores processed data in Google Sheets</li>
-            <li>Claude analyzes the sheet and generates insights</li>
-            <li>Claude triggers Hawiyat deployment based on analysis</li>
-          </ol>
+        <h4 className="text-sm font-semibold mb-2">Step-by-Step</h4>
+        <ol className="list-decimal pl-5 space-y-2 text-sm text-muted-foreground mb-4">
+          <li><strong>Describe your workflow</strong>  Tell Claude what you want to automate. Be as specific or as high-level as you like.</li>
+          <li><strong>Answer questions</strong>  The skill will ask for tokens, URLs, or credentials it needs. Paste them in.</li>
+          <li><strong>Review the workflow</strong>  Claude generates the n8n workflow JSON. Review it, ask questions, request changes.</li>
+          <li><strong>Deploy</strong>  Once you&apos;re happy, Claude can push the workflow to your n8n instance or export it as a file.</li>
+        </ol>
+
+        <div className="rounded-lg bg-muted/30 border border-border p-4 mb-4">
+          <p className="text-sm text-muted-foreground"><strong className="text-foreground">Example workflow:</strong> &ldquo;I want an n8n workflow that watches for new orders in Hawiyat and sends a WhatsApp notification via Evolution API. Also log every order to a Google Sheet.&rdquo;</p>
+          <p className="text-sm text-muted-foreground mt-2">Claude will ask for your Evolution API instance URL and token, your Google Sheet ID, and the Hawiyat webhook URL  then build the entire workflow node by node.</p>
+        </div>
+
+        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+          <p className="text-blue-500 font-medium mb-1">Pro tip</p>
+          <p className="text-muted-foreground">Start simple. Get one trigger working first (e.g., &ldquo;send me a Slack message when a new user signs up&rdquo;), then layer on more complexity.</p>
         </div>
       </SubStep>
 
-      <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground">
-        <strong className="text-foreground">Tip:</strong> Start with one integration, get it working, then add more. Test each connection before combining them.
-      </div>
+      <SubStep id="claude-sheets" title="Claude × Google Sheets">
+        <VideoEmbed videoId="1a161BJ3X_g" title="Claude × Google Sheets" />
+        <p className="text-sm text-muted-foreground mb-4">Claude can read, write, and analyze your Google Sheets data using natural language. No formulas, no scripts  just tell Claude what you need.</p>
+
+        <h4 className="text-sm font-semibold mb-2">How to Connect</h4>
+        <p className="text-sm text-muted-foreground mb-2">Claude connects to Google Sheets through MCP. The easiest way is to just ask:</p>
+        <CodeBlock code={`claude "connect to my Google Sheets"`} language="bash" />
+        <p className="text-sm text-muted-foreground mt-2 mb-4">Claude will guide you through the OAuth flow  a browser window opens, you authorize, and it&apos;s done. No tokens to copy, no config files to edit.</p>
+
+        <h4 className="text-sm font-semibold mb-2">What You Can Do</h4>
+        <div className="space-y-3 mb-4">
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Read &amp; Query</h4>
+            <p className="text-xs text-muted-foreground">&ldquo;Show me all rows where revenue is above $1000&rdquo; &bull; &ldquo;What was the total sales last month?&rdquo; &bull; &ldquo;Find duplicates in column B&rdquo;</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Write &amp; Update</h4>
+            <p className="text-xs text-muted-foreground">&ldquo;Add a new row with today&rsquo;s data&rdquo; &bull; &ldquo;Update the status column for row 5 to Done&rdquo; &bull; &ldquo;Append these 10 records from my CSV&rdquo;</p>
+          </div>
+          <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
+            <h4 className="text-sm font-semibold mb-1">Analyze &amp; Report</h4>
+            <p className="text-xs text-muted-foreground">&ldquo;Generate a monthly summary report&rdquo; &bull; &ldquo;Create a chart from columns A and B&rdquo; &bull; &ldquo;Find trends in this year&rsquo;s data&rdquo;</p>
+          </div>
+        </div>
+
+        <div className="p-3 sm:p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 text-sm">
+          <p className="text-amber-500 font-medium mb-1">Tip</p>
+          <p className="text-muted-foreground">You can reference multiple sheets in the same conversation. Claude keeps track of which sheet is which and can cross-reference data between them.</p>
+        </div>
+      </SubStep>
+
+      <SubStep id="fullstack-app" title="Full Stack App">
+        <VideoEmbed videoId="1a161BJ3X_g" title="Full Stack App" />
+        <p className="text-sm text-muted-foreground mb-4">Build a complete full-stack application using the <strong>nextjs-developer</strong> and <strong>shadcn-ui</strong> skills together. The two skills work in tandem  one handles architecture, routing, and data; the other handles UI components and theming.</p>
+
+        <h4 className="text-sm font-semibold mb-2">Recommended Workflow: Frontend First</h4>
+        <p className="text-sm text-muted-foreground mb-4">Start by building the frontend until you&apos;re satisfied with how it looks and feels. Once the UI matches your vision, add the backend layer. This way you validate the user experience before committing to data models and API logic.</p>
+
+        <div className="space-y-4 mb-4">
+          <div className="rounded-lg bg-muted/30 border border-border p-4">
+            <h4 className="text-sm font-semibold mb-2">Step 1: Scaffold &amp; Design the Frontend</h4>
+            <p className="text-sm text-muted-foreground mb-2">Tell Claude what you want to build. Focus on pages, layout, and components. Paste this into Claude:</p>
+            <CodeBlock code={`I want a SaaS landing page with a blog, auth pages (login/signup), and a dashboard. Use Next.js App Router with shadcn/ui. Start with the frontend only  I'll handle the backend after.`} language="text" />
+            <p className="text-sm text-muted-foreground mt-2">Claude scaffolds the project, sets up routing, builds UI components, and applies theming. Review the result, request changes, iterate on the design until it feels right.</p>
+          </div>
+
+          <div className="rounded-lg bg-muted/30 border border-border p-4">
+            <h4 className="text-sm font-semibold mb-2">Step 2: Iterate Until You&apos;re Happy</h4>
+            <p className="text-sm text-muted-foreground mb-2">Keep refining the frontend. Change layouts, swap components, adjust colors, add animations:</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+              <li>&ldquo;Change the dashboard layout to a sidebar navigation&rdquo;</li>
+              <li>&ldquo;Add a dark mode toggle&rdquo;</li>
+              <li>&ldquo;Make the hero section responsive with a mobile menu&rdquo;</li>
+              <li>&ldquo;Use a data table instead of a list for the analytics page&rdquo;</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-muted/30 border border-border p-4">
+            <h4 className="text-sm font-semibold mb-2">Step 3: Add the Backend</h4>
+            <p className="text-sm text-muted-foreground mb-2">Once the frontend is solid, paste this into Claude to wire up the backend:</p>
+            <CodeBlock code={`Now add the backend: set up Prisma with PostgreSQL, create User and Post models, add API routes for CRUD, and wire up NextAuth for authentication.`} language="text" />
+            <p className="text-sm text-muted-foreground mt-2">Claude adds the data layer, connects it to your frontend components, and handles all the wiring.</p>
+          </div>
+        </div>
+
+        <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
+          <strong className="text-foreground">Why frontend first?</strong> You can see and feel the product immediately. Backend decisions (data models, API design) become easier when you already know exactly what the UI needs. It also means you have something demo-worthy from day one.
+        </div>
+      </SubStep>
     </>
   )
 }
+
+

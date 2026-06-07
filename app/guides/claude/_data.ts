@@ -1,6 +1,7 @@
 export interface SubSection {
   id: string
   label: string
+  videoId?: string
 }
 
 export interface Section {
@@ -47,12 +48,13 @@ export const SECTIONS: Section[] = [
     icon: "BookOpen",
     label: "Skills",
     title: "Skills",
-    desc: "n8n, Next.js Full Stack, and UI/UX Pro Max skills.",
+    desc: "n8n, Next.js Full Stack, shadcn/ui, and UI/UX Pro Max skills.",
     videoId: "1a161BJ3X_g",
     subSections: [
       { id: "what-are-skills", label: "What are Skills?" },
       { id: "n8n-skill", label: "n8n Skill" },
       { id: "nextjs-skill", label: "Next.js Full Stack Skill" },
+      { id: "shadcn-skill", label: "shadcn/ui Skill" },
       { id: "uiux-skill", label: "UI/UX Pro Max Skill" },
       { id: "using-skills", label: "Using Skills" },
     ],
@@ -62,13 +64,13 @@ export const SECTIONS: Section[] = [
     icon: "Database",
     label: "MCP",
     title: "MCP Servers",
-    desc: "Connect Claude to external APIs via MCP.",
+    desc: "Connect Claude to external APIs instantly  no config files needed.",
     videoId: "1a161BJ3X_g",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },
+      { id: "easy-setup", label: "Easiest Way to Add MCP" },
       { id: "meta-ads-mcp", label: "Meta Ads MCP" },
-      { id: "usage-examples", label: "Usage Examples" },
-      { id: "adding-more", label: "Adding More MCP Servers" },
+      { id: "popular-mcp", label: "Popular MCP Servers" },
     ],
   },
   {
@@ -77,11 +79,11 @@ export const SECTIONS: Section[] = [
     label: "Integrations",
     title: "Integrations",
     desc: "Hawiyat × n8n and Claude × Google Sheets.",
-    videoId: "1a161BJ3X_g",
+    videoId: "",
     subSections: [
-      { id: "hawiyat-n8n", label: "Hawiyat × n8n" },
-      { id: "claude-sheets", label: "Claude × Google Sheets" },
-      { id: "combining", label: "Combining Integrations" },
+      { id: "hawiyat-n8n", label: "Claude × Hawiyat × n8n", videoId: "1a161BJ3X_g" },
+      { id: "claude-sheets", label: "Claude × Google Sheets", videoId: "1a161BJ3X_g" },
+      { id: "fullstack-app", label: "Full Stack App", videoId: "1a161BJ3X_g" },
     ],
   },
 ]

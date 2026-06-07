@@ -5,6 +5,7 @@ import { SECTIONS } from "../_data"
 import { SectionContent } from "../_content"
 
 function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
+  if (!videoId) return null
   return (
     <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-6 sm:mb-8">
       <iframe
