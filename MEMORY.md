@@ -1,0 +1,1 @@
+- [Claude Code Skill Installation](memory/claude-code-skill-installation.md) — How to install skills via natural language prompts

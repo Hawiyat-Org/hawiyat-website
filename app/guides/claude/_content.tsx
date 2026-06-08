@@ -240,9 +240,9 @@ function SkillsContent() {
     <>
       <SubStep id="what-are-skills" title="What are Skills?">
         <p className="text-sm text-muted-foreground mb-4">Skills are like plug-ins for Claude. They give Claude specialized knowledge for specific tasks like building n8n workflows, creating Next.js apps, or designing UIs.</p>
-        <p className="text-sm text-muted-foreground mb-4">Instead of manually creating files, you can install skills globally with a single command. Once installed, Claude will automatically use them when relevant.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills are cloned from GitHub repos into Claude Code's skills directory. Copy the prompt below and paste it into Claude Code — Claude handles the rest.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
-          <strong className="text-foreground">How it works:</strong> Get the skill link from Hawiyat, run one command, and you&apos;re done.
+          <strong className="text-foreground">How it works:</strong> Click copy, paste into Claude Code, restart. That&apos;s it.
         </div>
       </SubStep>
 
@@ -256,13 +256,9 @@ function SkillsContent() {
         </div>
         <p className="text-sm text-muted-foreground mb-4">This skill teaches Claude to create valid n8n workflows with proper node connections, error handling, and best practices.</p>
         <h4 className="text-sm font-semibold mb-2">How to Install</h4>
-        <p className="text-sm text-muted-foreground mb-2">Paste this command into Claude:</p>
-        <CodeBlock code={`/plugin install Hawiyat-Org/hawiyat-n8n-skill`} language="text" />
-        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude installs the skill in seconds. No marketplace registration, no config files.</p>
-        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">After Installing</p>
-          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
-        </div>
+        <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
+        <CodeBlock code={`Clone https://github.com/Hawiyat-Org/hawiyat-n8n-skill.git into my skills directory, then install the skill globally using the plugin system.\n\nSteps:\n1. Git clone the repo into ~/.claude/skills/hawiyat-n8n-skill/\n2. Run claude plugin init hawiyat-n8n --with skills --author "Hawiyat" --description "n8n workflow automation skill" to scaffold a proper plugin at ~/.claude/skills/hawiyat-n8n/ (this creates the .claude-plugin/plugin.json that auto-discovers on restart)\n3. Delete the example skill at ~/.claude/skills/hawiyat-n8n/skills/example/\n4. The .skill file in the repo is a ZIP. Extract hawiyat-n8n-evo.skill into ~/.claude/skills/hawiyat-n8n/skills/hawiyat-n8n-evo/ so SKILL.md lands at skills/hawiyat-n8n-evo/SKILL.md\n5. Confirm it loaded by checking the skills list after restart.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude uses <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude plugin init</code> (which works from within Claude Code) to scaffold the proper <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude-plugin/plugin.json</code> structure that auto-discovers on restart. Restart after.</p>
       </SubStep>
 
       <SubStep id="nextjs-skill" title="Next.js Full Stack Skill">
@@ -275,13 +271,9 @@ function SkillsContent() {
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude becomes a Next.js expert generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
         <h4 className="text-sm font-semibold mb-2">How to Install</h4>
-        <p className="text-sm text-muted-foreground mb-2">Paste these commands into Claude:</p>
-        <CodeBlock code={`/plugin marketplace add fullstack-dev-skills https://github.com/Jeffallan/claude-skills\n/plugin install fullstack-dev-skills/nextjs-developer`} language="text" />
-        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude adds the marketplace and installs <strong>only</strong> the <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">nextjs-developer</code> skill. None of the other 65 skills are installed.</p>
-        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">After Installing</p>
-          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
-        </div>
+        <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
+        <CodeBlock code={`Install the Next.js developer skill globally. Here's how:\n\n1. First, detect my OS. On Windows the skills directory is %USERPROFILE%\\.claude\\skills\\. On Linux/macOS it's ~/.claude/skills/.\n2. Git clone https://github.com/Jeffallan/claude-skills.git into that directory as "claude-skills".\n3. The repo already has a .claude-plugin/plugin.json at its root, so Claude Code will auto-discover it on restart — no extra setup needed.\n4. Confirm the clone is done and tell me to restart Claude Code.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude clones the repo. Restart Claude Code after.</p>
       </SubStep>
 
       <SubStep id="shadcn-skill" title="shadcn/ui Skill">
@@ -294,13 +286,9 @@ function SkillsContent() {
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude masters shadcn/ui component installation, theming with CSS variables, form building with React Hook Form + Zod, data tables with TanStack Table, and responsive composable UI patterns.</p>
         <h4 className="text-sm font-semibold mb-2">How to Install</h4>
-        <p className="text-sm text-muted-foreground mb-2">Paste this command into Claude:</p>
-        <CodeBlock code={`/plugin install capraidev/shadcn-claude-skill`} language="text" />
-        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude installs the skill directly in seconds. No cloning or manual file copying needed.</p>
-        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">After Installing</p>
-          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
-        </div>
+        <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
+        <CodeBlock code={`Install the shadcn/ui skill globally. Here's how:\n\n1. First, detect my OS. On Windows the skills directory is %USERPROFILE%\\.claude\\skills\\. On Linux/macOS it's ~/.claude/skills/.\n2. Git clone https://github.com/capraidev/shadcn-claude-skill.git into that directory as "shadcn".\n3. Check the cloned repo: if it has a SKILL.md at root with a .claude-plugin/plugin.json, it auto-loads on restart. If it only has SKILL.md with no plugin.json wrapper, create one: write a plugin.json at <skills-dir>/shadcn/plugin.json with {"name": "shadcn", "version": "1.0.0", "description": "shadcn/ui component library skill", "author": "capraidev", "license": "MIT", "keywords": ["shadcn", "ui", "components"], "skills": "./"} and Claude Code will discover it on restart.\n4. Confirm everything is ready so I just restart.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude clones the repo. Restart Claude Code after.</p>
       </SubStep>
 
       <SubStep id="uiux-skill" title="UI/UX Pro Max Skill">
@@ -313,13 +301,9 @@ function SkillsContent() {
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude generates production-grade UI components with responsive layouts, micro-interactions, and accessible design patterns.</p>
         <h4 className="text-sm font-semibold mb-2">How to Install</h4>
-        <p className="text-sm text-muted-foreground mb-2">Paste this command into Claude:</p>
-        <CodeBlock code={`/plugin install nextlevelbuilder/ui-ux-pro-max-skill`} language="text" />
-        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude installs the UI/UX Pro Max skill bundle in seconds. Includes banner design, brand identity, design systems, slides, and ui-styling sub-skills.</p>
-        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
-          <p className="text-blue-500 font-medium mb-1">After Installing</p>
-          <p className="text-muted-foreground">Quit Claude and enter again to load the new skill.</p>
-        </div>
+        <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
+        <CodeBlock code={`Install the UI/UX Pro Max skill bundle globally. Here's how:\n\n1. First, detect my OS. On Windows the skills directory is %USERPROFILE%\\.claude\\skills\\. On Linux/macOS it's ~/.claude/skills/.\n2. Git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git into that directory as "uiux-pro-max".\n3. This repo has its skills inside .claude/skills/ (banner-design, brand, design-systems, slides, ui-styling). It also has a .claude-plugin/plugin.json, so Claude Code will auto-discover all 5 sub-skills on restart — no extra setup needed.\n4. Confirm the clone is done and tell me to restart Claude Code.`} language="text" />
+        <p className="text-sm text-muted-foreground mt-3 mb-4">Claude clones the repo. All 5 sub-skills auto-load on restart.</p>
       </SubStep>
 
       <SubStep id="using-skills" title="Using Skills">
@@ -327,12 +311,12 @@ function SkillsContent() {
         <h4 className="text-sm font-semibold mb-2">Tips</h4>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Skills are installed globally, so they work in any project</li>
-          <li>Quit Claude and enter again to reload after installing a new skill</li>
-          <li>You can ask Claude what skills are currently active</li>
-          <li>Update skills anytime with <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">/plugin update</code></li>
+          <li>Restart Claude Code after adding a new skill for it to load</li>
+          <li>To update a skill, ask Claude: <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Update my n8n skill by running git pull in the skill folder</code></li>
+          <li>To remove a skill, ask Claude: <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Remove the shadcn skill by deleting its folder from the skills directory</code></li>
         </ul>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
-          <strong className="text-foreground">Need more skills?</strong> Check the Hawiyat dashboard or ask us for additional skill links.
+          <strong className="text-foreground">Need more skills?</strong> Check the Hawiyat dashboard or ask us for additional skill recommendations.
         </div>
       </SubStep>
     </>
