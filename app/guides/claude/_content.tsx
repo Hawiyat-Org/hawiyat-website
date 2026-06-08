@@ -449,7 +449,12 @@ function IntegrationsContent() {
       </SubStep>
 
       <SubStep id="claude-sheets" title="Claude × Google Sheets">
-        <VideoEmbed videoId="1a161BJ3X_g" title="Claude × Google Sheets" />
+        <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-border bg-[#0d0d0d] mb-6 sm:mb-8 flex items-center justify-center">
+          <div className="text-center">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-mono font-bold mb-3">▶ Video</span>
+            <p className="text-sm text-gray-400">Will be available soon</p>
+          </div>
+        </div>
         <p className="text-sm text-muted-foreground mb-4">Claude can read, write, and analyze your Google Sheets data using natural language. No formulas, no scripts  just tell Claude what you need.</p>
 
         <h4 className="text-sm font-semibold mb-2">How to Connect</h4>
