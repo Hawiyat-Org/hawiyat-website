@@ -480,7 +480,7 @@ function IntegrationsContent() {
       </SubStep>
 
       <SubStep id="fullstack-app" title="Full Stack App">
-        <VideoEmbed videoId="1a161BJ3X_g" title="Full Stack App" />
+        <VideoEmbed videoId="3QgEQH-RcHo" title="Full Stack App" />
         <p className="text-sm text-muted-foreground mb-4">Build a complete full-stack application using the <strong>nextjs-developer</strong> and <strong>shadcn-ui</strong> skills together. The two skills work in tandem  one handles architecture, routing, and data; the other handles UI components and theming.</p>
 
         <h4 className="text-sm font-semibold mb-2">Recommended Workflow: Frontend First</h4>

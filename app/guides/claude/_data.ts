@@ -83,7 +83,7 @@ export const SECTIONS: Section[] = [
     subSections: [
       { id: "hawiyat-n8n", label: "Claude × Hawiyat × n8n", videoId: "HnpW7kvaLLA" },
       { id: "claude-sheets", label: "Claude × Google Sheets", videoId: "1a161BJ3X_g" },
-      { id: "fullstack-app", label: "Full Stack App", videoId: "1a161BJ3X_g" },
+      { id: "fullstack-app", label: "Full Stack App", videoId: "3QgEQH-RcHo" },
     ],
   },
 ]
