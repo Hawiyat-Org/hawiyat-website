@@ -65,7 +65,7 @@ export const SECTIONS: Section[] = [
     label: "MCP",
     title: "MCP Servers",
     desc: "Connect Claude to external APIs instantly  no config files needed.",
-    videoId: "1a161BJ3X_g",
+    videoId: "PmgxterwxH0",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },
       { id: "easy-setup", label: "Easiest Way to Add MCP" },
