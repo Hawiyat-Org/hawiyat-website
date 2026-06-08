@@ -349,16 +349,35 @@ function MCPContent() {
         <p className="text-sm text-muted-foreground mb-2">Paste something like this into Claude (replace the link with your MCP server URL):</p>
         <CodeBlock code={`Set up the Meta Ads MCP server in this Next.js project. Use the official HTTP MCP endpoint at https://mcp.facebook.com/ads. Configure it in .mcp.json, run /mcp to trigger the OAuth login flow, and verify the tools are available. I have a Facebook Business Manager account with ads_management and ads_read permissions. If any scopes are missing, tell me exactly what to request.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude handles everything  configures the server, walks you through OAuth, and verifies the tools work.</p>
-        <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
+         <div className="p-3 sm:p-4 rounded-lg bg-blue-500/5 border border-blue-500/20 text-sm">
           <p className="text-blue-500 font-medium mb-1">After it&apos;s done</p>
-          <p className="text-muted-foreground">Quit Claude (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+C</code>) and enter again. The MCP server will be active and ready to use.</p>
+          <p className="text-muted-foreground">Quit Claude (<code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">Ctrl+C</code>) and enter again. Then run <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">/mcp</code> to trigger the browser-based OAuth flow. The MCP server will be active and ready to use.</p>
         </div>
       </SubStep>
 
       <SubStep id="meta-ads-mcp" title="Meta Ads MCP">
         <p className="text-sm text-muted-foreground mb-4">Connect Claude to Meta Ads Manager for campaign analytics, audience insights, and ad performance monitoring.</p>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude to set up Meta Ads MCP:</p>
-        <CodeBlock code={`Set up the Meta Ads MCP server in this Next.js project. Use the official HTTP MCP endpoint at https://mcp.facebook.com/ads. Configure it in .mcp.json, run /mcp to trigger the OAuth login flow, and verify the tools are available. I have a Facebook Business Manager account with ads_management and ads_read permissions. If any scopes are missing, tell me exactly what to request.`} language="text" />
+        <CodeBlock code={`Add the Meta Ads MCP server globally using the CLI — run this exact command:
+
+claude mcp add --transport http meta-ads https://mcp.facebook.com/ads
+
+Then edit ~/.claude.json to make sure the meta-ads server has "enableAllProjectMcpServers": true set in its project config so it connects without a trust prompt.
+
+Also, this project is a Next.js app — drop a .mcp.json in the project root (create one if it doesn't exist):
+
+{
+  "mcpServers": {
+    "meta-ads": {
+      "type": "http",
+      "url": "https://mcp.facebook.com/ads"
+    }
+  }
+}
+
+And in .claude/settings.local.json, add "enableAllProjectMcpServers": true and "enabledMcpjsonServers": ["meta-ads"].
+
+I already have a Facebook Business Manager account with ads_read and ads_management permissions, so OAuth scopes should be fine. Once the config is in place, tell me to restart Claude and run /mcp — that'll trigger the browser-based OAuth login flow.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude configures the MCP server, walks you through OAuth, and verifies the tools work. Then you can ask things like:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
           <li>&ldquo;Show me my top 5 campaigns this month&rdquo;</li>
