@@ -49,7 +49,7 @@ export const SECTIONS: Section[] = [
     label: "Skills",
     title: "Skills",
     desc: "n8n, Next.js Full Stack, shadcn/ui, and UI/UX Pro Max skills.",
-    videoId: "1a161BJ3X_g",
+    videoId: "7ZDB75Y99aU",
     subSections: [
       { id: "what-are-skills", label: "What are Skills?" },
       { id: "n8n-skill", label: "n8n Skill" },
