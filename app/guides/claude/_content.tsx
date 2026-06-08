@@ -423,7 +423,7 @@ function IntegrationsContent() {
   return (
     <>
       <SubStep id="hawiyat-n8n" title="Claude × Hawiyat × n8n">
-        <VideoEmbed videoId="1a161BJ3X_g" title="Claude × Hawiyat × n8n" />
+        <VideoEmbed videoId="HnpW7kvaLLA" title="Claude × Hawiyat × n8n" />
         <p className="text-sm text-muted-foreground mb-4">The n8n skill gives Claude deep knowledge of n8n workflow patterns, node configurations, webhook setups, and Hawiyat API integration. It should already be installed from the Skills section.</p>
 
         <h4 className="text-sm font-semibold mb-2">How It Works</h4>
