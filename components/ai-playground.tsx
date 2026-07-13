@@ -20,11 +20,8 @@ const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: stri
   const [isOpen, setIsOpen] = useState(false)
 
   const aiModels = [
-    { name: "Hawiyat CLI", icon: "bi-terminal", color: "text-cyan-600" },
-    { name: "Claude Sonnet", icon: "bi-robot", color: "text-orange-600"},
-    { name: "GPT 4o", icon: "bi-lightning", color: "text-green-600" },
-    { name: "Gemini", icon: "bi-gem", color: "text-purple-600" },
- 
+    { name: "Hawiyat Composer", icon: "bi-cpu", color: "text-cyan-600" },
+    { name: "Pablo", icon: "bi-robot", color: "text-orange-600"},
   ]
 
   const currentModel = aiModels.find(model => model.name === selectedModel) || aiModels[0]
@@ -74,7 +71,7 @@ const AIModelDropdown = ({ selectedModel, onModelChange }: { selectedModel: stri
 const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
   const [conversation, setConversation] = useState<ConversationMessage[]>([])
   const [currentPrompt, setCurrentPrompt] = useState("")
-  const [selectedModel, setSelectedModel] = useState("Hawiyat CLI")
+  const [selectedModel, setSelectedModel] = useState("Hawiyat Composer")
   const [showSignup, setShowSignup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const MAX_PROMPTS = 3
@@ -150,50 +147,9 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         className={`absolute rounded-xl text-center transition-transform duration-300
            ${showSignup ? "scale-100" : "scale-0"} backdrop-blur-lg flex flex-col p-10 place-items-center gap-4 w-full h-full dark:bg-[#000000b4] bg-[#ffffff6a] top-0 left-0 z-20`}
       >
-        <h4 className="mt-6 text-3xl max-md:text-xl">Signup to continue using Hawiyat CLI</h4>
+        <h4 className="mt-6 text-3xl max-md:text-xl">Signup to continue using Hawiyat Composer</h4>
 
-        <div className="flex gap-1 place-items-center">
-          <div className="flex -space-x-4">
-            <Image
-              className="z-10 w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/logo.svg?height=40&width=40"
-              width={40}
-              height={40}
-              alt="Avatar 1"
-            />
-            <Image
-              className="z-[4] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/logo.svg?height=40&width=40"
-              width={40}
-              height={40}
-              alt="Avatar 2"
-            />
-            <Image
-              className="z-[3] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/logo.svg?height=40&width=40"
-              width={40}
-              height={40}
-              alt="Avatar 3"
-            />
-            <Image
-              className="z-[2] w-10 h-10 object-cover rounded-full border-2 border-white"
-              src="/logo.svg?height=40&width=40"
-              width={40}
-              height={40}
-              alt="Avatar 4"
-            />
-            <Image
-              className="z-[1] w-10 h-10 object-cover rounded-full border-2 border-the"
-              src="/logo.svg?height=40&width=40"
-              width={40}
-              height={40}
-              alt="Avatar 5"
-            />
-          </div>
-          <p>+250</p>
-        </div>
-
-        <div className="mt-3 text-lg">Join developers using Hawiyat to deploy and run agents</div>
+        <p className="text-lg">Join developers across Algeria using Hawiyat Composer to cut their AI costs</p>
 
         <a href="/services" className="btn">
           Sign up
@@ -257,7 +213,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           <div className="overflow-y-auto px-[5%] max-lg:px-2 scrollbar max-lg:max-h-[80%] max-h-[550px] max-lg:mt-12 w-full h-full z-10 flex flex-col">
             {conversation.length === 0 ? (
               <div className="w-full flex text-center flex-col place-content-center">
-                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat CLI  interactive helper</h2>
+                <h2 className="text-4xl max-md:text-2xl max-md:mt-3 opacity-80">Hawiyat Composer  interactive helper</h2>
                 <div className="inline mt-6 max-md:mt-3">
                   <span>{typedText}</span>
                   <span className="animate-pulse">|</span>
@@ -301,7 +257,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           onSubmit={handleSubmit}
           className="place-content-center mt-auto h-[50px] p-1 place-items-center justify-around flex gap-1 bottom-2 w-full rounded-md bg-[#f3f4f6] dark:bg-[#171717]"
         >
-          <div className="min-w-[140px] min-h-[80px] max-lg:absolute z-10 top-1 left-1/2 max-lg:-translate-x-1/2 flex flex-col text-sm gap-1 place-content-center">
+          <div className="min-w-[100px] max-lg:absolute z-10 top-1 left-1/2 max-lg:-translate-x-1/2 flex flex-col text-sm gap-1 place-content-center">
             <AIModelDropdown selectedModel={selectedModel} onModelChange={handleModelChange} />
           </div>
 
@@ -309,8 +265,8 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
           <input
             placeholder="Ask the Hawiyat CLI (e.g. 'how do I deploy my app?')"
             type="text"
-            className="p-2 !outline-none pl-4 bg-transparent border-none w-full
-             placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[80%] h-full"
+            className="p-2 !outline-none pl-16 bg-transparent border-none w-full
+             placeholder-gray-500 dark:placeholder-opacity-60 dark:placeholder-gray-300 max-w-[95%] h-full"
             value={currentPrompt}
             onChange={(e) => setCurrentPrompt(e.target.value)}
             disabled={conversation.length >= MAX_PROMPTS * 2 || isLoading}

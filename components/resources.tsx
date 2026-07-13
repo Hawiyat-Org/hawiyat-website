@@ -1,44 +1,46 @@
 import Image from "next/image"
 import Link from "next/link"
-const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
+
 const Resources = () => {
   const articles = [
     {
-      title: "Getting started with Hawiyat CLI",
-      category: "Developer Tools",
-      date: "Aug 5, 2025",
-      image: "/assets/images/home/article1.webp",
-      href: {docsUrl},
+      title: "COSI 2025",
+      category: "First Public Appearance",
+      date: "2025",
+      image: "/aboutus/Cosi-2025/image1.png",
+      href: "/about",
     },
     {
-      title: "Optimizing container deployments on Hawiyat",
-      category: "Deployment",
-      date: "Jul 20, 2025",
-      image: "/assets/images/home/article2.webp",
-      href: {docsUrl},
+      title: "Label Projet Innovant",
+      category: "Ministry of Knowledge Economy",
+      date: "2026",
+      image: "/aboutus/label-projet-inovant.png",
+      href: "/about",
+      wide: true,
     },
     {
-      title: "Auto-scale architectures: Theory & practice",
-      category: "Infrastructure",
-      date: "Jun 15, 2025",
-      image: "/assets/images/home/article3.webp",
-      href: {docsUrl},
+      title: "Itihad Incubation Program",
+      category: "Accelerator",
+      date: "2025",
+      image: "/aboutus/itihad-incubation.png",
+      href: "/about",
     },
   ]
 
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
       <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">
-        Hawiyat Resources
+        Our Story
       </h3>
+      <p className="reveal-up mt-3 text-gray-500 dark:text-gray-400 text-center max-w-md">
+        From a small team in Algiers to a recognized AI infrastructure company.
+      </p>
 
-      {/* 🔥 changed flex-wrap to grid */}
-      <div className="reveal-up mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-[1200px]">
+      <div className="reveal-up mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.6fr_1fr] gap-3 w-full max-w-[1200px]">
         {articles.map((article, index) => (
           <Link
             key={index}
-            href={docsUrl || "https://docs.hawiyat.org/"}
+            href={article.href}
             className="flex h-[500px] flex-col gap-2 overflow-clip rounded-lg p-4 duration-300"
           >
             <div className="h-[350px] min-h-[350px] w-full overflow-hidden rounded-2xl">
@@ -48,6 +50,7 @@ const Resources = () => {
                 width={400}
                 height={350}
                 className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.3]"
+                style={index === 2 ? { objectPosition: "15% center" } : undefined}
               />
             </div>
 

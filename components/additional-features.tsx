@@ -10,55 +10,55 @@ const AdditionalFeatures = () => {
     {
       title: "One-Click Deployment",
       description:
-        "Deploy your apps with a single click. Hawiyat automatically builds, tests, and releases so you can focus on innovating, not infrastructure.",
+        "Deploy with one click. Hawiyat builds, tests, and releases so you focus on building, not on infrastructure.",
       image: RocketIcon
     },
     {
       title: "GitHub Integration",
       description:
-        "From push to production with CI/CD pipelines. Connect your repos to Hawiyat, modify the code, ship in no time.",
+        "Push to production with CI/CD. Connect your repos, change the code, ship it.",
       image: GitFork,
     },
     {
       title: "Automated Backups",
       description:
-        "Always safe. Keep your data in store with automated backups  no risk of losing databases or logs.",
+        "Your data, backed up automatically. Restore databases and logs whenever, no risk of losing anything.",
       image: DatabaseBackupIcon
     },
     {
       title: "Unified Identity",
       description:
-        "Authentication and permissions were never easier. Hawiyat secures and centralizes identity management for teams and apps.",
+        "Centralized authentication and permissions for teams and apps. Simple identity management.",
       image: Fingerprint,
     },
     {
       title: "Scalable Hosting",
       description:
-        "We grow with you. Hawiyat's infrastructure scales to fit your needs, making sure you're up at all times.",
+        "We scale as you grow. Infrastructure that handles your traffic, keeps you up, no surprises.",
       image: Expand,
     },
     {
       title: "Smart Analytics",
       description:
-        "Real-time insights into your projects and deployments. Track performance and issues with AI-powered analytics.",
+        "Real-time insights on your projects and deployments. AI-powered analytics for performance and issues.",
       image: TrendingUp,
     },
     {
       title: "300+ Ready-to-Use Templates",
       description:
-        "Start faster with over 300 pre-configured templates for popular stacks, frameworks, and services  no setup headaches.",
+        "Over 300 ready-to-go templates for popular stacks, frameworks, and services. Skip the boilerplate.",
       image: Layers,
     },
     {
       title: "Built-in Databases",
       description:
-        "Provision and manage databases in seconds. PostgreSQL, MySQL, and MongoDB are ready to plug into your apps.",
+        "Provision databases in seconds. PostgreSQL, MySQL, MongoDB. Ready to plug into your apps.",
       image: Database,
     },
     {
       title: "Team Collaboration",
       description:
-        "Invite teammates, assign roles, and collaborate securely on deployments  all within a single dashboard.",
+        "Invite teammates, assign roles, collaborate on deployments. All from one dashboard.",
       image: Users,
     }
   ]
@@ -67,7 +67,7 @@ const AdditionalFeatures = () => {
     <section id="features" className=" relative w-full flex flex-col items-center overflow-hidden py-12">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4">
         <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
-          Hawiyat Features
+          Hawiyat Cloud Features
         </h3>
 
         {/* Responsive grid: 1 column on xs, 2 on sm, 3 on lg */}

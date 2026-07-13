@@ -1,10 +1,17 @@
 "use client"
-import { useRef } from "react"
+import { useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Check, MessageSquare } from "lucide-react"
-import Link from "next/link"
+import { OrderForm } from "@/components/services/order-form"
 
 export default function Pricing() {
+  const [selectedService, setSelectedService] = useState<{
+    id: string
+    name: string
+    price: string
+    priceLabel: string
+    image: string
+  } | null>(null)
   const sectionRef = useRef(null)
   const headerRef = useRef(null)
   const cardsRef = useRef(null)
@@ -48,203 +55,66 @@ export default function Pricing() {
           className="mx-auto max-w-2xl space-y-6 text-center"
         >
           <h1 className="text-center text-4xl font-semibold lg:text-5xl">
-            Hosting Plans That Scale With You
+            Plans That Scale With You
           </h1>
           <p className="text-muted-foreground">
-            Choose from our ready-to-deploy hosting plans or request a custom solution tailored to your needs.
+            Hawiyat Composer for AI costs, Cloud Hosting for everything else. Or both.
           </p>
         </motion.div>
 
-        <div ref={cardsRef} className="mt-8 grid gap-6 md:mt-20 md:grid-cols-3 md:gap-0">
-          {/* Basic Plan */}
-          <motion.div 
-            initial={{ opacity: 1, scale: 0 }}
-            animate={cardsInView ? { 
-              x: 0,
-              y: 0, 
-              scale: 1,
-              transition: {
-                x: { duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] },
-                scale: { duration: 0.6, delay: 0.3, ease: [0.6, 0.05, 0.01, 0.9] }
-              }
-            } : { opacity: 1, scale: 0 }}
-            className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10"
-          >
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate={cardsInView ? "visible" : "hidden"}
-              transition={{ delay: 0.8 }}
-              className="space-y-4"
-            >
-              <motion.div variants={itemVariants}>
-                <h2 className="font-medium">Hosting Basic</h2>
-                <p className="text-muted-foreground text-sm mt-2">
-                  Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="mt-4">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-bold">1000</span>
-                  <span className="text-sm text-muted-foreground">DA/month</span>
-                </div>
-              </motion.div>
-
-              <motion.button 
-                variants={itemVariants}
-                className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-              >
-                <Link href="/services?q=hosting Basic">Get Started</Link>
-              </motion.button>
-
-              <motion.hr variants={itemVariants} className="border-dashed mt-6" />
-
-              <motion.ul 
-                variants={containerVariants}
-                className="list-outside space-y-3 text-sm mt-4"
-              >
-                {['1 application', 'Free SSL certificate', 'Automatic deployments', 'Basic monitoring'].map((item, index) => (
-                  <motion.li 
-                    key={index}
-                    variants={itemVariants}
-                    className="flex items-center gap-2"
-                  >
-                    <Check className="size-3" />
-                    {item}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          </motion.div>
-
-          {/* VIP Plan */}
-          <motion.div 
-            initial={{ opacity: 1, scale: 0 }}
-            animate={cardsInView ? { 
-              y: 0, 
-              scale: 1,
-              transition: {
-                y: { duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] },
-                scale: { duration: 0.6, delay: 0.5, ease: [0.6, 0.05, 0.01, 0.9] }
-              }
-            } : { opacity: 1, scale: 0 }}
-            className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]"
-          >
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate={cardsInView ? "visible" : "hidden"}
-              transition={{ delay: 0.8 }}
-              className="space-y-4"
-            >
-              <motion.div variants={itemVariants}>
-                <h2 className="font-medium">Hosting VIP</h2>
-                <p className="text-muted-foreground text-sm mt-2">
-                  Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="mt-4">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-bold">2000</span>
-                  <span className="text-sm text-muted-foreground">DA/month</span>
-                </div>
-              </motion.div>
-
-              <motion.button 
-                variants={itemVariants}
-                className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-              >
-                <Link href="/services?q=hosting vip">Get Started</Link>
-              </motion.button>
-
-              <motion.hr variants={itemVariants} className="border-dashed mt-6" />
-
-              <motion.ul 
-                variants={containerVariants}
-                className="list-outside space-y-3 text-sm mt-4"
-              >
-                {['2 applications', 'Managed database included', 'Free SSL certificate', 'Automatic deployments', 'Priority support'].map((item, index) => (
-                  <motion.li 
-                    key={index}
-                    variants={itemVariants}
-                    className="flex items-center gap-2"
-                  >
-                    <Check className="size-3" />
-                    {item}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          </motion.div>
-
-          {/* Custom Plan */}
-          <motion.div 
-            initial={{ opacity: 1, scale: 0 }}
-            animate={cardsInView ? { 
-              x: 0,
-              y: 0, 
-              scale: 1,
-              transition: {
-                x: { duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] },
-                scale: { duration: 0.6, delay: 0.7, ease: [0.6, 0.05, 0.01, 0.9] }
-              }
-            } : { opacity: 1, scale: 0 }}
-            className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-l-none md:border-l-0 lg:p-10"
-          >
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate={cardsInView ? "visible" : "hidden"}
-              transition={{ delay: 0.8 }}
-              className="space-y-4"
-            >
-              <motion.div variants={itemVariants}>
-                <h2 className="font-medium">Custom Hosting</h2>
-                <p className="text-muted-foreground text-sm mt-2">
-                  Need something tailored to your specific requirements? Let's build a custom hosting solution just for you.
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="mt-4">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-bold">Custom</span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">Pricing based on your needs</p>
-              </motion.div>
-
-              <motion.a 
-                variants={itemVariants}
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 text-white hover:bg-green-700 h-10 px-4 py-2"
-              >
-                <MessageSquare className="size-4" />
-                Contact on WhatsApp
-              </motion.a>
-
-              <motion.hr variants={itemVariants} className="border-dashed mt-6" />
-
-              <motion.ul 
-                variants={containerVariants}
-                className="list-outside space-y-3 text-sm mt-4"
-              >
-                {['Custom resource allocation', 'Dedicated support', 'Scalable infrastructure', 'SLA options', 'Free migration assistance', 'Tailored to your needs'].map((item, index) => (
-                  <motion.li 
-                    key={index}
-                    variants={itemVariants}
-                    className="flex items-center gap-2"
-                  >
-                    <Check className="size-3" />
-                    {item}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          </motion.div>
+        {/* Composer Plans */}
+        <div className="mt-12 mb-8 text-center">
+          <h2 className="text-2xl font-semibold">Hawiyat Composer + Claude Code</h2>
+          <p className="text-sm text-muted-foreground mt-1">AI coding plans, billed in DZD. No daily or weekly limits ever.</p>
         </div>
+        <div className="grid gap-6 md:grid-cols-3 md:gap-0">
+          {/* PRO */}
+          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10">
+            <div className="space-y-4">
+              <div><h2 className="font-medium">Hawiyat Composer PRO</h2>
+              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-purple-600 text-white mt-1">Pro</div>
+              <p className="text-muted-foreground text-sm mt-2">2x Claude credits with Hawiyat Composer caching. For individual devs and freelancers.</p></div>
+              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">6,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
+              <button onClick={() => setSelectedService({ id: "composer-pro", name: "Composer PRO", price: "6000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Get Started</button>
+              <hr className="border-dashed mt-6" />
+              <ul className="list-outside space-y-3 text-sm mt-4">
+                {['2x Claude Pro credit quota', 'No daily or weekly limits', 'Hawiyat Composer caching layer', 'Context-aware suggestions', 'Automated code reviews', 'Multi-language support'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+              </ul>
+            </div>
+          </div>
+          {/* MAX 5X */}
+          <div className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
+            <div className="space-y-4">
+              <div><h2 className="font-medium">Hawiyat Composer MAX 5X</h2>
+              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white mt-1">Max 5X</div>
+              <p className="text-muted-foreground text-sm mt-2">5x Claude capacity with semantic caching and smart routing. For daily shippers.</p></div>
+              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">15,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
+              <button onClick={() => setSelectedService({ id: "composer-max5x", name: "Composer MAX 5X", price: "15000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button>
+              <hr className="border-dashed mt-6" />
+              <ul className="list-outside space-y-3 text-sm mt-4">
+                {['5x Claude Pro credit quota', 'No daily or weekly limits', 'Semantic caching (vector-based)', 'Smart provider routing', 'Context-aware suggestions', 'Automated code reviews'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+              </ul>
+            </div>
+          </div>
+          {/* MAX 20X */}
+          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-l-none md:border-l-0 lg:p-10">
+            <div className="space-y-4">
+              <div><h2 className="font-medium">Hawiyat Composer MAX 20X</h2>
+              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30 mt-1">Max 20X</div>
+              <p className="text-muted-foreground text-sm mt-2">20x Claude capacity with Fable & Opus models, GDPR compliance. For teams and agencies.</p></div>
+              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">30,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
+              <button onClick={() => setSelectedService({ id: "composer-max20x", name: "Composer MAX 20X", price: "30000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button>
+              <hr className="border-dashed mt-6" />
+              <ul className="list-outside space-y-3 text-sm mt-4">
+                {['20x Claude Pro credit quota', 'No daily or weekly limits', 'Exact-match + semantic caching', 'Smart provider routing', 'Hybrid data compliance', 'Multi-agent traffic resolution', 'Priority support'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {selectedService && (
+          <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
+        )}
       </div>
     </section>
   )

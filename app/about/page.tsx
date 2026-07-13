@@ -29,9 +29,7 @@ export default function AboutPage() {
               About <span className="font-thin font-serif">Us</span>
             </h1>
             <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed max-md:text-sm">
-              A cloud and AI platform based in Algeria. We deliver infrastructure, AI
-              tooling, hosting, and automation for developers and businesses across
-              North Africa and beyond.
+              Hawiyat is an AI infrastructure company based in Algeria. We help developers and businesses across North Africa build with frontier AI models. Hawiyat Composer, our caching and routing gateway, handles the AI layer. Underneath it, our own cloud infrastructure handles hosting, databases, and deployment.
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Founded in Algiers • Incubated by Itihad • 100+ clients
@@ -310,7 +308,7 @@ export default function AboutPage() {
                 image: "/aboutus/Partners/brahim.png",
                 role: "Influencer in Automation",
                 url: "https://www.instagram.com/brahim_amro/",
-                desc: "Well-known in automation circles. Worked on Composer's core architecture and AI integration.",
+                desc: "Well-known in automation circles. Worked on Hawiyat Composer's core architecture and AI integration.",
               },
             ].map((p) => (
               <a

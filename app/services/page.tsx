@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo, useEffect, useCallback, Suspense } from "react"
-import { ArrowRight, Search, Zap, Clock, Shield, Server, MessageSquare, Bot } from "lucide-react"
+import { ArrowRight, Search, Zap, Clock, Shield, Server, MessageSquare, Bot, Users, DollarSign, Wrench, CheckCircle, PhoneCall, Activity } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
@@ -12,7 +12,7 @@ const services = [
     id: "n8n-hosting",
     name: "n8n Hosting",
     shortDesc: "Managed workflow automation platform",
-    description: "A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.",
+    description: "A managed n8n instance. Connect apps, automate tasks, and build AI workflows without dealing with servers or config files.",
     image: "/services/n8n-hosting.png",
     price: "8000",
     priceLabel: "DA/year",
@@ -20,7 +20,7 @@ const services = [
     link: "/services/n8n",
     category: "Managed Services",
     tag: "Popular",
-    useCases: "Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.",
+    useCases: "Automating WhatsApp replies, connecting CRMs, form-triggered actions, AI pipelines, scheduled tasks.",
     features: [
       "Fully managed instances",
       "Auto-scaling infrastructure",
@@ -46,7 +46,7 @@ const services = [
     link: "/services/claude",
     category: "Managed Services",
     tag: "Pro",
-    useCases: "Individual developers, freelancers, and small projects needing reliable AI coding assistance without usage anxiety.",
+    useCases: "Individual devs, freelancers, and small projects. Reliable AI coding help without worrying about hitting limits.",
     features: [
       "2x Claude Pro credit quota",
       "No daily or weekly limits",
@@ -65,7 +65,7 @@ const services = [
     id: "hosting-basic",
     name: "Hosting Basic",
     shortDesc: "Single app hosting with basic resources",
-    description: "Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites. Includes SSL, automatic deployments, and basic monitoring.",
+    description: "Simple hosting for a single app. Personal projects, portfolios, small websites. SSL, auto-deploy, and basic monitoring included.",
     image: "/logo.svg",
     price: "1000",
     priceLabel: "DA/month",
@@ -98,7 +98,7 @@ const services = [
     cta: "Get Started",
     link: "/services/evolution",
     category: "Managed Services",
-    useCases: "WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.",
+    useCases: "WhatsApp chatbots, order notifications, customer support automation, bulk messaging.",
     features: [
       "Official Business API",
       "Multi-channel support",
@@ -175,7 +175,7 @@ const services = [
     id: "hosting-vip",
     name: "Hosting VIP",
     shortDesc: "Premium hosting with 2 apps + database",
-    description: "Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power, a database, and priority support.",
+    description: "Premium hosting for up to 2 apps with a managed database. For projects that need database access and priority support.",
     image: "/logo.svg",
     price: "2000",
     priceLabel: "DA/month",
@@ -202,7 +202,7 @@ const services = [
     id: "llm-credit",
     name: "LLM Credit",
     shortDesc: "OpenAI credits served through Hawiyat Composer",
-    description: "LLM credits powered by Hawiyat Composer's optimization gateway. Access OpenAI models with built-in caching, smart routing, and reduced token waste.",
+    description: "OpenAI model credits served through Hawiyat Composer. Built-in caching, smart routing, less wasted tokens.",
     image: "/services/openai.png",
     price: "2500",
     priceLabel: "DA for 10 USD credits",
@@ -210,7 +210,7 @@ const services = [
     link: "/services",
     category: "Managed Services",
     tag: "Starter",
-    useCases: "Developers and teams who want OpenAI access with Hawiyat Composer's caching, routing, and cost optimization built in.",
+    useCases: "Developers and teams who want OpenAI access with Hawiyat Composer's caching, routing, and optimization.",
     features: [
       "OpenAI model access",
       "Hawiyat Composer caching layer",
@@ -220,7 +220,7 @@ const services = [
     ],
     bulletPoints: [
       { icon: Zap, text: "OpenAI Access" },
-      { icon: Shield, text: "Composer Optimized" },
+      { icon: Shield, text: "Hawiyat Composer Optimized" },
       { icon: Clock, text: "No Limits" },
     ],
   },
@@ -561,6 +561,27 @@ function ServicesContent() {
           <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
         )}
 
+        {/* Why Choose Hawiyat */}
+        <div className="mt-24 mb-10 w-full flex flex-col items-center">
+          <h3 className="text-5xl font-medium max-md:text-3xl text-center leading-normal mb-10">Why Choose Hawiyat</h3>
+          <p className="text-muted-foreground mt-[-24px] mb-10 text-center text-sm max-w-lg">Built for developers in Algeria. Priced in DZD.</p>
+          <div className="w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
+            {[
+              { icon: Users, title: "Local Team", desc: "Based in Algeria, same timezone, support in Arabic and French." },
+              { icon: DollarSign, title: "Flat Pricing", desc: "Fixed monthly price, no usage surprises or hidden fees." },
+              { icon: Wrench, title: "Fully Managed", desc: "You use the service, we run the infrastructure." },
+              { icon: CheckCircle, title: "Production-Tested", desc: "Same infrastructure powers 60+ live clients." },
+              { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
+              { icon: Activity, title: "24/7 Monitoring", desc: "Round-the-clock reliability and instant alerts." },
+            ].map((item, i) => (
+              <div key={i} className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border">
+                <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
+                <h3 className="text-2xl text-center">{item.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

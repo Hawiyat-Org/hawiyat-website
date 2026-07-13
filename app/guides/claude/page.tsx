@@ -11,7 +11,7 @@ export default function ClaudeGuideOverview() {
     
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Claude Code + Hawiyat Composer Guide</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Everything you need to install, configure, and master Claude Code  from VS Code extensions to n8n integration and web development.
+          Install, configure, and master Claude Code. VS Code extensions, n8n integration, web dev, and MCP servers.
         </p>
       </div>
       <div className="grid gap-4">

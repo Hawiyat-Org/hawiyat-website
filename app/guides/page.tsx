@@ -21,7 +21,7 @@ export default function GuideIndexPage() {
         <div className="mt-8 space-y-2">
           <h1 className="text-4xl font-semibold">Guides</h1>
           <p className="text-muted-foreground">
-            Everything you need to get started with Claude Code, Hawiyat Composer, integrations, and more.
+            Getting started with Claude Code, Hawiyat Composer, integrations, and more.
           </p>
         </div>
 

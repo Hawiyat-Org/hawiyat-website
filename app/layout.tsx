@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   Space_Grotesk,
   Playfair_Display,
@@ -11,6 +12,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
 import Header from "@/components/header";
+
 const space = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -47,37 +49,44 @@ const aldrich = Aldrich({
   display: "swap",
 });
 
-const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? 'Hawiyat';
-const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? 'https://hawiyat.org';
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.hawiyat.org';
-const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? 'https://docs.hawiyat.org';
+// AUDIT NOTE: five font families with multiple weights each are loaded on
+// every page. Confirm all five are actually used site-wide (not just on one
+// page) — each unused family/weight is pure LCP cost. Recommend trimming to
+// 2-3 max if some are only used on isolated pages.
+
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
+const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? "https://hawiyat.org";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.hawiyat.org";
+const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.hawiyat.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(NEXT_URL),
   title: {
-    default: `${APP_NAME} Deploy & Scale Your Apps`,
-    template: '%s | ' + APP_NAME,
+    default: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    template: "%s | " + APP_NAME,
   },
-  description: 'Hawiyat is an all-in-one platform for developers to deploy, manage, and scale applications globally with serverless functions, managed databases, CI/CD, and edge networking.',
+  description:
+    "Hawiyat is an AI infrastructure platform based in Algeria. Hawiyat Composer caches and routes requests between your dev tools and AI models, cutting token costs — priced in DZD, backed by our own cloud infrastructure.",
   applicationName: APP_NAME,
   keywords: [
-    'paas ', 'platform as service','paas algerien','paas dz','dz paas','platform as a service in algeria',
-    'platform as a service dz','scalability dz','scalability soltion in algeri','deploy dz',
-    'vps algerie', 'vps dz', 'hebergement agl', APP_NAME, 'cloud deployment',
-    'serverless', 'CI/CD', 'edge network', 'managed databases', 'DevOps',
-    'web applications', 'global deployment', 'developer tools',
-    'hebergement algerie', 'hebergement web algerie', 'hebergeur algerien',
-    'serveur vps algerie', 'vps pas cher algerie', 'hebergement site web algerie',
-    'serveur dedie algerie', 'vps algerie prix', 'cloud vps algerie',
-    'hebergement professionnel algerie', 'hebergeur vps algerien',
-    'machine virtuelle algerie', 'hebergement vps algerie', 'vps local algerie',
-    'hebergement web local', 'vps illimité algerie', 'hebergement vps web',
-    'heberger site en algerie'
+    "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
+    "platform as a service in algeria", "platform as a service dz",
+    "scalability dz", "deploy dz", "vps algerie", "vps dz", "hebergement algerie",
+    APP_NAME, "cloud deployment", "serverless", "CI/CD", "edge network",
+    "managed databases", "DevOps", "web applications", "global deployment",
+    "developer tools", "hebergement web algerie", "hebergeur algerien",
+    "serveur vps algerie", "vps pas cher algerie", "hebergement site web algerie",
+    "serveur dedie algerie", "vps algerie prix", "cloud vps algerie",
+    "hebergement professionnel algerie", "hebergeur vps algerien",
+    "machine virtuelle algerie", "hebergement vps algerie", "vps local algerie",
+    "hebergement web local", "vps illimité algerie", "hebergement vps web",
+    "heberger site en algerie",
+    // AI-first keywords
+    "ai gateway", "llm gateway", "ai infrastructure algeria", "reduce ai costs",
+    "llm caching", "model routing dz", "ai platform algeria", "hawiyat composer",
+    "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
   ],
-  
-  authors: [
-    { name: `${APP_NAME} Team`, url: NEXT_URL }
-  ],
+  authors: [{ name: `${APP_NAME} Team`, url: NEXT_URL }],
   creator: `${APP_NAME} Team`,
   publisher: APP_NAME,
   robots: {
@@ -89,12 +98,13 @@ export const metadata: Metadata = {
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
-      "max-snippet": -1
-    }
+      "max-snippet": -1,
+    },
   },
   openGraph: {
-    title: `${APP_NAME} Deploy & Scale Your Apps`,
-    description: 'All-in-one platform for deploying, managing, and scaling web applications with global edge infrastructure.',
+    title: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    description:
+      "Cut your AI costs with Hawiyat Composer, our caching and routing gateway. Priced in DZD, backed by cloud infrastructure built for Algeria.",
     url: NEXT_URL,
     siteName: APP_NAME,
     images: [
@@ -103,27 +113,38 @@ export const metadata: Metadata = {
         width: 2000,
         height: 2000,
         alt: `${APP_NAME} Platform`,
-      }
+      },
     ],
-    // use dash in locale to match common format
-    locale: 'en_US',
-    alternateLocale: ['fr_DZ'],
-
-    type: 'website',
+    // AUDIT NOTE: confirm which locale is actually primary for your traffic.
+    // If most visitors/target customers are French or Arabic speaking,
+    // consider making fr_DZ (or ar_DZ) the primary locale instead of en_US.
+    locale: "en_US",
+    alternateLocale: ["fr_DZ"],
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: `${APP_NAME} Deploy & Scale Your Apps`,
-    description: 'Your central hub for cloud deployments, serverless functions, and edge scaling.',
+    card: "summary_large_image",
+    title: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    description:
+      "Cut your AI costs with Hawiyat Composer, our caching and routing gateway. Priced in DZD, backed by cloud infrastructure built for Algeria.",
     images: [`${NEXT_URL}/hawiyat.png`],
-    creator: '@hawiyat',
+    creator: "@hawiyat",
   },
   alternates: {
+    // AUDIT NOTE (CRITICAL): this canonical applies to EVERY page that
+    // doesn't override it. If child routes (services, blog, pricing, docs
+    // links, etc.) don't set their own `alternates.canonical` in their own
+    // metadata export, they will all canonicalize to the homepage and stop
+    // being indexed separately. Verify every indexable route overrides this.
     canonical: NEXT_URL,
     languages: {
-      'en-US': NEXT_URL,
-      'fr-DZ': `${NEXT_URL}/fr`
-    }
+      "en-US": NEXT_URL,
+      "fr-DZ": `${NEXT_URL}/fr`,
+      // AUDIT NOTE: add "x-default" once you confirm the fallback page —
+      // required so Google knows which version to show users outside any
+      // matched locale.
+      "x-default": NEXT_URL,
+    },
   },
   formatDetection: {
     email: false,
@@ -131,40 +152,64 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: `${NEXT_URL}/favlogo.ico`,
-    shortcut: `${NEXT_URL}/logo.svg`,
-    apple: `${NEXT_URL}/logo.svg`,
+    icon: "/favlogo.ico",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
   },
   other: {
-    'application/ld+json': JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": APP_NAME,
-      "url": NEXT_URL,
-      "logo": `${NEXT_URL}/logo.svg`,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://hawiyat.org/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/hawiyat",
-        "https://github.com/Hawiyat-Corp"
-      ],
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "telephone": "+213-55-955-5951",
-        "contactType": "Customer Support",
-        "areaServed": "DZ"
-      }]
-    })
-  }
+    // AUDIT NOTE: split into two schema blocks below via <script> tags in
+    // <head> instead — WebSite and Organization are different types and
+    // contactPoint is not a valid WebSite property. See <head> below.
+  },
 };
 
-// Export viewport separately so Next.js App Router won't warn about unsupported viewport in metadata
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: APP_NAME,
+  url: NEXT_URL,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${NEXT_URL}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+// Organization schema, split out from WebSite per schema.org spec.
+// contactPoint, logo, and sameAs belong here, not on WebSite.
+// AUDIT NOTE: fill in foundingDate / foundingLocation if you want to
+// strengthen the "Built in Algeria" / "Founded in Algiers" trust signal for
+// Knowledge Panel eligibility.
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: APP_NAME,
+  url: NEXT_URL,
+  logo: `${NEXT_URL}/logo.svg`,
+  foundingLocation: {
+    "@type": "Place",
+    name: "Algiers, Algeria",
+  },
+  sameAs: [
+    "https://www.linkedin.com/company/hawiyat",
+    "https://github.com/Hawiyat-Corp",
+    "https://x.com/hawiyat",
+    "https://instagram.com/hawiyat.cloud",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+213-55-955-5951",
+      contactType: "Customer Support",
+      areaServed: "DZ",
+      availableLanguage: ["English", "French", "Arabic"],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -178,6 +223,14 @@ export default function RootLayout({
       className={`${space.variable} ${playfair.variable} ${ubuntu.variable} ${dancingScript.variable} ${aldrich.variable} antialiased`}
     >
       <head>
+        {/*
+          AUDIT NOTE: full Bootstrap Icons CDN stylesheet loaded site-wide
+          for what's likely a handful of icons. lucide-react is already in
+          your dependency tree elsewhere in the app (tree-shakeable, no
+          extra network origin, no unused icon payload). Recommend
+          replacing bootstrap-icons usages with lucide-react and removing
+          this stylesheet entirely once migrated.
+        */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
@@ -185,16 +238,32 @@ export default function RootLayout({
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        
+
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
-        {/* note: viewport is handled by export const viewport above - remove manual meta viewport to avoid duplication */}
-        {/* Meta Pixel  directly in head for server-side rendering */}
-        <script dangerouslySetInnerHTML={{
-          __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`
-        }} />
+
+        {/*
+          Self-referencing + reciprocal hreflang tags. Next.js's
+          `alternates.languages` metadata field does NOT automatically add
+          a self-referencing tag for the current locale — without it,
+          Google can drop the whole hreflang cluster. x-default tells
+          Google which version to serve users outside en/fr entirely.
+        */}
+        <link rel="alternate" hrefLang="en-US" href={NEXT_URL} />
+        <link rel="alternate" hrefLang="fr-DZ" href={`${NEXT_URL}/fr`} />
+        <link rel="alternate" hrefLang="x-default" href={NEXT_URL} />
+
+        {/* Organization + WebSite structured data, split per schema.org spec */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
-      <body className="min-h-screen flex flex-col hero-bg-gradient text-black  dark:bg-black dark:text-white font-sans">
+      <body className="min-h-screen flex flex-col hero-bg-gradient text-black dark:bg-black dark:text-white font-sans">
         {/* accessibility: skip link */}
         <a
           href="#content"
@@ -206,16 +275,13 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-     
           disableTransitionOnChange
         >
-          {/* main content anchor for skip-link */}
           <main id="content" className="flex-1 hero-bg-gradient">
             <LayoutWrapper>
-         
-            <Header />
+              <Header />
               {children}
-              </LayoutWrapper>
+            </LayoutWrapper>
           </main>
 
           <noscript>
@@ -224,6 +290,16 @@ export default function RootLayout({
             </div>
           </noscript>
         </ThemeProvider>
+
+        {/*
+          Meta Pixel moved to next/script with afterInteractive strategy.
+          Same tracking behavior, but no longer blocks initial render —
+          it now loads after the page becomes interactive instead of
+          racing hydration in a raw <head> script.
+        */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`}
+        </Script>
       </body>
     </html>
   );

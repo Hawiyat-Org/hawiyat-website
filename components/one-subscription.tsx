@@ -4,73 +4,17 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Check, X } from "lucide-react"
 
-const features = [
+const composerFeatures = [
   {
-    category: "Pricing & Location",
+    category: "AI Gateway",
     rows: [
-      { label: "Starting Price", hawiyat: "1,000 DA/month", hostinger: "~2,500 DA/month", railway: "$5/month", vercel: "$20/month" },
-      { label: "Local Currency (DA)", hawiyat: true, hostinger: false, railway: false, vercel: false },
-      { label: "Algerian Data Center", hawiyat: true, hostinger: false, railway: false, vercel: false },
-      { label: "Local Support (Arabic/French)", hawiyat: true, hostinger: true, railway: false, vercel: false },
-    ],
-  },
-  {
-    category: "Deployment & CI/CD",
-    rows: [
-      { label: "Git Integration", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "CI/CD Pipeline", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "One-Click Deploy", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Auto Deploy from Git", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Preview Deployments", hawiyat: false, hostinger: false, railway: true, vercel: true },
-    ],
-  },
-  {
-    category: "Infrastructure",
-    rows: [
-      { label: "DDoS Protection", hawiyat: true, hostinger: true, railway: "Add-on", vercel: true },
-      { label: "SSL Certificate", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Domain Name", hawiyat: true, hostinger: true, railway: false, vercel: true },
-      { label: "Load Balancer", hawiyat: true, hostinger: true, railway: false, vercel: true },
-      { label: "Monitoring", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Automated Backups", hawiyat: true, hostinger: true, railway: true, vercel: false },
-    ],
-  },
-  {
-    category: "Databases & Storage",
-    rows: [
-      { label: "Managed Database", hawiyat: true, hostinger: true, railway: true, vercel: false },
-      { label: "Supabase Compatible", hawiyat: true, hostinger: false, railway: true, vercel: false },
-      { label: "PostgreSQL", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "MySQL", hawiyat: true, hostinger: true, railway: false, vercel: false },
-      { label: "Redis", hawiyat: true, hostinger: true, railway: true, vercel: true },
-    ],
-  },
-  {
-    category: "Apps & Scaling",
-    rows: [
-      { label: "Number of Apps", hawiyat: "Up to 3 (Pro)", hostinger: "Up to 100", railway: "Unlimited", vercel: "Unlimited" },
-      { label: "Auto-scaling", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Edge Network", hawiyat: false, hostinger: true, railway: false, vercel: true },
-      { label: "Serverless Functions", hawiyat: true, hostinger: false, railway: true, vercel: true },
-    ],
-  },
-  {
-    category: "Support & Community",
-    rows: [
-      { label: "Premium Support", hawiyat: true, hostinger: true, railway: false, vercel: true },
-      { label: "Community Access", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "Dedicated Onboarding", hawiyat: true, hostinger: false, railway: false, vercel: false },
-      { label: "SLA Guarantee", hawiyat: true, hostinger: true, railway: false, vercel: false },
-      { label: "Notifications", hawiyat: true, hostinger: true, railway: true, vercel: true },
-    ],
-  },
-  {
-    category: "Security",
-    rows: [
-      { label: "Security Scanning", hawiyat: true, hostinger: true, railway: false, vercel: true },
-      { label: "DDoS Mitigation", hawiyat: true, hostinger: true, railway: "Add-on", vercel: true },
-      { label: "Access Control", hawiyat: true, hostinger: true, railway: true, vercel: true },
-      { label: "2FA Authentication", hawiyat: true, hostinger: true, railway: true, vercel: true },
+      { label: "DZD Pricing", composer: true, directapi: false, litellm: false, portkey: false },
+      { label: "Algerian Support", composer: true, directapi: false, litellm: false, portkey: false },
+      { label: "Exact-Match Caching", composer: true, directapi: false, litellm: false, portkey: false },
+      { label: "Semantic Caching", composer: true, directapi: false, litellm: false, portkey: false },
+      { label: "Smart Model Routing", composer: true, directapi: false, litellm: true, portkey: true },
+      { label: "Model Blending / Smart Routing", composer: true, directapi: false, litellm: false, portkey: false },
+      { label: "Drop-in Compatible (No Code Changes)", composer: true, directapi: "n/a", litellm: true, portkey: true },
     ],
   },
 ]
@@ -90,16 +34,18 @@ export default function ComparisonTable() {
   const sectionRef = useRef(null)
   const inView = useInView(sectionRef, { once: true, amount: 0.1 })
 
-  const platforms = [
-    { name: "Hawiyat", key: "hawiyat" as const, highlight: true },
-    { name: "Hostinger", key: "hostinger" as const, highlight: false },
-    { name: "Railway", key: "railway" as const, highlight: false },
-    { name: "Vercel", key: "vercel" as const, highlight: false },
+  const composerPlatforms = [
+    { name: "Hawiyat Composer", key: "composer" as const, highlight: true },
+    { name: "Direct API", key: "directapi" as const, highlight: false },
+    { name: "Claude Subscription", key: "litellm" as const, highlight: false },
+    { name: "Portkey", key: "portkey" as const, highlight: false },
   ]
 
   return (
     <section id="comparison" ref={sectionRef} className="py-16 md:py-32 px-[5%] max-md:px-4">
       <div className="mx-auto max-w-6xl">
+
+        {/* Composer Gateway Comparison */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -107,21 +53,21 @@ export default function ComparisonTable() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 dark:text-white">
-            Hawiyat vs The Competition
+            Hawiyat Composer vs The Alternatives
           </h2>
           <p className="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            See why Hawiyat is the best choice for developers in Algeria and beyond.
+            An AI gateway priced in DZD with local support for Algerian developers.
           </p>
         </motion.div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mb-24">
           <table className="w-full border-collapse min-w-[700px]">
             <thead>
               <tr>
-                <th className="text-left py-4 pr-4 text-sm font-semibold text-gray-700 dark:text-gray-300 w-[180px] md:w-[220px]">
+                <th className="text-left py-4 pr-4 text-sm font-semibold text-gray-700 dark:text-gray-300 w-[200px] md:w-[240px]">
                   Feature
                 </th>
-                {platforms.map((p) => (
+                {composerPlatforms.map((p) => (
                   <th
                     key={p.key}
                     className={`py-4 px-3 text-center text-sm font-semibold ${
@@ -142,7 +88,7 @@ export default function ComparisonTable() {
               </tr>
             </thead>
             <tbody>
-              {features.map((category) => (
+              {composerFeatures.map((category) => (
                 <>
                   <tr key={category.category}>
                     <td
@@ -160,14 +106,14 @@ export default function ComparisonTable() {
                       <td className="py-3.5 pr-4 text-sm text-gray-700 dark:text-gray-300">
                         {row.label}
                       </td>
-                      {platforms.map((p) => (
+                      {composerPlatforms.map((p) => (
                         <td
                           key={p.key}
                           className={`py-3.5 px-3 text-center ${
                             p.highlight ? "bg-gray-50 dark:bg-white/[0.04]" : ""
                           }`}
                         >
-                          <CellValue value={row[p.key]} />
+                          <CellValue value={row[p.key as keyof typeof row]} />
                         </td>
                       ))}
                     </tr>
@@ -177,6 +123,7 @@ export default function ComparisonTable() {
             </tbody>
           </table>
         </div>
+
       </div>
     </section>
   )

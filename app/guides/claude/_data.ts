@@ -34,7 +34,7 @@ export const SECTIONS: Section[] = [
     icon: "Users",
     label: "Co Work",
     title: "Claude Co Work + Hawiyat Composer",
-    desc: "Collaborate in real-time with Claude Co Work integrated with Hawiyat Composer.",
+    desc: "Collaborate in real time with Claude Co Work connected to Hawiyat Composer.",
     videoId: "nA_DQk1ZaK4",
     subSections: [
       { id: "what-is-co-work", label: "What is Claude Co Work?" },
@@ -64,7 +64,7 @@ export const SECTIONS: Section[] = [
     icon: "Database",
     label: "MCP",
     title: "MCP Servers",
-    desc: "Connect Claude to external APIs instantly  no config files needed.",
+    desc: "Connect Claude to external APIs instantly. No config files needed.",
     videoId: "PmgxterwxH0",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },

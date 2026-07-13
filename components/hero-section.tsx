@@ -3,21 +3,19 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import AIPlayground from "./ai-playground"
-import VideoModal from "./video-modal"
-const appUrl = process.env.NEXT_PUBLIC_APP_URL
 
 const HeroSection = () => {
-  const [showVideoModal, setShowVideoModal] = useState(false)
   const [typedText, setTypedText] = useState("")
   const [currentStringIndex, setCurrentStringIndex] = useState(0)
   const [currentCharIndex, setCurrentCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
 
   const strings = [
-    "How to solve a rubik's cube? Step by step guide",
-    "What's Hawiyat playground?",
-    "How to build an AI SaaS App?",
-    "How to integrate Hawiyat API?",
+    "How to use Hawiyat Composer caching?",
+    "What models does Hawiyat Composer support?",
+    "How to cut AI costs with Hawiyat Composer?",
+    "How to route requests via Hawiyat Composer?",
   ]
 
   useEffect(() => {
@@ -52,60 +50,46 @@ const HeroSection = () => {
     return () => clearTimeout(timeout)
   }, [currentCharIndex, currentStringIndex, isDeleting, strings])
 
-  const openVideo = () => {
-    setShowVideoModal(true)
-    document.body.classList.add("modal-open")
-  }
-
-  const closeVideo = () => {
-    setShowVideoModal(false)
-    document.body.classList.remove("modal-open")
-  }
-
   return (
     <section
       className="hero-section mt-[70px] md:mt-[100px]   relative flex min-h-[100vh] w-full max-w-[100vw] flex-col overflow-hidden"
       id="hero-section"
     >
-      <VideoModal isOpen={showVideoModal} onClose={closeVideo} />
-
       <div className="hero-bg-gradient relative flex h-full min-h-[100vh] w-full flex-col place-content-center gap-6 p-[5%] max-xl:place-items-center max-lg:p-6 max-md:p-4 max-md:gap-8">
         <div className="purple-bg-grad reveal-up absolute left-1/2 -translate-x-1/2 top-[10%] h-[120px] w-[120px] max-md:h-[80px] max-md:w-[80px] max-md:top-[5%]"></div>
 
         <div className="flex flex-col mt-12 md:mt-0 min-h-[60vh] max-md:min-h-[50vh] place-content-center items-center max-md:gap-6">
           <h2 className="reveal-up text-center text-7xl font-medium uppercase leading-[90px] max-lg:text-4xl max-md:text-3xl max-md:leading-tight max-md:px-2">
-            All of your <span className="text-4xl md:text-7xl"> InfraStructer</span> 
+            Algeria's AI{" "}
+            <span className="text-4xl md:text-7xl">Infrastructure</span>
             <br />
             <span className="font-thin font-serif max-md:text-2xl">
-              in one place
+              Built to Ship
             </span>
           </h2>
 
-          <div className="reveal-up mt-8 max-md:mt-4 max-w-[450px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
-            Your all in one devops companion. pipe lines, observability, codes, cluster, debug your web apps all with hawiyat
-            interface.
+          <div className="reveal-up mt-8 max-md:mt-4 max-w-[550px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
+            Hawiyat Composer routes and caches every request between your coding tools and the AI models you use. Same endpoints. Priced in DZD, backed by our own cloud.
           </div>
 
           <div className="reveal-up mt-10 max-md:mt-6 flex flex-col md:flex-row max-md:w-full max-md:px-4 place-items-center gap-4 max-md:gap-3">
-            <button
-              onClick={openVideo}
-              className="btn !w-[170px] max-lg:!w-[160px] max-md:!w-full !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 flex gap-2 place-content-center group !bg-transparent !text-black dark:!text-white transition-all duration-[0.3s] border-[1px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black active:scale-95"
-            >
-              <div className="relative flex place-items-center place-content-center w-6 h-6 max-md:w-5 max-md:h-5">
-                <div className="absolute inset-0 top-0 left-0 scale-0 duration-300 group-hover:scale-100 border-2 border-gray-600 dark:border-gray-200 rounded-full w-full h-full"></div>
-                <span className="bi bi-play-circle-fill max-md:text-lg"></span>
-              </div>
-              <span className="max-md:text-[15px] max-md:font-medium">Watch video</span>
-            </button>
-
             <Link
               href="/services"
               className="btn group max-lg:!w-[160px] max-md:!w-full flex gap-2 place-content-center shadow-lg !w-[170px] !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 transition-all duration-[0.3s] hover:scale-x-[1.03] active:scale-95"
             >
-              <span className="max-md:text-[15px] max-md:font-medium">get Started</span>
+              <span className="max-md:text-[15px] max-md:font-medium">Get Started</span>
               <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300 max-md:text-lg"></i>
             </Link>
+
+            <button
+              onClick={() => setShowVideo(true)}
+              className="btn !w-[170px] max-lg:!w-[160px] max-md:!w-full !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 flex gap-2 place-content-center group !bg-transparent !text-black dark:!text-white transition-all duration-[0.3s] border-[1px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black active:scale-95"
+            >
+              <span className="max-md:text-[15px] max-md:font-medium">Watch video</span>
+              <i className="bi bi-play-circle-fill max-md:text-lg"></i>
+            </button>
           </div>
+
         </div>
 
         {/* AI Playground Dashboard */}
@@ -129,6 +113,33 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {showVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setShowVideo(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowVideo(false)}
+              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+            >
+              <i className="bi bi-x text-lg"></i>
+            </button>
+            <iframe
+              src="https://www.youtube.com/embed/V2N9RvzCdnM?autoplay=1"
+              title="Hawiyat Composer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }

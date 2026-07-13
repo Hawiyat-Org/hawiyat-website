@@ -221,7 +221,7 @@ export default function CyberSecurityPage() {
           <div className="flex flex-col gap-4 mb-14 text-center">
             <h2 className="text-5xl max-md:text-3xl font-medium">From Commit to Deployment</h2>
             <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-              How Composer handles security at each step.
+              How Hawiyat Composer handles security at each step.
             </p>
           </div>
 
@@ -230,7 +230,7 @@ export default function CyberSecurityPage() {
               { step: "01", title: "Code Scanning", desc: "Every commit gets static analysis across all languages. Secrets, hardcoded credentials, insecure patterns. Flagged right away.", icon: Search },
               { step: "02", title: "Dependency Check", desc: "Package manifests are checked against vulnerability databases. Outdated or compromised dependencies get blocked before they touch a build.", icon: GitBranch },
               { step: "03", title: "Runtime Monitoring", desc: "Running services are watched continuously. Anomalies, unauthorized access, and potential breaches surface in real time.", icon: Eye },
-              { step: "04", title: "Automated Response", desc: "When something trips a rule, Composer isolates affected services, rolls back deployments, and pings your team.", icon: Zap },
+              { step: "04", title: "Automated Response", desc: "When something trips a rule, Hawiyat Composer isolates affected services, rolls back deployments, and pings your team.", icon: Zap },
             ].map((item, i) => (
               <div key={i} className="flex flex-col gap-3 flex-1 text-center max-lg:max-w-md">
                 <div className="w-14 h-14 mx-auto rounded-2xl bg-black dark:bg-white flex items-center justify-center">

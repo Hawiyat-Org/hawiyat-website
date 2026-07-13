@@ -44,7 +44,7 @@ const CallToAction = () => {
 
           {/* Subtitle */}
           <p className="text-center text-base dark:text-gray-300 text-gray-600 max-w-xl px-4">
-            Deploy your application with a single click. No complex configuration, no hassle. Just pure simplicity.
+            Deploy your app with one click. No complex config, no setup hell.
           </p>
 
           <div className="mt-6 relative flex max-lg:flex-col gap-5">

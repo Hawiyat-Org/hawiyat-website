@@ -7,24 +7,29 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is Hawiyat?",
+      question: "What is Hawiyat Composer?",
       answer:
-        "Hawiyat is a hosting Cloud provider offering affordable, fast, and reliable cloud Hosting with one-click deployment, GitHub integration, backups, and CI/CD support.",
+        "Hawiyat Composer is a gateway that sits between your coding tools like Claude Code, CLIs, and agents and the AI models they talk to. It caches repeat requests so you don't pay for the same tokens twice, and routes simple tasks to cheaper models automatically. We blend multiple models together so you get flagship-level results. You plug it in through the same API endpoints you already use. No code changes required.",
     },
     {
-      question: "Can I upgrade my plan later?",
+      question: "How does the caching work?",
       answer:
-        "Yes! You can easily upgrade your hosting plan at any time with minimal downtime.",
+        "Two layers. Exact-match caching normalizes repeat requests like boilerplate or common scaffolding and serves them from memory in 2 to 5ms at zero cost. Semantic caching uses vector search so if you ask the same thing a different way, Hawiyat Composer still recognizes it and serves the cached result. Same answer, no extra spend.",
     },
     {
-      question: "Do you provide backups?",
+      question: "What models can I use with Hawiyat Composer?",
       answer:
-        "Absolutely. Hawiyat provides automated backups to keep your data safe, with options for manual snapshots as well.",
+        "Hawiyat Composer blends multiple AI models behind the scenes to get flagship-level results. Simple tasks go to lightweight, cheaper models. Complex reasoning goes to frontier models. You don't switch anything manually. You just get the best output at the lowest cost.",
     },
     {
-      question: "Is there CI/CD and GitHub integration?",
+      question: "Is my data safe when using Composer?",
       answer:
-        "Yes. You can deploy your apps with one click, integrate with GitHub for automatic deployments, and set up full CI/CD pipelines.",
+        "Hawiyat Composer offers cost-aware routing and caching on every request. Sensitive workloads stay efficient and affordable. We also support ephemeral logging so nothing is persisted unless you need it to be.",
+    },
+    {
+      question: "How do I get started?",
+      answer:
+        "Point your existing tools at Hawiyat Composer's endpoints instead of the provider directly. That's it. If you're using Claude Code, Cursor, or any OpenAI/Anthropic compatible tool, it works out of the box. Sign up through our services page and we'll get you set up in minutes.",
     },
   ]
 

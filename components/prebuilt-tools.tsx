@@ -4,40 +4,58 @@ const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
 const PrebuiltTools = () => {
   const tools = [
     {
-      icon: "bi-code-square",
-      title: "CI/CD & Deployment",
+      icon: "bi-lightning-fill",
+      title: "Smart Caching",
       description:
-        "Automated pipelines with one-click deployments. Hawiyat ensures seamless updates, zero downtime, and GitHub integration so your projects move from code to production instantly.",
+        "Exact-match and semantic caching cut repeat-request costs to zero. Same question twice, second one is free.",
+    },
+    {
+      icon: "bi-diagram-3-fill",
+      title: "Model Routing",
+      description:
+        "Requests go to the right model automatically, every time. Light tasks get cheap models. Hard problems get frontier models.",
     },
     {
       icon: "bi-file-earmark-lock2-fill",
-      title: "Secure Identity",
+      title: "Cost-Aware Routing",
       description:
-        "Hawiyat provides a unified digital identity layer. Manage authentication, permissions, and privacy with full controlyour data, secured and simplified.",
-    },
-    {
-      icon: "bi-cloud-arrow-up-fill",
-      title: "Backups & Recovery",
-      description:
-        "Never lose progress. Hawiyat automatically backs up your applications and data, allowing instant recovery whenever needed, keeping your operations safe and reliable.",
+        "Cost-aware routing. Simple tasks hit cheaper models. Complex work gets frontier models. Hawiyat Composer picks the right one automatically.",
     },
     {
       icon: "bi-bar-chart-line-fill",
       title: "AI Insights",
       description:
-        "Integrated analytics powered by AI. Track system health, monitor usage, and receive actionable insights to improve performance and decision-making across your platform.",
+        "Real-time analytics on usage, spend, and cache hit rates. See exactly where your tokens are going.",
     },
     {
-      icon: "bi-diagram-3-fill",
+      icon: "bi-code-square",
+      title: "CI/CD & Deployment",
+      description:
+        "One-click deploys with GitHub integration. Push code, it ships. Zero downtime.",
+    },
+    {
+      icon: "bi-cloud-arrow-up-fill",
       title: "Unified Dashboard",
       description:
-        "All your tools, services, and deployments in one place. Hawiyat simplifies management with a single dashboard, so you spend less time switching platforms and more time building.",
+        "Hawiyat Composer usage and cloud deployments, all in one place. No switching between tabs.",
     },
     {
-      icon: "bi-lightning-fill",
+      icon: "bi-shield-lock-fill",
+      title: "Secure Identity",
+      description:
+        "Unified auth and permissions for your whole team. One login, everything connected.",
+    },
+    {
+      icon: "bi-archive-fill",
+      title: "Backups & Recovery",
+      description:
+        "Automated backups with instant restore. Manual snapshot options when you want them.",
+    },
+    {
+      icon: "bi-graph-up-arrow",
       title: "Scalable Infrastructure",
       description:
-        "From startups to enterprises, Hawiyat grows with you. Deploy applications across scalable infrastructure with reliability, speed, and cost-efficiency built in.",
+        "Grows from one project to enterprise load. No architecture changes, no surprises.",
     },
   ]
 
@@ -47,7 +65,7 @@ const PrebuiltTools = () => {
         <div className="relative flex max-w-[30%] max-lg:max-w-full flex-col items-start max-md:items-center gap-4 p-2 max-md:p-0 max-lg:items-center max-lg:justify-center max-lg:w-full">
           <div className="top-40 max-md:top-0 flex flex-col lg:sticky items-center max-h-fit max-w-[850px] max-lg:max-h-fit max-lg:max-w-[320px] max-md:max-w-full overflow-hidden max-md:mb-6">
             <h2 className="text-5xl font-serif text-center font-medium max-md:text-2xl max-md:leading-tight max-md:px-2">
-              Hawiyat Pre-Built Tools
+              Hawiyat Composer
             </h2>
 
             <Link
