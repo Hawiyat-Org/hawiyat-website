@@ -74,16 +74,16 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
-              href="/#solutions"
+              href="/hawiyat-composer"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
-            Solutions  
+              AI
             </Link>
             <Link
-              href="/#features"
+              href="/cyber-security"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
-              Features
+              Cyber Security
             </Link>
             <Link
               href="/services"
@@ -92,22 +92,10 @@ const Header = () => {
               Services
             </Link>
             <Link
-              href="/guides"
+              href="/about"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
-              Guides
-            </Link>
-            {/* <Link
-              href="/bootcamp"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
-            >
-              Bootcamp
-            </Link> */}
-            <Link
-              href="/#pricing"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
-            >
-              Pricing
+              About Us
             </Link>
           </nav>
 
@@ -126,10 +114,10 @@ const Header = () => {
             </button>
 
             <Link
-              href="/services"
+              href="/hawiyat-composer"
               className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
             >
-              Sign in
+              Get Started
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -170,57 +158,39 @@ const Header = () => {
             
             {/* Mobile Navigation Links */}
             <nav className="p-4 space-y-1">
-              <Link 
-                href="/#solutions" 
+              <Link
+                href="/hawiyat-composer"
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
-                <span className="font-medium">Solutions</span>
+                <span className="font-medium">AI</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
-              
-              <Link 
-                href="/#features" 
+
+              <Link
+                href="/cyber-security"
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
-                <span className="font-medium">Features</span>
+                <span className="font-medium">Cyber Security</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
-              
-              <Link 
-                href="/services" 
+
+              <Link
+                href="/services"
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Services</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
-              
-              <Link 
-                href="/guides" 
+
+              <Link
+                href="/about"
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
-                <span className="font-medium">Guide</span>
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </Link>
-              
-              {/* <Link 
-                href="/bootcamp" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
-                onClick={closeMobileMenu}
-              >
-                <span className="font-medium">Bootcamp</span>
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </Link> */}
-              
-              <Link 
-                href="#pricing" 
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
-                onClick={closeMobileMenu}
-              >
-                <span className="font-medium">Pricing</span>
+                <span className="font-medium">About Us</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
             </nav>
@@ -228,11 +198,11 @@ const Header = () => {
             {/* Mobile CTA Section - Enhanced */}
             <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-white/5">
               <Link
-                href="/services"
+                href="/hawiyat-composer"
                 className="flex items-center justify-center w-full bg-black dark:bg-white text-white dark:text-black px-6 py-4 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >
-                <span>Sign in</span>
+                <span>Get Started</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

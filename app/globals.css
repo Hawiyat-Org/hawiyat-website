@@ -475,3 +475,73 @@ body.booking-modal-open .fixed.inset-0 {
     box-shadow: 0px 2px 3px 2px #9f9f9f7c;
   }
 }
+
+
+.claude-bounce-logo {
+  opacity: 1;
+}
+
+@keyframes jumpBounce {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-20px); }
+  40% { transform: translateY(0); }
+  55% { transform: translateY(-10px); }
+  70% { transform: translateY(0); }
+  80% { transform: translateY(-5px); }
+  90% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+
+/* Claude logo - jumps up smoothly and settles on hover, plays once per hover */
+.how-it-works-btn:hover ~ .claude-bounce-logo {
+  animation: jumpOnce 0.8s ease-out forwards;
+}
+.claude-bounce-logo {
+  opacity: 1;
+}
+
+@keyframes jumpOnce {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-18px); }
+  45% { transform: translateY(0); }
+  60% { transform: translateY(-8px); }
+  75% { transform: translateY(0); }
+  87% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+/* Very slow spin for Hawiyat Composer logo */
+@keyframes verySlowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-very-slow-spin {
+  animation: verySlowSpin 600s linear infinite;
+}
+
+/* Shield pulse animation for cyber security hero */
+@keyframes shieldPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes ringExpand {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+@keyframes ringOuterExpand {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.06); opacity: 0.75; }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+.animate-shield-pulse {
+  animation: shieldPulse 3s ease-in-out infinite;
+}
+.animate-ring-pulse {
+  animation: ringExpand 3s ease-in-out infinite;
+}
+.animate-ring-outer-pulse {
+  animation: ringOuterExpand 3s ease-in-out infinite;
+}

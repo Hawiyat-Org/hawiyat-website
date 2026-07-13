@@ -1,40 +1,13 @@
 "use client"
 
 import { useState, useMemo, useEffect, useCallback, Suspense } from "react"
-import { ArrowRight, Search, Zap, Clock, Shield,Calendar, Users  , Server, Globe, MessageSquare, Bot, BarChart3 } from "lucide-react"
+import { ArrowRight, Search, Zap, Clock, Shield, Server, MessageSquare, Bot } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { OrderForm } from "@/components/services/order-form"
 
 const services = [
-  {
-    id: "claude-code",
-    name: "Claude Code",
-    shortDesc: "AI-powered coding assistant",
-    description: "AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions and automated code reviews.",
-    image: "services/claude-code.png",
-    originalPrice: "20000 DA",
-    price: "15000",
-    priceLabel: "DA/month",
-    cta: "Get Started",
-    link: "/services/claude",
-    category: "Managed Services",
-    tag: "Best Value",
-    useCases: "Context-aware suggestions, automated code reviews, documentation generation, bug detection & fixes.",
-    features: [
-      "Context-aware suggestions",
-      "Automated code reviews",
-      "Documentation generation",
-      "Bug detection & fixes",
-      "Multi-language support",
-    ],
-    bulletPoints: [
-      { icon: Zap, text: "AI-Powered" },
-      { icon: Shield, text: "Code Reviews" },
-      { icon: Clock, text: "Multi-Language" },
-    ],
-  },
   {
     id: "n8n-hosting",
     name: "n8n Hosting",
@@ -61,7 +34,34 @@ const services = [
       { icon: Shield, text: "Fully Managed" },
     ],
   },
-   {
+  {
+    id: "composer-pro",
+    name: "Hawiyat Composer + Claude Code",
+    shortDesc: "2x credits|No daily or weekly limits, deliver projects in time",
+    description: "2x Claude Pro credits with Hawiyat Composer caching. No daily or weekly limits ever.",
+    images: ["/services/hawiyat%20composer.png", "/services/claude-code.png"],
+    price: "6000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: "/services/claude",
+    category: "Managed Services",
+    tag: "Pro",
+    useCases: "Individual developers, freelancers, and small projects needing reliable AI coding assistance without usage anxiety.",
+    features: [
+      "2x Claude Pro credit quota",
+      "No daily or weekly limits",
+      "Hawiyat Composer caching layer",
+      "Context-aware suggestions",
+      "Automated code reviews",
+      "Multi-language support",
+    ],
+    bulletPoints: [
+      { icon: Zap, text: "2x Credits" },
+      { icon: Shield, text: "No Daily/Weekly Caps" },
+      { icon: Clock, text: "LLM Optimization" },
+    ],
+  },
+  {
     id: "hosting-basic",
     name: "Hosting Basic",
     shortDesc: "Single app hosting with basic resources",
@@ -85,6 +85,90 @@ const services = [
       { icon: Server, text: "1 App" },
       { icon: Shield, text: "Free SSL" },
       { icon: Zap, text: "Auto Deploy" },
+    ],
+  },
+  {
+    id: "evolution-api",
+    name: "Evolution API",
+    shortDesc: "WhatsApp Business API solution",
+    description: "WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically for customer support bots, notifications, and sales automation.",
+    image: "/logos/evolutionapi_evolutionapi.png",
+    price: "7000",
+    priceLabel: "DA/year",
+    cta: "Get Started",
+    link: "/services/evolution",
+    category: "Managed Services",
+    useCases: "WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.",
+    features: [
+      "Official Business API",
+      "Multi-channel support",
+      "Webhook integrations",
+      "Message queuing system",
+      "Rate limiting & throttling",
+    ],
+    bulletPoints: [
+      { icon: MessageSquare, text: "Multi-Channel" },
+      { icon: Bot, text: "Chatbot Ready" },
+      { icon: Shield, text: "Fully Managed" },
+    ],
+  },
+  {
+    id: "composer-max5x",
+    name: "Hawiyat Composer + Claude Code",
+    shortDesc: "5x credits|No daily or weekly limits, deliver projects in time",
+    description: "5x Claude capacity + semantic caching & smart routing. No daily or weekly limits ever.",
+    images: ["/services/hawiyat%20composer.png", "/services/claude-code.png"],
+    price: "15000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: "/services/claude",
+    category: "Managed Services",
+    tag: "Max 5X",
+    useCases: "Professional developers, startups, and small teams shipping daily and needing consistent high-volume AI access.",
+    features: [
+      "5x Claude Pro credit quota",
+      "No daily or weekly limits",
+      "Semantic caching (vector-based)",
+      "Smart provider routing",
+      "Context-aware suggestions",
+      "Automated code reviews",
+      "Multi-language support",
+    ],
+    bulletPoints: [
+      { icon: Zap, text: "5x Credits" },
+      { icon: Shield, text: "No Daily/Weekly Caps" },
+      { icon: Clock, text: "LLM Optimization" },
+    ],
+  },
+  {
+    id: "composer-max20x",
+    name: "Hawiyat Composer + Claude Code",
+    shortDesc: "20x credits|No daily or weekly limits, deliver projects in time",
+    description: "20x Claude capacity + Fable & Opus level models, GDPR compliance. No daily or weekly limits ever.",
+    images: ["/services/hawiyat%20composer.png", "/services/claude-code.png"],
+    price: "30000",
+    priceLabel: "DA/month",
+    cta: "Get Started",
+    link: "/services/claude",
+    category: "Managed Services",
+    tag: "Max 20X",
+    useCases: "Agencies, engineering teams, and power users who need maximum AI throughput with enterprise-grade optimization.",
+    features: [
+      "20x Claude Pro credit quota",
+      "No daily or weekly limits",
+      "Exact-match + semantic caching",
+      "Smart provider routing",
+      "Hybrid data compliance",
+      "Multi-agent traffic resolution",
+      "Context-aware suggestions",
+      "Automated code reviews",
+      "Multi-language support",
+      "Priority support",
+    ],
+    bulletPoints: [
+      { icon: Zap, text: "20x Credits" },
+      { icon: Clock, text: "No Daily/Weekly Caps" },
+      { icon: Shield, text: "GDPR Compliance" },
     ],
   },
   {
@@ -115,220 +199,31 @@ const services = [
     ],
   },
   {
-    id: "evolution-api",
-    name: "Evolution API",
-    shortDesc: "WhatsApp Business API solution",
-    description: "WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically  for customer support bots, notifications, and sales automation.",
-    image: "/logos/evolutionapi_evolutionapi.png",
-    price: "7000",
-    priceLabel: "DA/year",
+    id: "llm-credit",
+    name: "LLM Credit",
+    shortDesc: "OpenAI credits served through Hawiyat Composer",
+    description: "LLM credits powered by Hawiyat Composer's optimization gateway. Access OpenAI models with built-in caching, smart routing, and reduced token waste.",
+    image: "/services/openai.png",
+    price: "2500",
+    priceLabel: "DA for 10 USD credits",
     cta: "Get Started",
-    link: "/services/evolution",
-    category: "Managed Services",
-    useCases: "WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.",
-    features: [
-      "Official Business API",
-      "Multi-channel support",
-      "Webhook integrations",
-      "Message queuing system",
-      "Rate limiting & throttling",
-    ],
-    bulletPoints: [
-      { icon: MessageSquare, text: "Multi-Channel" },
-      { icon: Bot, text: "Chatbot Ready" },
-      { icon: Shield, text: "Fully Managed" },
-    ],
-  },
-  {
-    id: "hawiyat-otp-basic",
-    name: "Hawiyat OTP",
-    shortDesc: "SMS OTP verification for 1 device",
-    description: "SMS OTP verification service powered by Hawiyat. Send one-time passwords via SMS for secure authentication on a single device. Ideal for small businesses and startups.",
-    image: "/services/whatsapp-api.png",
-    price: "5000",
-    priceLabel: "DA/year",
-    cta: "Get Started",
-    link: "/services/otp",
-    category: "Managed Services",
-    tag: "Basic",
-    useCases: "Login verification, transaction confirmation, account recovery, two-factor authentication.",
-    features: [
-      "1 device",
-      "SMS OTP delivery",
-      "99.9% uptime",
-      "Basic support",
-      "Monthly reports",
-    ],
-    bulletPoints: [
-      { icon: MessageSquare, text: "SMS OTP" },
-      { icon: Shield, text: "1 Device" },
-      { icon: Clock, text: "Basic Support" },
-    ],
-  },
- 
-  {
-    id: "monitoring",
-    name: "Hawiyat Monitoring",
-    shortDesc: "Managed reliability service",
-    description: "A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.",
-    image: "/services/monitoring.png",
-    price: "5000",
-    priceLabel: "DA/month",
-    cta: "Get Started",
-    link: "/services/monitoring",
+    link: "/services",
     category: "Managed Services",
     tag: "Starter",
-    useCases: "Solo founders & single-server projects. 1 VPS monitored, 3 uptime monitors, 1 website analytics.",
+    useCases: "Developers and teams who want OpenAI access with Hawiyat Composer's caching, routing, and cost optimization built in.",
     features: [
-      "1 VPS server monitored",
-      "3 uptime monitors",
-      "1 website analytics tracker",
-      "1 public status page",
-      "Telegram + Email + Discord alerts",
+      "OpenAI model access",
+      "Hawiyat Composer caching layer",
+      "Smart request routing",
+      "Token usage optimization",
+      "No daily or weekly limits",
     ],
     bulletPoints: [
-      { icon: Server, text: "1 VPS" },
-      { icon: Globe, text: "3 Monitors" },
-      { icon: Shield, text: "24/7 Alerts" },
+      { icon: Zap, text: "OpenAI Access" },
+      { icon: Shield, text: "Composer Optimized" },
+      { icon: Clock, text: "No Limits" },
     ],
   },
-  {
-    id: "monitoring-pro",
-    name: "Hawiyat Monitoring Pro",
-    shortDesc: "For growing startups & small agencies",
-    description: "Managed monitoring for growing teams. 3 VPS servers, 10 uptime monitors, 3 website analytics, monthly PDF reports, and full setup by Hawiyat.",
-    image: "/services/monitoring.png",
-    price: "10000",
-    priceLabel: "DA/month",
-    cta: "Get Started",
-    link: "/services/monitoring",
-    category: "Managed Services",
-    tag: "Pro",
-    useCases: "Multiple server monitoring, team status pages, monthly reliability reports, incident tracking.",
-    features: [
-      "3 VPS servers monitored",
-      "10 uptime monitors",
-      "3 website analytics trackers",
-      "1 public status page",
-      "Monthly PDF report",
-      "Telegram + Email + Discord alerts",
-    ],
-    bulletPoints: [
-      { icon: Server, text: "3 VPS" },
-      { icon: Globe, text: "10 Monitors" },
-      { icon: BarChart3, text: "Monthly Report" },
-    ],
-  },
-  {
-    id: "monitoring-premium",
-    name: "Hawiyat Monitoring Premium",
-    shortDesc: "For established agencies & serious infrastructure",
-    description: "Full coverage monitoring for serious infrastructure. 5 VPS servers, 20 uptime monitors, custom domain status page, surveys module, and priority WhatsApp support.",
-    image: "/services/monitoring.png",
-    price: "18000",
-    priceLabel: "DA/month",
-    cta: "Get Started",
-    link: "/services/monitoring",
-    category: "Managed Services",
-    tag: "Premium",
-    useCases: "Enterprise monitoring, custom status pages, user feedback surveys, priority support.",
-    features: [
-      "5 VPS servers monitored",
-      "20 uptime monitors",
-      "10 website analytics trackers",
-      "Custom domain status page",
-      "Surveys module",
-      "Priority WhatsApp support",
-      "Detailed monthly PDF report",
-    ],
-    bulletPoints: [
-      { icon: Server, text: "5 VPS" },
-      { icon: Globe, text: "20 Monitors" },
-      { icon: MessageSquare, text: "Priority Support" },
-    ],
-  },
-  {
-    id: "cal-com",
-  name: "Cal.com",
-  shortDesc: "Open-source Calendly alternative for scheduling",
-  description: "Cal.com is scheduling platform that lets users create custom booking pages,  Perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.",
-  image: "/services/cal.png",
-  price: "10000",
-  priceLabel: "DA/Month",
-  cta: "Get Started",
-  link: "https://github.com/calcom/cal.com",
-  category: "Open Source SaaS",
-  tag: "Starter",
-  useCases: "Booking pages, SaaS appointment systems, team scheduling, coaching sessions, interview scheduling, client meetings automation.",
-  features: [
-    "Open-source and self-hostable",
-    "Multi-user team scheduling",
-    "Google Calendar / Outlook sync",
-    "Zoom / Google Meet integrations",
-    "Custom booking pages",
-    "Availability & timezone management",
-    "API for automation & integrations"
-  ],
-  bulletPoints: [
-    { icon: Calendar, text: "Smart Scheduling" },
-    { icon: Users, text: "Team Support" },
-    { icon: Globe, text: "Multi-Calendar Sync" }
-  ],
-},
- {
-    id: "hawiyat-otp-pro",
-    name: "Hawiyat OTP",
-    shortDesc: "SMS OTP verification for up to 5 devices",
-    description: "Scale your OTP verification across up to 5 devices. Includes priority support, message templates, and advanced analytics. Perfect for growing businesses.",
-    image: "/services/whatsapp-api.png",
-    price: "7000",
-    priceLabel: "DA/year",
-    cta: "Get Started",
-    link: "/services/otp",
-    category: "Managed Services",
-    tag: "Pro",
-    useCases: "Multi-device login verification, transaction confirmation, account recovery, two-factor authentication.",
-    features: [
-      "5 devices",
-      "SMS OTP delivery",
-      "Message templates library",
-      "Priority support",
-      "Analytics & reporting",
-    ],
-    bulletPoints: [
-      { icon: MessageSquare, text: "SMS OTP" },
-      { icon: Users, text: "5 Devices" },
-      { icon: BarChart3, text: "Analytics" },
-    ],
-  },
-  {
-    id: "hawiyat-otp-team",
-    name: "Hawiyat OTP",
-    shortDesc: "SMS OTP verification for up to 10 devices",
-    description: "Enterprise-grade OTP verification for up to 10 devices. Premium support, full analytics, custom templates, and dedicated account management.",
-    image: "/services/whatsapp-api.png",
-    price: "10000",
-    priceLabel: "DA/year",
-    cta: "Get Started",
-    link: "/services/otp",
-    category: "Managed Services",
-    tag: "Team",
-    useCases: "Enterprise login verification, transaction confirmation, account recovery, two-factor authentication.",
-    features: [
-      "10 devices",
-      "SMS OTP delivery",
-      "Custom message templates",
-      "Premium support",
-      "Full analytics & reporting",
-      "Dedicated account manager",
-    ],
-    bulletPoints: [
-      { icon: MessageSquare, text: "SMS OTP" },
-      { icon: Users, text: "10 Devices" },
-      { icon: BarChart3, text: "Analytics" },
-    ],
-  }
- 
 ]
 
 const tagStyleMap: Record<string, string> = {
@@ -336,11 +231,13 @@ const tagStyleMap: Record<string, string> = {
   "Most Popular": "bg-gradient-to-r from-violet-500 to-purple-600 text-white",
   Premium: "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30",
   "Best Value": "bg-gradient-to-r from-emerald-500 to-green-500 text-white",
-  VIP: "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30",
+  VIP: "bg-gradient-to-r from-violet-500 to-purple-600 text-white",
   Starter: "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300",
   Basic: "bg-gradient-to-r from-sky-500 to-blue-500 text-white",
   Pro: "bg-gradient-to-r from-violet-500 to-purple-600 text-white",
   Team: "bg-gradient-to-r from-rose-500 to-pink-600 text-white",
+  "Max 5X": "bg-gradient-to-r from-amber-500 to-orange-500 text-white",
+  "Max 20X": "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30",
 }
 
 function FlipCard({
@@ -354,7 +251,7 @@ function FlipCard({
   index: number
   isMobile: boolean
   isVisible: boolean
-  onOrderClick: (service: { id: string; name: string; price: string; priceLabel: string; image: string }) => void
+  onOrderClick: (service: { id: string; name: string; price: string; priceLabel: string; image: string; images?: string[] }) => void
 }) {
   const [isFlipped, setIsFlipped] = useState(false)
 
@@ -393,17 +290,41 @@ function FlipCard({
             )}
 
             {/* Image area */}
-            <div className="relative h-48 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center p-6">
+            <div className="relative h-52 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center gap-2 p-4">
 
-              <div className="relative w-32 h-32">
-                <Image
-                  src={service.image}
-                  alt={service.name}
-                  fill
-                  className="object-contain drop-shadow-lg"
-                  loading="lazy"
-                />
-              </div>
+              {"images" in service && service.images ? (
+                <div className="flex items-center justify-center gap-1">
+                  <div className={`relative flex-shrink-0 ${service.images[1].includes("claude-code") ? "w-[110px] h-[110px]" : "w-[130px] h-[120px]"}`}>
+                    <Image
+                      src={service.images[0]}
+                      alt={`${service.name}`}
+                      fill
+                      className="object-contain drop-shadow-md"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="text-2xl font-light text-foreground/30 mx-0.5 select-none">+</span>
+                  <div className={`relative flex-shrink-0 ${service.images[1].includes("claude-code") ? "w-[125px] h-[120px]" : "w-[110px] h-[120px]"}`}>
+                    <Image
+                      src={service.images[1]}
+                      alt={`${service.name}`}
+                      fill
+                      className="object-contain drop-shadow-md"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="relative w-36 h-32">
+                  <Image
+                    src={service.image || ""}
+                    alt={service.name}
+                    fill
+                    className="object-contain drop-shadow-lg"
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20 pointer-events-none" />
             </div>
 
@@ -415,17 +336,18 @@ function FlipCard({
 
               <h3 className="text-xl font-semibold">{service.name}</h3>
 
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                {service.shortDesc}
-              </p>
+              <div className="text-sm text-muted-foreground leading-relaxed">
+                {service.shortDesc.split("|").length > 1 ? (
+                  <>
+                    <span className="block font-semibold text-foreground">{service.shortDesc.split("|")[0]}</span>
+                    <span className="block text-muted-foreground">{service.shortDesc.split("|")[1]}</span>
+                  </>
+                ) : (
+                  <span>{service.shortDesc}</span>
+                )}
+              </div>
             
             <div className="mt-auto">
-                {service.originalPrice && (
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm text-muted-foreground line-through">{service.originalPrice}</span>
-                    <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 font-medium">Save</span>
-                  </div>
-                )}
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold">{service.price}</span>
                   <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
@@ -483,12 +405,6 @@ function FlipCard({
               {/* Price + CTA  always at bottom, never clipped */}
               <div className="mt-auto shrink-0 space-y-3">
                 <div>
-                  {service.originalPrice && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm text-muted-foreground line-through">{service.originalPrice}</span>
-                      <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 font-medium">Save</span>
-                    </div>
-                  )}
                   <div className="flex items-baseline gap-1">
                     <span className="text-2xl font-bold">{service.price}</span>
                     <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
@@ -502,7 +418,8 @@ function FlipCard({
                       name: service.name,
                       price: service.price,
                       priceLabel: service.priceLabel,
-                      image: service.image,
+                      image: "images" in service && service.images ? service.images[0] : (service.image || "/logo.svg"),
+                      images: "images" in service ? service.images : undefined,
                     })
                   }}
                   className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors duration-200"
@@ -546,6 +463,7 @@ function ServicesContent() {
     price: string
     priceLabel: string
     image: string
+    images?: string[]
   } | null>(null)
 
   useEffect(() => {
@@ -633,7 +551,7 @@ function ServicesContent() {
                 index={i}
                 isMobile={isMobile}
                 isVisible={isVisible}
-                onOrderClick={(svc) => setSelectedService(svc)}
+                onOrderClick={(svc) => setSelectedService(svc as { id: string; name: string; price: string; priceLabel: string; image: string; images?: string[] })}
               />
             ))}
           </div>
@@ -643,35 +561,6 @@ function ServicesContent() {
           <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
         )}
 
-        {/* Why Choose Hawiyat */}
-        <div
-          className={`mt-20 max-w-6xl mx-auto transition-all duration-500 delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          <h2 className="text-4xl font-medium text-center mb-12 max-md:text-3xl">Why Choose Hawiyat</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-            {[
-              { icon: Globe, title: "Local Team", desc: "Based in Algeria, same timezone, support in Arabic and French" },
-              { icon: Shield, title: "Flat Pricing", desc: "Fixed monthly price, no usage surprises or hidden fees" },
-              { icon: Zap, title: "Fully Managed", desc: "You use the service, we run the infrastructure" },
-              { icon: Server, title: "Production-Tested", desc: "Same infrastructure powers 60+ live clients" },
-              { icon: MessageSquare, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system" },
-              { icon: Clock, title: "24/7 Monitoring", desc: "Round-the-clock reliability and instant alerts" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border"
-              >
-                <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
-                <h3 className="text-2xl text-center">{item.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   )

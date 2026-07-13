@@ -240,7 +240,7 @@ function SkillsContent() {
     <>
       <SubStep id="what-are-skills" title="What are Skills?">
         <p className="text-sm text-muted-foreground mb-4">Skills are like plug-ins for Claude. They give Claude specialized knowledge for specific tasks like building n8n workflows, creating Next.js apps, or designing UIs.</p>
-        <p className="text-sm text-muted-foreground mb-4">Skills are cloned from GitHub repos into Claude Code's skills directory. Copy the prompt below and paste it into Claude Code — Claude handles the rest.</p>
+        <p className="text-sm text-muted-foreground mb-4">Skills are cloned from GitHub repos into Claude Code's skills directory. Copy the prompt below and paste it into Claude Code Claude handles the rest.</p>
         <div className="p-3 sm:p-4 rounded-lg bg-muted/50 border border-border text-sm">
           <strong className="text-foreground">How it works:</strong> Click copy, paste into Claude Code, restart. That&apos;s it.
         </div>
@@ -358,13 +358,13 @@ function MCPContent() {
       <SubStep id="meta-ads-mcp" title="Meta Ads MCP">
         <p className="text-sm text-muted-foreground mb-4">Connect Claude to Meta Ads Manager for campaign analytics, audience insights, and ad performance monitoring.</p>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude to set up Meta Ads MCP:</p>
-        <CodeBlock code={`Add the Meta Ads MCP server globally using the CLI — run this exact command:
+        <CodeBlock code={`Add the Meta Ads MCP server globally using the CLI run this exact command:
 
 claude mcp add --transport http meta-ads https://mcp.facebook.com/ads
 
 Then edit ~/.claude.json to make sure the meta-ads server has "enableAllProjectMcpServers": true set in its project config so it connects without a trust prompt.
 
-Also, this project is a Next.js app — drop a .mcp.json in the project root (create one if it doesn't exist):
+Also, this project is a Next.js app drop a .mcp.json in the project root (create one if it doesn't exist):
 
 {
   "mcpServers": {
@@ -377,7 +377,7 @@ Also, this project is a Next.js app — drop a .mcp.json in the project root (cr
 
 And in .claude/settings.local.json, add "enableAllProjectMcpServers": true and "enabledMcpjsonServers": ["meta-ads"].
 
-I already have a Facebook Business Manager account with ads_read and ads_management permissions, so OAuth scopes should be fine. Once the config is in place, tell me to restart Claude and run /mcp — that'll trigger the browser-based OAuth login flow.`} language="text" />
+I already have a Facebook Business Manager account with ads_read and ads_management permissions, so OAuth scopes should be fine. Once the config is in place, tell me to restart Claude and run /mcp that'll trigger the browser-based OAuth login flow.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude configures the MCP server, walks you through OAuth, and verifies the tools work. Then you can ask things like:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
           <li>&ldquo;Show me my top 5 campaigns this month&rdquo;</li>
