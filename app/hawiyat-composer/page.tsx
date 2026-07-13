@@ -70,15 +70,15 @@ export default function ComposerPage() {
 
         <div className="mx-auto w-full max-w-6xl px-6 flex max-lg:flex-col items-center justify-center gap-12 max-lg:gap-10 min-h-[85vh]">
           {/* Left - Content */}
-          <div className="flex flex-col gap-6 flex-1 max-w-lg">
-            <h1 className="text-5xl max-lg:text-3xl max-md:text-2xl font-medium uppercase whitespace-nowrap">
+          <div className="flex flex-col gap-6 flex-1 max-w-lg max-md:mt-8">
+            <h1 className="text-5xl max-lg:text-4xl  font-medium uppercase whitespace-nowrap">
               Hawiyat{" "}
               <span className="font-thin font-serif">
                 Composer
               </span>
             </h1>
 
-            <p className="text-lg text-gray-800 dark:text-white max-md:text-[15px]">
+            <p className="text-xl max-md:text-lg text-gray-800 dark:text-white">
               Your CLI tools, coding agents, and autocomplete plugins talk to LLM
               providers through one gateway. Same endpoints you already use. Way less
               waste.
