@@ -28,12 +28,12 @@ const securityModels = [
 ]
 
 const securityMCPs = [
-  { name: "Code Execution Sandbox", icon: Cpu, desc: "Isolated environment to safely run and analyze suspicious code without risking your infrastructure." },
-  { name: "File System Auditor", icon: Search, desc: "Deep file system scanning for permission issues, exposed secrets, and backdoor detection." },
+  { name: "Code Execution Sandbox", icon: Cpu, desc: "Runs and analyzes suspicious code in a sandbox, not on your machines." },
+  { name: "File System Auditor", icon: Search, desc: "Scans the file system for bad permissions, exposed secrets, and backdoors." },
   { name: "Dependency Scanner", icon: GitBranch, desc: "Cross-references every package against NVD, GitHub Advisory, and OSV databases." },
-  { name: "Network Monitor", icon: Wifi, desc: "Tracks ingress/egress traffic patterns and flags anomalous behavior in real time." },
-  { name: "Secret Hunter", icon: Eye, desc: "Regex + ML-based detection of API keys, tokens, and credentials in code and configs." },
-  { name: "Compliance Checker", icon: Shield, desc: "Validates infrastructure against SOC 2, ISO 27001, GDPR, and Algerian data protection laws." },
+  { name: "Network Monitor", icon: Wifi, desc: "Watches network traffic and flags anything unusual as it happens." },
+  { name: "Secret Hunter", icon: Eye, desc: "Finds API keys, tokens, and credentials buried in code and config files using regex and ML." },
+  { name: "Compliance Checker", icon: Shield, desc: "Checks your setup against SOC 2, ISO 27001, GDPR, and Algerian data protection laws." },
 ]
 
 const securitySkills = [
@@ -72,8 +72,8 @@ export default function CyberSecurityPage() {
                 </span>
               </h1>
               <p className="text-lg text-gray-800 dark:text-white leading-relaxed">
-                A dedicated security layer powered by multiple AI models, specialized MCP servers,
-                and a skill set built to protect your codebase from the first commit to production.
+                Multiple AI models, a set of specialized MCP servers, and security skills
+                that watch your codebase from first commit to deploy.
               </p>
               <div className="flex gap-4 max-md:flex-col justify-start mt-2">
                 <Link
@@ -127,7 +127,7 @@ export default function CyberSecurityPage() {
             <span className="text-xs text-foreground/40 uppercase tracking-widest">The Brains</span>
             <h2 className="text-5xl max-md:text-3xl font-medium">AI Models for Security</h2>
             <p className="text-base text-gray-600 dark:text-gray-400 max-w-xl">
-              Each model is specialized for a different security layer from code analysis to runtime threat detection.
+              Each model covers a different layer: code analysis, dependency scanning, runtime threat detection.
             </p>
           </div>
 
@@ -160,7 +160,8 @@ export default function CyberSecurityPage() {
             <span className="text-xs text-foreground/40 uppercase tracking-widest">The Tools</span>
             <h2 className="text-5xl max-md:text-3xl font-medium">Security MCP Servers</h2>
             <p className="text-base text-gray-600 dark:text-gray-400 max-w-xl">
-              Model Context Protocol servers that give AI agents direct access to your infrastructure for real-time security operations.
+              MCP servers that plug AI agents directly into your infrastructure so they
+              can actually do the security work, not just talk about it.
             </p>
           </div>
 
@@ -191,7 +192,7 @@ export default function CyberSecurityPage() {
               <span className="text-xs text-foreground/40 uppercase tracking-widest">The Expertise</span>
               <h2 className="text-5xl max-md:text-3xl font-medium leading-tight">Skills That Protect Your Codebase</h2>
               <p className="text-base text-gray-600 dark:text-gray-400">
-                Pre-configured security capabilities that run across every stage of your development lifecycle.
+                What the system checks, at each stage, every time.
               </p>
             </div>
 
@@ -220,16 +221,16 @@ export default function CyberSecurityPage() {
           <div className="flex flex-col gap-4 mb-14 text-center">
             <h2 className="text-5xl max-md:text-3xl font-medium">From Commit to Deployment</h2>
             <p className="text-base text-gray-600 dark:text-gray-400 max-w-lg mx-auto">
-              How Hawiyat Composer secures your pipeline at every step.
+              How Composer handles security at each step.
             </p>
           </div>
 
           <div className="flex max-lg:flex-col items-start justify-center gap-8 max-w-4xl mx-auto">
             {[
-              { step: "01", title: "Code Scanning", desc: "Every commit triggers static analysis across all languages. Secrets, hardcoded credentials, and insecure patterns are flagged instantly.", icon: Search },
-              { step: "02", title: "Dependency Check", desc: "Package manifests are cross-referenced against vulnerability databases. Outdated or compromised dependencies are blocked from entering builds.", icon: GitBranch },
-              { step: "03", title: "Runtime Monitoring", desc: "Deployed services are continuously observed. Behavioral analysis detects anomalies, unauthorized access, and potential breaches in real time.", icon: Eye },
-              { step: "04", title: "Automated Response", desc: "When a threat is detected, Composer can automatically isolate affected services, roll back deployments, and notify your team.", icon: Zap },
+              { step: "01", title: "Code Scanning", desc: "Every commit gets static analysis across all languages. Secrets, hardcoded credentials, insecure patterns. Flagged right away.", icon: Search },
+              { step: "02", title: "Dependency Check", desc: "Package manifests are checked against vulnerability databases. Outdated or compromised dependencies get blocked before they touch a build.", icon: GitBranch },
+              { step: "03", title: "Runtime Monitoring", desc: "Running services are watched continuously. Anomalies, unauthorized access, and potential breaches surface in real time.", icon: Eye },
+              { step: "04", title: "Automated Response", desc: "When something trips a rule, Composer isolates affected services, rolls back deployments, and pings your team.", icon: Zap },
             ].map((item, i) => (
               <div key={i} className="flex flex-col gap-3 flex-1 text-center max-lg:max-w-md">
                 <div className="w-14 h-14 mx-auto rounded-2xl bg-black dark:bg-white flex items-center justify-center">
@@ -256,8 +257,8 @@ export default function CyberSecurityPage() {
             Let's Secure Your Stack
           </h2>
           <p className="max-w-lg text-lg text-gray-800 dark:text-white">
-            Get in touch with our team. We'll set up a security audit of your codebase
-            and infrastructure completely free.
+            Get in touch. We'll run a free security audit of your codebase
+            and infrastructure.
           </p>
 
           <div className="flex gap-4 max-md:flex-col justify-center mt-4">
@@ -279,7 +280,7 @@ export default function CyberSecurityPage() {
           </div>
 
           <p className="text-xs text-gray-500 dark:text-gray-500 mt-4">
-            No commitment required. We'll show you exactly what needs fixing.
+            No commitment. We'll tell you exactly what needs fixing.
           </p>
         </div>
       </section>

@@ -29,11 +29,12 @@ export default function AboutPage() {
               About <span className="font-thin font-serif">Us</span>
             </h1>
             <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed max-md:text-sm">
-              We're an Algerian cloud platform on a mission to simplify infrastructure for developers across North Africa.
-              From a small team to a recognized startup.
+              A cloud and AI platform based in Algeria. We deliver infrastructure, AI
+              tooling, hosting, and automation for developers and businesses across
+              North Africa and beyond.
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Founded in Algiers • Incubated by Itihad • 30+ clients
+              Founded in Algiers • Incubated by Itihad • 100+ clients
             </p>
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
@@ -57,55 +58,55 @@ export default function AboutPage() {
           {/* Right  Simple image grid */}
           <div className="flex-shrink-0 w-[440px] max-lg:w-[360px] max-md:w-full">
             <div className="grid grid-cols-3 gap-2 auto-rows-[80px] max-md:auto-rows-[65px]">
-              {/* Row 1-2 col 1-2 — Label */}
+              {/* Row 1-2 col 1-2  Label */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 col-span-2 row-span-2">
                 <Image src="/aboutus/label-projet-inovant.png" alt="Label" fill className="object-cover" />
               </div>
-              {/* Row 1-2 col 3 — Composer1 */}
+              {/* Row 1-2 col 3  Composer1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
                 <Image src="/aboutus/hawiyat-composer/image1.png" alt="Composer" fill className="object-cover" />
               </div>
-              {/* Row 3 col 1 — Itihad */}
+              {/* Row 3 col 1  Itihad */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/itihad-incubation.png" alt="Incubation" fill className="object-cover" />
               </div>
-              {/* Row 3 col 2 — Week1 */}
+              {/* Row 3 col 2  Week1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/semaine-enteurprunariat-international/image1.png" alt="Week" fill className="object-cover" />
               </div>
-              {/* Row 3 col 3 — Week2 */}
+              {/* Row 3 col 3  Week2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/semaine-enteurprunariat-international/image2.png" alt="Event" fill className="object-cover" />
               </div>
-              {/* Row 4 col 1 — Week3 */}
+              {/* Row 4 col 1  Week3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/semaine-enteurprunariat-international/image3.png" alt="Event" fill className="object-cover" />
               </div>
-              {/* Row 4 col 2 — Comp2 */}
+              {/* Row 4 col 2  Comp2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/hawiyat-composer/image2.png" alt="Composer" fill className="object-cover" />
               </div>
-              {/* Row 4 col 3 — Nexus1 */}
+              {/* Row 4 col 3  Nexus1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image1.png" alt="Nexus" fill className="object-cover" />
               </div>
-              {/* Row 5-6 col 1 — Green Duty (bottom left, tall) */}
+              {/* Row 5-6 col 1  Green Duty (bottom left, tall) */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
                 <Image src="/aboutus/certiifcations/greenduty.png" alt="Green Duty" fill className="object-cover" />
               </div>
-              {/* Row 5 col 2 — COSI1 */}
+              {/* Row 5 col 2  COSI1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/Cosi-2025/image1.png" alt="COSI" fill className="object-cover" />
               </div>
-              {/* Row 5 col 3 — Comp3 */}
+              {/* Row 5 col 3  Comp3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/hawiyat-composer/image3.png" alt="Composer" fill className="object-cover" />
               </div>
-              {/* Row 6 col 2 — Nexus2 */}
+              {/* Row 6 col 2  Nexus2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image2.png" alt="Nexus" fill className="object-cover" />
               </div>
-              {/* Row 6 col 3 — COSI2 */}
+              {/* Row 6 col 3  COSI2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
                 <Image src="/aboutus/Cosi-2025/image2.png" alt="COSI" fill className="object-cover" />
               </div>
@@ -128,31 +129,31 @@ export default function AboutPage() {
               {
                 year: "2025",
                 title: "COSI 2025",
-                body: "Our first public appearance. Hawiyat participated in the COSI 2025 event, connecting with the Algerian tech community and showcasing our vision for cloud infrastructure.",
+                body: "First time anyone saw us. COSI 2025. We met the Algerian tech community and showed them what we were building. No polish, just the thing itself.",
                 img: "/aboutus/Cosi-2025/image1.png",
               },
               {
                 year: "2024",
                 title: "Label Projet Innovant",
-                body: "Officially recognized by the Algerian Ministry of Knowledge Economy as an innovative tech project  our official entry into the Algerian startup ecosystem.",
+                body: "The Ministry of Knowledge Economy labeled us an innovative tech project. That opened the door to the Algerian startup ecosystem for real.",
                 img: "/aboutus/label-projet-inovant.png",
               },
               {
                 year: "2024",
                 title: "Itihad Incubation",
-                body: "Accepted into Itihad's acceleration program  gaining mentorship, funding, and the infrastructure support needed to scale from an idea to a real platform.",
+                body: "Itihad brought us into their acceleration program. Mentorship, funding, and enough infrastructure to turn the idea into something that actually ran.",
                 img: "/aboutus/itihad-incubation.png",
               },
               {
                 year: "2026",
                 title: "International Entrepreneurship Week",
-                body: "Hawiyat was invited as hosts and mentors at the International Entrepreneurship Week. We presented our startup on stage and guided the next generation of Algerian entrepreneurs.",
+                body: "We got invited as hosts and mentors at International Entrepreneurship Week. Presented the startup on stage. Spent the rest of the time with the next generation of Algerian founders.",
                 img: "/aboutus/semaine-enteurprunariat-international/image1.png",
               },
               {
                 year: "Jun 2026",
                 title: "Hawiyat Composer Launch",
-                body: "Released Hawiyat Composer  our AI-powered gateway connecting developers with models through smart caching, routing, and optimization.",
+                body: "Shipped Hawiyat Composer. An AI gateway that sits between developers and LLM models. Caching, smart routing, and optimization, no code changes on your side.",
                 img: "/aboutus/hawiyat-composer/image1.png",
               },
             ].map((event, i) => (
@@ -284,7 +285,7 @@ export default function AboutPage() {
             <span className="text-xs text-foreground/40 uppercase tracking-widest">People</span>
             <h2 className="text-5xl max-md:text-3xl font-medium">Collaborations</h2>
             <p className="text-gray-500 dark:text-gray-400 max-w-md text-sm">
-              Working alongside talented people and teams.
+              People we work with.
             </p>
           </div>
 
@@ -295,21 +296,21 @@ export default function AboutPage() {
                 image: "/aboutus/Partners/mrz.png",
                 role: "CEO & Co-Founder @ mercus.ai",
                 url: "https://www.instagram.com/itstherealmr_z/",
-                desc: "Building the future of AI-powered automation. Strategic partner in shaping Hawiyat's vision and growth.",
+                desc: "Building AI-powered automation. Helped shape where Hawiyat is headed.",
               },
               {
                 name: "Mus Automation",
                 image: "/aboutus/Partners/mus.png",
                 role: "Automation Agency",
                 url: "https://www.instagram.com/mus_automation/",
-                desc: "Specialized automation agency delivering workflow optimization and infrastructure-as-code solutions.",
+                desc: "Automation agency. They do workflow optimization and infrastructure as code.",
               },
               {
                 name: "Brahim",
                 image: "/aboutus/Partners/brahim.png",
                 role: "Influencer in Automation",
                 url: "https://www.instagram.com/brahim_amro/",
-                desc: "Leading voice in the automation space. Contributing to Hawiyat Composer's core architecture and AI integration.",
+                desc: "Well-known in automation circles. Worked on Composer's core architecture and AI integration.",
               },
             ].map((p) => (
               <a
@@ -373,7 +374,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Hawiyat HQ</h3>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Itihad Campus, Boumerdes — we're based at Itihad's innovation hub, building cloud infrastructure tailored for North Africa.
+                  Itihad Campus, Boumerdes. Based out of Itihad's innovation hub, building cloud infrastructure for North Africa.
                 </p>
               </div>
             </div>
@@ -402,8 +403,8 @@ export default function AboutPage() {
           </h2>
 
           <p className="max-w-xl text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-            Whether you need cloud infrastructure, AI tooling, or a reliable hosting partner —
-            we'd love to hear from you.
+            Cloud infrastructure, AI tooling, or a hosting partner. If you need any
+            of it, we want to hear from you.
           </p>
 
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
@@ -425,7 +426,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-xs text-foreground/30 mt-8">
-            No commitment required • Free consultation • Algerian team
+            No commitment. Free consultation. Algerian team.
           </p>
         </div>
       </section>

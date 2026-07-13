@@ -79,9 +79,9 @@ export default function ComposerPage() {
             </h1>
 
             <p className="text-lg text-gray-800 dark:text-white max-md:text-[15px]">
-              A stateful, context-aware gateway that sits between your CLIs, coding agents,
-              and code-completion tools and the LLM providers behind them. Same endpoints
-              you already use. Far less waste.
+              Your CLI tools, coding agents, and autocomplete plugins talk to LLM
+              providers through one gateway. Same endpoints you already use. Way less
+              waste.
             </p>
 
             <div className="flex gap-4 max-md:flex-col justify-start">
@@ -132,9 +132,9 @@ export default function ComposerPage() {
         <div className="mx-auto w-full max-w-6xl px-6 flex flex-col items-center gap-6">
           <h3 className="text-5xl font-medium max-md:text-3xl text-center">Our Numbers</h3>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-stretch">
-            <AnimatedStatCard icon={BarChart3} value={40} label="Tokens Served" description="Processed through Hawiyat Composer's intelligent caching and routing layer." delay={0} />
-            <AnimatedStatCard icon={Users} value={30} label="Satisfied Clients" description="Trusted by developers, startups, and agencies across Algeria and beyond." delay={0.15} />
-            <AnimatedStatCard icon={Building2} value={3} label="Enterprise Partners" description="Enterprise-level deployments with dedicated support and custom SLAs." delay={0.3} />
+            <AnimatedStatCard icon={BarChart3} value={40} label="Tokens Served" description="Tokens processed through Hawiyat Composer's caching and routing." delay={0} />
+            <AnimatedStatCard icon={Users} value={30} label="Satisfied Clients" description="Developers, startups, and agencies across Algeria." delay={0.15} />
+            <AnimatedStatCard icon={Building2} value={3} label="Enterprise Partners" description="Enterprise deployments with dedicated support and custom SLAs." delay={0.3} />
             <AnimatedStatCard icon={Headphones} value={0} label="Customer Support" description="Round-the-clock support via WhatsApp, Email, and Telegram." text="24/7" delay={0.45} />
           </div>
         </div>
@@ -160,10 +160,9 @@ export default function ComposerPage() {
                 <span className="font-thin font-serif">Composer?</span>
               </h2>
               <p className="text-lg text-gray-800 dark:text-white leading-relaxed">
-                A highly optimized, stateful, context-aware abstraction gateway.
-                It exposes standard OpenAI- and Anthropic-compatible endpoints, so tools like
-                Claude Code or Copilot-style extensions can point at Hawiyat instead of the
-                provider directly no code changes required.
+                An abstraction layer with standard OpenAI and Anthropic endpoints.
+                Claude Code, Cursor, Copilot. You point them at Hawiyat instead of the
+                provider directly. Zero code changes.
               </p>
             </div>
           </div>
@@ -179,15 +178,15 @@ export default function ComposerPage() {
             {[
               {
                 title: "API Costs Were Draining Us",
-                desc: "Continuous microservice development against direct provider endpoints meant paying full price for the same data, over and over.",
+                desc: "We were paying full price for the same API data, over and over. Every microservice hitting the provider directly. It added up fast.",
               },
               {
                 title: "Context Was Structurally Wasteful",
-                desc: "Coding agents re-read your whole codebase layout on every turn. Sending 100,000 tokens for a one-line change doesn't scale.",
+                desc: "Coding agents re-read your whole codebase on every turn. A hundred thousand tokens for a one-line fix. That math breaks at scale.",
               },
               {
                 title: "No Optimization Layer Existed",
-                desc: "Standard API integrations had no client-side caching and no centralized way to handle repeated context, so providers ended up doing the same expensive work twice.",
+                desc: "No one had built client-side caching for this. No centralized way to handle repeated context. So the provider did the same expensive work twice, and we paid for it.",
               },
             ].map((item, i) => (
               <Link
@@ -213,8 +212,8 @@ export default function ComposerPage() {
             Ready to Cut Your Token Bill?
           </h2>
           <p className="max-w-lg text-lg text-gray-800 dark:text-white">
-            Point your existing tools at Hawiyat Composer and start caching, routing, and
-            saving without touching a line of your source code.
+            Point your tools at Hawiyat Composer and start caching, routing, and
+            saving. You don't touch a line of source code.
           </p>
 
           {/* Compatible tools */}
