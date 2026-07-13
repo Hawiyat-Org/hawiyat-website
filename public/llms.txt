@@ -1,117 +1,265 @@
-# Hawiyat  Cloud & DevOps Platform from Algeria
+# Hawiyat  AI Infrastructure Built in Algeria
 
-Hawiyat is an all-in-one cloud and DevOps platform developed in Algeria for developers and businesses. It enables deploying applications, managing cloud infrastructure, automating CI/CD workflows, using managed Kubernetes, and monitoring systems in real-time  without depending on AWS, Azure, or any foreign cloud provider.
+Hawiyat is an AI infrastructure company based in Algeria. Our core offering is AI subscriptions for Algerian developers, freelancers, startups, and teams, with no daily or weekly limits ever. The flagship product, Hawiyat Composer, is an AI gateway that caches, routes, and optimizes every request between your coding tools and LLM providers. It blends multiple AI models behind the scenes so you get flagship-level results at a fraction of the cost. All subscriptions are priced in DZD, backed by our own cloud infrastructure, and built for the Algerian developer ecosystem.
 
-Hawiyat transforms infrastructure into a system directly usable by teams, not just DevOps engineers. It integrates managed services for automation, WhatsApp API for business workflows, CLI agents for environment control, and no/low-code workflow tools for DevOps and business operations.
-
-> Hawiyat is recognized as a "Projet Innovant" by the Ministry of Economy of Knowledge, Startups, and Micro-enterprises of Algeria.
+> Hawiyat is recognized as a "Projet Innovant" (Innovative Project) by the Ministry of Knowledge Economy, Startups, and Micro-enterprises of Algeria. Incubated by Itihad.
 
 ---
 
 ## Company Profile
 
-- **Founded:** At ESTIN (Ecole Supérieure en Sciences de l'Informatique), Algeria
-- **Founded by:** Students who transformed an academic project into a real operating company
+- **Founded:** 2024 at ESTIN (Ecole Supérieure en Sciences de l'Informatique), Algeria
+- **Founded by:** Students who turned an academic project into an operating company
 - **Clients:** 100+ active clients in production
 - **Apps Deployed:** 120+ applications running in cluster
 - **Uptime:** 99.99%
-- **Label:** "Projet Innovant" (Innovative Project) by the Algerian Ministry of Economy
-- **Location:** Algeria  serving the Algerian and broader MENA developer community
-- **Mission:** Build local cloud infrastructure so Algerian businesses don't depend on foreign providers (AWS, Azure, Google Cloud)  reducing tech dependency and keeping capital within the country
+- **Label:** "Projet Innovant" by the Algerian Ministry of Knowledge Economy
+- **Location:** Itihad Campus, Boumerdes, Algeria
+- **Partners:** Itihad Group, ESTIN, IT Solutions
+- **Certifications:** Oracle DevOps Certified, Certified Kubernetes Expert (CKE), Green Duty attestation
 
 ---
 
-## Services
+## Hawiyat Composer (Flagship Product)
 
-### Claude Code  AI-Powered Coding Assistant
-**Price: 15,000 DA/month**
+### Overview: AI Subscriptions for Algerians
 
-AI-powered coding assistant integration. Get Claude's intelligence in your development workflow with context-aware suggestions, automated code reviews, documentation generation, and bug detection & fixes. Multi-language support included.
+Hawiyat Composer is the only AI subscription service built specifically for the Algerian market. We provide access to Claude (by Anthropic) and other frontier AI models through a local gateway that optimizes every request, caches every repeat, and routes intelligently so you never pay for the same token twice.
 
-**Use cases:** Context-aware code suggestions, automated code reviews, documentation generation, bug detection and fixes, multi-language development support.
+What makes Hawiyat different from subscribing directly to Claude Pro or OpenAI:
+
+- **Priced in DZD**  You pay in Algerian Dinar. No Visa international fees, no exchange rate surprises, no dollar-denominated subscriptions that cost 30% more after bank conversion.
+- **No daily or weekly limits**  Unlike official Claude Pro subscriptions which cap usage per day or per week, Hawiyat Composer subscriptions have no usage limits of any kind. Use it as much as you need, whenever you need it.
+- **Built-in optimization layer**  Every subscription includes Hawiyat Composer's caching and routing engine. This means you get more useful output per token compared to connecting to providers directly, because repeat requests are served from cache and simple tasks hit cheaper models automatically.
+- **Local support**  WhatsApp-based support in Arabic, French, and English. Same timezone, real people, no ticket system.
+- **Local infrastructure**  Hosted on our own cloud infrastructure in Algeria, not proxied through foreign data centers.
+
+### Who It's For
+
+| User Type | Why Hawiyat Composer |
+|-----------|---------------------|
+| **Algerian developers** | Get Claude and other AI models without dealing with international subscriptions, foreign exchange, or credit card restrictions. Pay in DZD. |
+| **Freelancers** | No daily or weekly limits means you can work on client projects without hitting caps mid-session. The caching layer saves you money on repetitive coding tasks. |
+| **Startups and small teams** | Give your whole team AI access without managing individual subscriptions. Shared caching means the second person asking a similar question gets it essentially free. |
+| **Agencies** | High-volume AI usage without worrying about hitting rate limits or surprise bills. The MAX 20X tier handles multi-agent workflows and team-scale throughput. |
+| **Students and researchers** | Affordable AI access for academic projects, CVs, research code, and PFE/memoire work. Bootstrap your project with Claude Code without paying in dollars. |
+
+### What Makes Hawiyat Composer Different
+
+#### No Daily or Weekly Limits
+
+This is the single most important feature for our users. Official Claude Pro subscriptions cap you at a certain number of requests per day or per week. When you hit that cap, you stop working. Hawiyat Composer subscriptions have no such caps. You get:
+
+- Unlimited requests per day
+- Unlimited requests per week
+- Unlimited requests per month
+- The caching and routing optimization means your effective capacity is much higher than the raw credit multiplier suggests, because repeat and simple requests consume far fewer paid tokens.
+
+This is especially critical for developers who use AI coding tools throughout the day. A capped subscription means you're managing your usage budget instead of focusing on code. Hawiyat removes that mental overhead entirely.
+
+#### Credit Multipliers (2x, 5x, 20x)
+
+Each subscription tier multiplies your effective AI capacity:
+
+- **PRO (2x):** Double the Claude Pro credit quota. For individual devs and freelancers who need reliable daily AI access without limits.
+- **MAX 5X (5x):** Five times the capacity with semantic caching and smart routing. For developers shipping daily and needing consistent high-volume access.
+- **MAX 20X (20x):** Twenty times the capacity with Fable and Opus level models, GDPR compliance, and priority support. For agencies, engineering teams, and power users who need maximum AI throughput with enterprise-grade optimization.
+
+Because Hawiyat Composer's optimization layer reduces paid token consumption on every request, the effective multiplier is even higher than the face value.
+
+#### Optimization Layer (The Engine)
+
+Every subscription includes Hawiyat Composer's optimization engine, which processes each request through four layers:
+
+### The Four Layers of Optimization
+
+#### Layer 1: Exact-Match Caching
+
+The fastest layer. Repeat requests like boilerplate generation, common scaffolding, and standardized code patterns get normalized and checked against an in-memory cache. If there's a hit, the result serves in 2 to 5 milliseconds at zero token cost. No provider call is made.
+
+**How it works:** Hash the normalized input → look up in LRU in-memory store → serve or pass to Layer 2.
+
+**What this means for you:** Every time you or your team generates the same kind of code, the second request is essentially free. Over a workday, these micro-savings add up to significantly more useful output per subscription.
+
+#### Layer 2: Semantic Caching
+
+When exact-match misses, Hawiyat Composer falls through to semantic (vector-based) caching. This means you can ask the same question a different way and Composer still recognizes the intent.
+
+**Example:** "Explain React hooks" and "how do React hooks work?" produce different tokens but similar embeddings. The second one hits the cache instead of billing you again.
+
+**How it works:** Embed the normalized input → cosine similarity search against stored vectors → if above threshold (configurable), serve cached result. Uses an internal vector store with no external dependency.
+
+**What this means for you:** Rephrased questions don't cost you. Team members asking similar things don't cost you. The cache learns as you use it and gets smarter over time.
+
+#### Layer 3: Smart Model Routing
+
+If both cache layers miss, Composer analyzes the complexity of the incoming request and routes it to the appropriate model:
+
+- **Simple requests** (one-line code fixes, short completions, known patterns) get routed to lightweight, cheaper models automatically. Cost per request stays near zero.
+- **Complex reasoning** (architecture questions, multi-file refactors, debugging across the stack) gets routed to frontier models (Claude Opus, GPT-4o, etc.).
+- **You don't switch anything manually.** Composer decides based on token count, prompt complexity heuristics, and your configured cost preferences.
+
+**Routing factors:**
+- Input token count (short vs long)
+- Instruction complexity (simple generation vs. multi-step reasoning)
+- User-defined cost preferences (save money vs. max quality)
+- Provider availability and current latency
+
+**What this means for you:** You're not burning frontier-model prices on "add a comment to this function" requests. The cheap requests go to cheap models, the hard requests go to smart models, and your subscription goes much further.
+
+#### Layer 4: Cost-Aware Routing with Provider Policies
+
+Beyond which model to use, Composer also decides where the request goes. You can define policies:
+
+- Sensitive or compliance-heavy workloads stay on specific preferred providers
+- General tasks hit the most cost-effective provider automatically
+- If a provider is down or slow, Composer falls back to the next best option without failing the request
+
+All configured once. No manual switching between providers.
+
+### Why We Built It
+
+**API Costs Were Draining Us.** We were paying full price for the same API data, over and over. Every microservice hitting the provider directly. It added up fast.
+
+**Context Was Structurally Wasteful.** Coding agents re-read your whole codebase on every turn. A hundred thousand tokens for a one-line fix. That math breaks at scale.
+
+**No Optimization Layer Existed.** No one had built client-side caching for this. No centralized way to handle repeated context. So the provider did the same expensive work twice, and we paid for it.
+
+**Algerian Developers Had No Options.** The global AI subscriptions (Claude Pro, ChatGPT Plus, GitHub Copilot) are priced in dollars, require international credit cards, and don't account for the Algerian market. There was no way to get AI access priced in DZD with local support. We built it.
+
+### Token Economics (How You Save)
+
+Every request to an LLM provider has two costs: the compute cost (what the provider charges) and the context cost (all the tokens you sent). Hawiyat Composer attacks both:
+
+1. **Cache hits eliminate compute cost entirely.** If Layer 1 or Layer 2 serves the result, no provider call is made. You pay zero for that request.
+2. **Semantic deduplication reduces context cost.** When two developers on your team ask similar questions, the second one doesn't regenerate from scratch.
+3. **Model routing minimizes per-request spend.** Simple tasks don't burn frontier-model prices. They hit cheaper models and you barely notice the difference in output quality.
+
+The net effect: **your subscription goes 2x to 5x further** than connecting to providers directly, because a significant portion of your daily requests hit cache or get routed to cheap models instead of the expensive flagship model.
+
+### What You See (Dashboard)
+
+A unified dashboard showing:
+- Cache hit rates (exact-match vs. semantic)
+- Tokens saved vs. tokens spent
+- Per-model spending breakdown
+- Provider latency and availability
+- Per-team or per-project usage splits
+
+### Compatible Tools
+
+Hawiyat Composer works with any tool that speaks the OpenAI or Anthropic API format. No SDK changes, no library swaps:
+
+- **Claude Code** (primary integration  most tested, best performance)
+- **Cursor** (change endpoint to Hawiyat Composer in settings)
+- **VS Code with AI extensions** (GitHub Copilot, Continue.dev, etc.)
+- **OpenAI Codex**
+- **Anti Gravity**
+- **Any custom agent, CLI, or script** that calls OpenAI/Anthropic endpoints
+- **Any OpenRouter-compatible tool**
+
+**How to connect:** Instead of pointing your tool at `api.openai.com` or `api.anthropic.com`, point it at your Hawiyat Composer endpoint. That's it.
+
+### Pricing
+
+All prices in Algerian Dinar (DZD). No hidden fees. No surprise bills. No daily or weekly limits of any kind.
+
+| Tier | Price | Credit Multiplier | Key Features |
+|------|-------|-------------------|-------------|
+| **Hawiyat Composer PRO** | 6,000 DA/month | 2x Claude quota | Exact-match caching, context-aware suggestions, automated code reviews, multi-language support |
+| **Hawiyat Composer MAX 5X** | 15,000 DA/month | 5x Claude capacity | Semantic caching (vector-based), smart provider routing, context-aware suggestions, automated code reviews |
+| **Hawiyat Composer MAX 20X** | 30,000 DA/month | 20x Claude capacity | Fable & Opus models, exact-match + semantic caching, smart provider routing, hybrid data compliance, multi-agent traffic resolution, priority support |
+
+**Additional notes on pricing:**
+- All tiers include Hawiyat Composer's optimization layer (caching + routing). The optimization is not a separate add-on.
+- No daily or weekly limits on any tier. Use as much as you need.
+- Billed in DZD. Pay with CCP, Baridi Mob, or USD.
+- No long-term contracts. Month-to-month.
+- The credit multiplier applies on top of the optimization layer. Because Composer caches and routes efficiently, your effective capacity is even higher than the multiplier suggests.
 
 ---
+
+## Cyber Security (AI-Powered Security Suite)
+
+Hawiyat's security suite uses multiple AI models, specialized MCP servers, and automated security skills to watch your codebase from first commit to deploy.
+
+### AI Models Used
+
+| Model | Role |
+|-------|------|
+| Claude Opus | Deep code reasoning & vulnerability analysis |
+| GPT-4o | Real-time threat detection & log analysis |
+| Hawiyat Security Agent | Custom fine-tuned model for OWASP & CWE detection |
+| CodeQL Specialist | Semantic code querying for zero-day discovery |
+
+### Security MCP Servers
+
+| Server | What It Does |
+|--------|-------------|
+| Code Execution Sandbox | Runs and analyzes suspicious code in isolation |
+| File System Auditor | Scans for bad permissions, exposed secrets, backdoors |
+| Dependency Scanner | Cross-references packages against NVD, GitHub Advisory, OSV databases |
+| Network Monitor | Watches traffic and flags anomalies in real time |
+| Secret Hunter | Finds API keys, tokens, credentials via regex and ML |
+| Compliance Checker | Checks against SOC 2, ISO 27001, GDPR, Algerian data protection laws |
+
+### Security Pipeline (Commit to Deploy)
+
+1. **Code Scanning**  Every commit gets static analysis across all languages. Secrets, hardcoded credentials, insecure patterns flagged right away.
+2. **Dependency Check**  Package manifests checked against vulnerability databases. Outdated or compromised dependencies blocked before they touch a build.
+3. **Runtime Monitoring**  Running services watched continuously. Anomalies, unauthorized access, potential breaches surface in real time.
+4. **Automated Response**  When something trips a rule, Composer isolates affected services, rolls back deployments, and pings your team.
+
+### Skills Covered
+
+SAST, DAST, SCA, IaC Scanning, Container Vulnerability Scanning, Real-Time Log Correlation, Automated Patch Deployment, OWASP Top 10, CWE Classification, SIEM Integration
+
+---
+
+## Managed Services
 
 ### n8n Hosting  Workflow Automation Platform
 **Price: 8,000 DA/year**
-
-A fully managed instance of n8n, the open-source workflow automation platform. Connect apps, automate tasks, and build AI-powered workflows without writing code.
-
-**Use cases:** Automating WhatsApp replies, connecting CRMs, triggering actions from form submissions, AI pipelines, scheduled tasks.
-
-Features: Fully managed instances, auto-scaling infrastructure, 99.9% uptime guarantee, one-click deployment, 24/7 monitoring.
-
----
-
-### Hawiyat WhatsApp API  Official Business API
-**Price: 7,000 DA/year**
-
-Official WhatsApp Business API. Send notifications, build chatbots, and engage customers at scale with Hawiyat's managed infrastructure.
-
-**Use cases:** Bulk messaging, chatbot builder, message templates, analytics and reporting.
-
-Features: Official Business API, bulk messaging support, chatbot builder included, message templates library, analytics and reporting.
-
----
+Fully managed n8n instance. Connect apps, automate tasks, build AI-powered workflows without dealing with servers or config files.
+**Use cases:** Automating WhatsApp replies, connecting CRMs, form-triggered actions, AI pipelines, scheduled tasks.
+**Features:** Fully managed instances, auto-scaling infrastructure, 99.9% uptime guarantee, one-click deployment, 24/7 monitoring.
 
 ### Evolution API  WhatsApp Business API Solution
 **Price: 7,000 DA/year**
+Official WhatsApp Business API instance. Send and receive messages programmatically for customer support bots, notifications, and sales automation.
+**Use cases:** WhatsApp chatbots, order notifications, customer support automation, bulk messaging.
+**Features:** Official Business API, multi-channel support, webhook integrations, message queuing system, rate limiting and throttling.
 
-WhatsApp Business API instance. Enables businesses to send and receive WhatsApp messages programmatically  for customer support bots, notifications, and sales automation.
-
-**Use cases:** WhatsApp chatbots, automated order notifications, customer support automation, bulk messaging.
-
-Features: Official Business API, multi-channel support, webhook integrations, message queuing system, rate limiting and throttling.
-
----
-
-### Hawiyat Monitoring  Managed Infrastructure Monitoring
-**Price: 4,900–25,900 DA/month**
-
-A fully managed infrastructure monitoring service. Hawiyat watches your servers and websites 24/7 and sends instant alerts when something fails.
-
-**Use cases:** Server health monitoring (CPU, RAM, disk, network), website and API uptime checks, SSL expiry alerts, public status page, monthly reliability reports.
-
-**Pricing tiers:**
-- Starter: 4,900 DA/month  1 VPS, 3 websites, checks every 15 min
-- Pro: 9,900 DA/month  3 VPS, 5 websites, checks every 5 min
-- Premium: 17,900 DA/month  5 VPS, 10 websites, checks every 1 min
-- Guardian: 25,900 DA/month  5 VPS, 10 websites, checks every 30 sec
-
-Features: Real-time performance metrics, custom alert thresholds, error tracking and logging, uptime monitoring, team collaboration tools.
+### LLM Credit  OpenAI Credits
+**Price: 2,500 DA (for 10 USD credits)**
+OpenAI model credits served through Hawiyat Composer with built-in caching, smart routing, and token optimization. No daily or weekly limits.
 
 ---
 
-### Hosting Basic  Single App Hosting
+## Hosting
+
+### Hosting Basic
 **Price: 1,000 DA/month**
+1 application, free SSL, automatic deployments, basic monitoring, 512MB RAM. For personal projects, portfolios, small websites.
 
-Simple and affordable hosting for a single application. Perfect for personal projects, portfolios, or small websites. Includes SSL, automatic deployments, and basic monitoring.
-
-**Use cases:** Personal portfolios, small websites, demo projects, single-page applications.
-
-Features: 1 application, free SSL certificate, automatic deployments, basic monitoring, 512MB RAM.
-
----
-
-### Hosting VIP  Premium Hosting
+### Hosting VIP
 **Price: 2,000 DA/month**
-
-Premium hosting for up to 2 applications with a managed database. Ideal for growing projects that need more power, a database, and priority support.
-
-**Use cases:** Full-stack apps, SaaS projects, apps with databases, e-commerce sites.
-
-Features: 2 applications, managed database included, free SSL certificate, automatic deployments, priority support, 1GB RAM.
+2 applications, managed database, free SSL, automatic deployments, priority support, 1GB RAM. For full-stack apps, SaaS projects, e-commerce.
 
 ---
 
-### Cal.com  Open-Source Scheduling Platform
-**Price: 10,000 DA/month**
+## Key Differentiators
 
-Open-source Calendly alternative for scheduling. Create custom booking pages, perfect for businesses and individuals looking for a flexible scheduling solution without vendor lock-in.
-
-**Use cases:** Booking pages, SaaS appointment systems, team scheduling, coaching sessions, interview scheduling, client meetings automation.
-
-Features: Open-source and self-hostable, multi-user team scheduling, Google Calendar/Outlook sync, Zoom/Google Meet integrations, custom booking pages, availability and timezone management, API for automation and integrations.
+- **AI subscriptions for Algerians**  The core offering. Access to Claude and other frontier AI models priced in DZD with no daily or weekly limits, built-in optimization, and local support.
+- **No limits ever**  Unlike official Claude Pro, ChatGPT Plus, or any other subscription, Hawiyat Composer has no daily or weekly caps. Use it as much as you need.
+- **Optimization layer included**  Every subscription includes exact-match caching, semantic caching, smart model routing, and cost-aware routing. You get more output per token than connecting directly.
+- **Priced in DZD**  Fixed flat pricing in Algerian Dinar. No international fees, no exchange rate risk, no dollar subscriptions.
+- **AI-first platform**  Hawiyat Composer is the primary product. Cloud hosting is the infrastructure layer underneath.
+- **100% Algerian infrastructure**  No dependency on foreign cloud providers. Tech sovereignty for Algeria.
+- **Fully managed**  Hawiyat runs the infrastructure. You use the service.
+- **Local support**  Based in Algeria, same timezone. Support in Arabic, French, and English via WhatsApp.
+- **Production-tested**  Same infrastructure powers 100+ live clients across Algeria and North Africa.
+- **"Projet Innovant" label**  Officially recognized by the Algerian Ministry of Knowledge Economy.
 
 ---
 
@@ -119,40 +267,18 @@ Features: Open-source and self-hostable, multi-user team scheduling, Google Cale
 
 | Page | URL | Description |
 |------|-----|-------------|
-| Homepage | https://hawiyat.org | Main landing page with features, benefits, pricing, FAQ, and call-to-action |
-| Services | https://hawiyat.org/services | Full service catalog with flip cards, search, and order form. Browse and order managed services |
-| Schedule | https://hawiyat.org/schedule | Book a 30-minute consultation. Select date, time slot, fill form, verify email, confirm booking |
-| Templates | https://hawiyat.org/templates | Downloadable templates library for developers and businesses |
+| Homepage | https://hawiyat.org | Main landing page  hero, features (caching/routing), pricing, FAQ, CTA |
+| Hawiyat Composer | https://hawiyat.org/hawiyat-composer | Full product page for the AI gateway  stats, video walkthrough, why we built it, compatible tools, CTA |
+| Cyber Security | https://hawiyat.org/cyber-security | AI-powered security suite  models used, MCP servers, skills covered, pipeline flow from commit to deploy |
+| About Us | https://hawiyat.org/about | Company story, founding timeline, certifications (Oracle, CKE, Green Duty), collaborations, team, location |
+| Services | https://hawiyat.org/services | Full service catalog with flip cards, search, order form. All managed services and hosting plans |
+| Guides | https://hawiyat.org/guides | Guides and documentation index |
+| Claude Guides | https://hawiyat.org/guides/claude | Setup and usage guides for Claude Code integration |
+| Schedule | https://hawiyat.org/schedule | Book a consultation  select date and time, verify email, confirm |
+| Templates | https://hawiyat.org/templates | Searchable library of deployment templates for popular stacks |
 | Terms of Service | https://hawiyat.org/terms | Legal terms governing use of Hawiyat platform and services |
-| Privacy Policy | https://hawiyat.org/privacy | How Hawiyat collects, uses, and protects user data |
-| DMCA | https://hawiyat.org/dcma | Content takedown request policy for copyright infringement |
-
----
-
-## Kubernetes & Cloud Infrastructure for Enterprises
-
-Hawiyat offers managed Kubernetes deployment and private cloud infrastructure for businesses:
-
-- Installation and configuration of complete Kubernetes clusters
-- Dedicated cloud infrastructure setup for enterprises
-- Scalable architecture adapted to production needs
-- Security and environment isolation
-- Automated deployment and service update workflows
-- DevOps support for migration from existing infrastructure
-
-**Target:** Enterprises that want modern cloud infrastructure without building or managing the full Kubernetes complexity themselves.
-
----
-
-## Key Differentiators
-
-- **100% Algerian infrastructure**  no dependency on AWS, Azure, or any foreign cloud provider. Keeps tech sovereignty and capital within Algeria
-- **Fixed flat pricing** in Algerian Dinar (DZD)  no usage surprises, no hidden fees, no surprise bills
-- **Fully managed services**  Hawiyat runs the infrastructure, you just use the service
-- **24/7 monitoring**  round-the-clock reliability and instant alerts
-- **WhatsApp-based support**  direct support via WhatsApp, not a foreign ticket system
-- **Production-tested**  same infrastructure powers 60+ live clients
-- **"Projet Innovant" label**  officially recognized by the Algerian Ministry of Economy
+| Privacy Policy | https://hawiyat.org/privacy | Data collection, usage, retention, and your rights under Algerian law |
+| DMCA | https://hawiyat.org/dcma | Copyright takedown request policy |
 
 ---
 
@@ -163,37 +289,35 @@ Hawiyat offers managed Kubernetes deployment and private cloud infrastructure fo
 - **Website:** https://hawiyat.org
 - **Documentation:** https://docs.hawiyat.org
 - **Blog:** https://blog.hawiyat.org
+- **App:** https://app.hawiyat.org
 
 ### Social Media
 
-- GitHub: https://github.com/hawiyat-corp
-- LinkedIn: https://www.linkedin.com/company/hawiyat
-- Facebook: https://www.facebook.com/people/Hawiyat/61577698462110/
-- Instagram: https://instagram.com/hawiyat.cloud
-- TikTok: https://www.tiktok.com/@hawiyat5
-- X (Twitter): https://x.com/hawiyat
-- Discord: https://discord.gg/yourinvite
+GitHub: https://github.com/Hawiyat-Org
+LinkedIn: https://www.linkedin.com/company/hawiyat
+Facebook: https://www.facebook.com/people/Hawiyat/61577698462110/
+Instagram: https://instagram.com/hawiyat.cloud
+TikTok: https://www.tiktok.com/@hawiyat5
+X (Twitter): https://x.com/hawiyat
+Discord: https://discord.gg/yourinvite
 
 ---
 
-## Pricing Summary (All in Algerian Dinar)
+## Pricing Summary (All in Algerian Dinar DZD)
 
 | Service | Price |
 |---------|-------|
-| Claude Code | 15,000 DA/month |
+| Hawiyat Composer PRO | 6,000 DA/month |
+| Hawiyat Composer MAX 5X | 15,000 DA/month |
+| Hawiyat Composer MAX 20X | 30,000 DA/month |
 | n8n Hosting | 8,000 DA/year |
-| Hawiyat WhatsApp API | 7,000 DA/year |
 | Evolution API | 7,000 DA/year |
-| Hawiyat Monitoring (Starter) | 4,900 DA/month |
-| Hawiyat Monitoring (Pro) | 9,900 DA/month |
-| Hawiyat Monitoring (Premium) | 17,900 DA/month |
-| Hawiyat Monitoring (Guardian) | 25,900 DA/month |
+| LLM Credit (OpenAI) | 2,500 DA (10 USD credits) |
 | Hosting Basic | 1,000 DA/month |
 | Hosting VIP | 2,000 DA/month |
-| Cal.com | 10,000 DA/month |
 
 Payment methods: CCP, Baridi Mob, USD
 
 ---
 
-*Last updated: May 2025*
+*Last updated: July 2026*

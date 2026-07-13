@@ -22,7 +22,7 @@ const Footer = () => {
       title: "Company",
       links: [
         { name: "Support", href: "tel:+213559555951" },
-        { name: "Github", href: "https://github.com/hawiyat-corp" },
+        { name: "Github", href: "https://github.com/Hawiyat-Org" },
       ],
       
     },
@@ -37,7 +37,7 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { name: "Github", href: "https://github.com/hawiyat-corp", icon: "bi-github" },
+    { name: "Github", href: "https://github.com/Hawiyat-Org", icon: "bi-github" },
     { name: "Discord", href: "https://discord.gg/yourinvite", icon: "bi-discord" },
     { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", icon: "bi-instagram" },
     { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", icon: "bi-facebook" },
