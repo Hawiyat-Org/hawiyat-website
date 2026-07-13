@@ -54,7 +54,7 @@ export default function CyberSecurityPage() {
     <div className="relative min-h-screen hero-bg-gradient overflow-hidden">
       {/* ── Hero ── */}
       <section className="relative flex min-h-[90vh] w-full flex-col place-content-center overflow-hidden mt-[70px] md:mt-[100px]">
-        <div className="purple-bg-grad absolute left-[5%] top-[10%] h-[250px] w-[250px] max-md:hidden" />
+        <div className="purple-bg-grad absolute left-[5%] top-[15%] h-[250px] w-[250px] max-md:hidden" />
         <div className="purple-bg-grad absolute right-[10%] bottom-[15%] h-[150px] w-[150px] max-md:hidden" />
 
         <div className="mx-auto w-full max-w-6xl px-6">
