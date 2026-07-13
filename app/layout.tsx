@@ -51,7 +51,7 @@ const aldrich = Aldrich({
 
 // AUDIT NOTE: five font families with multiple weights each are loaded on
 // every page. Confirm all five are actually used site-wide (not just on one
-// page) — each unused family/weight is pure LCP cost. Recommend trimming to
+// page)  each unused family/weight is pure LCP cost. Recommend trimming to
 // 2-3 max if some are only used on isolated pages.
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     template: "%s | " + APP_NAME,
   },
   description:
-    "Hawiyat is an AI infrastructure platform based in Algeria. Hawiyat Composer caches and routes requests between your dev tools and AI models, cutting token costs — priced in DZD, backed by our own cloud infrastructure.",
+    "Hawiyat is an AI infrastructure platform based in Algeria. Hawiyat Composer caches and routes requests between your dev tools and AI models, cutting token costs  priced in DZD, backed by our own cloud infrastructure.",
   applicationName: APP_NAME,
   keywords: [
     "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
@@ -140,7 +140,7 @@ export const metadata: Metadata = {
     languages: {
       "en-US": NEXT_URL,
       "fr-DZ": `${NEXT_URL}/fr`,
-      // AUDIT NOTE: add "x-default" once you confirm the fallback page —
+      // AUDIT NOTE: add "x-default" once you confirm the fallback page 
       // required so Google knows which version to show users outside any
       // matched locale.
       "x-default": NEXT_URL,
@@ -158,7 +158,7 @@ export const metadata: Metadata = {
   },
   other: {
     // AUDIT NOTE: split into two schema blocks below via <script> tags in
-    // <head> instead — WebSite and Organization are different types and
+    // <head> instead  WebSite and Organization are different types and
     // contactPoint is not a valid WebSite property. See <head> below.
   },
 };
@@ -245,7 +245,7 @@ export default function RootLayout({
         {/*
           Self-referencing + reciprocal hreflang tags. Next.js's
           `alternates.languages` metadata field does NOT automatically add
-          a self-referencing tag for the current locale — without it,
+          a self-referencing tag for the current locale  without it,
           Google can drop the whole hreflang cluster. x-default tells
           Google which version to serve users outside en/fr entirely.
         */}
@@ -293,7 +293,7 @@ export default function RootLayout({
 
         {/*
           Meta Pixel moved to next/script with afterInteractive strategy.
-          Same tracking behavior, but no longer blocks initial render —
+          Same tracking behavior, but no longer blocks initial render 
           it now loads after the page becomes interactive instead of
           racing hydration in a raw <head> script.
         */}
