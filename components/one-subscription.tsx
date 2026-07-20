@@ -8,13 +8,14 @@ const composerFeatures = [
   {
     category: "AI Gateway",
     rows: [
-      { label: "DZD Pricing", composer: true, directapi: false, litellm: false, portkey: false },
-      { label: "Algerian Support", composer: true, directapi: false, litellm: false, portkey: false },
-      { label: "Exact-Match Caching", composer: true, directapi: false, litellm: false, portkey: false },
-      { label: "Semantic Caching", composer: true, directapi: false, litellm: false, portkey: false },
-      { label: "Smart Model Routing", composer: true, directapi: false, litellm: true, portkey: true },
-      { label: "Model Blending / Smart Routing", composer: true, directapi: false, litellm: false, portkey: false },
-      { label: "Drop-in Compatible (No Code Changes)", composer: true, directapi: "n/a", litellm: true, portkey: true },
+      { label: "DZD Pricing", composer: true, litellm: false, zai: false },
+      { label: "Algerian Support", composer: true, litellm: false, zai: false },
+      { label: "Exact-Match Caching", composer: true, litellm: false, zai: false },
+      { label: "Semantic Caching", composer: true, litellm: false, zai: false },
+      { label: "Smart Model Routing", composer: true, litellm: true, zai: true },
+      { label: "Model Blending / Smart Routing", composer: true, litellm: false, zai: false },
+      { label: "Drop-in Compatible (No Code Changes)", composer: true, litellm: true, zai: "n/a" },
+      { label: "No Daily or Weekly Limits", composer: true, litellm: false, zai: false },
     ],
   },
 ]
@@ -36,9 +37,8 @@ export default function ComparisonTable() {
 
   const composerPlatforms = [
     { name: "Hawiyat Composer", key: "composer" as const, highlight: true },
-    { name: "Direct API", key: "directapi" as const, highlight: false },
     { name: "Claude Subscription", key: "litellm" as const, highlight: false },
-    { name: "Portkey", key: "portkey" as const, highlight: false },
+    { name: "z.ai Subscription", key: "zai" as const, highlight: false },
   ]
 
   return (
@@ -92,7 +92,7 @@ export default function ComparisonTable() {
                 <>
                   <tr key={category.category}>
                     <td
-                      colSpan={5}
+                      colSpan={4}
                       className="pt-8 pb-3 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500"
                     >
                       {category.category}

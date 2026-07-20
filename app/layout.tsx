@@ -62,11 +62,11 @@ const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.hawiyat.org";
 export const metadata: Metadata = {
   metadataBase: new URL(NEXT_URL),
   title: {
-    default: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    default: `${APP_NAME}: Built to Ship — AI Provider for Algeria`,
     template: "%s | " + APP_NAME,
   },
   description:
-    "Hawiyat is an AI infrastructure platform based in Algeria. Hawiyat Composer caches and routes requests between your dev tools and AI models, cutting token costs  priced in DZD, backed by our own cloud infrastructure.",
+    "Hawiyat Composer routes and caches every request between your coding tools and AI models. Priced in DZD, backed by our own cloud in Algeria. No provider switching, no hidden costs.",
   applicationName: APP_NAME,
   keywords: [
     "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
@@ -85,6 +85,14 @@ export const metadata: Metadata = {
     "ai gateway", "llm gateway", "ai infrastructure algeria", "reduce ai costs",
     "llm caching", "model routing dz", "ai platform algeria", "hawiyat composer",
     "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
+    // Model keywords — all major providers
+    "gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "o1", "o1-mini", "o3", "o3-mini",
+    "claude", "claude 4", "claude 3.5 sonnet", "claude opus", "claude sonnet", "claude haiku",
+    "gemini", "gemini 2.5 pro", "gemini 2.0 flash", "gemini 1.5 pro", "gemini 1.5 flash",
+    "llama", "llama 4", "llama 3", "meta llama",
+    "deepseek", "deepseek v3", "deepseek r1",
+    "mistral", "mistral large", "mistral small",
+    "openai models", "anthropic models", "google models", "meta models",
   ],
   authors: [{ name: `${APP_NAME} Team`, url: NEXT_URL }],
   creator: `${APP_NAME} Team`,
@@ -102,9 +110,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    title: `${APP_NAME}: Built to Ship`,
     description:
-      "Cut your AI costs with Hawiyat Composer, our caching and routing gateway. Priced in DZD, backed by cloud infrastructure built for Algeria.",
+      "Hawiyat Composer routes and caches AI requests. Priced in DZD, backed by our own cloud in Algeria.",
     url: NEXT_URL,
     siteName: APP_NAME,
     images: [
@@ -124,9 +132,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_NAME}: AI Infrastructure Built in Algeria`,
+    title: `${APP_NAME}: Built to Ship`,
     description:
-      "Cut your AI costs with Hawiyat Composer, our caching and routing gateway. Priced in DZD, backed by cloud infrastructure built for Algeria.",
+      "Hawiyat Composer routes and caches AI requests. Priced in DZD, backed by our own cloud in Algeria.",
     images: [`${NEXT_URL}/hawiyat.png`],
     creator: "@hawiyat",
   },

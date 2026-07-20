@@ -13,7 +13,7 @@ const BuildAIApps = () => {
         </h2>
 
         <p className="reveal-up mt-8 max-w-[650px] text-gray-700 dark:text-gray-200 text-center max-md:text-sm">
-          We blend multiple AI models together to get flagship-level results at a fraction of the cost. Hawiyat Composer handles the AI layer: smart routing, caching, and cost optimization on every request. Hawiyat Cloud handles hosting, databases, and deployment underneath. Priced in DZD, built for Algeria.
+          Hawiyat Composer handles the AI layer: smart routing, caching, and cost optimization on every request. Hawiyat Cloud handles hosting, databases, and deployment underneath. Priced in DZD, built for Algeria.
         </p>
 
         <div className="reveal-up flex mt-8">

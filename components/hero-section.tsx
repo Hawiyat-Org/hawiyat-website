@@ -61,14 +61,14 @@ const HeroSection = () => {
         <div className="flex flex-col mt-12 md:mt-0 min-h-[60vh] max-md:min-h-[50vh] place-content-center items-center max-md:gap-6">
           <h2 className="reveal-up text-center text-7xl font-medium uppercase leading-[90px] max-lg:text-4xl max-md:text-3xl max-md:leading-tight max-md:px-2">
             Algeria's AI{" "}
-            <span className="text-4xl md:text-7xl">Infrastructure</span>
+            <span className="text-4xl md:text-7xl">Provider</span>
             <br />
             <span className="font-thin font-serif max-md:text-2xl">
               Built to Ship
             </span>
           </h2>
 
-          <div className="reveal-up mt-8 max-md:mt-4 max-w-[550px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
+          <div className="reveal-up mt-8 max-md:mt-4 max-w-[600px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
             Hawiyat Composer routes and caches every request between your coding tools and the AI models you use. Same endpoints. Priced in DZD, backed by our own cloud.
           </div>
 
