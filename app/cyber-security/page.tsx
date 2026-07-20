@@ -6,13 +6,13 @@ import { Shield, Cpu, Eye, Search, Bug, Lock, Globe, Server, Zap, Wifi, Bot, Lay
 
 const securityModels = [
   {
-    name: "Claude Opus",
-    focus: "Deep code reasoning & vulnerability analysis",
+    name: "Hawiyat Code Analyst",
+    focus: "Deep code reasoning & vulnerability discovery across every commit",
     badge: "Security Lead",
   },
   {
-    name: "GPT-4o",
-    focus: "Real-time threat detection & log analysis",
+    name: "Hawiyat Threat Watch",
+    focus: "Real-time log correlation, anomaly detection & threat intel",
     badge: "Threat Intel",
   },
   {
@@ -21,8 +21,8 @@ const securityModels = [
     badge: "Custom",
   },
   {
-    name: "CodeQL Specialist",
-    focus: "Semantic code querying for zero-day discovery",
+    name: "Pablo (Hawiyat's Fable-class)",
+    focus: "Custom-built reasoning model equivalent to Fable — static analysis & zero-day hunting",
     badge: "Static Analysis",
   },
 ]
@@ -61,10 +61,7 @@ export default function CyberSecurityPage() {
           <div className="flex max-lg:flex-col items-center gap-16 max-lg:gap-10">
             {/* Left */}
             <div className="flex flex-col gap-6 flex-1 max-w-xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/60 text-sm font-medium w-fit">
-                <Shield className="w-4 h-4" />
-                AI-Powered Security Suite
-              </div>
+            
               <h1 className="text-6xl max-lg:text-4xl font-medium uppercase leading-[80px] max-lg:leading-tight">
                 Cyber{" "}
                 <span className="font-thin font-serif">
