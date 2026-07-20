@@ -22,7 +22,7 @@ const securityModels = [
   },
   {
     name: "Pablo (Hawiyat's Fable-class)",
-    focus: "Custom-built reasoning model equivalent to Fable — static analysis & zero-day hunting",
+    focus: "Custom-built reasoning model equivalent to Fable static analysis & zero-day hunting",
     badge: "Static Analysis",
   },
 ]
