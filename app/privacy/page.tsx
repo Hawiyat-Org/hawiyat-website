@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Hawiyat Privacy Policy. How we collect, use, and protect your personal data in compliance with Algerian Law 18-07 and GDPR.",
+  description: "Hawiyat Privacy Policy. How we collect, use, and protect your personal data, guided by the principles of Algerian Law 18-07 and GDPR.",
   alternates: {
     canonical: "/privacy",
   },
@@ -75,33 +75,31 @@ export default function PrivacyPage() {
                 in this policy.
               </p>
               <p className="mt-3">
-                We process your data in accordance with Algerian Law No. 18-07 on the protection of natural
-                persons in the processing of personal data (as amended by Law No. 25-11 of July 2025), and
-                where applicable, the EU General Data Protection Regulation (GDPR). Our processing activities
-                have been declared to the ANPDP (Autorite Nationale de Protection des Donnees a Caractere
-                Personnel) as required by law. If anything below is unclear, contact us at
-                privacy@hawiyat.org and we will respond within seven days.
+                We aim to process your data in a manner consistent with the principles of Algerian Law
+                No. 18-07 on the protection of natural persons in the processing of personal data (as
+                amended by Law No. 25-11 of July 2025), and where applicable, the EU General Data
+                Protection Regulation (GDPR). We are working toward full compliance and registration with
+                the ANPDP (Autorite Nationale de Protection des Donnees a Caractere Personnel). If anything
+                below is unclear, contact us at privacy@hawiyat.org and we will respond within seven days.
               </p>
             </section>
 
             <section id="dpo">
               <h2 className="text-lg font-medium text-foreground">2. Data Protection Officer</h2>
               <p className="mt-3">
-                In accordance with Law No. 25-11 of July 24, 2025, Hawiyat has appointed a Data Protection
-                Officer (DPO). The DPO is responsible for overseeing our compliance with Law 18-07 and
-                Law 25-11, advising on Data Protection Impact Assessments, and serving as the contact point
-                for the ANPDP and for data subjects.
-              </p>
-              <p className="mt-3">
-                The DPO acts independently in the exercise of their duties and may be contacted at:
+                Law No. 25-11 of July 24, 2025 requires the appointment of a Data Protection Officer (DPO).
+                Hawiyat is in the process of appointing a DPO who will be responsible for overseeing our
+                compliance with Law 18-07 and Law 25-11, advising on Data Protection Impact Assessments,
+                and serving as the contact point for the ANPDP and for data subjects. In the interim,
+                privacy inquiries may be directed to:
               </p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>Email: privacy@hawiyat.org</li>
                 <li>Mail: Hawiyat, Legal Department, Algiers, Algeria</li>
               </ul>
               <p className="mt-3 text-xs">
-                The DPO's contact details have been communicated to the ANPDP in accordance with
-                ANPDP Decision No. 01 of December 24, 2025.
+                Once appointed, the DPO's contact details will be communicated to the ANPDP in accordance
+                with ANPDP Decision No. 01 of December 24, 2025.
               </p>
             </section>
 
@@ -256,7 +254,7 @@ export default function PrivacyPage() {
                 We do not sell your personal data. We share data only with trusted third parties necessary
                 to operate our services, and only under written contracts that require them to process data
                 solely on our instructions, maintain confidentiality, and implement appropriate security
-                measures, as required by Article 38 of Law 18-07.
+                measures.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">Sub-processors</h3>
@@ -288,10 +286,11 @@ export default function PrivacyPage() {
                 Our sub-processors and the AI model providers you use may be located outside Algeria,
                 including in the United States and the European Union. Under Article 44 of Law 18-07,
                 transfers of personal data to a foreign state require prior authorization from the ANPDP
-                and an adequate level of protection in the recipient country.
+                and an adequate level of protection in the recipient country. We are working toward
+                obtaining the necessary authorizations for our current data transfers.
               </p>
               <p className="mt-3">
-                Where we transfer personal data across borders, we ensure compliance through one or more
+                Where we transfer personal data across borders, we aim to comply through one or more
                 of the following:
               </p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
@@ -315,7 +314,7 @@ export default function PrivacyPage() {
               <p className="mt-3">
                 We implement technical and organizational measures to protect personal data against
                 accidental or unlawful destruction, loss, alteration, unauthorized disclosure, or access,
-                as required by Article 38 of Law 18-07 and Article 45 bis 8 of Law 25-11.
+                guided by the requirements of Article 38 of Law 18-07 and Article 45 bis 8 of Law 25-11.
               </p>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>Encryption in transit (TLS 1.3) for all data transmitted to and from our services</li>
@@ -327,8 +326,8 @@ export default function PrivacyPage() {
                 Law 25-11</li>
               </ul>
               <p className="mt-3">
-                In the event of a personal data breach, we will notify the ANPDP within five days of
-                becoming aware of it, as required by Law 25-11. If the breach is likely to result in a
+                In the event of a personal data breach, we will notify the ANPDP without undue delay and
+                within the timeframe recommended by Law 25-11. If the breach is likely to result in a
                 high risk to your rights and freedoms, we will notify you without undue delay, describing
                 the nature of the breach, the likely consequences, and the measures we have taken or
                 propose to take. If you suspect a breach, contact us immediately at privacy@hawiyat.org.
@@ -368,7 +367,8 @@ export default function PrivacyPage() {
                 <li>
                   <span className="text-foreground">Right to Rectification.</span>
                   {" "}To request correction of inaccurate or incomplete data. We will respond to
-                  rectification requests within 10 days as required by Algerian law.
+                  rectification requests within a reasonable timeframe (within 10 days as recommended
+                  under Algerian law).
                 </li>
                 <li>
                   <span className="text-foreground">Right to Object.</span>
@@ -390,10 +390,9 @@ export default function PrivacyPage() {
               </ul>
               <p className="mt-3">
                 To exercise any of these rights, email us at privacy@hawiyat.org. We may ask you to verify
-                your identity before processing your request. We will respond within the timeframe required
-                by applicable law. You also have the right to lodge a complaint with the ANPDP (Autorite
-                Nationale de Protection des Donnees a Caractere Personnel) or your local data protection
-                authority.
+                your identity before processing your request. We will respond within a reasonable timeframe.
+                You also have the right to lodge a complaint with the ANPDP (Autorite Nationale de
+                Protection des Donnees a Caractere Personnel) or your local data protection authority.
               </p>
             </section>
 
