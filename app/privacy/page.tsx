@@ -88,10 +88,10 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-medium text-foreground">2. Data Protection Officer</h2>
               <p className="mt-3">
                 Law No. 25-11 of July 24, 2025 requires the appointment of a Data Protection Officer (DPO).
-                Hawiyat is in the process of appointing a DPO who will be responsible for overseeing our
-                compliance with Law 18-07 and Law 25-11, advising on Data Protection Impact Assessments,
-                and serving as the contact point for the ANPDP and for data subjects. In the interim,
-                privacy inquiries may be directed to:
+                Hawiyat is in the process of appointing a DPO, with appointment expected by Q4 2026, who
+                will be responsible for overseeing our compliance with Law 18-07 and Law 25-11, advising
+                on Data Protection Impact Assessments, and serving as the contact point for the ANPDP and
+                for data subjects. In the interim, privacy inquiries may be directed to:
               </p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>Email: privacy@hawiyat.org</li>
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
                 <li>VPS configuration and deployment metadata</li>
                 <li>Support ticket content and diagnostic information</li>
               </ul>
-              <p className="mt-2 text-xs">We do not log API prompt or completion content by default.</p>
+              <p className="mt-2 text-xs">We do not log API prompt or completion content. Users are prohibited from submitting special categories of personal data (sensitive data) through the Hawiyat Composer API or any of our services.</p>
 
               <h3 className="mt-4 font-medium text-foreground">Payment Information</h3>
               <ul className="mt-2 list-disc pl-5 space-y-1">
@@ -284,28 +284,24 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-medium text-foreground">8. International Transfers</h2>
               <p className="mt-3">
                 Our sub-processors and the AI model providers you use may be located outside Algeria,
-                including in the United States and the European Union. Under Article 44 of Law 18-07,
-                transfers of personal data to a foreign state require prior authorization from the ANPDP
-                and an adequate level of protection in the recipient country. We are working toward
-                obtaining the necessary authorizations for our current data transfers.
+                including in the United States and the European Union. Where transfers of personal data
+                to a foreign state occur, Algerian law requires an adequate level of protection and,
+                where applicable, authorization from the ANPDP.
               </p>
               <p className="mt-3">
-                Where we transfer personal data across borders, we aim to comply through one or more
-                of the following:
+                We are engaging with the ANPDP regarding the authorization framework for our international
+                data transfers. In the interim, we apply the following safeguards to all cross-border data
+                transfers:
               </p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>An adequacy determination by the ANPDP that the receiving country ensures sufficient
-                protection of privacy and fundamental rights</li>
-                <li>Prior authorization from the ANPDP for the specific transfer or category of transfers</li>
-                <li>Your explicit consent, where applicable and where the transfer is not otherwise restricted
-                by law</li>
-                <li>One of the statutory exceptions under Law 18-07 (contract performance, legal obligation,
-                public interest, or judicial cooperation)</li>
+                <li>Contractual safeguards with sub-processors requiring adequate data protection measures</li>
+                <li>Data minimization and encryption for data in transit (TLS 1.3)</li>
+                <li>Where appropriate, reliance on statutory exceptions under Law 18-07 such as contract
+                performance or your explicit consent</li>
               </ul>
               <p className="mt-3">
                 We do not transfer personal data to any jurisdiction where such transfer would endanger
-                public security or the vital interests of the state, as such transfers are prohibited
-                under Article 44 of Law 18-07.
+                public security or the vital interests of the state.
               </p>
             </section>
 
@@ -326,8 +322,8 @@ export default function PrivacyPage() {
                 Law 25-11</li>
               </ul>
               <p className="mt-3">
-                In the event of a personal data breach, we will notify the ANPDP without undue delay and
-                within the timeframe recommended by Law 25-11. If the breach is likely to result in a
+                In the event of a personal data breach, we will notify the competent supervisory authority
+                without undue delay and within the timeframe recommended by Law 25-11. If the breach is likely to result in a
                 high risk to your rights and freedoms, we will notify you without undue delay, describing
                 the nature of the breach, the likely consequences, and the measures we have taken or
                 propose to take. If you suspect a breach, contact us immediately at privacy@hawiyat.org.
