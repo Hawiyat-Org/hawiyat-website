@@ -204,7 +204,6 @@ export default function RootLayout({
           integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
-          media="print" onload="this.media='all'"
         />
 
         <meta name="theme-color" content="#ffffff" />
