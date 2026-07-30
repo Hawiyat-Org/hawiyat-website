@@ -4,7 +4,6 @@ import Script from "next/script";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import LayoutWrapper from "@/components/layout-wrapper";
 import Header from "@/components/header";
 
 const space = Space_Grotesk({
@@ -247,10 +246,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main id="content" className="flex-1 hero-bg-gradient">
-            <LayoutWrapper>
-              <Header />
-              {children}
-            </LayoutWrapper>
+            <Header />
+            {children}
           </main>
 
           <noscript>

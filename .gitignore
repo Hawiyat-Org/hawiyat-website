@@ -24,5 +24,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.tsscreenshots/
+next-env.d.ts
+screenshots/
 .omo/
