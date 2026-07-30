@@ -8,8 +8,7 @@ const BenefitsSection = () => {
       title: "Exact-Match Caching",
       description:
         "Boilerplate, common scaffolding, repeat requests. Hawiyat Composer normalizes them, checks an in-memory cache, and serves the result in 2 to 5ms at zero cost.",
-      image: Infinity,
-      light: "/card-icons/ci-cd-white.svg"
+      image: Infinity
     },
     {
       title: "Semantic Caching",

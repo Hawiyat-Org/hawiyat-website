@@ -223,19 +223,19 @@ export default function ComposerPage() {
             </span>
             <div className="flex flex-wrap items-center justify-center gap-8 max-md:gap-6">
               <div className="h-16 w-32 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/claude-code.png" alt="Claude Code" fill className="object-contain" />
+                <Image src="/Compatible/claude-code.webp" alt="Claude Code" fill className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 dark:invert">
-                <Image src="/Compatible/cursor.png" alt="Cursor" fill className="object-contain" />
+                <Image src="/Compatible/cursor.webp" alt="Cursor" fill className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/vscode.png" alt="VS Code" fill className="object-contain" />
+                <Image src="/Compatible/vscode.webp" alt="VS Code" fill className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/codex.png" alt="Codex" fill className="object-contain" />
+                <Image src="/Compatible/codex.webp" alt="Codex" fill className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/antigravity.png" alt="Anti Gravity" fill className="object-contain" />
+                <Image src="/Compatible/antigravity.webp" alt="Anti Gravity" fill className="object-contain" />
               </div>
             </div>
           </div>
