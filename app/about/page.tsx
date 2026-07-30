@@ -292,23 +292,23 @@ export default function AboutPage() {
               {
                 name: "Mrz",
                 image: "/aboutus/Partners/mrz.png",
-                role: "CEO & Co-Founder @ mercus.ai",
+                role: "CEO & Co-Founder @ MERCUS.AI",
                 url: "https://www.instagram.com/itstherealmr_z/",
-                desc: "Building AI-powered automation. Helped shape where Hawiyat is headed.",
+                desc: "Founder in the AI automation space and a valued member of Hawiyat's professional network.",
               },
               {
                 name: "Mus Automation",
                 image: "/aboutus/Partners/mus.png",
                 role: "Automation Agency",
                 url: "https://www.instagram.com/mus_automation/",
-                desc: "Automation agency. They do workflow optimization and infrastructure as code.",
+                desc: "AI automation agency collaborating with businesses to build intelligent workflows and automation solutions.",
               },
               {
                 name: "Brahim",
                 image: "/aboutus/Partners/brahim.png",
-                role: "Influencer in Automation",
+                role: "AI Automation Creator",
                 url: "https://www.instagram.com/brahim_amro/",
-                desc: "Well-known in automation circles. Worked on Hawiyat Composer's core architecture and AI integration.",
+                desc: "Content creator focused on AI automation, education, and the growth of the local AI ecosystem.",
               },
             ].map((p) => (
               <a
