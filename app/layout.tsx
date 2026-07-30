@@ -1,13 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import {
-  Space_Grotesk,
-  Playfair_Display,
-  Dancing_Script,
-  Ubuntu,
-  Aldrich,
-} from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import LayoutWrapper from "@/components/layout-wrapper";
@@ -19,40 +13,6 @@ const space = Space_Grotesk({
   variable: "--font-space",
   display: "swap",
 });
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-ubuntu",
-  display: "swap",
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-dancing",
-  display: "swap",
-});
-
-const aldrich = Aldrich({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-aldrich",
-  display: "swap",
-});
-
-// AUDIT NOTE: five font families with multiple weights each are loaded on
-// every page. Confirm all five are actually used site-wide (not just on one
-// page)  each unused family/weight is pure LCP cost. Recommend trimming to
-// 2-3 max if some are only used on isolated pages.
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
 const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? "https://hawiyat.org";
@@ -228,7 +188,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${space.variable} ${playfair.variable} ${ubuntu.variable} ${dancingScript.variable} ${aldrich.variable} antialiased`}
+      className={`${space.variable} antialiased`}
     >
       <head>
         {/*

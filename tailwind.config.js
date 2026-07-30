@@ -9,10 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-aldrich)", "sans-serif"],
-        ubuntu: ["var(--font-ubuntu)", "sans-serif"],
-        inter: ["var(--font-inter)", "sans-serif"],
-        dancing: ["var(--font-dancing)", "cursive"],
+        sans: ["var(--font-space)", "sans-serif"],
         poly: ['"Poly"', "serif"],
       },
       animation: {
