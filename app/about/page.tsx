@@ -37,7 +37,7 @@ export default function AboutPage() {
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
-                className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-[0.3s] hover:scale-x-[1.03] active:scale-95"
+                className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-300 hover:scale-x-[1.03] active:scale-95"
               >
                 <span>Explore Services</span>
                 <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300" />
