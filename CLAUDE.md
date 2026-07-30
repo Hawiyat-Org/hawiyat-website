@@ -44,8 +44,6 @@ import prisma from '@/lib/prisma/prismaClient'     // ✗ Causes undefined error
 
 ```env
 DATABASE_URL=postgresql://...
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-secret
 NEXT_PUBLIC_APP_NAME=Hawiyat
 NEXT_PUBLIC_URL=http://localhost:3000
 NEXT_PUBLIC_CHATWOOT_TOKEN=your-token
@@ -92,12 +90,12 @@ No formal test suite exists. Manual testing via:
 
 1. **TypeScript/ESLint errors ignored in builds** (`next.config.mjs`) - fix errors, don't ignore
 2. **Images:** `unoptimized: true` allows external images without optimization
-3. **GSAP:** Optimized import in `next.config.mjs` for scroll animations
-4. **Fonts:** 4 Google fonts loaded via `next/font` with CSS variables
+3. **GSAP:** Used via npm in `scroll-animations.tsx` (not CDN)
+4. **Fonts:** Single Space Grotesk font loaded via `next/font` with CSS variable `--font-space`
 
 ## Files to Read First
 
 1. `DESIGN.md` - Comprehensive design system and component specs
-2. `QWEN.md` - Project overview and setup instructions
+2. `AGENTS.md` - Project overview and setup instructions
 3. `prisma/schema.prisma` - Data models and relationships
 4. `app/layout.tsx` - Metadata, fonts, theme provider setup
