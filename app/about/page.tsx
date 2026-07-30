@@ -58,55 +58,55 @@ export default function AboutPage() {
             <div className="grid grid-cols-3 gap-2 auto-rows-[80px] max-md:auto-rows-[65px]">
               {/* Row 1-2 col 1-2  Label */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 col-span-2 row-span-2">
-                <Image src="/aboutus/label-projet-inovant.png" alt="Label" fill className="object-cover" />
+                <Image src="/aboutus/label-projet-inovant.webp" alt="Label" fill className="object-cover" />
               </div>
               {/* Row 1-2 col 3  Composer1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
-                <Image src="/aboutus/hawiyat-composer/image1.png" alt="Composer" fill className="object-cover" />
+                <Image src="/aboutus/hawiyat-composer/image1.webp" alt="Composer" fill className="object-cover" />
               </div>
               {/* Row 3 col 1  Itihad */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/itihad-incubation.png" alt="Incubation" fill className="object-cover" />
+                <Image src="/aboutus/itihad-incubation.webp" alt="Incubation" fill className="object-cover" />
               </div>
               {/* Row 3 col 2  Week1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image1.png" alt="Week" fill className="object-cover" />
+                <Image src="/aboutus/semaine-enteurprunariat-international/image1.webp" alt="Week" fill className="object-cover" />
               </div>
               {/* Row 3 col 3  Week2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image2.png" alt="Event" fill className="object-cover" />
+                <Image src="/aboutus/semaine-enteurprunariat-international/image2.webp" alt="Event" fill className="object-cover" />
               </div>
               {/* Row 4 col 1  Week3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image3.png" alt="Event" fill className="object-cover" />
+                <Image src="/aboutus/semaine-enteurprunariat-international/image3.webp" alt="Event" fill className="object-cover" />
               </div>
               {/* Row 4 col 2  Comp2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/hawiyat-composer/image2.png" alt="Composer" fill className="object-cover" />
+                <Image src="/aboutus/hawiyat-composer/image2.webp" alt="Composer" fill className="object-cover" />
               </div>
               {/* Row 4 col 3  Nexus1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image1.png" alt="Nexus" fill className="object-cover" />
+                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image1.webp" alt="Nexus" fill className="object-cover" />
               </div>
               {/* Row 5-6 col 1  Green Duty (bottom left, tall) */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
-                <Image src="/aboutus/certiifcations/greenduty.png" alt="Green Duty" fill className="object-cover" />
+                <Image src="/aboutus/certiifcations/greenduty.webp" alt="Green Duty" fill className="object-cover" />
               </div>
               {/* Row 5 col 2  COSI1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Cosi-2025/image1.png" alt="COSI" fill className="object-cover" />
+                <Image src="/aboutus/Cosi-2025/image1.webp" alt="COSI" fill className="object-cover" />
               </div>
               {/* Row 5 col 3  Comp3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/hawiyat-composer/image3.png" alt="Composer" fill className="object-cover" />
+                <Image src="/aboutus/hawiyat-composer/image3.webp" alt="Composer" fill className="object-cover" />
               </div>
               {/* Row 6 col 2  Nexus2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image2.png" alt="Nexus" fill className="object-cover" />
+                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image2.webp" alt="Nexus" fill className="object-cover" />
               </div>
               {/* Row 6 col 3  COSI2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Cosi-2025/image2.png" alt="COSI" fill className="object-cover" />
+                <Image src="/aboutus/Cosi-2025/image2.webp" alt="COSI" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -128,31 +128,31 @@ export default function AboutPage() {
                 year: "2025",
                 title: "COSI 2025",
                 body: "First time anyone saw us. COSI 2025. We met the Algerian tech community and showed them what we were building. No polish, just the thing itself.",
-                img: "/aboutus/Cosi-2025/image1.png",
+                img: "/aboutus/Cosi-2025/image1.webp",
               },
               {
                 year: "2024",
                 title: "Label Projet Innovant",
                 body: "The Ministry of Knowledge Economy labeled us an innovative tech project. That opened the door to the Algerian startup ecosystem for real.",
-                img: "/aboutus/label-projet-inovant.png",
+                img: "/aboutus/label-projet-inovant.webp",
               },
               {
                 year: "2024",
                 title: "Itihad Incubation",
                 body: "Itihad brought us into their acceleration program. Mentorship, funding, and enough infrastructure to turn the idea into something that actually ran.",
-                img: "/aboutus/itihad-incubation.png",
+                img: "/aboutus/itihad-incubation.webp",
               },
               {
                 year: "2026",
                 title: "International Entrepreneurship Week",
                 body: "We got invited as hosts and mentors at International Entrepreneurship Week. Presented the startup on stage. Spent the rest of the time with the next generation of Algerian founders.",
-                img: "/aboutus/semaine-enteurprunariat-international/image1.png",
+                img: "/aboutus/semaine-enteurprunariat-international/image1.webp",
               },
               {
                 year: "Jun 2026",
                 title: "Hawiyat Composer Launch",
                 body: "Shipped Hawiyat Composer. An AI gateway that sits between developers and LLM models. Caching, smart routing, and optimization, no code changes on your side.",
-                img: "/aboutus/hawiyat-composer/image1.png",
+                img: "/aboutus/hawiyat-composer/image1.webp",
               },
             ].map((event, i) => (
               <div key={i} className="flex-1 relative group">
@@ -192,17 +192,17 @@ export default function AboutPage() {
                 {
                   title: "Label Projet Innovant",
                   by: "Ministry of Knowledge Economy",
-                  img: "/aboutus/certiifcations/label.png",
+                  img: "/aboutus/certiifcations/label.webp",
                 },
                 {
                   title: "Attestation d'Incubation",
                   by: "Itihad Accelerator",
-                  img: "/aboutus/certiifcations/itihad-attestation-incubation-1.png",
+                  img: "/aboutus/certiifcations/itihad-attestation-incubation-1.webp",
                 },
                 {
                   title: "Oracle DevOps Certified",
                   by: "Oracle",
-                  img: "/aboutus/certiifcations/oracle.png",
+                  img: "/aboutus/certiifcations/oracle.webp",
                 },
                 {
                   title: "CKE Certification",
@@ -233,7 +233,7 @@ export default function AboutPage() {
             <div className="flex-[1.25] max-md:w-full">
               <div className="group bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-white dark:bg-black">
-                  <Image src="/aboutus/certiifcations/greenduty.png" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
@@ -291,21 +291,21 @@ export default function AboutPage() {
             {[
               {
                 name: "Mrz",
-                image: "/aboutus/Partners/mrz.png",
+                image: "/aboutus/Partners/mrz.webp",
                 role: "CEO & Co-Founder @ MERCUS.AI",
                 url: "https://www.instagram.com/itstherealmr_z/",
                 desc: "Founder in the AI automation space and a valued member of Hawiyat's professional network.",
               },
               {
                 name: "Mus Automation",
-                image: "/aboutus/Partners/mus.png",
+                image: "/aboutus/Partners/mus.webp",
                 role: "Automation Agency",
                 url: "https://www.instagram.com/mus_automation/",
                 desc: "AI automation agency collaborating with businesses to build intelligent workflows and automation solutions.",
               },
               {
                 name: "Brahim",
-                image: "/aboutus/Partners/brahim.png",
+                image: "/aboutus/Partners/brahim.webp",
                 role: "AI Automation Creator",
                 url: "https://www.instagram.com/brahim_amro/",
                 desc: "Content creator focused on AI automation, education, and the growth of the local AI ecosystem.",

@@ -1,16 +1,9 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import {
-  Space_Grotesk,
-  Playfair_Display,
-  Dancing_Script,
-  Ubuntu,
-  Aldrich,
-} from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import LayoutWrapper from "@/components/layout-wrapper";
 import Header from "@/components/header";
 
 const space = Space_Grotesk({
@@ -19,40 +12,6 @@ const space = Space_Grotesk({
   variable: "--font-space",
   display: "swap",
 });
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-ubuntu",
-  display: "swap",
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-dancing",
-  display: "swap",
-});
-
-const aldrich = Aldrich({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-aldrich",
-  display: "swap",
-});
-
-// AUDIT NOTE: five font families with multiple weights each are loaded on
-// every page. Confirm all five are actually used site-wide (not just on one
-// page)  each unused family/weight is pure LCP cost. Recommend trimming to
-// 2-3 max if some are only used on isolated pages.
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
 const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? "https://hawiyat.org";
@@ -228,7 +187,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${space.variable} ${playfair.variable} ${ubuntu.variable} ${dancingScript.variable} ${aldrich.variable} antialiased`}
+      className={`${space.variable} antialiased`}
     >
       <head>
         {/*
@@ -245,6 +204,7 @@ export default function RootLayout({
           integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
+          media="print" onload="this.media='all'"
         />
 
         <meta name="theme-color" content="#ffffff" />
@@ -286,10 +246,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main id="content" className="flex-1 hero-bg-gradient">
-            <LayoutWrapper>
-              <Header />
-              {children}
-            </LayoutWrapper>
+            <Header />
+            {children}
           </main>
 
           <noscript>
@@ -300,12 +258,11 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/*
-          Meta Pixel moved to next/script with afterInteractive strategy.
-          Same tracking behavior, but no longer blocks initial render 
-          it now loads after the page becomes interactive instead of
-          racing hydration in a raw <head> script.
+          Meta Pixel deferred to lazyOnload so it does not block the main
+          thread during page load (was afterInteractive, still after interactive
+          but after ALL resources are loaded).
         */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`}
         </Script>
       </body>

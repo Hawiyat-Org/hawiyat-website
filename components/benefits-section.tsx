@@ -8,8 +8,7 @@ const BenefitsSection = () => {
       title: "Exact-Match Caching",
       description:
         "Boilerplate, common scaffolding, repeat requests. Hawiyat Composer normalizes them, checks an in-memory cache, and serves the result in 2 to 5ms at zero cost.",
-      image: Infinity,
-      light: "/card-icons/ci-cd-white.svg"
+      image: Infinity
     },
     {
       title: "Semantic Caching",
@@ -44,7 +43,7 @@ const BenefitsSection = () => {
                   
                     <benefit.image className="w-20 h-20 text-black dark:text-white m-auto"/>
                   
-                  <h2 className="text-3xl max-md:text-2xl font-medium">{benefit.title}</h2>
+                  <h3 className="text-3xl max-md:text-2xl font-medium">{benefit.title}</h3>
                   <p className="text-base leading-normal text-gray-800 dark:text-gray-200">{benefit.description}</p>
                   <div className="flex items-center gap-2 mt-auto">
                     <span>Learn more</span>
@@ -64,7 +63,7 @@ const BenefitsSection = () => {
       <Shield className="w-32 h-32 text-black dark:text-white" />
     </div>
     <div className="flex flex-col gap-4">
-      <h2 className="text-3xl max-md:text-2xl font-medium">Cost-Aware Routing</h2>
+      <h3 className="text-3xl max-md:text-2xl font-medium">Cost-Aware Routing</h3>
       <p className="leading-normal text-gray-800 dark:text-gray-200">
         Smart routing keeps sensitive workloads on your preferred providers while general tasks hit the most cost-effective models. No manual switching. Hawiyat Composer handles the path selection.
       </p>

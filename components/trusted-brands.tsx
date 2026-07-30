@@ -116,9 +116,9 @@ const TrustedBrands = () => {
     <section className="relative w-full overflow-hidden px-6 max-md:px-4 py-20 md:py-32 max-md:py-12">
       <div className="mx-auto max-w-7xl">
         <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4 mx-auto">
-          <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
+          <h2 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
             Our Numbers
-          </h3>
+          </h2>
           <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
             {stats.map((stat, index) => (
               <StatCard

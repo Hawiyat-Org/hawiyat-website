@@ -147,7 +147,7 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         className={`absolute rounded-xl text-center transition-transform duration-300
            ${showSignup ? "scale-100" : "scale-0"} backdrop-blur-lg flex flex-col p-10 place-items-center gap-4 w-full h-full dark:bg-[#000000b4] bg-[#ffffff6a] top-0 left-0 z-20`}
       >
-        <h4 className="mt-6 text-3xl max-md:text-xl">Signup to continue using Hawiyat Composer</h4>
+        <h2 className="mt-6 text-3xl max-md:text-xl">Signup to continue using Hawiyat Composer</h2>
 
         <p className="text-lg">Join developers across Algeria using Hawiyat Composer to cut their AI costs</p>
 
