@@ -245,6 +245,7 @@ export default function RootLayout({
           integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
+          media="print" onload="this.media='all'"
         />
 
         <meta name="theme-color" content="#ffffff" />
@@ -300,12 +301,11 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/*
-          Meta Pixel moved to next/script with afterInteractive strategy.
-          Same tracking behavior, but no longer blocks initial render 
-          it now loads after the page becomes interactive instead of
-          racing hydration in a raw <head> script.
+          Meta Pixel deferred to lazyOnload so it does not block the main
+          thread during page load (was afterInteractive, still after interactive
+          but after ALL resources are loaded).
         */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`}
         </Script>
       </body>
