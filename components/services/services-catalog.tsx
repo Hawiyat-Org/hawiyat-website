@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useCallback } from "react"
 import { ArrowRight, Search, Zap, Clock, Shield, Server, MessageSquare, Bot, Users, DollarSign, Wrench, CheckCircle, PhoneCall, Activity } from "lucide-react"
-import { useSearchParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { OrderForm } from "@/components/services/order-form"
@@ -445,10 +445,9 @@ function FlipCard({
   )
 }
 
-export default function ServicesCatalog() {
-  const searchParams = useSearchParams()
+export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: string }) {
   const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "")
+  const [searchQuery, setSearchQuery] = useState(initialQuery)
   const [isMobile, setIsMobile] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [selectedService, setSelectedService] = useState<{
@@ -501,14 +500,8 @@ export default function ServicesCatalog() {
               onChange={(e) => {
                 const value = e.target.value
                 setSearchQuery(value)
-                const params = new URLSearchParams(searchParams.toString())
-                if (value) {
-                  params.set("q", value)
-                } else {
-                  params.delete("q")
-                }
-                const query = params.toString()
-                router.replace(query ? `/services?${query}` : "/services", { scroll: false })
+                const encoded = encodeURIComponent(value)
+                router.replace(value ? `/services?q=${encoded}` : "/services", { scroll: false })
               }}
               className="h-14 pl-12 text-base bg-white/80 dark:bg-secondary/80 backdrop-blur-xl border-2 border-border/60 focus:border-primary rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
             />

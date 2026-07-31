@@ -189,9 +189,9 @@ export function CalendarGrid({
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="flex items-center justify-between ">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           {monthName} <span className="text-gray-500 dark:text-gray-400">{year}</span>
-        </h3>
+        </h2>
         <div className="flex gap-2">
           <button
             onClick={() => onMonthChange(addMonths(currentMonth, -1))}

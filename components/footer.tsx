@@ -15,6 +15,7 @@ const Footer = () => {
         { name: "Blog", href: blogUrl || "https://blog.hawiyat.org" },
         { name: "Docs", href: docsUrl || "https://docs.hawiyat.org" },
         { name: "Templates", href: "/templates" },
+        { name: "AI Bootcamp", href: "/bootcamp" },
       ],
     },
     {

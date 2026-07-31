@@ -10,6 +10,12 @@ const guides = [
   },
 ]
 
+const related = [
+  { title: "Hawiyat Composer", desc: "The AI gateway, caching, and routing layer behind Hawiyat subscriptions.", href: "/hawiyat-composer" },
+  { title: "AI services in Algeria", desc: "Compare plans for AI access, automation, hosting, and WhatsApp integrations.", href: "/services" },
+  { title: "AI cybersecurity", desc: "How Hawiyat protects codebases with AI-assisted security checks.", href: "/cyber-security" },
+]
+
 export default function GuideIndexPage() {
   return (
     <div className="min-h-screen">
@@ -21,7 +27,7 @@ export default function GuideIndexPage() {
         <div className="mt-8 space-y-2">
           <h1 className="text-4xl font-semibold">AI and Claude Code Guides for Algeria</h1>
           <p className="text-muted-foreground">
-            Getting started with Claude Code, Hawiyat Composer, integrations, and more.
+            Step-by-step tutorials for installing and using Claude Code with Hawiyat Composer: setup, skills, MCP servers, n8n, and Google Sheets integrations. Built for developers and teams in Algeria who want practical, working AI workflows.
           </p>
         </div>
 
@@ -46,6 +52,19 @@ export default function GuideIndexPage() {
             </Link>
           ))}
         </div>
+
+        {/* Related Resources */}
+        <section className="mt-20">
+          <h2 className="text-2xl font-semibold">More Hawiyat resources</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {related.map((r) => (
+              <Link key={r.title} href={r.href} className="group rounded-xl border border-border bg-card/50 p-5 hover:border-primary/30">
+                <h3 className="font-semibold">{r.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{r.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   )

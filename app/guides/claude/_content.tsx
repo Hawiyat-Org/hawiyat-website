@@ -158,7 +158,7 @@ function CoWorkContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Users className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Real-Time Collaboration</h4>
+            <h3 className="text-sm font-semibold">Real-Time Collaboration</h3>
             <p className="text-xs text-muted-foreground">Work together with Claude and your team</p>
           </div>
         </div>
@@ -173,15 +173,15 @@ function CoWorkContent() {
         <p className="text-sm text-muted-foreground mb-4">Claude Desktop provides a native app experience with Co Work support. Download and install it for your platform from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">claude.ai/download</a>.</p>
         <div className="space-y-3">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">macOS</h4>
+            <h3 className="text-sm font-semibold mb-1">macOS</h3>
             <p className="text-xs text-muted-foreground">Download the .dmg installer or use Homebrew.</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Windows</h4>
+            <h3 className="text-sm font-semibold mb-1">Windows</h3>
             <p className="text-xs text-muted-foreground">Download the installer directly from the Claude download page.</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Linux</h4>
+            <h3 className="text-sm font-semibold mb-1">Linux</h3>
             <p className="text-xs text-muted-foreground">Download the AppImage or .deb package from the Claude download page.</p>
           </div>
         </div>
@@ -195,11 +195,11 @@ function CoWorkContent() {
         <p className="text-sm text-muted-foreground mb-4">Developer Mode unlocks advanced features in Claude Desktop, including third-party inference providers, custom MCP server configurations, and extended Co Work capabilities.</p>
         <div className="space-y-3">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">macOS / Linux</h4>
+            <h3 className="text-sm font-semibold mb-1">macOS / Linux</h3>
             <p className="text-xs text-muted-foreground">Open Claude Desktop settings and toggle Developer Mode in the Advanced section.</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Windows</h4>
+            <h3 className="text-sm font-semibold mb-1">Windows</h3>
             <p className="text-xs text-muted-foreground">Access settings via the gear icon, then enable Developer Mode under Advanced preferences.</p>
           </div>
         </div>
@@ -213,14 +213,14 @@ function CoWorkContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Sparkles className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Composer + Claude Desktop</h4>
+            <h3 className="text-sm font-semibold">Composer + Claude Desktop</h3>
             <p className="text-xs text-muted-foreground">Seamless AI-assisted collaboration</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">Hawiyat Composer integrates with Claude Desktop as a third-party inference provider, extending Claude&apos;s capabilities with deployment, monitoring, and workflow automation.</p>
-        <h4 className="text-sm font-semibold mb-2">How to Connect</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Connect</h3>
         <p className="text-sm text-muted-foreground mb-3">Use your Hawiyat token to activate the integration. This links Claude Desktop with Hawiyat Composer&apos;s infrastructure.</p>
-        <h4 className="text-sm font-semibold mb-2 mt-4">What You Get</h4>
+        <h3 className="text-sm font-semibold mb-2 mt-4">What You Get</h3>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Direct deployment from Claude Desktop to Hawiyat infrastructure</li>
           <li>Real-time monitoring and usage analytics</li>
@@ -250,12 +250,12 @@ function SkillsContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Workflow className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Workflow Automation &amp; AI Agents</h4>
+            <h3 className="text-sm font-semibold">Workflow Automation &amp; AI Agents</h3>
             <p className="text-xs text-muted-foreground">Build complex n8n pipelines with Claude</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">This skill teaches Claude to create valid n8n workflows with proper node connections, error handling, and best practices.</p>
-        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Install</h3>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
         <CodeBlock code={`Clone https://github.com/Hawiyat-Org/hawiyat-n8n-skill.git into my skills directory, then install the skill globally using the plugin system.\n\nSteps:\n1. Git clone the repo into ~/.claude/skills/hawiyat-n8n-skill/\n2. Run claude plugin init hawiyat-n8n --with skills --author "Hawiyat" --description "n8n workflow automation skill" to scaffold a proper plugin at ~/.claude/skills/hawiyat-n8n/ (this creates the .claude-plugin/plugin.json that auto-discovers on restart)\n3. Delete the example skill at ~/.claude/skills/hawiyat-n8n/skills/example/\n4. The .skill file in the repo is a ZIP. Extract hawiyat-n8n-evo.skill into ~/.claude/skills/hawiyat-n8n/skills/hawiyat-n8n-evo/ so SKILL.md lands at skills/hawiyat-n8n-evo/SKILL.md\n5. Confirm it loaded by checking the skills list after restart.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude uses <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude plugin init</code> (which works from within Claude Code) to scaffold the proper <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">.claude-plugin/plugin.json</code> structure that auto-discovers on restart. Restart after.</p>
@@ -265,12 +265,12 @@ function SkillsContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><CodeIcon className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Full-Stack React Framework</h4>
+            <h3 className="text-sm font-semibold">Full-Stack React Framework</h3>
             <p className="text-xs text-muted-foreground">App Router, server components, API routes, Prisma</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude becomes a Next.js expert generating App Router components, server actions, API routes, and database schemas with Prisma.</p>
-        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Install</h3>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
         <CodeBlock code={`Install the Next.js developer skill globally using the plugin system.\n\nSteps:\n1. Git clone https://github.com/Jeffallan/claude-skills.git into ~/.claude/skills/claude-skills/\n2. Run claude plugin init nextjs-developer --with skills --author "Jeffallan" --description "Full-stack Next.js development skill with App Router, API routes, and Prisma" to scaffold a proper plugin at ~/.claude/skills/nextjs-developer/\n3. Delete the example skill at ~/.claude/skills/nextjs-developer/skills/example/\n4. Copy SKILL.md from ~/.claude/skills/claude-skills/ into ~/.claude/skills/nextjs-developer/skills/nextjs/\n5. Optionally delete the cloned ~/.claude/skills/claude-skills/ folder\n6. Confirm everything is in place so I just restart.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude uses <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude plugin init</code> to scaffold the proper plugin structure, then moves the skill file in. Restart after.</p>
@@ -280,12 +280,12 @@ function SkillsContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><CodeIcon className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Component Library &amp; Theming</h4>
+            <h3 className="text-sm font-semibold">Component Library &amp; Theming</h3>
             <p className="text-xs text-muted-foreground">Radix UI primitives, Tailwind CSS, dark mode</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude masters shadcn/ui component installation, theming with CSS variables, form building with React Hook Form + Zod, data tables with TanStack Table, and responsive composable UI patterns.</p>
-        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Install</h3>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
         <CodeBlock code={`Install the shadcn/ui skill globally using the plugin system.\n\nSteps:\n1. Git clone https://github.com/capraidev/shadcn-claude-skill.git into ~/.claude/skills/shadcn-repo/\n2. Run claude plugin init shadcn --with skills --author "capraidev" --description "shadcn/ui component library and theming skill" to scaffold a proper plugin at ~/.claude/skills/shadcn/\n3. Delete the example skill at ~/.claude/skills/shadcn/skills/example/\n4. Copy SKILL.md from ~/.claude/skills/shadcn-repo/ into ~/.claude/skills/shadcn/skills/shadcn-ui/\n5. Optionally delete the cloned ~/.claude/skills/shadcn-repo/ folder\n6. Confirm everything is in place so I just restart.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude uses <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude plugin init</code> to scaffold the proper plugin structure, then moves the skill file in. Restart after.</p>
@@ -295,12 +295,12 @@ function SkillsContent() {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Cpu className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">Advanced Design Systems</h4>
+            <h3 className="text-sm font-semibold">Advanced Design Systems</h3>
             <p className="text-xs text-muted-foreground">Tailwind CSS, shadcn/ui, Framer Motion</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude generates production-grade UI components with responsive layouts, micro-interactions, and accessible design patterns.</p>
-        <h4 className="text-sm font-semibold mb-2">How to Install</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Install</h3>
         <p className="text-sm text-muted-foreground mb-2">Paste this into Claude Code:</p>
         <CodeBlock code={`Install the UI/UX Pro Max skill bundle globally using the plugin system.\n\nSteps:\n1. Git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git into ~/.claude/skills/uiux-pro-max-repo/\n2. Run claude plugin init uiux-pro-max --with skills --author "Next Level Builder" --description "UI/UX design system with banner, brand, slides, and styling skills" to scaffold a proper plugin at ~/.claude/skills/uiux-pro-max/\n3. Delete the example skill at ~/.claude/skills/uiux-pro-max/skills/example/\n4. Copy all 5 skill directories (banner-design, brand, design-systems, slides, ui-styling) from ~/.claude/skills/uiux-pro-max-repo/.claude/skills/ into ~/.claude/skills/uiux-pro-max/skills/\n5. Optionally delete the cloned ~/.claude/skills/uiux-pro-max-repo/ folder\n6. Confirm everything is in place so I just restart.`} language="text" />
         <p className="text-sm text-muted-foreground mt-3 mb-4">Claude uses <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">claude plugin init</code> to scaffold the proper plugin structure, then copies all 5 sub-skills in. Restart after.</p>
@@ -308,7 +308,7 @@ function SkillsContent() {
 
       <SubStep id="using-skills" title="Using Skills">
         <p className="text-sm text-muted-foreground mb-4">Once installed, skills work automatically. You don&apos;t need to activate them manually. Claude will recognize when a skill is relevant and apply it.</p>
-        <h4 className="text-sm font-semibold mb-2">Tips</h4>
+        <h3 className="text-sm font-semibold mb-2">Tips</h3>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mb-4">
           <li>Skills are installed globally, so they work in any project</li>
           <li>Restart Claude Code after adding a new skill for it to load</li>
@@ -341,7 +341,7 @@ function MCPContent() {
         <div className="flex items-center gap-3 mb-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-500"><Sparkles className="h-5 w-5" /></div>
           <div>
-            <h4 className="text-sm font-semibold">No config files needed</h4>
+            <h3 className="text-sm font-semibold">No config files needed</h3>
             <p className="text-xs text-muted-foreground">Just tell Claude what you want</p>
           </div>
         </div>
@@ -390,27 +390,27 @@ I already have a Facebook Business Manager account with ads_read and ads_managem
         <p className="text-sm text-muted-foreground mb-4">Same approach for any service. Paste the prompt with the MCP link into Claude and it handles the setup:</p>
         <div className="space-y-3">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Google Sheets</h4>
+            <h3 className="text-sm font-semibold mb-1">Google Sheets</h3>
             <p className="text-xs text-muted-foreground">Local only  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">github.com/xing5/mcp-google-sheets</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">GitHub</h4>
+            <h3 className="text-sm font-semibold mb-1">GitHub</h3>
             <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://api.githubcopilot.com/mcp/</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Notion</h4>
+            <h3 className="text-sm font-semibold mb-1">Notion</h3>
             <p className="text-xs text-muted-foreground">Remote hosted, one-click OAuth  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.notion.com/mcp</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Figma</h4>
+            <h3 className="text-sm font-semibold mb-1">Figma</h3>
             <p className="text-xs text-muted-foreground">Remote hosted, OAuth via share link  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.figma.com/mcp</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Canva</h4>
+            <h3 className="text-sm font-semibold mb-1">Canva</h3>
             <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.canva.com/mcp</code></p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Supabase</h4>
+            <h3 className="text-sm font-semibold mb-1">Supabase</h3>
             <p className="text-xs text-muted-foreground">Remote hosted  <code className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">https://mcp.supabase.com/sse</code></p>
           </div>
         </div>
@@ -426,10 +426,10 @@ function IntegrationsContent() {
         <VideoEmbed videoId="HnpW7kvaLLA" title="Claude × Hawiyat × n8n" />
         <p className="text-sm text-muted-foreground mb-4">The n8n skill gives Claude deep knowledge of n8n workflow patterns, node configurations, webhook setups, and Hawiyat API integration. It should already be installed from the Skills section.</p>
 
-        <h4 className="text-sm font-semibold mb-2">How It Works</h4>
+        <h3 className="text-sm font-semibold mb-2">How It Works</h3>
         <p className="text-sm text-muted-foreground mb-4">You describe the automation you want  the workflow, the triggers, the actions. Claude uses the n8n skill to determine what nodes are needed, how to connect them, and what the Hawiyat integration requires. It will ask you for any missing details like API tokens, instance URLs, or specific configuration values.</p>
 
-        <h4 className="text-sm font-semibold mb-2">Step-by-Step</h4>
+        <h3 className="text-sm font-semibold mb-2">Step-by-Step</h3>
         <ol className="list-decimal pl-5 space-y-2 text-sm text-muted-foreground mb-4">
           <li><strong>Describe your workflow</strong>  Tell Claude what you want to automate. Be as specific or as high-level as you like.</li>
           <li><strong>Answer questions</strong>  The skill will ask for tokens, URLs, or credentials it needs. Paste them in.</li>
@@ -457,23 +457,23 @@ function IntegrationsContent() {
         </div>
         <p className="text-sm text-muted-foreground mb-4">Claude can read, write, and analyze your Google Sheets data using natural language. No formulas, no scripts  just tell Claude what you need.</p>
 
-        <h4 className="text-sm font-semibold mb-2">How to Connect</h4>
+        <h3 className="text-sm font-semibold mb-2">How to Connect</h3>
         <p className="text-sm text-muted-foreground mb-2">Claude connects to Google Sheets through MCP. The easiest way is to just ask:</p>
         <CodeBlock code={`claude "connect to my Google Sheets"`} language="bash" />
         <p className="text-sm text-muted-foreground mt-2 mb-4">Claude will guide you through the OAuth flow  a browser window opens, you authorize, and it&apos;s done. No tokens to copy, no config files to edit.</p>
 
-        <h4 className="text-sm font-semibold mb-2">What You Can Do</h4>
+        <h3 className="text-sm font-semibold mb-2">What You Can Do</h3>
         <div className="space-y-3 mb-4">
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Read &amp; Query</h4>
+            <h3 className="text-sm font-semibold mb-1">Read &amp; Query</h3>
             <p className="text-xs text-muted-foreground">&ldquo;Show me all rows where revenue is above $1000&rdquo; &bull; &ldquo;What was the total sales last month?&rdquo; &bull; &ldquo;Find duplicates in column B&rdquo;</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Write &amp; Update</h4>
+            <h3 className="text-sm font-semibold mb-1">Write &amp; Update</h3>
             <p className="text-xs text-muted-foreground">&ldquo;Add a new row with today&rsquo;s data&rdquo; &bull; &ldquo;Update the status column for row 5 to Done&rdquo; &bull; &ldquo;Append these 10 records from my CSV&rdquo;</p>
           </div>
           <div className="p-3 sm:p-4 rounded-lg bg-muted/30 border border-border">
-            <h4 className="text-sm font-semibold mb-1">Analyze &amp; Report</h4>
+            <h3 className="text-sm font-semibold mb-1">Analyze &amp; Report</h3>
             <p className="text-xs text-muted-foreground">&ldquo;Generate a monthly summary report&rdquo; &bull; &ldquo;Create a chart from columns A and B&rdquo; &bull; &ldquo;Find trends in this year&rsquo;s data&rdquo;</p>
           </div>
         </div>
@@ -488,19 +488,19 @@ function IntegrationsContent() {
         <VideoEmbed videoId="3QgEQH-RcHo" title="Full Stack App" />
         <p className="text-sm text-muted-foreground mb-4">Build a complete full-stack application using the <strong>nextjs-developer</strong> and <strong>shadcn-ui</strong> skills together. The two skills work in tandem  one handles architecture, routing, and data; the other handles UI components and theming.</p>
 
-        <h4 className="text-sm font-semibold mb-2">Recommended Workflow: Frontend First</h4>
+        <h3 className="text-sm font-semibold mb-2">Recommended Workflow: Frontend First</h3>
         <p className="text-sm text-muted-foreground mb-4">Start by building the frontend until you&apos;re satisfied with how it looks and feels. Once the UI matches your vision, add the backend layer. This way you validate the user experience before committing to data models and API logic.</p>
 
         <div className="space-y-4 mb-4">
           <div className="rounded-lg bg-muted/30 border border-border p-4">
-            <h4 className="text-sm font-semibold mb-2">Step 1: Scaffold &amp; Design the Frontend</h4>
+            <h3 className="text-sm font-semibold mb-2">Step 1: Scaffold &amp; Design the Frontend</h3>
             <p className="text-sm text-muted-foreground mb-2">Tell Claude what you want to build. Focus on pages, layout, and components. Paste this into Claude:</p>
             <CodeBlock code={`I want a SaaS landing page with a blog, auth pages (login/signup), and a dashboard. Use Next.js App Router with shadcn/ui. Start with the frontend only  I'll handle the backend after.`} language="text" />
             <p className="text-sm text-muted-foreground mt-2">Claude scaffolds the project, sets up routing, builds UI components, and applies theming. Review the result, request changes, iterate on the design until it feels right.</p>
           </div>
 
           <div className="rounded-lg bg-muted/30 border border-border p-4">
-            <h4 className="text-sm font-semibold mb-2">Step 2: Iterate Until You&apos;re Happy</h4>
+            <h3 className="text-sm font-semibold mb-2">Step 2: Iterate Until You&apos;re Happy</h3>
             <p className="text-sm text-muted-foreground mb-2">Keep refining the frontend. Change layouts, swap components, adjust colors, add animations:</p>
             <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
               <li>&ldquo;Change the dashboard layout to a sidebar navigation&rdquo;</li>
@@ -511,7 +511,7 @@ function IntegrationsContent() {
           </div>
 
           <div className="rounded-lg bg-muted/30 border border-border p-4">
-            <h4 className="text-sm font-semibold mb-2">Step 3: Add the Backend</h4>
+            <h3 className="text-sm font-semibold mb-2">Step 3: Add the Backend</h3>
             <p className="text-sm text-muted-foreground mb-2">Once the frontend is solid, paste this into Claude to wire up the backend:</p>
             <CodeBlock code={`Now add the backend: set up Prisma with PostgreSQL, create User and Post models, add API routes for CRUD, and wire up NextAuth for authentication.`} language="text" />
             <p className="text-sm text-muted-foreground mt-2">Claude adds the data layer, connects it to your frontend components, and handles all the wiring.</p>

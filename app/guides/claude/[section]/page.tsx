@@ -32,9 +32,9 @@ export function generateMetadata({ params }: { params: { section: string } }): M
   const path = `/guides/claude/${section.id}`
   return {
     title: section.title,
-    description: section.desc,
+    description: section.metaDesc,
     alternates: { canonical: path },
-    openGraph: { title: section.title, description: section.desc, url: `${SITE_URL}${path}`, type: "article" },
+    openGraph: { title: section.title, description: section.metaDesc, url: `${SITE_URL}${path}`, type: "article" },
   }
 }
 
@@ -73,6 +73,7 @@ export default function SectionPage({ params }: { params: { section: string } })
 
       {/* Content */}
       <div className="mb-8">
+        <h2 className="mb-4 text-2xl font-semibold">{section.label} — step-by-step</h2>
         <SectionContent sectionId={section.id} />
       </div>
 

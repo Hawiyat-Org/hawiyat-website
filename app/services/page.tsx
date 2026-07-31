@@ -1,8 +1,7 @@
-import { Suspense } from "react"
 import Link from "next/link"
 import ServicesCatalog from "@/components/services/services-catalog"
 
-export default function ServicesPage() {
+export default function ServicesPage({ searchParams }: { searchParams: { q?: string | string[] } }) {
   return (
     <main className="relative min-h-screen overflow-hidden pb-20 pt-32">
       <div className="pointer-events-none absolute inset-0 opacity-10 dark:opacity-80">
@@ -18,9 +17,7 @@ export default function ServicesPage() {
             Compare the options below, learn about <Link href="/ai-algeria" className="underline">AI services for Algeria</Link>, or <Link href="/schedule" className="underline">book a consultation</Link> for a tailored recommendation.
           </p>
         </header>
-        <Suspense fallback={<p className="py-20 text-center">Loading services...</p>}>
-          <ServicesCatalog />
-        </Suspense>
+        <ServicesCatalog initialQuery={typeof searchParams.q === "string" ? searchParams.q : ""} />
       </div>
     </main>
   )

@@ -15,6 +15,20 @@ export default function SchedulePage() {
         <p className="mt-3 text-sm text-muted-foreground">
           Choose an available time below. You can also review our <Link href="/services" className="underline">AI services</Link> or read the <Link href="/guides" className="underline">technical guides</Link> before the meeting.
         </p>
+        <div className="mx-auto mt-8 grid max-w-2xl gap-4 text-left sm:grid-cols-3">
+          <div>
+            <h2 className="text-base font-semibold">1. Pick a slot</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Select an available day and time that works for you.</p>
+          </div>
+          <div>
+            <h2 className="text-base font-semibold">2. Share details</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Tell us your company name, email, and preferred platform (Meet, Teams, or Zoom).</p>
+          </div>
+          <div>
+            <h2 className="text-base font-semibold">3. Confirm</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Verify with the code we email you, and you are booked with a Hawiyat specialist.</p>
+          </div>
+        </div>
       </header>
       <div className="mx-auto mt-8 max-w-6xl">
         <SchedulingPanel />

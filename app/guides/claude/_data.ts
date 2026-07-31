@@ -10,6 +10,7 @@ export interface Section {
   label: string
   title: string
   desc: string
+  metaDesc: string
   videoId?: string
   subSections: SubSection[]
 }
@@ -21,6 +22,7 @@ export const SECTIONS: Section[] = [
     label: "Installation",
     title: "Install Claude Code with Hawiyat Composer",
     desc: "Install Node.js, Claude Code, and activate Hawiyat.",
+    metaDesc: "Install Node.js and Claude Code on macOS, Windows, or Linux, then activate your Hawiyat Composer subscription and VS Code extension to start building with AI.",
     videoId: "ewzeM6sYT0E",
     subSections: [
       { id: "installing-node", label: "Installing Node.js" },
@@ -35,6 +37,7 @@ export const SECTIONS: Section[] = [
     label: "Co Work",
     title: "Use Claude Co Work with Hawiyat Composer",
     desc: "Collaborate in real time with Claude Co Work connected to Hawiyat Composer.",
+    metaDesc: "Set up Claude Co Work with Hawiyat Composer: install Claude Desktop, enable Developer Mode, and integrate Hawiyat for real-time collaboration with Claude.",
     videoId: "nA_DQk1ZaK4",
     subSections: [
       { id: "what-is-co-work", label: "What is Claude Co Work?" },
@@ -49,6 +52,7 @@ export const SECTIONS: Section[] = [
     label: "Skills",
     title: "Claude Code Skills for n8n, Next.js, and shadcn/ui",
     desc: "n8n, Next.js Full Stack, shadcn/ui, and UI/UX Pro Max skills.",
+    metaDesc: "Learn Claude Code skills for n8n, Next.js full-stack, shadcn/ui, and UI/UX design, then install and use them with Hawiyat Composer for faster builds.",
     videoId: "7ZDB75Y99aU",
     subSections: [
       { id: "what-are-skills", label: "What are Skills?" },
@@ -65,6 +69,7 @@ export const SECTIONS: Section[] = [
     label: "MCP",
     title: "Connect MCP Servers to Claude Code",
     desc: "Connect Claude to external APIs instantly. No config files needed.",
+    metaDesc: "Connect Claude Code to external APIs with MCP servers in minutes. Set up Meta Ads and popular servers with no config files, powered by Hawiyat Composer.",
     videoId: "PmgxterwxH0",
     subSections: [
       { id: "what-are-mcp", label: "What are MCP Servers?" },
@@ -79,6 +84,7 @@ export const SECTIONS: Section[] = [
     label: "Integrations",
     title: "Claude Code Integrations with n8n and Google Sheets",
     desc: "Hawiyat × n8n and Claude × Google Sheets.",
+    metaDesc: "Integrate Claude Code with n8n and Google Sheets through Hawiyat Composer, plus full-stack app workflows for automating real projects end to end.",
     videoId: "",
     subSections: [
       { id: "hawiyat-n8n", label: "Claude × Hawiyat × n8n", videoId: "HnpW7kvaLLA" },

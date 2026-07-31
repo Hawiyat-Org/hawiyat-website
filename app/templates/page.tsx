@@ -82,6 +82,21 @@ export default function TemplatesShowcase() {
             Need implementation help? Explore our <Link href="/services" className="underline">managed services</Link> or <Link href="/schedule" className="underline">book a consultation</Link>.
           </p>
         </header>
+
+        <section className="mx-auto mb-12 grid max-w-4xl gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border bg-card/50 p-6">
+            <h2 className="text-xl font-semibold">AI workflows</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Templates that connect messaging, databases, and AI steps for real business automation.</p>
+          </div>
+          <div className="rounded-2xl border bg-card/50 p-6">
+            <h2 className="text-xl font-semibold">Apps and APIs</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Ready-to-deploy application stacks and APIs, hosted and monitored by Hawiyat.</p>
+          </div>
+          <div className="rounded-2xl border bg-card/50 p-6">
+            <h2 className="text-xl font-semibold">Infrastructure</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Databases, integrations, and tooling that run reliably on managed infrastructure.</p>
+          </div>
+        </section>
         <div className="mb-12 max-w-2xl mx-auto">
         <Input
   type="search"

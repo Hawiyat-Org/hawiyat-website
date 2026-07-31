@@ -29,6 +29,15 @@ export default function BootcampPage() {
             <li className="rounded-xl border p-5">Presenting a project, documenting decisions, and planning maintenance.</li>
           </ul>
         </section>
+        <section className="mt-20 text-left">
+          <h2 className="text-3xl font-semibold">Who this is for</h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Students in Algeria working on graduation projects, early-career developers who want to build a portfolio piece with AI tools, and teams evaluating whether AI-assisted development fits their workflow. The program teaches process, verification, and deployment — not memorisation or theory.
+          </p>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Not sure if it is the right fit? <Link href="/schedule" className="underline">Book a short call</Link> with the Hawiyat team to discuss your project and timing.
+          </p>
+        </section>
       </div>
     </main>
   )
