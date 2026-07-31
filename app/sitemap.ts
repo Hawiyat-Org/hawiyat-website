@@ -12,7 +12,6 @@ const routes = [
   "/guides",
   "/guides/claude",
   "/schedule",
-  "/templates",
   "/bootcamp",
   "/privacy",
   "/terms",
