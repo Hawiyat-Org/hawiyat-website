@@ -130,7 +130,7 @@ export default function ComposerPage() {
       {/* ── Our Numbers ── */}
       <section className="relative w-full flex flex-col place-content-center min-h-[70vh] py-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl px-6 flex flex-col items-center gap-6">
-          <h3 className="text-5xl font-medium max-md:text-3xl text-center">Our Numbers</h3>
+          <h2 className="text-5xl font-medium max-md:text-3xl text-center">Our Numbers</h2>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-stretch">
             <AnimatedStatCard icon={BarChart3} value={50} label="Tokens Served" description="Tokens processed through Hawiyat Composer's caching and routing." text="+50B" delay={0} />
             <AnimatedStatCard icon={Users} value={30} label="Satisfied Clients" description="Developers, startups, and agencies across Algeria using Hawiyat Composer to deliver projects." delay={0.15} />

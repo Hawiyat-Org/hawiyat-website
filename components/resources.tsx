@@ -29,9 +29,9 @@ const Resources = () => {
 
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
-      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">
+      <h2 className="reveal-up text-4xl font-medium max-md:text-2xl">
         Our Story
-      </h3>
+      </h2>
       <p className="reveal-up mt-3 text-gray-500 dark:text-gray-400 text-center max-w-md">
         From a small team in Algiers to a recognized AI infrastructure company.
       </p>

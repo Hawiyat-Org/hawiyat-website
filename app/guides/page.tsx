@@ -19,7 +19,7 @@ export default function GuideIndexPage() {
         </Link>
 
         <div className="mt-8 space-y-2">
-          <h1 className="text-4xl font-semibold">Guides</h1>
+          <h1 className="text-4xl font-semibold">AI and Claude Code Guides for Algeria</h1>
           <p className="text-muted-foreground">
             Getting started with Claude Code, Hawiyat Composer, integrations, and more.
           </p>
@@ -34,12 +34,12 @@ export default function GuideIndexPage() {
               className="group rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6 hover:border-primary/30 hover:bg-card/80 transition-all duration-200"
             >
               <div className="flex items-start gap-4">
-                  <Image src={g.image} alt="" width={82} height={82} className="rounded" />
+                  <Image src={g.image} alt="Claude Code guide" width={82} height={82} className="rounded" />
              
                 <div className="min-w-0">
-                  <h3 className="text-lg font-semibold leading-snug group-hover:text-primary transition-colors">
+                  <h2 className="text-lg font-semibold leading-snug group-hover:text-primary transition-colors">
                     {g.title}
-                  </h3>
+                  </h2>
                   <p className="mt-1 text-sm text-muted-foreground">{g.desc}</p>
                 </div>
               </div>

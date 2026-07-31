@@ -19,7 +19,7 @@ export const SECTIONS: Section[] = [
     id: "installation",
     icon: "Terminal",
     label: "Installation",
-    title: "Installation",
+    title: "Install Claude Code with Hawiyat Composer",
     desc: "Install Node.js, Claude Code, and activate Hawiyat.",
     videoId: "ewzeM6sYT0E",
     subSections: [
@@ -33,7 +33,7 @@ export const SECTIONS: Section[] = [
     id: "co-work",
     icon: "Users",
     label: "Co Work",
-    title: "Claude Co Work + Hawiyat Composer",
+    title: "Use Claude Co Work with Hawiyat Composer",
     desc: "Collaborate in real time with Claude Co Work connected to Hawiyat Composer.",
     videoId: "nA_DQk1ZaK4",
     subSections: [
@@ -47,7 +47,7 @@ export const SECTIONS: Section[] = [
     id: "skills",
     icon: "BookOpen",
     label: "Skills",
-    title: "Skills",
+    title: "Claude Code Skills for n8n, Next.js, and shadcn/ui",
     desc: "n8n, Next.js Full Stack, shadcn/ui, and UI/UX Pro Max skills.",
     videoId: "7ZDB75Y99aU",
     subSections: [
@@ -63,7 +63,7 @@ export const SECTIONS: Section[] = [
     id: "mcp-servers",
     icon: "Database",
     label: "MCP",
-    title: "MCP Servers",
+    title: "Connect MCP Servers to Claude Code",
     desc: "Connect Claude to external APIs instantly. No config files needed.",
     videoId: "PmgxterwxH0",
     subSections: [
@@ -77,7 +77,7 @@ export const SECTIONS: Section[] = [
     id: "integrations",
     icon: "Workflow",
     label: "Integrations",
-    title: "Integrations",
+    title: "Claude Code Integrations with n8n and Google Sheets",
     desc: "Hawiyat × n8n and Claude × Google Sheets.",
     videoId: "",
     subSections: [

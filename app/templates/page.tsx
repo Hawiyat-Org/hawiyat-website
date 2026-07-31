@@ -4,6 +4,7 @@ import type React from "react"
 import { useState, useMemo, useCallback, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
+import Link from "next/link"
 
 interface Template {
   id: string
@@ -72,9 +73,16 @@ export default function TemplatesShowcase() {
   return (
     <section className="py-12 px-4">
       <div className="container mx-auto max-w-6xl">
+        <header className="mx-auto mb-10 max-w-3xl text-center">
+          <h1 className="text-4xl font-semibold md:text-5xl">AI Automation and Deployment Templates</h1>
+          <p className="mt-4 text-muted-foreground">
+            Browse tools and templates for AI workflows, n8n automation, application deployment, and managed infrastructure. Hawiyat helps teams in Algeria configure, host, and operate these technologies.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Need implementation help? Explore our <Link href="/services" className="underline">managed services</Link> or <Link href="/schedule" className="underline">book a consultation</Link>.
+          </p>
+        </header>
         <div className="mb-12 max-w-2xl mx-auto">
-
-            
         <Input
   type="search"
   placeholder="Search templates..."

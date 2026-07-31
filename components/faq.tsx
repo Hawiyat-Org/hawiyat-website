@@ -42,7 +42,7 @@ const FAQ = () => {
       className="relative flex w-full flex-col place-content-center place-items-center gap-[10%] p-[5%] px-[10%]"
       id="faq"
     >
-      <h3 className="text-4xl font-medium max-md:text-2xl">Frequently Asked Questions</h3>
+      <h2 className="text-4xl font-medium max-md:text-2xl">Frequently Asked Questions</h2>
 
       <div className="mt-5 flex min-h-[300px] w-full max-w-[850px] flex-col gap-4">
         {faqs.map((faq, index) => (

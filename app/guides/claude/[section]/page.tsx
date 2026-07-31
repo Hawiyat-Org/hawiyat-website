@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
+import { SITE_URL } from "@/lib/seo"
 import Link from "next/link"
 import Image from "next/image"
 import { SECTIONS } from "../_data"
 import { SectionContent } from "../_content"
 
-function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
+function VideoEmbed({ videoId, title }: { videoId?: string; title: string }) {
   if (!videoId) return null
   return (
     <div className="relative w-full max-w-full aspect-video rounded-xl overflow-hidden border border-border bg-black mb-6 sm:mb-8">
@@ -22,6 +24,18 @@ function VideoEmbed({ videoId, title }: { videoId: string; title: string }) {
 
 export function generateStaticParams() {
   return SECTIONS.map((s) => ({ section: s.id }))
+}
+
+export function generateMetadata({ params }: { params: { section: string } }): Metadata {
+  const section = SECTIONS.find((item) => item.id === params.section)
+  if (!section) return {}
+  const path = `/guides/claude/${section.id}`
+  return {
+    title: section.title,
+    description: section.desc,
+    alternates: { canonical: path },
+    openGraph: { title: section.title, description: section.desc, url: `${SITE_URL}${path}`, type: "article" },
+  }
 }
 
 export default function SectionPage({ params }: { params: { section: string } }) {
