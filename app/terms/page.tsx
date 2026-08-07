@@ -9,33 +9,10 @@ function Note({ children }: { children: ReactNode }) {
   )
 }
 
-const sections = [
-  { id: "introduction", label: "Introduction and Acceptance" },
-  { id: "definitions", label: "Definitions" },
-  { id: "eligibility", label: "Eligibility" },
-  { id: "account", label: "Account Registration and Security" },
-  { id: "service", label: "The Service: Hawiyat Composer" },
-  { id: "api-keys", label: "API Key Terms" },
-  { id: "payments", label: "Payment Terms (Algerian Dinar)" },
-  { id: "quota", label: "Monthly Quota Policy" },
-  { id: "prohibited-activities", label: "Usage Restrictions and Prohibited Activities" },
-  { id: "security", label: "Security and Anti-Hacking Provisions" },
-  { id: "ip", label: "Intellectual Property" },
-  { id: "ai-limitations", label: "AI Model Limitations and Disclaimers" },
-  { id: "third-party", label: "Third-Party Services and Providers" },
-  { id: "indemnification", label: "Indemnification" },
-  { id: "liability", label: "Limitation of Liability" },
-  { id: "termination", label: "Termination" },
-  { id: "modifications", label: "Modifications to Terms" },
-  { id: "disputes", label: "Dispute Resolution" },
-  { id: "general", label: "General Provisions" },
-  { id: "contact", label: "Contact Information" },
-]
-
 export default function TermsPage() {
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl px-6 py-32">
+      <div className="mx-auto max-w-3xl px-6 py-32">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
           &larr; Back to home
         </Link>
@@ -46,27 +23,7 @@ export default function TermsPage() {
           <p className="text-muted-foreground text-xs">Last Updated: August 6, 2026 &middot; Version 1.2</p>
         </div>
 
-        <div className="mt-12 flex gap-12 lg:gap-20 relative">
-          {/* Table of Contents - Sidebar */}
-          <nav className="hidden lg:block w-64 shrink-0">
-            <div className="sticky top-32 space-y-1 border-l border-border pl-4">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                On this page
-              </p>
-              {sections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
-                >
-                  {section.label}
-                </a>
-              ))}
-            </div>
-          </nav>
-
-          {/* Main Content */}
-          <div className="flex-1 min-w-0 max-w-3xl text-sm leading-relaxed text-muted-foreground space-y-10">
+        <div className="mt-12 space-y-10 text-sm leading-relaxed text-muted-foreground">
             <section id="introduction" className="scroll-mt-24">
               <h2 className="text-lg font-medium text-foreground">1. Introduction and Acceptance</h2>
               <p className="mt-3">
@@ -1142,7 +1099,6 @@ export default function TermsPage() {
                 <p className="mt-3 text-xs text-muted-foreground">&copy; 2026 Hawiyat. All rights reserved.</p>
               </div>
             </section>
-          </div>
         </div>
       </div>
     </div>
