@@ -1,0 +1,22 @@
+# Hawiyat branch-preview worker — OpenNext build output
+# Account: hawiyat-team (86afaa372f06c7516c563e152faff79b)
+name = "hawiyat-preview"
+main = ".open-next/worker.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+account_id = "86afaa372f06c7516c563e152faff79b"
+
+# OpenNext static assets (built by `opennextjs-cloudflare build`)
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+
+# Runtime vars. NOTE: NEXT_PUBLIC_* values are inlined at BUILD time by Next.js —
+# the CI workflow must export the real values as env before `opennextjs-cloudflare build`.
+[vars]
+NEXT_PUBLIC_APP_NAME = "Hawiyat"
+NEXT_PUBLIC_URL = "https://hawiyat.org"
+NEXT_PUBLIC_CHATWOOT_TOKEN = ""
+
+# Secrets are NOT stored here. Set per-branch at deploy time:
+#   echo "<value>" | wrangler secret put <NAME> --name hawiyat-preview-<slug>
+# Required (same names as main env): DATABASE_URL, GEMINI_API_KEY,
+# SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM
