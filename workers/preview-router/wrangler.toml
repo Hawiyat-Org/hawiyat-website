@@ -1,0 +1,12 @@
+# Hawiyat preview router — maps <slug>.preview.hawiyat.org to the per-branch
+# worker hawiyat-preview-<slug>.<subdomain>.workers.dev, so branch previews get
+# branded URLs with zero per-branch DNS work.
+name = "hawiyat-preview-router"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+account_id = "86afaa372f06c7516c563e152faff79b"
+
+[vars]
+# Cloudflare account workers.dev subdomain (verified for account hawiyat-team).
+WORKERS_SUBDOMAIN = "shmsaldynbwbst"
