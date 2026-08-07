@@ -4,3 +4,4 @@ allowBuilds:
   esbuild: true
   msw: true
   prisma: true
+  workerd: true
