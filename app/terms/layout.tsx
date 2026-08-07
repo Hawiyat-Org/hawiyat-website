@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo"
 
 export const metadata = createMetadata({
   title: "Terms of Use",
-  description: "Terms governing Hawiyat websites, AI services, subscriptions, cloud hosting, billing, acceptable use, and customer responsibilities.",
+  description: "Terms of Use for the Hawiyat Composer platform: API keys, subscription plans, monthly quotas, DZD billing, acceptable use, security, liability, and dispute resolution.",
   path: "/terms",
 })
 
