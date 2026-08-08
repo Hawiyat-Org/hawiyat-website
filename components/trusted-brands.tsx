@@ -81,7 +81,7 @@ const TrustedBrands = () => {
           <div
             className={
               brand.square
-                ? "relative h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28"
+                ? "relative h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-36 lg:w-36"
                 : "relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48"
             }
           >
