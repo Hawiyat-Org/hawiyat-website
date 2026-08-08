@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 
 const TrustedBrands = () => {
   const { theme, resolvedTheme } = useTheme()
@@ -48,6 +48,14 @@ const TrustedBrands = () => {
       alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company that trusts Hawiyat",
       desc: "SARL RMASC is an Algerian company specialised in elevator design, installation, and repair that trusts Hawiyat for AI and digital services.",
     },
+    {
+      name: "Green Duty",
+      logo: "/trust/green-duty-logo.webp",
+      url: "",
+      title: "Green Duty — a company that trusts Hawiyat",
+      alt: "Green Duty logo — a company that trusts Hawiyat for AI and digital services",
+      desc: "Green Duty is a company that trusts Hawiyat for AI and digital services.",
+    },
   ]
 
   // Each half repeats the brands so the -50% loop wraps seamlessly.
@@ -57,26 +65,35 @@ const TrustedBrands = () => {
       aria-hidden={hidden || undefined}
       className="flex w-max shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
     >
-      {[...brands, ...brands].map((brand, index) => (
-        <div key={index} className="group relative flex shrink-0 items-center justify-center">
-          <Link
-            href={brand.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block h-full w-full"
-          >
-            <div className="relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
-              <Image
-                src={brand.logo}
-                alt={brand.alt}
-                title={brand.title}
-                fill
-                className="object-contain transition-all duration-500 drop-shadow-[0_0_8px_rgba(0,0,0,0.15)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-              />
-            </div>
-          </Link>
-        </div>
-      ))}
+      {[...brands, ...brands].map((brand, index) => {
+        const logo = (
+          <div className="relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
+            <Image
+              src={brand.logo}
+              alt={brand.alt}
+              title={brand.title}
+              fill
+              className="object-contain transition-all duration-500 drop-shadow-[0_0_8px_rgba(0,0,0,0.15)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+            />
+          </div>
+        )
+        return (
+          <div key={index} className="group relative flex shrink-0 items-center justify-center">
+            {brand.url ? (
+              <Link
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full w-full"
+              >
+                {logo}
+              </Link>
+            ) : (
+              logo
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 
@@ -99,7 +116,7 @@ const TrustedBrands = () => {
           transition={{ duration: 0.5 }}
           className="text-center text-2xl font-medium text-muted-foreground md:text-3xl"
         >
-          References
+        
         </motion.h2>
       </div>
 
