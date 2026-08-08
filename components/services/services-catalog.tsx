@@ -182,7 +182,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
               )}
 
               {/* Image */}
-              <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-muted/20 dark:to-muted/10 flex items-center justify-center p-4">
+              <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-surface-dim/30 to-surface-dim/10 dark:from-surface-dim/20 dark:to-surface-dim/10 flex items-center justify-center p-4">
                 {service.images ? (
                   <div className="flex items-center justify-center gap-3">
                     {service.images.map((img, idx) => (

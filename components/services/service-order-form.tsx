@@ -148,7 +148,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   "flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-sm font-medium transition-all",
                   isSelected
                     ? "border-primary bg-primary/10 text-primary"
-                    : "border-border/40 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/50"
+                    : "border-border/40 bg-surface-dim/30 text-muted-foreground hover:border-border hover:bg-surface-dim/50"
                 )}
               >
                 <Icon className="w-5 h-5" />
@@ -183,7 +183,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all",
                   isSelected
                     ? "border-primary bg-primary/10 text-primary"
-                    : "border-border/40 bg-muted/30 text-muted-foreground"
+                    : "border-border/40 bg-surface-dim/30 text-muted-foreground"
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -212,7 +212,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 p-1 rounded-lg hover:bg-muted transition-colors"
+              className="absolute top-4 right-4 p-1 rounded-lg hover:bg-surface-dim transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -240,9 +240,9 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               </div>
             ) : (
               <>
-                <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
+                <div className="mb-6 p-4 rounded-xl bg-surface-dim/50 border border-border/40">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
+                    <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-surface-dim flex items-center justify-center overflow-hidden">
                       <Image
                         src={serviceImage}
                         alt={service.name}
@@ -341,7 +341,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
                   <label
                     htmlFor="acceptTerms"
-                    className="flex items-start gap-2.5 p-3 rounded-lg bg-muted/30 border border-border/20 cursor-pointer select-none"
+                    className="flex items-start gap-2.5 p-3 rounded-lg bg-surface-dim/30 border border-border/20 cursor-pointer select-none"
                   >
                     <input
                       id="acceptTerms"

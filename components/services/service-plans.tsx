@@ -47,7 +47,7 @@ export function ServicePlans({ plans, fairUse, disclaimer, serviceId, serviceNam
             }`}
           >
             {/* Header */}
-            <div className="bg-gradient-to-br from-muted/50 to-muted/20 border-b border-border/60 p-5">
+            <div className="bg-gradient-to-br from-surface-dim/50 to-surface-dim/20 border-b border-border/60 p-5">
               <div className="flex items-center justify-between gap-3 mb-2">
                 <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
                 {idx === 1 && (

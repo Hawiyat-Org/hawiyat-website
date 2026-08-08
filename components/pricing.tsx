@@ -79,7 +79,7 @@ export default function Pricing() {
             </div>
           </div>
           {/* MAX 5X */}
-          <div className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
+          <div className="dark:bg-surface-dim rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
             <div className="space-y-4">
               <div><h2 className="font-medium">Hawiyat Composer MAX 5X</h2>
               <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white mt-1">Max 5X</div>

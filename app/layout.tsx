@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
@@ -13,17 +13,23 @@ const space = Space_Grotesk({
   display: "swap",
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
 const SITE_URL = "https://www.hawiyat.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `AI Provider in Algeria and Hawiyat Composer | ${APP_NAME}`,
+    default: `Hawiyat AI Composer | Execution Layer for Business AI`,
     template: `%s | ${APP_NAME}`,
   },
   description:
-    "AI services in Algeria for developers and businesses: Hawiyat Composer, AI subscriptions in DZD, automation, hosting, and local support.",
+    "The execution layer between frontier AI models and your business systems. Hawiyat AI Composer routes every task to the best model, context, and tools — model-independent, evaluated, priced in DZD, supported in Algeria.",
   applicationName: APP_NAME,
   keywords: [
     "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
@@ -32,15 +38,14 @@ export const metadata: Metadata = {
     APP_NAME, "cloud deployment", "serverless", "CI/CD", "edge network",
     "managed databases", "DevOps", "web applications", "global deployment",
     "developer tools", "hebergement web algerie", "hebergeur algerien",
-    "serveur vps algerie", "vps pas cher algerie", "hebergement site web algerie",
-    "serveur dedie algerie", "vps algerie prix", "cloud vps algerie",
+    "serveur vps algerie", "vps algerie prix", "cloud vps algerie",
     "hebergement professionnel algerie", "hebergeur vps algerien",
     "machine virtuelle algerie", "hebergement vps algerie", "vps local algerie",
     "hebergement web local", "vps illimité algerie", "hebergement vps web",
     "heberger site en algerie",
     // AI-first keywords
-    "ai gateway", "llm gateway", "ai infrastructure algeria", "reduce ai costs",
-    "llm caching", "model routing dz", "ai platform algeria", "hawiyat composer",
+    "ai gateway", "llm gateway", "ai infrastructure algeria",
+    "model routing dz", "ai platform algeria", "hawiyat composer",
     "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
     // Entity alias phrasings (machine-readable; used by AI search & engines)
     "Algeria's AI Provider", "Algeria AI Provider", "AI provider in Algeria",
@@ -72,7 +77,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${APP_NAME}: Built to Ship`,
     description:
-      "AI services in Algeria: Hawiyat Composer, subscriptions in DZD, automation, hosting, and local technical support.",
+      "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     url: SITE_URL,
     siteName: APP_NAME,
     images: [
@@ -93,7 +98,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${APP_NAME}: Built to Ship`,
     description:
-      "AI services in Algeria: Hawiyat Composer, subscriptions in DZD, automation, hosting, and local technical support.",
+      "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     images: [`${SITE_URL}/hawiyat.png`],
     creator: "@hawiyat",
   },
@@ -189,25 +194,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${space.variable} antialiased`}
+      className={`${space.variable} ${mono.variable} antialiased`}
     >
       <head>
-        {/*
-          AUDIT NOTE: full Bootstrap Icons CDN stylesheet loaded site-wide
-          for what's likely a handful of icons. lucide-react is already in
-          your dependency tree elsewhere in the app (tree-shakeable, no
-          extra network origin, no unused icon payload). Recommend
-          replacing bootstrap-icons usages with lucide-react and removing
-          this stylesheet entirely once migrated.
-        */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
-          integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
 

@@ -154,7 +154,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               <div className="space-y-6">
                 {/* Hero Image */}
                 {(service.image || service.images) && (
-                  <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 p-8 flex items-center justify-center overflow-hidden">
+                  <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
                     {service.tag && (
                       <div className="absolute top-3 right-3 z-10">
                         <span className={cn(
@@ -286,7 +286,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 /* Single Price Card */
                 <div className="rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden">
                   {/* Pricing Header */}
-                  <div className="border-b border-border/60 bg-muted/30 p-6">
+                  <div className="border-b border-border/60 bg-surface-dim/30 p-6">
                     <div className="space-y-2">
                       <div className="flex items-baseline gap-2">
                         <span className="text-4xl font-bold tracking-tight text-foreground">

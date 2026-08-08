@@ -101,7 +101,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1 rounded-lg hover:bg-muted transition-colors"
+          className="absolute top-4 right-4 p-1 rounded-lg hover:bg-surface-dim transition-colors"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
@@ -129,9 +129,9 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
           </div>
         ) : (
           <>
-            <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
+            <div className="mb-6 p-4 rounded-xl bg-surface-dim/50 border border-border/40">
               <div className="flex items-start gap-3">
-                <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
+                <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-surface-dim flex items-center justify-center overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.name}
@@ -226,7 +226,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                           "flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-sm font-medium transition-all",
                           isSelected
                             ? "border-primary bg-primary/10 text-primary"
-                            : "border-border/40 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/50"
+                            : "border-border/40 bg-surface-dim/30 text-muted-foreground hover:border-border hover:bg-surface-dim/50"
                         )}
                       >
                         <Icon className="w-5 h-5" />

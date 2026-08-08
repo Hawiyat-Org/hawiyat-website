@@ -10,14 +10,31 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-space)", "sans-serif"],
-        poly: ['"Poly"', "serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       animation: {
         scroll: "scroll 10s linear infinite",
         slide: "slide 10s ease-in-out infinite",
       },
       colors: {
-        border: "hsl(var(--border))",
+        paper: "rgb(var(--paper-rgb) / <alpha-value>)",
+        ink: "rgb(var(--ink-rgb) / <alpha-value>)",
+        surface: "rgb(var(--surface-rgb) / <alpha-value>)",
+        "surface-dim": "rgb(var(--surface-dim-rgb) / <alpha-value>)",
+        border: "rgb(var(--border-rgb) / <alpha-value>)",
+        muted: {
+          DEFAULT: "hsl(var(--muted-shadcn))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        "muted-ink": "rgb(var(--muted-rgb) / <alpha-value>)",
+        signal: "rgb(var(--signal-rgb) / <alpha-value>)",
+        "signal-text": "rgb(var(--signal-text-rgb) / <alpha-value>)",
+        "signal-contrast": "rgb(var(--signal-contrast-rgb) / <alpha-value>)",
+        "signal-bg": "rgb(var(--signal-bg-rgb) / <alpha-value>)",
+        ember: "rgb(var(--ember-rgb) / <alpha-value>)",
+        "ember-deep": "rgb(var(--ember-deep-rgb) / <alpha-value>)",
+        danger: "rgb(var(--danger-rgb) / <alpha-value>)",
+        ok: "rgb(var(--ok-rgb) / <alpha-value>)",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -33,10 +50,6 @@ module.exports = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
