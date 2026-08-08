@@ -37,7 +37,7 @@ export default function PrivacyPage() {
 
         <div className="mt-8 space-y-2">
           <h1 className="text-4xl font-semibold">Privacy Policy</h1>
-          <p className="text-muted-foreground">Effective: July 29, 2026</p>
+          <p className="text-muted-foreground">Effective: August 8, 2026</p>
         </div>
 
         <div className="mt-12 flex gap-12 lg:gap-20 relative">
@@ -172,8 +172,7 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <span className="text-foreground">Communications.</span>
-                  {" "}Send service notifications, security alerts, and billing reminders. Marketing
-                  communications are sent only with your consent, and you can opt out at any time.
+                  {" "}Send service notifications, security alerts, billing reminders, and waitlist updates. No marketing communications are sent.
                 </li>
                 <li>
                   <span className="text-foreground">Legal Compliance.</span>

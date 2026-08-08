@@ -39,15 +39,6 @@ model Order {
   @@map("orders")
 }
 
-model EmailSubscription {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  createdAt  DateTime @default(now()) @map("created_at")
-  
-  @@index([email])
-  @@map("email_subscriptions")
-}
-
 model Waitlist {
   id        String    @id @default(cuid())
   email     String    @unique
