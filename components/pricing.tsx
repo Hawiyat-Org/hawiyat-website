@@ -45,7 +45,7 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" ref={sectionRef} className="pt-8 pb-16 md:pt-12 md:pb-32">
+    <section id="pricing" ref={sectionRef} className="pt-8 pb-10 md:pt-12 md:pb-16">
       <div className="mx-auto max-w-5xl px-6">
         <motion.div 
           ref={headerRef}

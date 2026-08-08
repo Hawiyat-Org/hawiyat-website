@@ -81,7 +81,7 @@ const OurNumbers = () => {
   ]
 
   return (
-    <section className="relative w-full overflow-hidden px-6 max-md:px-4 py-20 md:py-32 max-md:py-12">
+    <section className="relative w-full overflow-hidden px-6 max-md:px-4 pt-4 pb-16 md:pt-8 md:pb-24 max-md:pt-2 max-md:pb-10">
       <div className="mx-auto max-w-7xl">
         <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4 mx-auto">
           <h2 className="text-5xl font-medium max-md:text-3xl text-center leading-normal">
