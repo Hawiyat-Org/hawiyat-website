@@ -13,10 +13,8 @@ const ScrollAnimations = () => {
 
     if (prefersReducedMotion) {
       // Respect prefers-reduced-motion: leave reveal-up elements fully visible
-      // (never set opacity:0) and skip the dashboard scrub so no scroll-linked
-      // transform runs.
+      // (never set opacity:0) and skip scroll-linked transforms.
       gsap.set(".reveal-up", { opacity: 1, y: 0 })
-      gsap.set("#dashboard", { scale: 1, translateY: 0, rotateX: "0deg" })
       return
     }
 
@@ -43,22 +41,6 @@ const ScrollAnimations = () => {
         }
       )
     })
-
-    // Dashboard animation
-    const dashboardElement = document.getElementById("dashboard")
-    if (dashboardElement) {
-      gsap.to("#dashboard", {
-        scale: 1,
-        translateY: 0,
-        rotateX: "0deg",
-        scrollTrigger: {
-          trigger: "#hero-section",
-          start: window.innerWidth > 1024 ? "top 95%" : "top 70%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-      })
-    }
 
     // Reveal animations for sections
     const sections = gsap.utils.toArray<Element>("section")
