@@ -1,0 +1,22 @@
+# Hawiyat preview router — maps <slug>.preview.hawiyat.org to the per-branch
+# worker hawiyat-preview-<slug>.<subdomain>.workers.dev, so branch previews get
+# branded URLs with zero per-branch DNS work.
+name = "hawiyat-preview-router"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+account_id = "86afaa372f06c7516c563e152faff79b"
+
+# Keep workers.dev reachable even though custom routes exist (CI deploys
+# otherwise disable it, which breaks the router's own workers.dev URL).
+workers_dev = true
+
+# Branded preview host: <slug>.preview.hawiyat.org -> this router.
+# Requires the wildcard DNS record *.preview.hawiyat.org (proxied) in the zone.
+[[routes]]
+pattern = "*.preview.hawiyat.org/*"
+zone_id = "afa547257ab2165693d6e3ad31357d25"
+
+[vars]
+# Cloudflare account workers.dev subdomain (verified for account hawiyat-team).
+WORKERS_SUBDOMAIN = "shmsaldynbwbst"

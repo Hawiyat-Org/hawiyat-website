@@ -207,8 +207,12 @@ body.booking-modal-open .fixed.inset-0 {
 }
 
 #dashboard {
-  transform: perspective(1200px) translateX(0px) translateY(12px) scale(0.8) rotate(0deg) rotateX(70deg);
-  transition: transform 0.5s;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 1s ease-out;
+}
+
+#dashboard.visible {
+  transform: translateY(0) scale(1);
 }
 
 .btn {
@@ -460,8 +464,16 @@ body.booking-modal-open .fixed.inset-0 {
 
 .reveal-up {
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 
 @media not all and (min-width: 1024px) {
   .collapsible-header {
@@ -555,4 +567,3 @@ body.booking-modal-open .fixed.inset-0 {
 .animate-ring-outer-pulse {
   animation: ringOuterExpand 3s ease-in-out infinite;
 }
-

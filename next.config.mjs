@@ -6,6 +6,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Required for OpenNext/Cloudflare Workers: OpenNext patches the Prisma client
+  // for the workerd runtime (WASM engine) when it is kept external to the bundle.
+  serverExternalPackages: ['@prisma/client', '.prisma/client'],
   images: {
   
     remotePatterns: [

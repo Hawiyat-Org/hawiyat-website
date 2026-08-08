@@ -66,3 +66,97 @@ model BootcampRegistration {
   @@index([status])
   @@map("bootcamp_registrations")
 }
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("VerificationCode")
+}
+
+model BlockedDate {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date
+  startTime String?  @map("start_time")
+  endTime   String?  @map("end_time")
+  reason    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([date])
+  @@map("blocked_dates")
+}
+
+model Booking {
+  id                String        @id @default(cuid())
+  startTime         DateTime      @map("start_time")
+  endTime           DateTime      @map("end_time")
+  timezone          String        @default("UTC")
+  status            BookingStatus @default(CONFIRMED)
+  customerName      String        @map("customer_name")
+  customerEmail     String        @map("customer_email")
+  customerPhone     String?       @map("customer_phone")
+  notes             String?
+  internalNotes     String?       @map("internal_notes")
+  cancelledAt       DateTime?     @map("cancelled_at")
+  cancellationReason String?      @map("cancellation_reason")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+  serviceId         String?
+  service           Service?      @relation(fields: [serviceId], references: [id])
+
+  @@index([customerEmail])
+  @@index([serviceId])
+  @@index([startTime, endTime])
+  @@index([status])
+  @@map("bookings")
+}
+
+model BusinessHours {
+  id        String   @id @default(cuid())
+  dayOfWeek Int      @unique @map("day_of_week")
+  isOpen    Boolean  @default(true) @map("is_open")
+  startTime String   @map("start_time")
+  endTime   String   @map("end_time")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("business_hours")
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  duration    Int
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  bookings    Booking[]
+
+  @@index([isActive])
+  @@map("services")
+}
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  ipAddress String   @map("ip_address")
+  userAgent String   @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([email])
+  @@map("waitlist")
+}

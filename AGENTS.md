@@ -11,6 +11,28 @@ pnpm db:reset               # Reset DB + seed
 pnpm prisma generate        # Generate Prisma client only
 ```
 
+## Cloudflare Branch Previews
+
+The site also has per-branch preview deployments on Cloudflare Workers (OpenNext).
+**Full runbook: `docs/preview-runbook.md`; decisions: `docs/adr/2026-08-08-cloudflare-preview-decisions.md`.**
+
+```bash
+# Build the OpenNext worker (run in a tmux session — takes ~3 min)
+pnpm exec prisma generate
+pnpm exec opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion
+
+# Manual branch deploy (slug = lowercase branch name)
+pnpm exec wrangler deploy --name hawiyat-preview-<slug>
+
+# Secrets per branch (values from the main .env)
+printf '%s' "$DATABASE_URL" | pnpm exec wrangler secret put DATABASE_URL --name hawiyat-preview-<slug>
+```
+
+- Per-PR auto-deploy/teardown: `.github/workflows/preview-deploy.yml` (needs the `CLOUDFLARE_API_TOKEN` repo secret).
+- Branded URLs `<slug>.preview.hawiyat.org` are served by `workers/preview-router/` (one manual wildcard DNS record required).
+- **Known limitation:** DB-backed endpoints fail on the Worker runtime (`prisma:error t2 is not a constructor`); Node path works. Previews are pages-only until resolved (see ADR-4).
+- Prisma: driver adapter `@prisma/adapter-pg` is required for Workers; keep the named import `{ prisma }`.
+
 ## Architecture
 
 **Stack:** Next.js 14 (App Router) • React 18 • TypeScript • Tailwind CSS • Prisma • PostgreSQL • shadcn/ui
