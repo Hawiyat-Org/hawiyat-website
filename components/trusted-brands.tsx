@@ -51,7 +51,7 @@ const TrustedBrands = () => {
     {
       name: "Green Duty",
       logo: mounted && (resolvedTheme === "dark" || theme === "dark")
-        ? "/trust/green-duty-logo.webp"
+        ? "/trust/green-duty-dark.webp"
         : "/trust/green-duty-light.webp",
       url: "",
       title: "Green Duty — a company that trusts Hawiyat",
