@@ -1,79 +1,77 @@
-# Spec: Hawiyat Monochrome Home Redesign
+# Spec: Hawiyat Refinement Round — Playful Tone, Services Consolidation, Design Polish
 
-> Status: DRAFT for founder review. Source research: `.superpowers/sdd/2026-08-08-hawiyat-monochrome-redesign/{design,engineering,frontend,marketing,seo,legal}-findings.md`. Branch: `rebrand/ai-infrastructure-identity`. This is a **strategic merge** — the old hawiyat.org layout already exists in git history (commit `f547cca`); we restore LAYOUT MECHANISMS only, never the reseller copy.
+> Status: Approved founder direction. Branch: `rebrand/ai-infrastructure-identity`. Supersedes prior home-order notes where they conflict.
 
 ## Objective
+Refine the Hawiyat site: playful, human (non-corporate) copy with **no em dashes**; brand-first hero ("Hawiyat AI Composer") that mentions our own-infrastructure hosting; smaller card border-radius; pricing badge above the title; copyright 2025-2026; Proof section redesigned with lucide icons (drop ARR/MRR); **services page shows non-Composer services only** (n8n, Evolution API, Hosting — combined into one card each) with **tier selectors on detail pages**; hosting framed as container-based (not VPS); and **duplicated content removed across pages**.
 
-Rework the Hawiyat site to the founder's monochrome, humanified, hawiyat.org-faithful aesthetic **while keeping the execution-layer positioning** (Hawiyat AI Composer, no reseller framing). Deliver: full black-to-white accent scale (keep dark mode), simple hero (title + subtitle + two buttons), partners marquee carousel, switchable MAX pricing cards, "Our Numbers" stat band, newsletter removed, Algeria band moved to `/about`, minimal motion, less border-radius, and the header theme-toggle hydration error fixed.
-
-**Success criteria:**
-- No chromatic accent tokens remain except `--danger` (red) and `--ok` (green); everything else is black→white scale.
-- Home order is exactly: Hero → Partners marquee → Our Numbers → Pricing (PRO / switchable MAX 5X-20X / Enterprise) → FAQ → CTA → Footer.
-- Newsletter component + `/api/subscribe` + `EmailSubscription` Prisma model removed; privacy policy §4 updated.
-- Algeria band renders on `/about` only.
-- Hydration error ("Expected `<circle>` in `<svg>`") gone — verified in browser with dark mode + reload.
-- Build green: `npx tsc --noEmit`, `pnpm lint`, `pnpm build`.
-- No "2x Claude credits"/reseller copy reintroduced anywhere (execution-layer copy retained).
+## Founder decisions (binding)
+1. **Services page = non-Composer only.** Show n8n Hosting (1 card), Evolution API (1 card), Hosting (1 card, container-based). Composer tiers live ONLY on home Pricing.
+2. **Delete Composer service detail pages** (`/services/composer-pro`, `composer-max5x`, `composer-max20x`, `llm-credit`) — remove from catalog + sitemap. Home Pricing is the sole Composer purchase path.
+3. **Tier selector on detail pages**: `/services/n8n-hosting` (Freelance/Startup/Enterprise), `/services/evolution-api` (WhatsApp/Startup/Enterprise), `/services/hosting-*` — a visible plan selector switches price + features + order-form (replaces the stacked ServicePlans layout).
+4. **Proof section redesign**: lucide icons per stat, drop the ARR/MRR figure. Keep 100+ clients, 10+ resellers, 100B+ tokens (3 cards).
+5. **Hero**: H1 "Hawiyat AI Composer"; playful sub mentioning our own infrastructure hosting + DZD + Algeria; no em dashes.
+6. **Tone**: playful, human, non-corporate. **No em dashes (—) anywhere in renderable copy** — replace with commas/periods/colons.
+7. **Pricing tags**: PRO / MAX 5X / MAX 20X badges render ABOVE the card title.
+8. **Copyright**: `Copyright © 2025-2026 Hawiyat`.
+9. **Border radius**: cards `rounded-lg` → `rounded-md`; buttons `rounded-lg` → `rounded-md` (keep `rounded-full` only for true circles/toggles per prior pass).
+10. **Hosting = container-based** (not VPS): update copy in `lib/data/services.ts` hosting entries + any "VPS" mentions (only a privacy-page false-positive exists today).
+11. **Remove duplicated content** across pages (e.g. "sits between / one layer / execution layer" repeated in hero, composer, FAQ, terms).
 
 ## Tech Stack
-Next.js 14 App Router (`next@^14.2.32`) · React 18 · TypeScript · Tailwind CSS · Prisma/Postgres · shadcn/ui · lucide-react · GSAP (composer-only scroll) · framer-motion (dependency present, **not** used by new motion budget).
+Next.js 14 App Router · React 18 · TypeScript · Tailwind · Prisma/Postgres · shadcn/ui · lucide-react · GSAP (composer only).
 
 ## Commands
 ```
-pnpm dev              # Dev server (localhost:3000)
-pnpm build            # Production build (runs prisma generate)
-pnpm lint             # Next.js linting
-pnpm db:push          # Push schema to DB + seed (Docker PG: postgres:postgres@localhost:5432/hawiyat_db)
-pnpm prisma generate  # Generate Prisma client only
-npx tsc --noEmit      # Type check (build ignores TS — run this explicitly)
+pnpm dev / pnpm build / pnpm lint / npx tsc --noEmit
 ```
 
-## Project Structure (relevant to this change)
+## Project Structure (relevant)
 ```
-app/
-  page.tsx                    # Home rebuild: Hero → PartnersMarquee → Pricing → OurNumbers → FAQ → CTA → Footer
-  about/page.tsx              # + AlgeriaBand section (moved from home)
-  composer/page.tsx           # Unchanged structurally (execution details)
-  api/subscribe/route.ts      # DELETE (newsletter teardown)
-  globals.css                 # Token VALUES → monochrome; radius lowered; #dashboard block removed
 components/
-  header.tsx                  # Hydration fix (mounted-guard theme toggle) + nav (Pricing → /#pricing) + mono pill CTA
-  hero-section.tsx            # Strip console + #dashboard → simple centered title/sub/2 buttons
-  ai-playground.tsx           # DELETE (only hero imported it)
-  partners-marquee.tsx        # NEW — marquee mechanism from f547cca + current partner data + ItemList JSON-LD
-  our-numbers.tsx             # NEW — static 4 verified stats (monochrome, string-safe)
-  trusted-brands.tsx          # REMOVE (split into the two above)
-  pricing.tsx                 # Restyle: rounded-lg, ink buttons, no glow/scale; keep data-driven switchable MAX
-  newsletter.tsx              # DELETE
-  algeria-band.tsx            # Keep file; mount on /about instead of home
-  faq.tsx, call-to-action.tsx, footer.tsx, whatsapp-widget.tsx  # Restyle to monochrome/radius
-  scroll-animations.tsx       # Remove #dashboard refs; keep reveal-up + trace-line (composer uses)
-  animated-text.tsx, animated-counter.tsx  # DELETE (dead code)
-prisma/schema.prisma          # Remove EmailSubscription model
-tailwind.config.js            # Add signal-hover key; radius scale
+  hero-section.tsx      # Brand-first H1 + playful sub (own infra), no em dash
+  pricing.tsx           # badge above title; rounded-md
+  our-numbers.tsx       # lucide icons, drop ARR, 3 stats
+  faq.tsx               # no em dashes; playful answers
+  call-to-action.tsx, partners-marquee.tsx, algeria-band.tsx  # tone + radius + no em dash
+  services/
+    services-catalog.tsx      # non-Composer only; combine tier cards → one card each
+    service-plans.tsx         # tier selector (replaces stacked)
+    service-order-form.tsx, order-form.tsx  # radius
+app/
+  page.tsx              # home order unchanged (Hero→Marquee→OurNumbers→Pricing→FAQ→CTA)
+  services/page.tsx     # H1/desc for non-Composer catalog
+  services/[slug]/page.tsx  # tier selector wiring; remove composer-* slugs
+  services/layout.tsx   # ItemList = n8n, evolution, hosting (no composer)
+  sitemap.ts            # remove /services/composer-*, llm-credit
+  composer/page.tsx     # no em dashes; tone
+  about/page.tsx        # no em dashes; tone
+  terms/page.tsx        # no em dashes; remove duplicated "execution layer" overlap
+lib/data/services.ts    # hosting = container-based copy; remove em dashes; tier data intact
+components/footer.tsx   # copyright 2025-2026
 ```
 
 ## Code Style
-- **Tokens only, no raw hex in components.** All color changes happen in `app/globals.css` + `tailwind.config.js`.
-- Keep token NAMES (`--signal*`/`--ember*`), re-point VALUES to grayscale — minimizes churn; semantic meaning shifts to "primary action fill"/"secondary gray accent".
-- `text-muted-ink` for muted text (GC13); `bg-signal text-signal-text` for primary CTAs.
-- Monochrome button spec: primary = `bg-signal text-signal-text rounded-lg hover:bg-signal-hover`; secondary = outline `border border-ink text-ink hover:bg-ink hover:text-paper` (inverts in dark via tokens).
-- Radius: `rounded-lg` cards/buttons, `rounded-md` inputs, `rounded-full` ONLY tiny pills/toggles.
-- No `hover:scale-*` transitions in the new motion budget. Keep `.marquee` CSS + `prefers-reduced-motion` guard.
-- Humanified copy per `.agents/product-marketing.md` + marketing findings (implementation-ready strings).
+- Copy: playful, human, non-corporate. No em dashes. No reseller/"cheap" framing. DZD + Algeria = identity.
+- Radius: `rounded-md` cards/buttons (smaller). `rounded-full` only true circles.
+- Tokens only (monochrome). lucide icons.
+- Keep verified stats: 100+ clients, 10+ resellers, 100B+ tokens. NO ARR/MRR figures rendered.
 
 ## Testing Strategy
-No formal suite (per AGENTS.md). Manual + gates:
-- `npx tsc --noEmit` (exit 0), `pnpm lint` (0 errors), `pnpm build` (25/25).
-- `pnpm db:push` against Docker Postgres after EmailSubscription removal.
-- Browser check: `/` home order + monochrome in light+dark; `/about` has Algeria band; `/composer` unchanged & token-correct; hydration error gone (dark mode + reload); marquee scrolls + pauses on hover + respects reduced-motion; pricing switchable MAX works; newsletter gone from home + footer.
-- `rg` gates: no `bi-`, no raw `bg-[#`, no `font-serif`, no `2x Claude|LLM Credit|Claude Code|cheap|50B|60+|300 Templates` in renderable files.
+No formal suite (per AGENTS.md). Gates: `npx tsc --noEmit`, `pnpm lint` (0 errors), `pnpm build` (succeeds). Manual browser: home hero, pricing badge position, Proof icons, services catalog (3 cards), detail-page tier selector, footer copyright, no em dashes visible.
 
 ## Boundaries
-- **Always:** run tsc + lint + build after each task; keep `lib/data/services.ts` untouched (pricing source of truth); keep `lib/rate-limiter.ts`; keep execution-layer copy; preserve `prefers-reduced-motion`; use tokens only.
-- **Ask first:** any Prisma schema change beyond EmailSubscription removal; deleting prod `email_subscriptions` table rows; renaming token names vs re-pointing values; moving sections not in this spec.
-- **Never:** reintroduce reseller copy or `f547cca` keyword-stuffed JSON-LD; add new hex in components; delete `/composer` functionality; add new framer-motion/GSAP animations; reintroduce `bi-*`/Bootstrap icons.
+- **Always:** no em dashes in renderable copy; keep verified stats exact; tokens only; smaller radius; delete composer-* service routes from catalog + sitemap.
+- **Ask first:** changing stat VALUES; adding/removing services beyond composer consolidation; changing pricing.
+- **Never:** reintroduce reseller/cheap framing; restore ARR/MRR figures; reintroduce full-rounded buttons; break the OrderForm/order flow; add new products.
 
-## Open Questions
-- Newsletter teardown: confirm prod `email_subscriptions` rows should be deleted (legal recommends yes; needs owner sign-off).
-- `EmailSubscription` model removal is a schema change — confirmed in scope by founder (newsletter removal).
+## Success Criteria
+- `/services` shows exactly 3 cards (n8n, Evolution, Hosting) — no composer cards.
+- `/services/composer-pro`, `composer-max5x`, `composer-max20x`, `llm-credit` 404/redirect and are gone from sitemap + ItemList.
+- `/services/n8n-hosting` etc. have a working tier selector (price/features/order-form switch).
+- Home hero: "Hawiyat AI Composer" + playful sub mentioning own infrastructure; no em dash.
+- Proof section: 3 stats with lucide icons, no ARR/MRR.
+- Footer: `© 2025-2026`.
+- `rg -c "—" components app --glob '*.tsx'` → 0.
+- Cards/buttons `rounded-md`.
+- Build/lint/tsc green.
