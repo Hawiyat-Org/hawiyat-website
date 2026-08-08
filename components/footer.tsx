@@ -1,26 +1,21 @@
 import Image from "next/image"
 import Link from "next/link"
-
-const docsUrl = process.env.NEXT_PUBLIC_DOCS_URL
-const blogUrl = process.env.NEXT_PUBLIC_BLOG_URL
+import { Github, Instagram, Facebook, Mail, Twitter, Linkedin } from "lucide-react"
 
 const Footer = () => {
   const footerSections = [
     {
-      title: "Resources",
+      title: "The Layer",
       links: [
-        { name: "Hawiyat Composer", href: "/hawiyat-composer" },
-        { name: "Pricing", href: "/#pricing" },
+        { name: "AI Composer", href: "/composer" },
         { name: "Services", href: "/services" },
-        { name: "Blog", href: blogUrl || "https://blog.hawiyat.org" },
-        { name: "Docs", href: docsUrl || "https://docs.hawiyat.org" },
-        { name: "AI Bootcamp", href: "/bootcamp" },
+        { name: "About", href: "/about" },
       ],
     },
     {
       title: "Company",
       links: [
-        { name: "Support", href: "tel:+213559555951" },
+        { name: "Support", href: "https://wa.me/213559555951" },
         { name: "Github", href: "https://github.com/Hawiyat-Org" },
       ],
       
@@ -36,14 +31,12 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { name: "Github", href: "https://github.com/Hawiyat-Org", icon: "bi-github" },
-    { name: "Discord", href: "https://discord.gg/yourinvite", icon: "bi-discord" },
-    { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", icon: "bi-instagram" },
-    { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", icon: "bi-facebook" },
-    { name: "TikTok", href: "https://www.tiktok.com/@hawiyat5", icon: "bi-tiktok" },
-    { name: "Email", href: "mailto:contact@hawiyat.org", icon: "bi-envelope" },
-    { name: "X (Twitter)", href: "https://x.com/hawiyat", icon: "bi-twitter-x" },
-    { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", icon: "bi-linkedin" },
+    { name: "Github", href: "https://github.com/Hawiyat-Org", Icon: Github },
+    { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", Icon: Instagram },
+    { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", Icon: Facebook },
+    { name: "Email", href: "mailto:contact@hawiyat.org", Icon: Mail },
+    { name: "X (Twitter)", href: "https://x.com/hawiyat", Icon: Twitter },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", Icon: Linkedin },
   ]
 
   return (
@@ -64,7 +57,7 @@ const Footer = () => {
                 aria-label={social.name}
                 className="footer-link hover:scale-110 transition-transform duration-200"
               >
-                <i className={`bi ${social.icon}`}></i>
+                <social.Icon className="w-5 h-5" />
               </Link>
             ))}
           </div>
