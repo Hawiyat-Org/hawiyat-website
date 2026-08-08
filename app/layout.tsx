@@ -80,11 +80,10 @@ export const metadata: Metadata = {
         alt: `${APP_NAME} Platform`,
       },
     ],
-    // AUDIT NOTE: confirm which locale is actually primary for your traffic.
-    // If most visitors/target customers are French or Arabic speaking,
-    // consider making fr_DZ (or ar_DZ) the primary locale instead of en_US.
-    locale: "en_US",
-    alternateLocale: ["fr_DZ"],
+    // Primary audience is Algerian developers/businesses: French is the
+    // most common working language, with English and Arabic as alternates.
+    locale: "fr_DZ",
+    alternateLocale: ["en_US", "ar_DZ"],
     type: "website",
   },
   twitter: {

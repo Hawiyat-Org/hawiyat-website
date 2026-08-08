@@ -1,5 +1,13 @@
-import Link from "next/link"
+import type { Metadata } from "next"
 import ServicesCatalog from "@/components/services/services-catalog"
+import { createMetadata } from "@/lib/seo"
+
+export const metadata: Metadata = createMetadata({
+  title: "AI Services in Algeria | n8n, Claude Code, WhatsApp API, Hosting | Hawiyat",
+  description:
+    "Browse all Hawiyat services: n8n workflow automation (8,000 DA/year), Hawiyat Composer Claude subscriptions (6,000-30,000 DA/month), Evolution API WhatsApp hosting (7,000 DA/year), OpenAI credits, and web hosting. Priced in Algerian dinars, local support in Arabic, French, and English.",
+  path: "/services",
+})
 
 export default function ServicesPage({ searchParams }: { searchParams: { q?: string | string[] } }) {
   return (

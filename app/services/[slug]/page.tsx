@@ -15,10 +15,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const service = getServiceBySlug(params.slug)
   if (!service) return {}
 
+  // Use the service's own product image for social/WhatsApp previews
+  const serviceImage = service.images?.[0] || service.image
+
   return createMetadata({
     title: service.seo.title,
     description: service.seo.description,
     path: `/services/${params.slug}` as `/${string}`,
+    image: serviceImage,
+    publishedTime: "2026-01-01T00:00:00+01:00",
+    modifiedTime: new Date().toISOString(),
   })
 }
 
@@ -37,21 +43,67 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     "@type": "Service",
     name: service.name,
     description: service.description,
+    url: `${SITE_URL}/services/${service.slug}`,
+    image: service.images?.[0] || service.image || `${SITE_URL}/hawiyat.png`,
     provider: {
       "@type": "Organization",
       name: "Hawiyat",
       url: SITE_URL,
+      logo: `${SITE_URL}/logo.svg`,
+      telephone: "+213-55-955-5951",
     },
     areaServed: {
       "@type": "Country",
       name: "Algeria",
     },
-    offers: {
-      "@type": "Offer",
-      price: service.price,
-      priceCurrency: "DZD",
-      availability: "https://schema.org/InStock",
-    },
+    serviceType: service.category,
+    hasOfferCatalog:
+      service.plans && service.plans.length > 0
+        ? {
+            "@type": "OfferCatalog",
+            name: `${service.name} Plans`,
+            itemListElement: service.plans.map((plan) => ({
+              "@type": "Offer",
+              name: plan.name,
+              price: plan.price.replace(/,/g, ""),
+              priceCurrency: "DZD",
+              description: plan.tagline,
+              availability: "https://schema.org/InStock",
+            })),
+          }
+        : {
+            "@type": "Offer",
+            price: service.price.replace(/,/g, ""),
+            priceCurrency: "DZD",
+            availability: "https://schema.org/InStock",
+          },
+    datePublished: "2026-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${SITE_URL}/services`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.name,
+        item: `${SITE_URL}/services/${service.slug}`,
+      },
+    ],
   }
 
   const serviceData = {
@@ -65,7 +117,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }} />
 
       <main className="min-h-screen bg-background">
         {/* Back Navigation */}
@@ -135,6 +187,45 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   {service.details.idealFor}
                 </p>
               </div>
+
+              {/* SEO Content Blocks for AI Search */}
+              {service.seoContent && (
+                <div className="space-y-8 pt-8 border-t border-border/40">
+                  <div>
+                    <h2 className="text-xl font-semibold text-foreground mb-3">What is {service.name}?</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {service.seoContent.whatIs}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold text-foreground mb-3">Why Choose Hawiyat for {service.name}?</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {service.seoContent.whyChoose}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold text-foreground mb-3">How Does {service.name} Work?</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {service.seoContent.howItWorks}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* FAQ Section */}
+              {service.faq && service.faq.length > 0 && (
+                <div className="space-y-4 pt-8 border-t border-border/40">
+                  <h2 className="text-xl font-semibold text-foreground">Frequently Asked Questions</h2>
+                  <div className="space-y-4">
+                    {service.faq.map((item, idx) => (
+                      <div key={idx}>
+                        <h3 className="text-base font-medium text-foreground mb-2">{item.question}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right Column - Pricing & CTA */}
