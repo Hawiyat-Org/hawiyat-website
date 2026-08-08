@@ -32,21 +32,13 @@ export const metadata: Metadata = {
     "The execution layer between frontier AI models and your business systems. Hawiyat AI Composer routes every task to the best model, context, and tools — model-independent, evaluated, priced in DZD, supported in Algeria.",
   applicationName: APP_NAME,
   keywords: [
-    "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
-    "platform as a service in algeria", "platform as a service dz",
-    "scalability dz", "deploy dz", "vps algerie", "vps dz", "hebergement algerie",
     APP_NAME, "cloud deployment", "serverless", "CI/CD", "edge network",
-    "managed databases", "DevOps", "web applications", "global deployment",
-    "developer tools", "hebergement web algerie", "hebergeur algerien",
-    "serveur vps algerie", "vps algerie prix", "cloud vps algerie",
-    "hebergement professionnel algerie", "hebergeur vps algerien",
-    "machine virtuelle algerie", "hebergement vps algerie", "vps local algerie",
-    "hebergement web local", "vps illimité algerie", "hebergement vps web",
-    "heberger site en algerie",
-    // AI-first keywords
-    "ai gateway", "llm gateway", "ai infrastructure algeria",
-    "model routing dz", "ai platform algeria", "hawiyat composer",
-    "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
+    "scalability dz", "deploy dz", "managed databases", "DevOps",
+    "web applications", "global deployment", "developer tools",
+    // AI infrastructure / execution-layer keywords
+    "ai gateway", "llm gateway", "ai infrastructure algeria", "execution layer",
+    "ai execution layer", "model gateway", "model routing dz", "ai platform algeria",
+    "hawiyat composer", "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
     // Entity alias phrasings (machine-readable; used by AI search & engines)
     "Algeria's AI Provider", "Algeria AI Provider", "AI provider in Algeria",
     "AI in Algeria", "B2B AI Algeria", "AI provider algeria", "fournisseur IA algerie",
@@ -75,7 +67,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${APP_NAME}: Built to Ship`,
+    title: `${APP_NAME} — AI Execution Layer`,
     description:
       "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     url: SITE_URL,
@@ -96,7 +88,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_NAME}: Built to Ship`,
+    title: `${APP_NAME} — AI Execution Layer`,
     description:
       "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     images: [`${SITE_URL}/hawiyat.png`],
