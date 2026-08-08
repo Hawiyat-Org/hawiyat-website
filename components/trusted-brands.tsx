@@ -69,17 +69,23 @@ const TrustedBrands = () => {
   }, [])
 
   const brands = [
-    { 
-      name: "Itihad", 
-      logo: "/trust/itihad-logo.svg", 
-      url: "https://itihad.group", 
-      large: true 
+    {
+      name: "Itihad",
+      logo: "/trust/itihad-logo.svg",
+      url: "https://itihad.group",
+      large: true,
+      title: "Itihad Group — a company that trusts Hawiyat",
+      alt: "Itihad Group logo — an Algerian business group that trusts Hawiyat for AI, automation, and cloud services",
+      desc: "Itihad Group is a company that trusts Hawiyat for AI, automation, and cloud services in Algeria.",
     },
-    { 
-      name: "ESTIN", 
-      logo: "/trust/estin-logo.svg", 
-      url: "https://estin.dz/", 
-      large: true 
+    {
+      name: "ESTIN",
+      logo: "/trust/estin-logo.svg",
+      url: "https://estin.dz/",
+      large: true,
+      title: "ESTIN — École Supérieure en Informatique, a trusted Hawiyat reference",
+      alt: "ESTIN logo — the Algerian computer science school École Supérieure en Informatique, which trusts Hawiyat for AI access and developer services",
+      desc: "ESTIN (École Supérieure en Informatique) is an Algerian higher education institution that trusts Hawiyat for AI access and developer services.",
     },
     {
       name: "IT Solutions",
@@ -87,13 +93,19 @@ const TrustedBrands = () => {
         ? "/trust/itsol-dark.svg"
         : "/trust/itsol.svg",
       url: "https://itsolutions.dz/",
-      large: true
+      large: true,
+      title: "IT Solutions — an IT services company that trusts Hawiyat",
+      alt: "IT Solutions logo — an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation",
+      desc: "IT Solutions is an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation.",
     },
     {
       name: "RMASC",
-      logo: "/trust/Webp.net-resizeimage.png",
+      logo: "/trust/rmasc-logo.webp",
       url: "https://www.sarlrmasc.com/",
-      large: true
+      large: true,
+      title: "RMASC (SARL RMASC) — an Algerian elevator company that trusts Hawiyat",
+      alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company that trusts Hawiyat",
+      desc: "SARL RMASC is an Algerian company specialised in elevator design, installation, and repair that trusts Hawiyat for AI and digital services.",
     },
   ]
 
@@ -177,7 +189,8 @@ const TrustedBrands = () => {
                   >
                     <Image
                       src={brand.logo || "/placeholder.svg"}
-                      alt={brand.name}
+                      alt={brand.alt || brand.name}
+                      title={brand.title}
                       fill
                       className="object-contain transition-all duration-500 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
                     />
@@ -187,6 +200,31 @@ const TrustedBrands = () => {
             ))}
           </div>
         </motion.div>
+
+        {/* Structured data: lets search engines & AI crawlers read the references as entities */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "Companies that trust Hawiyat",
+              description:
+                "Algerian companies, institutions, and teams that trust Hawiyat for AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services.",
+              numberOfItems: brands.length,
+              itemListElement: brands.map((brand, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                item: {
+                  "@type": "Organization",
+                  name: brand.name,
+                  url: brand.url,
+                  description: brand.desc,
+                },
+              })),
+            }),
+          }}
+        />
       </div>
     </section>
   )
