@@ -149,12 +149,6 @@ hr {
   opacity: 0.5;
 }
 
-#dashboard {
-  /* transform-origin: bottom center; */
-  transform: perspective(1200px) translateX(0px) translateY(12px) scale(0.8) rotate(0deg) rotateX(70deg);
-  transition: transform 0.5;
-}
-
 .opacity-0 {
   opacity: 0 !important;
 }
