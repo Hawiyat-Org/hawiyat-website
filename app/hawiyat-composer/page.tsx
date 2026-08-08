@@ -132,7 +132,7 @@ export default function ComposerPage() {
         <div className="mx-auto w-full max-w-6xl px-6 flex flex-col items-center gap-6">
           <h2 className="text-5xl font-medium max-md:text-3xl text-center">Our Numbers</h2>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-stretch">
-            <AnimatedStatCard icon={BarChart3} value={50} label="Tokens Served" description="Tokens processed through Hawiyat Composer's caching and routing." text="+50B" delay={0} />
+            <AnimatedStatCard icon={BarChart3} value={100} label="Tokens Served" description="Tokens processed through Hawiyat Composer's caching and routing." text="100 Billion" delay={0} />
             <AnimatedStatCard icon={Users} value={30} label="Satisfied Clients" description="Developers, startups, and agencies across Algeria using Hawiyat Composer to deliver projects." delay={0.15} />
             <AnimatedStatCard icon={Building2} value={3} label="Enterprise Partners" description="Enterprises that integrated Hawiyat Composer into their workflow with dedicated support." delay={0.3} />
             <AnimatedStatCard icon={Headphones} value={0} label="Customer Support" description="Round-the-clock support via WhatsApp, Email, and Telegram." text="24/7" delay={0.45} />
