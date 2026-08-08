@@ -198,6 +198,37 @@ body.booking-modal-open .fixed.inset-0 {
   background: linear-gradient(180deg, var(--hero-gradient) 23%, rgba(0, 0, 0, 0) 87%);
 }
 
+/* References marquee: logos stream left-to-right in a seamless infinite loop.
+   The track holds two identical halves, so translating -50% -> 0 wraps
+   perfectly. */
+.marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 
 .gradient-text {
   background: rgb(215, 215, 215);

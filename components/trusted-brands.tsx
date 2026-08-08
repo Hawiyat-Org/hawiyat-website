@@ -18,7 +18,6 @@ const TrustedBrands = () => {
       name: "Itihad",
       logo: "/trust/itihad-logo.svg",
       url: "https://itihad.group",
-      large: true,
       title: "Itihad Group — a company that trusts Hawiyat",
       alt: "Itihad Group logo — an Algerian business group that trusts Hawiyat for AI, automation, and cloud services",
       desc: "Itihad Group is a company that trusts Hawiyat for AI, automation, and cloud services in Algeria.",
@@ -27,7 +26,6 @@ const TrustedBrands = () => {
       name: "ESTIN",
       logo: "/trust/estin-logo.svg",
       url: "https://estin.dz/",
-      large: true,
       title: "ESTIN — École Supérieure en Informatique, a trusted Hawiyat reference",
       alt: "ESTIN logo — the Algerian computer science school École Supérieure en Informatique, which trusts Hawiyat for AI access and developer services",
       desc: "ESTIN (École Supérieure en Informatique) is an Algerian higher education institution that trusts Hawiyat for AI access and developer services.",
@@ -38,7 +36,6 @@ const TrustedBrands = () => {
         ? "/trust/itsol-dark.svg"
         : "/trust/itsol.svg",
       url: "https://itsolutions.dz/",
-      large: true,
       title: "IT Solutions — an IT services company that trusts Hawiyat",
       alt: "IT Solutions logo — an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation",
       desc: "IT Solutions is an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation.",
@@ -47,91 +44,89 @@ const TrustedBrands = () => {
       name: "RMASC",
       logo: "/trust/rmasc-logo.webp",
       url: "https://www.sarlrmasc.com/",
-      large: true,
       title: "RMASC (SARL RMASC) — an Algerian elevator company that trusts Hawiyat",
       alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company that trusts Hawiyat",
       desc: "SARL RMASC is an Algerian company specialised in elevator design, installation, and repair that trusts Hawiyat for AI and digital services.",
     },
   ]
 
+  // Each half repeats the brands so the -50% loop wraps seamlessly.
+  // Trailing padding matches the item gap so spacing stays uniform.
+  const renderRow = (hidden: boolean) => (
+    <div
+      aria-hidden={hidden || undefined}
+      className="flex w-max shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
+    >
+      {[...brands, ...brands].map((brand, index) => (
+        <div key={index} className="group relative flex shrink-0 items-center justify-center">
+          <Link
+            href={brand.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block h-full w-full"
+          >
+            <div className="relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
+              <Image
+                src={brand.logo}
+                alt={brand.alt}
+                title={brand.title}
+                fill
+                className="object-contain transition-all duration-500 drop-shadow-[0_0_8px_rgba(0,0,0,0.15)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              />
+            </div>
+          </Link>
+        </div>
+      ))}
+    </div>
+  )
+
   return (
-    <section className="relative w-full overflow-hidden px-6 max-md:px-4 py-20 md:py-32 max-md:py-12">
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-24 max-md:mb-8 text-center"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl max-md:text-2xl">Trusted by</h2>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative"
-        >
-          <div className="grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-16 lg:gap-20 max-md:gap-8">
-            {brands.map((brand, index) => (
-              <div
-                key={index}
-                className="group relative flex items-center justify-center"
-              >
-                <Link 
-                  href={brand.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="block w-full h-full"
-                >
-                  <div
-                    className={`relative w-full transition-transform duration-500 ease-out group-hover:scale-110 ${
-                      brand.large
-                        ? "h-32 md:h-40 lg:h-52 max-md:h-28"
-                        : "h-24 md:h-32 lg:h-40 max-md:h-20"
-                    }`}
-                  >
-                    <Image
-                      src={brand.logo || "/placeholder.svg"}
-                      alt={brand.alt || brand.name}
-                      title={brand.title}
-                      fill
-                      className="object-contain transition-all duration-500 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
-                    />
-                  </div>
-                </Link>
-              </div>
-            ))}
+    <section className="relative w-full overflow-hidden py-10 md:py-14">
+      <div className="flex flex-col items-center gap-5">
+        {/* Logos stream left-to-right, on top */}
+        <div className="marquee relative w-full overflow-hidden">
+          <div className="marquee-track flex w-max">
+            {renderRow(false)}
+            {renderRow(true)}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Structured data: lets search engines & AI crawlers read the references as entities */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ItemList",
-              name: "Companies that trust Hawiyat",
-              description:
-                "Algerian companies, institutions, and teams that trust Hawiyat for AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services.",
-              numberOfItems: brands.length,
-              itemListElement: brands.map((brand, i) => ({
-                "@type": "ListItem",
-                position: i + 1,
-                item: {
-                  "@type": "Organization",
-                  name: brand.name,
-                  url: brand.url,
-                  description: brand.desc,
-                },
-              })),
-            }),
-          }}
-        />
+        {/* Word below the logos */}
+        <motion.h2
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+          className="text-center text-2xl font-medium text-muted-foreground md:text-3xl"
+        >
+          References
+        </motion.h2>
       </div>
+
+      {/* Structured data: lets search engines & AI crawlers read the references as entities */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Companies that trust Hawiyat",
+            description:
+              "Algerian companies, institutions, and teams that trust Hawiyat for AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services.",
+            numberOfItems: brands.length,
+            itemListElement: brands.map((brand, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: {
+                "@type": "Organization",
+                name: brand.name,
+                url: brand.url,
+                description: brand.desc,
+              },
+            })),
+          }),
+        }}
+      />
     </section>
   )
 }
