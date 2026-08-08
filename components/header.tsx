@@ -45,7 +45,7 @@ const Header = () => {
        <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-white/60 dark:bg-[#3A3A40]/50 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 border border-gray-200/50 dark:border-white/10 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-white/60 dark:bg-surface-dim/50 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 border border-gray-200/50 dark:border-white/10 transition-all duration-500 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
         

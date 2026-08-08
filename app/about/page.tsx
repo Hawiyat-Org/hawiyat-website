@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin } from "lucide-react"
+import { ArrowRight, MapPin, MessageCircle, Package } from "lucide-react"
 
 export default function AboutPage() {
   const { theme, resolvedTheme } = useTheme()
@@ -14,11 +14,9 @@ export default function AboutPage() {
     setMounted(true)
   }, [])
   return (
-    <div className="relative min-h-screen hero-bg-gradient overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* ─── Hero + Gallery ─── */}
       <section className="relative flex min-h-[85vh] w-full flex-col place-content-center overflow-hidden mt-[70px] md:mt-[100px]">
-        <div className="purple-bg-grad absolute left-[5%] top-[15%] h-[160px] w-[160px] max-md:hidden" />
-
         <div className="mx-auto w-full max-w-6xl px-6 flex max-lg:flex-col items-center justify-center gap-8 max-lg:gap-6 min-h-[85vh] py-10">
           {/* Left  Text */}
           <div className="flex flex-col gap-5 flex-1 max-w-lg">
@@ -26,12 +24,12 @@ export default function AboutPage() {
               Built in Algeria 🇩🇿
             </div>
             <h1 className="text-5xl max-lg:text-3xl max-md:text-2xl font-medium uppercase">
-              About <span className="font-thin font-serif">Us</span>
+              About <span className="font-light">Us</span>
             </h1>
-            <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed max-md:text-sm">
-              Hawiyat is an AI infrastructure company based in Algeria. We help developers and businesses across North Africa build with frontier AI models. Hawiyat Composer, our caching and routing gateway, handles the AI layer. Underneath it, our own cloud infrastructure handles hosting, databases, and deployment.
+            <p className="text-base text-ink leading-relaxed max-md:text-sm">
+              Hawiyat is the AI infrastructure platform based in Algeria. We build and run the execution layer between frontier AI models and the systems businesses rely on — WhatsApp, CRM, ERP, email, databases, workflows. Our Composer engine plans, routes, and executes every task: the best model, the right context, automatic fallbacks, and an evaluated result — priced in DZD, on our own cloud.
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-muted-ink">
               Founded in Algiers • Incubated by Itihad • 100+ clients
             </p>
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
@@ -40,7 +38,7 @@ export default function AboutPage() {
                 className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-300 hover:scale-x-[1.03] active:scale-95"
               >
                 <span>Explore Services</span>
-                <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
               <Link
                 href="https://wa.me/213559555951"
@@ -48,7 +46,7 @@ export default function AboutPage() {
                 className="btn max-md:!w-full flex gap-2 place-content-center !rounded-lg !py-3.5 max-md:!py-3 text-sm !bg-transparent !text-black dark:!text-white border-[1px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 active:scale-95"
               >
                 <span>Contact Us</span>
-                <i className="bi bi-whatsapp" />
+                <MessageCircle className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -115,7 +113,6 @@ export default function AboutPage() {
 
       {/* ─── Timeline ─── */}
       <section className="w-full py-16 md:py-24 bg-foreground/[0.01] border-y border-foreground/5">
-        <div className="purple-bg-grad absolute left-1/2 -translate-x-1/2 top-[40%] h-[200px] w-[200px] max-md:hidden pointer-events-none" />
         <div className="mx-auto max-w-6xl px-6 relative">
           <div className="mb-14">
             <span className="text-xs text-foreground/40 uppercase tracking-widest">Our Story</span>
@@ -158,7 +155,7 @@ export default function AboutPage() {
                     <h3 className="text-lg font-semibold text-white mt-1">{event.title}</h3>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{event.body}</p>
+                <p className="text-sm text-muted-ink leading-relaxed">{event.body}</p>
               </div>
             ))}
           </div>
@@ -199,10 +196,10 @@ export default function AboutPage() {
                   isIcon: true,
                 },
               ].map((cert, i) => (
-                <div key={i} className="group bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                <div key={i} className="group bg-surface-dim rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
                   {cert.isIcon ? (
                     <div className="aspect-[4/3] flex items-center justify-center bg-foreground/[0.02]">
-                      <i className="bi-box-seam text-5xl text-foreground/20"></i>
+                      <Package className="h-12 w-12 text-foreground/20" />
                     </div>
                   ) : (
                     <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-black">
@@ -219,7 +216,7 @@ export default function AboutPage() {
 
             {/* Right  Green Duty tall card spanning 2 rows */}
             <div className="flex-[1.25] max-md:w-full">
-              <div className="group bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
+              <div className="group bg-surface-dim rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-white dark:bg-black">
                   <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -265,12 +262,11 @@ export default function AboutPage() {
 
       {/* ─── Collaborations ─── */}
       <section className="w-full py-20 md:py-28 relative overflow-hidden">
-        <div className="purple-bg-grad absolute right-[-5%] top-[10%] h-[200px] w-[200px] max-md:hidden pointer-events-none" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col gap-4 mb-14">
             <span className="text-xs text-foreground/40 uppercase tracking-widest">People</span>
             <h2 className="text-5xl max-md:text-3xl font-medium">Collaborations</h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-md text-sm">
+            <p className="text-muted-ink max-w-md text-sm">
               People we work with.
             </p>
           </div>
@@ -304,7 +300,7 @@ export default function AboutPage() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-[#f6f7fb] dark:bg-[#141414] rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-500"
+                className="group relative bg-surface-dim rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-500"
               >
                 <div className="relative h-56 max-md:h-48 overflow-hidden">
                   <Image
@@ -313,11 +309,11 @@ export default function AboutPage() {
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#f6f7fb] dark:from-[#141414] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent" />
                 </div>
                 <div className="relative -mt-12 px-6 pb-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white dark:border-[#141414] shadow-lg shrink-0 -mt-7">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white dark:border-surface-dim shadow-lg shrink-0 -mt-7">
                       <Image src={p.image} alt={p.name} width={56} height={56} className="w-full h-full object-cover" />
                     </div>
                     <div className="pt-4">
@@ -325,7 +321,7 @@ export default function AboutPage() {
                       <span className="text-xs font-medium text-foreground/50 uppercase tracking-wider">{p.role}</span>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mt-4">{p.desc}</p>
+                  <p className="text-sm text-muted-ink leading-relaxed mt-4">{p.desc}</p>
                 </div>
               </a>
             ))}
@@ -338,10 +334,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-12">
             <span className="text-xs text-foreground/40 uppercase tracking-widest">HQ</span>
-            <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We're At</h2>
+            <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We&apos;re At</h2>
           </div>
           <div className="flex max-md:flex-col gap-5">
-            <div className="flex-1 bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl overflow-hidden">
+            <div className="flex-1 bg-surface-dim rounded-2xl overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200.3!2d3.4671314!3d36.7607705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e69f0bb134dd5%3A0x5c74ae92a333fc22!2sItihad!5e1!3m2!1sen!2sdz!4v1"
                 width="100%"
@@ -353,14 +349,14 @@ export default function AboutPage() {
                 className="w-full h-full"
               />
             </div>
-            <div className="flex-1 bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl p-8 flex gap-5 items-start">
+            <div className="flex-1 bg-surface-dim rounded-2xl p-8 flex gap-5 items-start">
               <div className="w-12 h-12 rounded-xl bg-black dark:bg-white flex items-center justify-center shrink-0">
                 <MapPin className="w-6 h-6 text-white dark:text-black" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">Hawiyat HQ</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Itihad Campus, Boumerdes. Based out of Itihad's innovation hub, building cloud infrastructure for North Africa.
+                <p className="text-muted-ink leading-relaxed">
+                  Itihad Campus, Boumerdes. Based out of Itihad&apos;s innovation hub, building cloud infrastructure for North Africa.
                 </p>
               </div>
             </div>
@@ -372,8 +368,6 @@ export default function AboutPage() {
       <section className="relative w-full py-32 md:py-44 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/[0.05]" />
-        <div className="purple-bg-grad absolute left-1/2 -translate-x-1/2 top-[15%] h-[300px] w-[300px] opacity-40" />
-        <div className="purple-bg-grad absolute right-[5%] bottom-[10%] h-[200px] w-[200px]" />
 
         {/* Grid lines overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
@@ -384,11 +378,11 @@ export default function AboutPage() {
           </div>
 
           <h2 className="text-7xl md:text-8xl max-md:text-4xl font-medium leading-[1.1] tracking-tight">
-            Let's Build<br />
-            <span className="font-thin font-serif italic">Together</span>
+            Let&apos;s Build<br />
+            <span className="font-light">Together</span>
           </h2>
 
-          <p className="max-w-xl text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="max-w-xl text-lg text-muted-ink leading-relaxed">
             Cloud infrastructure, AI tooling, or a hosting partner. If you need any
             of it, we want to hear from you.
           </p>
@@ -399,7 +393,7 @@ export default function AboutPage() {
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
             >
               <span>Explore Services</span>
-              <i className="bi bi-arrow-right group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
             <Link
               href="https://wa.me/213559555951"
@@ -407,7 +401,7 @@ export default function AboutPage() {
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-foreground/20 text-foreground/80 hover:bg-foreground/5 hover:border-foreground/40 transition-all duration-300 active:scale-[0.97]"
             >
               <span>Contact Us</span>
-              <i className="bi bi-whatsapp" />
+              <MessageCircle className="h-4 w-4" />
             </Link>
           </div>
 

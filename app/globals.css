@@ -288,33 +288,6 @@ body.booking-modal-open .fixed.inset-0 {
 }
 
 
-.gradient-text {
-  background: rgb(215, 215, 215);
-  background: linear-gradient(90deg, rgba(215, 215, 215, 1) 18%, rgba(136, 136, 136, 1) 71%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.purple-bg-grad {
-  background: rgb(126, 34, 206);
-  background: linear-gradient(90deg, #7e22ce91 8%, #625aafae 31%, #7badbbbc 76%, #54d2d0ca 89%);
-  filter: blur(50px);
-  opacity: 0.5;
-}
-.purple-bg-grad-text{
-   background: linear-gradient(
-    90deg,
-    #7e22ce91 100%,
-    #625aafae 31%,
-    #7badbbbc 76%,
-    #54d2d0ca 89%
-  );
-  -webkit-background-clip: text;  /* for Chrome/Safari */
-  -webkit-text-fill-color: transparent;
-  background-clip: text;          /* for Firefox */
-  color: transparent;
-}
-
 #dashboard {
   transform: perspective(1200px) translateX(0px) translateY(12px) scale(0.8) rotate(0deg) rotateX(70deg);
   transition: transform 0.5s;

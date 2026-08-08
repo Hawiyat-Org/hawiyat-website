@@ -32,8 +32,8 @@ const CHAR_MS = 45
 const STAGE_MS = 700
 const HOLD_MS = 2600
 
-export default function AIPlayground({ typedText }: { typedText?: string }) {
-  const [typed, setTyped] = useState(typedText ?? "")
+export default function AIPlayground() {
+  const [typed, setTyped] = useState("")
   const [active, setActive] = useState(-1)
   const [telemetry, setTelemetry] = useState<string[]>([])
   const [showSignup, setShowSignup] = useState(false)

@@ -247,7 +247,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
             { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
             { icon: CheckCircle, title: "Production-Tested", desc: "The same execution layer that ships 100+ client deployments." },
           ].map((item, i) => (
-            <div key={i} className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border">
+            <div key={i} className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-surface-dim dark:border-border flex flex-col gap-4 box-border">
               <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
               <h3 className="text-2xl text-center">{item.title}</h3>
               <p className="text-muted-ink px-2 text-center text-sm break-words">{item.desc}</p>
