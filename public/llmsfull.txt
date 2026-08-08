@@ -1,0 +1,229 @@
+# Hawiyat
+
+> AI infrastructure platform — the execution layer between frontier AI models and business systems. Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
+
+This file expands on [llms.txt](https://www.hawiyat.org/llms.txt) with full pricing, features, and FAQs for every Hawiyat service, so AI agents can answer questions about Hawiyat's plans and DZD pricing. Google Search does not use llms.txt as a ranking signal.
+
+## Main pages
+
+- [Home](https://www.hawiyat.org/): The execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run — WhatsApp, CRM, ERP, email, databases, workflows.
+- [Hawiyat AI Composer](https://www.hawiyat.org/composer): The AI execution engine — every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
+- [Services](https://www.hawiyat.org/services): The full catalog of Hawiyat AI Composer plans, n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting.
+- [Pricing](https://www.hawiyat.org/pricing.md): Machine-readable pricing for every plan, verbatim from the service catalog.
+- [About Hawiyat](https://www.hawiyat.org/about): Company, team, credentials, and Algeria presence.
+- [Terms of Use](https://www.hawiyat.org/terms): Legal terms for the Hawiyat platform and services.
+- [Privacy Policy](https://www.hawiyat.org/privacy): How Hawiyat collects, uses, and protects personal data.
+- [DMCA](https://www.hawiyat.org/dmca): Copyright notice and counter-notice policy.
+
+## Important facts
+
+- Hawiyat is based in Algeria and supports customers in Arabic, French, and English. These are support languages, not translated site content.
+- Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted, as well as USD.
+- Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
+- Hawiyat does not imply an official partnership with any model provider unless explicitly stated; third-party product and model names belong to their respective owners.
+- Orders are placed through the Hawiyat website; the team activates Composer workspaces and deployments within 24 hours.
+
+## Payment methods
+
+- CCP — Algerian postal checking account transfer
+- Baridi Mob — Algeria Post mobile payment
+- USD — for international customers
+
+## Services
+
+### Hawiyat AI Composer Pro — 6,000 DA/month
+
+- [Service page](https://www.hawiyat.org/services/composer-pro)
+- Category: AI Execution
+- The execution layer for solo builders. Composer routes each task to the best model, carries your context, falls back on failure, and evaluates the result.
+
+Features:
+- Model-agnostic routing per task
+- Context-aware execution against your systems
+- Automatic model fallbacks on failure
+- Evaluation and quality score for every run
+- Semantic caching to cut repeat spend
+- Billed in DZD with a transparent per-task cost
+- Priority support via WhatsApp
+
+What you get:
+- Route every task to the best model by quality, latency, and cost
+- Carry business context from your CRM, ERP, email, and databases
+- Evaluation log with a quality score for every run
+- IDE integrations (VS Code, JetBrains) and API access
+
+FAQ:
+- What exactly does Hawiyat AI Composer Pro do? It is the execution layer between AI models and your systems. For each task it decides which model to route to, which context to carry, when to fall back, and whether the result is good enough, then logs the run and its cost in DZD.
+- Is Hawiyat AI Composer tied to one AI model? No. Models are routes, chosen per task by quality, latency, and cost. GPT, Claude, Gemini, and open models are all available routes inside the layer, so the layer outlives any single model.
+- How are costs billed? In Algerian dinars with CCP or Baridi Mob. Pro is 6,000 DA/month, and every run shows a transparent per-task cost.
+
+### Hawiyat AI Composer MAX 5X — 15,000 DA/month
+
+- [Service page](https://www.hawiyat.org/services/composer-max5x)
+- Category: AI Execution
+- 5× the base execution capacity of Pro, more parallel runs and tasks, with the same routing, context, fallbacks, and evaluation. Built for professional developers, startups, and small teams shipping daily.
+
+Features:
+- 5X base execution capacity, more parallel runs and tasks
+- Model-agnostic routing per task
+- Advanced semantic caching (vector-based)
+- Automatic model fallbacks on failure
+- Evaluation and quality score for every run
+- Billed in DZD with a transparent per-task cost
+- Priority support via WhatsApp
+
+What you get:
+- Automatic fallback cascades across models
+- Usage analytics and reporting in DZD
+- IDE integrations (VS Code, JetBrains) and API access
+
+FAQ:
+- How is MAX 5X different from Pro? MAX 5X gives you five times the base execution capacity of Pro, more parallel runs and tasks at the same time. Pro is 6,000 DA/month for solo builders; MAX 5X is 15,000 DA/month for teams shipping daily. Routing, context, fallbacks, and evaluation are the same layer.
+- Are there usage limits on MAX 5X? No daily or weekly caps on the layer. MAX 5X is five times the base execution capacity of Pro, measured in parallel runs and tasks.
+- Who is MAX 5X designed for? Professional developers, startups, and small teams shipping daily that need consistent high-throughput execution. It includes priority WhatsApp support and usage analytics in DZD.
+
+### Hawiyat AI Composer MAX 20X — 30,000 DA/month
+
+- [Service page](https://www.hawiyat.org/services/composer-max20x)
+- Category: AI Execution
+- 20× the base execution capacity of Pro, maximum parallel throughput, with hybrid data compliance and multi-agent traffic resolution. Built for agencies and engineering teams running AI at scale.
+
+Features:
+- 20X base execution capacity, maximum parallel throughput
+- Model-agnostic routing per task
+- Exact-match and semantic caching
+- Automatic model fallbacks on failure
+- Hybrid data compliance (GDPR ready)
+- Multi-agent traffic resolution
+- Evaluation and quality score for every run
+
+What you get:
+- Dedicated account manager
+- Advanced usage analytics and reporting in DZD
+- Priority support via WhatsApp
+
+FAQ:
+- What does 20X execution capacity mean in practice? MAX 20X gives you twenty times the base execution capacity of Pro, maximum parallel runs and tasks on the layer. It is enough for teams running dozens of concurrent workloads.
+- Is MAX 20X GDPR compliant? Yes. MAX 20X includes hybrid data compliance ready for GDPR, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.
+- Who is MAX 20X designed for? Agencies, engineering teams, and power users who need maximum parallel throughput. It includes a dedicated account manager, advanced analytics in DZD, and priority WhatsApp support.
+
+### AI Composer access — 2,500 DA/month
+
+- [Service page](https://www.hawiyat.org/services/llm-credit)
+- Category: AI Execution
+- Access to the Hawiyat AI Composer execution layer for your own tasks. Pay-per-run, with routing, caching, fallbacks, and a transparent per-task cost, billed in DZD. For individuals and teams who want the layer without committing to a fixed capacity plan.
+
+Features:
+- Model-agnostic routing per task (GPT, Claude, Gemini, open models)
+- Transparent per-task cost in DZD
+- Semantic caching to cut repeat spend
+- Automatic model fallbacks on failure
+- Evaluation log for every run
+- API access for custom integrations
+- Priority support via WhatsApp
+
+FAQ:
+- What do I actually get with AI Composer access? Access to the Hawiyat execution layer, priced in dinars with a transparent per-task cost. Composer routes each task to the best model, carries your context, falls back automatically, and evaluates the result.
+- Can I pay for AI Composer access with Baridi Mob or CCP? Yes. AI Composer access is priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD. No foreign card is needed.
+- How is the per-task cost calculated? Each run is evaluated and logged with its cost in dinars. Caching and routing keep the cost down: repeated work is served from cache, and each task goes to the most efficient model for the job.
+
+### n8n Hosting — managed workflow automation
+
+- [Service page](https://www.hawiyat.org/services/n8n-hosting)
+- Category: Managed Systems
+- Managed n8n automation, fully maintained by Hawiyat: auto-scaling infrastructure, 99.9% uptime guarantee, one-click deployment, 24/7 monitoring. Every plan includes a PostgreSQL database, unlimited workflows, custom domain support, and webhook endpoints.
+
+Plans:
+- **Freelance — 8,000 DA/year.** For solo devs and freelancers. Up to 8 workflows running at the same time. Support by email.
+- **Startup — 30,000 DA/year.** Worker-based setup: parallel execution, handles heavier load, unlimited executions, 99% uptime guarantee. Support by email.
+- **Enterprise — 80,000 DA/year.** Worker-based setup, automatic backups (the only tier with backups), 99.9% uptime guarantee with compensation if missed. Support by WhatsApp (the only tier with WhatsApp support).
+
+Features:
+- Fully managed instances with automatic updates
+- Auto-scaling infrastructure
+- SSL certificates and security hardening
+- Daily backups and disaster recovery
+- Latest n8n version with all core nodes
+- API access for programmatic control
+
+FAQ:
+- What is the difference between the n8n Freelance, Startup, and Enterprise plans? Freelance (8,000 DA/year) is for solo developers with up to 8 concurrent workflows. Startup (30,000 DA/year) uses worker-based setup for unlimited executions and is best for small companies and startups. Enterprise (80,000 DA/year) includes automatic backups, a 99.9% uptime SLA with compensation, and WhatsApp support for teams scaling heavy workloads.
+- Do you provide n8n hosting support in Arabic and French? Yes. Hawiyat provides n8n hosting support in Arabic, French, and English, based in Algeria with local, timezone-aligned support by email on all plans and by WhatsApp on the Enterprise plan.
+- Can I upgrade my n8n plan later? Yes, you can upgrade from Freelance to Startup or Enterprise at any time by contacting us.
+
+### Evolution API — WhatsApp Business API infrastructure
+
+- [Service page](https://www.hawiyat.org/services/evolution-api)
+- Category: Managed Systems
+- Official WhatsApp Business API access for messaging and automation. Hawiyat hosts fully managed Evolution API instances and shows you how to connect them properly. Webhook integrations, message queuing, and rate limiting and throttling to prevent bans.
+
+Plans:
+- **WhatsApp — 7,000 DA/year.** One instance of Evolution API, one WhatsApp number. Messaging and automation features. Support by email.
+- **Startup — 30,000 DA/year.** Multiple WhatsApp numbers in one instance (multi-number lives here). 99% uptime guarantee. Support by email. Onboarding: we show you how to connect Evolution API with WhatsApp.
+- **Enterprise — 80,000 DA/year.** Unlimited numbers (fair use), priority infrastructure, 99.9% uptime guarantee with compensation if missed. Support by WhatsApp. Onboarding included.
+
+Features:
+- Official Business API (Meta Business API)
+- Multi-channel message support
+- Webhook integrations for real-time messaging
+- Message queuing system for reliability
+- Rate limiting and throttling to prevent bans
+- RESTful API with message status tracking (sent, delivered, read)
+
+Note: The Evolution API is a powerful third-party tool, not an official WhatsApp or Meta product. Hawiyat's responsibility covers what we control: hosting, setup, and support.
+
+FAQ:
+- What is the difference between the Evolution API WhatsApp, Startup, and Enterprise plans? The WhatsApp plan (7,000 DA/year) includes one instance with one WhatsApp number, ideal for solo developers. Startup (30,000 DA/year) supports multiple WhatsApp numbers in a single instance for growing companies. Enterprise (80,000 DA/year) offers unlimited numbers under fair use, priority infrastructure, a 99.9% uptime SLA, and WhatsApp support.
+- Is the Evolution API an official WhatsApp or Meta product? No. It is a third-party tool that connects your WhatsApp number to Hawiyat's infrastructure using official Meta Business API access. We follow best practices, but we are not responsible for issues caused by the tool itself or by WhatsApp.
+- How do I connect my WhatsApp number to the Evolution API? After you order, our team deploys your instance and walks you through onboarding: linking your WhatsApp number, configuring webhooks and message templates, and testing your first automation.
+
+### Hosting Basic — 1,000 DA/month
+
+- [Service page](https://www.hawiyat.org/services/hosting-basic)
+- Category: Cloud Runtime
+- Simple managed hosting for a single application. Personal projects, portfolios, small websites. Free SSL, auto-deploy, and basic monitoring included.
+
+Features:
+- 1 application
+- Free SSL certificate
+- Automatic deployments from Git
+- Basic monitoring and uptime tracking
+- 512MB RAM
+- Custom domain support
+- Weekly backups
+- Node.js, Python, or static site support
+- Support by email
+
+FAQ:
+- What can I host on the Basic hosting plan? One application — personal portfolios, small websites, demo projects, and single-page applications. It supports Node.js, Python, and static sites with 512MB RAM, free SSL, and automatic Git deployments.
+- Do I need a foreign credit card to pay for hosting? No. All Hawiyat hosting plans are priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.
+- How do deployments work on Hosting Basic? Deployments are automatic from Git. Connect your repository, and every push deploys your changes with zero configuration.
+
+### Hosting VIP — 2,000 DA/month
+
+- [Service page](https://www.hawiyat.org/services/hosting-vip)
+- Category: Cloud Runtime
+- Premium hosting for up to 2 apps with a managed database. For full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.
+
+Features:
+- 2 applications
+- Managed database (PostgreSQL or MySQL)
+- Free SSL certificate
+- Automatic deployments from Git
+- Priority support via WhatsApp
+- 1GB RAM
+- Custom domain support
+- Daily backups and advanced resource monitoring
+
+FAQ:
+- What is the difference between Hosting Basic and Hosting VIP? Basic hosts one application at 1,000 DA/month with 512MB RAM. VIP hosts two applications plus a managed PostgreSQL or MySQL database at 2,000 DA/month, with 1GB RAM, daily backups, advanced monitoring, and priority WhatsApp support.
+- Which databases are supported on Hosting VIP? A managed PostgreSQL or MySQL database, provisioned and maintained by our team, with daily backups and advanced resource monitoring included.
+- Can I host a SaaS or e-commerce site on Hosting VIP? Yes. Hosting VIP is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access, custom domains, automatic HTTPS, and priority support.
+
+## Contact
+
+- Website: https://www.hawiyat.org
+- Email: contact@hawiyat.org
+- Phone and WhatsApp: +213 559 555 951
+
+_Last updated: August 2026. All prices are in Algerian dinars (DZD), sourced verbatim from Hawiyat's service catalog._

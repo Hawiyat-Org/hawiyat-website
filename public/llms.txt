@@ -1,7 +1,7 @@
 # Hawiyat
 > AI infrastructure platform — the execution layer between frontier AI models and business systems. Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
 
-This optional file helps compatible non-Google systems discover Hawiyat's main public pages. Google Search does not use llms.txt as a ranking signal.
+This optional file helps compatible non-Google systems discover Hawiyat's main public pages. Google Search does not use llms.txt as a ranking signal. See /llmsfull.txt for full details (every service, pricing in DZD, features, and FAQs).
 
 ## Main pages
 - [Home](https://www.hawiyat.org/): The execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run — WhatsApp, CRM, ERP, email, databases, workflows.
