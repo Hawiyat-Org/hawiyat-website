@@ -9,11 +9,33 @@ const ScrollAnimations = () => {
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger)
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
     // Initial state for reveal-up elements
     gsap.set(".reveal-up", {
       opacity: 0,
       y: "100%",
     })
+
+    // Trace-line draw-on-scroll reveal
+    if (!prefersReducedMotion) {
+      gsap.utils.toArray<HTMLElement>(".trace-line").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              end: "top 30%",
+              scrub: 1,
+            },
+          }
+        )
+      })
+    }
 
     // Dashboard animation
     const dashboardElement = document.getElementById("dashboard")
@@ -32,8 +54,8 @@ const ScrollAnimations = () => {
     }
 
     // Reveal animations for sections
-    const sections = gsap.utils.toArray("section")
-    sections.forEach((sec: any) => {
+    const sections = gsap.utils.toArray<Element>("section")
+    sections.forEach((sec: Element) => {
       const revealElements = sec.querySelectorAll(".reveal-up")
       if (revealElements.length > 0) {
         gsap
