@@ -26,6 +26,7 @@
 10. All work on branch `rebrand/ai-infrastructure-identity`; commit after each task.
 11. **DESIGN.md staleness guard:** `DESIGN.md` §4 TrustedBrands spec still lists `+60 clients` / `+50B tokens`; that is **SUPERSEDED by GC5** (numbers policy) — implementers must NOT copy those stats from DESIGN.md. Do not "fix" plan copy back to DESIGN.md where the plan deliberately overrides it (hero eyebrow, tier naming, home section count).
 12. **Copy context:** before writing any marketing copy (Tasks 5/6/7), read `.agents/product-marketing.md` (created in Task 5 Step 1) or `DESIGN.md` §1 & §9. Copy must satisfy the acceptance checklist in Task 9 Step 6.
+13. **Token naming (validator IMPORTANT-B):** after Task 2, `text-muted` resolves to shadcn gray (`--muted-shadcn`) — near-invisible on `bg-surface-dim`. The Hawiyat muted text color is **`text-muted-ink`** (→ `--muted` hex). All new components (ExecutionTrace, hero, pricing, composer, algeria-band) MUST use `text-muted-ink` for muted text; `text-muted`/`bg-muted` remain shadcn semantics for legacy surfaces until migrated.
 
 ---
 
@@ -48,7 +49,7 @@
 
 - [ ] **Step 0: Baseline** — run `npx tsc --noEmit` and record pre-existing failures (`lib/helper.ts` prisma.invoice/payment; `test/email-test.ts`). This confirms the gate is red BEFORE changes.
 - [ ] **Step 1: Read current schema + schedule routes** — confirm the full model list and that only `Order`/`EmailSubscription`/`BootcampRegistration` exist in `schema.prisma` today.
-- [ ] **Step 2: Edit `prisma/schema.prisma`** — restore `Waitlist` model and remove the four schedule models. Reference `prisma/migrations/20251114195950_gg/migration.sql` + `20250729143840_init/migration.sql` for the exact historical `Waitlist` fields. Verify the model satisfies `app/api/waitlist/route.ts` (`ipAddress`, `userAgent`, `createdAt`, unique `email`).
+- [ ] **Step 2: Edit `prisma/schema.prisma`** — restore `Waitlist` model and remove the four schedule models. Reference `prisma/migrations/20250729143840_init/migration.sql` for the `Waitlist` table + unique `email` index + fields (`ip_address`, `user_agent`, `created_at`) — note: `20251114195950_gg/migration.sql` only adds a `waitlist_email_idx` index, not the table. Verify the model satisfies `app/api/waitlist/route.ts` (`ipAddress`, `userAgent`, `createdAt`, unique `email`).
 - [ ] **Step 3: Replace `lib/prisma/seed.ts`** with a minimal seed:
 ```ts
 // lib/prisma/seed.ts
@@ -108,12 +109,13 @@ main().finally(() => prisma.$disconnect())
   --ok: #0E9F6E;
 }
 ```
-- [ ] **Step 2b: Update the `* { border-color: ... }` and `@layer base` rules** in `globals.css` to reference `var(--border-shadcn)` (shadcn border) — do NOT point them at the new hex `--border` (invalid `hsl(#E4E2DC)`).
-- [ ] **Step 3: Add dark tokens** under `.dark` (rename shadcn `--border`/`--muted` to `--border-shadcn`/`--muted-shadcn` there too), plus Hawiyat dark hex tokens:
+- [ ] **Step 2b: Update the `* { border-color: ... }` and `@layer base` rules** in `globals.css` to reference `var(--border-shadcn)` (shadcn border) — do NOT point them at the new hex `--border` (invalid `hsl(#E4E2DC)`). **Preferred:** delete the unlayered `* { border-color: hsl(var(--border-shadcn)) }` rule entirely and keep only the `@layer base` `border-border` apply, so the new hex `--border` token actually drives rendered borders. Use `hsl(var(--border-shadcn))` (wrapped) in any remaining reference.
+- [ ] **Step 2c: Handle the legacy `--hero-gradient` orphan** — the `:root` replacement drops `--hero-gradient`, consumed by `.hero-bg-gradient` (globals.css ~177-179) on `<body>`/`<main>` in `app/layout.tsx:202,216`. Either retain the legacy var block (and `.hero-bg-gradient` class) until Task 8 restyles those surfaces, or delete both in this task. Flag it in Task 8's sweep if not handled here.
+- [ ] **Step 3: Add dark tokens** under `.dark` (rename shadcn `--border`/`--muted` to `--border-shadcn`/`--muted-shadcn` there too), plus Hawiyat dark hex tokens. **Preserve the repo's CURRENT shadcn dark values when renaming** (currently `220 8% 14%` muted / `220 8% 16%` border — NOT the default neutrals below); otherwise every existing `bg-muted`/shadcn-border surface shifts hue in dark mode:
 ```css
 .dark {
-  --border-shadcn: 0 0% 16%;
-  --muted-shadcn: 0 0% 14.9%;
+  --border-shadcn: 220 8% 16%;
+  --muted-shadcn: 220 8% 14%;
   /* Hawiyat dark tokens */
   --paper: #0A0F0E;
   --ink: #EDF2EF;
@@ -178,7 +180,7 @@ Remove the Bootstrap Icons CDN `<link>` block. Remove the two Google font `@impo
 
 **Interfaces:**
 - Produces: `<ExecutionTrace stages={…} active={n} telemetry={…} className={…} />` — props: `stages?: string[]` (default `["UNDERSTAND","PLAN","ROUTE","EXECUTE","EVALUATE","RESULT"]`), `active?: number` (index of current step, 0-based), `telemetry?: string[]` (mono strip lines — rendered when non-empty), `className?: string`. **Note: no `showTelemetry` prop — telemetry renders iff `telemetry.length > 0`.** Renders a horizontal pipeline with a moving spark; respects `prefers-reduced-motion` (static when reduced).
-- Consumes: tokens `--signal`, `--signal-text`, `--muted`, `--paper`, `--surface-dim`; `--font-mono`. (`border-border` resolves via shadcn `--border-shadcn` after Task 2; `bg-surface`/`text-muted` via Hawiyat hex tokens.)
+- Consumes: tokens `--signal`, `--signal-text`, `--paper`, `--surface-dim`, `--border`; `--font-mono`. **Use `text-muted-ink` (NOT `text-muted`) for the muted text** — after Task 2's token scheme, `text-muted` resolves to shadcn gray (`hsl(var(--muted-shadcn))`) which is near-invisible on `bg-surface-dim`; `muted-ink` is the Hawiyat hex `--muted`. (`border-border` resolves via shadcn `--border-shadcn` after Task 2; `bg-surface` via Hawiyat hex.)
 
 - [ ] **Step 1: Read `components/scroll-animations.tsx`** to match its GSAP setup style.
 - [ ] **Step 2: Create `components/execution-trace.tsx`:**
@@ -204,7 +206,7 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
             <span
               className={cn(
                 "whitespace-nowrap rounded-full px-2 py-1 transition-colors",
-                i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted"
+                i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted-ink"
               )}
             >
               {stage}
@@ -214,7 +216,7 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
         ))}
       </div>
       {telemetry.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 border-t border-border pt-3 text-[11px] text-muted">
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 border-t border-border pt-3 text-[11px] text-muted-ink">
           {telemetry.map((t) => (
             <span key={t}>{t}</span>
           ))}
@@ -257,7 +259,7 @@ async redirects() {
 - [ ] **Step 4: Rewrite `components/footer.tsx`** — The Layer: AI Composer (`/composer`), Services (`/services`), About (`/about`); Company: Support (WhatsApp `https://wa.me/213559555951`), GitHub; Legal: Terms/Privacy/DMCA. Remove AI Bootcamp/Templates/Monitoring/Blog links. Replace `bi-*` social icons with lucide equivalents.
 - [ ] **Step 5: Update `app/sitemap.ts`** — remove `/cyber-security`, `/guides/*`, `/ai-algeria`, `/schedule`, `/bootcamp`, `/templates`; add `/composer`. **Also remove the `SECTIONS` import from `@/app/guides/claude/_data`** (the guides dir was deleted in Step 1 — this import would break the build).
 - [ ] **Step 6: Remove orphaned API routes + components** — `app/api/bootcamp/register/`, `app/api/templates/`. **Do NOT delete `bootcamp-effects.tsx`/`registration-modal.tsx` here** — Task 8 owns those file deletions (dedupe per validator). Confirm API routes have no importers via `rg` first.
-- [ ] **Step 7: Verify** `rg -rn "cyber-security|ai-algeria|/guides|/schedule|/bootcamp|/templates|/hawiyat-composer" app components` returns nothing except the redirect sources in `next.config.mjs`; `npx tsc --noEmit` + `pnpm build` pass.
+- [ ] **Step 7: Verify** — `rg -rn "cyber-security|ai-algeria|/guides|/schedule|/bootcamp|/templates|/hawiyat-composer" components/header.tsx components/footer.tsx app/sitemap.ts next.config.mjs` returns only the redirect sources in `next.config.mjs`. **Known out-of-scope matches to ignore (owned by T7/T8):** `app/page.tsx` (`/ai-algeria` link, rewritten T7), `app/about/page.tsx` (image paths, restyled T8), `components/benefits-section.tsx` (`/hawiyat-composer`, deleted T8), `components/registration-modal.tsx` (`/api/bootcamp/register`, deleted T8). `npx tsc --noEmit` + `pnpm build` pass.
 - [ ] **Step 8: Commit** `git commit -m "refactor: remove off-mission routes; add /composer + /ai-algeria redirects; update nav/footer/sitemap"`
 
 ---
@@ -273,7 +275,7 @@ async redirects() {
 - Produces: `/composer` page with sections: hero (H1 "Hawiyat AI Composer", sub "The AI execution engine"), Execution Trace (larger), Any Model/Any System (model chips + systems cards), engine capabilities (6 cards), telemetry band (**only verified numbers + hidden unverified — no literal TODO strings rendered**), enterprise full-stack (Composer+n8n+Evolution+Platform, WhatsApp CTA), Why-not-DIY strip, CTA → `/services`.
 - Consumes: tokens from Task 2; `ExecutionTrace` from Task 3; `.agents/product-marketing.md` (created here) for copy. **Does NOT consume `lib/data/services.ts`** — the page links to `/services` for pricing; do not add price display here (validator: it runs before Task 6).
 
-- [ ] **Step 1: Create `.agents/product-marketing.md`** — positioning statement, ICP segments (e-commerce/WhatsApp operators, devs/agencies, infra/DevOps), pains, proof points with sources, objection handling. All later copy tasks MUST read it (GC12).
+- [ ] **Step 1: Create `.agents/product-marketing.md`** — positioning statement, ICP segments (e-commerce/WhatsApp operators, devs/agencies, infra/DevOps), pains, proof points with sources, objection handling. **Source material:** `DESIGN.md` §Identity & Positioning + §Copy & Voice (the vision report is not in the repo — do not hunt for a `*vision*` file). All later copy tasks MUST read it (GC12).
 - [ ] **Step 1b: Create `app/composer/layout.tsx`** with metadata (title `Hawiyat AI Composer | The AI Execution Engine`, canonical `/composer`, OG) using `createMetadata` from `@/lib/seo`.
 - [ ] **Step 2: Build the hero** — H1 "Hawiyat AI Composer", mono eyebrow `EXECUTION LAYER · MODEL-INDEPENDENT`, sub copy from `.agents/product-marketing.md` + DESIGN.md §1, CTAs (`Start building` → `/services`, `See how it executes` → scroll to trace).
 - [ ] **Step 3: Execution loop section** — large `ExecutionTrace` with mono telemetry strip; map the 6 stages with short descriptions.
@@ -299,14 +301,14 @@ async redirects() {
 - Consumes: existing `Service`/`ServicePlan` types (keep shape), `OrderForm`/`ServiceOrderForm`/`ServicePlans` components (keep), `.agents/product-marketing.md` (from Task 5) for copy.
 
 - [ ] **Step 1: Rename composer entries** in `lib/data/services.ts` — `name: "Hawiyat AI Composer Pro"`, MAX tiers `Hawiyat AI Composer MAX 5X` / `MAX 20X`; drop `+ Claude Code` from names. Update `shortDesc`/`description`/`features`/`bulletPoints`/`seo`/`details`/`faq` to execution-layer value (routing, context, fallbacks, evaluation) — remove "2x Claude credits", "No daily or weekly limits" credit-multiplier framing. **Define the MAX unit in card copy** ("5X base execution capacity — more parallel runs/tasks"), never "5x Claude credits" (marketing M6).
-- [ ] **Step 1b: Fully rewrite `llm-credit` entry** — not just rename. Current entry is a literal reseller SKU ("OpenAI credits served through Hawiyat Composer", "2500 DA for 10 USD credits", features "OpenAI model access… Token usage optimization", 3 credit-amount FAQs). Rewrite to **"AI Composer access"**: price the layer in DZD (per-task cost line), drop "OpenAI credits"/"10 USD"/"Token usage optimization", rewrite `seoContent` + `faq` around execution access (validator/marketing I2).
+- [ ] **Step 1b: Fully rewrite `llm-credit` entry** — not just rename. Current entry is a literal reseller SKU ("OpenAI credits served through Hawiyat Composer", "2500 DA for 10 USD credits", features "OpenAI model access… Token usage optimization", 3 credit-amount FAQs). Rewrite to **"AI Composer access"**: price the layer in DZD (per-task cost line), drop "OpenAI credits"/"10 USD"/"Token usage optimization". **Rewrite the WHOLE entry, not just some fields** — `name`, `shortDesc`, `description`, `priceLabel`, `image`, `bulletPoints`, `features`, `useCases`, `seo` (title/description/keywords), `details`, `faq`, `seoContent`. Keep `id`/`slug: "llm-credit"` (CARD_ORDER + `/services/llm-credit` URL key off it; renaming would 404 with no redirect) (validator + marketing I2).
 - [ ] **Step 2: Re-categorize** — `category: "AI Subscription"` → `"AI Execution"`; `LLM Credit` → `"AI Composer access"` under `"AI Execution"`; n8n/Evolution/Hosting → `"Managed Systems"`/`"Cloud Runtime"` as appropriate. **Scrub legacy client-count claims** (`60+ clients`, `60+ live clients`) from ALL `seoContent` blocks (n8n, hosting-basic, evolution-api, hosting-vip) — replace with verified `100+ clients` or neutral phrasing.
-- [ ] **Step 3: Remove launch-price discount strings catalog-wide** — delete `originalPrice`/`launchNote` text from composer cards **AND** n8n-hosting Freelance (`originalPrice: "15,000"`) + evolution-api (`originalPrice: "14,000"`) (spec §6 is catalog-wide). Leave honest `price` + `priceLabel`. Verify render sites (`app/services/[slug]/page.tsx:216-218`, `service-plans.tsx:66-68`) are guarded so removing fields is safe.
+- [ ] **Step 3: Remove launch-price discount strings catalog-wide** — delete `originalPrice`/`launchNote` fields from composer cards **AND** n8n-hosting Freelance (`originalPrice: "15,000"`) + evolution-api (`originalPrice: "14,000"`) (spec §6 is catalog-wide). **Also scrub the same discount mechanic from `seoContent` prose** — n8n ("47% cheaper than the regular 15,000 DA/year price until August 31, 2026") and evolution ("half the regular 14,000 DA/year price until August 31, 2026"). Leave honest `price` + `priceLabel`. Verify render sites (`app/services/[slug]/page.tsx:216-218`, `service-plans.tsx:66-68`) are guarded so removing fields is safe.
 - [ ] **Step 4: Reorder catalog** in `services-catalog.tsx` — adjust the **`CARD_ORDER`** map (`services-catalog.tsx:77-94`) so Composer/execution tiers sort first, then systems. **There is no `tagStyleMap`** — update the category badge rendering (~line 204) and the tag-color `cn()` chain (~166-178) for the new `AI Execution` / `Managed Systems` / `Cloud Runtime` categories.
 - [ ] **Step 5: Rewrite "Why Choose Hawiyat" strip** — lead with execution layer: local support, DZD billing, model-agnostic, telemetry/evaluation, not generic hosting ops.
 - [ ] **Step 6: Update `app/services/page.tsx`** H1/description → execution framing ("Run your stack on the Hawiyat execution layer — in DZD"), metadata title without "Claude Code" branding.
 - [ ] **Step 6b: Update `app/services/layout.tsx`** — metadata title (`AI Subscriptions and Managed Services` → execution-layer framing) AND the `serviceSchema` ItemList names → `Hawiyat AI Composer`, `AI Composer access`, `n8n Hosting`, `Evolution API`, `Application Hosting` (no "Claude Code", no "LLM Credit").
-- [ ] **Step 7: Verify** `npx tsc --noEmit` + `pnpm build`; visit `/services` + a `/services/[slug]`; confirm no `originalPrice` renders, no `60+`/`+50B`/`LLM Credit`/`Claude Code` in `lib/data/services.ts` (`rg -n "60\\+|50B|LLM Credit|Claude Code" lib/data/services.ts app/services` returns nothing).
+- [ ] **Step 7: Verify** `npx tsc --noEmit` + `pnpm build`; visit `/services` + a `/services/[slug]`; confirm no `originalPrice` renders, no `60+`/`+50B`/`LLM Credit`/`Claude Code`/`openai credits` anywhere in `lib/data/services.ts` OR `components/services` (`rg -ni "60\\+|50B|LLM Credit|Claude Code|openai credits|10 USD" lib/data/services.ts components/services app/services` returns nothing).
 - [ ] **Step 8: Commit** `git commit -m "feat(services): de-resellerize catalog — AI Composer naming, execution categories, honest pricing, metadata+JSON-LD"`
 
 ---
