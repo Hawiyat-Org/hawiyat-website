@@ -202,11 +202,11 @@ const AIPlayground = ({ typedText }: AIPlaygroundProps) => {
         <div className="relative w-full flex place-content-center h-full">
           <div className="absolute top-[20%] max-lg:top-[30%] left-1/2 -translate-x-1/2 w-[150px] h-[150px]">
             <Image
-              src="/logo.png"
+              src="/services/composer-light.svg"
               width={150}
               height={150}
-              className="w-full h-full object-contain opacity-20"
-              alt="AI Assistant logo"
+              className="w-full h-full object-contain opacity-20 dark:invert"
+              alt="Hawiyat Composer logo"
             />
           </div>
 
