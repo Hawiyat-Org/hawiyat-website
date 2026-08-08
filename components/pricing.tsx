@@ -12,9 +12,17 @@ interface OrderService {
   image: string
 }
 
-const proService = services.find((s) => s.id === "composer-pro")!
-const max5xService = services.find((s) => s.id === "composer-max5x")!
-const max20xService = services.find((s) => s.id === "composer-max20x")!
+function getComposerService(id: string) {
+  const service = services.find((s) => s.id === id)
+  if (!service) {
+    throw new Error(`Unknown service id: ${id}`)
+  }
+  return service
+}
+
+const proService = getComposerService("composer-pro")
+const max5xService = getComposerService("composer-max5x")
+const max20xService = getComposerService("composer-max20x")
 
 const maxTiers: Array<{
   key: "composer-max5x" | "composer-max20x"
@@ -176,12 +184,16 @@ export default function Pricing() {
           </div>
 
           {/* ENTERPRISE */}
-          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 lg:p-8">
-            <div className="space-y-5">
+          <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-signal/60 bg-signal-bg p-6 lg:p-8">
+            <span
+              aria-hidden="true"
+              className="absolute -top-16 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-signal/20 blur-3xl"
+            />
+            <div className="relative space-y-5">
               <div>
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
-                  <span className="rounded-full border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                  <span className="rounded-full bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                     Custom pricing
                   </span>
                 </div>
@@ -205,7 +217,7 @@ export default function Pricing() {
               </ul>
             </div>
 
-            <div className="mt-8 space-y-3">
+            <div className="relative mt-8 space-y-3">
               <a
                 href={enterpriseWhatsappUrl}
                 target="_blank"
