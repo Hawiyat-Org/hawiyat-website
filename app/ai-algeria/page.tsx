@@ -34,7 +34,7 @@ export default function AIAlgeriaPage() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Hawiyat is a registered Algerian société (company), operating locally in Algeria. Every order is facturated, meaning officially invoiced in line with Algerian government requirements, so you always receive a formal invoice for your purchase.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
             <Link href="/services" className="btn">Compare AI services</Link>
             <a
               href="https://wa.me/213559555951"

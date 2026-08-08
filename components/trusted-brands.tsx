@@ -81,13 +81,19 @@ const TrustedBrands = () => {
       url: "https://estin.dz/", 
       large: true 
     },
-    { 
-      name: "IT Solutions", 
-      logo: mounted && (resolvedTheme === "dark" || theme === "dark") 
-        ? "/trust/itsol-dark.svg" 
-        : "/trust/itsol.svg", 
-      url: "https://itsolutions.dz/", 
-      large: true 
+    {
+      name: "IT Solutions",
+      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
+        ? "/trust/itsol-dark.svg"
+        : "/trust/itsol.svg",
+      url: "https://itsolutions.dz/",
+      large: true
+    },
+    {
+      name: "RMASC",
+      logo: "/trust/Webp.net-resizeimage.png",
+      url: "https://www.sarlrmasc.com/",
+      large: true
     },
   ]
 
@@ -150,7 +156,7 @@ const TrustedBrands = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="grid grid-cols-3 gap-12 md:grid-cols-3 md:gap-16 lg:gap-20 max-md:gap-8">
+          <div className="grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-16 lg:gap-20 max-md:gap-8">
             {brands.map((brand, index) => (
               <div
                 key={index}
