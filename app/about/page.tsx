@@ -5,6 +5,7 @@ import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, MessageCircle, Package } from "lucide-react"
+import AlgeriaBand from "@/components/algeria-band"
 
 export default function AboutPage() {
   const { theme, resolvedTheme } = useTheme()
@@ -110,6 +111,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── Algeria Band ─── */}
+      <AlgeriaBand />
 
       {/* ─── Timeline ─── */}
       <section className="w-full py-16 md:py-24 bg-foreground/[0.01] border-y border-foreground/5">
