@@ -58,11 +58,13 @@
 
 ## 4. Proof points (verified — may ship)
 
-Numbers policy (implementation plan GC5 / spec §4.3): **only verified numbers ship.** Hidden, never shown as "TODO".
+Numbers policy (implementation plan GC5 / spec §4.3): **only verified numbers ship.** Hidden, never shown as "TODO". Amended GC5 (founder confirmation, 2026-08-08): the four stats below are verified and render on the home proof band — do not remove them.
 
 | Proof point | Exact figure | Source |
 |---|---|---|
 | Clients | `100+ clients` (108 paying) | Rebrand spec §4.3 (Rami's dashboard) |
+| Resellers | `10+ resellers` | Founder confirmation (amended GC5) |
+| Tokens served | `100B+ tokens served` | Founder confirmation (amended GC5) |
 | Revenue | `≈2.6M DZD ARR` (ARR ≈ 2,621,906 DA; MRR ≈ 218,492 DA) — always render `≈` + `DZD` suffix | Rebrand spec §4.3 |
 | Founded / HQ | Founded in Algiers; HQ at Itihad Campus, Boumerdes | About page |
 | Incubation | Itihad accelerator incubation | About page |
@@ -71,7 +73,7 @@ Numbers policy (implementation plan GC5 / spec §4.3): **only verified numbers s
 | Operator creds | Oracle DevOps Certified; CKE (Certified Kubernetes Expert) | About page |
 | Regional partners | Itihad, ESTIN, IT Solutions (label as partners/customers) | Trusted brands |
 
-**FORBIDDEN (never ship):** `+50B tokens`, `+60 clients`, "10 Resellers", "300 Templates" — unverified or fabricated.
+**FORBIDDEN (never ship):** `+50B tokens` standalone, `+60 clients`, "300 Templates" — unverified or fabricated. (The four verified stats above are NOT forbidden; they are the proof band.)
 
 ---
 

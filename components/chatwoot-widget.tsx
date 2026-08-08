@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MessageCircle, X, Send, Minimize2 } from 'lucide-react'
+import { MessageCircle, X } from 'lucide-react'
 
 interface ChatwootWidgetProps {
   websiteToken: string
@@ -10,9 +10,16 @@ interface ChatwootWidgetProps {
 
 declare global {
   interface Window {
-    chatwootSettings: any
-    chatwootSDK: any
-    $chatwoot: any
+    chatwootSettings?: Record<string, unknown>
+    chatwootSDK?: {
+      run: (config: { websiteToken: string; baseUrl: string }) => void
+    } | null
+    $chatwoot?: {
+      toggle: (state?: 'open' | 'close') => void
+      setUser: (identifier: string, user: Record<string, unknown>) => void
+      setCustomAttributes: (attributes: Record<string, unknown>) => void
+      reset: () => void
+    } | null
   }
 }
 
@@ -90,11 +97,11 @@ export function useChatwoot() {
     window.$chatwoot?.toggle(state)
   }
 
-  const setUser = (identifier: string, user: Record<string, any>) => {
+  const setUser = (identifier: string, user: Record<string, unknown>) => {
     window.$chatwoot?.setUser(identifier, user)
   }
 
-  const setCustomAttributes = (attributes: Record<string, any>) => {
+  const setCustomAttributes = (attributes: Record<string, unknown>) => {
     window.$chatwoot?.setCustomAttributes(attributes)
   }
 

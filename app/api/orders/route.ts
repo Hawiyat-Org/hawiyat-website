@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma/prismaClient"
 import { PaymentMethod } from "@prisma/client"
-import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification } from "@/lib/email-utils"
+import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification, escapeHtml } from "@/lib/email-utils"
 import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
 
 const IP_RATE_LIMIT = { maxRequests: 5, windowMs: 60 * 60 * 1000 }
@@ -42,6 +42,20 @@ export async function POST(request: NextRequest) {
     if (!serviceId || !serviceName || !customerName || !customerEmail) {
       return NextResponse.json(
         { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
+        { status: 400 }
+      )
+    }
+
+    if (customerName.length > 120 || customerEmail.length > 254 || (customerPhone && customerPhone.length > 32)) {
+      return NextResponse.json(
+        { error: "Field too long" },
+        { status: 400 }
+      )
+    }
+
+    if (notes && notes.length > 2000) {
+      return NextResponse.json(
+        { error: "Notes too long" },
         { status: 400 }
       )
     }
@@ -102,10 +116,10 @@ export async function POST(request: NextRequest) {
 
     const telegramMessage = `<b>New Order Received!</b>
 
-<b>Service:</b> ${serviceName}
-<b>Customer:</b> ${customerName}
-<b>Email:</b> ${customerEmail}
-${customerPhone ? `<b>Phone:</b> ${customerPhone}\n` : ""}${notes ? `<b>Notes:</b> ${notes}\n` : ""}
+<b>Service:</b> ${escapeHtml(serviceName)}
+<b>Customer:</b> ${escapeHtml(customerName)}
+<b>Email:</b> ${escapeHtml(customerEmail)}
+${customerPhone ? `<b>Phone:</b> ${escapeHtml(customerPhone)}\n` : ""}${notes ? `<b>Notes:</b> ${escapeHtml(notes)}\n` : ""}
 <b>Order ID:</b> ${order.id}
 <b>Date:</b> ${new Date(order.createdAt).toLocaleString()}`
 
@@ -155,9 +169,8 @@ ${notes ? `📝 *Notes:* ${notes}\n` : ""}
     )
   } catch (error) {
     console.error("Order creation error:", error)
-    const errorMessage = error instanceof Error ? error.message : "Unknown error"
     return NextResponse.json(
-      { error: "Failed to create order", details: errorMessage },
+      { error: "Failed to create order" },
       { status: 500 }
     )
   }

@@ -20,15 +20,27 @@ function cleanupExpiredEntries() {
   lastCleanup = now
 }
 
+// Client IP resolution.
+// SECURITY NOTE: `x-forwarded-for` is client-spoofable unless the proxy chain
+// overwrites it. Prefer the platform-provided `request.ip` when available (Vercel
+// / Next.js behind Cloudflare set it to the trusted proxy-resolved client IP);
+// only fall back to the first XFF hop, which is correct when a single trusted
+// reverse proxy is the only entry point (our deployment model). The in-memory
+// limiter is per-instance, so these limits are best-effort for horizontal scale.
 function getClientIP(request: NextRequest): string {
-  const forwarded = request.headers.get("x-forwarded-for")
-  if (forwarded) {
-    return forwarded.split(",")[0].trim()
+  const platformIP = request.ip
+  if (platformIP) {
+    return platformIP
   }
 
   const realIP = request.headers.get("x-real-ip")
   if (realIP) {
     return realIP.trim()
+  }
+
+  const forwarded = request.headers.get("x-forwarded-for")
+  if (forwarded) {
+    return forwarded.split(",")[0].trim()
   }
 
   return "unknown"

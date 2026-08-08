@@ -90,9 +90,9 @@ const CARD_ORDER: Record<string, number> = {
 }
 
 const categoryStyles: Record<string, string> = {
-  "AI Execution": "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
-  "Managed Systems": "bg-teal-500/10 text-teal-600 dark:text-teal-400",
-  "Cloud Runtime": "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+  "AI Execution": "bg-signal-bg text-signal-contrast border border-signal/20",
+  "Managed Systems": "bg-surface-dim text-muted-ink border border-border",
+  "Cloud Runtime": "bg-surface-dim text-muted-ink border border-border",
 }
 
 const catalogCards = buildCatalogCards().sort(
@@ -130,7 +130,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
         }`}
       >
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/60 z-10 pointer-events-none" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-ink z-10 pointer-events-none" />
           <Input
             type="search"
             placeholder="Search services..."
@@ -141,7 +141,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
               const encoded = encodeURIComponent(value)
               router.replace(value ? `/services?q=${encoded}` : "/services", { scroll: false })
             }}
-            className="h-14 pl-12 text-base bg-white/80 dark:bg-secondary/80 backdrop-blur-xl border-2 border-border/60 focus:border-primary rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+            className="h-14 pl-12 text-base bg-surface dark:bg-surface-dim backdrop-blur-xl border-2 border-border focus:border-signal rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
           />
         </div>
       </div>
@@ -149,7 +149,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
       {/* Grid */}
       {filteredCards.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-muted-foreground mb-3">No services found.</p>
+          <p className="text-muted-ink mb-3">No services found.</p>
           <button onClick={() => { setSearchQuery(""); router.replace("/services", { scroll: false }) }} className="text-sm underline hover:no-underline">
             Clear search
           </button>
@@ -160,35 +160,23 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
             <Link
               key={service.key}
               href={`/services/${service.slug}${service.plan ? `?plan=${encodeURIComponent(service.plan)}` : ""}`}
-              className={`group relative rounded-xl border border-border/40 bg-white/40 dark:bg-secondary dark:border-border/60 backdrop-blur-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
+              className={`group relative rounded-3xl border border-border bg-surface overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-signal-bg/30 via-transparent to-surface-dim/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
               {service.tag && (
                 <div className="absolute top-3 right-3 z-10">
-                  <span className={cn(
-                    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold shadow-lg text-white",
-                    service.tag === "Popular" && "bg-gradient-to-r from-violet-500 to-purple-600",
-                    service.tag === "Pro" && "bg-gradient-to-r from-purple-500 to-violet-600",
-                    service.tag === "Starter" && "bg-gradient-to-r from-emerald-500 to-green-600",
-                    service.tag === "Max 5X" && "bg-gradient-to-r from-orange-500 to-red-600",
-                    service.tag === "Max 20X" && "bg-gradient-to-r from-yellow-500 to-amber-600",
-                    service.tag === "VIP" && "bg-gradient-to-r from-amber-500 to-yellow-600",
-                    service.tag === "Freelance" && "bg-gradient-to-r from-teal-500 to-emerald-600",
-                    service.tag === "WhatsApp" && "bg-gradient-to-r from-green-500 to-emerald-600",
-                    service.tag === "Startup" && "bg-gradient-to-r from-blue-500 to-indigo-600",
-                    service.tag === "Enterprise" && "bg-gradient-to-r from-yellow-500 to-amber-600",
-                  )}>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-signal text-signal-text">
                     {service.tag}
                   </span>
                 </div>
               )}
 
               {/* Image */}
-              <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-surface-dim/30 to-surface-dim/10 dark:from-surface-dim/20 dark:to-surface-dim/10 flex items-center justify-center p-4">
+              <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-surface-dim/40 to-surface-dim/10 dark:from-surface-dim/20 dark:to-surface-dim/10 flex items-center justify-center p-4">
                 {service.images ? (
                   <div className="flex items-center justify-center gap-3">
                     {service.images.map((img, idx) => (
@@ -208,24 +196,24 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
               <div className="relative p-4 flex flex-col gap-2">
                 <span className={cn(
                   "inline-flex items-center self-start px-2 py-0.5 rounded-full text-xs font-medium",
-                  categoryStyles[service.category] ?? "bg-primary/10 text-primary"
+                  categoryStyles[service.category] ?? "bg-surface-dim text-muted-ink border border-border"
                 )}>
                   {service.category}
                 </span>
 
-                <h2 className="text-base font-semibold group-hover:text-primary transition-colors line-clamp-1">{service.name}</h2>
+                <h2 className="text-base font-semibold text-ink group-hover:text-ink transition-colors line-clamp-1">{service.name}</h2>
 
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                <p className="text-xs text-muted-ink leading-relaxed line-clamp-2">
                   {service.description}
                 </p>
 
                 <div className="mt-2 pt-3 border-t border-border/30">
                   <div className="flex items-baseline gap-1.5 flex-wrap">
-                    <span className="text-2xl font-bold">{service.price}</span>
+                    <span className="text-2xl font-bold text-ink">{service.price}</span>
                     {service.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">{service.originalPrice}</span>
+                      <span className="text-sm text-muted-ink line-through">{service.originalPrice}</span>
                     )}
-                    <span className="text-xs text-muted-foreground">{service.priceLabel}</span>
+                    <span className="text-xs text-muted-ink">{service.priceLabel}</span>
                   </div>
                 </div>
               </div>
@@ -247,9 +235,9 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
             { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
             { icon: CheckCircle, title: "Production-Tested", desc: "The same execution layer that ships 100+ client deployments." },
           ].map((item, i) => (
-            <div key={i} className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-surface-dim dark:border-border flex flex-col gap-4 box-border">
-              <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
-              <h3 className="text-2xl text-center">{item.title}</h3>
+            <div key={i} className="w-full max-w-[420px] mx-auto rounded-2xl p-6 bg-surface border border-border flex flex-col gap-4 box-border">
+              <item.icon className="w-16 h-16 text-signal mx-auto" />
+              <h3 className="text-2xl text-ink text-center">{item.title}</h3>
               <p className="text-muted-ink px-2 text-center text-sm break-words">{item.desc}</p>
             </div>
           ))}

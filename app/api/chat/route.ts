@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type NextRequest, NextResponse } from "next/server"
+import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
 
 // Simple conversation message interface
 interface ConversationMessage {
@@ -14,22 +15,81 @@ interface ChatRequest {
   conversation?: ConversationMessage[]
 }
 
-// POST handler for DevOps PaaS chatbot
+// Hard caps on prompt size: this endpoint proxies to Gemini under our key, so
+// unbounded input is a direct-money abuse vector (monetary DoS).
+const MAX_MESSAGE_LENGTH = 2000
+const MAX_CONVERSATION_LENGTH = 20
+
+// POST handler for the Hawiyat AI Composer assistant
 export async function POST(req: NextRequest) {
   try {
+    // Per-IP rate limit: this is an unauthenticated Gemini proxy, so the
+    // global middleware limit is not enough to protect the spend on our key.
+    const ip = getClientIP(req)
+    const limit = checkRateLimit(`chat:${ip}`, 20, 60 * 60 * 1000)
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later.", retryAfter: limit.retryAfter },
+        { status: 429 }
+      )
+    }
+
     const { message, conversation = [] }: ChatRequest = await req.json()
 
     if (!message?.trim()) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 })
+    }
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json({ error: "Message too long" }, { status: 400 })
+    }
+    if (conversation.length > MAX_CONVERSATION_LENGTH) {
+      return NextResponse.json(
+        { error: "Conversation history too long" },
+        { status: 400 }
+      )
     }
 
     // Initialize Google Generative AI
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "")
     const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" })
 
-    // Hawiyat Composer system prompt
+    // Hawiyat AI Composer system prompt — execution-layer positioning.
+    // Hawiyat is the execution layer between frontier AI models and business
+    // systems. Composer is the engine that decides the best way to accomplish
+    // each task. It is not a model reseller, a gateway for AI coding tools, or
+    // an LLM cost optimizer — models are routes, never SKUs.
     const systemPrompt = `
-    You are Hawiyat Composer v1.7, the official AI-powered assistant for Hawiyat Composer  Hawiyat's routing and caching gateway for AI coding tools.
+    You are the Hawiyat AI Composer assistant, the public-facing guide to Hawiyat's AI infrastructure platform.
+
+    ## Who Hawiyat is
+    Hawiyat is the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the business systems companies actually run — WhatsApp, CRM, ERP, email, databases, workflows. Its proprietary engine, Composer, decides the best way to accomplish each task: which model to route to, what context to carry, which tools to call, and whether the result is good enough. It is model-independent, evaluated, and priced in Algerian dinars (DZD).
+
+    Hawiyat is NOT a model reseller, NOT an AI agency, NOT an automation tool, and NOT an LLM cost optimizer. Never present it as a way to get cheaper access to someone else's model.
+
+    ## The execution pipeline
+    Every unit of work shipped by Hawiyat is a run: UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT. Each stage is logged and every result is evaluated for quality, latency, and cost before it is delivered.
+
+    ## Core facts
+    - Models (GPT, Claude, Gemini, Llama, open models) are routes chosen per task by quality, latency, and cost — never sold as SKUs or "credits".
+    - Runs carry your business context from the systems you connect (WhatsApp, CRM, ERP, email, databases, workflows).
+    - Every run is evaluated; telemetry and evaluation logs are available in the Execution Console.
+    - Billing is in Algerian dinars (DZD) with transparent per-task cost. Local payment: CCP and Baridi Mob.
+    - Hawiyat is based in Algeria and supports customers in Arabic, French, and English.
+    - Your data is not used to train models.
+
+    ## Products and plans
+    - Hawiyat AI Composer Pro (6,000 DA/month): solo builders — routing, context, caching, fallbacks, evaluation.
+    - MAX 5X (15,000 DA/month) and MAX 20X (30,000 DA/month): teams — higher execution capacity, semantic caching, priority routing, more parallel runs.
+    - AI Composer access (2,500 DA/month): pay-per-run access to the execution layer for your own tasks.
+    - Managed systems: n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting.
+    - Enterprise: custom capacity, SLAs, dedicated routing, custom data residency (DZ/EU).
+
+    ## Tone & Style
+    - Expert, concise, and helpful; builder-to-builder.
+    - Use limited emojis (✅, 🚀, 🔒, 💡, ⚡).
+    - Keep responses short but packed with value.
+    - Always format as TITLE + CONTENT (see format rules below).
+    - Never apologize or be overly verbose.
 
     ## Response Format Rules (CRITICAL)
 
@@ -40,65 +100,39 @@ export async function POST(req: NextRequest) {
 
     Examples:
 
-    TITLE: Cut AI Costs with Caching ⚡
-    CONTENT: Hawiyat Composer caches repeat requests, so you never pay for the same tokens twice. Simple tasks get routed to cheaper models automatically, keeping flagship-level results at a fraction of the cost. 🚀
+    TITLE: The execution layer explained
+    CONTENT: Hawiyat sits between frontier AI models and the systems your business runs — WhatsApp, CRM, ERP, email, databases, workflows. Composer decides the best way to accomplish each task: the model to route to, the context to carry, and whether the result is good enough.
 
-    TITLE: Routing Made Simple 🔄
-    CONTENT: Hawiyat Composer sits between your coding tools like Claude Code, Cursor, CLIs, and agents and the AI models they talk to. You plug it in through the same API endpoints you already use, with no code changes required.
+    TITLE: How a run executes
+    CONTENT: Every task is a run through UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT. Each stage is logged, and the result is evaluated for quality, latency, and cost before it reaches you.
 
-    TITLE: Same Endpoints, Way Less Waste 💡
-    CONTENT: Point your tools at Hawiyat Composer instead of the provider directly and keep the exact same OpenAI and Anthropic endpoints. We handle the routing, caching, and cost optimization on our own cloud in Algeria.
+    TITLE: Billed in dinars, transparent
+    CONTENT: Everything is billed in Algerian dinars with a transparent per-task cost, measured not guessed. Pay with CCP or Baridi Mob; no foreign card required.
 
-    ## Core Knowledge
-
-    Hawiyat Composer is a gateway that sits between coding tools (Claude Code, Cursor, CLIs, agents) and the AI models they talk to:
-    - Caches repeat requests so you don't pay for the same tokens twice
-    - Routes simple tasks to cheaper models automatically to cut AI costs
-    - Blends multiple models so you get flagship-level results
-    - Works through the same API endpoints you already use, no code changes required
-    - Priced in Algerian dinars (DZD), backed by Hawiyat's own cloud in Algeria
-
-    Plans:
-    - PRO (6,000 DA/month): 2x Claude credits with Hawiyat Composer caching
-    - MAX 5X (15,000 DA/month): 5x Claude capacity, no limits, semantic caching, smart routing
-    - MAX 20X (30,000 DA/month): 20x Claude capacity, exact-match + semantic caching, priority support
-    - Enterprise: custom capacity, SLAs, dedicated routing, custom data residency (DZ/EU)
-
-    ## Tone & Style
-
-    - Expert, concise, and helpful
-    - Use limited emojis (✅, 🚀, 🔒, 💡, ⚡)
-    - Keep responses short but packed with value
-    - Always format as TITLE + CONTENT
-    - Never apologize or be overly verbose
-
-    Docs: https://www.hawiyat.org/docs
+    Docs: https://www.hawiyat.org/composer
     `
 
     // Build conversation history
     const conversationHistory = conversation.map((msg) => ({
       role: msg.role === "user" ? "user" : "model",
-      parts: [{ text: msg.content }],
+      parts: [{ text: msg.content.slice(0, MAX_MESSAGE_LENGTH) }],
     }))
 
     // Add current message
     conversationHistory.push({
       role: "user",
-      parts: [{ text: message }],
+      parts: [{ text: message.slice(0, MAX_MESSAGE_LENGTH) }],
     })
 
     // Start chat with history and system prompt
     const chat = chatModel.startChat({
+      systemInstruction: systemPrompt,
       history: [
-        {
-          role: "user",
-          parts: [{ text: systemPrompt }],
-        },
         {
           role: "model",
           parts: [
             {
-              text: "TITLE: Welcome to Hawiyat Composer 🚀\nCONTENT: I'm Hawiyat Composer v1.7, your AI assistant for routing, caching, and cutting AI costs. Ask me how to route requests, use the caching layer, or reduce token spend. Let's get started!",
+              text: "TITLE: Welcome to Hawiyat AI Composer 🚀\nCONTENT: I'm the Hawiyat AI Composer assistant. Hawiyat is the execution layer between frontier AI models and business systems, and Composer decides the best way to accomplish each task — model-agnostic, evaluated, and billed in DZD. Ask me about the execution layer, Composer, our managed systems, or how to get started.",
             },
           ],
         },
@@ -111,7 +145,7 @@ export async function POST(req: NextRequest) {
     })
 
     // Send the current message
-    const result = await chat.sendMessage(message)
+    const result = await chat.sendMessage(message.slice(0, MAX_MESSAGE_LENGTH))
     const aiResponse = result.response.text()
 
     // Parse the response to extract title and content
@@ -139,13 +173,10 @@ export async function POST(req: NextRequest) {
       conversation: updatedConversation,
     })
   } catch (error) {
-    console.error("Error generating Hawiyat Composer response:", error)
+    console.error("Error generating Hawiyat AI Composer response:", error)
     return NextResponse.json(
-      {
-        error: "Failed to process chat request",
-        details: error instanceof Error ? error.message : String(error),
-      },
-      { status: 500 },
+      { error: "Failed to process chat request" },
+      { status: 500 }
     )
   }
 }
@@ -153,8 +184,8 @@ export async function POST(req: NextRequest) {
 // Optional: GET handler for health check
 export async function GET() {
   return NextResponse.json({
-    status: "Hawiyat Composer v1.7 API is running",
-    platform: "Hawiyat Composer - routing and caching gateway for AI coding tools",
-    docs: "https://docs.hawiyat.org",
+    status: "Hawiyat AI Composer assistant API is running",
+    platform: "Hawiyat - AI infrastructure and execution layer",
+    docs: "https://www.hawiyat.org/composer",
   })
 }

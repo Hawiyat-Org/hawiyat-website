@@ -40,7 +40,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="mt-auto flex flex-col w-full gap-4 text-sm pt-[5%] pb-10 px-[10%] text-black dark:text-white max-md:flex-col">
+    <footer className="mt-auto flex flex-col w-full gap-4 text-sm pt-[5%] pb-10 px-[10%] text-ink max-md:flex-col">
       <div className="flex max-md:flex-col max-md:gap-6 gap-3 w-full place-content-around">
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
@@ -86,7 +86,7 @@ const Footer = () => {
 
       <hr className="mt-8" />
 
-      <div className="mt-2 flex gap-2 flex-col text-gray-700 dark:text-gray-300 place-items-center text-[12px] w-full text-center place-content-around">
+      <div className="mt-2 flex gap-2 flex-col text-muted-ink place-items-center text-[12px] w-full text-center place-content-around">
         <span>Copyright © 2023-2026 Hawiyat</span>
         <span>All trademarks and copyrights belong to their respective owners.</span>
       </div>

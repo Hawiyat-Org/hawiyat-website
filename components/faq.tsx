@@ -40,7 +40,7 @@ const FAQ = () => {
 
   return (
     <section
-      className="relative flex w-full flex-col place-content-center place-items-center p-[5%] px-[10%] max-md:px-4"
+      className="relative flex w-full flex-col place-content-center place-items-center py-16 px-6 md:py-24"
       id="faq"
     >
       <div className="mx-auto w-full max-w-3xl">
@@ -57,7 +57,7 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <div key={index} className="w-full rounded-2xl border border-border bg-surface">
               <button
-                className="flex w-full items-center justify-between gap-4 select-none text-left py-5 px-6 cursor-pointer focus:outline-none"
+                className="flex w-full items-center justify-between gap-4 select-none text-left py-5 px-6 cursor-pointer rounded-2xl focus-visible:ring-2 focus-visible:ring-signal/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface outline-none"
                 onClick={() => toggleItem(index)}
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-panel-${index}`}

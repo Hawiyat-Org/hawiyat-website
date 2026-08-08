@@ -4,7 +4,6 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { ServicePlans } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
 
@@ -133,12 +132,12 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }} />
 
-      <main className="min-h-screen bg-background">
+      <div className="min-h-screen">
         {/* Back Navigation */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-ink transition-colors hover:text-ink"
           >
             <ArrowLeft className="h-4 w-4" />
             All Services
@@ -157,15 +156,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
                     {service.tag && (
                       <div className="absolute top-3 right-3 z-10">
-                        <span className={cn(
-                          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold shadow-lg text-white",
-                          service.tag === "Popular" && "bg-gradient-to-r from-violet-500 to-purple-600",
-                          service.tag === "Pro" && "bg-gradient-to-r from-purple-500 to-violet-600",
-                          service.tag === "Starter" && "bg-gradient-to-r from-emerald-500 to-green-600",
-                          service.tag === "Max 5X" && "bg-gradient-to-r from-orange-500 to-red-600",
-                          service.tag === "Max 20X" && "bg-gradient-to-r from-yellow-500 to-amber-600",
-                          service.tag === "VIP" && "bg-gradient-to-r from-amber-500 to-yellow-600",
-                        )}>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-signal text-signal-text">
                           {service.tag}
                         </span>
                       </div>
@@ -200,10 +191,10 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
                 {/* Title & Description */}
                 <div className="space-y-4">
-                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-ink">
                     {service.name}
                   </h1>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-ink leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -212,11 +203,11 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 {mobilePrice && (
                   <div className="lg:hidden -mt-2">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold tracking-tight text-foreground">{mobilePrice.price}</span>
+                      <span className="text-4xl font-bold tracking-tight text-ink">{mobilePrice.price}</span>
                       {mobilePrice.originalPrice && (
-                        <span className="text-2xl text-muted-foreground line-through">{mobilePrice.originalPrice}</span>
+                        <span className="text-2xl text-muted-ink line-through">{mobilePrice.originalPrice}</span>
                       )}
-                      <span className="text-lg text-muted-foreground font-medium">{mobilePrice.priceLabel}</span>
+                      <span className="text-lg text-muted-ink font-medium">{mobilePrice.priceLabel}</span>
                     </div>
                   </div>
                 )}
@@ -224,8 +215,8 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
               {/* Ideal For */}
               <div className="pt-8 border-t border-border/40">
-                <h2 className="text-sm font-semibold text-foreground mb-3">Ideal For</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h2 className="text-sm font-semibold text-ink mb-3">Ideal For</h2>
+                <p className="text-sm text-muted-ink leading-relaxed">
                   {service.details.idealFor}
                 </p>
               </div>
@@ -234,20 +225,20 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               {service.seoContent && (
                 <div className="space-y-8 pt-8 border-t border-border/40">
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-3">What is {service.name}?</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <h2 className="text-xl font-semibold text-ink mb-3">What is {service.name}?</h2>
+                    <p className="text-sm text-muted-ink leading-relaxed">
                       {service.seoContent.whatIs}
                     </p>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-3">Why Choose Hawiyat for {service.name}?</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <h2 className="text-xl font-semibold text-ink mb-3">Why Choose Hawiyat for {service.name}?</h2>
+                    <p className="text-sm text-muted-ink leading-relaxed">
                       {service.seoContent.whyChoose}
                     </p>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-3">How Does {service.name} Work?</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <h2 className="text-xl font-semibold text-ink mb-3">How Does {service.name} Work?</h2>
+                    <p className="text-sm text-muted-ink leading-relaxed">
                       {service.seoContent.howItWorks}
                     </p>
                   </div>
@@ -257,12 +248,12 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               {/* FAQ Section */}
               {service.faq && service.faq.length > 0 && (
                 <div className="space-y-4 pt-8 border-t border-border/40">
-                  <h2 className="text-xl font-semibold text-foreground">Frequently Asked Questions</h2>
+                  <h2 className="text-xl font-semibold text-ink">Frequently Asked Questions</h2>
                   <div className="space-y-4">
                     {service.faq.map((item, idx) => (
                       <div key={idx}>
-                        <h3 className="text-base font-medium text-foreground mb-2">{item.question}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{item.answer}</p>
+                        <h3 className="text-base font-medium text-ink mb-2">{item.question}</h3>
+                        <p className="text-sm text-muted-ink leading-relaxed">{item.answer}</p>
                       </div>
                     ))}
                   </div>
@@ -284,24 +275,24 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 />
               ) : (
                 /* Single Price Card */
-                <div className="rounded-2xl border border-border/60 bg-card shadow-sm overflow-hidden">
+                <div className="rounded-2xl border border-border/60 bg-surface shadow-sm overflow-hidden">
                   {/* Pricing Header */}
                   <div className="border-b border-border/60 bg-surface-dim/30 p-6">
                     <div className="space-y-2">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-4xl font-bold tracking-tight text-foreground">
+                        <span className="text-4xl font-bold tracking-tight text-ink">
                           {service.price}
                         </span>
                         {service.originalPrice && (
-                          <span className="text-2xl text-muted-foreground line-through">
+                          <span className="text-2xl text-muted-ink line-through">
                             {service.originalPrice}
                           </span>
                         )}
-                        <span className="text-lg text-muted-foreground font-medium">
+                        <span className="text-lg text-muted-ink font-medium">
                           {service.priceLabel}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-muted-ink">
                         All-inclusive pricing • No hidden fees
                       </p>
                     </div>
@@ -310,13 +301,13 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   {/* What's Included */}
                   <div className="p-6 space-y-4">
                     <div className="space-y-3">
-                      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        What's Included
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-ink">
+                        What&apos;s Included
                       </h3>
                       <ul className="space-y-2">
                         {service.details.whatYouGet.slice(0, 6).map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-foreground/80">
-                            <span className="text-muted-foreground mt-0.5">•</span>
+                          <li key={idx} className="flex items-start gap-2 text-sm text-ink/80">
+                            <span className="text-muted-ink mt-0.5">•</span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -333,7 +324,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </>
   )
 }

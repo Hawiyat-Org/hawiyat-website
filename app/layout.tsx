@@ -38,10 +38,10 @@ export const metadata: Metadata = {
     // AI infrastructure / execution-layer keywords
     "ai gateway", "llm gateway", "ai infrastructure algeria", "execution layer",
     "ai execution layer", "model gateway", "model routing dz", "ai platform algeria",
-    "hawiyat composer", "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
+    "hawiyat ai composer", "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
     // Entity alias phrasings (machine-readable; used by AI search & engines)
-    "Algeria's AI Provider", "Algeria AI Provider", "AI provider in Algeria",
-    "AI in Algeria", "B2B AI Algeria", "AI provider algeria", "fournisseur IA algerie",
+    "ai infrastructure algeria", "ai execution layer algeria", "AI infrastructure in Algeria",
+    "execution layer in Algeria", "AI execution layer in Algeria", "AI en Algérie", "infrastructure IA algérie", "البنية التحتية للذكاء الاصطناعي في الجزائر",
     // Model keywords all major providers
     "gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "o1", "o1-mini", "o3", "o3-mini",
     "claude", "claude 4", "claude 3.5 sonnet", "claude opus", "claude sonnet", "claude haiku",
@@ -137,25 +137,20 @@ const organizationSchema = {
   name: APP_NAME,
   alternateName: [
     "Hawiyat",
-    "Algeria's AI Provider",
-    "Algeria AI Provider",
-    "AI Provider in Algeria",
-    "AI in Algeria",
-    "B2B AI Algeria",
-    "AI provider algerie",
-    "Fournisseur IA en Algérie",
-    "مزود الذكاء الاصطناعي في الجزائر",
+    "AI infrastructure Algeria",
+    "AI execution layer Algeria",
+    "AI infrastructure in Algeria",
+    "Execution layer in Algeria",
+    "AI en Algérie",
+    "البنية التحتية للذكاء الاصطناعي في الجزائر",
   ],
   url: SITE_URL,
   logo: `${SITE_URL}/logo.svg`,
   keywords: [
-    "Algeria's AI Provider",
-    "Algeria AI Provider",
-    "AI provider in Algeria",
-    "AI in Algeria",
-    "B2B AI Algeria",
-    "AI provider algeria",
-    "fournisseur IA algerie",
+    "AI infrastructure Algeria",
+    "AI execution layer Algeria",
+    "AI infrastructure in Algeria",
+    "Execution layer in Algeria",
   ],
   foundingLocation: {
     "@type": "Place",
@@ -203,11 +198,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col hero-bg-gradient text-black dark:bg-black dark:text-white font-sans">
-        {/* accessibility: skip link */}
+      <body className="min-h-screen flex flex-col bg-paper text-ink dark:bg-paper font-sans">
+        {/* accessibility: skip link — targets #content, which now sits ABOVE
+            the header so keyboard users actually skip navigation */}
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-white dark:bg-black p-2 rounded shadow"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-surface text-ink border border-border p-2 rounded-md shadow focus:ring-2 focus:ring-signal/60"
         >
           Skip to content
         </a>
@@ -217,8 +213,8 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
-          <main id="content" className="flex-1 hero-bg-gradient">
-            <Header />
+          <Header />
+          <main id="content" className="flex-1">
             {children}
           </main>
 

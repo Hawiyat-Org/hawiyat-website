@@ -20,19 +20,9 @@ interface ServiceOrderFormProps {
   paymentMethod?: string
 }
 
-// Tag badge gradient, matching the catalog cards and slug pages
-const tagStyles: Record<string, string> = {
-  "Popular": "bg-gradient-to-r from-violet-500 to-purple-600",
-  "Pro": "bg-gradient-to-r from-purple-500 to-violet-600",
-  "Starter": "bg-gradient-to-r from-emerald-500 to-green-600",
-  "Max 5X": "bg-gradient-to-r from-orange-500 to-red-600",
-  "Max 20X": "bg-gradient-to-r from-yellow-500 to-amber-600",
-  "VIP": "bg-gradient-to-r from-amber-500 to-yellow-600",
-  "Freelance": "bg-gradient-to-r from-teal-500 to-emerald-600",
-  "WhatsApp": "bg-gradient-to-r from-green-500 to-emerald-600",
-  "Startup": "bg-gradient-to-r from-blue-500 to-indigo-600",
-  "Enterprise": "bg-gradient-to-r from-yellow-500 to-amber-600",
-}
+// Tag badge — single token style (execution-layer accent), matching the catalog
+// and slug pages. No per-tier rainbow/purple "AI wrapper" gradients.
+const tagStyle = "bg-signal text-signal-text"
 
 export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: ServiceOrderFormProps) {
   const [isOpen, setIsOpen] = useState(false)
@@ -135,8 +125,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
     <div className="space-y-4">
       {/* Desktop: Payment Method Selector */}
       <div className="hidden lg:block space-y-2">
-        <label className="block text-sm font-medium">
-          Payment Method <span className="text-destructive">*</span>
+        <label className="block text-sm font-medium text-ink">
+          Payment Method <span className="text-danger">*</span>
         </label>
         <div className="grid grid-cols-3 gap-2">
           {paymentOptions.map((option) => {
@@ -150,8 +140,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 className={cn(
                   "flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-sm font-medium transition-all",
                   isSelected
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border/40 bg-surface-dim/30 text-muted-foreground hover:border-border hover:bg-surface-dim/50"
+                    ? "border-signal bg-signal-bg text-signal-contrast"
+                    : "border-border/40 bg-surface-dim/30 text-muted-ink hover:border-border hover:bg-surface-dim/50"
                 )}
               >
                 <Icon className="w-5 h-5" />
@@ -163,46 +153,46 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       </div>
 
       {/* Desktop: Order Now button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-xl"
-      >
-        Order Now
-        <ArrowRight className="w-5 h-5" />
-      </button>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-signal text-signal-text font-semibold text-base hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Order Now
+              <ArrowRight className="w-5 h-5" />
+            </button>
 
-      {/* Mobile: Floating Bottom Bar */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 border-t border-border/60 bg-background/95 backdrop-blur-xl px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <div className="grid grid-cols-3 gap-2 mb-2.5">
-          {paymentOptions.map((option) => {
-            const Icon = option.icon
-            const isSelected = selectedPayment === option.value
-            return (
+            {/* Mobile: Floating Bottom Bar */}
+            <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 border-t border-border/60 bg-paper/95 backdrop-blur-xl px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+              <div className="grid grid-cols-3 gap-2 mb-2.5">
+                {paymentOptions.map((option) => {
+                  const Icon = option.icon
+                  const isSelected = selectedPayment === option.value
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setSelectedPayment(option.value)}
+                      className={cn(
+                        "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all",
+                        isSelected
+                          ? "border-signal bg-signal-bg text-signal-contrast"
+                          : "border-border/40 bg-surface-dim/30 text-muted-ink"
+                      )}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{option.label}</span>
+                    </button>
+                  )
+                })}
+              </div>
               <button
-                key={option.value}
-                type="button"
-                onClick={() => setSelectedPayment(option.value)}
-                className={cn(
-                  "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all",
-                  isSelected
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border/40 bg-surface-dim/30 text-muted-foreground"
-                )}
+                onClick={() => setIsOpen(true)}
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-signal text-signal-text font-semibold text-base shadow-lg"
               >
-                <Icon className="w-4 h-4" />
-                <span>{option.label}</span>
+                Order Now
+                <ArrowRight className="w-5 h-5" />
               </button>
-            )
-          })}
-        </div>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-base shadow-lg"
-        >
-          Order Now
-          <ArrowRight className="w-5 h-5" />
-        </button>
-      </div>
+            </div>
 
       {isOpen && typeof document !== 'undefined' && createPortal(
         <div
@@ -210,7 +200,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl border border-border/60 bg-background shadow-2xl p-6 scrollbar-hide"
+            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl border border-border/60 bg-surface shadow-2xl p-6 scrollbar-hide"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -223,20 +213,20 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
             {isSuccess ? (
               <div className="text-center py-8">
-                <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Order Submitted!</h3>
-                <p className="text-muted-foreground text-sm mb-1">
+                <CheckCircle2 className="w-16 h-16 text-ok mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2 text-ink">Order Submitted!</h3>
+                <p className="text-muted-ink text-sm mb-1">
                   Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
                 </p>
-                <p className="text-xs text-muted-foreground mb-1">
+                <p className="text-xs text-muted-ink mb-1">
                   Payment method: {formData.paymentMethod === "CCP" ? "CCP" : formData.paymentMethod === "BARIDI_MOB" ? "Baridi Mob" : "USD"}
                 </p>
                 {orderId && (
-                  <p className="text-xs text-muted-foreground mb-4">Order ID: {orderId}</p>
+                  <p className="text-xs text-muted-ink mb-4">Order ID: {orderId}</p>
                 )}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="px-6 py-2 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors"
+                  className="px-6 py-2 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
                 >
                   Close
                 </button>
@@ -245,7 +235,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               <>
                 <div className="mb-6 p-4 rounded-xl bg-surface-dim/50 border border-border/40">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-surface-dim flex items-center justify-center overflow-hidden">
+                    <div className="shrink-0 w-14 h-14 rounded-lg bg-surface border border-border flex items-center justify-center overflow-hidden">
                       <Image
                         src={serviceImage}
                         alt={service.name}
@@ -255,16 +245,16 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-base truncate">{service.name}</h3>
+                      <h3 className="font-semibold text-base text-ink truncate">{service.name}</h3>
                       <div className="flex items-baseline gap-1 mt-1">
-                        <span className="text-xl font-bold">{service.price}</span>
-                        <span className="text-sm text-muted-foreground">{service.priceLabel}</span>
+                        <span className="text-xl font-bold text-ink">{service.price}</span>
+                        <span className="text-sm text-muted-ink">{service.priceLabel}</span>
                       </div>
                     </div>
                     {service.tag && (
                       <span className={cn(
-                        "shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white",
-                        tagStyles[service.tag] ?? "bg-primary"
+                        "shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold",
+                        tagStyle
                       )}>
                         {service.tag}
                       </span>
@@ -280,8 +270,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="customerName" className="block text-sm font-medium mb-1">
-                      Full Name <span className="text-destructive">*</span>
+                    <label htmlFor="customerName" className="block text-sm font-medium text-ink mb-1">
+                      Full Name <span className="text-danger">*</span>
                     </label>
                     <input
                       id="customerName"
@@ -290,14 +280,14 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerName}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="customerEmail" className="block text-sm font-medium mb-1">
-                      Email <span className="text-destructive">*</span>
+                    <label htmlFor="customerEmail" className="block text-sm font-medium text-ink mb-1">
+                      Email <span className="text-danger">*</span>
                     </label>
                     <input
                       id="customerEmail"
@@ -306,14 +296,14 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerEmail}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="you@example.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="customerPhone" className="block text-sm font-medium mb-1">
-                      Phone <span className="text-destructive">*</span>
+                    <label htmlFor="customerPhone" className="block text-sm font-medium text-ink mb-1">
+                      Phone <span className="text-danger">*</span>
                     </label>
                     <input
                       id="customerPhone"
@@ -322,14 +312,14 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerPhone}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="+213 ..."
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="notes" className="block text-sm font-medium mb-1">
-                      Notes <span className="text-muted-foreground">(optional)</span>
+                    <label htmlFor="notes" className="block text-sm font-medium text-ink mb-1">
+                      Notes <span className="text-muted-ink">(optional)</span>
                     </label>
                     <textarea
                       id="notes"
@@ -337,7 +327,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       rows={3}
                       value={formData.notes}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal resize-none"
                       placeholder="Any additional details..."
                     />
                   </div>
@@ -361,25 +351,25 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       className={cn(
                         "flex-shrink-0 w-[18px] h-[18px] rounded border-2 flex items-center justify-center transition-colors",
                         formData.acceptTerms
-                          ? "bg-primary border-primary"
-                          : "border-border bg-background"
+                          ? "bg-signal border-signal"
+                          : "border-border bg-surface"
                       )}
                     >
                       <Check
                         strokeWidth={3}
                         className={cn(
-                          "w-3 h-3 text-primary-foreground transition-opacity",
+                          "w-3 h-3 text-signal-text transition-opacity",
                           formData.acceptTerms ? "opacity-100" : "opacity-0"
                         )}
                       />
                     </span>
-                    <span className="text-xs text-muted-foreground leading-relaxed">
+                    <span className="text-xs text-muted-ink leading-relaxed">
                       I agree to the{" "}
-                      <Link href="/terms" className="font-medium text-primary underline hover:no-underline" target="_blank">
+                      <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline" target="_blank">
                         Terms of Service
                       </Link>{" "}
                       and{" "}
-                      <Link href="/privacy" className="font-medium text-primary underline hover:no-underline" target="_blank">
+                      <Link href="/privacy" className="font-medium text-signal-contrast underline hover:no-underline" target="_blank">
                         Privacy Policy
                       </Link>
                     </span>
@@ -388,7 +378,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-11 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full h-11 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

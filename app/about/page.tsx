@@ -20,11 +20,11 @@ export default function AboutPage() {
         <div className="mx-auto w-full max-w-6xl px-6 flex max-lg:flex-col items-center justify-center gap-8 max-lg:gap-6 min-h-[85vh] py-10">
           {/* Left  Text */}
           <div className="flex flex-col gap-5 flex-1 max-w-lg">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/60 text-sm w-fit">
-              Built in Algeria 🇩🇿
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-signal-bg border border-signal/20 text-signal-contrast text-sm w-fit">
+              Built in Algeria
             </div>
-            <h1 className="text-5xl max-lg:text-3xl max-md:text-2xl font-medium uppercase">
-              About <span className="font-light">Us</span>
+            <h1 className="text-5xl max-lg:text-4xl max-md:text-3xl font-bold text-ink">
+              About <span className="font-medium">Us</span>
             </h1>
             <p className="text-base text-ink leading-relaxed max-md:text-sm">
               Hawiyat is the AI infrastructure platform based in Algeria. We build and run the execution layer between frontier AI models and the systems businesses rely on — WhatsApp, CRM, ERP, email, databases, workflows. Our Composer engine plans, routes, and executes every task: the best model, the right context, automatic fallbacks, and an evaluated result — priced in DZD, on our own cloud.
@@ -35,7 +35,7 @@ export default function AboutPage() {
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
-                className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-300 hover:scale-x-[1.03] active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-signal text-signal-text font-medium text-sm shadow-lg hover:scale-x-[1.03] transition-all duration-300 active:scale-95"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -43,7 +43,7 @@ export default function AboutPage() {
               <Link
                 href="https://wa.me/213559555951"
                 target="_blank"
-                className="btn max-md:!w-full flex gap-2 place-content-center !rounded-lg !py-3.5 max-md:!py-3 text-sm !bg-transparent !text-black dark:!text-white border-[1px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-ink border border-ink/30 hover:bg-surface-dim transition-all duration-300 active:scale-95"
               >
                 <span>Contact Us</span>
                 <MessageCircle className="h-4 w-4" />
@@ -141,7 +141,7 @@ export default function AboutPage() {
               },
             ].map((event, i) => (
               <div key={i} className="flex-1 relative group">
-                <div className="relative rounded-2xl overflow-hidden aspect-[3/4] mb-4 bg-white dark:bg-black">
+                <div className="relative rounded-2xl overflow-hidden aspect-[3/4] mb-4 bg-surface-dim">
                   <Image
                     src={event.img}
                     alt={event.title}
@@ -202,7 +202,7 @@ export default function AboutPage() {
                       <Package className="h-12 w-12 text-foreground/20" />
                     </div>
                   ) : (
-                    <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-black">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-surface-dim">
                       <Image src={cert.img} alt={cert.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                   )}
@@ -217,12 +217,12 @@ export default function AboutPage() {
             {/* Right  Green Duty tall card spanning 2 rows */}
             <div className="flex-[1.25] max-md:w-full">
               <div className="group bg-surface-dim rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
-                <div className="relative flex-1 min-h-[300px] overflow-hidden bg-white dark:bg-black">
+                <div className="relative flex-1 min-h-[300px] overflow-hidden bg-surface-dim">
                   <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
-                  <p className="text-[11px] leading-relaxed text-foreground/50">Green Duty  AI delivered via Hawiyat Composer</p>
+                  <p className="text-[11px] leading-relaxed text-foreground/50">Green Duty  AI delivered via Hawiyat AI Composer</p>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
       <section className="w-full py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-14 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl max-md:text-2xl">Trusted by</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl max-md:text-2xl text-ink">Partners &amp; early customers</h2>
           </div>
 
           <div className="grid grid-cols-3 gap-12 md:gap-16 lg:gap-20 max-md:gap-8">
@@ -350,8 +350,8 @@ export default function AboutPage() {
               />
             </div>
             <div className="flex-1 bg-surface-dim rounded-2xl p-8 flex gap-5 items-start">
-              <div className="w-12 h-12 rounded-xl bg-black dark:bg-white flex items-center justify-center shrink-0">
-                <MapPin className="w-6 h-6 text-white dark:text-black" />
+              <div className="w-12 h-12 rounded-xl bg-signal flex items-center justify-center shrink-0">
+                <MapPin className="w-6 h-6 text-signal-text" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">Hawiyat HQ</h3>
@@ -377,9 +377,9 @@ export default function AboutPage() {
             Ready to scale?
           </div>
 
-          <h2 className="text-7xl md:text-8xl max-md:text-4xl font-medium leading-[1.1] tracking-tight">
+          <h2 className="text-5xl md:text-6xl max-md:text-4xl font-bold leading-[1.1] tracking-tight text-ink">
             Let&apos;s Build<br />
-            <span className="font-light">Together</span>
+            <span className="font-medium">Together</span>
           </h2>
 
           <p className="max-w-xl text-lg text-muted-ink leading-relaxed">
@@ -390,7 +390,7 @@ export default function AboutPage() {
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
             <Link
               href="/services"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-signal text-signal-text font-medium hover:scale-[1.03] transition-all duration-300 active:scale-[0.97]"
             >
               <span>Explore Services</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -398,14 +398,14 @@ export default function AboutPage() {
             <Link
               href="https://wa.me/213559555951"
               target="_blank"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-foreground/20 text-foreground/80 hover:bg-foreground/5 hover:border-foreground/40 transition-all duration-300 active:scale-[0.97]"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-ink/30 text-ink hover:bg-surface-dim hover:border-ink/50 transition-all duration-300 active:scale-[0.97]"
             >
               <span>Contact Us</span>
               <MessageCircle className="h-4 w-4" />
             </Link>
           </div>
 
-          <p className="text-xs text-foreground/30 mt-8">
+          <p className="text-xs text-muted-ink mt-8">
             No commitment. Free consultation. Algerian team.
           </p>
         </div>

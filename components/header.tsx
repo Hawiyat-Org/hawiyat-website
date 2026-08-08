@@ -19,11 +19,20 @@ const Header = () => {
     }
 
     document.addEventListener("keydown", handleEscape)
-    
+
     return () => {
       document.removeEventListener("keydown", handleEscape)
     }
   }, [])
+
+  // Lock body scroll while the mobile menu is open so long pages don't scroll
+  // behind the fixed panel (DESIGN §Interactive Behaviors).
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMobileMenuOpen])
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
@@ -40,70 +49,68 @@ const Header = () => {
   if (pathname?.startsWith("/services/") && pathname !== "/services") return null
 
   return (
-    <>
-      
-       <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
+    <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-white/60 dark:bg-surface-dim/50 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-md dark:shadow-lg dark:shadow-black/20 border border-gray-200/50 dark:border-white/10 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-2xl sm:rounded-2xl border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-500 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
-        
+
         {/* Main Header Row */}
-        <div className="flex  items-center justify-between px-3 sm:px-6   min-h-[64px] ">
+        <div className="flex items-center justify-between px-3 sm:px-6 min-h-[64px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
-            <Image 
-              src="/logo.svg" 
-              alt="Hawiyat Logo" 
-              width={60} 
-              height={40} 
-              className="w-10 h-8 sm:w-12 sm:h-10 transition-transform duration-200 hover:scale-105" 
+            <Image
+              src="/logo.svg"
+              alt="Hawiyat Logo"
+              width={60}
+              height={40}
+              className="w-10 h-8 sm:w-12 sm:h-10 transition-transform duration-200 hover:scale-105"
             />
-            <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
+            <span className="text-lg sm:text-xl font-semibold text-ink">
               Hawiyat
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-2">
             <Link
               href="/composer"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
             >
               Composer
             </Link>
             <Link
               href="/services"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
             >
               Services
             </Link>
             <Link
               href="/about"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
             >
               About
             </Link>
           </nav>
 
           {/* Desktop Right Side Actions */}
-          <div className="hidden lg:flex items-center gap-2 sm:gap-4 flex-shrink-0">
+          <div className="hidden lg:flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg  border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200"
+              className="p-2 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <Moon className="w-5 h-5" />
               )}
             </button>
 
             <Link
               href="/composer"
-              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+              className="bg-signal text-signal-text px-6 py-2.5 rounded-full font-medium hover:scale-[1.03] transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
             >
               Start Building
               <ArrowRight className="w-4 h-4" />
@@ -114,42 +121,44 @@ const Header = () => {
           <div className="lg:hidden flex items-center gap-2 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-3 rounded-lg border border-gray-200 dark:border-gray-700   hover:bg-gray-50 dark:hover:bg-black/30 transition-all duration-200 touch-manipulation"
+              className="p-3 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200 touch-manipulation"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <Moon className="w-5 h-5" />
               )}
-              
             </button>
 
-            <button 
-              className="p-3 touch-manipulation rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200" 
+            <button
+              className="p-3 touch-manipulation rounded-full text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation - Enhanced UX */}
-        <div className={`lg:hidden transition-all duration-500 ease-out ${
-          isMobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
-        } overflow-y-auto`}>
-          <div className="border-t border-gray-200 dark:border-white/10">
-            
-            {/* Mobile Navigation Links */}
+        {/* Mobile Navigation */}
+        <div
+          id="mobile-menu"
+          className={`lg:hidden transition-all duration-500 ease-out ${
+            isMobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
+          } overflow-y-auto`}
+        >
+          <div className="border-t border-border">
             <nav className="p-4 space-y-1">
               <Link
                 href="/composer"
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Composer</span>
@@ -158,7 +167,7 @@ const Header = () => {
 
               <Link
                 href="/services"
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Services</span>
@@ -167,7 +176,7 @@ const Header = () => {
 
               <Link
                 href="/about"
-                className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">About</span>
@@ -175,11 +184,11 @@ const Header = () => {
               </Link>
             </nav>
 
-            {/* Mobile CTA Section - Enhanced */}
-            <div className="p-4 border-t border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-white/5">
+            {/* Mobile CTA Section */}
+            <div className="p-4 border-t border-border bg-surface-dim/40">
               <Link
                 href="/composer"
-                className="flex items-center justify-center w-full bg-black dark:bg-white text-white dark:text-black px-6 py-4 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
+                className="flex items-center justify-center w-full bg-signal text-signal-text px-6 py-4 rounded-full font-medium hover:scale-[1.02] transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >
                 <span>Start Building</span>
@@ -190,8 +199,6 @@ const Header = () => {
         </div>
       </div>
     </header>
-    </>
-    
   )
 }
 

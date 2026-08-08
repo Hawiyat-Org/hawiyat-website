@@ -11,6 +11,15 @@ const ScrollAnimations = () => {
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
+    if (prefersReducedMotion) {
+      // Respect prefers-reduced-motion: leave reveal-up elements fully visible
+      // (never set opacity:0) and skip the dashboard scrub so no scroll-linked
+      // transform runs.
+      gsap.set(".reveal-up", { opacity: 1, y: 0 })
+      gsap.set("#dashboard", { scale: 1, translateY: 0, rotateX: "0deg" })
+      return
+    }
+
     // Initial state for reveal-up elements
     gsap.set(".reveal-up", {
       opacity: 0,
@@ -18,24 +27,22 @@ const ScrollAnimations = () => {
     })
 
     // Trace-line draw-on-scroll reveal
-    if (!prefersReducedMotion) {
-      gsap.utils.toArray<HTMLElement>(".trace-line").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              end: "top 30%",
-              scrub: 1,
-            },
-          }
-        )
-      })
-    }
+    gsap.utils.toArray<HTMLElement>(".trace-line").forEach((el) => {
+      gsap.fromTo(
+        el,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: 1,
+          },
+        }
+      )
+    })
 
     // Dashboard animation
     const dashboardElement = document.getElementById("dashboard")

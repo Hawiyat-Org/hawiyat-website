@@ -45,13 +45,13 @@ const Newsletter = () => {
         <div className="flex flex-col items-center gap-2 text-center md:items-start md:text-left">
           <div className="flex items-center gap-2">
             <Mail className="h-5 w-5 text-signal" />
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-ink">
               Newsletter
-            </h2>
+            </span>
           </div>
-          <p className="text-2xl font-semibold text-ink">
+          <h2 className="text-2xl font-semibold text-ink">
             Execution insights. No pitch spam.
-          </p>
+          </h2>
         </div>
 
         <form

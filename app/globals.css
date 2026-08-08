@@ -545,6 +545,15 @@ body.booking-modal-open .fixed.inset-0 {
   transform: translateY(100%);
 }
 
+/* Reduced-motion fallback: never hide scroll-reveal content for users who
+   opt out of motion, even before the GSAP reveal runs. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media not all and (min-width: 1024px) {
   .collapsible-header {
     position: fixed;
@@ -603,7 +612,7 @@ body.booking-modal-open .fixed.inset-0 {
   100% { transform: translateY(0); }
 }
 
-/* Very slow spin for Hawiyat Composer logo */
+/* Very slow spin for Hawiyat AI Composer logo */
 @keyframes verySlowSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

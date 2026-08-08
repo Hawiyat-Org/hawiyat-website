@@ -65,7 +65,7 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-medium text-foreground">1. Introduction</h2>
               <p className="mt-3">
                 Hawiyat (we, our, or us) operates hawiyat.org and provides AI infrastructure services
-                including the Hawiyat Composer API gateway, virtual private servers, and managed hosting.
+                including the Hawiyat AI Composer execution layer, virtual private servers, and managed hosting.
                 We are based in Algiers, Algeria.
               </p>
               <p className="mt-3">
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
                 <li>Mail: Hawiyat, Legal Department, Algiers, Algeria</li>
               </ul>
               <p className="mt-3 text-xs">
-                Once appointed, the DPO's contact details will be communicated to the ANPDP in accordance
+                Once appointed, the DPO&apos;s contact details will be communicated to the ANPDP in accordance
                 with ANPDP Decision No. 01 of December 24, 2025.
               </p>
             </section>
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
                 <li>VPS configuration and deployment metadata</li>
                 <li>Support ticket content and diagnostic information</li>
               </ul>
-              <p className="mt-2 text-xs">We do not log API prompt or completion content. Users are prohibited from submitting special categories of personal data (sensitive data) through the Hawiyat Composer API or any of our services.</p>
+              <p className="mt-2 text-xs">We do not log API prompt or completion content. Users are prohibited from submitting special categories of personal data (sensitive data) through the Hawiyat AI Composer execution layer or any of our services.</p>
 
               <h3 className="mt-4 font-medium text-foreground">Payment Information</h3>
               <ul className="mt-2 list-disc pl-5 space-y-1">
@@ -152,7 +152,7 @@ export default function PrivacyPage() {
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>
                   <span className="text-foreground">Provide and Operate Services.</span>
-                  {" "}Provision VPS instances, route API requests through Hawiyat Composer, manage your
+                  {" "}Provision VPS instances, route API requests through Hawiyat AI Composer, manage your
                   account, and maintain platform availability.
                 </li>
                 <li>
@@ -273,7 +273,7 @@ export default function PrivacyPage() {
 
               <h3 className="mt-4 font-medium text-foreground">Upstream AI Providers</h3>
               <p className="mt-2">
-                When you use Hawiyat Composer to call an AI model, your request is forwarded to the provider
+                When you use Hawiyat AI Composer to call an AI model, your request is forwarded to the provider
                 you selected (OpenAI, Anthropic, Google, or others). Each provider has its own privacy policy
                 that applies once the request leaves our infrastructure. Where available, we negotiate
                 zero-retention terms with these providers.
@@ -422,7 +422,7 @@ export default function PrivacyPage() {
             <section id="children">
               <h2 className="text-lg font-medium text-foreground">13. Children</h2>
               <p className="mt-3">
-                Our services are not directed to minors. Under Algerian law, processing of a child's
+                Our services are not directed to minors. Under Algerian law, processing of a child&apos;s
                 personal data requires the consent of their legal representative. We do not knowingly
                 process personal data of minors without such consent. If you believe a child has provided
                 personal information to us without appropriate consent, contact us at privacy@hawiyat.org
@@ -459,7 +459,7 @@ export default function PrivacyPage() {
               </p>
 
               {/* Contact CTA */}
-              <div className="mt-8 rounded-xl border border-border/60 bg-surface-dim/30 dark:bg-secondary/30 p-6">
+              <div className="mt-8 rounded-xl border border-border/60 bg-surface-dim/30 p-6">
                 <p className="text-sm font-medium text-foreground">Have a question about your data?</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   We answer privacy emails within seven days.

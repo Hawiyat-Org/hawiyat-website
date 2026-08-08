@@ -302,22 +302,21 @@ export const services: Service[] = [
     ],
     seo: {
       title: "Basic Web Hosting in Algeria | 1000 DA/month | Hawiyat",
-      description: "Affordable web hosting in Algeria for personal projects and portfolios. Free SSL, auto-deploy, 512MB RAM. 1000 DA/month.",
+      description: "Managed web hosting in Algeria for personal projects and portfolios. Free SSL, auto-deploy, 512MB RAM, local support. 1000 DA/month.",
       keywords: [
         "web hosting algeria",
-        "cheap hosting algeria",
+        "managed hosting algeria",
         "basic hosting dz",
         "hebergement web algerie",
-        "hebergement pas cher algerie",
+        "hebergement site web algerie",
         "hosting for developers algeria",
         "app hosting algeria",
-        "hebergement site web algerie",
-        "affordable hosting dz",
+        "managed hosting dz",
         "personal project hosting algeria",
       ],
     },
     details: {
-      overview: "Simple, affordable hosting for a single application. Perfect for personal projects, portfolios, and small websites. We handle the infrastructure so you can focus on building.",
+      overview: "Managed hosting for a single application. Perfect for personal projects, portfolios, and small websites. We handle the infrastructure so you can focus on building.",
       whatYouGet: [
         "1 application deployment",
         "Free SSL certificate for secure connections",
@@ -339,9 +338,9 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Basic web hosting in Algeria from Hawiyat is simple, affordable hosting for a single application at 1,000 DA/month. Perfect for personal portfolios, small websites, demo projects, and single-page applications, the plan includes one application deployment, free SSL certificates for secure connections, and automatic deployments from Git. You get 512MB RAM, custom domain support, and basic monitoring with uptime tracking. Node.js, Python, and static sites are all supported, with automatic HTTPS through Let's Encrypt and weekly backups included. Everything is managed by our Algerian team, so you do not need to touch a server or read a single line of configuration. For developers in Algeria who want cheap hosting priced in dinars, Hosting Basic delivers production-grade infrastructure at a freelancer-friendly price.",
+        "Basic web hosting in Algeria from Hawiyat is managed hosting for a single application at 1,000 DA/month. Perfect for personal portfolios, small websites, demo projects, and single-page applications, the plan includes one application deployment, free SSL certificates for secure connections, and automatic deployments from Git. You get 512MB RAM, custom domain support, and basic monitoring with uptime tracking. Node.js, Python, and static sites are all supported, with automatic HTTPS through Let's Encrypt and weekly backups included. Everything is managed by our Algerian team, so you do not need to touch a server or read a single line of configuration. For developers in Algeria who want production-grade hosting priced in dinars, Hosting Basic delivers managed infrastructure with local support and billing in DZD.",
       whyChoose:
-        "Hawiyat Hosting Basic is among the most affordable web hosting in Algeria at just 1,000 DA/month, priced in dinars with no hidden fees. You get free SSL, automatic deployments from Git, and basic monitoring  everything a personal project needs to go live. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you in Arabic, French, and English from the same timezone. Your site runs on the same production-tested infrastructure that powers 100+ clients, with weekly backups and automatic HTTPS included. Whether you are hosting a portfolio, a demo, or a small business site, you get a professional deployment without the professional price tag. Upgrade to Hosting VIP anytime for a managed database and priority support.",
+        "Hawiyat Hosting Basic is managed web hosting in Algeria at 1,000 DA/month, priced in dinars with no hidden fees. You get free SSL, automatic deployments from Git, and basic monitoring  everything a personal project needs to go live. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you in Arabic, French, and English from the same timezone. Your site runs on the same production-tested infrastructure that powers 100+ clients, with weekly backups and automatic HTTPS included. Whether you are hosting a portfolio, a demo, or a small business site, you get a professional deployment, managed for you. Upgrade to Hosting VIP anytime for a managed database and priority support.",
       howItWorks:
         "Getting your site live with Hawiyat Hosting Basic takes three steps. First, order the plan at 1,000 DA/month using your preferred payment method  CCP, Baridi Mob, or USD. Second, connect your Git repository: our platform automatically deploys Node.js, Python, or static site projects from Git with zero configuration. Third, point your custom domain and get a free SSL certificate from Let's Encrypt, so your site is live on HTTPS within minutes. You get 512MB RAM, basic monitoring with uptime tracking, and weekly backups of your application. Every deployment is automatic  push to Git and your changes go live. If you need a database, more applications, or priority support, you can upgrade to Hosting VIP at 2,000 DA/month at any time. Support is available by email in Arabic, French, and English.",
     },
@@ -746,9 +745,9 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Hosting VIP from Hawiyat is premium web hosting in Algeria for up to two applications with a managed database included. At 2,000 DA/month, it is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support. You get two application deployments, a managed PostgreSQL or MySQL database, free SSL certificates, automatic deployments from Git, and 1GB RAM. Custom domain support with DNS management, automatic HTTPS through Let's Encrypt, advanced resource monitoring, and daily backups are all included. Priority support is available via WhatsApp. Whether you are launching a SaaS product, an e-commerce store, or a client project that needs a database, Hosting VIP gives you professional-grade infrastructure in Algeria at a price that works in dinars.",
+        "Hosting VIP from Hawiyat is premium web hosting in Algeria for up to two applications with a managed database included. At 2,000 DA/month, it is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support. You get two application deployments, a managed PostgreSQL or MySQL database, free SSL certificates, automatic deployments from Git, and 1GB RAM. Custom domain support with DNS management, automatic HTTPS through Let's Encrypt, advanced resource monitoring, and daily backups are all included. Priority support is available via WhatsApp. Whether you are launching a SaaS product, an e-commerce store, or a client project that needs a database, Hosting VIP gives you professional-grade infrastructure in Algeria, managed for you and billed in dinars.",
       whyChoose:
-        "Hawiyat Hosting VIP is the best full-stack hosting option in Algeria because it includes a managed database  something cheap hosting plans skip. You get two applications plus PostgreSQL or MySQL, managed entirely by our team, with daily backups and advanced monitoring. At 2,000 DA/month, it costs a fraction of international premium hosts while giving you priority WhatsApp support in Arabic, French, and English. You pay in Algerian dinars with CCP or Baridi Mob  no foreign credit card needed. Your projects run on production-tested infrastructure that powers 100+ clients, with automatic HTTPS and custom domain management. Whether you are building a SaaS product, a client application, or an e-commerce site, Hosting VIP delivers premium hosting with database access, priority support, and local expertise at a fair price.",
+        "Hawiyat Hosting VIP is full-stack hosting in Algeria with a managed database included. You get two applications plus PostgreSQL or MySQL, managed entirely by our team, with daily backups and advanced monitoring. At 2,000 DA/month, you pay in Algerian dinars with CCP or Baridi Mob  no foreign credit card needed. Priority WhatsApp support comes in Arabic, French, and English. Your projects run on production-tested infrastructure that powers 100+ clients, with automatic HTTPS and custom domain management. Whether you are building a SaaS product, a client application, or an e-commerce site, Hosting VIP delivers premium hosting with database access, priority support, and local expertise.",
       howItWorks:
         "Getting your full-stack project live with Hosting VIP takes three steps. First, order the plan at 2,000 DA/month using your preferred payment method  CCP, Baridi Mob, or USD. Second, connect your Git repositories: our platform automatically deploys up to two Node.js, Python, or static applications, and our team provisions your managed PostgreSQL or MySQL database for you. Third, point your custom domains and get free SSL certificates from Let's Encrypt, so both apps are live on HTTPS within minutes. You get 1GB RAM, advanced resource monitoring, and daily backups. Every deployment is automatic  push to Git and your changes go live. Priority support is available via WhatsApp whenever you need help. If you only need one app without a database, start with Hosting Basic at 1,000 DA/month and upgrade later.",
     },

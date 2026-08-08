@@ -1,20 +1,22 @@
 # Hawiyat
-> AI infrastructure, subscriptions, automation, hosting, and local technical support for developers and businesses in Algeria.
+> AI infrastructure platform — the execution layer between frontier AI models and business systems. Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
 
 This optional file helps compatible non-Google systems discover Hawiyat's main public pages. Google Search does not use llms.txt as a ranking signal.
 
 ## Main pages
-- [AI in Algeria](https://www.hawiyat.org/ai-algeria): Hawiyat's AI services, subscriptions in DZD, and local implementation support.
-- [Hawiyat Composer](https://www.hawiyat.org/hawiyat-composer): Gateway, caching, and routing for compatible coding tools and supported AI providers.
-- [Services](https://www.hawiyat.org/services): Current AI, automation, hosting, messaging, and infrastructure plans.
-- [Claude Code guides](https://www.hawiyat.org/guides/claude): Installation, skills, MCP servers, and integrations.
-- [Cybersecurity](https://www.hawiyat.org/cyber-security): AI-assisted security and infrastructure protection services.
+- [Home](https://www.hawiyat.org/): The execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run — WhatsApp, CRM, ERP, email, databases, workflows.
+- [Hawiyat AI Composer](https://www.hawiyat.org/composer): The AI execution engine — every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
+- [Services](https://www.hawiyat.org/services): Hawiyat AI Composer plans, pay-per-run AI Composer access, n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting — all billed in Algerian dinars.
 - [About Hawiyat](https://www.hawiyat.org/about): Company, team, credentials, and Algeria presence.
+- [Terms of Use](https://www.hawiyat.org/terms): Legal terms for the Hawiyat platform and services.
+- [Privacy Policy](https://www.hawiyat.org/privacy): How Hawiyat collects, uses, and protects personal data.
+- [DMCA](https://www.hawiyat.org/dmca): Copyright notice and counter-notice policy.
 
 ## Important facts
 - Hawiyat is based in Algeria and supports customers in Arabic, French, and English.
-- Selected services are priced in Algerian dinars (DZD).
-- Third-party product and model names belong to their respective owners. Hawiyat does not imply an official partnership unless explicitly stated.
+- Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted.
+- Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
+- Hawiyat does not imply an official partnership with any model provider unless explicitly stated; third-party product and model names belong to their respective owners.
 
 ## Contact
 - Website: https://www.hawiyat.org

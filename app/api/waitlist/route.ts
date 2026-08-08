@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma/prismaClient';
+import { checkRateLimit, getClientIP } from '@/lib/rate-limiter';
 
 const WaitlistSchema = z.object({
   email: z
@@ -14,6 +15,16 @@ const WaitlistSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    // Per-IP rate limit for the email-capture surface (list-pumping / spam abuse).
+    const ip = getClientIP(req);
+    const limit = checkRateLimit(`waitlist:${ip}`, 5, 60 * 60 * 1000);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.', retryAfter: limit.retryAfter },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
 
     const validationResult = WaitlistSchema.safeParse(body);
@@ -28,37 +39,22 @@ export async function POST(req: NextRequest) {
 
     const { email } = validationResult.data;
 
-    const ipAddress =
-      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      req.headers.get('x-real-ip') ||
-      'unknown';
-
-    const userAgent = req.headers.get('user-agent') || 'unknown';
-
     const existingUser = await prisma.waitlist.findUnique({
       where: { email },
     });
 
     if (existingUser) {
-      const position = await prisma.waitlist.count({
-        where: {
-          createdAt: {
-            lte: existingUser.createdAt,
-          },
-        },
-      });
-
+      // Idempotent success — no position returned, so an attacker cannot
+      // enumerate list membership or learn the queue position of an email.
       return NextResponse.json(
-        { error: 'Email already exists in waitlist', position },
-        { status: 409 }
+        { success: true, message: 'Already on the waitlist' },
+        { status: 200 }
       );
     }
 
     const signup = await prisma.waitlist.create({
       data: {
         email,
-        ipAddress,
-        userAgent,
       },
     });
 

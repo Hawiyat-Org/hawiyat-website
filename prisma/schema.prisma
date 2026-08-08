@@ -49,11 +49,11 @@ model EmailSubscription {
 }
 
 model Waitlist {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  ipAddress String   @map("ip_address")
-  userAgent String   @map("user_agent")
-  createdAt DateTime @default(now()) @map("created_at")
+  id        String    @id @default(cuid())
+  email     String    @unique
+  ipAddress String?   @map("ip_address")
+  userAgent String?   @map("user_agent")
+  createdAt DateTime  @default(now()) @map("created_at")
 
   @@map("waitlist")
 }

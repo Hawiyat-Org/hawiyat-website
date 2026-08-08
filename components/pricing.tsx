@@ -130,7 +130,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 shadow-lg shadow-gray-950/5 lg:p-8">
+          <div className="relative flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 shadow-lg shadow-ink/5 lg:p-8">
             <div>
               <div className="mb-4 flex items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
@@ -222,7 +222,7 @@ export default function Pricing() {
                 href={enterpriseWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform duration-300 hover:scale-[1.03] dark:bg-paper dark:text-ink"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
               >
                 Book with the team
                 <MessageCircle className="h-4 w-4" />

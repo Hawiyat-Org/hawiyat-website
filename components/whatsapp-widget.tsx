@@ -23,10 +23,10 @@ export default function WhatsAppWidget() {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <div className="relative">
-        <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-40" />
-        <div className="absolute -inset-2 rounded-full bg-green-400 animate-pulse opacity-30 blur-sm" />
-        <div className="absolute -inset-4 rounded-full bg-green-300 animate-pulse opacity-20 blur-md" />
-        <div className="absolute -inset-6 rounded-full bg-green-200 animate-pulse opacity-10 blur-lg" />
+        <div className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-40 motion-reduce:animate-none motion-reduce:opacity-0" />
+        <div className="absolute -inset-2 rounded-full bg-green-400 animate-pulse opacity-30 blur-sm motion-reduce:animate-none motion-reduce:opacity-0" />
+        <div className="absolute -inset-4 rounded-full bg-green-300 animate-pulse opacity-20 blur-md motion-reduce:animate-none motion-reduce:opacity-0" />
+        <div className="absolute -inset-6 rounded-full bg-green-200 animate-pulse opacity-10 blur-lg motion-reduce:animate-none motion-reduce:opacity-0" />
 
         <button
           onClick={handleClick}

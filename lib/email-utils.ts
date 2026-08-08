@@ -1,6 +1,18 @@
 import { createTransport } from 'nodemailer';
 import juice from 'juice';
 
+// HTML-encode user-controlled values before they are interpolated into email
+// templates, so order fields cannot inject markup into emails that appear to
+// come from Hawiyat (phishing/credential-harvest vector).
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function sendWhatsAppNotification(message: string): Promise<boolean> {
   const apiUrl = process.env.WHATSAPP_API_URL;
   const basicAuth = process.env.WHATSAPP_BASIC_AUTH;
@@ -105,15 +117,15 @@ export async function sendOrderNotification({
           <div class="details">
             <h3>Order Details</h3>
             <table>
-              <tr><td class="label">Order ID:</td><td class="value">${order.id}</td></tr>
-              <tr><td class="label">Service:</td><td class="value">${order.serviceName}</td></tr>
-              <tr><td class="label">Customer:</td><td class="value">${order.customerName}</td></tr>
-              <tr><td class="label">Email:</td><td class="value"><a href="mailto:${order.customerEmail}">${order.customerEmail}</a></td></tr>
-              ${order.customerPhone ? `<tr><td class="label">Phone:</td><td class="value">${order.customerPhone}</td></tr>` : ''}
-              <tr><td class="label">Preferred Payment:</td><td class="value">${order.preferredPayment ? order.preferredPayment.toUpperCase() : 'Not specified'}</td></tr>
-              <tr><td class="label">Status:</td><td class="value">${order.status}</td></tr>
+              <tr><td class="label">Order ID:</td><td class="value">${escapeHtml(order.id)}</td></tr>
+              <tr><td class="label">Service:</td><td class="value">${escapeHtml(order.serviceName)}</td></tr>
+              <tr><td class="label">Customer:</td><td class="value">${escapeHtml(order.customerName)}</td></tr>
+              <tr><td class="label">Email:</td><td class="value"><a href="mailto:${escapeHtml(order.customerEmail)}">${escapeHtml(order.customerEmail)}</a></td></tr>
+              ${order.customerPhone ? `<tr><td class="label">Phone:</td><td class="value">${escapeHtml(order.customerPhone)}</td></tr>` : ''}
+              <tr><td class="label">Preferred Payment:</td><td class="value">${order.preferredPayment ? escapeHtml(order.preferredPayment.toUpperCase()) : 'Not specified'}</td></tr>
+              <tr><td class="label">Status:</td><td class="value">${escapeHtml(order.status)}</td></tr>
               <tr><td class="label">Date:</td><td class="value">${new Date(order.createdAt).toLocaleString()}</td></tr>
-              ${order.notes ? `<tr><td class="label">Notes:</td><td class="value">${order.notes}</td></tr>` : ''}
+              ${order.notes ? `<tr><td class="label">Notes:</td><td class="value">${escapeHtml(order.notes)}</td></tr>` : ''}
             </table>
           </div>
         </div>
@@ -242,7 +254,7 @@ export async function sendOrderConfirmation({
                 <!-- Body -->
                 <tr>
                   <td style="padding: 0 40px 40px;">
-                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Hello ${order.customerName},</h2>
+                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Hello ${escapeHtml(order.customerName)},</h2>
                     <p style="margin: 0 0 32px; color: #a3a3a3; font-size: 15px; line-height: 1.7;">
                       Thank you for your order! We've received it and our team will get back to you shortly with the next steps.
                     </p>
@@ -267,7 +279,7 @@ export async function sendOrderConfirmation({
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td style="color: #737373; font-size: 13px;">Service</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${order.serviceName}</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${escapeHtml(order.serviceName)}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -297,7 +309,7 @@ export async function sendOrderConfirmation({
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td style="color: #737373; font-size: 13px; vertical-align: top;">Notes</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${order.notes}</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${escapeHtml(order.notes)}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -513,7 +525,7 @@ export async function sendBootcampConfirmation({
                 <!-- Body -->
                 <tr>
                   <td style="padding: 0 40px 40px;">
-                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Bonjour ${registration.fullName},</h2>
+                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Bonjour ${escapeHtml(registration.fullName)},</h2>
                     <p style="margin: 0 0 32px; color: #a3a3a3; font-size: 15px; line-height: 1.7;">
                       Ton inscription au <strong style="color: #ffffff;">Hawiyat AI Bootcamp</strong> a été enregistrée avec succès. Prépare-toi à transformer ton mémoire en un vrai produit et à acquérir des compétences qui valent de l'argent.
                     </p>
@@ -528,7 +540,7 @@ export async function sendBootcampConfirmation({
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td style="color: #737373; font-size: 13px; width: 100px;">Université</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.university}</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${escapeHtml(registration.university)}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -538,7 +550,7 @@ export async function sendBootcampConfirmation({
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td style="color: #737373; font-size: 13px;">Filière</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.major}</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${escapeHtml(registration.major)}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -568,7 +580,7 @@ export async function sendBootcampConfirmation({
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td style="color: #737373; font-size: 13px; vertical-align: top;">Sujet PFE</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${registration.topic}</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${escapeHtml(registration.topic)}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -592,7 +604,7 @@ export async function sendBootcampConfirmation({
                                 </table>
                               </td>
                               <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
-                                On te contactera sur WhatsApp au <strong style="color: #ffffff;">${registration.phone}</strong> dans les prochaines 48h.
+                                On te contactera sur WhatsApp au <strong style="color: #ffffff;">${escapeHtml(registration.phone)}</strong> dans les prochaines 48h.
                               </td>
                             </tr>
                             <tr>
