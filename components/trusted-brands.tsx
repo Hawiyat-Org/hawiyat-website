@@ -62,6 +62,7 @@ const TrustedBrands = () => {
         ? "/trust/mercus-academy-dark.webp"
         : "/trust/mercus-academy-light.webp",
       url: "",
+      square: true,
       title: "Mercus Academy — a training institution that trusts Hawiyat",
       alt: "Mercus Academy logo — a training and education institution that trusts Hawiyat for AI and digital services",
       desc: "Mercus Academy is a training and education institution that trusts Hawiyat for AI and digital services.",
@@ -77,7 +78,13 @@ const TrustedBrands = () => {
     >
       {[...brands, ...brands].map((brand, index) => {
         const logo = (
-          <div className="relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
+          <div
+            className={
+              brand.square
+                ? "relative h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28"
+                : "relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48"
+            }
+          >
             <Image
               src={brand.logo}
               alt={brand.alt}
