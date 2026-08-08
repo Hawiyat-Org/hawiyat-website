@@ -4,12 +4,7 @@ import { ArrowRight } from "lucide-react"
 const CallToAction = () => {
   return (
     <section className="relative flex w-full flex-col place-content-center place-items-center px-4 py-16 md:py-24">
-      <div className="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-border bg-surface-dim px-6 py-14 text-center md:py-20">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-signal/10 blur-3xl"
-        />
-
+      <div className="relative w-full max-w-5xl overflow-hidden rounded-lg border border-border bg-surface-dim px-6 py-14 text-center md:py-20">
         <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
             Start
@@ -24,14 +19,14 @@ const CallToAction = () => {
           <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:flex-row reveal-up">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-full bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Start building
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/composer"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
               Meet Composer
             </Link>

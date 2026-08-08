@@ -271,7 +271,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 - **Specific > clever.** Use tokens, numbers, model names, systems — concrete.
 - **No cheap.** "Save money" NEVER first; first is reliability + control. Money is the *final proof point*.
 - **Naming things:** trace verbs for product surfaces:
-  - "Composer" = execution engine; "Execution Console" = the UI.
+  - "Composer" = execution engine; the **Execution Trace** (UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT with mono telemetry) is its signature UI, rendered on `/composer`.
   - A unit of work shipped by Hawiyat is a **"run"** — described as `task → plan → route → execute → evaluate`. (Keep it simple: a task packet in the Trace is "one run." Avoid introducing an unexplained vocabulary like "STAR/BATCH" unless the product UI defines it.)
 - The hero carries the *layer* thesis implicitly ("The layer that decides how your business uses AI"); quote the north-star line verbatim once in a sub-line (hero or FAQ) so it is on record.
 - Segment copy: e-commerce/WhatsApp bar; dev/agency bar; infra/devOps bar.
@@ -305,7 +305,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 | xs | < 640 | 1 col; trace stacks vertical (stages up/down) |
 | sm | ≥640 | panels stack, sidebars hide |
 | md | 768 | 2-col cards; aside layout engages |
-| lg | 1024 | full grip; sticky title aside; console panel right |
+| lg | 1024 | full grip; sticky title aside |
 | xl | 1536 | max-w container |
 
 Mobile: reduced H sizes, tap ≥44px, full-width buttons, hamburger, hidden sidebars.
@@ -330,7 +330,6 @@ NEXT_PUBLIC_APP_URL=https://app.hawiyat.org
 NEXT_PUBLIC_DOCS_URL=https://docs.hawiyat.org
 NEXT_PUBLIC_BLOG_URL=https://blog.hawiyat.org
 NEXT_PUBLIC_CHATWOOT_TOKEN=...
-NEXT_PUBLIC_ENTERPRISE_SCHEDULE_URL=https://www.hawiyat.org/schedule
 GEMINI_API_KEY=...
 ```
 

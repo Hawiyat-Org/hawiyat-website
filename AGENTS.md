@@ -66,15 +66,15 @@ Copy `.env.example` → `.env` if missing.
 ## Identity / IA
 
 **Pages:**
-- `/` home — execution layer story (`DESIGN.md` order)
-- `/hawiyat-composer` — the execution engine (Composer). **Target:** rename to `/composer` with redirect during rebrand.
-- `/ai-algeria` — regional AI positioning.
+- `/` home — execution layer story; order is Hero → Partners marquee → Pricing (PRO / MAX switchable / Enterprise) → Our Numbers → FAQ → CTA → Footer (newsletter removed).
+- `/composer` — the execution engine (Composer); legacy `/hawiyat-composer` redirects here.
 - `/services` — managed services catalog (DZD pricing) + `/services/[slug]` detail pages.
-- `/schedule`, `/about`, `/cyber-security`, `/guides/*`, legal `/terms /privacy /dmca`.
-- Note: `/templates` and `/bootcamp` were removed from the repo — do not reference them in nav/footer/sitemap.
+- `/about` — includes the Algeria band.
+- Legal — `/terms`, `/privacy`, `/dmca`.
+- Note: `/templates`, `/bootcamp`, `/schedule`, `/cyber-security`, `/guides`, `/ai-algeria` were removed from the repo — do not reference them in nav/footer/sitemap.
 
 **Services data** — source of truth is the `services` array in **`lib/data/services.ts`** (type `Service`/`ServicePlan`, 8 entries with `seo`, `details`, `seoContent`, `faq`, optional `plans`, payment-method aware). `components/services/services-catalog.tsx` renders the `/services` grid from it; each service also has a detail page at `/services/[slug]` (`app/services/[slug]/page.tsx`) with `components/services/service-order-form.tsx` + `components/services/service-plans.tsx`. To add/modify services or DZD pricing, edit `lib/data/services.ts` (not the page components).
-**Models:** Booking, Service, BusinessHours, BlockedDate, VerificationCode, Waitlist. API: `/api/schedule/*`. **Friday is CLOSED** by default.
+**Models:** Order, Waitlist, BootcampRegistration. API: `/api/orders`, `/api/chat`, `/api/waitlist`.
 
 ## Testing
 No formal suite. Manual: `pnpm dev` for UI, curl for API, `npx tsx test/email-test.ts` for email utils.
