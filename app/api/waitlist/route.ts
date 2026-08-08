@@ -13,6 +13,16 @@ const WaitlistSchema = z.object({
     .transform(email => email.toLowerCase().trim()),
 });
 
+async function getPosition(createdAt: Date): Promise<number> {
+  return prisma.waitlist.count({
+    where: {
+      createdAt: {
+        lte: createdAt,
+      },
+    },
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     // Per-IP rate limit for the email-capture surface (list-pumping / spam abuse).
@@ -43,28 +53,23 @@ export async function POST(req: NextRequest) {
       where: { email },
     });
 
+    let createdAt: Date;
+
     if (existingUser) {
-      // Idempotent success — no position returned, so an attacker cannot
-      // enumerate list membership or learn the queue position of an email.
-      return NextResponse.json(
-        { success: true, message: 'Already on the waitlist' },
-        { status: 200 }
-      );
+      // Idempotent path: same status + response shape as a new signup so a
+      // probing client cannot distinguish "already on the waitlist" from a
+      // fresh join (the position is returned in both cases).
+      createdAt = existingUser.createdAt;
+    } else {
+      const signup = await prisma.waitlist.create({
+        data: {
+          email,
+        },
+      });
+      createdAt = signup.createdAt;
     }
 
-    const signup = await prisma.waitlist.create({
-      data: {
-        email,
-      },
-    });
-
-    const position = await prisma.waitlist.count({
-      where: {
-        createdAt: {
-          lte: signup.createdAt,
-        },
-      },
-    });
+    const position = await getPosition(createdAt);
 
     return NextResponse.json(
       {

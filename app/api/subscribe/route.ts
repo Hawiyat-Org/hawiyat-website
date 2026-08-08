@@ -36,20 +36,22 @@ export async function POST(request: NextRequest) {
       where: { email },
     })
 
+    let subscribedAt: Date
+
     if (existing) {
-      // Idempotent success — avoid email-enumeration via a distinguishable 409.
-      return NextResponse.json(
-        { success: true, subscribedAt: existing.createdAt },
-        { status: 200 }
-      )
+      // Idempotent path: same status + response shape as a fresh subscribe so
+      // a probing client cannot distinguish "already subscribed" from a new
+      // signup.
+      subscribedAt = existing.createdAt
+    } else {
+      const subscription = await prisma.emailSubscription.create({
+        data: { email },
+      })
+      subscribedAt = subscription.createdAt
     }
 
-    const subscription = await prisma.emailSubscription.create({
-      data: { email },
-    })
-
     return NextResponse.json(
-      { success: true, subscribedAt: subscription.createdAt },
+      { success: true, subscribedAt },
       { status: 201 }
     )
   } catch (error) {

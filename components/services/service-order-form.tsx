@@ -263,7 +263,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 </div>
 
                 {error && (
-                  <div className="mb-4 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
+                  <div className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
                     {error}
                   </div>
                 )}

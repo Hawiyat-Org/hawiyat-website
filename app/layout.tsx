@@ -199,8 +199,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-paper text-ink dark:bg-paper font-sans">
-        {/* accessibility: skip link — targets #content, which now sits ABOVE
-            the header so keyboard users actually skip navigation */}
+        {/* accessibility: skip link — targets #content, which sits BELOW
+            the header in DOM order, so keyboard users actually skip navigation */}
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-surface text-ink border border-border p-2 rounded-md shadow focus:ring-2 focus:ring-signal/60"

@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type NextRequest, NextResponse } from "next/server"
 import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
+import { services } from "@/lib/data/services"
 
 // Simple conversation message interface
 interface ConversationMessage {
@@ -19,6 +20,49 @@ interface ChatRequest {
 // unbounded input is a direct-money abuse vector (monetary DoS).
 const MAX_MESSAGE_LENGTH = 2000
 const MAX_CONVERSATION_LENGTH = 20
+
+// Format a numeric price string ("6000") with thousands separators ("6,000").
+function formatPrice(price: string): string {
+  const n = Number(price.replace(/[^\d.]/g, ""))
+  return Number.isFinite(n) ? n.toLocaleString("en-US") : price
+}
+
+// Derive the plan list for the system prompt from lib/data/services.ts so the
+// chatbot always answers with the current catalog pricing — never a hand-kept
+// copy. ids: composer-pro, composer-max5x, composer-max20x, llm-credit.
+function buildPlansSection(): string {
+  const byId = (id: string) => services.find((s) => s.id === id)
+
+  const pro = byId("composer-pro")
+  const max5x = byId("composer-max5x")
+  const max20x = byId("composer-max20x")
+  const access = byId("llm-credit")
+
+  const lines: string[] = []
+
+  if (pro) {
+    lines.push(
+      `- ${pro.name} (${formatPrice(pro.price)} ${pro.priceLabel}): solo builders — routing, context, caching, fallbacks, evaluation.`
+    )
+  }
+  if (max5x && max20x) {
+    lines.push(
+      `- ${max5x.name} (${formatPrice(max5x.price)} ${max5x.priceLabel}) and ${max20x.name} (${formatPrice(max20x.price)} ${max20x.priceLabel}): teams — higher execution capacity, semantic caching, priority routing, more parallel runs.`
+    )
+  }
+  if (access) {
+    lines.push(
+      `- ${access.name} (${formatPrice(access.price)} ${access.priceLabel}): pay-per-run access to the execution layer for your own tasks.`
+    )
+  }
+
+  lines.push(
+    "- Managed systems: n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting.",
+    "- Enterprise: custom capacity, SLAs, dedicated routing, custom data residency (DZ/EU)."
+  )
+
+  return lines.join("\n")
+}
 
 // POST handler for the Hawiyat AI Composer assistant
 export async function POST(req: NextRequest) {
@@ -78,11 +122,7 @@ export async function POST(req: NextRequest) {
     - Your data is not used to train models.
 
     ## Products and plans
-    - Hawiyat AI Composer Pro (6,000 DA/month): solo builders — routing, context, caching, fallbacks, evaluation.
-    - MAX 5X (15,000 DA/month) and MAX 20X (30,000 DA/month): teams — higher execution capacity, semantic caching, priority routing, more parallel runs.
-    - AI Composer access (2,500 DA/month): pay-per-run access to the execution layer for your own tasks.
-    - Managed systems: n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting.
-    - Enterprise: custom capacity, SLAs, dedicated routing, custom data residency (DZ/EU).
+    ${buildPlansSection()}
 
     ## Tone & Style
     - Expert, concise, and helpful; builder-to-builder.

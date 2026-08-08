@@ -39,21 +39,30 @@ export async function POST(request: NextRequest) {
 
     const { serviceId, serviceName, customerName, customerEmail, customerPhone, notes, preferredPayment } = body
 
-    if (!serviceId || !serviceName || !customerName || !customerEmail) {
+    if (
+      typeof serviceId !== "string" || !serviceId ||
+      typeof serviceName !== "string" || !serviceName ||
+      typeof customerName !== "string" || !customerName ||
+      typeof customerEmail !== "string" || !customerEmail
+    ) {
       return NextResponse.json(
         { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
         { status: 400 }
       )
     }
 
-    if (customerName.length > 120 || customerEmail.length > 254 || (customerPhone && customerPhone.length > 32)) {
+    if (
+      customerName.length > 120 ||
+      customerEmail.length > 254 ||
+      (typeof customerPhone === "string" && customerPhone.length > 32)
+    ) {
       return NextResponse.json(
         { error: "Field too long" },
         { status: 400 }
       )
     }
 
-    if (notes && notes.length > 2000) {
+    if (typeof notes === "string" && notes.length > 2000) {
       return NextResponse.json(
         { error: "Notes too long" },
         { status: 400 }
@@ -90,8 +99,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const normalizedPayment = preferredPayment
-      ? (preferredPayment as string).toUpperCase().replace(/\s+/g, "_")
+    // Normalize phone to a string or null so a malformed type cannot reach Prisma.
+    const normalizedPhone = typeof customerPhone === "string" && customerPhone.trim()
+      ? customerPhone
+      : null
+
+    const normalizedPayment = typeof preferredPayment === "string" && preferredPayment
+      ? preferredPayment.toUpperCase().replace(/\s+/g, "_")
       : null
 
     const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
@@ -108,8 +122,8 @@ export async function POST(request: NextRequest) {
         serviceName,
         customerName,
         customerEmail,
-        customerPhone: customerPhone || null,
-        notes: notes || null,
+        customerPhone: normalizedPhone,
+        notes: typeof notes === "string" ? notes : null,
         preferredPayment: normalizedPayment ? normalizedPayment as PaymentMethod : null,
       },
     })
