@@ -31,7 +31,7 @@ export default function Home() {
           <p className="mx-auto mt-5 max-w-3xl text-lg text-muted-foreground">
             Hawiyat gives developers and businesses local access to AI subscriptions, Composer, automation, hosting, and implementation support. Selected plans are priced in DZD, with assistance in Arabic, French, and English.
           </p>
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/ai-algeria" className="btn">Explore AI in Algeria</Link>
             <Link href="/services" className="btn !bg-transparent !text-foreground border border-border">Compare services</Link>
           </div>

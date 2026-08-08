@@ -15,6 +15,8 @@ export const metadata: Metadata = {
 }
 
 const faqs = [
+  ["Is Hawiyat the AI provider in Algeria?", "Yes. Hawiyat is a registered Algerian société and an AI provider in Algeria for businesses, developers, freelancers, and startups. We provide AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services, with official facturation for every order."],
+  ["Does Hawiyat offer B2B AI services in Algeria?", "Yes. Hawiyat provides B2B AI services in Algeria for businesses and teams, including managed AI subscriptions, automation with n8n, application hosting, WhatsApp integrations, and implementation support."],
   ["What AI services does Hawiyat provide in Algeria?", "Hawiyat offers Composer plans for supported AI models, managed automation, application hosting, WhatsApp integrations, cybersecurity services, implementation guidance, and local support."],
   ["Can I pay for AI services in Algerian dinars?", "Selected Hawiyat plans are priced in Algerian dinars. Current prices and included capacity are listed on the services page; contact the team before ordering if you need a business invoice or custom plan. Every order is facturated  officially invoiced in line with Algerian government requirements."],
   ["Does Hawiyat own the third-party AI models it supports?", "No. Third-party model and product names belong to their respective owners. Hawiyat Composer provides a gateway and optimization layer for supported tools and model providers; availability depends on the selected plan."],
@@ -34,7 +36,7 @@ export default function AIAlgeriaPage() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Hawiyat is a registered Algerian société (company), operating locally in Algeria. Every order is facturated, meaning officially invoiced in line with Algerian government requirements, so you always receive a formal invoice for your purchase.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
             <Link href="/services" className="btn">Compare AI services</Link>
             <a
               href="https://wa.me/213559555951"
@@ -73,7 +75,7 @@ export default function AIAlgeriaPage() {
         </section>
 
         <section className="mt-16">
-          <h2 className="text-3xl font-semibold">AI solutions for Algerian teams</h2>
+          <h2 className="text-3xl font-semibold">B2B AI solutions for Algerian teams</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {[
               ["AI subscriptions in DZD", "Plans for supported AI tools and models, local assistance, and clear service descriptions for Algerian users."],

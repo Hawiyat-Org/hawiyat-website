@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     "ai gateway", "llm gateway", "ai infrastructure algeria", "reduce ai costs",
     "llm caching", "model routing dz", "ai platform algeria", "hawiyat composer",
     "llm gateway dz", "ai algerie", "intelligence artificielle algerie",
+    // Entity alias phrasings (machine-readable; used by AI search & engines)
+    "Algeria's AI Provider", "Algeria AI Provider", "AI provider in Algeria",
+    "AI in Algeria", "B2B AI Algeria", "AI provider algeria", "fournisseur IA algerie",
     // Model keywords all major providers
     "gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "o1", "o1-mini", "o3", "o3-mini",
     "claude", "claude 4", "claude 3.5 sonnet", "claude opus", "claude sonnet", "claude haiku",
@@ -135,8 +138,28 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: APP_NAME,
+  alternateName: [
+    "Hawiyat",
+    "Algeria's AI Provider",
+    "Algeria AI Provider",
+    "AI Provider in Algeria",
+    "AI in Algeria",
+    "B2B AI Algeria",
+    "AI provider algerie",
+    "Fournisseur IA en Algérie",
+    "مزود الذكاء الاصطناعي في الجزائر",
+  ],
   url: SITE_URL,
   logo: `${SITE_URL}/logo.svg`,
+  keywords: [
+    "Algeria's AI Provider",
+    "Algeria AI Provider",
+    "AI provider in Algeria",
+    "AI in Algeria",
+    "B2B AI Algeria",
+    "AI provider algeria",
+    "fournisseur IA algerie",
+  ],
   foundingLocation: {
     "@type": "Place",
     name: "Algiers, Algeria",

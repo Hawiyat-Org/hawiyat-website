@@ -75,10 +75,10 @@ const Header = () => {
               AI in Algeria
             </Link>
             <Link
-              href="/cyber-security"
+              href="/#pricing"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
-              Cyber Security
+              Pricing
             </Link>
             <Link
               href="/services"
@@ -164,11 +164,11 @@ const Header = () => {
               </Link>
 
               <Link
-                href="/cyber-security"
+                href="/#pricing"
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
-                <span className="font-medium">Cyber Security</span>
+                <span className="font-medium">Pricing</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
 

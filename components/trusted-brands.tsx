@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect, useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Users, Handshake, LayoutGrid } from "lucide-react"
+import { Users, Handshake, Cpu } from "lucide-react"
 
 function useCounter(end: number, duration: number = 2000, start: boolean = false) {
   const [count, setCount] = useState(0)
@@ -32,11 +32,10 @@ function useCounter(end: number, duration: number = 2000, start: boolean = false
   return count
 }
 
-function StatCard({ value, label, description, icon: Icon, delay }: { value: number; label: string; description: string; icon: React.ElementType; delay: number }) {
+function StatCard({ value, label, description, icon: Icon, delay, prefix = "+", suffix = "" }: { value: number; label: string; description: string; icon: React.ElementType; delay: number; prefix?: string; suffix?: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.3 })
   const count = useCounter(value, 2000, inView)
-  const prefix = "+"
 
   return (
     <motion.div
@@ -49,7 +48,7 @@ function StatCard({ value, label, description, icon: Icon, delay }: { value: num
       <Icon className="w-16 h-16 text-black dark:text-white mx-auto" />
       <div className="text-center">
         <div className="text-4xl tracking-tight">
-          {prefix}{count}
+          {prefix}{count}{suffix}
         </div>
         <h3 className="text-2xl mt-2">{label}</h3>
       </div>
@@ -69,25 +68,43 @@ const TrustedBrands = () => {
   }, [])
 
   const brands = [
-    { 
-      name: "Itihad", 
-      logo: "/trust/itihad-logo.svg", 
-      url: "https://itihad.group", 
-      large: true 
+    {
+      name: "Itihad",
+      logo: "/trust/itihad-logo.svg",
+      url: "https://itihad.group",
+      large: true,
+      title: "Itihad Group — a company that trusts Hawiyat",
+      alt: "Itihad Group logo — an Algerian business group that trusts Hawiyat for AI, automation, and cloud services",
+      desc: "Itihad Group is a company that trusts Hawiyat for AI, automation, and cloud services in Algeria.",
     },
-    { 
-      name: "ESTIN", 
-      logo: "/trust/estin-logo.svg", 
-      url: "https://estin.dz/", 
-      large: true 
+    {
+      name: "ESTIN",
+      logo: "/trust/estin-logo.svg",
+      url: "https://estin.dz/",
+      large: true,
+      title: "ESTIN — École Supérieure en Informatique, a trusted Hawiyat reference",
+      alt: "ESTIN logo — the Algerian computer science school École Supérieure en Informatique, which trusts Hawiyat for AI access and developer services",
+      desc: "ESTIN (École Supérieure en Informatique) is an Algerian higher education institution that trusts Hawiyat for AI access and developer services.",
     },
-    { 
-      name: "IT Solutions", 
-      logo: mounted && (resolvedTheme === "dark" || theme === "dark") 
-        ? "/trust/itsol-dark.svg" 
-        : "/trust/itsol.svg", 
-      url: "https://itsolutions.dz/", 
-      large: true 
+    {
+      name: "IT Solutions",
+      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
+        ? "/trust/itsol-dark.svg"
+        : "/trust/itsol.svg",
+      url: "https://itsolutions.dz/",
+      large: true,
+      title: "IT Solutions — an IT services company that trusts Hawiyat",
+      alt: "IT Solutions logo — an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation",
+      desc: "IT Solutions is an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation.",
+    },
+    {
+      name: "RMASC",
+      logo: "/trust/rmasc-logo.webp",
+      url: "https://www.sarlrmasc.com/",
+      large: true,
+      title: "RMASC (SARL RMASC) — an Algerian elevator company that trusts Hawiyat",
+      alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company that trusts Hawiyat",
+      desc: "SARL RMASC is an Algerian company specialised in elevator design, installation, and repair that trusts Hawiyat for AI and digital services.",
     },
   ]
 
@@ -105,10 +122,12 @@ const TrustedBrands = () => {
       icon: Handshake,
     },
     {
-      value: 300,
-      label: "Templates",
-      description: "Pre-configured stacks and services ready to deploy in seconds.",
-      icon: LayoutGrid,
+      value: 100,
+      label: "Tokens Served",
+      description: "Tokens processed through Hawiyat Composer's caching and routing.",
+      icon: Cpu,
+      prefix: "+",
+      suffix: "B",
     },
   ]
 
@@ -150,7 +169,7 @@ const TrustedBrands = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="grid grid-cols-3 gap-12 md:grid-cols-3 md:gap-16 lg:gap-20 max-md:gap-8">
+          <div className="grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-16 lg:gap-20 max-md:gap-8">
             {brands.map((brand, index) => (
               <div
                 key={index}
@@ -171,7 +190,8 @@ const TrustedBrands = () => {
                   >
                     <Image
                       src={brand.logo || "/placeholder.svg"}
-                      alt={brand.name}
+                      alt={brand.alt || brand.name}
+                      title={brand.title}
                       fill
                       className="object-contain transition-all duration-500 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
                     />
@@ -181,6 +201,31 @@ const TrustedBrands = () => {
             ))}
           </div>
         </motion.div>
+
+        {/* Structured data: lets search engines & AI crawlers read the references as entities */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "Companies that trust Hawiyat",
+              description:
+                "Algerian companies, institutions, and teams that trust Hawiyat for AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services.",
+              numberOfItems: brands.length,
+              itemListElement: brands.map((brand, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                item: {
+                  "@type": "Organization",
+                  name: brand.name,
+                  url: brand.url,
+                  description: brand.desc,
+                },
+              })),
+            }),
+          }}
+        />
       </div>
     </section>
   )

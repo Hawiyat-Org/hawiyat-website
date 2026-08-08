@@ -10,7 +10,7 @@ const Footer = () => {
       title: "Resources",
       links: [
         { name: "Hawiyat Composer", href: "/hawiyat-composer" },
-        { name: "Cyber Security", href: "/cyber-security" },
+        { name: "Pricing", href: "/#pricing" },
         { name: "Services", href: "/services" },
         { name: "Blog", href: blogUrl || "https://blog.hawiyat.org" },
         { name: "Docs", href: docsUrl || "https://docs.hawiyat.org" },

@@ -63,11 +63,7 @@ export default function Pricing() {
         </motion.div>
 
         {/* Composer Plans */}
-        <div className="mt-12 mb-8 text-center">
-          <h2 className="text-2xl font-semibold">Hawiyat Composer + Claude Code</h2>
-          <p className="text-sm text-muted-foreground mt-1">AI coding plans, billed in DZD. No daily or weekly limits ever.</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3 md:gap-0">
+        <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-0">
           {/* PRO */}
           <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10">
             <div className="space-y-4">
