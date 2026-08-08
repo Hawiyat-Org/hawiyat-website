@@ -74,7 +74,7 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="pt-8 pb-10 md:pt-12 md:pb-16">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-2xl space-y-4 text-center">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
             Pricing
@@ -87,9 +87,9 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid md:grid-cols-3">
           {/* PRO */}
-          <div className="flex flex-col justify-between rounded-lg border border-border bg-surface p-6 lg:p-8">
+          <div className="rounded-lg flex flex-col justify-between border border-border bg-surface p-6 max-md:rounded-b-none max-md:border-b-0 md:rounded-r-none md:border-r-0 lg:p-8">
             <div className="space-y-5">
               <div>
                 <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface p-6 lg:p-8">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 max-md:rounded-none max-md:border-t-0 max-md:border-b-0">
             <div>
               <div className="mb-4 flex items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
@@ -184,7 +184,7 @@ export default function Pricing() {
           </div>
 
           {/* ENTERPRISE */}
-          <div className="relative flex flex-col justify-between rounded-lg border-2 border-ink bg-surface p-6 lg:p-8">
+          <div className="rounded-lg flex flex-col justify-between border-2 border-ink bg-surface p-6 max-md:rounded-t-none max-md:border-t-0 md:rounded-l-none md:border-l-0 lg:p-8">
             <div className="space-y-5">
               <div>
                 <div className="flex items-center justify-between">
