@@ -11,18 +11,18 @@ const OurNumbers = () => (
   <section className="w-full py-16 md:py-20">
     <div className="mx-auto max-w-6xl px-6">
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Our numbers</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Proof, not promises</p>
         <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-          The execution layer, in production.
+          Proof it works.
         </h2>
         <p className="mt-3 text-sm text-muted-ink">
-          Verified from our own operations — nothing here is guessed.
+          Straight from our own operations — we only print what&rsquo;s real.
         </p>
       </div>
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard value="100+" label="paying clients" />
+        <StatCard value="100+" label="businesses paying in DZD" />
         <StatCard value="10+" label="resellers" />
-        <StatCard value="100B+" label="tokens executed" />
+        <StatCard value="100B+" label="AI tasks processed" />
         <StatCard value="≈2.6M DZD" label="annual recurring revenue (DZD)" />
       </div>
     </div>

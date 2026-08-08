@@ -149,18 +149,17 @@ export default function ComposerPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
-              EXECUTION LAYER · MODEL-INDEPENDENT
+              THE ENGINE BEHIND HAWIYAT
             </p>
             <h1 className="text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-7xl reveal-up">
               Hawiyat AI Composer
             </h1>
             <p className="text-2xl font-semibold text-ink md:text-3xl reveal-up">
-              The AI execution engine.
+              The engine that figures out the best way to do each task.
             </p>
             <p className="max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg reveal-up">
-              Composer sits between frontier AI models and the systems you run — WhatsApp, CRM,
-              ERP, email, databases, workflows. One task in. The best model, context, tools, and
-              fallbacks out. Every run evaluated. Every cost in DZD.
+              Give Composer a task. It picks the best AI, pulls in the context from your systems,
+              and hands you back a result it has already checked. No model juggling, no glue code.
             </p>
             <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
               <Link
@@ -194,9 +193,10 @@ export default function ComposerPage() {
               Every task becomes a run.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              A task packet enters, and Composer plans, routes, and executes it across the best
-              models and tools — then grades the result and learns. No scripts to babysit, no
-              connectors to glue together.
+              Think of Composer as a careful coworker. You hand it a task — &ldquo;reply to order
+              1024 on WhatsApp in Arabic&rdquo; — and it figures out the rest: which AI is best,
+              what it needs to know, and whether the answer is good enough before it reaches your
+              customer.
             </p>
           </div>
 
@@ -257,9 +257,9 @@ export default function ComposerPage() {
                   One layer. Every model. Every system.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  Hawiyat sits between the frontier models and the systems you already run.
-                  Composer speaks to both — and you decide which models and which systems.
-                  Whatever AI exists tomorrow, you don&rsquo;t rebuild the layer.
+                  You already run your business on WhatsApp, a CRM, and spreadsheets. Composer
+                  connects to all of it — and to every major AI — so you never pick a
+                  &ldquo;model.&rdquo; You just pick a task.
                 </p>
               </div>
             </div>
@@ -346,7 +346,7 @@ export default function ComposerPage() {
             <div className="rounded-3xl border border-border bg-surface p-8 text-center">
               <p className="font-mono text-5xl font-bold text-signal md:text-6xl">100+</p>
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                clients on the execution layer
+                clients on the platform
               </p>
             </div>
             <div className="rounded-3xl border border-border bg-surface p-8 text-center">
@@ -470,7 +470,7 @@ export default function ComposerPage() {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <SectionEyebrow>START</SectionEyebrow>
           <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-            Your first task, executed in 5 minutes.
+            Have your first task running today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
             Pick a plan on the services page — or bring the whole stack. Composer runs the layer;

@@ -8,15 +8,15 @@ const HeroSection = () => {
     >
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-6 pb-16 pt-32 text-center md:pt-40">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-          Hawiyat AI Composer · Execution Layer
+          AI that works for your business
         </p>
 
         <h1 className="max-w-3xl text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl xl:text-7xl">
-          The layer that decides how your business uses AI.
+          Your AI just works.
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
-          The right model for every task, your systems connected, results you can verify — billed in DZD, supported from Algeria.
+          Hawiyat picks the best AI for the job, connects your systems, and checks the result — billed in DZD, supported from Algeria.
         </p>
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
@@ -45,12 +45,12 @@ const HeroSection = () => {
             "@type": "WebPage",
             url: "https://www.hawiyat.org/",
             name: "Hawiyat — AI infrastructure platform",
-            headline: "The layer that decides how your business uses AI.",
+            headline: "Your AI just works.",
             about: {
               "@type": "Organization",
               name: "Hawiyat",
               description:
-                "The AI infrastructure platform between frontier AI models and business systems — WhatsApp, CRM, ERP, email, databases, workflows. Model-independent, evaluated on every run, priced in DZD.",
+                "The AI infrastructure platform between frontier AI models and the systems your business runs — WhatsApp, CRM, ERP, email, databases, workflows. Model-independent, every run evaluated, priced in DZD.",
             },
           }),
         }}

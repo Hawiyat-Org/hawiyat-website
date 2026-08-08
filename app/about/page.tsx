@@ -28,7 +28,10 @@ export default function AboutPage() {
               About <span className="font-medium">Us</span>
             </h1>
             <p className="text-base text-ink leading-relaxed max-md:text-sm">
-              Hawiyat is the AI infrastructure platform based in Algeria. We build and run the execution layer between frontier AI models and the systems businesses rely on — WhatsApp, CRM, ERP, email, databases, workflows. Our Composer engine plans, routes, and executes every task: the best model, the right context, automatic fallbacks, and an evaluated result — priced in DZD, on our own cloud.
+              Hawiyat is an Algerian company that makes AI actually work for businesses. We connect
+              the best AI models to the tools you already use — WhatsApp, CRM, email, databases —
+              and we check every result before it reaches you. Founded in Algiers. Priced in dinars.
+              Built on our own cloud.
             </p>
             <p className="text-sm text-muted-ink">
               Founded in Algiers • Incubated by Itihad • 100+ clients
@@ -378,17 +381,16 @@ export default function AboutPage() {
 
         <div className="relative mx-auto max-w-4xl px-6 flex flex-col items-center gap-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-foreground/5 border border-foreground/10 text-foreground/60 text-xs uppercase tracking-widest">
-            Ready to scale?
+            Got a project in mind?
           </div>
 
           <h2 className="text-5xl md:text-6xl max-md:text-4xl font-bold leading-[1.1] tracking-tight text-ink">
-            Let&apos;s Build<br />
-            <span className="font-medium">Together</span>
+            Let&apos;s build something together.
           </h2>
 
           <p className="max-w-xl text-lg text-muted-ink leading-relaxed">
-            Cloud infrastructure, AI tooling, or a hosting partner. If you need any
-            of it, we want to hear from you.
+            Tell us what you&apos;re building. AI infrastructure, automation, hosting, or something
+            we haven&apos;t heard yet — we&apos;d love to talk.
           </p>
 
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
@@ -410,7 +412,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-xs text-muted-ink mt-8">
-            No commitment. Free consultation. Algerian team.
+            Free consultation, no pressure — talk to a real Algerian team.
           </p>
         </div>
       </section>

@@ -7,14 +7,14 @@ const CallToAction = () => {
       <div className="relative w-full max-w-5xl overflow-hidden rounded-lg border border-border bg-surface-dim px-6 py-14 text-center md:py-20">
         <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-            Start
+            Ready when you are
           </p>
           <h2 className="text-4xl font-bold leading-tight text-ink md:text-5xl">
-            Your first task, executed in 5 minutes.
+            Have your first task running today.
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a plan on the services page, connect your tools, and run your first task on the
-            execution layer. Composer plans, routes, and evaluates — you run the business.
+            Pick a plan, connect your tools, and send your first task. Hawiyat handles the models —
+            you handle the business.
           </p>
           <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

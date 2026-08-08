@@ -8,27 +8,27 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is the Hawiyat execution layer?",
+      question: "What does Hawiyat actually do?",
       answer:
-        "Hawiyat is the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs — WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, businesses will need a layer that decides how to use it — that layer is Hawiyat.",
+        "Think of Hawiyat as the layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs — WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, you'll need a layer that decides how to use it.",
     },
     {
-      question: "Is Hawiyat tied to one AI model?",
+      question: "Am I locked into one AI model?",
       answer:
         "No. Models are routes, chosen per task by quality, latency, and cost. GPT, Claude, Gemini, and open models all sit behind the same layer, so a provider change never breaks your pipeline. The layer outlives any single model.",
     },
     {
-      question: "How do costs work?",
+      question: "What will this cost me?",
       answer:
         "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost — roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed.",
     },
     {
-      question: "Is my data used to train models?",
+      question: "Is my data safe — do you train on it?",
       answer:
         "No. Your data is never used to train models. Runs carry your context to complete the task, and the evaluation logs are yours to audit. Data stays between your systems and the layer.",
     },
     {
-      question: "How do I start?",
+      question: "How do I get started?",
       answer:
         "Pick a plan on the services page — Composer Pro for solo builders or a MAX tier for teams — or order Enterprise for the full stack. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day.",
     },
@@ -49,7 +49,7 @@ const FAQ = () => {
             FAQ
           </p>
           <h2 className="mt-4 text-4xl font-semibold text-ink md:text-5xl">
-            Frequently asked questions
+            Questions, answered straight
           </h2>
         </div>
 
