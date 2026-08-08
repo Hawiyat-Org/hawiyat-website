@@ -84,7 +84,7 @@ export const services: Service[] = [
       { icon: Shield, text: "Fully Managed" },
     ],
     seo: {
-      title: "n8n Hosting in Algeria | Managed Workflow Automation | Hawiyat",
+      title: "n8n Hosting in Algeria | Managed Workflow Automation",
       description: "Managed n8n hosting in Algeria. Automate workflows, connect apps, and build AI pipelines without server management. 8000 DA/year with 99.9% uptime.",
       keywords: [
         "n8n hosting algeria",
@@ -214,7 +214,7 @@ export const services: Service[] = [
     seo: {
       title: "Hawiyat AI Composer Pro | AI Execution Layer in Algeria",
       description:
-        "Run AI tasks on the Hawiyat AI Composer execution layer. Model-agnostic routing, context, fallbacks, and evaluation for solo builders. 6,000 DA/month in DZD.",
+        "Run AI tasks on the Hawiyat AI Composer execution layer. Model-agnostic routing, context, fallbacks, and evaluation for solo builders. 6,000 DA/month.",
       keywords: [
         "ai execution layer algeria",
         "hawiyat ai composer",
@@ -301,7 +301,7 @@ export const services: Service[] = [
       { icon: Zap, text: "Auto Deploy" },
     ],
     seo: {
-      title: "Basic Web Hosting in Algeria | 1000 DA/month | Hawiyat",
+      title: "Basic Web Hosting in Algeria | 1000 DA/month",
       description: "Managed web hosting in Algeria for personal projects and portfolios. Free SSL, auto-deploy, 512MB RAM, local support. 1000 DA/month.",
       keywords: [
         "web hosting algeria",
@@ -387,7 +387,7 @@ export const services: Service[] = [
       { icon: Shield, text: "Fully Managed" },
     ],
     seo: {
-      title: "WhatsApp Business API in Algeria | Evolution API | Hawiyat",
+      title: "WhatsApp Business API in Algeria | Evolution API",
       description: "WhatsApp Business API hosting in Algeria. Build chatbots, send notifications, automate customer support. 7000 DA/year.",
       keywords: [
         "whatsapp api algeria",
@@ -517,9 +517,9 @@ export const services: Service[] = [
       { icon: Clock, text: "Evaluate Every Run" },
     ],
     seo: {
-      title: "Hawiyat AI Composer MAX 5X | 5X Execution Capacity | Algeria",
+      title: "Hawiyat AI Composer MAX 5X | 5X Capacity | Algeria",
       description:
-        "5X base execution capacity on the Hawiyat AI Composer execution layer, more parallel runs and tasks, with routing, fallbacks, and evaluation. 15,000 DA/month.",
+        "5X base execution capacity on the Hawiyat AI Composer execution layer with more parallel runs, routing, fallbacks, and evaluation. 15,000 DA/month.",
       keywords: [
         "ai execution capacity algeria",
         "hawiyat ai composer max",
@@ -610,9 +610,9 @@ export const services: Service[] = [
       { icon: Clock, text: "Evaluate Every Run" },
     ],
     seo: {
-      title: "Hawiyat AI Composer MAX 20X | Maximum Execution Capacity | Algeria",
+      title: "Hawiyat AI Composer MAX 20X | 20X Capacity | Algeria",
       description:
-        "20X base execution capacity on the Hawiyat AI Composer execution layer for teams and agencies. Parallel throughput, hybrid compliance, evaluation. 30,000 DA/month.",
+        "20X base execution capacity on the Hawiyat AI Composer execution layer. Parallel throughput, hybrid compliance, evaluation. 30,000 DA/month.",
       keywords: [
         "ai execution capacity algeria enterprise",
         "hawiyat ai composer enterprise",
@@ -706,7 +706,7 @@ export const services: Service[] = [
       { icon: Clock, text: "Priority Support" },
     ],
     seo: {
-      title: "VIP Web Hosting in Algeria | 2 Apps + Database | 2000 DA/month",
+      title: "VIP Web Hosting in Algeria | 2 Apps + Database",
       description: "Premium web hosting in Algeria for full-stack apps. 2 applications, managed database, free SSL, priority support. 2000 DA/month.",
       keywords: [
         "premium hosting algeria",
@@ -797,9 +797,9 @@ export const services: Service[] = [
       { icon: Clock, text: "Per-Task Cost" },
     ],
     seo: {
-      title: "AI Composer access in Algeria | Pay-per-run | Hawiyat AI Composer",
+      title: "AI Composer access in Algeria | Pay-per-run",
       description:
-        "Pay-per-run access to the Hawiyat AI Composer execution layer. Model-agnostic routing, caching, fallbacks, and transparent per-task pricing in DZD. 2,500 DA/month.",
+        "Pay-per-run access to the Hawiyat AI Composer execution layer. Model-agnostic routing, caching, fallbacks, transparent per-task pricing. 2,500 DA/month.",
       keywords: [
         "ai composer access algeria",
         "ai execution layer algeria",

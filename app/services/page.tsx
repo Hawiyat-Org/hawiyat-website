@@ -3,9 +3,9 @@ import ServicesCatalog from "@/components/services/services-catalog"
 import { createMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createMetadata({
-  title: "AI Execution Services in Algeria | Hawiyat AI Composer, n8n, Hosting",
+  title: "AI Execution Services in Algeria | n8n, WhatsApp API",
   description:
-    "Run your stack on the Hawiyat execution layer. Hawiyat AI Composer for model-agnostic AI execution, n8n automation, Evolution API WhatsApp, and app hosting, all priced in Algerian dinars with local support.",
+    "AI execution services in Algeria: Hawiyat AI Composer, n8n automation, WhatsApp API, and app hosting — priced in DZD with local support.",
   path: "/services",
 })
 

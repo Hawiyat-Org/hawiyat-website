@@ -2,9 +2,9 @@ import type { ReactNode } from "react"
 import { createMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createMetadata({
-  title: "AI Execution Services in Algeria | Hawiyat AI Composer, n8n, Hosting",
+  title: "AI Execution Services in Algeria | n8n, WhatsApp API",
   description:
-    "Run your stack on the Hawiyat execution layer: Hawiyat AI Composer, n8n automation, Evolution API WhatsApp, and app hosting, priced in DZD with local support for Algeria.",
+    "AI execution services in Algeria: Hawiyat AI Composer, n8n automation, WhatsApp API, and app hosting — priced in DZD with local support.",
   path: "/services",
 })
 
