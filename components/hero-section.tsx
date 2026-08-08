@@ -37,7 +37,7 @@ const HeroSection = () => {
         </div>
 
         <p className="font-mono text-xs text-muted-ink">
-          100+ paying clients · 100B+ tokens executed · ≈2.6M DZD ARR
+          100+ paying clients · 100B+ tokens · ≈2.6M DZD ARR
         </p>
 
         <a

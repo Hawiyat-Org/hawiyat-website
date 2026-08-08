@@ -8,7 +8,7 @@ Rework the Hawiyat site to the founder's monochrome, humanified, hawiyat.org-fai
 
 **Success criteria:**
 - No chromatic accent tokens remain except `--danger` (red) and `--ok` (green); everything else is black→white scale.
-- Home order is exactly: Hero → Partners marquee → Pricing (PRO / switchable MAX 5X-20X / Enterprise) → Our Numbers → FAQ → CTA → Footer.
+- Home order is exactly: Hero → Partners marquee → Our Numbers → Pricing (PRO / switchable MAX 5X-20X / Enterprise) → FAQ → CTA → Footer.
 - Newsletter component + `/api/subscribe` + `EmailSubscription` Prisma model removed; privacy policy §4 updated.
 - Algeria band renders on `/about` only.
 - Hydration error ("Expected `<circle>` in `<svg>`") gone — verified in browser with dark mode + reload.

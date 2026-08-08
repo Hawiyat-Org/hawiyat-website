@@ -153,7 +153,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 <div className="flex-1">
                   <h3 className="font-semibold text-base text-ink">{service.name}</h3>
                   <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-xl font-bold text-ink">{Number(service.price).toLocaleString("en-US")}</span>
+                    <span className="text-xl font-bold text-ink">{Number(String(service.price).replace(/,/g, "")).toLocaleString("en-US")}</span>
                     <span className="text-sm text-muted-ink">{service.priceLabel}</span>
                   </div>
                 </div>

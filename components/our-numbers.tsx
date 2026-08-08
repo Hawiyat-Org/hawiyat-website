@@ -22,7 +22,7 @@ const OurNumbers = () => (
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard value="100+" label="businesses paying in DZD" />
         <StatCard value="10+" label="resellers" />
-        <StatCard value="100B+" label="AI tasks processed" />
+        <StatCard value="100B+" label="tokens" />
         <StatCard value="≈2.6M DZD" label="annual recurring revenue (DZD)" />
       </div>
     </div>
