@@ -52,3 +52,25 @@ Why A over the alternatives: B (router Worker in front) is gold-plating for an i
 - Branch convention: every PR, or only `feature/*`?
 - Preview email behavior: real sends or stub until the nodemailer spike settles it?
 - Workers plan: Hyperdrive is a **Paid-plan** feature (~$5/mo) — confirmed budget?
+
+---
+
+## Status (2026-08-08) — intent CONFIRMED and largely shipped
+
+**What landed** (branch `feat/cloudflare-workers-migration`, all reviewed):
+- Spike gate passed: full Next 14.2.33 app builds to a Worker (`@opennextjs/cloudflare` 1.20.2).
+- Router + test branch worker deployed and live (pages 200 on the real edge).
+- CI workflow (deploy/comment/teardown) committed.
+- 10/12 GitHub secrets set via gh (missing `CLOUDFLARE_API_TOKEN`, `GEMINI_API_KEY` — user-created).
+- **Schema bug found & fixed** (ADR-5): 6 booking models were missing from `schema.prisma` — the booking/schedule/waitlist endpoints were 500ing on Vercel prod too. Restored from Neon introspection; Node path proven.
+
+**Still open:**
+- Wildcard DNS record `*.preview.hawiyat.org` (AAAA `100::`, proxied) — one manual dashboard step (token is zone-read-only; wrangler has no DNS command).
+- DB-backed endpoints on workerd: `prisma:error t2 is not a constructor` after the WASM engine fix — direct connection is one bundling bug from green; official production pattern is Hyperdrive (Workers Paid). See ADR-4.
+- PR to `main` (fixes prod booking via the schema restore).
+
+**Refinements vs the original one-pager:**
+- Domain is `hawiyat.org` (not hawiyat.cloud); zone already on Cloudflare DNS, Free plan.
+- Account: `hawiyat-team`, workers.dev subdomain `shmsaldynbwbst`.
+- DB is Neon (pooled endpoint) — pooler question settled, no PgBouncer needed.
+- Direct-connection test was correct to attempt; the repo schema bug (not Cloudflare) was the first real blocker.
