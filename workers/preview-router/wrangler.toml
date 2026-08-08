@@ -4,8 +4,12 @@
 name = "hawiyat-preview-router"
 main = "src/index.ts"
 compatibility_date = "2026-08-01"
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 account_id = "86afaa372f06c7516c563e152faff79b"
+
+# Keep workers.dev reachable even though custom routes exist (CI deploys
+# otherwise disable it, which breaks the router's own workers.dev URL).
+workers_dev = true
 
 # Branded preview host: <slug>.preview.hawiyat.org -> this router.
 # Requires the wildcard DNS record *.preview.hawiyat.org (proxied) in the zone.

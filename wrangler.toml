@@ -19,4 +19,5 @@ NEXT_PUBLIC_CHATWOOT_TOKEN = ""
 # Secrets are NOT stored here. Set per-branch at deploy time:
 #   echo "<value>" | wrangler secret put <NAME> --name hawiyat-preview-<slug>
 # Required (same names as main env): DATABASE_URL, GEMINI_API_KEY,
-# SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM
+# SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, SMTP_FROM,
+# TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID

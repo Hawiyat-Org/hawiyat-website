@@ -40,6 +40,8 @@ jobs:
           PR_HEAD_REF: ${{ github.head_ref }}
         run: |
           slug=$(echo "${PR_HEAD_REF}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | cut -c1-40)
+          if [ -z "$slug" ]; then slug="branch"; fi
+          if [ "$slug" = "router" ]; then slug="router-branch"; fi
           echo "slug=${slug}" >> "$GITHUB_ENV"
 
       - name: Deploy preview worker
@@ -160,6 +162,8 @@ jobs:
           PR_HEAD_REF: ${{ github.head_ref }}
         run: |
           slug=$(echo "${PR_HEAD_REF}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | cut -c1-40)
+          if [ -z "$slug" ]; then slug="branch"; fi
+          if [ "$slug" = "router" ]; then slug="router-branch"; fi
           echo "slug=${slug}" >> "$GITHUB_ENV"
 
       - name: Delete preview worker
