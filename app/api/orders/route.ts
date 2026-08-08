@@ -104,6 +104,11 @@ export async function POST(request: NextRequest) {
       ? customerPhone
       : null
 
+    // Normalize notes to a string or null for both the DB write and the
+    // notification templates — the templates must never escapeHtml() a
+    // non-string (a truthy non-string would throw AFTER the order commits).
+    const normalizedNotes = typeof notes === "string" ? notes : null
+
     const normalizedPayment = typeof preferredPayment === "string" && preferredPayment
       ? preferredPayment.toUpperCase().replace(/\s+/g, "_")
       : null
@@ -123,7 +128,7 @@ export async function POST(request: NextRequest) {
         customerName,
         customerEmail,
         customerPhone: normalizedPhone,
-        notes: typeof notes === "string" ? notes : null,
+        notes: normalizedNotes,
         preferredPayment: normalizedPayment ? normalizedPayment as PaymentMethod : null,
       },
     })
@@ -133,7 +138,7 @@ export async function POST(request: NextRequest) {
 <b>Service:</b> ${escapeHtml(serviceName)}
 <b>Customer:</b> ${escapeHtml(customerName)}
 <b>Email:</b> ${escapeHtml(customerEmail)}
-${customerPhone ? `<b>Phone:</b> ${escapeHtml(customerPhone)}\n` : ""}${notes ? `<b>Notes:</b> ${escapeHtml(notes)}\n` : ""}
+${normalizedPhone ? `<b>Phone:</b> ${escapeHtml(normalizedPhone)}\n` : ""}${normalizedNotes ? `<b>Notes:</b> ${escapeHtml(normalizedNotes)}\n` : ""}
 <b>Order ID:</b> ${order.id}
 <b>Date:</b> ${new Date(order.createdAt).toLocaleString()}`
 
@@ -142,8 +147,8 @@ ${customerPhone ? `<b>Phone:</b> ${escapeHtml(customerPhone)}\n` : ""}${notes ? 
 📦 *Service:* ${serviceName}
 👤 *Customer:* ${customerName}
 📧 *Email:* ${customerEmail}
-${customerPhone ? `📱 *Phone:* ${customerPhone}\n` : ""}💳 *Payment:* ${normalizedPayment ?? 'Not specified'}
-${notes ? `📝 *Notes:* ${notes}\n` : ""}
+${normalizedPhone ? `📱 *Phone:* ${normalizedPhone}\n` : ""}💳 *Payment:* ${normalizedPayment ?? 'Not specified'}
+${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}
 🆔 *Order ID:* ${order.id}
 📅 *Date:* ${new Date(order.createdAt).toLocaleString()}`
 
