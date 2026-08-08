@@ -83,7 +83,7 @@ const HeroSection = () => {
                 "@type": "WebPage",
                 url: "https://www.hawiyat.org/",
                 name: "Algeria's AI Provider — AI in Algeria",
-                headline: "Algeria's AI Provider | Algeria AI Provider | AI in Algeria | B2B AI Algeria | AI Provider in Algeria",
+                headline: "Algeria's AI Provider | Algeria AI Provider | AI in Algeria | B2B AI Algeria | AI Provider in Algeria | ai provider in algeria",
                 about: {
                   "@type": "Organization",
                   name: "Hawiyat",
@@ -93,6 +93,7 @@ const HeroSection = () => {
                     "AI in Algeria",
                     "B2B AI Algeria",
                     "AI Provider in Algeria",
+                    "ai provider in algeria",
                     "AI provider algerie",
                     "Fournisseur IA en Algérie",
                     "مزود الذكاء الاصطناعي في الجزائر",
