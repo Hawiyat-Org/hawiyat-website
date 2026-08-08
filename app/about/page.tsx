@@ -333,35 +333,104 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Location ─── */}
-      <section className="w-full py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">HQ</span>
-            <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We're At</h2>
+      {/* ─── Location / HQ ─── */}
+      <section className="relative w-full py-16 md:py-24 overflow-hidden">
+        <div className="purple-bg-grad absolute right-[-5%] top-[15%] h-[200px] w-[200px] max-md:hidden pointer-events-none" />
+        <div className="mx-auto max-w-6xl px-6 relative">
+          <div className="mb-12 flex max-lg:flex-col max-lg:gap-4 lg:items-end lg:justify-between">
+            <div>
+              <span className="text-xs text-foreground/40 uppercase tracking-widest">HQ</span>
+              <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We're At</h2>
+            </div>
+            <p className="max-w-sm text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+              Building cloud infrastructure for North Africa out of Itihad's innovation hub in Boumerdes — visit us, or reach us online.
+            </p>
           </div>
-          <div className="flex max-md:flex-col gap-5">
-            <div className="flex-1 bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl overflow-hidden">
+
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
+            {/* Map with custom location pin */}
+            <div className="relative min-h-[380px] overflow-hidden rounded-3xl border border-foreground/10 bg-[#f6f7fb] dark:bg-[#141414] shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200.3!2d3.4671314!3d36.7607705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e69f0bb134dd5%3A0x5c74ae92a333fc22!2sItihad!5e1!3m2!1sen!2sdz!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d800!2d3.4671314!3d36.7607705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sdz!4v1"
                 width="100%"
                 height="100%"
-                style={{ minHeight: "280px" }}
+                style={{
+                  minHeight: "380px",
+                  filter:
+                    mounted && resolvedTheme === "dark"
+                      ? "grayscale(1) invert(0.92) contrast(0.9) hue-rotate(180deg)"
+                      : undefined,
+                }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full h-full"
               />
-            </div>
-            <div className="flex-1 bg-[#f6f7fb] dark:bg-[#141414] rounded-2xl p-8 flex gap-5 items-start">
-              <div className="w-12 h-12 rounded-xl bg-black dark:bg-white flex items-center justify-center shrink-0">
-                <MapPin className="w-6 h-6 text-white dark:text-black" />
+
+              {/* Custom branded pin (Google's default pin removed from embed) */}
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="relative -mt-6">
+                  <span className="absolute -inset-5 rounded-full bg-purple-600/30 animate-ping" />
+                  <span className="absolute -inset-10 rounded-full bg-purple-600/20 animate-ping [animation-delay:600ms]" />
+                  <div className="relative flex flex-col items-center">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black dark:bg-white shadow-xl ring-4 ring-white/70 dark:ring-black/50">
+                      <MapPin className="h-6 w-6 text-white dark:text-black" />
+                    </div>
+                    <span className="-mt-1 h-2.5 w-2.5 rotate-45 rounded-[2px] bg-black dark:bg-white" />
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Hawiyat HQ</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Itihad Campus, Boumerdes. Based out of Itihad's innovation hub, building cloud infrastructure for North Africa.
-                </p>
+
+              {/* Address chip */}
+              <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 dark:bg-black/80 px-4 py-2 shadow-lg backdrop-blur-sm">
+                <MapPin className="h-4 w-4 text-black dark:text-white" />
+                <span className="text-xs font-medium">Itihad Campus, Boumerdes</span>
+              </div>
+
+              {/* Open in Google Maps */}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Itihad+Boumerdes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-black dark:bg-white px-4 py-2 text-xs font-medium text-white dark:text-black shadow-lg transition-all duration-300 hover:scale-[1.04] active:scale-95"
+              >
+                Open in Google Maps
+                <i className="bi bi-box-arrow-up-right" />
+              </a>
+            </div>
+
+            {/* Info card */}
+            <div className="flex flex-col justify-between gap-8 rounded-3xl border border-foreground/10 bg-[#f6f7fb] dark:bg-[#141414] p-8">
+              <div className="flex items-start gap-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black dark:bg-white">
+                  <MapPin className="h-6 w-6 text-white dark:text-black" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Hawiyat HQ</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Itihad Campus, Boumerdes. Based out of Itihad's innovation hub, building cloud infrastructure for North Africa.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="https://wa.me/213559555951"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-black dark:bg-white px-5 py-3.5 text-sm font-medium text-white dark:text-black transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                >
+                  <i className="bi bi-whatsapp" />
+                  WhatsApp us
+                </a>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Itihad+Boumerdes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-foreground/20 px-5 py-3.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-foreground/5 hover:border-foreground/40 active:scale-95"
+                >
+                  Get Directions
+                  <i className="bi bi-arrow-up-right" />
+                </a>
               </div>
             </div>
           </div>
