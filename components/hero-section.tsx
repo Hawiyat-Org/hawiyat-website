@@ -68,6 +68,40 @@ const HeroSection = () => {
             </span>
           </h1>
 
+          {/*
+            Machine-readable entity aliases for this hero section.
+            AI search & search engines read these phrasings; they are never
+            rendered to humans. This is the legitimate channel for
+            "invisible" keyword coverage (structured data), unlike CSS-hidden
+            text which Google treats as spam.
+          */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                url: "https://www.hawiyat.org/",
+                name: "Algeria's AI Provider — AI in Algeria",
+                headline: "Algeria's AI Provider | Algeria AI Provider | AI in Algeria | B2B AI Algeria | AI Provider in Algeria",
+                about: {
+                  "@type": "Organization",
+                  name: "Hawiyat",
+                  alternateName: [
+                    "Algeria's AI Provider",
+                    "Algeria AI Provider",
+                    "AI in Algeria",
+                    "B2B AI Algeria",
+                    "AI Provider in Algeria",
+                    "AI provider algerie",
+                    "Fournisseur IA en Algérie",
+                    "مزود الذكاء الاصطناعي في الجزائر",
+                  ],
+                },
+              }),
+            }}
+          />
+
           <div className="reveal-up mt-8 max-md:mt-4 max-w-[600px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
             Hawiyat Composer routes and caches every request between your coding tools and the AI models you use. Same endpoints. Priced in DZD, backed by our own cloud.
           </div>
