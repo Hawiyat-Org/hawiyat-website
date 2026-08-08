@@ -22,6 +22,8 @@ export default function Pricing() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '213559555951'
   const customPlanMessage = encodeURIComponent('Hello! I need a custom hosting plan.')
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${customPlanMessage}`
+  const enterpriseMessage = encodeURIComponent('Hello! I want to discuss the Hawiyat Composer Enterprise plan.')
+  const enterpriseWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${enterpriseMessage}`
 
   const containerVariants = {
     hidden: {},
@@ -45,7 +47,7 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" ref={sectionRef} className="py-16 md:py-32">
+    <section id="pricing" ref={sectionRef} className="pt-8 pb-10 md:pt-12 md:pb-16">
       <div className="mx-auto max-w-5xl px-6">
         <motion.div 
           ref={headerRef}
@@ -58,7 +60,7 @@ export default function Pricing() {
             Plans That Scale With You
           </h2>
           <p className="text-muted-foreground">
-            Hawiyat Composer for AI costs, Cloud Hosting for everything else. Or both.
+            Hawiyat Composer for AI costs, AI Automation for everything else. Or both.
           </p>
         </motion.div>
 

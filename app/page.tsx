@@ -7,6 +7,8 @@ import AdditionalFeatures from "@/components/additional-features"
 import OneSubscription from "@/components/one-subscription"
 import Testimonials from "@/components/testimonials"
 import Pricing from "@/components/pricing"
+import AiPlaygroundDashboard from "@/components/ai-playground-dashboard"
+import OurNumbers from "@/components/our-numbers"
 import Resources from "@/components/resources"
 import FAQ from "@/components/faq"
 import CallToAction from "@/components/call-to-action"
@@ -24,8 +26,12 @@ export default function Home() {
       
       <ScrollAnimations />
      
-      <main className="hero-bg-gradient"> 
+      <main className="hero-bg-gradient">
         <HeroSection />
+        <TrustedBrands />
+        <Pricing />
+        <OurNumbers />
+        <AiPlaygroundDashboard />
         <section className="mx-auto max-w-6xl px-6 py-20 text-center" aria-labelledby="ai-algeria-heading">
           <h2 id="ai-algeria-heading" className="text-4xl font-semibold md:text-5xl">An AI provider built for Algeria</h2>
           <p className="mx-auto mt-5 max-w-3xl text-lg text-muted-foreground">
@@ -36,15 +42,13 @@ export default function Home() {
             <Link href="/services" className="btn !bg-transparent !text-foreground border border-border">Compare services</Link>
           </div>
         </section>
-        <TrustedBrands />
         <BenefitsSection />
         <BuildAIApps />
         <PrebuiltTools />
-      
+
         <AdditionalFeatures />
         <OneSubscription />
         {/* <Testimonials /> */}
-        <Pricing />
         <Resources />
         <FAQ />
         <CallToAction />
