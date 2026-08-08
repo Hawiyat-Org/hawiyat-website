@@ -23,7 +23,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: service.seo.description,
     path: `/services/${params.slug}` as `/${string}`,
     image: serviceImage,
-    publishedTime: "2026-01-01T00:00:00+01:00",
     modifiedTime: new Date().toISOString(),
   })
 }
@@ -77,7 +76,6 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
             priceCurrency: "DZD",
             availability: "https://schema.org/InStock",
           },
-    datePublished: "2026-01-01",
     dateModified: new Date().toISOString().split("T")[0],
   }
 
