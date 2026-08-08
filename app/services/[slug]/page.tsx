@@ -4,6 +4,7 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { ServicePlans } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
 
@@ -108,12 +109,25 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   const serviceData = {
     id: service.id,
+    // Clean display name; the form appends " {tag}" to the order record
+    // so orders/emails show e.g. "Hawiyat Composer + Claude Code  Pro"
     name: service.name,
+    tag: service.tag,
     price: service.price,
     priceLabel: service.priceLabel,
     image: service.image,
     images: service.images
   }
+
+  // Mobile quick price: shown under the title/description on small screens only
+  // (desktop already shows it in the sticky pricing card on the right).
+  // Single-price services, or a single plan filtered by ?plan=, get their price here.
+  const singlePlan = plans && plans.length === 1 ? plans[0] : null
+  const mobilePrice = singlePlan
+    ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
+    : !service.plans || service.plans.length === 0
+      ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
+      : null
 
   return (
     <>
@@ -141,6 +155,21 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 {/* Hero Image */}
                 {(service.image || service.images) && (
                   <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 p-8 flex items-center justify-center overflow-hidden">
+                    {service.tag && (
+                      <div className="absolute top-3 right-3 z-10">
+                        <span className={cn(
+                          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold shadow-lg text-white",
+                          service.tag === "Popular" && "bg-gradient-to-r from-violet-500 to-purple-600",
+                          service.tag === "Pro" && "bg-gradient-to-r from-purple-500 to-violet-600",
+                          service.tag === "Starter" && "bg-gradient-to-r from-emerald-500 to-green-600",
+                          service.tag === "Max 5X" && "bg-gradient-to-r from-orange-500 to-red-600",
+                          service.tag === "Max 20X" && "bg-gradient-to-r from-yellow-500 to-amber-600",
+                          service.tag === "VIP" && "bg-gradient-to-r from-amber-500 to-yellow-600",
+                        )}>
+                          {service.tag}
+                        </span>
+                      </div>
+                    )}
                     {service.images ? (
                       <div className="flex items-center justify-center gap-8">
                         {service.images.map((img, idx) => (
@@ -178,6 +207,19 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                     {service.description}
                   </p>
                 </div>
+
+                {/* Mobile quick price (desktop shows it in the sticky pricing card) */}
+                {mobilePrice && (
+                  <div className="lg:hidden -mt-2">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold tracking-tight text-foreground">{mobilePrice.price}</span>
+                      {mobilePrice.originalPrice && (
+                        <span className="text-2xl text-muted-foreground line-through">{mobilePrice.originalPrice}</span>
+                      )}
+                      <span className="text-lg text-muted-foreground font-medium">{mobilePrice.priceLabel}</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Ideal For */}

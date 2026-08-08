@@ -11,12 +11,27 @@ interface ServiceOrderFormProps {
   service: {
     id: string
     name: string
+    tag?: string
     price: string
     priceLabel: string
     image?: string
     images?: string[]
   }
   paymentMethod?: string
+}
+
+// Tag badge gradient, matching the catalog cards and slug pages
+const tagStyles: Record<string, string> = {
+  "Popular": "bg-gradient-to-r from-violet-500 to-purple-600",
+  "Pro": "bg-gradient-to-r from-purple-500 to-violet-600",
+  "Starter": "bg-gradient-to-r from-emerald-500 to-green-600",
+  "Max 5X": "bg-gradient-to-r from-orange-500 to-red-600",
+  "Max 20X": "bg-gradient-to-r from-yellow-500 to-amber-600",
+  "VIP": "bg-gradient-to-r from-amber-500 to-yellow-600",
+  "Freelance": "bg-gradient-to-r from-teal-500 to-emerald-600",
+  "WhatsApp": "bg-gradient-to-r from-green-500 to-emerald-600",
+  "Startup": "bg-gradient-to-r from-blue-500 to-indigo-600",
+  "Enterprise": "bg-gradient-to-r from-yellow-500 to-amber-600",
 }
 
 export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: ServiceOrderFormProps) {
@@ -65,7 +80,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceId: service.id,
-          serviceName: service.name,
+          // Keep the tier in the order record/emails (e.g. "Hawiyat Composer + Claude Code  Pro")
+          serviceName: service.tag ? `${service.name}  ${service.tag}` : service.name,
           customerName: formData.customerName,
           customerEmail: formData.customerEmail,
           customerPhone: formData.customerPhone,
@@ -225,7 +241,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
             ) : (
               <>
                 <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-center gap-3">
                     <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
                       <Image
                         src={serviceImage}
@@ -235,13 +251,21 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                         className="object-contain w-10 h-10"
                       />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-base">{service.name}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-base truncate">{service.name}</h3>
                       <div className="flex items-baseline gap-1 mt-1">
                         <span className="text-xl font-bold">{service.price}</span>
                         <span className="text-sm text-muted-foreground">{service.priceLabel}</span>
                       </div>
                     </div>
+                    {service.tag && (
+                      <span className={cn(
+                        "shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white",
+                        tagStyles[service.tag] ?? "bg-primary"
+                      )}>
+                        {service.tag}
+                      </span>
+                    )}
                   </div>
                 </div>
 

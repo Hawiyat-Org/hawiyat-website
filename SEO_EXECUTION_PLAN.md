@@ -6,7 +6,7 @@
 
 ---
 
-## ✅ Implementation Status — 2026-08-08: ALL ITEMS IMPLEMENTED
+## ✅ Implementation Status  2026-08-08: ALL ITEMS IMPLEMENTED
 
 | Section | Item | Status |
 |---------|------|--------|
@@ -22,7 +22,7 @@
 | 4.2 | OG locale → fr_DZ | ✅ Done (`app/layout.tsx`) |
 
 **Notes for the record:**
-- `createMetadata` in `lib/seo.ts` gained optional `image`, `publishedTime`, `modifiedTime` params (backward compatible — all existing callers unaffected).
+- `createMetadata` in `lib/seo.ts` gained optional `image`, `publishedTime`, `modifiedTime` params (backward compatible  all existing callers unaffected).
 - `datePublished` set to `2026-01-01` for all services; update to actual per-service launch dates when known.
 - `app/services/layout.tsx` already supplied metadata + ItemList schema for `/services`; page-level metadata now takes precedence (standard Next.js merge behavior). No changes needed there.
 - Not run: `pnpm build` (per user constraint). Verify via `pnpm dev` + view-source and Google Rich Results Test.
@@ -47,7 +47,7 @@ These block indexing or cause immediate SEO problems.
 
 ### 1.1 Add Metadata to `/services` Page
 
-**Problem:** The `/services` page has no `generateMetadata` export. It inherits the layout's generic title: *"AI Provider in Algeria and Hawiyat Composer | Hawiyat"* — which has nothing to do with services.
+**Problem:** The `/services` page has no `generateMetadata` export. It inherits the layout's generic title: *"AI Provider in Algeria and Hawiyat Composer | Hawiyat"*  which has nothing to do with services.
 
 **File to edit:** `app/services/page.tsx`
 
@@ -143,7 +143,7 @@ These significantly impact rankings and rich results eligibility.
 
 ### 2.1 Use Service-Specific OG Images
 
-**Problem:** Every service page's Open Graph image is `/hawiyat.png` (the generic site image). When someone shares `/services/n8n-hosting` on social media or WhatsApp, the preview shows the Hawiyat logo — not the n8n image.
+**Problem:** Every service page's Open Graph image is `/hawiyat.png` (the generic site image). When someone shares `/services/n8n-hosting` on social media or WhatsApp, the preview shows the Hawiyat logo  not the n8n image.
 
 **File to edit:** `lib/seo.ts`
 
@@ -438,7 +438,7 @@ Example: If `service.seo.keywords` includes `"n8n hosting algeria"`, `"workflow 
 
 ### 3.3 Add datePublished and dateModified to Service Pages
 
-**Problem:** No service page has date metadata. AI search systems heavily weight recency — pages without dates lose citation eligibility after ~6 months stale.
+**Problem:** No service page has date metadata. AI search systems heavily weight recency  pages without dates lose citation eligibility after ~6 months stale.
 
 **File to edit:** `app/services/[slug]/page.tsx`
 
@@ -637,9 +637,9 @@ After implementing all fixes, verify:
 
 ### AI Search Verification
 
-- [ ] Test with ChatGPT: "what is n8n hosting in algeria" — does it cite hawiyat.org?
-- [ ] Test with Perplexity: "how to get claude code in algeria" — does it cite hawiyat.org?
-- [ ] Test with Google AI Overviews: "n8n hosting algeria" — does it cite hawiyat.org?
+- [ ] Test with ChatGPT: "what is n8n hosting in algeria"  does it cite hawiyat.org?
+- [ ] Test with Perplexity: "how to get claude code in algeria"  does it cite hawiyat.org?
+- [ ] Test with Google AI Overviews: "n8n hosting algeria"  does it cite hawiyat.org?
 
 ---
 
@@ -675,11 +675,11 @@ After implementing all fixes, verify:
 
 ## Notes for the Executor
 
-1. **Do not run builds** — the user explicitly said "dont do builds please". Just make the code changes.
-2. **Test with view-source** — after changes, right-click the page → "View Page Source" to verify meta tags and schema are present.
-3. **Use Google Rich Results Test** — paste the URL into https://search.google.com/test/rich-results to validate schema.
-4. **Write SEO content carefully** — the `seoContent` blocks need to be 134-167 words each with specific facts, prices, and features. Don't just copy-paste the service description.
-5. **Update dates** — the `datePublished` should be the actual launch date of each service, not "2026-01-01".
+1. **Do not run builds**  the user explicitly said "dont do builds please". Just make the code changes.
+2. **Test with view-source**  after changes, right-click the page → "View Page Source" to verify meta tags and schema are present.
+3. **Use Google Rich Results Test**  paste the URL into https://search.google.com/test/rich-results to validate schema.
+4. **Write SEO content carefully**  the `seoContent` blocks need to be 134-167 words each with specific facts, prices, and features. Don't just copy-paste the service description.
+5. **Update dates**  the `datePublished` should be the actual launch date of each service, not "2026-01-01".
 
 ---
 

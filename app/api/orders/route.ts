@@ -130,6 +130,7 @@ ${notes ? `📝 *Notes:* ${notes}\n` : ""}
           id: order.id,
           serviceName: order.serviceName,
           customerName: order.customerName,
+          preferredPayment: order.preferredPayment,
           notes: order.notes,
           createdAt: order.createdAt,
         },

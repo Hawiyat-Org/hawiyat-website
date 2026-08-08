@@ -294,7 +294,8 @@ Order ID: ${order.id}
 Service: ${order.serviceName}
 Customer: ${order.customerName}
 Email: ${order.customerEmail}
-${order.customerPhone ? `Phone: ${order.customerPhone}\n` : ''}Status: ${order.status}
+${order.customerPhone ? `Phone: ${order.customerPhone}\n` : ''}Preferred Payment: ${order.preferredPayment ? order.preferredPayment.toUpperCase() : 'Not specified'}
+Status: ${order.status}
 Date: ${new Date(order.createdAt).toLocaleString()}
 ${order.notes ? `Notes: ${order.notes}\n` : ''}
     `;
@@ -321,6 +322,7 @@ interface SendOrderConfirmationProps {
     id: string;
     serviceName: string;
     customerName: string;
+    preferredPayment?: string | null;
     notes?: string | null;
     createdAt: Date;
   };
@@ -354,6 +356,13 @@ export async function sendOrderConfirmation({
         pass: SMTP_PASS
       }
     });
+
+    // Friendly label for the payment method actually selected by the customer
+    const paymentLabel = order.preferredPayment
+      ? order.preferredPayment === 'BARIDI_MOB'
+        ? 'Baridi Mob'
+        : order.preferredPayment.toUpperCase()
+      : 'To be specified';
 
     const htmlTemplate = `
       <!DOCTYPE html>
@@ -421,6 +430,16 @@ export async function sendOrderConfirmation({
                                   <tr>
                                     <td style="color: #737373; font-size: 13px;">Service</td>
                                     <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${order.serviceName}</td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="color: #737373; font-size: 13px;">Payment Method</td>
+                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${paymentLabel}</td>
                                   </tr>
                                 </table>
                               </td>
@@ -537,6 +556,7 @@ Thank you for your order! We've received it and our team will get back to you sh
 ──────────────────────────────────────────
   Order ID :  ${order.id}
   Service  :  ${order.serviceName}
+  Payment  :  ${paymentLabel}
   Date     :  ${new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
 ${order.notes ? `  Notes    :  ${order.notes}` : ''}
 

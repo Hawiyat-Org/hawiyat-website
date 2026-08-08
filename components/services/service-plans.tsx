@@ -29,7 +29,10 @@ export function ServicePlans({ plans, fairUse, disclaimer, serviceId, serviceNam
       {plans.map((plan, idx) => {
         const serviceData = {
           id: serviceId,
+          // Clean display name; the form appends " {tag}" to the order record
+          // so orders/emails show e.g. "n8n Hosting  Enterprise"
           name: serviceName,
+          tag: plan.name,
           price: plan.price,
           priceLabel: plan.priceLabel,
           image: serviceImage ?? undefined,

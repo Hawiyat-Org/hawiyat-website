@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const faqs = [
   ["What AI services does Hawiyat provide in Algeria?", "Hawiyat offers Composer plans for supported AI models, managed automation, application hosting, WhatsApp integrations, cybersecurity services, implementation guidance, and local support."],
-  ["Can I pay for AI services in Algerian dinars?", "Selected Hawiyat plans are priced in Algerian dinars. Current prices and included capacity are listed on the services page; contact the team before ordering if you need a business invoice or custom plan."],
+  ["Can I pay for AI services in Algerian dinars?", "Selected Hawiyat plans are priced in Algerian dinars. Current prices and included capacity are listed on the services page; contact the team before ordering if you need a business invoice or custom plan. Every order is facturated  officially invoiced in line with Algerian government requirements."],
   ["Does Hawiyat own the third-party AI models it supports?", "No. Third-party model and product names belong to their respective owners. Hawiyat Composer provides a gateway and optimization layer for supported tools and model providers; availability depends on the selected plan."],
   ["Can Hawiyat help a business automate work with AI?", "Yes. Hawiyat can help assess a workflow, connect tools such as n8n and messaging services, deploy the solution, and operate the underlying infrastructure."],
 ]
@@ -31,11 +31,36 @@ export default function AIAlgeriaPage() {
           <p className="mt-6 text-xl leading-relaxed text-muted-foreground">
             Hawiyat is an Algeria-based AI infrastructure provider for developers, freelancers, startups, and businesses. We provide locally supported AI plans, Hawiyat Composer, automation, hosting, and implementation services, with selected subscriptions priced in DZD.
           </p>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            Hawiyat is a registered Algerian société (company), operating locally in Algeria. Every order is facturated, meaning officially invoiced in line with Algerian government requirements, so you always receive a formal invoice for your purchase.
+          </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/services" className="btn">Compare AI services</Link>
-            <Link href="/schedule" className="btn !bg-transparent !text-foreground border border-border">Talk to the Hawiyat team</Link>
+            <a
+              href="https://wa.me/213559555951"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn !bg-transparent !text-foreground border border-border"
+            >
+              Talk to the Hawiyat team
+            </a>
           </div>
         </header>
+
+        <section className="mt-12 grid gap-4 sm:grid-cols-2" aria-label="Company and invoicing">
+          <div className="rounded-2xl border bg-card/50 p-6">
+            <h2 className="text-lg font-semibold">Registered Algerian société</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Hawiyat is a registered Algerian company (société). We operate locally in Algeria and support Algerian developers, freelancers, startups, and businesses directly.
+            </p>
+          </div>
+          <div className="rounded-2xl border bg-card/50 p-6">
+            <h2 className="text-lg font-semibold">Official invoicing (facturation)</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Everything is facturated by the government: every order is invoiced officially and compliantly with Algerian tax and government requirements. You get a formal invoice for each purchase, whether you are an individual or a business.
+            </p>
+          </div>
+        </section>
 
         <section className="mt-20">
           <h2 className="text-3xl font-semibold">AI access through Hawiyat Composer</h2>

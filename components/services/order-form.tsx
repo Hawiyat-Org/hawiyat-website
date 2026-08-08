@@ -115,7 +115,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
               Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
             </p>
             <p className="text-xs text-muted-foreground mb-1">
-              Payment method: {formData.paymentMethod === "ccp" ? "CCP" : formData.paymentMethod === "baridi-mob" ? "Baridi Mob" : "USD"}
+              Payment method: {formData.paymentMethod === "CCP" ? "CCP" : formData.paymentMethod === "BARIDI_MOB" ? "Baridi Mob" : "USD"}
             </p>
             {orderId && (
               <p className="text-xs text-muted-foreground mb-4">Order ID: {orderId}</p>
