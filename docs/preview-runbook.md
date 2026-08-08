@@ -54,6 +54,26 @@ The remaining gap is Prisma's pg driver under the workerd bundle. Options:
 Hyperdrive (Workers Paid), per-request client + `maxUses: 1`, or accept
 pages-only previews until resolved. See `docs/adr/2026-08-08-cloudflare-preview-decisions.md` (ADR-4).
 
+## Known issue: theme-init script error (`__name is not defined`)
+
+Browser smoke (Playwright/Chromium, 2026-08-08) on the deployed preview found a
+client-side console error on every page:
+
+```
+ReferenceError: __name is not defined
+```
+
+It fires in the `next-themes` inline theme-init `<script>` in the document
+`<head>`. The OpenNext build minifies that inline script with esbuild
+`keepNames` but drops the `__name` helper definition (verified: the helper is
+absent from the served HTML; `__name` is not in `next-themes` source nor app
+code). Effect: the pre-hydration theme class isn't applied — a brief wrong-theme
+flash until React hydrates.
+
+**Verdict:** cosmetic, preview-only. Hydration and interactivity work (Next
+router present, theme toggle functions). Vercel prod is unaffected (Next.js SWC
+build does not produce `__name`). Tracked as an OpenNext build artifact.
+
 ## Troubleshooting
 
 - **Preview 404s:** branch worker deleted? re-run deploy. Router down? re-deploy
