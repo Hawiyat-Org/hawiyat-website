@@ -56,6 +56,16 @@ const TrustedBrands = () => {
       alt: "Green Duty logo — a company that trusts Hawiyat for AI and digital services",
       desc: "Green Duty is a company that trusts Hawiyat for AI and digital services.",
     },
+    {
+      name: "Mercus Academy",
+      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
+        ? "/trust/mercus-academy-dark.webp"
+        : "/trust/mercus-academy-light.webp",
+      url: "",
+      title: "Mercus Academy — a training institution that trusts Hawiyat",
+      alt: "Mercus Academy logo — a training and education institution that trusts Hawiyat for AI and digital services",
+      desc: "Mercus Academy is a training and education institution that trusts Hawiyat for AI and digital services.",
+    },
   ]
 
   // Each half repeats the brands so the -50% loop wraps seamlessly.
