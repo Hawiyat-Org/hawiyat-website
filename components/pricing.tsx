@@ -98,19 +98,26 @@ export default function Pricing() {
           {/* MAX 5X / MAX 20X (toggle) — center */}
           <div className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
             <div className="mb-6 flex w-full items-center justify-center">
-              <div className="inline-flex rounded-full border border-border bg-background p-1">
+              <div className="relative inline-flex rounded-full border border-border bg-background p-1">
                 {(["5X", "20X"] as const).map((tier) => (
                   <button
                     key={tier}
                     type="button"
                     onClick={() => setMaxTier(tier)}
-                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                    className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                       maxTier === tier
-                        ? "bg-primary text-primary-foreground"
+                        ? "text-primary-foreground"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    Max {tier}
+                    {maxTier === tier && (
+                      <motion.span
+                        layoutId="max-tier-pill"
+                        transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                        className="absolute inset-0 rounded-full bg-primary"
+                      />
+                    )}
+                    <span className="relative z-10">Max {tier}</span>
                   </button>
                 ))}
               </div>
