@@ -125,11 +125,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const slug = process.env.SLUG;
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Preview ready: https://${process.env.SLUG}.preview.hawiyat.org`,
+              body: `Preview ready: https://hawiyat-preview-${slug}.shmsaldynbwbst.workers.dev\nBranded URL (once wildcard DNS exists): https://${slug}.preview.hawiyat.org`,
             })
 
   teardown:
