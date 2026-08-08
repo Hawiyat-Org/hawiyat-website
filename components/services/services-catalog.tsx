@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { ArrowRight, Search, Users, DollarSign, Wrench, CheckCircle, PhoneCall, Activity } from "lucide-react"
+import { Search, Users, DollarSign, Bot, CheckCircle, PhoneCall, Activity } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
@@ -72,21 +72,27 @@ function buildCatalogCards(): CatalogCard[] {
   return cards
 }
 
-/* Display order: first row = the 4 flagship products (n8n, Hawiyat Composer, Evolution, OpenAI credit),
-   then each product's plan variants, then hosting. */
+/* Display order: the execution layer sorts first (Composer tiers + AI Composer access),
+   then the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
 const CARD_ORDER: Record<string, number> = {
-  "n8n-hosting--freelance": 1,
-  "composer-pro": 2,
-  "evolution-api--whatsapp": 3,
+  "composer-pro": 1,
+  "composer-max5x": 2,
+  "composer-max20x": 3,
   "llm-credit": 4,
-  "n8n-hosting--startup": 5,
-  "n8n-hosting--enterprise": 6,
-  "evolution-api--startup": 7,
-  "evolution-api--enterprise": 8,
-  "composer-max5x": 9,
-  "composer-max20x": 10,
+  "n8n-hosting--freelance": 5,
+  "n8n-hosting--startup": 6,
+  "n8n-hosting--enterprise": 7,
+  "evolution-api--whatsapp": 8,
+  "evolution-api--startup": 9,
+  "evolution-api--enterprise": 10,
   "hosting-basic": 11,
   "hosting-vip": 12,
+}
+
+const categoryStyles: Record<string, string> = {
+  "AI Execution": "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+  "Managed Systems": "bg-teal-500/10 text-teal-600 dark:text-teal-400",
+  "Cloud Runtime": "bg-violet-500/10 text-violet-600 dark:text-violet-400",
 }
 
 const catalogCards = buildCatalogCards().sort(
@@ -200,7 +206,10 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
 
               {/* Content */}
               <div className="relative p-4 flex flex-col gap-2">
-                <span className="inline-flex items-center self-start px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                <span className={cn(
+                  "inline-flex items-center self-start px-2 py-0.5 rounded-full text-xs font-medium",
+                  categoryStyles[service.category] ?? "bg-primary/10 text-primary"
+                )}>
                   {service.category}
                 </span>
 
@@ -228,20 +237,20 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
       {/* Why Choose Hawiyat */}
       <div className="mt-24 mb-10 w-full flex flex-col items-center">
         <h2 className="text-5xl font-medium max-md:text-3xl text-center leading-normal mb-10">Why Choose Hawiyat</h2>
-        <p className="text-muted-foreground mt-[-24px] mb-10 text-center text-sm max-w-lg">Built for developers in Algeria. Priced in DZD.</p>
+        <p className="text-muted-ink mt-[-24px] mb-10 text-center text-sm max-w-lg">The execution layer, locally supported and billed in DZD.</p>
         <div className="w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
           {[
-            { icon: Users, title: "Local Team", desc: "Based in Algeria, same timezone, support in Arabic and French." },
-            { icon: DollarSign, title: "Flat Pricing", desc: "Fixed monthly price, no usage surprises or hidden fees." },
-            { icon: Wrench, title: "Fully Managed", desc: "You use the service, we run the infrastructure." },
-            { icon: CheckCircle, title: "Production-Tested", desc: "Same infrastructure powers 60+ live clients." },
+            { icon: Users, title: "Local Team", desc: "Based in Algiers. Same timezone, support in Arabic, French, and English." },
+            { icon: DollarSign, title: "Billed in DZD", desc: "Pay in dinars with CCP or Baridi Mob. No foreign cards, no forex drift." },
+            { icon: Bot, title: "Model-Agnostic", desc: "Models are routes, not SKUs. Composer picks the right one for each task." },
+            { icon: Activity, title: "Telemetry & Evaluation", desc: "Every run is logged and evaluated, quality, latency, and cost in DZD." },
             { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
-            { icon: Activity, title: "24/7 Monitoring", desc: "Round-the-clock reliability and instant alerts." },
+            { icon: CheckCircle, title: "Production-Tested", desc: "The same execution layer that ships 100+ client deployments." },
           ].map((item, i) => (
             <div key={i} className="w-full max-w-[420px] mx-auto rounded-md p-6 bg-[#f2f3f4] dark:bg-[#141414] dark:border-[#1f2123] flex flex-col gap-4 box-border">
               <item.icon className="w-16 h-16 text-black dark:text-white mx-auto" />
               <h3 className="text-2xl text-center">{item.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300 px-2 text-center text-sm break-words">{item.desc}</p>
+              <p className="text-muted-ink px-2 text-center text-sm break-words">{item.desc}</p>
             </div>
           ))}
         </div>

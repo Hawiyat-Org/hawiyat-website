@@ -110,7 +110,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   const serviceData = {
     id: service.id,
     // Clean display name; the form appends " {tag}" to the order record
-    // so orders/emails show e.g. "Hawiyat Composer + Claude Code  Pro"
+    // so orders/emails show e.g. "Hawiyat AI Composer Pro  Pro"
     name: service.name,
     tag: service.tag,
     price: service.price,

@@ -80,7 +80,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceId: service.id,
-          // Keep the tier in the order record/emails (e.g. "Hawiyat Composer + Claude Code  Pro")
+          // Keep the tier in the order record/emails (e.g. "Hawiyat AI Composer Pro  Pro")
           serviceName: service.tag ? `${service.name}  ${service.tag}` : service.name,
           customerName: formData.customerName,
           customerEmail: formData.customerEmail,
@@ -100,13 +100,16 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       const usdValue = price / 250
 
       const firePixel = () => {
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-          (window as any).fbq('track', 'Purchase', {
-            value: usdValue,
-            currency: 'USD',
-            content_type: 'product',
-            content_ids: [service.id],
-          })
+        if (typeof window !== 'undefined') {
+          const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq
+          if (fbq) {
+            fbq('track', 'Purchase', {
+              value: usdValue,
+              currency: 'USD',
+              content_type: 'product',
+              content_ids: [service.id],
+            })
+          }
         }
       }
 
@@ -223,7 +226,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Order Submitted!</h3>
                 <p className="text-muted-foreground text-sm mb-1">
-                  Thank you, {formData.customerName}. We'll contact you at {formData.customerEmail} shortly.
+                  Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
                 </p>
                 <p className="text-xs text-muted-foreground mb-1">
                   Payment method: {formData.paymentMethod === "CCP" ? "CCP" : formData.paymentMethod === "BARIDI_MOB" ? "Baridi Mob" : "USD"}
