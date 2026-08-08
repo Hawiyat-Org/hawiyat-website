@@ -154,7 +154,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
                     {service.tag && (
                       <div className="absolute top-3 right-3 z-10">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-signal text-signal-text">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-signal text-signal-text">
                           {service.tag}
                         </span>
                       </div>

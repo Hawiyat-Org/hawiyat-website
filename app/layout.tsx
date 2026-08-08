@@ -5,6 +5,7 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const space = Space_Grotesk({
   subsets: ["latin"],
@@ -214,6 +215,8 @@ export default function RootLayout({
           <main id="content" className="flex-1">
             {children}
           </main>
+
+          <Footer />
 
           <noscript>
             <div className="p-2 text-sm bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-100">

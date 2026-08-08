@@ -165,14 +165,14 @@ export default function ComposerPage() {
             <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
               >
                 Start building
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#trace"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
               >
                 See how it executes
                 <ArrowRight className="h-4 w-4 rotate-90" />
@@ -202,7 +202,7 @@ export default function ComposerPage() {
 
           <div className="reveal-up">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <span className="rounded-full border border-border bg-surface px-4 py-2 font-mono text-xs text-ink">
+              <span className="rounded-lg border border-border bg-surface px-4 py-2 font-mono text-xs text-ink">
                 task ▸ &ldquo;Reply to order 1024 on WhatsApp in Arabic&rdquo;
               </span>
               <span className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
@@ -269,7 +269,7 @@ export default function ComposerPage() {
                 {MODEL_CHIPS.map((chip) => (
                   <span
                     key={chip.name}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 font-mono text-sm text-ink"
+                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm text-ink"
                   >
                     <span className={`h-2 w-2 rounded-full ${chip.dot}`} />
                     {chip.name}
@@ -381,14 +381,14 @@ export default function ComposerPage() {
                     href={FULLSTACK_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
                   >
                     Book with the team
                     <MessageCircle className="h-4 w-4" />
                   </a>
                   <Link
                     href="/services"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
                   >
                     Browse services
                     <ArrowRight className="h-4 w-4" />
@@ -479,7 +479,7 @@ export default function ComposerPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-full bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
             >
               Browse services
               <ArrowRight className="h-4 w-4" />
@@ -488,7 +488,7 @@ export default function ComposerPage() {
               href="https://wa.me/213559555951"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
             >
               Talk to the team
               <MessageCircle className="h-4 w-4" />

@@ -155,7 +155,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       {/* Desktop: Order Now button */}
             <button
               onClick={() => setIsOpen(true)}
-              className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-signal text-signal-text font-semibold text-base hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-signal text-signal-text font-semibold text-base hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Order Now
               <ArrowRight className="w-5 h-5" />
@@ -187,7 +187,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               </div>
               <button
                 onClick={() => setIsOpen(true)}
-                className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-signal text-signal-text font-semibold text-base shadow-lg"
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-lg bg-signal text-signal-text font-semibold text-base shadow-lg"
               >
                 Order Now
                 <ArrowRight className="w-5 h-5" />
@@ -226,7 +226,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 )}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="px-6 py-2 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+                  className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
                 >
                   Close
                 </button>
@@ -253,7 +253,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                     </div>
                     {service.tag && (
                       <span className={cn(
-                        "shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold",
+                        "shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold",
                         tagStyle
                       )}>
                         {service.tag}
@@ -378,7 +378,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-11 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

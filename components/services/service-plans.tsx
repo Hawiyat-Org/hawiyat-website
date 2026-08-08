@@ -51,7 +51,7 @@ export function ServicePlans({ plans, fairUse, disclaimer, serviceId, serviceNam
               <div className="flex items-center justify-between gap-3 mb-2">
                 <h3 className="text-lg font-semibold text-ink">{plan.name}</h3>
                 {idx === 1 && (
-                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-signal text-signal-text">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-signal text-signal-text">
                     Most Popular
                   </span>
                 )}

@@ -169,7 +169,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
 
               {service.tag && (
                 <div className="absolute top-3 right-3 z-10">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-signal text-signal-text">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-signal text-signal-text">
                     {service.tag}
                   </span>
                 </div>
@@ -195,7 +195,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
               {/* Content */}
               <div className="relative p-4 flex flex-col gap-2">
                 <span className={cn(
-                  "inline-flex items-center self-start px-2 py-0.5 rounded-full text-xs font-medium",
+                  "inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-medium",
                   categoryStyles[service.category] ?? "bg-surface-dim text-muted-ink border border-border"
                 )}>
                   {service.category}

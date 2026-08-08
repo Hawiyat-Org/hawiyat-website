@@ -13,7 +13,7 @@ export default function ServicesPage({ searchParams }: { searchParams: { q?: str
   return (
     <div className="relative min-h-screen overflow-hidden pb-20 pt-32">
       <div className="pointer-events-none absolute inset-0 opacity-10 dark:opacity-80">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-gradient-to-b from-foreground/[0.03] to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-lg bg-gradient-to-b from-foreground/[0.03] to-transparent blur-3xl" />
       </div>
       <div className="relative mx-auto max-w-7xl px-6">
         <header className="mx-auto mb-10 max-w-3xl text-center">

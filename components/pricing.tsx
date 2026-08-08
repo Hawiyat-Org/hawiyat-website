@@ -94,7 +94,7 @@ export default function Pricing() {
               <div>
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-ink">{proService.name}</h3>
-                  <span className="rounded-full border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                  <span className="rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
                     Pro
                   </span>
                 </div>
@@ -134,12 +134,12 @@ export default function Pricing() {
             <div>
               <div className="mb-4 flex items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
-                <div className="flex items-center gap-1 rounded-full border border-border bg-surface-dim p-1">
+                <div className="flex items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
                   {maxTiers.map((tier) => (
                     <button
                       key={tier.key}
                       onClick={() => setActiveMax(tier.key)}
-                      className={`rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
+                      className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
                         activeMax === tier.key
                           ? "bg-signal text-signal-text"
                           : "text-muted-ink hover:text-ink"
@@ -189,7 +189,7 @@ export default function Pricing() {
               <div>
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
-                  <span className="rounded-full bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
+                  <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                     Custom pricing
                   </span>
                 </div>

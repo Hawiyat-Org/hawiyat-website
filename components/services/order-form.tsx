@@ -122,7 +122,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             )}
             <button
               onClick={onClose}
-              className="px-6 py-2 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+              className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
             >
               Close
             </button>
@@ -255,7 +255,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-11 rounded-full bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

@@ -87,19 +87,19 @@ const Header = () => {
           <nav className="hidden lg:flex items-center gap-2">
             <Link
               href="/composer"
-              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
             >
               Composer
             </Link>
             <Link
               href="/services"
-              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
             >
               Services
             </Link>
             <Link
               href="/about"
-              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-full hover:bg-surface-dim"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
             >
               About
             </Link>
@@ -109,7 +109,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
+              className="p-2 rounded-lg border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               aria-label="Toggle theme"
             >
               {themeIcon}
@@ -128,14 +128,14 @@ const Header = () => {
           <div className="lg:hidden flex items-center gap-2 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-3 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200 touch-manipulation"
+              className="p-3 rounded-lg border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200 touch-manipulation"
               aria-label="Toggle theme"
             >
               {themeIcon}
             </button>
 
             <button
-              className="p-3 touch-manipulation rounded-full text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
+              className="p-3 touch-manipulation rounded-lg text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
               aria-expanded={isMobileMenuOpen}
@@ -161,7 +161,7 @@ const Header = () => {
             <nav className="p-4 space-y-1">
               <Link
                 href="/composer"
-                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Composer</span>
@@ -170,7 +170,7 @@ const Header = () => {
 
               <Link
                 href="/services"
-                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">Services</span>
@@ -179,7 +179,7 @@ const Header = () => {
 
               <Link
                 href="/about"
-                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-full hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
                 <span className="font-medium">About</span>

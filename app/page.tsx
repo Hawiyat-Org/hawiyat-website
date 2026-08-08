@@ -4,7 +4,6 @@ import Pricing from "@/components/pricing"
 import OurNumbers from "@/components/our-numbers"
 import FAQ from "@/components/faq"
 import CallToAction from "@/components/call-to-action"
-import Footer from "@/components/footer"
 import WhatsAppWidget from "@/components/whatsapp-widget"
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
         <FAQ />
         <CallToAction />
       </main>
-      <Footer />
     </>
   )
 }

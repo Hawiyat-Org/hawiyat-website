@@ -21,7 +21,7 @@ export default function AboutPage() {
         <div className="mx-auto w-full max-w-6xl px-6 flex max-lg:flex-col items-center justify-center gap-8 max-lg:gap-6 min-h-[85vh] py-10">
           {/* Left  Text */}
           <div className="flex flex-col gap-5 flex-1 max-w-lg">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-signal-bg border border-signal/20 text-signal-contrast text-sm w-fit">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-signal-bg border border-signal/20 text-signal-contrast text-sm w-fit">
               Built in Algeria
             </div>
             <h1 className="text-5xl max-lg:text-4xl max-md:text-3xl font-bold text-ink">
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-signal text-signal-text font-medium text-sm shadow-lg hover:scale-x-[1.03] transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-signal text-signal-text font-medium text-sm shadow-lg hover:scale-x-[1.03] transition-all duration-300 active:scale-95"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -44,7 +44,7 @@ export default function AboutPage() {
               <Link
                 href="https://wa.me/213559555951"
                 target="_blank"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-ink border border-ink/30 hover:bg-surface-dim transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-ink border border-ink/30 hover:bg-surface-dim transition-all duration-300 active:scale-95"
               >
                 <span>Contact Us</span>
                 <MessageCircle className="h-4 w-4" />
@@ -377,7 +377,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
 
         <div className="relative mx-auto max-w-4xl px-6 flex flex-col items-center gap-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/60 text-xs uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-foreground/5 border border-foreground/10 text-foreground/60 text-xs uppercase tracking-widest">
             Ready to scale?
           </div>
 
@@ -394,7 +394,7 @@ export default function AboutPage() {
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
             <Link
               href="/services"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-signal text-signal-text font-medium hover:scale-[1.03] transition-all duration-300 active:scale-[0.97]"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-signal text-signal-text font-medium hover:scale-[1.03] transition-all duration-300 active:scale-[0.97]"
             >
               <span>Explore Services</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -402,7 +402,7 @@ export default function AboutPage() {
             <Link
               href="https://wa.me/213559555951"
               target="_blank"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-ink/30 text-ink hover:bg-surface-dim hover:border-ink/50 transition-all duration-300 active:scale-[0.97]"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-lg border border-ink/30 text-ink hover:bg-surface-dim hover:border-ink/50 transition-all duration-300 active:scale-[0.97]"
             >
               <span>Contact Us</span>
               <MessageCircle className="h-4 w-4" />

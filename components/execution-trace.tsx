@@ -18,7 +18,7 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
           <div key={stage} className="flex flex-1 items-center gap-2 last:flex-none">
             <span
               className={cn(
-                "whitespace-nowrap rounded-full px-2 py-1 transition-colors",
+                "whitespace-nowrap rounded-md px-2 py-1 transition-colors",
                 i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted-ink"
               )}
             >
