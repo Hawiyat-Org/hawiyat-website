@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect, useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Users, Handshake, LayoutGrid } from "lucide-react"
+import { Users, Handshake, Cpu } from "lucide-react"
 
 function useCounter(end: number, duration: number = 2000, start: boolean = false) {
   const [count, setCount] = useState(0)
@@ -32,11 +32,10 @@ function useCounter(end: number, duration: number = 2000, start: boolean = false
   return count
 }
 
-function StatCard({ value, label, description, icon: Icon, delay }: { value: number; label: string; description: string; icon: React.ElementType; delay: number }) {
+function StatCard({ value, label, description, icon: Icon, delay, prefix = "+", suffix = "" }: { value: number; label: string; description: string; icon: React.ElementType; delay: number; prefix?: string; suffix?: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.3 })
   const count = useCounter(value, 2000, inView)
-  const prefix = "+"
 
   return (
     <motion.div
@@ -49,7 +48,7 @@ function StatCard({ value, label, description, icon: Icon, delay }: { value: num
       <Icon className="w-16 h-16 text-black dark:text-white mx-auto" />
       <div className="text-center">
         <div className="text-4xl tracking-tight">
-          {prefix}{count}
+          {prefix}{count}{suffix}
         </div>
         <h3 className="text-2xl mt-2">{label}</h3>
       </div>
@@ -123,10 +122,12 @@ const TrustedBrands = () => {
       icon: Handshake,
     },
     {
-      value: 300,
-      label: "Templates",
-      description: "Pre-configured stacks and services ready to deploy in seconds.",
-      icon: LayoutGrid,
+      value: 100,
+      label: "Tokens Served",
+      description: "Over 100 billion AI tokens processed through the Hawiyat Composer gateway for Algerian developers, freelancers, and businesses.",
+      icon: Cpu,
+      prefix: "",
+      suffix: "B",
     },
   ]
 
