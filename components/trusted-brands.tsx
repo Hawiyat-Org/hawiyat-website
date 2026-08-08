@@ -124,9 +124,9 @@ const TrustedBrands = () => {
     {
       value: 100,
       label: "Tokens Served",
-      description: "Over 100 billion AI tokens processed through the Hawiyat Composer gateway for Algerian developers, freelancers, and businesses.",
+      description: "Tokens processed through Hawiyat Composer's caching and routing.",
       icon: Cpu,
-      prefix: "",
+      prefix: "+",
       suffix: "B",
     },
   ]
