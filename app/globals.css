@@ -167,15 +167,35 @@ body.booking-modal-open .fixed.inset-0 {
   z-index: 9999 !important; /* Highest z-index for modals */
 }
 
+/* The homepage hero's dotted background is drawn on a masked ::before layer so
+   it fades out toward the bottom instead of getting hard-cut where the hero
+   meets the section below it. */
 .hero-section {
+  position: relative;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
   background-image: var(--hero-bg-img);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 98%);
+  mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 98%);
 }
 
 .hero-bg-gradient {
   background: linear-gradient(180deg, var(--hero-gradient) 23%, rgba(0, 0, 0, 0) 87%, var(--hero-gradient) 97%);
+}
+
+/* Homepage hero only: end the overlay transparent so the bottom blends into
+   the section below rather than snapping to a solid color band. */
+.hero-section .hero-bg-gradient {
+  background: linear-gradient(180deg, var(--hero-gradient) 23%, rgba(0, 0, 0, 0) 87%);
 }
 
 
