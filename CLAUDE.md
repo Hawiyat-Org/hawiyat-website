@@ -47,7 +47,6 @@ DATABASE_URL=postgresql://...
 NEXT_PUBLIC_APP_NAME=Hawiyat
 NEXT_PUBLIC_URL=http://localhost:3000
 NEXT_PUBLIC_CHATWOOT_TOKEN=your-token
-GEMINI_API_KEY=your-key
 ```
 
 Copy `.env.example` to `.env` if it exists, or create from scratch.

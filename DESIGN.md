@@ -330,7 +330,6 @@ NEXT_PUBLIC_APP_URL=https://app.hawiyat.org
 NEXT_PUBLIC_DOCS_URL=https://docs.hawiyat.org
 NEXT_PUBLIC_BLOG_URL=https://blog.hawiyat.org
 NEXT_PUBLIC_CHATWOOT_TOKEN=...
-GEMINI_API_KEY=...
 ```
 
 ## File Structure Summary
