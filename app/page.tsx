@@ -14,6 +14,7 @@ import Newsletter from "@/components/newsletter"
 import Footer from "@/components/footer"
 import ScrollAnimations from "@/components/scroll-animations"
 import WhatsAppWidget from "@/components/whatsapp-widget"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -25,6 +26,16 @@ export default function Home() {
      
       <main className="hero-bg-gradient"> 
         <HeroSection />
+        <section className="mx-auto max-w-6xl px-6 py-20 text-center" aria-labelledby="ai-algeria-heading">
+          <h2 id="ai-algeria-heading" className="text-4xl font-semibold md:text-5xl">An AI provider built for Algeria</h2>
+          <p className="mx-auto mt-5 max-w-3xl text-lg text-muted-foreground">
+            Hawiyat gives developers and businesses local access to AI subscriptions, Composer, automation, hosting, and implementation support. Selected plans are priced in DZD, with assistance in Arabic, French, and English.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link href="/ai-algeria" className="btn">Explore AI in Algeria</Link>
+            <Link href="/services" className="btn !bg-transparent !text-foreground border border-border">Compare services</Link>
+          </div>
+        </section>
         <TrustedBrands />
         <BenefitsSection />
         <BuildAIApps />

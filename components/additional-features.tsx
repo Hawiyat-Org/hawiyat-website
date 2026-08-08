@@ -1,6 +1,5 @@
 "use client"
 import { DatabaseBackupIcon, Expand, Fingerprint, GitFork, Layers, Database,Users, RocketIcon, TrendingUp } from "lucide-react";
-import { useTheme } from "next-themes"
 
 
 const AdditionalFeatures = () => {
@@ -66,9 +65,9 @@ const AdditionalFeatures = () => {
   return (
     <section id="features" className=" relative w-full flex flex-col items-center overflow-hidden py-12">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-4 p-4">
-        <h3 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
+        <h2 className="reveal-up text-5xl font-medium max-md:text-3xl text-center leading-normal">
           Hawiyat Cloud Features
-        </h3>
+        </h2>
 
         {/* Responsive grid: 1 column on xs, 2 on sm, 3 on lg */}
         <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">

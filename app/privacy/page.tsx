@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Hawiyat Privacy Policy. How we collect, use, and protect your personal data, guided by the principles of Algerian Law 18-07 and GDPR.",
+  description: "How Hawiyat collects, uses, protects, retains, and shares personal data when you use its website, AI services, and cloud platform.",
   alternates: {
     canonical: "/privacy",
   },

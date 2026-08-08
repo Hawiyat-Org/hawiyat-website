@@ -8,16 +8,10 @@ import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 const Header = () => {
   const pathname = usePathname()
-  if (pathname?.startsWith("/guides/claude")) return null
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
-
-
   useEffect(() => {
-    setMounted(true)
-
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsMobileMenuOpen(false)
@@ -43,7 +37,7 @@ const Header = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }
 
-  if (!mounted) return null
+  if (pathname?.startsWith("/guides/claude")) return null
 
   return (
     <>
@@ -77,7 +71,7 @@ const Header = () => {
               href="/hawiyat-composer"
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-transparent"
             >
-              AI
+              AI in Algeria
             </Link>
             <Link
               href="/cyber-security"
@@ -134,6 +128,7 @@ const Header = () => {
               ) : (
                 <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               )}
+              
             </button>
 
             <button 
@@ -163,7 +158,7 @@ const Header = () => {
                 className="flex items-center justify-between w-full p-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-transparent transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
               >
-                <span className="font-medium">AI</span>
+                <span className="font-medium">AI in Algeria</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
 

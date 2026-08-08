@@ -54,9 +54,9 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-2xl space-y-6 text-center"
         >
-          <h1 className="text-center text-4xl font-semibold lg:text-5xl">
+          <h2 className="text-center text-4xl font-semibold lg:text-5xl">
             Plans That Scale With You
-          </h1>
+          </h2>
           <p className="text-muted-foreground">
             Hawiyat Composer for AI costs, Cloud Hosting for everything else. Or both.
           </p>

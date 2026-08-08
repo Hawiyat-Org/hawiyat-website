@@ -1,12 +1,19 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { SECTIONS } from "./_data"
+
+export const metadata: Metadata = {
+  title: "Claude Code and Hawiyat Composer Guide",
+  description: "Install and use Claude Code with Hawiyat Composer, skills, MCP servers, n8n, Google Sheets, and practical development workflows.",
+  alternates: { canonical: "/guides/claude" },
+}
 
 export default function ClaudeGuideOverview() {
   return (
     <>
       <div className="text-center mb-12 pt-8">
-          <Image src="/services/claude-code.png" alt="" width={128} height={128} className="my-4 rounded mx-auto" />
+          <Image src="/services/claude-code.png" alt="Claude Code" width={128} height={128} className="my-4 rounded mx-auto" />
    
     
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Claude Code + Hawiyat Composer Guide</h1>
@@ -25,7 +32,7 @@ export default function ClaudeGuideOverview() {
               {s.label[0]}
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-semibold leading-snug group-hover:text-primary transition-colors">{s.title}</h3>
+              <h2 className="text-base font-semibold leading-snug group-hover:text-primary transition-colors">{s.title}</h2>
               <p className="mt-0.5 text-sm text-muted-foreground">{s.desc}</p>
             </div>
           </Link>

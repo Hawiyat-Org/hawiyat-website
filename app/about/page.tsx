@@ -37,7 +37,7 @@ export default function AboutPage() {
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
-                className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-[0.3s] hover:scale-x-[1.03] active:scale-95"
+                className="btn max-md:!w-full flex gap-2 place-content-center shadow-lg !rounded-lg !py-3.5 max-md:!py-3 text-sm transition-all duration-300 hover:scale-x-[1.03] active:scale-95"
               >
                 <span>Explore Services</span>
                 <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300" />
@@ -118,8 +118,8 @@ export default function AboutPage() {
         <div className="purple-bg-grad absolute left-1/2 -translate-x-1/2 top-[40%] h-[200px] w-[200px] max-md:hidden pointer-events-none" />
         <div className="mx-auto max-w-6xl px-6 relative">
           <div className="mb-14">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">Timeline</span>
-            <h2 className="text-5xl max-md:text-3xl font-medium mt-2">From the Beginning</h2>
+            <span className="text-xs text-foreground/40 uppercase tracking-widest">Our Story</span>
+            <h2 className="text-5xl max-md:text-3xl font-medium mt-2">From a small team in Algiers to a recognized AI infrastructure company.</h2>
           </div>
 
           <div className="flex max-lg:flex-col gap-6">
@@ -127,32 +127,20 @@ export default function AboutPage() {
               {
                 year: "2025",
                 title: "COSI 2025",
-                body: "First time anyone saw us. COSI 2025. We met the Algerian tech community and showed them what we were building. No polish, just the thing itself.",
+                body: "First Public Appearance",
                 img: "/aboutus/Cosi-2025/image1.webp",
               },
               {
-                year: "2024",
+                year: "2026",
                 title: "Label Projet Innovant",
-                body: "The Ministry of Knowledge Economy labeled us an innovative tech project. That opened the door to the Algerian startup ecosystem for real.",
+                body: "Ministry of Knowledge Economy",
                 img: "/aboutus/label-projet-inovant.webp",
               },
               {
-                year: "2024",
-                title: "Itihad Incubation",
-                body: "Itihad brought us into their acceleration program. Mentorship, funding, and enough infrastructure to turn the idea into something that actually ran.",
+                year: "2025",
+                title: "Itihad Incubation Program",
+                body: "Accelerator",
                 img: "/aboutus/itihad-incubation.webp",
-              },
-              {
-                year: "2026",
-                title: "International Entrepreneurship Week",
-                body: "We got invited as hosts and mentors at International Entrepreneurship Week. Presented the startup on stage. Spent the rest of the time with the next generation of Algerian founders.",
-                img: "/aboutus/semaine-enteurprunariat-international/image1.webp",
-              },
-              {
-                year: "Jun 2026",
-                title: "Hawiyat Composer Launch",
-                body: "Shipped Hawiyat Composer. An AI gateway that sits between developers and LLM models. Caching, smart routing, and optimization, no code changes on your side.",
-                img: "/aboutus/hawiyat-composer/image1.webp",
               },
             ].map((event, i) => (
               <div key={i} className="flex-1 relative group">

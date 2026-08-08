@@ -14,18 +14,16 @@ const space = Space_Grotesk({
 });
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
-const NEXT_URL = process.env.NEXT_PUBLIC_URL ?? "https://hawiyat.org";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.hawiyat.org";
-const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? "https://docs.hawiyat.org";
+const SITE_URL = "https://www.hawiyat.org";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(NEXT_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: `${APP_NAME}: Built to Ship AI Provider for Algeria`,
-    template: "%s | " + APP_NAME,
+    default: `AI Provider in Algeria and Hawiyat Composer | ${APP_NAME}`,
+    template: `%s | ${APP_NAME}`,
   },
   description:
-    "Hawiyat Composer routes and caches every request between your coding tools and AI models. Priced in DZD, backed by our own cloud in Algeria. No provider switching, no hidden costs.",
+    "AI services in Algeria for developers and businesses: Hawiyat Composer, AI subscriptions in DZD, automation, hosting, and local support.",
   applicationName: APP_NAME,
   keywords: [
     "paas", "platform as service", "paas algerien", "paas dz", "dz paas",
@@ -53,7 +51,7 @@ export const metadata: Metadata = {
     "mistral", "mistral large", "mistral small",
     "openai models", "anthropic models", "google models", "meta models",
   ],
-  authors: [{ name: `${APP_NAME} Team`, url: NEXT_URL }],
+  authors: [{ name: `${APP_NAME} Team`, url: SITE_URL }],
   creator: `${APP_NAME} Team`,
   publisher: APP_NAME,
   robots: {
@@ -71,12 +69,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${APP_NAME}: Built to Ship`,
     description:
-      "Hawiyat Composer routes and caches AI requests. Priced in DZD, backed by our own cloud in Algeria.",
-    url: NEXT_URL,
+      "AI services in Algeria: Hawiyat Composer, subscriptions in DZD, automation, hosting, and local technical support.",
+    url: SITE_URL,
     siteName: APP_NAME,
     images: [
       {
-        url: `${NEXT_URL}/hawiyat.png`,
+        url: `${SITE_URL}/hawiyat.png`,
         width: 2000,
         height: 2000,
         alt: `${APP_NAME} Platform`,
@@ -93,25 +91,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${APP_NAME}: Built to Ship`,
     description:
-      "Hawiyat Composer routes and caches AI requests. Priced in DZD, backed by our own cloud in Algeria.",
-    images: [`${NEXT_URL}/hawiyat.png`],
+      "AI services in Algeria: Hawiyat Composer, subscriptions in DZD, automation, hosting, and local technical support.",
+    images: [`${SITE_URL}/hawiyat.png`],
     creator: "@hawiyat",
   },
   alternates: {
-    // AUDIT NOTE (CRITICAL): this canonical applies to EVERY page that
-    // doesn't override it. If child routes (services, blog, pricing, docs
-    // links, etc.) don't set their own `alternates.canonical` in their own
-    // metadata export, they will all canonicalize to the homepage and stop
-    // being indexed separately. Verify every indexable route overrides this.
-    canonical: NEXT_URL,
-    languages: {
-      "en-US": NEXT_URL,
-      "fr-DZ": `${NEXT_URL}/fr`,
-      // AUDIT NOTE: add "x-default" once you confirm the fallback page 
-      // required so Google knows which version to show users outside any
-      // matched locale.
-      "x-default": NEXT_URL,
-    },
+    canonical: "/",
   },
   formatDetection: {
     email: false,
@@ -139,12 +124,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: APP_NAME,
-  url: NEXT_URL,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${NEXT_URL}/search?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
+  url: SITE_URL,
 };
 
 // Organization schema, split out from WebSite per schema.org spec.
@@ -156,8 +136,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: APP_NAME,
-  url: NEXT_URL,
-  logo: `${NEXT_URL}/logo.svg`,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.svg`,
   foundingLocation: {
     "@type": "Place",
     name: "Algiers, Algeria",
@@ -204,22 +184,11 @@ export default function RootLayout({
           integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
-          media="print" onload="this.media='all'"
         />
 
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
 
-        {/*
-          Self-referencing + reciprocal hreflang tags. Next.js's
-          `alternates.languages` metadata field does NOT automatically add
-          a self-referencing tag for the current locale  without it,
-          Google can drop the whole hreflang cluster. x-default tells
-          Google which version to serve users outside en/fr entirely.
-        */}
-        <link rel="alternate" hrefLang="en-US" href={NEXT_URL} />
-        <link rel="alternate" hrefLang="fr-DZ" href={`${NEXT_URL}/fr`} />
-        <link rel="alternate" hrefLang="x-default" href={NEXT_URL} />
 
         {/* Organization + WebSite structured data, split per schema.org spec */}
         <script

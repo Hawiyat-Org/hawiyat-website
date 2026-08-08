@@ -7,14 +7,14 @@ const Resources = () => {
       title: "COSI 2025",
       category: "First Public Appearance",
       date: "2025",
-      image: "/aboutus/Cosi-2025/image1.png",
+      image: "/aboutus/Cosi-2025/image1.webp",
       href: "/about",
     },
     {
       title: "Label Projet Innovant",
       category: "Ministry of Knowledge Economy",
       date: "2026",
-      image: "/aboutus/label-projet-inovant.png",
+      image: "/aboutus/label-projet-inovant.webp",
       href: "/about",
       wide: true,
     },
@@ -22,16 +22,16 @@ const Resources = () => {
       title: "Itihad Incubation Program",
       category: "Accelerator",
       date: "2025",
-      image: "/aboutus/itihad-incubation.png",
+      image: "/aboutus/itihad-incubation.webp",
       href: "/about",
     },
   ]
 
   return (
     <section className="mt-5 flex min-h-[80vh] w-full flex-col place-content-center place-items-center p-[2%] max-lg:p-3">
-      <h3 className="reveal-up text-4xl font-medium max-md:text-2xl">
+      <h2 className="reveal-up text-4xl font-medium max-md:text-2xl">
         Our Story
-      </h3>
+      </h2>
       <p className="reveal-up mt-3 text-gray-500 dark:text-gray-400 text-center max-w-md">
         From a small team in Algiers to a recognized AI infrastructure company.
       </p>

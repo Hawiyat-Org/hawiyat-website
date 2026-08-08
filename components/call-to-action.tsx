@@ -34,13 +34,13 @@ const CallToAction = () => {
             <span className="text-sm font-medium dark:text-gray-300 text-gray-600">Deployment Made Simple</span>
           </div>
 
-          <h3 className="reveal-up text-5xl dark:text-white/80 text-black/80 font-light max-md:text-3xl text-center leading-relaxed px-4">
+          <h2 className="reveal-up text-5xl dark:text-white/80 text-black/80 font-light max-md:text-3xl text-center leading-relaxed px-4">
             <span className="dark:text-white text-black font-semibold">Click </span>
             {' '}the button,{' '}
             <span className="dark:text-white text-black font-semibold">Ship</span>
             {' '}the app,{' '}
             <span className="dark:text-white text-black font-semibold">Done</span>
-          </h3>
+          </h2>
 
           {/* Subtitle */}
           <p className="text-center text-base dark:text-gray-300 text-gray-600 max-w-xl px-4">
