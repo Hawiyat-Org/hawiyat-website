@@ -13,9 +13,7 @@ export default function ServicesPage({ searchParams }: { searchParams: { q?: str
           <p className="mt-5 text-lg text-muted-foreground">
             Hawiyat provides locally supported AI access, Hawiyat Composer plans, workflow automation, WhatsApp integrations, and application hosting with prices in Algerian dinars.
           </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Compare the options below, learn about <Link href="/ai-algeria" className="underline">AI services for Algeria</Link>, or <Link href="/schedule" className="underline">book a consultation</Link> for a tailored recommendation.
-          </p>
+       
         </header>
         <ServicesCatalog initialQuery={typeof searchParams.q === "string" ? searchParams.q : ""} />
       </div>

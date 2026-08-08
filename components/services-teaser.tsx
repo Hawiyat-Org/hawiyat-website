@@ -62,7 +62,7 @@ export default function ServicesTeaser() {
             </p>
             <Link
               href="/services"
-              className="btn !mt-8 max-md:!mt-6 max-md:!w-[90%] max-md:!rounded-lg max-md:!py-3.5 max-md:!text-[15px] max-md:!font-medium !bg-transparent !text-black !border-[1px] !border-black dark:!border-white dark:!text-white transition-all duration-300 active:scale-95 inline-flex items-center gap-2"
+              className="btn  !mt-8 max-md:!mt-6 max-md:!w-[90%] max-md:!rounded-lg max-md:!py-3.5 max-md:!text-[15px] max-md:!font-medium !bg-transparent !text-black !border-[1px] !border-black dark:!border-white dark:!text-white transition-all duration-300 active:scale-95 inline-flex items-center gap-2"
             >
               <span>View All Services</span>
               <ArrowRight className="w-4 h-4" />

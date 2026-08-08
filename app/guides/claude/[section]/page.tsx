@@ -73,7 +73,7 @@ export default function SectionPage({ params }: { params: { section: string } })
 
       {/* Content */}
       <div className="mb-8">
-        <h2 className="mb-4 text-2xl font-semibold">{section.label} — step-by-step</h2>
+        <h2 className="mb-4 text-2xl font-semibold">{section.label} - step-by-step</h2>
         <SectionContent sectionId={section.id} />
       </div>
 

@@ -38,6 +38,7 @@ const Header = () => {
   }
 
   if (pathname?.startsWith("/guides/claude")) return null
+  if (pathname?.startsWith("/services/") && pathname !== "/services") return null
 
   return (
     <>
