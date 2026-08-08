@@ -31,6 +31,7 @@ module.exports = {
         "signal-text": "rgb(var(--signal-text-rgb) / <alpha-value>)",
         "signal-contrast": "rgb(var(--signal-contrast-rgb) / <alpha-value>)",
         "signal-bg": "rgb(var(--signal-bg-rgb) / <alpha-value>)",
+        "signal-hover": "rgb(var(--signal-hover-rgb) / <alpha-value>)",
         ember: "rgb(var(--ember-rgb) / <alpha-value>)",
         "ember-deep": "rgb(var(--ember-deep-rgb) / <alpha-value>)",
         danger: "rgb(var(--danger-rgb) / <alpha-value>)",

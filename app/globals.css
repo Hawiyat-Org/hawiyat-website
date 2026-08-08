@@ -56,37 +56,39 @@
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
-  --radius: 0.5rem;
+  --radius: 0.375rem;
 
   /* Hawiyat execution-layer tokens (light) */
-  --paper: #F7F6F3;
-  --ink: #0B0F0E;
-  --surface: #FDFCFA;
-  --surface-dim: #EDEBE5;
-  --border: #E4E2DC;
-  --muted: #62665F;
-  --signal: #16A085;
-  --signal-text: #0B0F0E;
-  --signal-contrast: #0C6A56;
-  --signal-bg: #E6FFF7;
-  --ember: #B06A21;
-  --ember-deep: #8C4D11;
+  --paper: #FAFAFA;
+  --ink: #0A0A0A;
+  --surface: #FFFFFF;
+  --surface-dim: #F2F2F2;
+  --border: #E5E5E5;
+  --muted: #5C5C5C;
+  --signal: #0A0A0A;
+  --signal-text: #FFFFFF;
+  --signal-contrast: #1A1A1A;
+  --signal-bg: #F0F0F0;
+  --signal-hover: #262626;
+  --ember: #6B6B6B;
+  --ember-deep: #4A4A4A;
   --danger: #C03E2B;
   --ok: #0E9F6E;
 
   /* RGB channel companions (for Tailwind opacity utilities) */
-  --paper-rgb: 247 246 243;
-  --ink-rgb: 11 15 14;
-  --surface-rgb: 253 252 250;
-  --surface-dim-rgb: 237 235 229;
-  --border-rgb: 228 226 220;
-  --muted-rgb: 98 102 95;
-  --signal-rgb: 22 160 133;
-  --signal-text-rgb: 11 15 14;
-  --signal-contrast-rgb: 12 106 86;
-  --signal-bg-rgb: 230 255 247;
-  --ember-rgb: 176 106 33;
-  --ember-deep-rgb: 140 77 17;
+  --paper-rgb: 250 250 250;
+  --ink-rgb: 10 10 10;
+  --surface-rgb: 255 255 255;
+  --surface-dim-rgb: 242 242 242;
+  --border-rgb: 229 229 229;
+  --muted-rgb: 92 92 92;
+  --signal-rgb: 10 10 10;
+  --signal-text-rgb: 255 255 255;
+  --signal-contrast-rgb: 26 26 26;
+  --signal-bg-rgb: 240 240 240;
+  --signal-hover-rgb: 38 38 38;
+  --ember-rgb: 107 107 107;
+  --ember-deep-rgb: 74 74 74;
   --danger-rgb: 192 62 43;
   --ok-rgb: 14 159 110;
 }
@@ -146,34 +148,36 @@
   --ring: 0 0% 83%;
 
   /* Hawiyat execution-layer tokens (dark) */
-  --paper: #0A0F0E;
-  --ink: #EDF2EF;
-  --surface: #111817;
-  --surface-dim: #18211F;
-  --border: #242B28;
-  --muted: #8FA09A;
-  --signal: #2EE6B6;
-  --signal-text: #00382C;
-  --signal-contrast: #B6F7E4;
-  --signal-bg: #0E241E;
-  --ember: #F2A23B;
-  --ember-deep: #FFC97A;
+  --paper: #0A0A0A;
+  --ink: #F5F5F5;
+  --surface: #141414;
+  --surface-dim: #1E1E1E;
+  --border: #2A2A2A;
+  --muted: #A3A3A3;
+  --signal: #FFFFFF;
+  --signal-text: #0A0A0A;
+  --signal-contrast: #E5E5E5;
+  --signal-bg: #1C1C1C;
+  --signal-hover: #E2E2E2;
+  --ember: #B0B0B0;
+  --ember-deep: #D4D4D4;
   --danger: #F4684F;
   --ok: #37D67A;
 
   /* RGB channel companions (for Tailwind opacity utilities) */
-  --paper-rgb: 10 15 14;
-  --ink-rgb: 237 242 239;
-  --surface-rgb: 17 24 23;
-  --surface-dim-rgb: 24 33 31;
-  --border-rgb: 36 43 40;
-  --muted-rgb: 143 160 154;
-  --signal-rgb: 46 230 182;
-  --signal-text-rgb: 0 56 44;
-  --signal-contrast-rgb: 182 247 228;
-  --signal-bg-rgb: 14 36 30;
-  --ember-rgb: 242 162 59;
-  --ember-deep-rgb: 255 201 122;
+  --paper-rgb: 10 10 10;
+  --ink-rgb: 245 245 245;
+  --surface-rgb: 20 20 20;
+  --surface-dim-rgb: 30 30 30;
+  --border-rgb: 42 42 42;
+  --muted-rgb: 163 163 163;
+  --signal-rgb: 255 255 255;
+  --signal-text-rgb: 10 10 10;
+  --signal-contrast-rgb: 229 229 229;
+  --signal-bg-rgb: 28 28 28;
+  --signal-hover-rgb: 226 226 226;
+  --ember-rgb: 176 176 176;
+  --ember-deep-rgb: 212 212 212;
   --danger-rgb: 244 104 79;
   --ok-rgb: 55 214 122;
 }
