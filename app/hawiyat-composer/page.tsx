@@ -120,6 +120,7 @@ export default function ComposerPage() {
               alt="Hawiyat Composer"
               width={400}
               height={340}
+              sizes="(max-width: 768px) 220px, (max-width: 1024px) 280px, 400px"
               className="w-full h-auto animate-very-slow-spin"
               priority
             />
@@ -223,19 +224,19 @@ export default function ComposerPage() {
             </span>
             <div className="flex flex-wrap items-center justify-center gap-8 max-md:gap-6">
               <div className="h-16 w-32 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/claude-code.webp" alt="Claude Code" fill className="object-contain" />
+                <Image src="/Compatible/claude-code.webp" alt="Claude Code" fill sizes="128px" className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 dark:invert">
-                <Image src="/Compatible/cursor.webp" alt="Cursor" fill className="object-contain" />
+                <Image src="/Compatible/cursor.webp" alt="Cursor" fill sizes="112px" className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/vscode.webp" alt="VS Code" fill className="object-contain" />
+                <Image src="/Compatible/vscode.webp" alt="VS Code" fill sizes="112px" className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/codex.webp" alt="Codex" fill className="object-contain" />
+                <Image src="/Compatible/codex.webp" alt="Codex" fill sizes="112px" className="object-contain" />
               </div>
               <div className="h-14 w-28 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <Image src="/Compatible/antigravity.webp" alt="Anti Gravity" fill className="object-contain" />
+                <Image src="/Compatible/antigravity.webp" alt="Anti Gravity" fill sizes="112px" className="object-contain" />
               </div>
             </div>
           </div>

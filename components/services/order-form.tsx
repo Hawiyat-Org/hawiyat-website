@@ -131,13 +131,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
           <>
             <div className="mb-6 p-4 rounded-xl bg-muted/50 border border-border/40">
               <div className="flex items-start gap-3">
-                <div className="shrink-0 w-14 h-14 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
+                <div className="shrink-0 w-20 h-20 rounded-lg bg-white dark:bg-muted flex items-center justify-center overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.name}
-                    width={48}
-                    height={48}
-                    className="object-contain w-10 h-10"
+                    width={64}
+                    height={64}
+                    sizes="64px"
+                    className="object-contain w-16 h-16"
                   />
                 </div>
                 <div className="flex-1">
