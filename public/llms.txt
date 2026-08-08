@@ -12,6 +12,16 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - [Privacy Policy](https://www.hawiyat.org/privacy): How Hawiyat collects, uses, and protects personal data.
 - [DMCA](https://www.hawiyat.org/dmca): Copyright notice and counter-notice policy.
 
+## Pricing
+
+- [Pricing](https://www.hawiyat.org/pricing.md): Machine-readable pricing for every plan in Algerian dinars (DZD), verbatim from the service catalog. Models are routes on the execution layer, never sold as SKUs or credits.
+
+## Key resources
+
+- [llms.txt](https://www.hawiyat.org/llms.txt): This file — quick overview for AI agents.
+- [llmsfull.txt](https://www.hawiyat.org/llmsfull.txt): Full details — every service, pricing in DZD, features, and FAQs.
+- [pricing.md](https://www.hawiyat.org/pricing.md): Machine-readable pricing for every plan, verbatim from the service catalog.
+
 ## Important facts
 - Hawiyat is based in Algeria and supports customers in Arabic, French, and English.
 - Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted.

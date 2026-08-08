@@ -3,6 +3,10 @@ import type { NextRequest } from "next/server"
 
 const GLOBAL_RATE_LIMIT = { maxRequests: 100, windowMs: 60 * 1000 }
 
+// Known search engines and AI crawlers are exempt from the rate limit so they
+// can index the site unimpeded. The human limiter below is untouched.
+const CRAWLER_RE = /(googlebot|bingbot|slurp|duckduckbot|gptbot|oai-searchbot|chatgpt-user|perplexitybot|claude-ai|claudebot|anthropic-ai|google-extended|ccbot|ia_archiver|yandex|baiduspider)/i
+
 const globalRateLimitStore = new Map<string, { count: number; resetTime: number }>()
 
 let lastCleanup = Date.now()
@@ -68,6 +72,9 @@ function checkGlobalRateLimit(ip: string): { allowed: boolean; retryAfter?: numb
 }
 
 export function middleware(request: NextRequest) {
+  const UA = request.headers.get("user-agent") ?? ""
+  if (CRAWLER_RE.test(UA)) return NextResponse.next()
+
   const ip = getClientIP(request)
   const result = checkGlobalRateLimit(ip)
 

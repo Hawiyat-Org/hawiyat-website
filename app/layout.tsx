@@ -184,6 +184,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" />
 
 
         {/* Organization + WebSite structured data, split per schema.org spec */}

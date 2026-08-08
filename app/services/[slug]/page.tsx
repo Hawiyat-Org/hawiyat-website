@@ -104,6 +104,22 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     ],
   }
 
+  const faqSchema =
+    service.faq && service.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: service.faq.map((qa) => ({
+            "@type": "Question",
+            name: qa.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: qa.answer,
+            },
+          })),
+        }
+      : null
+
   const serviceData = {
     id: service.id,
     // Clean display name; the form appends " {tag}" to the order record
@@ -128,7 +144,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema, faqSchema].filter(Boolean)) }} />
 
       <div className="min-h-screen">
         {/* Back Navigation */}
