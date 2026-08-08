@@ -26,6 +26,27 @@ const partners = [
     alt: "IT Solutions — partner company",
     desc: "IT Solutions — partner company.",
   },
+  {
+    name: "RMASC",
+    logo: "/trust/rmasc-logo.webp",
+    url: "https://www.sarlrmasc.com/",
+    alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company",
+    desc: "RMASC — Algerian elevator company trusting Hawiyat.",
+  },
+  {
+    name: "Green Duty",
+    logo: "green-duty",
+    url: "",
+    alt: "Green Duty logo — a company that trusts Hawiyat",
+    desc: "Green Duty — a company that trusts Hawiyat.",
+  },
+  {
+    name: "Mercus Academy",
+    logo: "mercus",
+    url: "https://www.mercus-academy.com/",
+    alt: "Mercus Academy logo — a training institution that trusts Hawiyat",
+    desc: "Mercus Academy — training institution.",
+  },
 ]
 
 function StatCard({ value, label }: { value: string; label: string }) {
@@ -62,8 +83,10 @@ const TrustedBrands = () => {
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
-          <StatCard value="100+ clients" label="paying customers on the execution layer" />
+        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard value="100+" label="clients" />
+          <StatCard value="10+" label="resellers" />
+          <StatCard value="100B+" label="tokens served" />
           <StatCard value="≈2.6M DZD" label="annual recurring revenue" />
         </div>
 
@@ -73,39 +96,67 @@ const TrustedBrands = () => {
             Partners &amp; early customers
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-            {partners.map((partner) => (
-              <Link
-                key={partner.name}
-                href={partner.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-2"
-                aria-label={partner.alt}
-                title={partner.desc}
-              >
-                {partner.logo === "itsol" ? (
-                  <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
-                    <Image
-                      src={isDark ? "/trust/itsol-dark.svg" : "/trust/itsol.svg"}
-                      alt={partner.alt}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                ) : partner.logo ? (
-                  <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
-                    <Image src={partner.logo} alt={partner.alt} fill className="object-contain" />
-                  </div>
-                ) : (
-                  <span className="font-mono text-xl font-semibold text-muted-ink transition-colors group-hover:text-ink">
-                    IT Solutions
+            {partners.map((partner) => {
+              const logoEl = partner.logo === "itsol" ? (
+                <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                  <Image
+                    src={isDark ? "/trust/itsol-dark.svg" : "/trust/itsol.svg"}
+                    alt={partner.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ) : partner.logo === "green-duty" ? (
+                <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                  <Image
+                    src={isDark ? "/trust/green-duty-dark.webp" : "/trust/green-duty-light.webp"}
+                    alt={partner.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ) : partner.logo === "mercus" ? (
+                <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                  <Image
+                    src={isDark ? "/trust/mercus-academy-dark.webp" : "/trust/mercus-academy-light.webp"}
+                    alt={partner.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ) : partner.logo ? (
+                <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                  <Image src={partner.logo} alt={partner.alt} fill className="object-contain" />
+                </div>
+              ) : null
+
+              const content = (
+                <span className="group flex flex-col items-center gap-2">
+                  {logoEl}
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                    {partner.name}
                   </span>
-                )}
-                <span className="font-mono text-[11px] uppercase tracking-wider text-muted-ink">
-                  {partner.name}
                 </span>
-              </Link>
-            ))}
+              )
+
+              return partner.url ? (
+                <Link
+                  key={partner.name}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                  aria-label={partner.alt}
+                  title={partner.desc}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <span key={partner.name} aria-label={partner.alt} title={partner.desc}>
+                  {content}
+                </span>
+              )
+            })}
           </div>
         </div>
       </div>
