@@ -41,66 +41,71 @@
 
 **The website's single job:** convert belief that "AI in emerging markets is messy, fragmented and expensive" into "Hawiyat executes my AI — correctly and reliably, in DZD, close to home." (Cost is the *final proof point*, never the opener.)
 
-**Visual metaphor = control plane.** The site looks like a system console for the AI era: pipelines, telemetry, verdict strips, task cards — not like a chat app mock. The power is in *evidence of execution*, so we show *execution*.
+**Visual metaphor = control plane, rendered minimal.** The home leads with a simple, calm statement of the thesis; the execution evidence (pipelines, telemetry, the Trace) lives on the **Composer page**, where the engine is explained. Home is quiet and confident; Composer shows the machinery. The power is in *evidence of execution*, so we show *execution* — on the page where we talk about it.
 
 ---
 
 ## Design Tokens
 
-All values are CSS custom properties in `app/globals.css`, mirrored into Tailwind.
+All values are CSS custom properties in `app/globals.css`, mirrored into Tailwind. **No raw hex in components** — always reference a token.
 
 ### Light Mode
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--paper` | `#F7F6F3` | Page background |
-| `--ink` | `#0B0F0E` | Primary text (near-black, green tint) |
-| `--surface` | `#FDFCFA` | Cards, elevated panels |
-| `--surface-dim` | `#EDEBE5` | Secondary wells, code blocks |
-| `--border` | `#E4E2DC` | Hairlines, dividers |
-| `--muted` | `#62665F` | Captions, secondary text |
-| `--signal` | `#16A085` | Primary CTA **fill**, active states, "executing" (verdigris) |
-| `--signal-text` | `#0B0F0E` | Text/icon **on a signal fill** (ink — ≈6:1, passes AA) |
-| `--signal-contrast` | `#0C6A56` | `signal`-tinted surfaces / large text accents (≥18px) |
-| `--signal-bg` | `#E6FFF7` | Signal-tinted surface, light mode |
-| `--ember` | `#B06A21` | Secondary warm accent — **large text (≥18px), fills, icons** |
-| `--ember-deep` | `#8C4D11` | Regular/small text on `--paper` in ember (passes 4.5:1) |
-| `--danger` | `#C03E2B` | Errors |
-| `--ok` | `#0E9F6E` | Success (distinct hue from signal) |
+| `--paper` | `#FAFAFA` | Page background |
+| `--ink` | `#0A0A0A` | Primary text (black) |
+| `--surface` | `#FFFFFF` | Cards, elevated panels |
+| `--surface-dim` | `#F2F2F2` | Secondary wells, code blocks |
+| `--border` | `#E5E5E5` | Hairlines, dividers |
+| `--muted` | `#5C5C5C` | Captions, secondary text |
+| `--signal` | `#0A0A0A` | Primary CTA **fill**, active states (ink-black) |
+| `--signal-text` | `#FFFFFF` | Text/icon **on a signal fill** (white — passes AA) |
+| `--signal-contrast` | `#1A1A1A` | `signal`-tinted surfaces / large text accents (≥18px) |
+| `--signal-bg` | `#F0F0F0` | Signal-tinted surface, light mode |
+| `--signal-hover` | `#262626` | Primary CTA hover fill |
+| `--ember` | `#6B6B6B` | Secondary neutral accent — large text, fills, icons |
+| `--ember-deep` | `#4A4A4A` | Regular/small text on `--paper` in ember (passes 4.5:1) |
+| `--danger` | `#C03E2B` | Errors (the only chromatic red) |
+| `--ok` | `#0E9F6E` | Success (the only chromatic green) |
 
 ### Dark Mode
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--paper` | `#0A0F0E` | Page background |
-| `--ink` | `#EDF2EF` | Primary text |
-| `--surface` | `#111817` | Cards, panels |
-| `--surface-dim` | `#18211F` | Wells, code blocks, secondary |
-| `--border` | `#242B28` | Hairlines |
-| `--muted` | `#8FA09A` | Secondary text |
-| `--signal` | `#2EE6B6` | CTA fill, pipelines, active states (bright verdigris) |
-| `--signal-text` | `#00382C` | Text/icon **on a signal fill** (≈8:1, passes) |
-| `--signal-contrast` | `#B6F7E4` | `signal`-tinted surface text (dark) |
-| `--signal-bg` | `#0E241E` | Signal-tinted surface, dark mode |
-| `--ember` | `#F2A23B` | Warm accent — large text, fills, icons |
-| `--ember-deep` | `#FFC97A` | Small/secondary ember text on dark |
-| `--danger` | `#F4684F` | Error |
+| `--paper` | `#0A0A0A` | Page background |
+| `--ink` | `#F5F5F5` | Primary text |
+| `--surface` | `#141414` | Cards, panels |
+| `--surface-dim` | `#1E1E1E` | Wells, code blocks, secondary |
+| `--border` | `#2A2A2A` | Hairlines |
+| `--muted` | `#A3A3A3` | Secondary text |
+| `--signal` | `#FFFFFF` | Primary CTA fill (white) |
+| `--signal-text` | `#0A0A0A` | Text/icon **on a signal fill** (black — passes AA) |
+| `--signal-contrast` | `#E5E5E5` | `signal`-tinted surface text (dark) |
+| `--signal-bg` | `#1C1C1C` | Signal-tinted surface, dark mode |
+| `--signal-hover` | `#E2E2E2` | Primary CTA hover fill |
+| `--ember` | `#B0B0B0` | Secondary neutral accent — large text, fills, icons |
+| `--ember-deep` | `#D4D4D4` | Small/secondary ember text on dark |
+| `--danger` | `#F4684F` | Errors |
 | `--ok` | `#37D67A` | Success |
 
 ### Contrast & usage rules (hard)
-- **CTA button in light mode:** `--signal` fill + `--signal-text` (ink) text. Do **not** use white text on `--signal` (fails AA).
-- **CTA button in dark mode:** `--signal` fill + `--signal-text` (dark green).
-- `--ember` in light mode is only for **large text (≥18px/bold), fills, and icons**. For small/regular ember text use `--ember-deep`.
-- Accent colors (`--signal`, `--ember`) are for fills, large text, and UI accents — never for regular body copy. Body copy uses `--ink`/`--muted` only.
+- **CTA button in light mode:** `--signal` fill (black) + `--signal-text` (white) text, hover `--signal-hover`.
+- **CTA button in dark mode:** `--signal` fill (white) + `--signal-text` (black).
+- `--signal` **is the ink-black neutral** — never a colored accent. It makes the primary action read as the strongest, darkest thing on the page.
+- `--ember` is a **neutral gray** secondary accent — for fills, large text, and icons that should read one step softer than signal. Never for regular body copy; body copy uses `--ink`/`--muted` only.
 - Text on `--signal-bg` uses `--signal-contrast`.
+- `--danger`/`--ok` are the **only chromatic tokens** on the site (errors/success). Everything else is a black-to-white gray scale.
 
 ### Brand Gradients
-- **Night-pulse** (hero gradient): `#0B0F0E → #111817 → #0A0F0E` with a faint `signal` radial (`#16A085` at 8–12% opacity) — *cold control room heat*.
-- **Execution line**: linear-gradient(90deg, `#16A085`, `#2EE6B6`) — used sparingly for the Trace, text-gradients, hover thermometers.
+- No chromatic gradients. The monochrome palette is deliberately flat.
+- **Hero background:** plain `--paper` with a faint dot grid (`--hero-bg-img`), masked to fade out toward the bottom. Calm, quiet, no color heat.
+- **Trace-line:** a 1px `--signal` horizontal rule used as a section eyebrow divider on `/composer`.
 
 ### Why this palette (design decision)
-- No default purple "AI gradient" (that reads "wrapper/product"). 
-- No acid-green-on-black (default #2 cliché). Verdigris `#16A085`/`#2EE6B6` is *inherited,* calm, infrastructure-like.
-- Warm amber `ember` gives the "local Algeria / DZD / human warmth" counterpoint to pristine execution-green.
-- Neutral paper tones with green undertone feel like printed schematics — sits under any model brand (Claude/GPT/Gemini) without clashing.
+- **Monochrome by design.** A full black-to-white gray scale with two token families (`signal` = ink-black CTA, `ember` = mid-gray secondary) reads as infrastructure — not a flashy "AI wrapper" product.
+- No default purple "AI gradient" (that reads "wrapper/product"), no acid-green-on-black.
+- Grays sit under any model brand (Claude/GPT/Gemini) without clashing — the palette itself says "model-independent".
+- Only `--danger`/`--ok` carry color, so red/green always mean exactly one thing: error/success.
+- The palette is the calm frame; the *execution evidence* (the Trace, telemetry) is the content that gets the attention.
 
 ---
 
@@ -111,14 +116,14 @@ All values are CSS custom properties in `app/globals.css`, mirrored into Tailwin
 | Role | Family | Variables | Notes |
 |------|--------|-----------|-------|
 | Display + Body | **Space Grotesk** | `--font-space` (weights 300–700) | Huge but humanist tech. Loaded `next/font`, keep. |
-| Data, labels, pipeline, code, metadata | **JetBrains Mono** | `--font-mono` (weights 400–700) | NEW — add to `app/layout.tsx`. Telemetry = mono. |
+| Data, labels, pipeline, code, metadata | **JetBrains Mono** | `--font-mono` (weights 400–700) | Telemetry = mono. |
 
-- Remove legacy Ubuntu, Dancing Script, Playfair, Poly from **all** of: `app/layout.tsx` (next/font/imports), `app/globals.css` (@import lines + font-family fallbacks), `styles/globals.css` (dead duplicate — delete the file), `tailwind.config.js` (`poly`/`fontFamily`), and any component using `font-serif`.
+- Keep Ubuntu, Dancing Script, Playfair, Poly **removed** from all of: `app/layout.tsx` (next/font/imports), `app/globals.css`, `tailwind.config.js`, and every component. No `font-serif`.
 
 ### Type Scale
 | Use | Size | Weight |
 |-----|------|--------|
-| Hero display | clamp(3rem, 7vw, 4.5rem) | 700, tight |
+| Hero display | text-5xl → 7xl (clamp-style, md/xl bumps) | 700, tight (`leading-[1.05]`) |
 | H1 | 5xl (3rem) | 700 |
 | H2 | 4xl (2.25rem) | 700 |
 | H3 | 3xl (1.875rem) | 600 |
@@ -126,8 +131,8 @@ All values are CSS custom properties in `app/globals.css`, mirrored into Tailwin
 | Body Large | lg (1.125rem) | 400/500 |
 | Body | base (1rem) | 400 |
 | Small / caption | sm (0.875rem) | 400 |
-| **Eyebrow** | xs mono uppercase, tracking-widest | e.g. `ROUTE / 03` |
-| **Metadata strip** | xs mono, muted | e.g. `ctx 12k · cost 0.4 DZD · 212ms` |
+| **Eyebrow** | xs mono uppercase, tracking-widest | e.g. `EXECUTION LOOP` |
+| **Metadata strip** | xs mono, muted | e.g. `RUN 02 · COMPLETED` |
 
 Use **mono for everything measured** (numbers, tokens, status, labels, pasted system names like `claude-sonnet-4-5`). Grotesk for **talking**.
 
@@ -139,18 +144,19 @@ Use **mono for everything measured** (numbers, tokens, status, labels, pasted sy
 ## Spacing & Layout
 
 - Base 4px. Common: 4,8,12,16,24,32,48,64,80,96,128.
-- Section vertical rhythm: `py-24 md:py-32` for headline sections; `py-16` for supporting.
-- Content container: `max-w-6xl/7xl`; hero full-bleed with centered core column.
-- **Two-zone band** pattern: left sticky title column (aside, `md:w-5/12`) + right content column (cards). Used in engine + integrations.
-- **Pipeline strip** pattern: 6 tiny columns (UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT) — as an eyebrow row over any section that needs "the loop" framing.
-- Cards: `rounded-3xl`, `border border-border`, `bg-surface`, pad `p-6 md:p-8`.
-- Buttons: `rounded-full px-6 py-3`, hover `scale-[1.03]`. Primary = `--signal` fill + `--signal-text` (light) / dark-green `--signal-text` (dark); secondary = outline `border` + `--ink` text.
+- Section vertical rhythm: `py-16 md:py-24` for headline sections; `py-16` for supporting.
+- Content container: `max-w-6xl`; hero full-bleed with centered core column.
+- Cards: `rounded-lg`, `border border-border`, `bg-surface`, pad `p-6 md:p-8`.
+- Buttons: `rounded-lg px-6 py-3` (primary = `--signal` fill + `--signal-text` + hover `--signal-hover`; secondary = outline `border` + `--ink` text). Hover is `transition-colors` — **no scale**.
+- Inputs: `rounded-md`.
+- `rounded-full` reserved for **tiny pills/toggles** only (status chips, model chips, MAX tier switch, small badges). Not for cards or buttons.
+- Radius scale: cards/buttons `rounded-lg`, inputs `rounded-md`, small `rounded-full` pills, `--radius: 0.375rem` (Tailwind `lg`).
 
 ---
 
 ## Signature Element — The Execution Trace
 
-> **The one memorable, non-template element of the site.** A live horizontal pipeline that takes a *task packet* through the loop:
+> **The one memorable, non-template element of the site.** A horizontal pipeline that takes a *task packet* through the loop:
 
 ```
 [TASK PACKET]
@@ -162,14 +168,10 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
  ctx.12k     plan     + fallback  n8n      cost.0.4DZD
 ```
 
-**Rendering behavior:**
-- Hero: large console panel (the upgraded "AI Playground"): a vertical height ▓ queue with:
-  - a task chip that *types in* e.g. `"Reply to order 1024 on WhatsApp in Arabic"`
-  - a status line in mono (`ROUTE ▸ model: claude-sonnet-4-5 · ctx: docs/FAQ · tools:[EVO,CRM]`)
-  - a progress "spark" traveling through the 6 mono stages with `signal` highlight past the current step
-  - a footer mono telemetry strip (`tokens 1.2k · cost 0.4 DZD · Q 0.98 · 210ms · Reroutes from fallback`)
-- Section transition: a thin 1px horizontal trace line with a travelling `signal` dot used as a divider.
-- Loading/empty states in product UI reuse stages with spark marking.
+**Rendering behavior (lives on `/composer` only):**
+- The home hero is deliberately simple — no console panel. The Trace is the Composer page's centerpiece, rendered by `components/execution-trace.tsx` inside an "Every task becomes a run." section.
+- The composer run shows a mono task chip (`task ▸ "Reply to order 1024 on WhatsApp in Arabic"`), a status line (`RUN 02 · COMPLETED`), the 6-stage pipeline with the current stage highlighted, and a footer mono telemetry strip (`route: auto · model: gpt-4o → claude-sonnet · ctx: docs/FAQ · 12k · tools: [whatsapp, crm] · cost: ~0.4 DZD · latency: 210ms · quality: 0.98`).
+- A thin `trace-line` (1px `--signal`) draws in on scroll as a section-eyebrow divider throughout the composer page.
 
 **Why:** Chat bubbles are a cliché; a "routing table operating on your business" is visibly *Hawiyat*. It demonstrates the moat — execution intelligence — rather than stating it.
 
@@ -177,104 +179,68 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 
 ## Components Architecture
 
+> Current shipped component set (monochrome). Deleted during the redesign: `ai-playground.tsx`, `trusted-brands.tsx` (split), `newsletter.tsx`, `animated-text.tsx`, `animated-counter.tsx`, `benefits-section`, `additional-features`, `build-ai-apps`, `prebuilt-tools`, `one-subscription`, `resources`, `video-modal`.
+
 ### 1. Header (`components/header.tsx`)
-- Fixed, `z-50`, `backdrop-blur`, bg `--paper/70` border-bottom `--border`.
-- Center nav (desktop): **Solutions** (→ `/`), **Composer** (→ `/composer` — during rebrand, legacy `/hawiyat-composer` until the redirect lands), **Security** (`/cyber-security`), **Services** (`/services`), **AI in Algeria** (`/ai-algeria`).
-- Right: theme toggle (Sun/Moon) + primary CTA pill `**Start Building**` → `/composer` (legacy `/hawiyat-composer`).
-- Mobile: slide panel, full-width links, CTA bottom.
-- Hover on nav: `bg-surface-dim rounded-full`.
+- Fixed top pill, `z-50`, `backdrop-blur-xl`, bg `--paper/70` (dark `--surface-dim/50`), `rounded-2xl`, border-bottom `--border`. Mounted-guard theme toggle (no hydration mismatch).
+- Desktop nav: **Composer** (`/composer`), **Services** (`/services`), **About** (`/about`).
+- Right: theme toggle (Sun/Moon) + primary CTA pill **Start Building** → `/composer`.
+- Mobile: slide panel, full-width links, CTA bottom. Esc/close + body scroll lock.
+- Hover on nav: `hover:bg-surface-dim rounded-full`; no scale.
 
 ### 2. Hero Section (`components/hero-section.tsx`) — **The thesis**
-- Full viewport, bg `--paper` + `hero gradient` + faint dots; signature panel below H1.
+- Simple centered column, `min-h-[80vh]`, `--paper` + faint dots (masked fade at bottom). **No console panel, no 3D, no GSAP.**
+- Eyebrow (mono): `HAWIYAT AI COMPOSER · EXECUTION LAYER`
 - H1: **"The layer that decides how your business uses AI."**
-- Eyebrow (mono): `AI INFRASTRUCTURE · ALGIERS · MODEL-INDEPENDENT`
-- Sub (max-w-2xl): "Hawiyat sits between frontier models and the systems you run — WhatsApp, CRM, ERP, email, workflows. One task in. The best model, context, tools and fallbacks out. Priced in DZD."
-- CTAs: **Start building** (primary) · **See how it executes** (secondary outline, opens scrolled trace demo).
-- Dashboard panel: **Execution Console** (see AIPlayground rework) with 3D perspective (keep GSAP dashboard effect).
+- Sub (max-w-xl): "The right model for every task, your systems connected, results you can verify — billed in DZD, supported from Algeria."
+- CTAs: **Get Started** (primary → `/services`) · **How it works** (secondary → `/composer`).
+- Keeps the WebPage JSON-LD block for AI search.
 
-### 3. AI Playground → **Execution Console** (`components/ai-playground.tsx`)
-- Renamed semantically (keep filename for compat). Sidebar (250px, hidden mobile) w/ brand; nav items now: **Deployments, Agents, Composer, Docs & CLI**.
-- Main panel = the trace panel above.
-- Model selector dropdown: `Hawiyat (auto)`, `Claude Sonnet`, `GPT 4o`, `Gemini`, `Llama (open)` — each a small colored chip + mono name; toggle "Auto-route / Fixed". **Remove the legacy "Pablo" model** (current `ai-playground.tsx` still ships it) and its static nav items.
-- Signup popup (after 3 runs): "Run your business on Hawiyat" + CTA. 
+### 3. Partners Marquee (`components/partners-marquee.tsx`) — "Partners & early customers"
+- Two identical logo rows in one track, animated `translateX(-50% → 0)` on a 36s loop (`marquee-track` in globals.css); pauses on hover; disabled under `prefers-reduced-motion`.
+- Logos grayscale → full color on hover (`group-hover:grayscale-0`).
+- **A11y:** the duplicate second track is `aria-hidden`, and its links carry `tabIndex={-1}` so keyboard users don't tab through invisible copies.
+- Embeds an `ItemList` JSON-LD (partners as organizations) for search/AI crawlers.
 
-### 4. Trusted Brands (« proof ») (`components/trusted-brands.tsx`)
-- `py-20`. Grid of 3–6 logos (Itihad/ESTIN/IT-Solutions + regional partners) with hover scale-110. Title: "Already running on Hawiyat" +
-- Add second strip: metrics (verified only: `100+ clients`, `≈2.6M DZD ARR`, `p95 latency` placeholder, `DZD checkout`) as mono metadata. **Superseded by the plan's GC5 numbers policy — never render `+50B tokens` or `+60 clients` (unverified).**
+### 4. Our Numbers (`components/our-numbers.tsx`) — stat band
+- Static 4 verified stats: `100+` paying clients, `10+` resellers, `100B+` tokens executed, `≈2.6M DZD` ARR. Mono numerals. No animated counters, no scroll-triggered counting.
 
-### 5. "AI Execution Layer" (BenefitsSection rename, same click-id `solutions`)
-- 4 cards, 350×540-ish, rounded-3xl, hover scale-[1.02].
-- Cards (stage map — these 4 cards collapse the 6-stage trace; keep the numbering honest):
-  1. **Understand** (`BrainCircuit` icon) — classifies intent & business context. *(trace: UNDERSTAND)*
-  2. **Plan** — selects model, context, tools, workflow. *(trace: PLAN → ROUTE)*
-  3. **Execute** — runs across models & tools with fallbacks. *(trace: EXECUTE)*
-  4. **Evaluate & learn** — grades every outcome; execution intelligence accumulates. *(trace: EVALUATE → RESULT)*
-- Title: **"HOW HAWIYAT EXECUTES A TASK"**; eyebrow mono `EXECUTION LOOP`.
-- "Learn more →" → `/composer`.
+### 5. Pricing (`components/pricing.tsx`)
+- 3 cards, `rounded-lg`, `bg-surface border border-border`, data from `lib/data/services.ts` (untouched).
+- **PRO** (Composer Pro): outline button → OrderForm.
+- **MAX**: switchable 5X/20X plain `aria-pressed` pill toggle (no spring animation), primary `bg-signal` button → OrderForm.
+- **Enterprise**: `border-2 border-ink` "Custom pricing" card, prefilled WhatsApp link + mailto fallback.
+- Flat monochrome — no ambient glow, no shadows, no `hover:scale`.
 
-### 6. Any Model. Any System (replaces additional Features) `id="platform"`
-- 2-zone layout: sticky left "**One layer. Every model. Every system.**" + right column list of "wiring cards":
-  - Models: GPT, Claude, Gemini, open models, future models (each chip).
-  - Systems: WhatsApp, CRM, ERP, Email, Databases, n8n workflows, Internal APIs.
-- Cards: `240px` full-height, hover `scale-[0.98]`, icon 4xl, "Route to →" arrow.
-
-### 7. Telemetry / Metrics band
-- Full-width `--surface-dim` with mono numbers (stat cards): tokens served, average cost/task, P95 latency, ROUTE success %, clients in DZ. *Numbers as design, not decoration.*
-
-### 8. Composer Engine (`prebuilt-tools` rework) — 6 tools
-1. Model Gateway — route by task/quality/cost.
-2. Context Selector — pull the right CRM/env/FAQ context.
-3. Tool Router — call WhatsApp, CRM, ERP, DB, n8n only when needed.
-4. Reliability & Fallbacks — cascade between models on failure.
-5. Guardrails & Evaluations — verdict + quality scores + logs.
-6. Cost Controls — cache & compression, budgets in DZD.
-Hover: `scale-[0.98]`; each card `Learn more →` `/composer`. (Consistent direction: interactive cards **shrink** `scale-[0.98]`, buttons/CTAs **grow** `scale-[1.03]`.)
-
-### 9. Services Catalog (`app/services/` + `lib/data/services.ts`)
-Present as **"Run your stack on Hawiyat"** with DZD pricing, categories updated to reflect infra reality. **Source of truth:** the `services` array in `lib/data/services.ts` (8 entries — n8n Hosting, Composer Pro, Hosting Basic, Evolution API, Composer MAX 5X/20X, Hosting VIP, LLM Credit). `components/services/services-catalog.tsx` renders the grid on `/services`; each service has a detail page at `/services/[slug]` (`app/services/[slug]/page.tsx`) with `service-order-form.tsx` + `service-plans.tsx`.
-**Rebrand must de-resellerize this surface (validator C1/I5):**
-- Rename services so **Composer (the engine) leads** and Claude/GPT are *routes inside it* — never "Composer + Claude Code" product names, never "2x Claude credit" features, never an "AI Subscription" category. The value is the execution layer; tokens/models are incidental.
-- Re-categorize away from `AI Subscription` / `AI Tokens` → execution-layer categories (e.g. `AI Execution`, `Managed Systems`, `Cloud Runtime`).
-- Order cards: Composer/execution first; n8n/Evolution/credits demoted to "systems you connect."
-- Drop strikethrough/launch-price discount mechanics; replace with honest DZD pricing.
-- Rewrite the "Why Choose Hawiyat" strip to lead with the execution layer (local support, DZD billing, model-agnostic, telemetry) not generic hosting ops.
-- LLM Credit → reframe as "Composer access" (the layer is the product; tokens are incidental).
-
-### 9b. Enterprise full-stack narrative (validator I7 — the revenue mitigation)
-- Add one section (home) + copy on `/services` + `/schedule` framing **"one contract, the whole stack"**: Composer (execution) + n8n (workflow) + Evolution API (WhatsApp infra) + Platform (runtime) as a single full-service offer, with a "Schedule a meeting" CTA to `/schedule`. This is the stated mitigation for the 90%-Composer revenue concentration risk.
-
-### 10. One Subscription / Comparison (keep, re-tag "Why not DIY")
-- H2: "The fragments are the trap." vs Composer vs DIY (OpenAI+Claude+n8n+WhatsApp+DB). Highlight "Composer runs the layer".
-
-### 11. Resources (`resources.tsx`) — "From the control room"
-- 3 articles with category/date/title; images 350px, hover `scale-[1.3]`. Copy themes: "What is the Hawiyat execution layer?", "Routing every model on one control plane", "How Composer learns from every run".
-
-### 12. FAQ (`faq.tsx`) — 5 Q:
+### 6. FAQ (`components/faq.tsx`) — 5 Q:
 1. "What is the Hawiyat execution layer?" (answer includes north-star line)
 2. "Is Hawiyat tied to one AI model?" — No. Route by task.
 3. "How do costs work?" — DZD, tokens, caches, an `approx N DZD/task`.
 4. "Is my data used to train models?" No.
 5. "How do I start?" Build → Composer → run a WhatsApp workflow.
 
-### 12b. Pricing (`components/pricing.tsx`) — de-resellerize (validator C2)
-- Current state sells "Hawiyat Composer + Claude Code … 2x/5x/20x Claude credits." **Rebrand must remove the credit-multiplication framing** — it reads as an LLM reseller.
-- Price the **execution layer**: tiers by throughput/tasks and capability (e.g. `Starter` / `Growth` / `Scale`), with DZD pricing and a transparent "per-task cost" line (mono, e.g. `~0.4 DZD/task`). Claude/GPT/Gemini are listed as *available routes*, never as the SKU.
-- Frame: "One engine. Every model. Never vendor-locked to a model." (Scoped to *models* — see §Copy & Voice; switching costs are a feature of the layer, not a threat to the customer.)
-- Keep OrderForm integration.
+### 7. Call to Action (`components/call-to-action.tsx`)
+- **"Your first task, executed in 5 minutes."** Primary **Start building** → `/services`, secondary **Meet Composer** → `/composer`.
 
-### 13. CTA (`call-to-action.tsx`): **"Your first task, executed in 5 minutes."** CTA Start building.
+### 8. Composer page (`app/composer/page.tsx`) — engine page
+- Sections: hero → Execution loop (`ExecutionTrace` + 6 stage cards) → Any Model. Any System. (model chips + system cards) → Engine capabilities (6) → Telemetry band → Enterprise full-stack → Why not DIY comparison → final CTA.
+- `ScrollAnimations` (GSAP reveal-up + trace-line draw) is mounted **here only**, not on home.
 
-### 14. Newsletter (`newsletter.tsx`): keep, success w/ waitlist number; subheading "Execution insights. No pitch spam."
+### 9. Footer (`components/footer.tsx`)
+- Columns — **The Layer** (AI Composer, Services, About), **Company** (Support WhatsApp, Github), **Legal** (Terms, Privacy, DMCA). Social links (6). Copyright `© 2023–2026 Hawiyat`. *(No "Monitoring"/"Blog" links without real target pages — only link existing routes.)*
 
-### 15. Footer (`footer.tsx`): columns — The Layer (Composer, AI in Algeria, Services), Company (Support tel, GitHub), Legal (Terms, Privacy, DMCA). Social links (8). Copyright `© 2023–2026 Hawiyat`. *(No "Monitoring"/"Blog" links without real target pages — only link existing routes.)*
+### 10. Services Catalog (`app/services/` + `lib/data/services.ts`)
+- **Source of truth:** the `services` array in `lib/data/services.ts` (8 entries — n8n Hosting, Composer Pro, Hosting Basic, Evolution API, Composer MAX 5X/20X, Hosting VIP, LLM Credit, in `AI Execution` / `Managed Systems` / `Cloud Runtime` categories). `components/services/services-catalog.tsx` renders the grid; each service has a detail page at `/services/[slug]` with `service-order-form.tsx` + `service-plans.tsx`.
+- **Composer (the engine) leads**; Claude/GPT are *routes inside it* — never "Composer + Claude Code" product names, never "2x Claude credit" features. Honest DZD pricing, no strikethrough discounts.
 
-### 16. Chatwoot / WhatsApp widgets: keep positioning `bottom-6 right-6`.
+### 11. Algeria Band (`components/algeria-band.tsx`)
+- Mounted on `/about` (société, facturation, DZD, Itihad / Label Projet Innovant). Not on home.
 
-### 17. Scroll animations (`scroll-animations.tsx`): keep GSAP reveal; add "trace-line" draw-on-scroll for signature.
+### 12. Widgets
+- `whatsapp-widget.tsx` + `chatwoot-widget.tsx`: keep positioning `bottom-6 right-6`.
 
-### 18. Video modal: keep; embed updated demo "The execution trace".
-
-### 19. Schedule (`/schedule`): keep; matches enterprise "Schedule a meeting" flows.
+### 13. Scroll animations (`components/scroll-animations.tsx`)
+- GSAP reveal-up + `trace-line` draw-on-scroll, **used on `/composer` only**. Respects `prefers-reduced-motion` (elements stay visible). No `#dashboard` blocks remain.
 
 ---
 
@@ -282,27 +248,20 @@ Present as **"Run your stack on Hawiyat"** with DZD pricing, categories updated 
 
 ### Home (`/`):
 1. Header
-2. Hero (execution console)
-3. TrustedBrands / Metrics
-4. Benefits (Execution loop)
-5. Any Model. Any System.
-6. Metrics band
-7. Composer Engine (6)
-8. Comparison ("Why not DIY")  — lands before buy-section for the technical audience
-9. Services teaser (engine-first order, de-resellerized)
-10. Enterprise full-stack ("one contract, the whole stack" → `/schedule`)
-11. Resources
-12. FAQ
-13. CTA
-14. Newsletter
-15. Footer
+2. Hero (simple: title + subtitle + 2 CTAs)
+3. Partners marquee
+4. Pricing (PRO / MAX switchable / Enterprise)
+5. Our Numbers
+6. FAQ
+7. CTA
+8. Footer
+*(no newsletter — removed)*
 
-### `/composer` — engine page (target; rename existing `/hawiyat-composer` w/ redirect during rebrand)
-### `/ai-algeria` — regional positioning (revamp copy; scope = Algeria → North Africa / MENA, **not** "all-Africa")
-### `/services` — catalog (revamp) + `/services/[slug]` detail pages (per-service plans, features, SEO/GEO)
-### `/schedule` — keep
-### `/about` + `/cyber-security` + `/guides/*` + Legal `/terms /privacy /dmca` — restyle only
-> Note: `/templates` and `/bootcamp` routes were removed from the repo. Do not link to them in nav/footer/sitemap.
+### `/composer` — engine page (redirect from legacy `/hawiyat-composer`; `/ai-algeria` → `/` redirect)
+### `/services` — catalog + `/services/[slug]` detail pages (per-service plans, features, SEO/GEO)
+### `/about` — includes the Algeria band
+### Legal — `/terms`, `/privacy`, `/dmca`
+> Note: `/templates`, `/bootcamp`, `/schedule`, `/cyber-security`, and `/guides` routes are **not** in the repo. Do not link to them in nav/footer/sitemap.
 
 ---
 
@@ -321,26 +280,23 @@ Present as **"Run your stack on Hawiyat"** with DZD pricing, categories updated 
 
 ## Interactive Behaviors
 
-- Theme switch persisted (`localStorage`) via next-themes `class`.
-- Mobile menu: slide with `500ms`, Esc/close; body scroll lock.
-- Hero trace: spark animates step→step on loop (respect reduced-motion: static).
-- Model selector chips: popover with current "route".
-- Form interactions unchanged (newsletter subscribe, schedule booking, services, forms).
-- Hover scale table: buttons `1.03`, cards `1.02`, links translate-x-1, social scale-110.
+- Theme switch persisted (`localStorage`) via next-themes `class`. Header toggle is **mounted-guard**: a same-size neutral placeholder until mounted, then Sun/Moon — no hydration mismatch, no CLS.
+- Mobile menu: slide with `500ms`, Esc/close, body scroll lock.
+- Marquee: infinite loop, pauses on hover, disabled under reduced-motion; duplicate track `aria-hidden` + `tabIndex={-1}`.
+- MAX tier switch: plain `aria-pressed` pill toggle (no spring).
+- Form interactions unchanged (order forms, schedule booking, services).
+- **Minimal motion:** hover = color/background transitions only. No scale-on-hover, no typewriter, no spark-line.
 
 ## Animations & Effects
 
-| Animation | Property | Duration | Easing |
-|-----------|----------|----------|--------|
-| reveal-up | opacity/transform | 0.8s | ease-out |
-| trace-follow | left/dashoffset | 3s | linear infinite (mono stage dot) |
-| fadeIn | opacity | .3s | ease |
-| pulse | opacity | 2s | ease-in-out infinite (status) |
-| scale-load | transform | 1s | ease-out (task card) |
-| shrink | width | 1.2s | ease-in-out (progress bar) |
+| Animation | Where | Property | Notes |
+|-----------|-------|----------|-------|
+| marquee | Partners row (home) | transform `translateX(-50% → 0)`, 36s linear infinite | CSS in globals.css; pauses on hover; off under reduced-motion |
+| reveal-up | `/composer` only | opacity/transform 0.8s, stagger 0.2 | GSAP ScrollTrigger; reduced-motion keeps elements visible |
+| trace-line | `/composer` only | scaleX 0→1, scroll-scrubbed | GSAP ScrollTrigger draw-on-scroll |
 
-Special: motorized **spark-line** (signal → ember) used along horizontal rules under section eyebrows.
-Use `.reveal-up` with `@media (prefers-reduced-motion: reduce){auto:none}`.
+- **No motion on home beyond the marquee.** No hero console typewriter, no scroll-reveal dashboard, no counting numbers, no spark-lines.
+- All motion respects `@media (prefers-reduced-motion: reduce)`.
 
 ## Responsive Breakpoints
 
@@ -379,13 +335,13 @@ GEMINI_API_KEY=...
 ```
 
 ## File Structure Summary
-- `app/`: page.tsx, layout.tsx, globals.css, hawiyat-composer/, ai-algeria/, services/ (+`[slug]/page.tsx`), schedule/, about/, cyber-security/, guides/, terms/, privacy/, dmca/, api/…, robots.ts, sitemap.ts. (`templates/` & `bootcamp/` removed.)
-- `components/`: header, footer, hero-section, ai-playground (execution console), execution-trace (new), trusted-brands, benefits-section, additional-features, build-ai-apps, prebuilt-tools, one-subscription, pricing, services (catalog + order-form + service-order-form + service-plans), resources, faq, call-to-action, newsletter, chatwoot-widget, whatsapp-widget, scroll-animations, video-modal, theme-provider
-- `components/schedule/…`, `components/ui/` (shadcn)
+- `app/`: page.tsx, layout.tsx, globals.css, composer/, services/ (+`[slug]/page.tsx`), about/, privacy/, terms/, dmca/, api/…, robots.ts, sitemap.ts. (`hawiyat-composer` + `ai-algeria` redirect via next.config.mjs; `templates/` & `bootcamp/` removed.)
+- `components/`: header, footer, hero-section, partners-marquee, our-numbers, pricing, faq, call-to-action, execution-trace (composer), scroll-animations (composer), algeria-band (about), whatsapp-widget, chatwoot-widget, theme-provider
+- `components/services/…` (catalog + order-form + service-order-form + service-plans), `components/ui/` (shadcn)
 - `lib/` (utils, seo, email-utils, auth, prisma, **data/services.ts**), `prisma/`, `public/` (logos, trust, assets, dots)
 
 ---
 
-*Document Version 2.0*  
+*Document Version 3.0*  
 *Last Updated: August 8, 2026*  
 *Project: Hawiyat — AI Infrastructure Platform (Execution Layer Between Models & Business)*

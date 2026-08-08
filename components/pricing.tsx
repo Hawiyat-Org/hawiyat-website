@@ -130,7 +130,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface p-6 shadow-lg shadow-ink/5 lg:p-8">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface p-6 lg:p-8">
             <div>
               <div className="mb-4 flex items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
@@ -184,8 +184,8 @@ export default function Pricing() {
           </div>
 
           {/* ENTERPRISE */}
-          <div className="relative flex flex-col justify-between overflow-hidden rounded-lg border-2 border-ink bg-surface p-6 lg:p-8">
-            <div className="relative space-y-5">
+          <div className="relative flex flex-col justify-between rounded-lg border-2 border-ink bg-surface p-6 lg:p-8">
+            <div className="space-y-5">
               <div>
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
@@ -213,7 +213,7 @@ export default function Pricing() {
               </ul>
             </div>
 
-            <div className="relative mt-8 space-y-3">
+            <div className="mt-8 space-y-3">
               <a
                 href={enterpriseWhatsappUrl}
                 target="_blank"

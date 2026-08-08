@@ -108,6 +108,7 @@ const PartnersMarquee = () => {
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                tabIndex={hidden ? -1 : undefined}
                 className="block h-full w-full"
               >
                 {logo}
