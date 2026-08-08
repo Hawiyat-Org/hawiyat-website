@@ -7,6 +7,12 @@ compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
 account_id = "86afaa372f06c7516c563e152faff79b"
 
+# Branded preview host: <slug>.preview.hawiyat.org -> this router.
+# Requires the wildcard DNS record *.preview.hawiyat.org (proxied) in the zone.
+[[routes]]
+pattern = "*.preview.hawiyat.org/*"
+zone_id = "afa547257ab2165693d6e3ad31357d25"
+
 [vars]
 # Cloudflare account workers.dev subdomain (verified for account hawiyat-team).
 WORKERS_SUBDOMAIN = "shmsaldynbwbst"
