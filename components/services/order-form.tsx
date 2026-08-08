@@ -21,7 +21,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     customerName: "",
     customerEmail: "",
     customerPhone: "",
-    paymentMethod: "",
+    paymentMethod: "BARIDI_MOB",
     notes: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -96,7 +96,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md rounded-2xl border border-border/60 bg-surface shadow-2xl p-6"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-border/60 bg-surface p-6 shadow-2xl scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -120,12 +120,22 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             {orderId && (
               <p className="text-xs text-muted-ink mb-4">Order ID: {orderId}</p>
             )}
-            <button
-              onClick={onClose}
-              className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
-            >
-              Close
-            </button>
+            <div className="flex flex-col gap-2">
+              <a
+                href={`https://wa.me/213559555951?text=Hello%20Hawiyat!%20My%20order%20${orderId}%20is%20submitted.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+              >
+                Chat on WhatsApp to confirm payment
+              </a>
+              <button
+                onClick={onClose}
+                className="px-6 py-2 rounded-lg border border-border text-ink font-medium text-sm hover:bg-surface-dim transition-colors"
+              >
+                Close
+              </button>
+            </div>
           </div>
         ) : (
           <>
@@ -143,7 +153,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 <div className="flex-1">
                   <h3 className="font-semibold text-base text-ink">{service.name}</h3>
                   <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-xl font-bold text-ink">{service.price}</span>
+                    <span className="text-xl font-bold text-ink">{Number(service.price).toLocaleString("en-US")}</span>
                     <span className="text-sm text-muted-ink">{service.priceLabel}</span>
                   </div>
                 </div>
@@ -263,9 +273,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                     Submitting...
                   </>
                 ) : (
-                  "Submit Order"
+                  "Order now — activate in 24h"
                 )}
               </button>
+
+              <p className="text-xs text-muted-ink">
+                No card needed — we&apos;ll confirm payment with you on WhatsApp, then activate your
+                workspace within 24 hours.
+              </p>
             </form>
           </>
         )}

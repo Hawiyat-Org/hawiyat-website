@@ -386,9 +386,14 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                         Submitting...
                       </>
                     ) : (
-                      "Submit Order"
+                      "Order now — activate in 24h"
                     )}
                   </button>
+
+                  <p className="text-xs text-muted-ink">
+                    No card needed — we&apos;ll confirm payment with you on WhatsApp, then activate
+                    your workspace within 24 hours.
+                  </p>
                 </form>
               </>
             )}

@@ -473,8 +473,8 @@ export default function ComposerPage() {
             Have your first task running today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a plan on the services page — or bring the whole stack. Composer runs the layer;
-            you run the business.
+            Pick a plan on the services page — or bring the whole stack. Composer handles the
+            models — you handle the business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

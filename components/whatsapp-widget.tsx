@@ -11,7 +11,7 @@ export default function WhatsAppWidget() {
   }, [])
 
   const phoneNumber = '213559555951'
-  const message = encodeURIComponent('Hello! I need help.')
+  const message = encodeURIComponent('Hello Hawiyat! I have a question about the Composer.')
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
 
   const handleClick = () => {

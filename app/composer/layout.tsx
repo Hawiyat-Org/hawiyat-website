@@ -5,7 +5,7 @@ export const metadata = {
   ...createMetadata({
     title: "Hawiyat AI Composer | The AI Execution Engine",
     description:
-      "The AI execution engine between frontier models and business systems: WhatsApp, CRM, ERP, email, databases. Model-independent, evaluated, priced in DZD.",
+      "How Hawiyat AI Composer picks the best model for each task, connects your systems, and checks the result — billed in DZD.",
     path: "/composer",
   }),
   title: { absolute: "Hawiyat AI Composer | The AI Execution Engine" },

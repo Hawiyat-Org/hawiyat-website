@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { MessageCircle } from "lucide-react"
 
 const HeroSection = () => {
   return (
@@ -21,7 +22,7 @@ const HeroSection = () => {
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
           <Link
-            href="/services"
+            href="#pricing"
             className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
           >
             Get Started
@@ -34,6 +35,20 @@ const HeroSection = () => {
             How it works
           </Link>
         </div>
+
+        <p className="font-mono text-xs text-muted-ink">
+          100+ paying clients · 100B+ tokens executed · ≈2.6M DZD ARR
+        </p>
+
+        <a
+          href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20have%20a%20question%20about%20Composer."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Questions? Chat with the team on WhatsApp
+        </a>
       </div>
 
       {/* Machine-readable entity aliases for AI search / structured data. */}
