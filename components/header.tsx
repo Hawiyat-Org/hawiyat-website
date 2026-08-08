@@ -76,7 +76,7 @@ const Header = () => {
               alt="Hawiyat Logo"
               width={60}
               height={40}
-              className="w-10 h-8 sm:w-12 sm:h-10 transition-transform duration-200 hover:scale-105"
+              className="w-10 h-8 sm:w-12 sm:h-10"
             />
             <span className="text-lg sm:text-xl font-semibold text-ink">
               Hawiyat
@@ -117,7 +117,7 @@ const Header = () => {
 
             <Link
               href="/composer"
-              className="bg-signal text-signal-text px-6 py-2.5 rounded-full font-medium hover:scale-[1.03] transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+              className="bg-signal text-signal-text px-6 py-2.5 rounded-lg font-medium transition-colors hover:bg-signal-hover flex items-center gap-2 whitespace-nowrap"
             >
               Start Building
               <ArrowRight className="w-4 h-4" />
@@ -191,7 +191,7 @@ const Header = () => {
             <div className="p-4 border-t border-border bg-surface-dim/40">
               <Link
                 href="/composer"
-                className="flex items-center justify-center w-full bg-signal text-signal-text px-6 py-4 rounded-full font-medium hover:scale-[1.02] transition-all duration-200 touch-manipulation active:scale-[0.98] gap-2 shadow-lg"
+                className="flex items-center justify-center w-full bg-signal text-signal-text px-6 py-4 rounded-lg font-medium transition-colors hover:bg-signal-hover touch-manipulation gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >
                 <span>Start Building</span>

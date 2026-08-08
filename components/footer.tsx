@@ -55,7 +55,7 @@ const Footer = () => {
                 key={social.name}
                 href={social.href}
                 aria-label={social.name}
-                className="footer-link hover:scale-110 transition-transform duration-200"
+                className="footer-link hover:opacity-80 transition-opacity duration-200"
               >
                 <social.Icon className="w-5 h-5" />
               </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="footer-link hover:translate-x-1 transition-transform duration-200"
+                    className="footer-link hover:opacity-80 transition-opacity duration-200"
                   >
                     {link.name}
                   </Link>

@@ -14,7 +14,7 @@
 
 **The website's single job:** convert the belief that "AI in emerging markets is messy, fragmented and expensive" into "Hawiyat executes my AI — correctly and reliably, in DZD, close to home." Cost is the **final proof point**, never the opener.
 
-**Product naming:** the product is **Hawiyat AI Composer** (shorthand "Composer" is fine in UI labels). It is the execution engine. "Composer" = the engine; "Execution Console" = the UI. A unit of work shipped by Hawiyat is a **run** (`task → plan → route → execute → evaluate`).
+**Product naming:** the product is **Hawiyat AI Composer** (shorthand "Composer" is fine in UI labels). It is the execution engine. "Composer" = the engine; the signature **Execution Trace** (UNDERSTAND→PLAN→ROUTE→EXECUTE→EVALUATE→RESULT with mono telemetry) is rendered on the `/composer` page. A unit of work shipped by Hawiyat is a **run** (`task → plan → route → execute → evaluate`).
 
 ---
 

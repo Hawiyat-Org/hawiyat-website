@@ -36,9 +36,9 @@ import prisma from '@/lib/prisma/prismaClient'     // ✗ undefined errors
 ### Path aliases
 - `@/*` → repo root (`@/components/*`, `@/lib/*`).
 
-### Design tokens (hard rule — TARGET STATE, see plan)
-- **No raw hex in components.** The *target* token set (light `--paper/--ink/--surface/--border/--muted/--signal/--signal-text/--ember/--ember-deep`, dark equivalents) is defined in `DESIGN.md` §Palette.
-- ⚠️ **Not yet installed:** `app/globals.css` currently has only shadcn HSL tokens + legacy vars (`--primary-text-color`, `--btn-bg`, …); `tailwind.config.js` maps only the shadcn HSL set. Installing the new tokens + Tailwind map is **Task 1** of the rebrand plan — do not claim the tokens exist before then.
+### Design tokens (hard rule)
+- **No raw hex in components.** The token set (light `--paper/--ink/--surface/--border/--muted/--signal/--signal-text/--ember/--ember-deep`, dark equivalents) is defined in `DESIGN.md` §Palette.
+- ✅ **Installed:** the tokens are defined in `app/globals.css` and mapped in `tailwind.config.js`. Values are monochrome grays — use `text-ink`, `text-muted-ink`, `bg-surface`, `bg-surface-dim`, `bg-signal`, `text-signal-text`, `hover:bg-signal-hover` instead of raw hex.
 - Legacy components use raw `dark:bg-[#…]`/`bg-[#…]` — audit and replace with tokens as you touch them.
 
 ### Fonts — exactly two families
@@ -77,12 +77,12 @@ Copy `.env.example` → `.env` if missing.
 **Models:** Order, Waitlist, BootcampRegistration. API: `/api/orders`, `/api/chat`, `/api/waitlist`.
 
 ## Testing
-No formal suite. Manual: `pnpm dev` for UI, curl for API, `npx tsx test/email-test.ts` for email utils.
+No formal suite. Verify with `npx tsc --noEmit`, `pnpm lint`, `pnpm build`, then manual browser checks via `pnpm dev`.
 
 ## Gotchas
 1. `next.config.mjs` ignores TS/ESLint at build — fix errors, don't ignore.
 2. Images `unoptimized: true` allows external images.
-3. GSAP npm (not CDN) in `scroll-animations.tsx`. Keep reveal-up + dashboard 3D; add the signature **trace-line** reveal.
+3. GSAP npm (not CDN) in `scroll-animations.tsx`. Trace-line + reveal-up GSAP, mounted on `/composer` only (dashboard deleted). Never add `reveal-up` classes to non-composer pages — nothing animates them there and the CSS keeps them `opacity: 0` (invisible).
 4. Brand: the signature UI element is **The Execution Trace** (pipeline UNDERSTAND→PLAN→ROUTE→EXECUTE→EVALUATE→RESULT with mono telemetry). See `DESIGN.md`.
 
 ## Files to Read First

@@ -45,19 +45,19 @@ const FAQ = () => {
     >
       <div className="mx-auto w-full max-w-3xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
             FAQ
           </p>
-          <h2 className="mt-4 text-4xl font-semibold text-ink md:text-5xl reveal-up">
+          <h2 className="mt-4 text-4xl font-semibold text-ink md:text-5xl">
             Frequently asked questions
           </h2>
         </div>
 
-        <div className="mt-10 flex w-full flex-col gap-4 reveal-up">
+        <div className="mt-10 flex w-full flex-col gap-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="w-full rounded-2xl border border-border bg-surface">
+            <div key={index} className="w-full rounded-lg border border-border bg-surface">
               <button
-                className="flex w-full items-center justify-between gap-4 select-none text-left py-5 px-6 cursor-pointer rounded-2xl focus-visible:ring-2 focus-visible:ring-signal/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface outline-none"
+                className="flex w-full items-center justify-between gap-4 select-none text-left py-5 px-6 cursor-pointer rounded-lg focus-visible:ring-2 focus-visible:ring-signal/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface outline-none"
                 onClick={() => toggleItem(index)}
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-panel-${index}`}

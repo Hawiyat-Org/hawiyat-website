@@ -76,13 +76,13 @@ export default function Pricing() {
     <section id="pricing" className="pt-8 pb-10 md:pt-12 md:pb-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl space-y-4 text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
             Pricing
           </p>
-          <h2 className="text-4xl font-semibold text-ink lg:text-5xl reveal-up">
+          <h2 className="text-4xl font-semibold text-ink lg:text-5xl">
             Plans for the execution layer
           </h2>
-          <p className="text-base text-muted-ink reveal-up">
+          <p className="text-base text-muted-ink">
             One layer, every model — and everything billed in dinars.
           </p>
         </div>
