@@ -1,117 +1,80 @@
-"use client"
-
-import { useState } from "react"
 import Link from "next/link"
+import AIPlayground from "@/components/ai-playground"
 
 const HeroSection = () => {
-  const [showVideo, setShowVideo] = useState(false)
-
   return (
     <section
-      className="hero-section mt-[56px] md:mt-[70px]   relative flex min-h-[75vh] w-full max-w-[100vw] flex-col overflow-hidden"
+      className="hero-section relative flex min-h-[85vh] w-full max-w-[100vw] flex-col overflow-hidden"
       id="hero-section"
     >
-      <div className="hero-bg-gradient relative flex h-full min-h-[75vh] w-full flex-col place-content-center gap-6 p-[5%] max-xl:place-items-center max-lg:p-6 max-md:p-4 max-md:gap-8">
-        <div className="purple-bg-grad absolute left-1/2 -translate-x-1/2 top-[10%] h-[120px] w-[120px] max-md:h-[80px] max-md:w-[80px] max-md:top-[5%]"></div>
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 pb-16 pt-32 md:pt-40 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-20">
+        {/* Ambient glow (token-based, replaces legacy purple blob) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-signal/20 blur-3xl"
+        />
 
-        <div className="flex flex-col min-h-[45vh] max-md:min-h-[40vh] place-content-center max-md:place-content-start items-center max-md:gap-6">
-          <h1 className="text-center text-7xl font-medium uppercase leading-[90px] max-lg:text-4xl max-md:text-3xl max-md:leading-tight max-md:px-2">
-            Algeria's AI{" "}
-            <span className="text-4xl md:text-7xl">Provider</span>
-            <br />
-            <span className="font-thin font-serif max-md:text-2xl">
-              Built to Ship
-            </span>
+        {/* Left: copy */}
+        <div className="flex flex-col items-center gap-6 text-center lg:col-span-6 lg:items-start lg:text-left">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+            Hawiyat AI Composer · Execution Layer
+          </p>
+
+          <h1 className="text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl xl:text-7xl">
+            The layer that decides how your business uses AI.
           </h1>
 
-          {/*
-            Machine-readable entity aliases for this hero section.
-            AI search & search engines read these phrasings; they are never
-            rendered to humans. This is the legitimate channel for
-            "invisible" keyword coverage (structured data), unlike CSS-hidden
-            text which Google treats as spam.
-          */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                url: "https://www.hawiyat.org/",
-                name: "Algeria's AI Provider — AI in Algeria",
-                headline: "Algeria's AI Provider | Algeria AI Provider | AI in Algeria | B2B AI Algeria | AI Provider in Algeria | ai provider in algeria | b2b ai in algeria | b2b ai provider in algeria",
-                about: {
-                  "@type": "Organization",
-                  name: "Hawiyat",
-                  alternateName: [
-                    "Algeria's AI Provider",
-                    "Algeria AI Provider",
-                    "AI in Algeria",
-                    "B2B AI Algeria",
-                    "AI Provider in Algeria",
-                    "ai provider in algeria",
-                    "b2b ai in algeria",
-                    "b2b ai provider in algeria",
-                    "AI provider algerie",
-                    "Fournisseur IA en Algérie",
-                    "مزود الذكاء الاصطناعي في الجزائر",
-                  ],
-                },
-              }),
-            }}
-          />
+          <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
+            Hawiyat is the AI infrastructure platform between frontier AI models and the systems
+            you run — WhatsApp, CRM, ERP, email, databases, workflows. It plans, routes, and
+            executes every task: the best model, the right context, automatic fallbacks, and an
+            evaluated result. Every run in DZD.
+          </p>
 
-          <div className="mt-8 max-md:mt-4 max-w-[600px] text-lg max-lg:text-base max-md:text-[15px] p-2 max-md:px-4 text-center text-gray-800 dark:text-white max-lg:max-w-full max-md:leading-relaxed">
-            Hawiyat Composer routes and caches every request between your coding tools and the AI models you use. Same endpoints. Priced in DZD, backed by our own cloud.
-          </div>
-
-          <div className="mt-10 max-md:mt-6 flex flex-col md:flex-row max-md:w-full max-md:px-4 place-items-center gap-4 max-md:gap-3">
+          <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row">
+            <Link
+              href="/composer"
+              className="inline-flex items-center gap-2 rounded-full bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+            >
+              Start building
+              <span aria-hidden="true" className="text-base leading-none">→</span>
+            </Link>
             <Link
               href="/services"
-              className="btn group max-lg:!w-[160px] max-md:!w-full flex gap-2 place-content-center shadow-lg !w-[170px] !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 transition-all duration-[0.3s] hover:scale-x-[1.03] active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
             >
-              <span className="max-md:text-[15px] max-md:font-medium">Get Started</span>
-              <i className="bi bi-arrow-right group-hover:translate-x-1 duration-300 max-md:text-lg"></i>
+              See services
             </Link>
-
-            <button
-              onClick={() => setShowVideo(true)}
-              className="btn !w-[170px] max-lg:!w-[160px] max-md:!w-full !rounded-lg max-md:!rounded-lg !py-4 max-lg:!py-2 max-md:!py-3.5 flex gap-2 place-content-center group !bg-transparent !text-black dark:!text-white transition-all duration-[0.3s] border-[1px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black active:scale-95"
-            >
-              <span className="max-md:text-[15px] max-md:font-medium">Watch video</span>
-              <i className="bi bi-play-circle-fill max-md:text-lg"></i>
-            </button>
           </div>
+        </div>
 
+        {/* Right: Execution Console (keeps #dashboard for the GSAP 3D wrapper) */}
+        <div className="relative w-full lg:col-span-6">
+          <div id="dashboard" className="relative">
+            <AIPlayground />
+          </div>
         </div>
       </div>
 
-      {/* Video Modal */}
-      {showVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
-          onClick={() => setShowVideo(false)}
-        >
-          <div
-            className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowVideo(false)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
-            >
-              <i className="bi bi-x text-lg"></i>
-            </button>
-            <iframe
-              src="https://www.youtube.com/embed/V2N9RvzCdnM?autoplay=1"
-              title="Hawiyat Composer"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            />
-          </div>
-        </div>
-      )}
+      {/* Machine-readable entity aliases for AI search / structured data. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            url: "https://www.hawiyat.org/",
+            name: "Hawiyat — AI infrastructure platform",
+            headline: "The layer that decides how your business uses AI.",
+            about: {
+              "@type": "Organization",
+              name: "Hawiyat",
+              description:
+                "The AI infrastructure platform between frontier AI models and business systems — WhatsApp, CRM, ERP, email, databases, workflows. Model-independent, evaluated on every run, priced in DZD.",
+            },
+          }),
+        }}
+      />
     </section>
   )
 }

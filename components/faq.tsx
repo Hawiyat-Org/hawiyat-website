@@ -1,35 +1,36 @@
 "use client"
 
 import { useState } from "react"
+import { Plus } from "lucide-react"
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   const faqs = [
     {
-      question: "What is Hawiyat Composer?",
+      question: "What is the Hawiyat execution layer?",
       answer:
-        "Hawiyat Composer is a gateway that sits between your coding tools like Claude Code, CLIs, and agents and the AI models they talk to. It caches repeat requests so you don't pay for the same tokens twice, and routes simple tasks to cheaper models automatically. We blend multiple models together so you get flagship-level results. You plug it in through the same API endpoints you already use. No code changes required.",
+        "Hawiyat is the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs — WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, businesses will need a layer that decides how to use it — that layer is Hawiyat.",
     },
     {
-      question: "How does the caching work?",
+      question: "Is Hawiyat tied to one AI model?",
       answer:
-        "Two layers. Exact-match caching normalizes repeat requests like boilerplate or common scaffolding and serves them from memory in 2 to 5ms at zero cost. Semantic caching uses vector search so if you ask the same thing a different way, Hawiyat Composer still recognizes it and serves the cached result. Same answer, no extra spend.",
+        "No. Models are routes, chosen per task by quality, latency, and cost. GPT, Claude, Gemini, and open models all sit behind the same layer, so a provider change never breaks your pipeline. The layer outlives any single model.",
     },
     {
-      question: "What models can I use with Hawiyat Composer?",
+      question: "How do costs work?",
       answer:
-        "Hawiyat Composer blends multiple AI models behind the scenes to get flagship-level results. Simple tasks go to lightweight, cheaper models. Complex reasoning goes to frontier models. You don't switch anything manually. You just get the best output at the lowest cost.",
+        "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost — roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed.",
     },
     {
-      question: "Is my data safe when using Composer?",
+      question: "Is my data used to train models?",
       answer:
-        "Hawiyat Composer offers cost-aware routing and caching on every request. Sensitive workloads stay efficient and affordable. We also support ephemeral logging so nothing is persisted unless you need it to be.",
+        "No. Your data is never used to train models. Runs carry your context to complete the task, and the evaluation logs are yours to audit. Data stays between your systems and the layer.",
     },
     {
-      question: "How do I get started?",
+      question: "How do I start?",
       answer:
-        "Point your existing tools at Hawiyat Composer's endpoints instead of the provider directly. That's it. If you're using Claude Code, Cursor, or any OpenAI/Anthropic compatible tool, it works out of the box. Sign up through our services page and we'll get you set up in minutes.",
+        "Pick a plan on the services page — Composer Pro for solo builders or a MAX tier for teams — or order Enterprise for the full stack. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day.",
     },
   ]
 
@@ -39,45 +40,51 @@ const FAQ = () => {
 
   return (
     <section
-      className="relative flex w-full flex-col place-content-center place-items-center gap-[10%] p-[5%] px-[10%]"
+      className="relative flex w-full flex-col place-content-center place-items-center p-[5%] px-[10%] max-md:px-4"
       id="faq"
     >
-      <h2 className="text-4xl font-medium max-md:text-2xl">Frequently Asked Questions</h2>
+      <div className="mx-auto w-full max-w-3xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
+            FAQ
+          </p>
+          <h2 className="mt-4 text-4xl font-semibold text-ink md:text-5xl reveal-up">
+            Frequently asked questions
+          </h2>
+        </div>
 
-      <div className="mt-5 flex min-h-[300px] w-full max-w-[850px] flex-col gap-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="faq w-full border-b border-gray-200 ">
-            <button
-              className="faq-accordion flex w-full items-center justify-between select-none text-left text-xl max-md:text-lg cursor-pointer focus:outline-none py-4  transition-colors duration-200"
-              onClick={() => toggleItem(index)}
-              aria-expanded={openIndex === index}
-            >
-              <span className="font-medium ">{faq.question}</span>
-              <i
-                className={`bi bi-plus text-xl origin-center duration-300 transition-transform font-semibold flex-shrink-0 ml-4 ${
-                  openIndex === index ? "rotate-45" : ""
+        <div className="mt-10 flex w-full flex-col gap-4 reveal-up">
+          {faqs.map((faq, index) => (
+            <div key={index} className="w-full rounded-2xl border border-border bg-surface">
+              <button
+                className="flex w-full items-center justify-between gap-4 select-none text-left py-5 px-6 cursor-pointer focus:outline-none"
+                onClick={() => toggleItem(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-panel-${index}`}
+                id={`faq-button-${index}`}
+              >
+                <span className="text-lg font-medium text-ink">{faq.question}</span>
+                <Plus
+                  className={`h-5 w-5 shrink-0 text-signal transition-transform duration-300 ${
+                    openIndex === index ? "rotate-45" : ""
+                  }`}
+                />
+              </button>
+
+              <div
+                id={`faq-panel-${index}`}
+                role="region"
+                aria-labelledby={`faq-button-${index}`}
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}
-              ></i>
-            </button>
-
-            <div
-              className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                openIndex === index 
-                  ? "max-h-96 opacity-100 pb-4" 
-                  : "max-h-0 opacity-0 pb-0"
-              }`}
-            >
-              <div className="px-4">
-                <p className="whitespace-pre-line text-gray-700 dark:text-white/60 max-lg:text-sm leading-relaxed">
-                  {faq.answer}
-                </p>
+              >
+                <p className="px-6 pb-5 text-sm leading-relaxed text-muted-ink">{faq.answer}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      <div className="purple-bg-grad max-md:hidden reveal-up absolute bottom-14 right-[20%] h-[150px] w-[150px] rounded-full"></div>
     </section>
   )
 }

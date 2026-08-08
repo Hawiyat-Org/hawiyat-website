@@ -3,7 +3,39 @@ import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+
+const partners = [
+  {
+    name: "Itihad",
+    logo: "/trust/itihad-logo.svg",
+    url: "https://itihad.group",
+    alt: "Itihad Group logo — accelerator partner",
+    desc: "Itihad Group — acceleration partner at Itihad Campus, Boumerdes.",
+  },
+  {
+    name: "ESTIN",
+    logo: "/trust/estin-logo.svg",
+    url: "https://estin.dz/",
+    alt: "ESTIN logo — partner institution",
+    desc: "ESTIN (École Supérieure en Informatique) — partner institution.",
+  },
+  {
+    name: "IT Solutions",
+    logo: "itsol",
+    url: "https://itsolutions.dz/",
+    alt: "IT Solutions — partner company",
+    desc: "IT Solutions — partner company.",
+  },
+]
+
+function StatCard({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-3xl border border-border bg-surface p-8 text-center">
+      <p className="font-mono text-4xl font-bold text-signal md:text-5xl">{value}</p>
+      <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">{label}</p>
+    </div>
+  )
+}
 
 const TrustedBrands = () => {
   const { theme, resolvedTheme } = useTheme()
@@ -13,151 +45,90 @@ const TrustedBrands = () => {
     setMounted(true)
   }, [])
 
-  const brands = [
-    {
-      name: "Itihad",
-      logo: "/trust/itihad-logo.svg",
-      url: "https://itihad.group",
-      title: "Itihad Group — a company that trusts Hawiyat",
-      alt: "Itihad Group logo — an Algerian business group that trusts Hawiyat for AI, automation, and cloud services",
-      desc: "Itihad Group is a company that trusts Hawiyat for AI, automation, and cloud services in Algeria.",
-    },
-    {
-      name: "ESTIN",
-      logo: "/trust/estin-logo.svg",
-      url: "https://estin.dz/",
-      title: "ESTIN — École Supérieure en Informatique, a trusted Hawiyat reference",
-      alt: "ESTIN logo — the Algerian computer science school École Supérieure en Informatique, which trusts Hawiyat for AI access and developer services",
-      desc: "ESTIN (École Supérieure en Informatique) is an Algerian higher education institution that trusts Hawiyat for AI access and developer services.",
-    },
-    {
-      name: "IT Solutions",
-      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
-        ? "/trust/itsol-dark.svg"
-        : "/trust/itsol.svg",
-      url: "https://itsolutions.dz/",
-      title: "IT Solutions — an IT services company that trusts Hawiyat",
-      alt: "IT Solutions logo — an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation",
-      desc: "IT Solutions is an Algerian IT services company that trusts Hawiyat for AI subscriptions, hosting, and automation.",
-    },
-    {
-      name: "RMASC",
-      logo: "/trust/rmasc-logo.webp",
-      url: "https://www.sarlrmasc.com/",
-      title: "RMASC (SARL RMASC) — an Algerian elevator company that trusts Hawiyat",
-      alt: "RMASC logo — SARL RMASC, an Algerian elevator design, installation, and repair company that trusts Hawiyat",
-      desc: "SARL RMASC is an Algerian company specialised in elevator design, installation, and repair that trusts Hawiyat for AI and digital services.",
-    },
-    {
-      name: "Green Duty",
-      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
-        ? "/trust/green-duty-dark.webp"
-        : "/trust/green-duty-light.webp",
-      url: "",
-      title: "Green Duty — a company that trusts Hawiyat",
-      alt: "Green Duty logo — a company that trusts Hawiyat for AI and digital services",
-      desc: "Green Duty is a company that trusts Hawiyat for AI and digital services.",
-    },
-    {
-      name: "Mercus Academy",
-      logo: mounted && (resolvedTheme === "dark" || theme === "dark")
-        ? "/trust/mercus-academy-dark.webp"
-        : "/trust/mercus-academy-light.webp",
-      url: "",
-      square: true,
-      title: "Mercus Academy — a training institution that trusts Hawiyat",
-      alt: "Mercus Academy logo — a training and education institution that trusts Hawiyat for AI and digital services",
-      desc: "Mercus Academy is a training and education institution that trusts Hawiyat for AI and digital services.",
-    },
-  ]
-
-  // Each half repeats the brands so the -50% loop wraps seamlessly.
-  // Trailing padding matches the item gap so spacing stays uniform.
-  const renderRow = (hidden: boolean) => (
-    <div
-      aria-hidden={hidden || undefined}
-      className="flex w-max shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
-    >
-      {[...brands, ...brands].map((brand, index) => {
-        const logo = (
-          <div
-            className={
-              brand.square
-                ? "relative h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-36 lg:w-36"
-                : "relative h-12 w-32 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48"
-            }
-          >
-            <Image
-              src={brand.logo}
-              alt={brand.alt}
-              title={brand.title}
-              fill
-              className="object-contain transition-all duration-500 drop-shadow-[0_0_8px_rgba(0,0,0,0.15)] dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-            />
-          </div>
-        )
-        return (
-          <div key={index} className="group relative flex shrink-0 items-center justify-center">
-            {brand.url ? (
-              <Link
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block h-full w-full"
-              >
-                {logo}
-              </Link>
-            ) : (
-              logo
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
+  const isDark = mounted && (resolvedTheme === "dark" || theme === "dark")
 
   return (
-    <section className="relative w-full overflow-hidden relative ">
-      <div className="flex flex-col items-center gap-5">
-        {/* Logos stream left-to-right, on top */}
-        <div className="marquee relative w-full overflow-hidden">
-          <div className="marquee-track flex w-max">
-            {renderRow(false)}
-            {renderRow(true)}
-          </div>
+    <section className="w-full bg-surface-dim py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+            Proof
+          </p>
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            The execution layer, in production.
+          </h2>
+          <p className="mt-3 text-sm text-muted-ink">
+            Verified figures from the Hawiyat operations dashboard. Nothing else gets printed.
+          </p>
         </div>
 
-        {/* Word below the logos */}
-        <motion.h2
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-          className="text-center text-2xl font-medium text-muted-foreground md:text-3xl"
-        >
-        
-        </motion.h2>
+        <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
+          <StatCard value="100+ clients" label="paying customers on the execution layer" />
+          <StatCard value="≈2.6M DZD" label="annual recurring revenue" />
+        </div>
+
+        {/* Partners & early customers */}
+        <div className="mt-14">
+          <p className="text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+            Partners &amp; early customers
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+            {partners.map((partner) => (
+              <Link
+                key={partner.name}
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center gap-2"
+                aria-label={partner.alt}
+                title={partner.desc}
+              >
+                {partner.logo === "itsol" ? (
+                  <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                    <Image
+                      src={isDark ? "/trust/itsol-dark.svg" : "/trust/itsol.svg"}
+                      alt={partner.alt}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : partner.logo ? (
+                  <div className="relative h-12 w-36 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                    <Image src={partner.logo} alt={partner.alt} fill className="object-contain" />
+                  </div>
+                ) : (
+                  <span className="font-mono text-xl font-semibold text-muted-ink transition-colors group-hover:text-ink">
+                    IT Solutions
+                  </span>
+                )}
+                <span className="font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                  {partner.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Structured data: lets search engines & AI crawlers read the references as entities */}
+      {/* Structured data: search engines & AI crawlers read the references as entities */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Companies that trust Hawiyat",
+            name: "Hawiyat partners and early customers",
             description:
-              "Algerian companies, institutions, and teams that trust Hawiyat for AI subscriptions, Hawiyat Composer, automation, hosting, and implementation services.",
-            numberOfItems: brands.length,
-            itemListElement: brands.map((brand, i) => ({
+              "Partners and early customers working with the Hawiyat execution layer.",
+            numberOfItems: partners.length,
+            itemListElement: partners.map((partner, i) => ({
               "@type": "ListItem",
               position: i + 1,
               item: {
                 "@type": "Organization",
-                name: brand.name,
-                url: brand.url,
-                description: brand.desc,
+                name: partner.name,
+                url: partner.url,
+                description: partner.desc,
               },
             })),
           }),

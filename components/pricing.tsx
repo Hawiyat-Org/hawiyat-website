@@ -1,119 +1,235 @@
 "use client"
-import { useState, useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Check, MessageSquare } from "lucide-react"
+import { useState } from "react"
+import { Check, MessageCircle, Mail, ArrowRight } from "lucide-react"
 import { OrderForm } from "@/components/services/order-form"
+import { services } from "@/lib/data/services"
+
+interface OrderService {
+  id: string
+  name: string
+  price: string
+  priceLabel: string
+  image: string
+}
+
+const proService = services.find((s) => s.id === "composer-pro")!
+const max5xService = services.find((s) => s.id === "composer-max5x")!
+const max20xService = services.find((s) => s.id === "composer-max20x")!
+
+const maxTiers: Array<{
+  key: "composer-max5x" | "composer-max20x"
+  label: string
+  service: typeof max5xService
+  capacity: string
+  blurb: string
+}> = [
+  {
+    key: "composer-max5x",
+    label: "MAX 5X",
+    service: max5xService,
+    capacity: "5X base execution capacity — more parallel runs/tasks",
+    blurb: "For startups and teams shipping daily.",
+  },
+  {
+    key: "composer-max20x",
+    label: "MAX 20X",
+    service: max20xService,
+    capacity: "20X base execution capacity — maximum parallel throughput",
+    blurb: "For agencies and engineering teams running AI at scale.",
+  },
+]
+
+const toOrderService = (s: typeof proService): OrderService => ({
+  id: s.id,
+  name: s.name,
+  price: s.price,
+  priceLabel: s.priceLabel,
+  image: s.image ?? "/logo.svg",
+})
 
 export default function Pricing() {
-  const [selectedService, setSelectedService] = useState<{
-    id: string
-    name: string
-    price: string
-    priceLabel: string
-    image: string
-  } | null>(null)
-  const sectionRef = useRef(null)
-  const headerRef = useRef(null)
-  const cardsRef = useRef(null)
-  
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 })
-  const cardsInView = useInView(cardsRef, { once: true, amount: 0.2 })
+  const [selectedService, setSelectedService] = useState<OrderService | null>(null)
+  const [activeMax, setActiveMax] = useState<(typeof maxTiers)[number]["key"]>("composer-max5x")
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '213559555951'
-  const customPlanMessage = encodeURIComponent('Hello! I need a custom hosting plan.')
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${customPlanMessage}`
-  const enterpriseMessage = encodeURIComponent('Hello! I want to discuss the Hawiyat Composer Enterprise plan.')
-  const enterpriseWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${enterpriseMessage}`
+  const activeTier = maxTiers.find((t) => t.key === activeMax)!
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  }
+  const enterpriseWhatsappUrl =
+    "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%E2%80%94%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
-      }
-    }
-  }
+  const enterpriseFeatures = [
+    "Full stack — Composer + n8n + Evolution + Platform",
+    "Dedicated account manager",
+    "Priority WhatsApp support",
+    "Usage analytics and reporting in DZD",
+    "Book with the team",
+  ]
 
   return (
-    <section id="pricing" ref={sectionRef} className="pt-8 pb-10 md:pt-12 md:pb-16">
-      <div className="mx-auto max-w-5xl px-6">
-        <motion.div 
-          ref={headerRef}
-          initial={{ opacity: 0, y: 30 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mx-auto max-w-2xl space-y-6 text-center"
-        >
-          <h2 className="text-center text-4xl font-semibold lg:text-5xl">
-            Plans That Scale With You
-          </h2>
-          <p className="text-muted-foreground">
-            Hawiyat Composer for AI costs, AI Automation for everything else. Or both.
+    <section id="pricing" className="pt-8 pb-10 md:pt-12 md:pb-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-2xl space-y-4 text-center">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
+            Pricing
           </p>
-        </motion.div>
+          <h2 className="text-4xl font-semibold text-ink lg:text-5xl reveal-up">
+            Plans for the execution layer
+          </h2>
+          <p className="text-base text-muted-ink reveal-up">
+            One engine. Every model. In DZD.
+          </p>
+        </div>
 
-        {/* Composer Plans */}
-        <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-0">
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {/* PRO */}
-          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10">
-            <div className="space-y-4">
-              <div><h2 className="font-medium">Hawiyat Composer PRO</h2>
-              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-purple-600 text-white mt-1">Pro</div>
-              <p className="text-muted-foreground text-sm mt-2">2x Claude credits with Hawiyat Composer caching. For individual devs and freelancers.</p></div>
-              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">6,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
-              <button onClick={() => setSelectedService({ id: "composer-pro", name: "Composer PRO", price: "6000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Get Started</button>
-              <hr className="border-dashed mt-6" />
-              <ul className="list-outside space-y-3 text-sm mt-4">
-                {['2x Claude Pro credit quota', 'No daily or weekly limits', 'Hawiyat Composer caching layer', 'Context-aware suggestions', 'Automated code reviews', 'Multi-language support'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 lg:p-8">
+            <div className="space-y-5">
+              <div>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-ink">{proService.name}</h3>
+                  <span className="rounded-full border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                    Pro
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-muted-ink">
+                  The execution layer for solo builders. Route, run, and evaluate every task.
+                </p>
+              </div>
+
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mono text-4xl font-bold text-ink">
+                  {Number(proService.price).toLocaleString("en-US")}
+                </span>
+                <span className="font-mono text-sm text-muted-ink">{proService.priceLabel}</span>
+              </div>
+
+              <ul className="space-y-3">
+                {proService.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    {feature}
+                  </li>
+                ))}
               </ul>
             </div>
+
+            <button
+              onClick={() => setSelectedService(toOrderService(proService))}
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
-          {/* MAX 5X */}
-          <div className="dark:bg-surface-dim rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10">
-            <div className="space-y-4">
-              <div><h2 className="font-medium">Hawiyat Composer MAX 5X</h2>
-              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white mt-1">Max 5X</div>
-              <p className="text-muted-foreground text-sm mt-2">5x Claude capacity with semantic caching and smart routing. For daily shippers.</p></div>
-              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">15,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
-              <button onClick={() => setSelectedService({ id: "composer-max5x", name: "Composer MAX 5X", price: "15000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button>
-              <hr className="border-dashed mt-6" />
-              <ul className="list-outside space-y-3 text-sm mt-4">
-                {['5x Claude Pro credit quota', 'No daily or weekly limits', 'Semantic caching (vector-based)', 'Smart provider routing', 'Context-aware suggestions', 'Automated code reviews'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+
+          {/* MAX switchable */}
+          <div className="relative flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 shadow-lg shadow-gray-950/5 lg:p-8">
+            <div>
+              <div className="mb-4 flex items-center justify-between gap-2">
+                <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
+                <div className="flex items-center gap-1 rounded-full border border-border bg-surface-dim p-1">
+                  {maxTiers.map((tier) => (
+                    <button
+                      key={tier.key}
+                      onClick={() => setActiveMax(tier.key)}
+                      className={`rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
+                        activeMax === tier.key
+                          ? "bg-signal text-signal-text"
+                          : "text-muted-ink hover:text-ink"
+                      }`}
+                      aria-pressed={activeMax === tier.key}
+                    >
+                      {tier.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-sm text-muted-ink">{activeTier.capacity}.</p>
+              <p className="mt-1 text-sm text-muted-ink">{activeTier.blurb}</p>
+
+              <div className="mt-5 flex items-baseline gap-1.5">
+                <span className="font-mono text-4xl font-bold text-ink">
+                  {Number(activeTier.service.price).toLocaleString("en-US")}
+                </span>
+                <span className="font-mono text-sm text-muted-ink">
+                  {activeTier.service.priceLabel}
+                </span>
+              </div>
+
+              <ul className="mt-5 space-y-3">
+                {activeTier.service.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    {feature}
+                  </li>
+                ))}
               </ul>
             </div>
+
+            <button
+              onClick={() => setSelectedService(toOrderService(activeTier.service))}
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
-          {/* MAX 20X */}
-          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-l-none md:border-l-0 lg:p-10">
-            <div className="space-y-4">
-              <div><h2 className="font-medium">Hawiyat Composer MAX 20X</h2>
-              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-amber-500/30 mt-1">Max 20X</div>
-              <p className="text-muted-foreground text-sm mt-2">20x Claude capacity with Fable & Opus models, GDPR compliance. For teams and agencies.</p></div>
-              <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">30,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
-              <button onClick={() => setSelectedService({ id: "composer-max20x", name: "Composer MAX 20X", price: "30000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button>
-              <hr className="border-dashed mt-6" />
-              <ul className="list-outside space-y-3 text-sm mt-4">
-                {['20x Claude Pro credit quota', 'No daily or weekly limits', 'Exact-match + semantic caching', 'Smart provider routing', 'Hybrid data compliance', 'Multi-agent traffic resolution', 'Priority support'].map((item, index) => (<li key={index} className="flex items-center gap-2"><Check className="size-3" />{item}</li>))}
+
+          {/* ENTERPRISE */}
+          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 lg:p-8">
+            <div className="space-y-5">
+              <div>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
+                  <span className="rounded-full border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                    Custom pricing
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-muted-ink">
+                  The whole stack under one contract — Composer + n8n + Evolution API + Platform.
+                </p>
+              </div>
+
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mono text-4xl font-bold text-ink">Custom</span>
+                <span className="font-mono text-sm text-muted-ink">pricing</span>
+              </div>
+
+              <ul className="space-y-3">
+                {enterpriseFeatures.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    {feature}
+                  </li>
+                ))}
               </ul>
+            </div>
+
+            <div className="mt-8 space-y-3">
+              <a
+                href={enterpriseWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-transform duration-300 hover:scale-[1.03] dark:bg-paper dark:text-ink"
+              >
+                Book with the team
+                <MessageCircle className="h-4 w-4" />
+              </a>
+              <a
+                href="mailto:contact@hawiyat.org"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+              >
+                Email us instead
+                <Mail className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
-
-        {selectedService && (
-          <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
-        )}
       </div>
+
+      {selectedService && (
+        <OrderForm service={selectedService} onClose={() => setSelectedService(null)} />
+      )}
     </section>
   )
 }

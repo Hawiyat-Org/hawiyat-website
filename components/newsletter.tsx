@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import { Mail, Loader2, CheckCircle2 } from "lucide-react"
 
 const Newsletter = () => {
   const [email, setEmail] = useState("")
@@ -39,54 +40,57 @@ const Newsletter = () => {
   }
 
   return (
-    <section className="flex w-full flex-col place-content-center place-items-center gap-[10%] p-[5%] px-[10%] max-md:px-2">
-      <div className="flex w-full max-w-6xl place-content-center place-items-center justify-between gap-3 rounded-lg bg-[#F6F7FB] dark:bg-[#3A3A40] p-6 max-md:max-w-full max-md:flex-col">
-        <div className="flex flex-col max-lg:text-center gap-1">
-          <h2 className="text-2xl text-gray-800 dark:text-gray-200 max-md:text-xl">Join our newsletter</h2>
-          <div className="text-gray-700 dark:text-gray-300">Get product insights and updates.</div>
+    <section className="flex w-full flex-col place-content-center place-items-center px-6 pb-24 max-md:px-4">
+      <div className="flex w-full max-w-5xl flex-col items-center justify-between gap-6 rounded-3xl border border-border bg-surface p-8 md:flex-row md:p-10">
+        <div className="flex flex-col items-center gap-2 text-center md:items-start md:text-left">
+          <div className="flex items-center gap-2">
+            <Mail className="h-5 w-5 text-signal" />
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+              Newsletter
+            </h2>
+          </div>
+          <p className="text-2xl font-semibold text-ink">
+            Execution insights. No pitch spam.
+          </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="flex h-[60px] place-items-center gap-2 overflow-hidden p-2 max-md:w-full"
+          className="flex w-full max-w-md items-center gap-2"
         >
-            <input
+          <input
             type="email"
-            className="input h-full w-full !border-gray-600 p-2 outline-none"
-            placeholder="email"
+            className="h-12 w-full rounded-full border border-border bg-surface-dim px-5 text-sm text-ink outline-none transition-colors placeholder:text-muted-ink focus:border-signal"
+            placeholder="you@company.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             disabled={loading}
+            aria-label="Email address"
           />
           <button
             type="submit"
             disabled={loading}
-            className="btn !rounded-lg !border-[1px] !text-black !border-solid !border-black dark:!text-white dark:!border-gray-300 !bg-transparent transition-all duration-[0.3s] disabled:opacity-60 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black min-w-[100px]"
+            className="inline-flex h-12 shrink-0 items-center gap-2 rounded-full bg-signal px-6 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03] disabled:opacity-60"
           >
             {loading ? (
-              <span className="flex items-center gap-2">
-                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Joining...
-              </span>
+              <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              "Join"
+              "Subscribe"
             )}
           </button>
         </form>
       </div>
 
       {message && (
-        <div className="mt-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-green-700 dark:text-green-400 text-center animate-fadeIn">
-          <div className="font-medium">{message}</div>
+        <div className="mt-6 flex items-center gap-2 rounded-full border border-ok/40 bg-ok/10 px-5 py-2 text-sm text-ok">
+          <CheckCircle2 className="h-4 w-4" />
+          {message}
         </div>
       )}
       {error && (
-        <div className="mt-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 text-red-700 dark:text-red-400 text-center animate-fadeIn">
-          <div className="font-medium">{error}</div>
+        <div className="mt-6 rounded-full border border-danger/40 bg-danger/10 px-5 py-2 text-sm text-danger">
+          {error}
         </div>
       )}
     </section>
