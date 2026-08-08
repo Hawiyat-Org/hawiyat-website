@@ -35,15 +35,15 @@ const maxTiers: Array<{
     key: "composer-max5x",
     label: "MAX 5X",
     service: max5xService,
-    capacity: "5X base execution capacity — more parallel runs/tasks",
-    blurb: "For startups and teams shipping daily.",
+    capacity: "5× more tasks at the same time.",
+    blurb: "For startups and teams shipping every day.",
   },
   {
     key: "composer-max20x",
     label: "MAX 20X",
     service: max20xService,
-    capacity: "20X base execution capacity — maximum parallel throughput",
-    blurb: "For agencies and engineering teams running AI at scale.",
+    capacity: "20× more tasks at the same time — with GDPR-ready compliance.",
+    blurb: "For agencies and teams running AI at scale.",
   },
 ]
 
@@ -83,13 +83,13 @@ export default function Pricing() {
             Plans for the execution layer
           </h2>
           <p className="text-base text-muted-ink reveal-up">
-            One engine. Every model. In DZD.
+            One layer, every model — and everything billed in dinars.
           </p>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {/* PRO */}
-          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 lg:p-8">
+          <div className="flex flex-col justify-between rounded-lg border border-border bg-surface p-6 lg:p-8">
             <div className="space-y-5">
               <div>
                 <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-muted-ink">
-                  The execution layer for solo builders. Route, run, and evaluate every task.
+                  For solo builders. Give it a task, get a checked result.
                 </p>
               </div>
 
@@ -113,7 +113,7 @@ export default function Pricing() {
               <ul className="space-y-3">
                 {proService.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
                     {feature}
                   </li>
                 ))}
@@ -122,7 +122,7 @@ export default function Pricing() {
 
             <button
               onClick={() => setSelectedService(toOrderService(proService))}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
               Get started
               <ArrowRight className="h-4 w-4" />
@@ -130,7 +130,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-3xl border border-border bg-surface p-6 shadow-lg shadow-ink/5 lg:p-8">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface p-6 shadow-lg shadow-ink/5 lg:p-8">
             <div>
               <div className="mb-4 flex items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
@@ -152,7 +152,7 @@ export default function Pricing() {
                 </div>
               </div>
 
-              <p className="text-sm text-muted-ink">{activeTier.capacity}.</p>
+              <p className="text-sm text-muted-ink">{activeTier.capacity}</p>
               <p className="mt-1 text-sm text-muted-ink">{activeTier.blurb}</p>
 
               <div className="mt-5 flex items-baseline gap-1.5">
@@ -167,7 +167,7 @@ export default function Pricing() {
               <ul className="mt-5 space-y-3">
                 {activeTier.service.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
                     {feature}
                   </li>
                 ))}
@@ -176,7 +176,7 @@ export default function Pricing() {
 
             <button
               onClick={() => setSelectedService(toOrderService(activeTier.service))}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Get started
               <ArrowRight className="h-4 w-4" />
@@ -184,11 +184,7 @@ export default function Pricing() {
           </div>
 
           {/* ENTERPRISE */}
-          <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-signal/60 bg-signal-bg p-6 lg:p-8">
-            <span
-              aria-hidden="true"
-              className="absolute -top-16 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-signal/20 blur-3xl"
-            />
+          <div className="relative flex flex-col justify-between overflow-hidden rounded-lg border-2 border-ink bg-surface p-6 lg:p-8">
             <div className="relative space-y-5">
               <div>
                 <div className="flex items-center justify-between">
@@ -210,7 +206,7 @@ export default function Pricing() {
               <ul className="space-y-3">
                 {enterpriseFeatures.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm text-muted-ink">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
                     {feature}
                   </li>
                 ))}
@@ -222,14 +218,14 @@ export default function Pricing() {
                 href={enterpriseWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
                 Book with the team
                 <MessageCircle className="h-4 w-4" />
               </a>
               <a
                 href="mailto:contact@hawiyat.org"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 Email us instead
                 <Mail className="h-4 w-4" />
