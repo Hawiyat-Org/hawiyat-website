@@ -58,7 +58,7 @@ export default function Pricing() {
             Plans That Scale With You
           </h2>
           <p className="text-muted-foreground">
-            Hawiyat Composer for AI costs, Cloud Hosting for everything else. Or both.
+            Hawiyat Composer for AI costs, AI Automation for everything else. Or both.
           </p>
         </motion.div>
 
