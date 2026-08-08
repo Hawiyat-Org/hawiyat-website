@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
     let content = aiResponse
 
     const titleMatch = aiResponse.match(/TITLE:\s*(.+?)(?:\n|$)/i)
-    const contentMatch = aiResponse.match(/CONTENT:\s*(.+)/is)
+    const contentMatch = aiResponse.match(/CONTENT:\s*([\s\S]+)/i)
 
     if (titleMatch && contentMatch) {
       title = titleMatch[1].trim()

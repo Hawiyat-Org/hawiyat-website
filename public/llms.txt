@@ -10,7 +10,6 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - [Claude Code guides](https://www.hawiyat.org/guides/claude): Installation, skills, MCP servers, and integrations.
 - [Cybersecurity](https://www.hawiyat.org/cyber-security): AI-assisted security and infrastructure protection services.
 - [About Hawiyat](https://www.hawiyat.org/about): Company, team, credentials, and Algeria presence.
-- [Book a consultation](https://www.hawiyat.org/schedule): Discuss requirements with the Hawiyat team.
 
 ## Important facts
 - Hawiyat is based in Algeria and supports customers in Arabic, French, and English.
