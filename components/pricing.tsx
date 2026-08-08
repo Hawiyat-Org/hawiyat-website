@@ -73,19 +73,21 @@ export default function Pricing() {
           <h2 className="text-center text-4xl font-semibold lg:text-5xl">
             Plans That Scale With You
           </h2>
-          <p className="text-muted-foreground">
-            Hawiyat Composer for AI costs, AI Automation for everything else. Or both.
-          </p>
+    
         </motion.div>
 
         {/* Composer Plans */}
-        <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-0">
+        <div className="mt-12 grid md:grid-cols-3">
           {/* PRO */}
-          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10">
+          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 max-md:rounded-b-none max-md:border-b-0 md:col-span-1 md:my-2 md:rounded-r-none md:border-r-0 lg:p-10">
             <div className="space-y-4">
-              <div><h2 className="font-medium">Hawiyat Composer PRO</h2>
-              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-purple-600 text-white mt-1">Pro</div>
-              <p className="text-muted-foreground text-sm mt-2">2x Claude credits with Hawiyat Composer caching. For individual devs and freelancers.</p></div>
+              <div>
+                <h2 className="font-medium flex flex-wrap items-center gap-2">
+                  Hawiyat Composer
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-purple-600 text-white">PRO</span>
+                </h2>
+                <p className="text-muted-foreground text-sm mt-2">2x Claude credits with Hawiyat Composer caching. For individual devs and freelancers.</p>
+              </div>
               <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">6,000</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
               <button onClick={() => setSelectedService({ id: "composer-pro", name: "Composer PRO", price: "6000", priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Get Started</button>
               <hr className="border-dashed mt-6" />
@@ -96,7 +98,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX 5X / MAX 20X (toggle) — center */}
-          <div className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
+          <div className="dark:bg-muted rounded-lg border p-6 shadow-lg shadow-gray-950/5 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 max-md:shadow-none md:col-span-1 lg:p-10 dark:[--color-muted:var(--color-zinc-900)]">
             <div className="mb-6 flex w-full items-center justify-center">
               <div className="relative inline-flex rounded-full border border-border bg-background p-1">
                 {(["5X", "20X"] as const).map((tier) => (
@@ -123,9 +125,13 @@ export default function Pricing() {
               </div>
             </div>
             <div className="space-y-4">
-              <div><h2 className="font-medium">{maxPlan.name}</h2>
-              <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold mt-1 ${maxPlan.tagClass}`}>{maxPlan.tag}</div>
-              <p className="text-muted-foreground text-sm mt-2">{maxPlan.desc}</p></div>
+              <div>
+                <h2 className="font-medium flex flex-wrap items-center gap-2">
+                  Hawiyat Composer
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold mt-1 ${maxPlan.tagClass}`}>{maxPlan.tag}</span>
+                </h2>
+                <p className="text-muted-foreground text-sm mt-2">{maxPlan.desc}</p>
+              </div>
               <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">{maxPlan.price}</span><span className="text-sm text-muted-foreground">DA/month</span></div></div>
               <button onClick={() => setSelectedService({ ...maxPlan.order, priceLabel: "DA/month", image: "/services/hawiyat%20composer.png" })} className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button>
               <hr className="border-dashed mt-6" />
@@ -136,11 +142,15 @@ export default function Pricing() {
           </div>
 
           {/* ENTERPRISE */}
-          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 md:col-span-1 md:my-2 md:rounded-l-none md:border-l-0 lg:p-10">
+          <div className="rounded-lg flex flex-col bg-[#f2f3f4] dark:bg-transparent justify-between space-y-8 border p-6 max-md:rounded-t-none max-md:border-t-0 md:col-span-1 md:my-2 md:rounded-l-none md:border-l-0 lg:p-10">
             <div className="space-y-4">
-              <div><h2 className="font-medium">Hawiyat Composer Enterprise</h2>
-              <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-black mt-1">Enterprise</div>
-              <p className="text-muted-foreground text-sm mt-2">Dedicated capacity, SLAs, and onboarding for teams that outgrow MAX 20X.</p></div>
+              <div>
+                <h2 className="font-medium flex flex-wrap items-center gap-2">
+                  Hawiyat Composer
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-black">Enterprise</span>
+                </h2>
+                <p className="text-muted-foreground text-sm mt-2">Dedicated capacity, SLAs, and onboarding for teams that outgrow MAX 20X.</p>
+              </div>
               <div className="mt-4"><div className="flex items-baseline gap-1"><span className="text-3xl font-bold">Custom</span><span className="text-sm text-muted-foreground">billed annually</span></div></div>
               <a href={enterpriseWhatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Contact us</a>
               <hr className="border-dashed mt-6" />

@@ -63,7 +63,7 @@ const TrustedBrands = () => {
       logo: mounted && (resolvedTheme === "dark" || theme === "dark")
         ? "/trust/mercus-academy-dark.webp"
         : "/trust/mercus-academy-light.webp",
-      url: "",
+      url: "https://www.mercus-academy.com/",
       square: true,
       title: "Mercus Academy — a training institution that trusts Hawiyat",
       alt: "Mercus Academy logo — a training and education institution that trusts Hawiyat for AI and digital services",

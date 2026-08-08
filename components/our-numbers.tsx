@@ -63,12 +63,16 @@ const OurNumbers = () => {
       label: "Clients",
       description: "Trusted by businesses, developers, and teams across Algeria and beyond.",
       icon: Users,
+      prefix: "+",
+      suffix: "",
     },
     {
       value: 10,
       label: "Resellers",
       description: "Growing partner network delivering Hawiyat solutions to local markets.",
       icon: Handshake,
+      prefix: "+",
+      suffix: "",
     },
     {
       value: 100,
@@ -96,6 +100,8 @@ const OurNumbers = () => {
                 description={stat.description}
                 icon={stat.icon}
                 delay={index * 0.15}
+                prefix={stat.prefix}
+                suffix={stat.suffix}
               />
             ))}
           </div>
