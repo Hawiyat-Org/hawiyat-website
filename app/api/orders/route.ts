@@ -99,6 +99,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // serviceName and customerName are interpolated into email subjects
+    // (lib/email-utils.ts), so strip CR/LF — which could inject SMTP headers —
+    // and cap their length. Both are validated as non-empty strings above; the
+    // typeof guard only hardens against a non-string reaching this block.
+    const sanitizedServiceName = (typeof serviceName === "string" ? serviceName : "")
+      .replace(/[\r\n]+/g, " ").trim()
+      .slice(0, 120)
+    const sanitizedCustomerName = (typeof customerName === "string" ? customerName : "")
+      .replace(/[\r\n]+/g, " ").trim()
+      .slice(0, 120)
+
     // Normalize phone to a string or null so a malformed type cannot reach Prisma.
     const normalizedPhone = typeof customerPhone === "string" && customerPhone.trim()
       ? customerPhone
@@ -124,8 +135,8 @@ export async function POST(request: NextRequest) {
     const order = await prisma.order.create({
       data: {
         serviceId,
-        serviceName,
-        customerName,
+        serviceName: sanitizedServiceName,
+        customerName: sanitizedCustomerName,
         customerEmail,
         customerPhone: normalizedPhone,
         notes: normalizedNotes,
@@ -135,8 +146,8 @@ export async function POST(request: NextRequest) {
 
     const telegramMessage = `<b>New Order Received!</b>
 
-<b>Service:</b> ${escapeHtml(serviceName)}
-<b>Customer:</b> ${escapeHtml(customerName)}
+<b>Service:</b> ${escapeHtml(sanitizedServiceName)}
+<b>Customer:</b> ${escapeHtml(sanitizedCustomerName)}
 <b>Email:</b> ${escapeHtml(customerEmail)}
 ${normalizedPhone ? `<b>Phone:</b> ${escapeHtml(normalizedPhone)}\n` : ""}${normalizedNotes ? `<b>Notes:</b> ${escapeHtml(normalizedNotes)}\n` : ""}
 <b>Order ID:</b> ${order.id}
@@ -144,8 +155,8 @@ ${normalizedPhone ? `<b>Phone:</b> ${escapeHtml(normalizedPhone)}\n` : ""}${norm
 
     const whatsappMessage = `🔔 *New Order Received!*
 
-📦 *Service:* ${serviceName}
-👤 *Customer:* ${customerName}
+📦 *Service:* ${sanitizedServiceName}
+👤 *Customer:* ${sanitizedCustomerName}
 📧 *Email:* ${customerEmail}
 ${normalizedPhone ? `📱 *Phone:* ${normalizedPhone}\n` : ""}💳 *Payment:* ${normalizedPayment ?? 'Not specified'}
 ${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}

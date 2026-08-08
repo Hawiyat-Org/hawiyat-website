@@ -773,7 +773,7 @@ export const services: Service[] = [
     id: "llm-credit",
     slug: "llm-credit",
     name: "AI Composer access",
-    shortDesc: "Pay-per-run access to the Hawiyat execution layer",
+    shortDesc: "Access to the execution layer for your own tasks",
     description:
       "Access to the Hawiyat AI Composer execution layer for your own tasks. Route models per task, with caching, fallbacks, and a transparent per-task cost, billed in DZD.",
     image: "/services/hawiyat%20composer.png",
