@@ -200,7 +200,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 
 ### 4. Trusted Brands (« proof ») (`components/trusted-brands.tsx`)
 - `py-20`. Grid of 3–6 logos (Itihad/ESTIN/IT-Solutions + regional partners) with hover scale-110. Title: "Already running on Hawiyat" +
-- Add second strip: metrics (`+60 clients`, `+50B tokens`, `p95 latency`, `DZD checkout`) as mono metadata.
+- Add second strip: metrics (verified only: `100+ clients`, `≈2.6M DZD ARR`, `p95 latency` placeholder, `DZD checkout`) as mono metadata. **Superseded by the plan's GC5 numbers policy — never render `+50B tokens` or `+60 clients` (unverified).**
 
 ### 5. "AI Execution Layer" (BenefitsSection rename, same click-id `solutions`)
 - 4 cards, 350×540-ish, rounded-3xl, hover scale-[1.02].
