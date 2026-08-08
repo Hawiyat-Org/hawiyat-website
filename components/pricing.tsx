@@ -22,6 +22,8 @@ export default function Pricing() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '213559555951'
   const customPlanMessage = encodeURIComponent('Hello! I need a custom hosting plan.')
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${customPlanMessage}`
+  const enterpriseMessage = encodeURIComponent('Hello! I want to discuss the Hawiyat Composer Enterprise plan.')
+  const enterpriseWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${enterpriseMessage}`
 
   const containerVariants = {
     hidden: {},

@@ -8,7 +8,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero-section mt-[56px] md:mt-[100px]   relative flex min-h-[75vh] w-full max-w-[100vw] flex-col overflow-hidden"
+      className="hero-section mt-[56px] md:mt-[70px]   relative flex min-h-[75vh] w-full max-w-[100vw] flex-col overflow-hidden"
       id="hero-section"
     >
       <div className="hero-bg-gradient relative flex h-full min-h-[75vh] w-full flex-col place-content-center gap-6 p-[5%] max-xl:place-items-center max-lg:p-6 max-md:p-4 max-md:gap-8">

@@ -117,7 +117,7 @@ const TrustedBrands = () => {
   )
 
   return (
-    <section className="relative w-full overflow-hidden pt-2 pb-8 md:pt-4 md:pb-12">
+    <section className="relative w-full overflow-hidden relative ">
       <div className="flex flex-col items-center gap-5">
         {/* Logos stream left-to-right, on top */}
         <div className="marquee relative w-full overflow-hidden">
