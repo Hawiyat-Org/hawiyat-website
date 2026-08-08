@@ -8,13 +8,13 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero-section mt-[70px] md:mt-[100px]   relative flex min-h-[75vh] w-full max-w-[100vw] flex-col overflow-hidden"
+      className="hero-section mt-[56px] md:mt-[100px]   relative flex min-h-[75vh] w-full max-w-[100vw] flex-col overflow-hidden"
       id="hero-section"
     >
       <div className="hero-bg-gradient relative flex h-full min-h-[75vh] w-full flex-col place-content-center gap-6 p-[5%] max-xl:place-items-center max-lg:p-6 max-md:p-4 max-md:gap-8">
         <div className="purple-bg-grad absolute left-1/2 -translate-x-1/2 top-[10%] h-[120px] w-[120px] max-md:h-[80px] max-md:w-[80px] max-md:top-[5%]"></div>
 
-        <div className="flex flex-col mt-12 md:mt-0 min-h-[45vh] max-md:min-h-[40vh] place-content-center items-center max-md:gap-6">
+        <div className="flex flex-col min-h-[45vh] max-md:min-h-[40vh] place-content-center max-md:place-content-start items-center max-md:gap-6">
           <h1 className="text-center text-7xl font-medium uppercase leading-[90px] max-lg:text-4xl max-md:text-3xl max-md:leading-tight max-md:px-2">
             Algeria's AI{" "}
             <span className="text-4xl md:text-7xl">Provider</span>
