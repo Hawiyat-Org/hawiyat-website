@@ -16,7 +16,7 @@ const OurNumbers = () => (
           Proof it works.
         </h2>
         <p className="mt-3 text-sm text-muted-ink">
-          Straight from our own operations — we only print what&rsquo;s real.
+          Straight from our own operations, we only print what&rsquo;s real.
         </p>
       </div>
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">

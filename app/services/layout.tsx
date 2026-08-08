@@ -4,7 +4,7 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 export const metadata = createMetadata({
   title: "AI Execution Services in Algeria | n8n, WhatsApp API",
   description:
-    "AI execution services in Algeria: Hawiyat AI Composer, n8n automation, WhatsApp API, and app hosting — priced in DZD with local support.",
+    "AI execution services in Algeria: Hawiyat AI Composer, n8n automation, WhatsApp API, and app hosting, priced in DZD with local support.",
   path: "/services",
 })
 

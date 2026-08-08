@@ -29,7 +29,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-base text-ink leading-relaxed max-md:text-sm">
               Hawiyat is an Algerian company that makes AI actually work for businesses. We connect
-              the best AI models to the tools you already use — WhatsApp, CRM, email, databases —
+              the best AI models to the tools you already use, like WhatsApp, CRM, email, and databases,
               and we check every result before it reaches you. Founded in Algiers. Priced in dinars.
               Built on our own cloud.
             </p>
@@ -390,7 +390,7 @@ export default function AboutPage() {
 
           <p className="max-w-xl text-lg text-muted-ink leading-relaxed">
             Tell us what you&apos;re building. AI infrastructure, automation, hosting, or something
-            we haven&apos;t heard yet — we&apos;d love to talk.
+            we haven&apos;t heard yet. We&apos;d love to talk.
           </p>
 
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
@@ -412,7 +412,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-xs text-muted-ink mt-8">
-            Free consultation, no pressure — talk to a real Algerian team.
+            Free consultation, no pressure. Talk to a real Algerian team.
           </p>
         </div>
       </section>

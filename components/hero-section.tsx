@@ -17,7 +17,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
-          Hawiyat picks the best AI for the job, connects your systems, and checks the result — billed in DZD, supported from Algeria.
+          Hawiyat picks the best AI for the job, connects your systems, and checks the result, billed in DZD, supported from Algeria.
         </p>
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
@@ -59,13 +59,13 @@ const HeroSection = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             url: "https://www.hawiyat.org/",
-            name: "Hawiyat — AI infrastructure platform",
+            name: "Hawiyat, AI infrastructure platform",
             headline: "Your AI just works.",
             about: {
               "@type": "Organization",
               name: "Hawiyat",
               description:
-                "The AI infrastructure platform between frontier AI models and the systems your business runs — WhatsApp, CRM, ERP, email, databases, workflows. Model-independent, every run evaluated, priced in DZD.",
+                "The AI infrastructure platform between frontier AI models and the systems your business runs: WhatsApp, CRM, ERP, email, databases, workflows. Model-independent, every run evaluated, priced in DZD.",
             },
           }),
         }}

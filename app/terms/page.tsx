@@ -70,8 +70,8 @@ export default function TermsPage() {
                 <li>
                   <span className="text-foreground font-medium">&quot;Composer.&quot;</span>{" "}
                   Hawiyat&apos;s AI execution engine. Composer sits between your business systems and Frontier Models. For
-                  each task it decides the best way to accomplish it — which model to route to, what context to carry,
-                  which tools to call, and whether the result is good enough — then executes, evaluates, and learns.
+                  each task it decides the best way to accomplish it: which model to route to, what context to carry,
+                  which tools to call, and whether the result is good enough. It then executes, evaluates, and learns.
                   &quot;Hawiyat AI Composer&quot; and &quot;Composer&quot; refer to the same engine.
                 </li>
                 <li>
@@ -199,7 +199,7 @@ export default function TermsPage() {
                 </li>
                 <li>
                   <span className="text-foreground font-medium">Task Understanding.</span>{" "}
-                  When you submit Inputs, Composer determines what the task actually requires — the goal, the context
+                  When you submit Inputs, Composer determines what the task actually requires: the goal, the context
                   from your connected systems (WhatsApp, CRM, ERP, email, databases, workflows), and the tools needed
                   to complete it.
                 </li>

@@ -10,7 +10,7 @@ const FAQ = () => {
     {
       question: "What does Hawiyat actually do?",
       answer:
-        "Think of Hawiyat as the layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs — WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, you'll need a layer that decides how to use it.",
+        "Think of Hawiyat as the layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs: WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, you'll need a layer that decides how to use it.",
     },
     {
       question: "Am I locked into one AI model?",
@@ -20,22 +20,22 @@ const FAQ = () => {
     {
       question: "What will this cost me?",
       answer:
-        "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost — roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed.",
+        "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost, roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed.",
     },
     {
       question: "Can I pay without a foreign card?",
       answer:
-        "Yes — everything is billed in DZD. Pay with CCP or Baridi Mob, no foreign card needed.",
+        "Yes, everything is billed in DZD. Pay with CCP or Baridi Mob, no foreign card needed.",
     },
     {
-      question: "Is my data safe — do you train on it?",
+      question: "Is my data safe? Do you train on it?",
       answer:
         "No. Your data is never used to train models. Runs carry your context to complete the task, and the evaluation logs are yours to audit. Data stays between your systems and the layer.",
     },
     {
       question: "How do I get started?",
       answer:
-        "Pick a plan on the services page — Composer Pro for solo builders or a MAX tier for teams — or order Enterprise for the full stack. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day. Prefer to talk first? Chat with us on WhatsApp and we'll set you up.",
+        "Pick a plan on the services page: Composer Pro for solo builders, a MAX tier for teams, or Enterprise for the full stack. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day. Prefer to talk first? Chat with us on WhatsApp and we'll set you up.",
     },
   ]
 

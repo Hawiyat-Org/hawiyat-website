@@ -13,8 +13,8 @@ const CallToAction = () => {
             Have your first task running today.
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a plan, connect your tools, and send your first task. Hawiyat handles the models —
-            you handle the business.
+            Pick a plan, connect your tools, and send your first task. Hawiyat handles the models.
+            You handle the business.
           </p>
           <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

@@ -21,7 +21,7 @@ import {
 const STAGES = [
   {
     name: "UNDERSTAND",
-    body: "Classifies the task and pulls the business context it needs — CRM records, docs, order history.",
+    body: "Classifies the task and pulls the business context it needs: CRM records, docs, order history.",
   },
   {
     name: "PLAN",
@@ -66,12 +66,12 @@ const CAPABILITIES = [
   {
     title: "Model Gateway",
     icon: Network,
-    body: "Routes every task to the best model for the job — by quality, latency, and cost. GPT, Claude, Gemini, and open models sit behind one route.",
+    body: "Routes every task to the best model for the job, by quality, latency, and cost. GPT, Claude, Gemini, and open models sit behind one route.",
   },
   {
     title: "Context Selector",
     icon: FileSearch,
-    body: "Pulls the right context per task — CRM records, docs, order history — so answers are grounded in your business, not the model's memory.",
+    body: "Pulls the right context per task: CRM records, docs, order history, so answers are grounded in your business, not the model's memory.",
   },
   {
     title: "Tool Router",
@@ -86,20 +86,20 @@ const CAPABILITIES = [
   {
     title: "Guardrails & Evaluations",
     icon: ShieldCheck,
-    body: "Every result is graded on quality, latency, and cost — with logs you can audit. Runs ship evaluated, or they don't ship.",
+    body: "Every result is graded on quality, latency, and cost, with logs you can audit. Runs ship evaluated, or they don't ship.",
   },
   {
     title: "Cost Controls",
     icon: Gauge,
-    body: "Caching, compression, and budgets — with per-task cost in DZD. Cost is measured and managed, never guessed.",
+    body: "Caching, compression, and budgets, with per-task cost in DZD. Cost is measured and managed, never guessed.",
   },
 ]
 
 const FULLSTACK = [
-  { name: "Composer", icon: GitMerge, note: "execution engine — routes, runs, and evaluates every task" },
-  { name: "n8n", icon: Workflow, note: "workflow runtime — your flows, hosted and supervised" },
-  { name: "Evolution API", icon: MessageCircle, note: "WhatsApp infrastructure — the channel to your customers" },
-  { name: "Platform", icon: ServerCog, note: "cloud runtime — servers, storage, and databases under one roof" },
+  { name: "Composer", icon: GitMerge, note: "execution engine: routes, runs, and evaluates every task" },
+  { name: "n8n", icon: Workflow, note: "workflow runtime: your flows, hosted and supervised" },
+  { name: "Evolution API", icon: MessageCircle, note: "WhatsApp infrastructure: the channel to your customers" },
+  { name: "Platform", icon: ServerCog, note: "cloud runtime: servers, storage, and databases under one roof" },
 ]
 
 const COMPARISON = [
@@ -193,8 +193,8 @@ export default function ComposerPage() {
               Every task becomes a run.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              Think of Composer as a careful coworker. You hand it a task — &ldquo;reply to order
-              1024 on WhatsApp in Arabic&rdquo; — and it figures out the rest: which AI is best,
+              Think of Composer as a careful coworker. You hand it a task, &ldquo;reply to order
+              1024 on WhatsApp in Arabic&rdquo;, and it figures out the rest: which AI is best,
               what it needs to know, and whether the answer is good enough before it reaches your
               customer.
             </p>
@@ -258,7 +258,7 @@ export default function ComposerPage() {
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
                   You already run your business on WhatsApp, a CRM, and spreadsheets. Composer
-                  connects to all of it — and to every major AI — so you never pick a
+                  connects to all of it, and to every major AI, so you never pick a
                   &ldquo;model.&rdquo; You just pick a task.
                 </p>
               </div>
@@ -374,7 +374,7 @@ export default function ComposerPage() {
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
                   Composer runs the layer; the rest of the stack runs Composer. Deployment,
-                  support, telemetry, and billing — one team, one invoice, in DZD.
+                  support, telemetry, and billing: one team, one invoice, in DZD.
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
@@ -425,7 +425,7 @@ export default function ComposerPage() {
               The fragments are the trap.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              OpenAI + Claude + n8n + WhatsApp + a database can all work — if you&rsquo;re happy
+              OpenAI + Claude + n8n + WhatsApp + a database can all work, if you&rsquo;re happy
               being the layer. Composer runs the layer; you run the business.
             </p>
           </div>
@@ -436,10 +436,10 @@ export default function ComposerPage() {
                 &nbsp;
               </div>
               <div className="col-span-4 border-l border-border bg-surface p-6 font-mono text-xs font-semibold uppercase tracking-widest text-signal-contrast">
-                Composer — the layer
+                Composer: the layer
               </div>
               <div className="col-span-4 border-l border-border p-6 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                DIY — 5 tools, hand-glued
+                DIY: 5 tools, hand-glued
               </div>
             </div>
 
@@ -473,8 +473,8 @@ export default function ComposerPage() {
             Have your first task running today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a plan on the services page — or bring the whole stack. Composer handles the
-            models — you handle the business.
+            Pick a plan on the services page, or bring the whole stack. Composer handles the
+            models. You handle the business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

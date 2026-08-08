@@ -42,7 +42,7 @@ const maxTiers: Array<{
     key: "composer-max20x",
     label: "MAX 20X",
     service: max20xService,
-    capacity: "20× more tasks at the same time — with GDPR-ready compliance.",
+    capacity: "20× more tasks at the same time, with GDPR-ready compliance.",
     blurb: "For agencies and teams running AI at scale.",
   },
 ]
@@ -65,7 +65,7 @@ export default function Pricing() {
     "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%E2%80%94%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
   const enterpriseFeatures = [
-    "Full stack — Composer + n8n + Evolution + Platform",
+    "Full stack: Composer + n8n + Evolution + Platform",
     "Dedicated account manager",
     "Priority WhatsApp support",
     "Usage analytics and reporting in DZD",
@@ -83,7 +83,7 @@ export default function Pricing() {
             Plans for the execution layer
           </h2>
           <p className="text-base text-muted-ink">
-            One layer, every model — and everything billed in dinars.
+            One layer, every model, and everything billed in dinars.
           </p>
         </div>
 
@@ -194,7 +194,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-muted-ink">
-                  The whole stack under one contract — Composer + n8n + Evolution API + Platform.
+                  The whole stack under one contract: Composer + n8n + Evolution API + Platform.
                 </p>
               </div>
 

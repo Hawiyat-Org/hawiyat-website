@@ -15,7 +15,7 @@ const AlgeriaBand = () => {
     {
       icon: Landmark,
       title: "Billed in DZD",
-      body: "Algerian dinars with CCP or Baridi Mob — no foreign cards, no forex drift.",
+      body: "Algerian dinars with CCP or Baridi Mob. No foreign cards, no forex drift.",
     },
     {
       icon: MapPin,
@@ -55,7 +55,7 @@ const AlgeriaBand = () => {
             The execution layer, close to home.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-ink">
-            Hawiyat is an AI infrastructure company registered in Algeria — billing, support, and
+            Hawiyat is an AI infrastructure company registered in Algeria. Billing, support, and
             invoicing all run from the same timezone as your business.
           </p>
         </div>

@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${APP_NAME} — AI Execution Layer`,
+    title: `${APP_NAME} | AI Execution Layer`,
     description:
-      "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
+      "Hawiyat AI Composer, the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     url: SITE_URL,
     siteName: APP_NAME,
     images: [
@@ -86,9 +86,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${APP_NAME} — AI Execution Layer`,
+    title: `${APP_NAME} | AI Execution Layer`,
     description:
-      "Hawiyat AI Composer — the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
+      "Hawiyat AI Composer, the execution layer between frontier AI models and your business systems. Model-independent, priced in DZD, supported in Algeria.",
     images: [`${SITE_URL}/hawiyat.png`],
     creator: "@hawiyat",
   },
@@ -198,7 +198,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-paper text-ink dark:bg-paper font-sans">
-        {/* accessibility: skip link — targets #content, which sits BELOW
+        {/* accessibility: skip link targets #content, which sits BELOW
             the header in DOM order, so keyboard users actually skip navigation */}
         <a
           href="#content"
