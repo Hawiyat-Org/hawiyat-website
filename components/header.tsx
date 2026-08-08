@@ -9,7 +9,10 @@ import Image from "next/image"
 const Header = () => {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -45,6 +48,14 @@ const Header = () => {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }
+
+  const themeIcon = !mounted ? (
+    <span className="block h-5 w-5" aria-hidden="true" />
+  ) : theme === "dark" ? (
+    <Sun className="w-5 h-5" />
+  ) : (
+    <Moon className="w-5 h-5" />
+  )
 
   if (pathname?.startsWith("/services/") && pathname !== "/services") return null
 
@@ -101,11 +112,7 @@ const Header = () => {
               className="p-2 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {themeIcon}
             </button>
 
             <Link
@@ -124,11 +131,7 @@ const Header = () => {
               className="p-3 rounded-full border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200 touch-manipulation"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {themeIcon}
             </button>
 
             <button
