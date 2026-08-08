@@ -197,12 +197,12 @@ body.booking-modal-open .fixed.inset-0 {
 }
 
 #dashboard {
-  transform: perspective(1200px) translateX(0px) translateY(12px) scale(0.8) rotate(0deg) rotateX(70deg);
+  transform: translateY(12px) scale(0.98);
   transition: transform 1s ease-out;
 }
 
 #dashboard.visible {
-  transform: perspective(1200px) translateX(0px) translateY(0px) scale(1) rotate(0deg) rotateX(0deg);
+  transform: translateY(0) scale(1);
 }
 
 .btn {
@@ -557,4 +557,3 @@ body.booking-modal-open .fixed.inset-0 {
 .animate-ring-outer-pulse {
   animation: ringOuterExpand 3s ease-in-out infinite;
 }
-
