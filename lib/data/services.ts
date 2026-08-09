@@ -280,6 +280,8 @@ export const services: Service[] = [
   {
     id: "hosting-basic",
     slug: "hosting-basic",
+    // hosting-basic and hosting-vip are two live slugs for the same single
+    // "Hawiyat Cloud" by-order offering (no tiers); both render the same card.
     name: "Hawiyat Cloud",
     shortDesc: "Managed cloud, sized to your needs",
     description: "A managed cloud runtime on our infrastructure: containers, VPS, or Kubernetes, planned with our team. Contact us to start.",
