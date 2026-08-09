@@ -16,6 +16,7 @@ const Footer = () => {
       title: "Company",
       links: [
         { name: "Support", href: "https://wa.me/213559555951" },
+        { name: "FAQ", href: "/faq" },
         { name: "Github", href: "https://github.com/Hawiyat-Org" },
       ],
       

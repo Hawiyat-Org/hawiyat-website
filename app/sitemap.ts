@@ -6,6 +6,7 @@ const routes = [
   "",
   "/composer",
   "/services",
+  "/faq",
   "/about",
   "/privacy",
   "/terms",
@@ -19,7 +20,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}${route}`,
     lastModified,
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/composer" || route === "/services" ? 0.9 : 0.7,
+    priority:
+      route === ""
+        ? 1
+        : route === "/composer" || route === "/services"
+          ? 0.9
+          : route === "/faq"
+            ? 0.8
+            : 0.7,
   }))
 
   // Add all service pages so search engines discover them via the sitemap
