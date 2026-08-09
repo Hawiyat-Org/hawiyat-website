@@ -187,13 +187,13 @@ export default function ComposerPage() {
                 See Composer plans
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
+              <Link
                 href="#trace"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
               >
                 Watch a run
                 <ArrowRight className="h-4 w-4 rotate-90" />
-              </a>
+              </Link>
             </div>
             <div className="-mt-3 flex items-center justify-center reveal-up">
               <a

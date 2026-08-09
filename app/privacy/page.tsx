@@ -48,13 +48,13 @@ export default function PrivacyPage() {
                 On this page
               </p>
               {sections.map((section) => (
-                <a
+                <Link
                   key={section.id}
                   href={`#${section.id}`}
                   className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
                 >
                   {section.label}
-                </a>
+                </Link>
               ))}
             </div>
           </nav>

@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Script from "next/script";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -200,12 +201,12 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-paper text-ink dark:bg-paper font-sans">
         {/* accessibility: skip link targets #content, which sits BELOW
             the header in DOM order, so keyboard users actually skip navigation */}
-        <a
+        <Link
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-surface text-ink border border-border p-2 rounded-md shadow focus:ring-2 focus:ring-signal/60"
         >
           Skip to content
-        </a>
+        </Link>
 
         <ThemeProvider
           attribute="class"
