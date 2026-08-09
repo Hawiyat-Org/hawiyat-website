@@ -65,7 +65,7 @@ Copy `.env.example` → `.env` if missing.
 ## Identity / IA
 
 **Pages:**
-- `/` home — execution layer story; order is Hero → Partners marquee → Our Numbers → Pricing (PRO / MAX switchable / Enterprise) → FAQ → CTA → Footer (newsletter removed).
+- `/` home — execution layer story; order is Hero → Partners marquee → Our Numbers → Composer card → Pricing (PRO / MAX switchable / Enterprise) → FAQ → CTA → Footer (newsletter removed).
 - `/composer` — the execution engine (Composer); legacy `/hawiyat-composer` redirects here.
 - `/services` — managed services catalog (DZD pricing) + `/services/[slug]` detail pages.
 - `/about` — includes the Algeria band.

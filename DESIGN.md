@@ -250,11 +250,12 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 1. Header
 2. Hero (simple: title + subtitle + 2 CTAs)
 3. Partners marquee
-4. Pricing (PRO / MAX switchable / Enterprise)
-5. Our Numbers
-6. FAQ
-7. CTA
-8. Footer
+4. Our Numbers
+5. Composer card (execution engine, prices in DZD, CTA → `#pricing`)
+6. Pricing (PRO / MAX switchable / Enterprise)
+7. FAQ
+8. CTA
+9. Footer
 *(no newsletter — removed)*
 
 ### `/composer` — engine page (redirect from legacy `/hawiyat-composer`; `/ai-algeria` → `/` redirect)
