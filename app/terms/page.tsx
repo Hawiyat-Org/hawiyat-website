@@ -33,7 +33,7 @@ export default function TermsPage() {
                 dashboards, and all related software and infrastructure (together, the &quot;Service&quot;).
               </p>
               <p className="mt-3">
-                By creating an account, accessing, or using the Service, you agree to be bound by these Terms.
+                By placing an order for, accessing, or using the Service, you agree to be bound by these Terms.
                 If you do not agree, you must not access or use the Service.
               </p>
               <p className="mt-3">
@@ -61,11 +61,11 @@ export default function TermsPage() {
                 </li>
                 <li>
                   <span className="text-foreground font-medium">&quot;Account.&quot;</span>{" "}
-                  Your registered Hawiyat account, created through our registration process.
+                  Your Hawiyat account, provisioned as part of your order and onboarding.
                 </li>
                 <li>
-                  <span className="text-foreground font-medium">&quot;API Key.&quot;</span>{" "}
-                  A unique credential issued to you for authentication and access to Hawiyat&apos;s APIs and services.
+                  <span className="text-foreground font-medium">&quot;Workspace Credentials.&quot;</span>{" "}
+                  Unique credentials issued by Hawiyat that identify your Composer workspace and authorize access to the Service and its API.
                 </li>
                 <li>
                   <span className="text-foreground font-medium">&quot;Composer.&quot;</span>{" "}
@@ -100,7 +100,7 @@ export default function TermsPage() {
                 </li>
                 <li>
                   <span className="text-foreground font-medium">&quot;Plan.&quot;</span>{" "}
-                  The service level you select for Composer or a managed service (e.g., Pro, MAX 5X, MAX 20X, or a
+                  The service level you select for Composer or a managed service (e.g., Pro, MAX 5X, MAX 20X, Enterprise, or a
                   managed hosting plan), each with its own capacity and billing terms.
                 </li>
                 <li>
@@ -127,7 +127,7 @@ export default function TermsPage() {
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>You meet the age requirement described above;</li>
                 <li>You have not previously been suspended or banned from the Service;</li>
-                <li>Your registration and use of the Service comply with all applicable laws in your jurisdiction; and</li>
+                <li>Your order and use of the Service comply with all applicable laws in your jurisdiction; and</li>
                 <li>
                   You are not located in, under the control of, or a national or resident of any country subject to
                   comprehensive international sanctions.
@@ -140,14 +140,14 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">4.1 Account Creation</h3>
               <p className="mt-2">
-                To use the Service, you must create an account. You agree to provide accurate, current, and complete
-                information during registration, and to keep it up to date.
+                Access to the Service is provisioned by Hawiyat after your order is confirmed. You agree to provide accurate,
+                current, and complete information at the time of order, and to keep it up to date through our support team.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">4.2 Account Security</h3>
               <p className="mt-2">You are solely responsible for:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>Keeping your account credentials (password and API Keys) confidential;</li>
+                <li>Keeping your account credentials (password and workspace credentials) confidential;</li>
                 <li>All activities that occur under your Account, whether or not you authorized them;</li>
                 <li>
                   Notifying Hawiyat immediately if you become aware of any unauthorized use of your Account.
@@ -156,16 +156,16 @@ export default function TermsPage() {
               <Note>
                 <p className="text-foreground font-medium">Security Notice:</p>
                 <p className="mt-1">
-                  Treat your API Keys as you would a password. Do not expose them in client-side code, public
+                  Treat your workspace credentials as you would a password. Do not expose them in client-side code, public
                   repositories, browsers, or shared documents. Hawiyat is not responsible for losses caused by
-                  unauthorized use of your API Keys.
+                  unauthorized use of your workspace credentials.
                 </p>
               </Note>
 
-              <h3 className="mt-4 font-medium text-foreground">4.3 Multi-Factor Authentication</h3>
+              <h3 className="mt-4 font-medium text-foreground">4.3 Authentication</h3>
               <p className="mt-2">
-                Hawiyat may require or offer multi-factor authentication (&quot;MFA&quot;) for certain accounts or
-                features. You agree to enable MFA when required and to keep your MFA credentials secure.
+                Hawiyat may require or offer additional authentication for certain accounts or features. You agree to follow
+                any authentication requirements Hawiyat communicates to you for your workspace.
               </p>
             </section>
 
@@ -193,9 +193,9 @@ export default function TermsPage() {
               <h3 className="mt-4 font-medium text-foreground">5.2 How It Works</h3>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <span className="text-foreground font-medium">API Key Activation.</span>{" "}
-                  When you subscribe, you receive an API Key. This key connects your account to the Service and
-                  authenticates all your requests.
+                  <span className="text-foreground font-medium">Workspace Activation.</span>{" "}
+                  When you subscribe, our team activates your Composer workspace within 24 hours of order confirmation.
+                  You connect the workspace to your tools, IDE integrations, or the Composer API for custom workflows.
                 </li>
                 <li>
                   <span className="text-foreground font-medium">Task Understanding.</span>{" "}
@@ -212,8 +212,8 @@ export default function TermsPage() {
                 <li>
                   <span className="text-foreground font-medium">Execution and Evaluation.</span>{" "}
                   The run is executed against your systems, and the result is evaluated for quality, correctness, and
-                  completeness before it is delivered to you. Telemetry and evaluation logs are available in the
-                  Execution Console.
+                  completeness before it is delivered to you. Telemetry and evaluation logs are available from Hawiyat
+                  on request.
                 </li>
                 <li>
                   <span className="text-foreground font-medium">Learning.</span>{" "}
@@ -249,25 +249,37 @@ export default function TermsPage() {
               <p className="mt-2">
                 Hawiyat provides customer support for all active subscribers. Support covers the Execution Layer and
                 Composer interface. Support for Frontier Model-specific behavior is limited to how that behavior
-                appears through the Execution Layer. Support is available in Arabic, French, and English through the
-                channels in your subscription dashboard.
+                appears through the Execution Layer. Support is available in Arabic, French, and English through WhatsApp
+                and our support channels on the site.
+              </p>
+
+              <h3 className="mt-4 font-medium text-foreground">5.6 Managed Services</h3>
+              <p className="mt-2">
+                Managed services (n8n hosting, the Evolution API, and hosting plans) are deployed, maintained, and
+                monitored by Hawiyat. Managed means Hawiyat operates the infrastructure for you, including updates,
+                backups, and uptime monitoring, and provides access to your instance and the data it holds in accordance
+                with your plan. The Evolution API is a third-party tool and is not an official WhatsApp or Meta product.
+                It connects your WhatsApp number to our infrastructure, and our responsibility is limited to what we
+                control: hosting, setup, and support.
               </p>
             </section>
 
             <section id="api-keys" className="scroll-mt-24">
-              <h2 className="text-lg font-medium text-foreground">6. API Key Terms</h2>
+              <h2 className="text-lg font-medium text-foreground">6. Workspace and API Access</h2>
 
               <h3 className="mt-4 font-medium text-foreground">6.1 Issuance</h3>
               <p className="mt-2">
-                After you subscribe, Hawiyat issues one or more API Keys. These are unique, cryptographically generated
-                credentials that identify your Account and authorize access to the Service.
+                After your order is confirmed, Hawiyat provisions your Composer workspace and, where your plan includes
+                API access, issues unique credentials that identify your workspace and authorize programmatic access to
+                the Service. Credentials are generated, delivered, and managed by Hawiyat; there is no self-serve
+                issuance portal.
               </p>
 
-              <h3 className="mt-4 font-medium text-foreground">6.2 Standard B2B Method</h3>
+              <h3 className="mt-4 font-medium text-foreground">6.2 Access Model</h3>
               <p className="mt-2">
-                Hawiyat uses the industry-standard API Key authentication model, the same approach major AI providers
-                (Anthropic, OpenAI, etc.) use for B2B access. Activation, usage tracking, and support are all tied to
-                your API Key.
+                Composer is accessed through your provisioned workspace, IDE integrations, and the Composer API. Where
+                API credentials are issued, usage tracking and support are tied to your workspace rather than to any
+                single third-party key.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">6.3 Your Obligations</h3>
@@ -304,14 +316,15 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">7.1 Currency</h3>
               <p className="mt-2">
-                All fees, charges, prices, and payments under these Terms are in Algerian Dinar (DZD / DA). No other
-                currency is accepted unless Hawiyat agrees in writing.
+                All fees, charges, prices, and payments under these Terms are denominated in Algerian Dinar (DZD / DA).
+                Payments are accepted in DZD via CCP or Baridi Mob; USD is accepted for international customers at the
+                agreed rate.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">7.2 Pricing</h3>
               <p className="mt-2">
                 Hawiyat sets and may modify pricing for the Service. Current pricing is on our pricing page. Price
-                changes are communicated in advance through the dashboard, email, or other reasonable means. Your
+                changes are communicated in advance by email, WhatsApp, or other reasonable means. Your
                 continued use after a change takes effect means you accept the new pricing.
               </p>
 
@@ -324,21 +337,29 @@ export default function TermsPage() {
                 </li>
                 <li>
                   <span className="text-foreground font-medium">Managed Services.</span>{" "}
-                  Hosting, n8n, and WhatsApp infrastructure plans are billed monthly or yearly in DZD, as defined in
-                  the plan.
+                  n8n and WhatsApp infrastructure plans are billed yearly in DZD; hosting plans are billed monthly in
+                  DZD, as defined in the plan.
                 </li>
               </ul>
+              <p className="mt-2">
+                Service availability may change. Hawiyat may suspend sales of, or temporarily pause, any specific
+                service (for example, hosting) and will communicate such changes on the site and by email or WhatsApp.
+                A paused service is not charged to new or existing subscriptions.
+              </p>
 
               <h3 className="mt-4 font-medium text-foreground">7.4 Payment Methods</h3>
               <p className="mt-2">
-                Payments are processed through Hawiyat&apos;s approved payment processors. You authorize Hawiyat and
-                its payment processors to charge your designated payment method for all fees under your Account.
+                Payment is made by CCP transfer, Baridi Mob, or USD as selected at order time and confirmed through our
+                support team. Hawiyat does not store payment credentials or automatically charge a payment method; each
+                subscription period is confirmed before it renews. Fees are non-refundable as described in Section 7.5.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">7.5 Non-Refundable Fees</h3>
               <p className="mt-2">
                 Unless stated otherwise or required by law, all fees are non-refundable, including fees for partially
-                used subscription periods.
+                used subscription periods. Where you are a consumer under Algerian consumer-protection law and a
+                mandatory withdrawal right applies to a distance or electronic sale, that right is not excluded, and
+                you may cancel within the legal withdrawal period for a refund of amounts not yet consumed.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">7.6 Taxes</h3>
@@ -356,7 +377,7 @@ export default function TermsPage() {
               </ul>
             </section>
 
-            <section id="quota" className="scroll-mt-24">
+            <section id="capacity" className="scroll-mt-24">
               <h2 className="text-lg font-medium text-foreground">8. Usage and Capacity Policy</h2>
               <Note>
                 <p>
@@ -373,9 +394,8 @@ export default function TermsPage() {
               </p>
               <p className="mt-2">
                 Your included capacity covers your usage for the full month. The limit stays as published on our
-                pricing page and in your subscription dashboard until Hawiyat changes it. Any change to included
-                capacity or pricing is communicated in advance through the dashboard, email, or other reasonable
-                means, and takes effect in the next billing cycle.
+                pricing page until Hawiyat changes it. Any change to included capacity or pricing is communicated in
+                advance by email, WhatsApp, or other reasonable means, and takes effect in the next billing cycle.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">8.2 How Included Capacity Works</h3>
@@ -422,16 +442,16 @@ export default function TermsPage() {
               <h3 className="mt-4 font-medium text-foreground">8.5 Changes to the Included Capacity</h3>
               <p className="mt-2">
                 Hawiyat may modify the included capacity in each plan tier, and the pricing for additional usage.
-                Changes are communicated at least thirty (30) days in advance through the dashboard, email, or other
+                Changes are communicated at least thirty (30) days in advance by email, WhatsApp, or other
                 reasonable means. Your continued use after a change takes effect means you accept it. If you disagree,
                 you may terminate your subscription before the change takes effect.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">8.6 Usage Monitoring</h3>
               <p className="mt-2">
-                You can check your current usage, remaining allocation, and billing history through the Hawiyat
-                Execution Console. Usage data is provided on a best-effort basis; actual billing is based on
-                Hawiyat&apos;s internal records.
+                You can request your current usage, remaining capacity, and billing history from Hawiyat support or,
+                where available, through the Hawiyat Execution Console. Usage data is provided on a best-effort basis;
+                actual billing is based on Hawiyat&apos;s internal records.
               </p>
             </section>
 
@@ -461,10 +481,10 @@ export default function TermsPage() {
                   model distillation, or model stealing;
                 </li>
                 <li>
-                  Provide any third party with access to the Service using your API Key, except as expressly
-                  authorized;
+                  Provide any third party with access to the Service using your workspace credentials, except as
+                  expressly authorized;
                 </li>
-                <li>Share, resell, or transfer your subscription, API Key, or quota to any third party;</li>
+                <li>Share, resell, or transfer your subscription, workspace credentials, or included capacity to any third party;</li>
                 <li>
                   Use the Service for benchmarking or competitive analysis without Hawiyat&apos;s prior written consent;
                 </li>
@@ -473,10 +493,10 @@ export default function TermsPage() {
                   Use automated scripts, bots, crawlers, or other automated means to access the Service except through
                   the documented API;
                 </li>
-                <li>Exceed the rate limits or usage quotas of your plan;</li>
+                <li>Exceed the rate limits or included capacity of your plan;</li>
                 <li>
-                  Circumvent or attempt to circumvent any usage limitations, quotas, or security measures of the
-                  Service.
+                  Circumvent or attempt to circumvent any usage limitations, included capacity, or security measures of
+                  the Service.
                 </li>
               </ul>
 
@@ -633,13 +653,13 @@ export default function TermsPage() {
               <p className="mt-2">You must:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>
-                  Implement and maintain reasonable security measures for your Account, API Key(s), and any systems
-                  that integrate with the Service;
+                  Implement and maintain reasonable security measures for your Account, workspace credentials, and any
+                  systems that integrate with the Service;
                 </li>
                 <li>Use strong, unique passwords for your Account;</li>
                 <li>Enable multi-factor authentication when available;</li>
-                <li>Revoke and rotate API Keys promptly if a security incident is suspected;</li>
-                <li>Not store API Keys in plaintext, version control systems, or insecure locations;</li>
+                <li>Revoke and rotate workspace credentials promptly if a security incident is suspected;</li>
+                <li>Not store workspace credentials in plaintext, version control systems, or insecure locations;</li>
                 <li>Comply with all applicable data protection and cybersecurity laws;</li>
                 <li>Review Account activity regularly and report suspicious behavior to Hawiyat.</li>
               </ul>
@@ -647,8 +667,8 @@ export default function TermsPage() {
               <h3 className="mt-4 font-medium text-foreground">10.4 Monitoring and Enforcement</h3>
               <p className="mt-2">
                 Hawiyat may monitor usage patterns to detect anomalous API usage, potential abuse, and security
-                threats. Hawiyat may suspend or restrict access if it reasonably believes your Account or API Key has
-                been compromised, or if your usage poses a security risk to the Service or other users.
+                threats. Hawiyat may suspend or restrict access if it reasonably believes your Account or workspace
+                credentials have been compromised, or if your usage poses a security risk to the Service or other users.
               </p>
             </section>
 
@@ -700,6 +720,14 @@ export default function TermsPage() {
                 Hawiyat may collect and analyze usage data (technical logs, performance metrics, usage patterns) for
                 security, analytics, and service improvement. Usage data is disclosed to third parties only in
                 aggregated or de-identified form that does not identify you.
+              </p>
+
+              <h3 className="mt-4 font-medium text-foreground">11.6 No Training by Hawiyat</h3>
+              <p className="mt-2">
+                Hawiyat does not use your Inputs or Outputs to train, fine-tune, or improve any AI model, and does not
+                sell your Content. Your Content is used only to provide and operate the Service, consistent with the
+                Privacy Policy. Frontier Model providers are separate data controllers for data that leaves our
+                infrastructure under Section 11.3.
               </p>
             </section>
 
@@ -819,6 +847,16 @@ export default function TermsPage() {
                 incidents, policy changes, or service discontinuations by third-party Frontier Model providers or
                 other third-party services.
               </p>
+
+              <h3 className="mt-4 font-medium text-foreground">13.5 Data Processing</h3>
+              <p className="mt-2">
+                Hawiyat processes Content and account data to provide the Service. Where you are a business and the
+                Service involves personal data, Hawiyat acts as a processor on your documented instructions, as set out
+                in a Data Processing Addendum available on request, which is incorporated into these Terms by
+                reference. Hawiyat will notify you of any new sub-processors with an opportunity to object. Where
+                Hawiyat itself is a data controller, the Privacy Policy governs. Nothing in this section overrides the
+                model providers&apos; independent processing described in Section 11.3.
+              </p>
             </section>
 
             <section id="indemnification" className="scroll-mt-24">
@@ -838,8 +876,14 @@ export default function TermsPage() {
                 </li>
                 <li>Your violation of any applicable law, regulation, or third-party right;</li>
                 <li>Your violation of any security obligations under Section 10;</li>
-                <li>Any unauthorized use of your Account or API Key(s).</li>
+                <li>Any unauthorized use of your Account or workspace credentials.</li>
               </ul>
+              <p className="mt-2">
+                Hawiyat will defend, indemnify, and hold you harmless from third-party claims alleging that the
+                Service, as provided by Hawiyat and used in accordance with these Terms, infringes a third party&apos;s
+                intellectual property rights, subject to your prompt notice and cooperation and Hawiyat&apos;s sole
+                control of the defense.
+              </p>
             </section>
 
             <section id="liability" className="scroll-mt-24">
@@ -875,10 +919,10 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">15.4 Exceptions</h3>
               <p className="mt-2">
-                The limitations in this Section 15 do not apply to: (a) Hawiyat&apos;s indemnification obligations
-                under Section 14; (b) either party&apos;s breach of confidentiality obligations; (c) either
-                party&apos;s willful misconduct or gross negligence; or (d) liability that cannot be excluded or
-                limited under applicable law.
+                The limitations in this Section 15 do not apply to: (a) Hawiyat&apos;s indemnity obligations under
+                Section 14; (b) either party&apos;s breach of the confidentiality obligations in Section 19.10; (c)
+                either party&apos;s willful misconduct or gross negligence; (d) liability that cannot be excluded or
+                limited under applicable law; or (e) statutory consumer rights that cannot be waived.
               </p>
             </section>
 
@@ -887,9 +931,9 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">16.1 By You</h3>
               <p className="mt-2">
-                You may terminate your Account and stop using the Service at any time by contacting Hawiyat support or
-                through your Account dashboard. Termination does not entitle you to a refund of fees already paid,
-                except as required by applicable law.
+                You may terminate your Account and stop using the Service at any time by contacting Hawiyat support.
+                Termination does not entitle you to a refund of fees already paid, except as required by applicable
+                law. Where a mandatory consumer withdrawal right applies, it is not excluded by this section.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">16.2 By Hawiyat</h3>
@@ -912,7 +956,7 @@ export default function TermsPage() {
               <h3 className="mt-4 font-medium text-foreground">16.3 Effect of Termination</h3>
               <p className="mt-2">Upon termination:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>Your API Key(s) are revoked immediately;</li>
+                <li>Your workspace credentials are revoked immediately;</li>
                 <li>Your access to the Service stops immediately;</li>
                 <li>
                   Hawiyat may delete your Account data after a reasonable retention period (minimum 30 days);
@@ -933,8 +977,8 @@ export default function TermsPage() {
             <section id="modifications" className="scroll-mt-24">
               <h2 className="text-lg font-medium text-foreground">17. Modifications to Terms</h2>
               <p className="mt-3">
-                Hawiyat may modify these Terms at any time. Material changes are communicated through the Service
-                dashboard, email, or other reasonable means at least thirty (30) days before taking effect. Your
+                Hawiyat may modify these Terms at any time. Material changes are communicated by email, WhatsApp, or
+                other reasonable means at least thirty (30) days before taking effect. Your
                 continued use after the effective date means you accept the modified Terms.
               </p>
               <p className="mt-3">
@@ -954,8 +998,10 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">18.2 Jurisdiction</h3>
               <p className="mt-2">
-                Any dispute arising out of or relating to these Terms is subject to the exclusive jurisdiction of the
-                competent courts of Algeria, subject to the dispute resolution procedures below.
+                Any dispute arising out of or relating to these Terms will first be submitted to the procedures in this
+                Section 18. Where you are a commercial user, the exclusive forum for final resolution is arbitration
+                under Section 18.4. If you are a consumer, you may bring any dispute before the competent Algerian
+                courts.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">18.3 Amicable Resolution</h3>
@@ -966,11 +1012,10 @@ export default function TermsPage() {
 
               <h3 className="mt-4 font-medium text-foreground">18.4 Arbitration</h3>
               <p className="mt-2">
-                Any dispute that cannot be resolved through amicable negotiation within thirty (30) days will be
-                settled by arbitration under the rules of the Comite National de l&apos;Arbitrage (CNA) or another
-                arbitration body agreed upon by both parties in Algeria. The arbitration will be conducted in Arabic or
-                French, in Algiers, unless the parties agree on a different location. The arbitral award is final and
-                binding on both parties.
+                Any dispute between Hawiyat and a commercial user that cannot be resolved under Section 18.3 within
+                thirty (30) days will be settled by final and binding arbitration under the rules of the Comite National
+                de l&apos;Arbitrage (CNA) in Algiers, in Arabic or French, applying the English text of these Terms. The
+                arbitral award may be enforced in the competent Algerian courts.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">18.5 Equitable Relief</h3>
@@ -1048,6 +1093,14 @@ export default function TermsPage() {
                 The Service may not be used in, for the benefit of, or exported or re-exported to any country or
                 territory subject to international sanctions, or to any individual or entity with whom dealings are
                 prohibited under applicable trade laws.
+              </p>
+
+              <h3 className="mt-4 font-medium text-foreground">19.10 Confidentiality</h3>
+              <p className="mt-2">
+                Each party will keep confidential any non-public information of the other party obtained in connection
+                with these Terms, and will use it only to perform these Terms. This clause does not apply to
+                information that is public, independently developed, lawfully received from a third party, or required
+                to be disclosed by law. This obligation survives termination.
               </p>
             </section>
 
