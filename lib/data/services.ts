@@ -279,8 +279,8 @@ export const services: Service[] = [
     id: "hosting-basic",
     slug: "hosting-basic",
     name: "Hosting Basic",
-    shortDesc: "Single app hosting with basic resources",
-    description: "Simple hosting for a single app. Personal projects, portfolios, small websites. SSL, auto-deploy, and basic monitoring included.",
+    shortDesc: "Single app in a managed container",
+    description: "Managed container hosting for a single app. Your app runs in its own container with SSL, auto-deploy, and basic monitoring included.",
     image: "/logo.svg",
     price: "1000",
     priceLabel: "DA/month",
@@ -289,7 +289,7 @@ export const services: Service[] = [
     tag: "Starter",
     useCases: "Personal portfolios, small websites, demo projects, single-page applications.",
     features: [
-      "1 application",
+      "1 application in a managed container",
       "Free SSL certificate",
       "Automatic deployments",
       "Basic monitoring",
@@ -301,24 +301,25 @@ export const services: Service[] = [
       { icon: Zap, text: "Auto Deploy" },
     ],
     seo: {
-      title: "Basic Web Hosting in Algeria | 1000 DA/month",
-      description: "Managed web hosting in Algeria for personal projects and portfolios. Free SSL, auto-deploy, 512MB RAM, local support. 1000 DA/month.",
+      title: "Basic Container Hosting in Algeria | 1000 DA/month",
+      description: "Managed container hosting in Algeria for personal projects and portfolios. Your app runs in a managed container with free SSL, auto-deploy, 512MB RAM, local support. 1000 DA/month.",
       keywords: [
-        "web hosting algeria",
+        "container hosting algeria",
+        "managed container hosting algeria",
         "managed hosting algeria",
         "basic hosting dz",
         "hebergement web algerie",
         "hebergement site web algerie",
         "hosting for developers algeria",
         "app hosting algeria",
-        "managed hosting dz",
+        "managed containers dz",
         "personal project hosting algeria",
       ],
     },
     details: {
-      overview: "Managed hosting for a single application. Perfect for personal projects, portfolios, and small websites. We handle the infrastructure so you can focus on building.",
+      overview: "Managed container hosting for a single application. Your app runs in its own container with SSL, automatic Git deploys, and basic monitoring. Perfect for personal projects, portfolios, and small websites. We handle the infrastructure so you can focus on building.",
       whatYouGet: [
-        "1 application deployment",
+        "1 application in a managed container",
         "Free SSL certificate for secure connections",
         "Automatic deployments from Git",
         "Basic monitoring and uptime tracking",
@@ -328,6 +329,7 @@ export const services: Service[] = [
       ],
       idealFor: "Personal portfolios, small websites, demo projects, and single-page applications.",
       technicalSpecs: [
+        "Container-based runtime, isolated per app",
         "Node.js, Python, or static site support",
         "Git-based deployments",
         "Custom domain with DNS management",
@@ -338,11 +340,11 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Basic web hosting in Algeria from Hawiyat is managed hosting for a single application at 1,000 DA/month. Perfect for personal portfolios, small websites, demo projects, and single-page applications, the plan includes one application deployment, free SSL certificates for secure connections, and automatic deployments from Git. You get 512MB RAM, custom domain support, and basic monitoring with uptime tracking. Node.js, Python, and static sites are all supported, with automatic HTTPS through Let's Encrypt and weekly backups included. Everything is managed by our Algerian team, so you do not need to touch a server or read a single line of configuration. For developers in Algeria who want production-grade hosting priced in dinars, Hosting Basic delivers managed infrastructure with local support and billing in DZD.",
+        "Basic container hosting in Algeria from Hawiyat is managed hosting for a single application at 1,000 DA/month. Your app runs in its own managed container, isolated and ready to go live. Perfect for personal portfolios, small websites, demo projects, and single-page applications, the plan includes one containerized application, free SSL certificates for secure connections, and automatic deployments from Git. You get 512MB RAM, custom domain support, and basic monitoring with uptime tracking. Node.js, Python, and static sites are all supported, with automatic HTTPS through Let's Encrypt and weekly backups included. Everything is managed by our Algerian team, so you never touch a server or read a line of configuration. For developers in Algeria who want production-grade container hosting priced in dinars, Hosting Basic delivers managed infrastructure with local support and billing in DZD.",
       whyChoose:
-        "Hawiyat Hosting Basic is managed web hosting in Algeria at 1,000 DA/month, priced in dinars with no hidden fees. You get free SSL, automatic deployments from Git, and basic monitoring  everything a personal project needs to go live. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you in Arabic, French, and English from the same timezone. Your site runs on the same production-tested infrastructure that powers 100+ clients, with weekly backups and automatic HTTPS included. Whether you are hosting a portfolio, a demo, or a small business site, you get a professional deployment, managed for you. Upgrade to Hosting VIP anytime for a managed database and priority support.",
+        "Hawiyat Hosting Basic is managed container hosting in Algeria at 1,000 DA/month, priced in dinars with no hidden fees. Your app runs in a managed container and we handle the infrastructure behind it. You get free SSL, automatic deployments from Git, and basic monitoring, everything a personal project needs to go live. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you in Arabic, French, and English from the same timezone. Your app runs on the same production-tested infrastructure that powers 100+ clients, with weekly backups and automatic HTTPS included. Whether you are hosting a portfolio, a demo, or a small business site, you get a professional deployment, managed for you. Upgrade to Hosting VIP anytime for a managed database and priority support.",
       howItWorks:
-        "Getting your site live with Hawiyat Hosting Basic takes three steps. First, order the plan at 1,000 DA/month using your preferred payment method  CCP, Baridi Mob, or USD. Second, connect your Git repository: our platform automatically deploys Node.js, Python, or static site projects from Git with zero configuration. Third, point your custom domain and get a free SSL certificate from Let's Encrypt, so your site is live on HTTPS within minutes. You get 512MB RAM, basic monitoring with uptime tracking, and weekly backups of your application. Every deployment is automatic  push to Git and your changes go live. If you need a database, more applications, or priority support, you can upgrade to Hosting VIP at 2,000 DA/month at any time. Support is available by email in Arabic, French, and English.",
+        "Getting your site live with Hawiyat Hosting Basic takes three steps. First, order the plan at 1,000 DA/month using your preferred payment method: CCP, Baridi Mob, or USD. Second, connect your Git repository: our platform builds your app into a managed container and automatically deploys Node.js, Python, or static site projects from Git with zero configuration. Third, point your custom domain and get a free SSL certificate from Let's Encrypt, so your site is live on HTTPS within minutes. Your app keeps running in its managed container with 512MB RAM, basic monitoring with uptime tracking, and weekly backups. Every deployment is automatic, push to Git and your changes go live. If you need a database, more applications, or priority support, you can upgrade to Hosting VIP at 2,000 DA/month at any time. Support is available by email in Arabic, French, and English.",
     },
     faq: [
       {
@@ -683,8 +685,8 @@ export const services: Service[] = [
     id: "hosting-vip",
     slug: "hosting-vip",
     name: "Hosting VIP",
-    shortDesc: "Premium hosting with 2 apps + database",
-    description: "Premium hosting for up to 2 apps with a managed database. For projects that need database access and priority support.",
+    shortDesc: "Premium container hosting, 2 apps + database",
+    description: "Premium container hosting for up to 2 apps with a managed database. Each app runs in its own managed container, with priority support for projects that need a database.",
     image: "/logo.svg",
     price: "2000",
     priceLabel: "DA/month",
@@ -693,7 +695,7 @@ export const services: Service[] = [
     tag: "VIP",
     useCases: "Full-stack apps, SaaS projects, apps with databases, e-commerce sites.",
     features: [
-      "2 applications",
+      "2 applications, each in its own managed container",
       "Managed database included",
       "Free SSL certificate",
       "Automatic deployments",
@@ -706,25 +708,27 @@ export const services: Service[] = [
       { icon: Clock, text: "Priority Support" },
     ],
     seo: {
-      title: "VIP Web Hosting in Algeria | 2 Apps + Database",
-      description: "Premium web hosting in Algeria for full-stack apps. 2 applications, managed database, free SSL, priority support. 2000 DA/month.",
+      title: "VIP Container Hosting in Algeria | 2 Apps + Database",
+      description: "Premium container hosting in Algeria for full-stack apps. 2 applications in managed containers, managed database, free SSL, priority support. 2000 DA/month.",
       keywords: [
-        "premium hosting algeria",
+        "premium container hosting algeria",
+        "container hosting algeria",
         "vip hosting algeria",
         "hosting with database algeria",
         "full stack hosting algeria",
         "hebergement premium algerie",
         "hosting for saas algeria",
         "managed database hosting algeria",
+        "managed containers algeria",
         "hebergement professionnel algerie",
         "hosting for ecommerce algeria",
         "priority support hosting algeria",
       ],
     },
     details: {
-      overview: "Premium hosting for up to 2 applications with a managed database included. Perfect for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.",
+      overview: "Premium container hosting for up to 2 applications with a managed database included. Each app runs in its own managed container. Perfect for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.",
       whatYouGet: [
-        "2 application deployments",
+        "2 applications, each in its own managed container",
         "Managed database (PostgreSQL or MySQL)",
         "Free SSL certificate for secure connections",
         "Automatic deployments from Git",
@@ -734,6 +738,7 @@ export const services: Service[] = [
       ],
       idealFor: "Full-stack applications, SaaS projects, apps with databases, and e-commerce sites.",
       technicalSpecs: [
+        "Container-based runtime, isolated per app",
         "Node.js, Python, or static site support",
         "PostgreSQL or MySQL managed database",
         "Git-based deployments",
@@ -745,11 +750,11 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Hosting VIP from Hawiyat is premium web hosting in Algeria for up to two applications with a managed database included. At 2,000 DA/month, it is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support. You get two application deployments, a managed PostgreSQL or MySQL database, free SSL certificates, automatic deployments from Git, and 1GB RAM. Custom domain support with DNS management, automatic HTTPS through Let's Encrypt, advanced resource monitoring, and daily backups are all included. Priority support is available via WhatsApp. Whether you are launching a SaaS product, an e-commerce store, or a client project that needs a database, Hosting VIP gives you professional-grade infrastructure in Algeria, managed for you and billed in dinars.",
+        "Hosting VIP from Hawiyat is premium container hosting in Algeria for up to two applications with a managed database included. At 2,000 DA/month, it is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support. You get two applications, each running in its own managed container, a managed PostgreSQL or MySQL database, free SSL certificates, automatic deployments from Git, and 1GB RAM. Custom domain support with DNS management, automatic HTTPS through Let's Encrypt, advanced resource monitoring, and daily backups are all included. Priority support is available via WhatsApp. Whether you are launching a SaaS product, an e-commerce store, or a client project that needs a database, Hosting VIP gives you professional-grade container hosting in Algeria, managed for you and billed in dinars.",
       whyChoose:
-        "Hawiyat Hosting VIP is full-stack hosting in Algeria with a managed database included. You get two applications plus PostgreSQL or MySQL, managed entirely by our team, with daily backups and advanced monitoring. At 2,000 DA/month, you pay in Algerian dinars with CCP or Baridi Mob  no foreign credit card needed. Priority WhatsApp support comes in Arabic, French, and English. Your projects run on production-tested infrastructure that powers 100+ clients, with automatic HTTPS and custom domain management. Whether you are building a SaaS product, a client application, or an e-commerce site, Hosting VIP delivers premium hosting with database access, priority support, and local expertise.",
+        "Hawiyat Hosting VIP is full-stack container hosting in Algeria with a managed database included. You get two applications, each in its own managed container, plus PostgreSQL or MySQL, managed entirely by our team, with daily backups and advanced monitoring. At 2,000 DA/month, you pay in Algerian dinars with CCP or Baridi Mob, no foreign credit card needed. Priority WhatsApp support comes in Arabic, French, and English. Your projects run on production-tested infrastructure that powers 100+ clients, with automatic HTTPS and custom domain management. Whether you are building a SaaS product, a client application, or an e-commerce site, Hosting VIP delivers premium container hosting with database access, priority support, and local expertise.",
       howItWorks:
-        "Getting your full-stack project live with Hosting VIP takes three steps. First, order the plan at 2,000 DA/month using your preferred payment method  CCP, Baridi Mob, or USD. Second, connect your Git repositories: our platform automatically deploys up to two Node.js, Python, or static applications, and our team provisions your managed PostgreSQL or MySQL database for you. Third, point your custom domains and get free SSL certificates from Let's Encrypt, so both apps are live on HTTPS within minutes. You get 1GB RAM, advanced resource monitoring, and daily backups. Every deployment is automatic  push to Git and your changes go live. Priority support is available via WhatsApp whenever you need help. If you only need one app without a database, start with Hosting Basic at 1,000 DA/month and upgrade later.",
+        "Getting your full-stack project live with Hosting VIP takes three steps. First, order the plan at 2,000 DA/month using your preferred payment method: CCP, Baridi Mob, or USD. Second, connect your Git repositories: our platform builds up to two Node.js, Python, or static applications into managed containers, and our team provisions your managed PostgreSQL or MySQL database for you. Third, point your custom domains and get free SSL certificates from Let's Encrypt, so both apps are live on HTTPS within minutes. Each app keeps running in its managed container with 1GB RAM, advanced resource monitoring, and daily backups. Every deployment is automatic, push to Git and your changes go live. Priority support is available via WhatsApp whenever you need help. If you only need one app without a database, start with Hosting Basic at 1,000 DA/month and upgrade later.",
     },
     faq: [
       {

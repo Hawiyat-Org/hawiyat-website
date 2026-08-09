@@ -27,15 +27,45 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   })
 }
 
+// hosting-basic and hosting-vip are separate single-price services. The detail page
+// folds them into a synthetic Basic/VIP plan list so either URL renders the tier selector.
+const HOSTING_SLUGS = ["hosting-basic", "hosting-vip"]
+
 export default function ServicePage({ params, searchParams }: { params: { slug: string }, searchParams?: { plan?: string } }) {
   const service = getServiceBySlug(params.slug)
   if (!service) notFound()
 
-  // When arriving from a plan card on /services (e.g. ?plan=Freelance), show only that plan
-  const activePlan = searchParams?.plan
-  const plans = service.plans && activePlan
-    ? service.plans.filter((p) => p.name === activePlan)
-    : service.plans
+  const isHosting = HOSTING_SLUGS.includes(params.slug)
+
+  let plans = service.plans
+  if (isHosting) {
+    const hostingBasic = getServiceBySlug("hosting-basic")
+    const hostingVip = getServiceBySlug("hosting-vip")
+    if (hostingBasic && hostingVip) {
+      plans = [
+        {
+          name: "Basic",
+          price: "1,000",
+          priceLabel: "DA/month",
+          tagline: "One app in a managed container. SSL, auto-deploy, monitoring.",
+          features: hostingBasic.features,
+        },
+        {
+          name: "VIP",
+          price: "2,000",
+          priceLabel: "DA/month",
+          tagline: "Two apps plus a managed database, with priority support.",
+          features: hostingVip.features,
+        },
+      ]
+    }
+  }
+
+  // Preselect a plan when arriving with ?plan= (matches a plan name)
+  const defaultPlan =
+    plans && searchParams?.plan && plans.some((p) => p.name === searchParams.plan)
+      ? searchParams.plan
+      : undefined
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -135,12 +165,15 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   // Mobile quick price: shown under the title/description on small screens only
   // (desktop already shows it in the sticky pricing card on the right).
   // Single-price services, or a single plan filtered by ?plan=, get their price here.
+  // Hosting renders the Basic/VIP selector, so pricing lives in the selector card.
   const singlePlan = plans && plans.length === 1 ? plans[0] : null
-  const mobilePrice = singlePlan
-    ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
-    : !service.plans || service.plans.length === 0
-      ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
-      : null
+  const mobilePrice = isHosting
+    ? null
+    : singlePlan
+      ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
+      : !service.plans || service.plans.length === 0
+        ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
+        : null
 
   return (
     <>
@@ -286,6 +319,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   serviceImages={service.images}
                   fairUse={service.fairUse}
                   disclaimer={service.disclaimer}
+                  defaultPlan={defaultPlan}
                 />
               ) : (
                 /* Single Price Card */
