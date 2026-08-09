@@ -127,6 +127,7 @@ const CARD_ORDER: Record<string, number> = {
 }
 
 const categoryStyles: Record<string, string> = {
+  "Execution Layer": "bg-signal text-signal-text border border-signal/20",
   "AI Execution": "bg-signal text-signal-text border border-signal/20",
   "Managed Systems": "bg-surface-dim text-muted-ink border border-border",
   "Cloud Runtime": "bg-surface-dim text-muted-ink border border-border",
@@ -255,7 +256,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                     {service.category}
                   </span>
                   {service.key === "hosting" && (
-                    <span className="inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-surface-dim text-muted-ink border border-border">
+                    <span className="inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-mono bg-surface-dim text-muted-ink border border-border">
                       hosting
                     </span>
                   )}
