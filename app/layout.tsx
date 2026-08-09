@@ -156,7 +156,6 @@ const organizationSchema = {
   sameAs: [
     "https://www.linkedin.com/company/hawiyat",
     "https://github.com/Hawiyat-Org",
-    "https://x.com/hawiyat",
     "https://instagram.com/hawiyat.cloud",
   ],
   contactPoint: [
