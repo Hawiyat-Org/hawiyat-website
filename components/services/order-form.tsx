@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface OrderFormProps {
@@ -118,6 +119,14 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover"
               >
                 Chat on WhatsApp to confirm payment
+              </a>
+              <a
+                href={USAGE_DASHBOARD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg border border-border text-ink font-medium text-sm hover:bg-surface-dim transition-colors"
+              >
+                Open your usage dashboard
               </a>
               <button
                 onClick={onClose}
