@@ -1,6 +1,7 @@
 import Link from "next/link"
 import ScrollAnimations from "@/components/scroll-animations"
 import { RunConsole } from "@/components/run-console"
+import { AnimatedNumber } from "@/components/animated-number"
 import {
   ArrowRight,
   Boxes,
@@ -374,13 +375,13 @@ export default function ComposerPage() {
 
           <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
             <div className="rounded-md border border-border bg-surface p-8 text-center">
-              <p className="font-mono text-5xl font-bold text-ink md:text-6xl">100+</p>
+              <AnimatedNumber value="100+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 clients on the platform
               </p>
             </div>
             <div className="rounded-md border border-border bg-surface p-8 text-center">
-              <p className="font-mono text-5xl font-bold text-ink md:text-6xl">100B+</p>
+              <AnimatedNumber value="100B+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 tokens executed through Composer
               </p>

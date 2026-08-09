@@ -1,75 +1,14 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
 import { Users, Handshake, Zap } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-
-const ANIMATION_DURATION = 800
-
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
-
-function AnimatedNumber({ value }: { value: string }) {
-  const [display, setDisplay] = useState(value)
-  const rootRef = useRef<HTMLSpanElement>(null)
-  const startedRef = useRef(false)
-
-  const match = /^(\d+)(.*)$/.exec(value)
-  const target = match ? parseInt(match[1], 10) : NaN
-  const suffix = match ? match[2] : ''
-
-  useEffect(() => {
-    const node = rootRef.current
-    if (!node || Number.isNaN(target)) return
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setDisplay(value)
-      return
-    }
-
-    let rafId = 0
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting) || startedRef.current) return
-        startedRef.current = true
-        observer.disconnect()
-
-        const startTime = performance.now()
-
-        const tick = (now: number) => {
-          const progress = Math.min(Math.max((now - startTime) / ANIMATION_DURATION, 0), 1)
-          const eased = easeOutCubic(progress)
-          const current = Math.round(target * eased)
-          setDisplay(`${current}${suffix}`)
-          if (progress < 1) {
-            rafId = requestAnimationFrame(tick)
-          } else {
-            setDisplay(value)
-          }
-        }
-
-        rafId = requestAnimationFrame(tick)
-      },
-      { threshold: 0.4 }
-    )
-
-    observer.observe(node)
-    return () => {
-      observer.disconnect()
-      cancelAnimationFrame(rafId)
-    }
-  }, [target, suffix, value])
-
-  return <span ref={rootRef}>{display}</span>
-}
+import { AnimatedNumber } from '@/components/animated-number'
 
 function StatCard({ icon: Icon, value, label }: { icon: LucideIcon; value: string; label: string }) {
   return (
     <div className="rounded-md border border-border bg-surface p-8 text-center">
       <Icon className="mx-auto mb-4 h-8 w-8 text-muted-ink" strokeWidth={1.5} />
-      <p className="font-mono text-4xl font-bold text-ink md:text-5xl">
-        <AnimatedNumber value={value} />
-      </p>
+      <AnimatedNumber value={value} className="font-mono text-4xl font-bold text-ink md:text-5xl" />
       <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">{label}</p>
     </div>
   )
