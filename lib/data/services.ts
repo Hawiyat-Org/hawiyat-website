@@ -24,6 +24,8 @@ export interface Service {
   cta: string
   category: string
   tag?: string
+  /** Whether the service can be ordered. Defaults to "available". */
+  availability?: "available" | "unavailable"
   useCases: string
   features: string[]
   bulletPoints: Array<{
@@ -287,6 +289,7 @@ export const services: Service[] = [
     cta: "See plans in DZD",
     category: "Cloud Runtime",
     tag: "Starter",
+    availability: "unavailable",
     useCases: "Personal portfolios, small websites, demo projects, single-page applications.",
     features: [
       "1 application in a managed container",
@@ -696,6 +699,7 @@ export const services: Service[] = [
     cta: "See plans in DZD",
     category: "Cloud Runtime",
     tag: "VIP",
+    availability: "unavailable",
     useCases: "Full-stack apps, SaaS projects, apps with databases, e-commerce sites.",
     features: [
       "2 applications, each in its own managed container",

@@ -42,6 +42,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     .slice(0, 4)
 
   const isHosting = HOSTING_SLUGS.includes(params.slug)
+  const isUnavailable = service.availability === "unavailable"
 
   let plans: ServicePlan[] | undefined = service.plans
   if (isHosting) {
@@ -115,14 +116,18 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               price: plan.price.replace(/,/g, ""),
               priceCurrency: "DZD",
               description: plan.tagline,
-              availability: "https://schema.org/InStock",
+              availability: isUnavailable
+                ? "https://schema.org/OutOfStock"
+                : "https://schema.org/InStock",
             })),
           }
         : {
             "@type": "Offer",
             price: service.price.replace(/,/g, ""),
             priceCurrency: "DZD",
-            availability: "https://schema.org/InStock",
+            availability: isUnavailable
+              ? "https://schema.org/OutOfStock"
+              : "https://schema.org/InStock",
           },
     dateModified: new Date().toISOString().split("T")[0],
   }
@@ -185,13 +190,15 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   // Single-price services, or a single plan filtered by ?plan=, get their price here.
   // Hosting renders the Basic/VIP selector, so pricing lives in the selector card.
   const singlePlan = plans && plans.length === 1 ? plans[0] : null
-  const mobilePrice = isHosting
+  const mobilePrice = isUnavailable
     ? null
-    : singlePlan
-      ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
-      : !service.plans || service.plans.length === 0
-        ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
-        : null
+    : isHosting
+      ? null
+      : singlePlan
+        ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
+        : !service.plans || service.plans.length === 0
+          ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
+          : null
 
   return (
     <>
@@ -343,7 +350,43 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
             {/* Right Column - Pricing & CTA */}
             <div className="lg:sticky lg:top-8">
-              {plans && plans.length > 0 ? (
+              {isUnavailable ? (
+                /* Availability Notice */
+                <div className="rounded-lg border border-border/60 bg-surface shadow-sm overflow-hidden">
+                  <div className="border-b border-border/60 bg-surface-dim/30 p-6">
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                      Availability
+                    </p>
+                    <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink">
+                      Hosting is temporarily unavailable
+                    </h2>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <p className="text-sm text-muted-ink leading-relaxed">
+                      We are not taking new hosting orders right now. The rest of the stack is open:
+                      Composer plans, n8n, and WhatsApp infrastructure are available.
+                    </p>
+                    <div className="space-y-3">
+                      <Link
+                        href="/#pricing"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+                      >
+                        See Composer plans in DZD
+                      </Link>
+                      <a
+                        href={`https://wa.me/213559555951?text=${encodeURIComponent(
+                          "Hello Hawiyat! I have a question about Hosting availability."
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                      >
+                        Chat on WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ) : plans && plans.length > 0 ? (
                 <ServicePlans
                   plans={plans}
                   serviceId={service.id}

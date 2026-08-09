@@ -21,6 +21,7 @@ interface CatalogCard {
   priceLabel: string
   category: string
   tag?: string
+  availability?: Service["availability"]
   features: string[]
   useCases: string
 }
@@ -63,6 +64,7 @@ function buildCatalogCards(): CatalogCard[] {
         priceLabel: "DA/month",
         category: service.category,
         tag: "Basic / VIP",
+        availability: service.availability,
         features: [
           "1 or 2 applications",
           "Managed database (PostgreSQL or MySQL)",
@@ -89,6 +91,7 @@ function buildCatalogCards(): CatalogCard[] {
         priceLabel: service.priceLabel,
         category: service.category,
         tag: service.tag,
+        availability: service.availability,
         features: service.features,
         useCases: service.useCases,
       })
@@ -107,6 +110,7 @@ function buildCatalogCards(): CatalogCard[] {
       priceLabel: service.priceLabel,
       category: service.category,
       tag: service.tag,
+      availability: service.availability,
       features: service.features,
       useCases: service.useCases,
     })
@@ -208,6 +212,14 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                 </div>
               )}
 
+              {service.availability === "unavailable" && (
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-surface-dim text-muted-ink border border-border">
+                    Unavailable for now
+                  </span>
+                </div>
+              )}
+
               {/* Image */}
               <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-surface-dim/40 to-surface-dim/10 dark:from-surface-dim/20 dark:to-surface-dim/10 flex items-center justify-center p-4">
                 {service.images ? (
@@ -241,13 +253,19 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                 </p>
 
                 <div className="mt-2 pt-3 border-t border-border/30">
-                  <div className="flex items-baseline gap-1.5 flex-wrap">
-                    <span className="text-2xl font-bold text-ink">{service.price}</span>
-                    {service.originalPrice && (
-                      <span className="text-sm text-muted-ink line-through">{service.originalPrice}</span>
-                    )}
-                    <span className="text-xs text-muted-ink">{service.priceLabel}</span>
-                  </div>
+                  {service.availability === "unavailable" ? (
+                    <span className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                      Unavailable for now
+                    </span>
+                  ) : (
+                    <div className="flex items-baseline gap-1.5 flex-wrap">
+                      <span className="text-2xl font-bold text-ink">{service.price}</span>
+                      {service.originalPrice && (
+                        <span className="text-sm text-muted-ink line-through">{service.originalPrice}</span>
+                      )}
+                      <span className="text-xs text-muted-ink">{service.priceLabel}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </Link>
