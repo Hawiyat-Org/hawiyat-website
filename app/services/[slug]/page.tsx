@@ -167,7 +167,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               <div className="space-y-6">
                 {/* Hero Image */}
                 {(service.image || service.images) && (
-                  <div className="relative aspect-video rounded-2xl border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
+                  <div className="relative aspect-video rounded-lg border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
                     {service.tag && (
                       <div className="absolute top-3 right-3 z-10">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-signal text-signal-text">
@@ -289,7 +289,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 />
               ) : (
                 /* Single Price Card */
-                <div className="rounded-2xl border border-border/60 bg-surface shadow-sm overflow-hidden">
+                <div className="rounded-lg border border-border/60 bg-surface shadow-sm overflow-hidden">
                   {/* Pricing Header */}
                   <div className="border-b border-border/60 bg-surface-dim/30 p-6">
                     <div className="space-y-2">

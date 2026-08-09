@@ -138,7 +138,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 type="button"
                 onClick={() => setSelectedPayment(option.value)}
                 className={cn(
-                  "flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-sm font-medium transition-all",
+                  "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all",
                   isSelected
                     ? "border-signal bg-signal-bg text-signal-contrast"
                     : "border-border/40 bg-surface-dim/30 text-muted-ink hover:border-border hover:bg-surface-dim/50"
@@ -200,7 +200,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl border border-border/60 bg-surface shadow-2xl p-6 scrollbar-hide"
+            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg border border-border/60 bg-surface shadow-2xl p-6 scrollbar-hide"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -233,7 +233,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               </div>
             ) : (
               <>
-                <div className="mb-6 p-4 rounded-xl bg-surface-dim/50 border border-border/40">
+                <div className="mb-6 p-4 rounded-lg bg-surface-dim/50 border border-border/40">
                   <div className="flex items-center gap-3">
                     <div className="shrink-0 w-14 h-14 rounded-lg bg-surface border border-border flex items-center justify-center overflow-hidden">
                       <Image

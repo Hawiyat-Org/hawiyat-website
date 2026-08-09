@@ -400,7 +400,7 @@ export default function ComposerPage() {
                 {FULLSTACK.map((item) => (
                   <div
                     key={item.name}
-                    className="rounded-2xl border border-border bg-surface-dim p-6"
+                    className="rounded-lg border border-border bg-surface-dim p-6"
                   >
                     <item.icon className="h-7 w-7 text-signal" />
                     <h3 className="mt-4 font-mono text-sm font-semibold text-ink">{item.name}</h3>
@@ -454,7 +454,7 @@ export default function ComposerPage() {
                   </p>
                 </div>
                 <div className="col-span-12 border-t border-border p-5 md:col-span-4 md:border-l md:border-t-0 md:p-6">
-                  <p className="bg-surface rounded-xl px-4 py-3 text-sm text-ink">{row.composer}</p>
+                  <p className="bg-surface rounded-lg px-4 py-3 text-sm text-ink">{row.composer}</p>
                 </div>
                 <div className="col-span-12 border-t border-border p-5 md:col-span-4 md:border-l md:border-t-0 md:p-6">
                   <p className="text-sm text-muted-ink">{row.diy}</p>

@@ -148,7 +148,7 @@ export default function AboutPage() {
               },
             ].map((event, i) => (
               <div key={i} className="flex-1 relative group">
-                <div className="relative rounded-2xl overflow-hidden aspect-[3/4] mb-4 bg-surface-dim">
+                <div className="relative rounded-lg overflow-hidden aspect-[3/4] mb-4 bg-surface-dim">
                   <Image
                     src={event.img}
                     alt={event.title}
@@ -203,7 +203,7 @@ export default function AboutPage() {
                   isIcon: true,
                 },
               ].map((cert, i) => (
-                <div key={i} className="group bg-surface-dim rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                <div key={i} className="group bg-surface-dim rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
                   {cert.isIcon ? (
                     <div className="aspect-[4/3] flex items-center justify-center bg-foreground/[0.02]">
                       <Package className="h-12 w-12 text-foreground/20" />
@@ -223,7 +223,7 @@ export default function AboutPage() {
 
             {/* Right  Green Duty tall card spanning 2 rows */}
             <div className="flex-[1.25] max-md:w-full">
-              <div className="group bg-surface-dim rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
+              <div className="group bg-surface-dim rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-surface-dim">
                   <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -320,7 +320,7 @@ export default function AboutPage() {
                 </div>
                 <div className="relative -mt-12 px-6 pb-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white dark:border-surface-dim shadow-lg shrink-0 -mt-7">
+                    <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-white dark:border-surface-dim shadow-lg shrink-0 -mt-7">
                       <Image src={p.image} alt={p.name} width={56} height={56} className="w-full h-full object-cover" />
                     </div>
                     <div className="pt-4">
@@ -344,7 +344,7 @@ export default function AboutPage() {
             <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We&apos;re At</h2>
           </div>
           <div className="flex max-md:flex-col gap-5">
-            <div className="flex-1 bg-surface-dim rounded-2xl overflow-hidden">
+            <div className="flex-1 bg-surface-dim rounded-lg overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200.3!2d3.4671314!3d36.7607705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e69f0bb134dd5%3A0x5c74ae92a333fc22!2sItihad!5e1!3m2!1sen!2sdz!4v1"
                 width="100%"
@@ -356,8 +356,8 @@ export default function AboutPage() {
                 className="w-full h-full"
               />
             </div>
-            <div className="flex-1 bg-surface-dim rounded-2xl p-8 flex gap-5 items-start">
-              <div className="w-12 h-12 rounded-xl bg-signal flex items-center justify-center shrink-0">
+            <div className="flex-1 bg-surface-dim rounded-lg p-8 flex gap-5 items-start">
+              <div className="w-12 h-12 rounded-lg bg-signal flex items-center justify-center shrink-0">
                 <MapPin className="w-6 h-6 text-signal-text" />
               </div>
               <div>

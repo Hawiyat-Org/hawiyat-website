@@ -42,7 +42,7 @@ export function ServicePlans({ plans, fairUse, disclaimer, serviceId, serviceNam
         return (
           <div
             key={plan.name}
-            className={`rounded-2xl border bg-surface shadow-sm overflow-hidden ${
+            className={`rounded-lg border bg-surface shadow-sm overflow-hidden ${
               idx === 1 ? "border-signal/40 ring-1 ring-signal/10" : "border-border/60"
             }`}
           >

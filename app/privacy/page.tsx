@@ -458,7 +458,7 @@ export default function PrivacyPage() {
               </p>
 
               {/* Contact CTA */}
-              <div className="mt-8 rounded-xl border border-border/60 bg-surface-dim/30 p-6">
+              <div className="mt-8 rounded-lg border border-border/60 bg-surface-dim/30 p-6">
                 <p className="text-sm font-medium text-foreground">Have a question about your data?</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   We answer privacy emails within seven days.

@@ -3,7 +3,7 @@ import Link from "next/link"
 
 function Note({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-4 rounded-xl border border-border/60 bg-surface-dim/30 p-4 text-xs leading-relaxed">
+    <div className="mt-4 rounded-lg border border-border/60 bg-surface-dim/30 p-4 text-xs leading-relaxed">
       {children}
     </div>
   )
@@ -1094,7 +1094,7 @@ export default function TermsPage() {
               </p>
 
               {/* Footer */}
-              <div className="mt-8 rounded-xl border border-border/60 bg-surface-dim/30 p-6">
+              <div className="mt-8 rounded-lg border border-border/60 bg-surface-dim/30 p-6">
                 <p className="text-sm font-medium text-foreground">HAWIYAT Terms of Use v1.2</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   Effective Date: August 2026 &middot; Last Updated: August 6, 2026

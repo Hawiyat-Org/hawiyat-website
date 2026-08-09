@@ -63,7 +63,7 @@ const Header = () => {
     <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-2xl sm:rounded-2xl border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-lg sm:rounded-lg border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-500 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
 

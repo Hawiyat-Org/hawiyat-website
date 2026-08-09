@@ -141,7 +141,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
               const encoded = encodeURIComponent(value)
               router.replace(value ? `/services?q=${encoded}` : "/services", { scroll: false })
             }}
-            className="h-14 pl-12 text-base bg-surface dark:bg-surface-dim backdrop-blur-xl border-2 border-border focus:border-signal rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+            className="h-14 pl-12 text-base bg-surface dark:bg-surface-dim backdrop-blur-xl border-2 border-border focus:border-signal rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
           />
         </div>
       </div>
@@ -235,7 +235,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
             { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
             { icon: CheckCircle, title: "Production-Tested", desc: "The same execution layer that ships 100+ client deployments." },
           ].map((item, i) => (
-            <div key={i} className="w-full max-w-[420px] mx-auto rounded-2xl p-6 bg-surface border border-border flex flex-col gap-4 box-border">
+            <div key={i} className="w-full max-w-[420px] mx-auto rounded-lg p-6 bg-surface border border-border flex flex-col gap-4 box-border">
               <item.icon className="w-16 h-16 text-signal mx-auto" />
               <h3 className="text-2xl text-ink text-center">{item.title}</h3>
               <p className="text-muted-ink px-2 text-center text-sm break-words">{item.desc}</p>

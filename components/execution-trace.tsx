@@ -12,7 +12,7 @@ const DEFAULT_STAGES = ["UNDERSTAND", "PLAN", "ROUTE", "EXECUTE", "EVALUATE", "R
 
 export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry = [], className }: ExecutionTraceProps) {
   return (
-    <div className={cn("rounded-2xl border border-border bg-surface p-4 md:p-6 font-mono text-xs", className)}>
+    <div className={cn("rounded-lg border border-border bg-surface p-4 md:p-6 font-mono text-xs", className)}>
       <div className="flex items-center justify-between gap-2 overflow-x-auto">
         {stages.map((stage, i) => (
           <div key={stage} className="flex flex-1 items-center gap-2 last:flex-none">
