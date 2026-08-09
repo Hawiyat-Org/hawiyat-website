@@ -170,8 +170,11 @@ export function RunConsole() {
 
   const selectTask = (index: number) => {
     setTaskIndex(index)
-    setPlaying(false)
     setStageIndex(reducedMotion ? FINISHED : 0)
+    if (!reducedMotion) {
+      setPlaying(true)
+      setUserInteracted(false)
+    }
   }
 
   const handleStageClick = (index: number) => {
