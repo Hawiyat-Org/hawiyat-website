@@ -1,6 +1,10 @@
-function StatCard({ value, label }: { value: string; label: string }) {
+import { Users, Handshake, Zap } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+
+function StatCard({ icon: Icon, value, label }: { icon: LucideIcon; value: string; label: string }) {
   return (
-    <div className="rounded-lg border border-border bg-surface p-8 text-center">
+    <div className="rounded-md border border-border bg-surface p-8 text-center">
+      <Icon className="mx-auto mb-4 h-8 w-8 text-muted-ink" strokeWidth={1.5} />
       <p className="font-mono text-4xl font-bold text-ink md:text-5xl">{value}</p>
       <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">{label}</p>
     </div>
@@ -19,11 +23,10 @@ const OurNumbers = () => (
           Straight from our own operations, we only print what&rsquo;s real.
         </p>
       </div>
-      <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard value="100+" label="businesses paying in DZD" />
-        <StatCard value="10+" label="resellers" />
-        <StatCard value="100B+" label="tokens" />
-        <StatCard value="≈2.6M DZD" label="annual recurring revenue (DZD)" />
+      <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">
+        <StatCard icon={Users} value="100+" label="businesses paying in DZD" />
+        <StatCard icon={Handshake} value="10+" label="resellers" />
+        <StatCard icon={Zap} value="100B+" label="tokens" />
       </div>
     </div>
   </section>
