@@ -35,6 +35,12 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   const service = getServiceBySlug(params.slug)
   if (!service) notFound()
 
+  const relatedServices = getAllServiceSlugs()
+    .filter((slug) => slug !== params.slug)
+    .map((slug) => getServiceBySlug(slug)!)
+    .filter(Boolean)
+    .slice(0, 4)
+
   const isHosting = HOSTING_SLUGS.includes(params.slug)
 
   let plans = service.plans
@@ -387,6 +393,27 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 </div>
               )}
             </div>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-20 max-w-6xl px-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+            Keep building the stack
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold text-ink">Related services</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {relatedServices.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="group rounded-lg border border-border bg-surface p-5 transition-colors hover:border-signal/50"
+              >
+                <h3 className="font-mono text-sm font-semibold text-ink">{s.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-ink line-clamp-2">
+                  {s.description}
+                </p>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

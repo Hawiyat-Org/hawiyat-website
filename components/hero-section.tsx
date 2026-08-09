@@ -17,7 +17,9 @@ const HeroSection = () => {
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
-          We pick the best AI for each job, connect your systems, check the result, and run it all on our own infrastructure. Billed in DZD, built in Algeria.
+          Hand Composer a job like a WhatsApp refund or a 40-lead follow-up. It picks the best AI,
+          connects your systems, and ships a result it already checked. Billed in DZD, supported
+          from Algeria.
         </p>
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
@@ -25,14 +27,14 @@ const HeroSection = () => {
             href="#pricing"
             className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
           >
-            Get Started
+            See Composer plans
             <span aria-hidden="true" className="text-base leading-none">→</span>
           </Link>
           <Link
             href="/composer"
             className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink"
           >
-            How it works
+            Watch a run execute
           </Link>
         </div>
 
@@ -43,7 +45,7 @@ const HeroSection = () => {
           className="inline-flex items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
         >
           <MessageCircle className="h-4 w-4" />
-          Questions? Chat with the team on WhatsApp
+          Questions? Reply in Arabic, French, or English on WhatsApp
         </a>
       </div>
 

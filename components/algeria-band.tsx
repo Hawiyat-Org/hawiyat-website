@@ -80,14 +80,14 @@ const AlgeriaBand = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
           >
-            Talk to the team
+            Chat on WhatsApp
             <MessageCircle className="h-4 w-4" />
           </a>
           <Link
             href="/services"
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
           >
-            See services
+            See services in DZD
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

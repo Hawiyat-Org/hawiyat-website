@@ -26,7 +26,7 @@ const OurNumbers = () => (
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">
         <StatCard icon={Users} value="100+" label="businesses paying in DZD" />
         <StatCard icon={Handshake} value="10+" label="resellers" />
-        <StatCard icon={Zap} value="100B+" label="tokens" />
+        <StatCard icon={Zap} value="100B+" label="tokens executed through Composer" />
       </div>
     </div>
   </section>

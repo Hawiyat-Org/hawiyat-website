@@ -26,11 +26,11 @@ const SITE_URL = "https://www.hawiyat.org";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Hawiyat AI Composer | Execution Layer for Business AI`,
+    default: `Hawiyat AI Composer | AI Infrastructure in Algeria`,
     template: `%s | ${APP_NAME}`,
   },
   description:
-    "Execution layer between frontier AI models and business systems. Hawiyat Composer routes each task to the best model, context, and tools. Priced in DZD.",
+    "Execution layer between frontier AI models and business systems. Hawiyat Composer routes each task to the best model, context, and tools. Priced in DZD, built in Algeria.",
   applicationName: APP_NAME,
   keywords: [
     APP_NAME,
@@ -78,10 +78,9 @@ export const metadata: Metadata = {
         alt: `${APP_NAME} Platform`,
       },
     ],
-    // Primary audience is Algerian developers/businesses: French is the
-    // most common working language, with English and Arabic as alternates.
-    locale: "fr_DZ",
-    alternateLocale: ["en_US", "ar_DZ"],
+    // Content is English; French and Arabic are support languages.
+    locale: "en_US",
+    alternateLocale: ["fr_DZ", "ar_DZ"],
     type: "website",
   },
   twitter: {

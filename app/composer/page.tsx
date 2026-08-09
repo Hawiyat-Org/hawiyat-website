@@ -163,6 +163,41 @@ export default function ComposerPage() {
   return (
     <>
       <ScrollAnimations />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Hawiyat AI Composer",
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
+            url: "https://www.hawiyat.org/composer",
+            description:
+              "The AI execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.",
+            offers: [
+              {
+                "@type": "Offer",
+                name: "Pro",
+                price: "6000",
+                priceCurrency: "DZD",
+              },
+              {
+                "@type": "Offer",
+                name: "MAX 5X",
+                price: "15000",
+                priceCurrency: "DZD",
+              },
+              {
+                "@type": "Offer",
+                name: "MAX 20X",
+                price: "30000",
+                priceCurrency: "DZD",
+              },
+            ],
+          }),
+        }}
+      />
 
       {/* ─── Hero ─── */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-44 md:pb-20">
@@ -186,14 +221,14 @@ export default function ComposerPage() {
                 href="/#pricing"
                 className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
               >
-                Start building
+                See Composer plans
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#trace"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
               >
-                See how it executes
+                Watch a run
                 <ArrowRight className="h-4 w-4 rotate-90" />
               </a>
             </div>
@@ -221,6 +256,17 @@ export default function ComposerPage() {
           </div>
 
           <RunConsole />
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 text-center">
+            <p className="text-sm text-muted-ink">Your task can be the next run.</p>
+            <Link
+              href="/#pricing"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
+            >
+              Try it for your business
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {STAGES.map((stage, i) => (
@@ -374,7 +420,7 @@ export default function ComposerPage() {
             <div className="rounded-md border border-border bg-surface p-8 text-center">
               <p className="font-mono text-5xl font-bold text-ink md:text-6xl">100B+</p>
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                tokens
+                tokens executed through Composer
               </p>
             </div>
           </div>
@@ -405,14 +451,14 @@ export default function ComposerPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
                   >
-                    Book with the team
+                    Book the full stack
                     <MessageCircle className="h-4 w-4" />
                   </a>
                   <Link
                     href="/services"
                     className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
                   >
-                    Browse services
+                    See services in DZD
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -515,10 +561,10 @@ export default function ComposerPage() {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <SectionEyebrow>START</SectionEyebrow>
           <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-            See what Composer does.
+            Start your first run today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a Composer plan on the home page, or bring the whole stack. Composer handles the
+            Pick a Composer plan in DZD, or bring the whole stack. Composer handles the
             models. You focus on your business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -526,7 +572,7 @@ export default function ComposerPage() {
               href="/#pricing"
               className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
             >
-              Browse services
+              See plans in DZD
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -535,7 +581,7 @@ export default function ComposerPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
             >
-              Talk to the team
+              Chat on WhatsApp
               <MessageCircle className="h-4 w-4" />
             </Link>
           </div>

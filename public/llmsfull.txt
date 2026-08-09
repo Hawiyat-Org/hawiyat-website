@@ -33,7 +33,7 @@ This file expands on [llms.txt](https://www.hawiyat.org/llms.txt) with full pric
 
 ### Hawiyat AI Composer Pro — 6,000 DA/month
 
-- [Service page](https://www.hawiyat.org/services/composer-pro)
+- [Service page](https://www.hawiyat.org/composer) · [Composer plans](https://www.hawiyat.org/#pricing)
 - Category: AI Execution
 - The execution layer for solo builders. Composer routes each task to the best model, carries your context, falls back on failure, and evaluates the result.
 
@@ -59,7 +59,7 @@ FAQ:
 
 ### Hawiyat AI Composer MAX 5X — 15,000 DA/month
 
-- [Service page](https://www.hawiyat.org/services/composer-max5x)
+- [Service page](https://www.hawiyat.org/composer) · [Composer plans](https://www.hawiyat.org/#pricing)
 - Category: AI Execution
 - 5× the base execution capacity of Pro, more parallel runs and tasks, with the same routing, context, fallbacks, and evaluation. Built for professional developers, startups, and small teams shipping daily.
 
@@ -84,7 +84,7 @@ FAQ:
 
 ### Hawiyat AI Composer MAX 20X — 30,000 DA/month
 
-- [Service page](https://www.hawiyat.org/services/composer-max20x)
+- [Service page](https://www.hawiyat.org/composer) · [Composer plans](https://www.hawiyat.org/#pricing)
 - Category: AI Execution
 - 20× the base execution capacity of Pro, maximum parallel throughput, with hybrid data compliance and multi-agent traffic resolution. Built for agencies and engineering teams running AI at scale.
 

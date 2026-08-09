@@ -37,7 +37,27 @@ const FAQ = () => {
       answer:
         "Pick a Composer plan on the home page, or browse n8n, WhatsApp, and hosting on the services page. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day. Prefer to talk first? Chat with us on WhatsApp and we'll set you up.",
     },
+    {
+      question: "Why not just use ChatGPT or a chatbot?",
+      answer:
+        "A chatbot answers a prompt. Composer executes a business task: it pulls your customer and order context, picks the best model for the job, runs it against your systems, and checks the result before it reaches anyone. Same engines, but the layer decides the how.",
+    },
+    {
+      question: "Can Composer work with my WhatsApp?",
+      answer:
+        "Yes, WhatsApp is a first-class route on the layer. Support, sales, and back-office runs happen there, and a workflow can be executing the same day you order.",
+    },
   ]
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  }
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -48,6 +68,10 @@ const FAQ = () => {
       className="relative flex w-full flex-col place-content-center place-items-center py-16 px-6 md:py-24"
       id="faq"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="mx-auto w-full max-w-3xl">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">

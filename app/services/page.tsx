@@ -3,7 +3,7 @@ import ServicesCatalog from "@/components/services/services-catalog"
 import { createMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createMetadata({
-  title: "Services in Algeria | AI Composer, n8n, WhatsApp API, Hosting",
+  title: "AI Services in Algeria | Composer, n8n, WhatsApp API",
   description:
     "Services in Algeria: AI Composer access, n8n automation, WhatsApp API, and app hosting, priced in DZD with local support.",
   path: "/services",

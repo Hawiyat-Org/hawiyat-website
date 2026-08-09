@@ -22,6 +22,13 @@ Support is provided in **Arabic, French, and English** via WhatsApp and Chatwoot
 
 The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
 
+| Plan | Price | Who it's for |
+| --- | --- | --- |
+| Hawiyat AI Composer Pro | 6,000 DA/month | Solo builders |
+| Hawiyat AI Composer MAX 5X | 15,000 DA/month | Professional developers, startups, small teams |
+| Hawiyat AI Composer MAX 20X | 30,000 DA/month | Agencies, engineering teams running AI at scale |
+| AI Composer access | 2,500 DA/month | Pay-per-run access, no fixed capacity commitment |
+
 ### Hawiyat AI Composer Pro — 6,000 DA/month
 For solo builders. Execution layer with routing, context, fallbacks, and evaluation.
 - Model-agnostic routing per task
@@ -89,12 +96,21 @@ Official WhatsApp Business API access for messaging and automation: webhook inte
 
 ### Hosting Basic — 1,000 DA/month
 Single app hosting for personal projects, portfolios, and small websites.
+
+| Plan | Price | What you get |
+| --- | --- | --- |
+| Hosting Basic | 1,000 DA/month | 1 application, 512MB RAM, free SSL, automatic Git deployments, custom domain, weekly backups, email support |
+| Hosting VIP | 2,000 DA/month | 2 applications, 1GB RAM, managed database (PostgreSQL or MySQL), daily backups, priority WhatsApp support |
+
+Details:
+
+**Hosting Basic — 1,000 DA/month**
 - 1 application, free SSL certificate, automatic deployments, basic monitoring
 - 512MB RAM, custom domain support, weekly backups
 - Node.js, Python, or static sites. Support by email.
 
-### Hosting VIP — 2,000 DA/month
-Premium hosting for up to 2 apps with a managed database.
+**Hosting VIP — 2,000 DA/month**
+- Premium hosting for up to 2 apps with a managed database
 - 2 applications, managed database (PostgreSQL or MySQL), free SSL, automatic deployments
 - 1GB RAM, daily backups, advanced resource monitoring
 - Priority support via WhatsApp

@@ -21,14 +21,14 @@ const CallToAction = () => {
               href="/services"
               className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
-              Start building
+              Start your first run
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/composer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
-              Meet Composer
+              See Composer in action
             </Link>
           </div>
         </div>

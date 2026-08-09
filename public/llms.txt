@@ -28,6 +28,12 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
 - Hawiyat does not imply an official partnership with any model provider unless explicitly stated; third-party product and model names belong to their respective owners.
 
+## Common questions
+- What is Hawiyat? An AI infrastructure platform, the execution layer between frontier AI models and business systems. Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
+- Is Hawiyat available in Algeria? Yes. Hawiyat is based in Algeria, supports Arabic, French, and English, and bills in Algerian dinars (DZD) with CCP and Baridi Mob.
+- What does Hawiyat AI Composer cost in DZD? Pro is 6,000 DA/month, MAX 5X is 15,000 DA/month, MAX 20X is 30,000 DA/month, and pay-per-run access is 2,500 DA/month. See pricing.md for the full list.
+- What is n8n hosting in Algeria? Managed n8n automation hosted by Hawiyat, priced in DZD: Freelance 8,000 DA/year, Startup 30,000 DA/year, Enterprise 80,000 DA/year.
+
 ## Contact
 - Website: https://www.hawiyat.org
 - Email: contact@hawiyat.org

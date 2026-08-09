@@ -69,7 +69,6 @@ export default function Pricing() {
     "Dedicated account manager",
     "Priority WhatsApp support",
     "Usage analytics and reporting in DZD",
-    "Book with the team",
   ]
 
   return (
@@ -124,9 +123,12 @@ export default function Pricing() {
               onClick={() => setSelectedService(toOrderService(proService))}
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
-              Get started
+              Order Pro, live in 24h
               <ArrowRight className="h-4 w-4" />
             </button>
+            <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+              No card needed. CCP or Baridi Mob.
+            </p>
           </div>
 
           {/* MAX switchable */}
@@ -183,9 +185,12 @@ export default function Pricing() {
               onClick={() => setSelectedService(toOrderService(activeTier.service))}
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
-              Get started
+              Order MAX, live in 24h
               <ArrowRight className="h-4 w-4" />
             </button>
+            <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+              No card needed. CCP or Baridi Mob.
+            </p>
           </div>
 
           {/* ENTERPRISE */}
@@ -225,7 +230,7 @@ export default function Pricing() {
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
-                Book with the team
+                Book the full stack
                 <MessageCircle className="h-4 w-4" />
               </a>
               <a
