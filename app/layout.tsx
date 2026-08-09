@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description:
-    "Execution layer between frontier AI models and business systems. Hawiyat Composer routes each task to the best model, context, and tools. Priced in DZD, built in Algeria.",
+    "Execution layer between frontier AI models and business systems. Composer routes each task to the best model, context, and tools. Priced in DZD.",
   applicationName: APP_NAME,
   keywords: [
     APP_NAME,

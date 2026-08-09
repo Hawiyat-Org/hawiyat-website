@@ -24,6 +24,7 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - [pricing.md](https://www.hawiyat.org/pricing.md): Machine-readable pricing for every plan, verbatim from the service catalog.
 
 ## Important facts
+- Hawiyat is an AI provider based in Algeria: an AI infrastructure platform and the execution layer between frontier AI models and business systems.
 - Hawiyat is based in Algeria and supports customers in Arabic, French, and English.
 - Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted.
 - Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
@@ -34,6 +35,10 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - Is Hawiyat available in Algeria? Yes. Hawiyat is based in Algeria, supports Arabic, French, and English, and bills in Algerian dinars (DZD) with CCP and Baridi Mob.
 - What does Hawiyat AI Composer cost in DZD? Pro is 6,000 DA/month, MAX 5X is 15,000 DA/month, MAX 20X is 30,000 DA/month. See pricing.md for the full list.
 - What is n8n hosting in Algeria? Managed n8n automation hosted by Hawiyat, priced in DZD: Freelance 8,000 DA/year, Startup 30,000 DA/year, Enterprise 80,000 DA/year.
+- Am I locked into one AI model? No. Models are routes, chosen per task by quality, latency, and cost. GPT, Claude, Gemini, and open models all sit behind the same layer, so a provider change never breaks your pipeline. The layer outlives any single model.
+- Can I pay without a foreign card? Yes, everything is billed in DZD. Pay with CCP or Baridi Mob, no foreign card needed.
+- Why not just use ChatGPT or a chatbot? A chatbot answers a prompt. Composer executes a business task: it pulls your customer and order context, picks the best model for the job, runs it against your systems, and checks the result before it reaches anyone. Same engines, but the layer decides the how.
+- Can Composer work with my WhatsApp? Yes, WhatsApp is a first-class route on the layer. Support, sales, and back-office runs happen there, and a workflow can be executing the same day you order.
 
 ## Contact
 - Website: https://www.hawiyat.org

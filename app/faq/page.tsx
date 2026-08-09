@@ -4,9 +4,9 @@ import { createMetadata } from "@/lib/seo"
 import { faqs } from "@/lib/data/faqs"
 
 export const metadata = createMetadata({
-  title: "FAQ | Hawiyat AI Composer & Services in Algeria",
+  title: "FAQ | AI Composer & Services in Algeria",
   description:
-    "Questions and answers about Hawiyat: what the AI Composer does, how it routes tasks, DZD pricing and payment methods, data privacy, and getting started in Algeria.",
+    "Questions and answers about Hawiyat: what the AI Composer does, how it routes tasks, DZD pricing and payment methods, data privacy, and getting started.",
   path: "/faq",
 })
 
@@ -72,6 +72,7 @@ export default function FaqPage() {
               <Link
                 href="https://wa.me/213559555951"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 <MessageCircle className="h-4 w-4" />

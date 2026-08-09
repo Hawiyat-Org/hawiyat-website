@@ -64,8 +64,11 @@ export function AnimatedNumber({ value, className }: AnimatedNumberProps) {
   }, [target, suffix, value])
 
   return (
-    <span ref={rootRef} className={className}>
-      {display}
-    </span>
+    <>
+      <span ref={rootRef} aria-hidden="true" className={className}>
+        {display}
+      </span>
+      <span className="sr-only">{value}</span>
+    </>
   )
 }

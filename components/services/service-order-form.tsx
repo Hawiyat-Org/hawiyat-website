@@ -210,8 +210,16 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   Payment method: {formData.paymentMethod === "CCP" ? "CCP" : formData.paymentMethod === "BARIDI_MOB" ? "Baridi Mob" : "USD"}
                 </p>
                 {orderId && (
-                  <p className="text-xs text-muted-ink mb-4">Order ID: {orderId}</p>
+                  <p className="text-xs text-muted-ink mb-3">Order ID: {orderId}</p>
                 )}
+                <a
+                  href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20just%20placed%20an%20order%2C%20please%20confirm%20payment."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center border border-border rounded-lg px-6 py-2 min-h-[44px] text-sm font-medium text-ink hover:bg-surface-dim transition-colors mb-4"
+                >
+                  Chat on WhatsApp to confirm payment
+                </a>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover"

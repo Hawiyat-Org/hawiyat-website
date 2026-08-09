@@ -229,7 +229,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
-                  <p className="text-[11px] leading-relaxed text-foreground/50">Green Duty  AI delivered via Hawiyat AI Composer</p>
+                  <p className="text-[11px] leading-relaxed text-foreground/50">Green Duty AI delivered via Hawiyat AI Composer</p>
                 </div>
               </div>
             </div>

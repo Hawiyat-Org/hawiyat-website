@@ -57,7 +57,7 @@ const HeroSection = () => {
                 <iframe
                   src={
                     introOpen
-                      ? "https://www.youtube-nocookie.com/embed/V2N9RvzCdnM?autoplay=1"
+                      ? "https://www.youtube-nocookie.com/embed/V2N9RvzCdnM?autoplay=1&mute=1&playsinline=1"
                       : ""
                   }
                   title="Hawiyat AI Composer intro"

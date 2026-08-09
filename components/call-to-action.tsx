@@ -18,7 +18,7 @@ const CallToAction = () => {
           </p>
           <div className="mt-2 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/services"
+              href="/#pricing"
               className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Start your first run

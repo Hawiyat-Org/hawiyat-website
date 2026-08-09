@@ -12,7 +12,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "What will this cost me?",
     answer:
-      "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost, roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed.",
+      "Everything is billed in Algerian dinars. Composer caches repeated work, routes each task to the most efficient model, and logs a transparent per-task cost, roughly a fraction of a DZD per task. You always see what you paid and what you got, measured, not guessed. Composer plans run 6,000 DA/month (Pro), 15,000 DA/month (MAX 5X), and 30,000 DA/month (MAX 20X).",
   },
   {
     question: "Can I pay without a foreign card?",

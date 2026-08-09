@@ -18,6 +18,7 @@ This file expands on [llms.txt](https://www.hawiyat.org/llms.txt) with full pric
 
 ## Important facts
 
+- Hawiyat is an AI provider based in Algeria: an AI infrastructure platform and the execution layer between frontier AI models and business systems.
 - Hawiyat is based in Algeria and supports customers in Arabic, French, and English. These are support languages, not translated site content.
 - Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted, as well as USD.
 - Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
