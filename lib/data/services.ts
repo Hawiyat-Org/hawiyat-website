@@ -815,6 +815,12 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((service) => service.slug === slug)
 }
 
+export function getComposerService(id: string) {
+  const service = services.find((s) => s.id === id)
+  if (!service) throw new Error(`Unknown service id: ${id}`)
+  return service
+}
+
 export function getAllServiceSlugs(): string[] {
   return services
     .filter((service) => !EXCLUDED_SERVICE_IDS.includes(service.id))

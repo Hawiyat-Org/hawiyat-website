@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { Check, MessageCircle, Mail, ArrowRight } from "lucide-react"
 import { OrderForm } from "@/components/services/order-form"
-import { services } from "@/lib/data/services"
+import { getComposerService } from "@/lib/data/services"
 
 interface OrderService {
   id: string
@@ -10,14 +10,6 @@ interface OrderService {
   price: string
   priceLabel: string
   image: string
-}
-
-function getComposerService(id: string) {
-  const service = services.find((s) => s.id === id)
-  if (!service) {
-    throw new Error(`Unknown service id: ${id}`)
-  }
-  return service
 }
 
 const proService = getComposerService("composer-pro")
