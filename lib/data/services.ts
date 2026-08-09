@@ -867,10 +867,21 @@ export const services: Service[] = [
   },
 ]
 
+/**
+ * Composer services are not sold on public service pages — home Pricing is the
+ * sole purchase path (components/pricing.tsx reads them straight from the
+ * `services` array by id). Keep them in the data for pricing, but exclude them
+ * from the public catalog/static-generation/sitemap helpers.
+ */
+export const EXCLUDED_SERVICE_IDS: string[] = ["composer-pro", "composer-max5x", "composer-max20x", "llm-credit"]
+
 export function getServiceBySlug(slug: string): Service | undefined {
+  if (EXCLUDED_SERVICE_IDS.includes(slug)) return undefined
   return services.find((service) => service.slug === slug)
 }
 
 export function getAllServiceSlugs(): string[] {
-  return services.map((service) => service.slug)
+  return services
+    .filter((service) => !EXCLUDED_SERVICE_IDS.includes(service.id))
+    .map((service) => service.slug)
 }
