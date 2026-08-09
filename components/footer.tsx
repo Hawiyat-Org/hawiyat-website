@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Github, Instagram, Facebook, Mail, Linkedin } from "lucide-react"
+import { Github, Instagram, Facebook, Mail, Linkedin, Youtube } from "lucide-react"
 
 const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://")
@@ -40,6 +40,7 @@ const Footer = () => {
     { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", Icon: Facebook },
     { name: "Email", href: "mailto:contact@hawiyat.org", Icon: Mail },
     { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", Icon: Linkedin },
+    { name: "YouTube", href: "https://www.youtube.com/@Hawiyat", Icon: Youtube },
   ]
 
   return (
