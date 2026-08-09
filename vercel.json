@@ -1,3 +1,6 @@
 {
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "redirects": [
+    { "source": "/(.*)", "destination": "https://www.hawiyat.org/$1", "permanent": true }
+  ]
 }
