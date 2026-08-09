@@ -134,7 +134,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-lg border border-border border-t-[3px] border-t-signal bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 lg:shadow-2xl lg:shadow-ink/10 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border border-t-[3px] border-t-signal bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 lg:shadow-2xl lg:shadow-ink/10 lg:-translate-y-3 lg:z-10 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
             <div className="flex-1">
               <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                 {activeTier.label}
