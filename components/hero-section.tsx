@@ -17,8 +17,8 @@ const HeroSection = () => {
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
-          Hand Composer a job like a WhatsApp refund or a 40-lead follow-up. It picks the best AI,
-          connects your systems, and ships a result it already checked. Billed in DZD, supported
+          Draft the weekly report, reconcile an invoice, or turn a spec into code. It picks the best
+          AI, connects your systems, and ships a result it already checked. Billed in DZD, supported
           from Algeria.
         </p>
 

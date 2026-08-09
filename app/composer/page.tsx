@@ -4,8 +4,10 @@ import { RunConsole } from "@/components/run-console"
 import {
   ArrowRight,
   Boxes,
+  Braces,
   BrainCircuit,
   Database,
+  FileText,
   GitMerge,
   Mail,
   MessageCircle,
@@ -59,6 +61,8 @@ const SYSTEMS = [
   { name: "Email", icon: Mail, note: "sequences and triage" },
   { name: "Databases", icon: Database, note: "grounded, queried, updated" },
   { name: "n8n", icon: Workflow, note: "existing workflows, routed" },
+  { name: "Docs & Sheets", icon: FileText, note: "reports, briefs, shared tables" },
+  { name: "API endpoints", icon: Braces, note: "your other tools, called on demand" },
 ]
 
 const CAPABILITIES = [
@@ -77,7 +81,7 @@ const CAPABILITIES = [
   {
     title: "Calls tools only when a task needs them",
     icon: Workflow,
-    body: "WhatsApp, CRM, ERP, databases, n8n. Each run gets the tools it needs and nothing stuck on. The wiring is Composer's job, not yours.",
+    body: "WhatsApp, CRM, ERP, databases, n8n, and anything else you already run. Each run gets the tools it needs and nothing stuck on. The wiring is Composer's job, not yours.",
     telemetry: "tools: on-demand",
   },
   {
@@ -249,9 +253,10 @@ export default function ComposerPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
               Think of Composer as a careful coworker. You hand it a task like &ldquo;resolve the
-              refund for order 3051 on WhatsApp in Algerian Arabic.&rdquo; It pulls the order and
-              the policy, picks the right model, and checks the answer before it reaches your
-              customer. Done in seconds, for a fraction of a dinar.
+              refund for order 3051 on WhatsApp in Algerian Arabic&rdquo;, or a report, an invoice,
+              a research brief, a code change. It pulls the order and the policy, picks the right
+              model, and checks the answer before it reaches your customer. Done in seconds, for a
+              fraction of a dinar.
             </p>
           </div>
 
@@ -301,9 +306,9 @@ export default function ComposerPage() {
                   One layer. Every model. Every system.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  Your stack is already wired in: WhatsApp, CRM, ERP, email, databases, and
-                  n8n, each as a route the layer can reach. Models are routes too. Here is
-                  the guest list.
+                  Your stack is already wired in: WhatsApp, CRM, ERP, email, databases, n8n,
+                  and anything else you already run, each as a route the layer can reach.
+                  Models are routes too. Here is the guest list.
                 </p>
               </div>
             </div>
