@@ -251,6 +251,50 @@ export const services: Service[] = [
         "API access for custom workflows",
       ],
     },
+    plans: [
+      {
+        name: "Pro",
+        price: "6000",
+        priceLabel: "DA/month",
+        tagline: "For solo builders. Give it a task, get a checked result.",
+        features: [
+          "Model-agnostic routing per task",
+          "Context-aware execution against your systems",
+          "Automatic model fallbacks on failure",
+          "Evaluation and quality score for every run",
+          "Semantic caching to cut repeat spend",
+          "Billed in DZD with a transparent per-task cost",
+        ],
+      },
+      {
+        name: "MAX 5X",
+        price: "15000",
+        priceLabel: "DA/month",
+        tagline: "5× more tasks at the same time, for startups and teams shipping daily.",
+        features: [
+          "5X base execution capacity, more parallel runs and tasks",
+          "Model-agnostic routing per task",
+          "Advanced semantic caching (vector-based)",
+          "Automatic model fallbacks on failure",
+          "Evaluation and quality score for every run",
+          "Billed in DZD with a transparent per-task cost",
+        ],
+      },
+      {
+        name: "MAX 20X",
+        price: "30000",
+        priceLabel: "DA/month",
+        tagline: "20× more tasks at the same time, for agencies running AI at scale.",
+        features: [
+          "Everything in MAX 5X",
+          "20× the base execution capacity of Pro, maximum parallel throughput",
+          "Multi-agent traffic resolution for heavy concurrent load",
+          "Hybrid data compliance for strict enterprise requirements",
+          "Dedicated account manager who knows your runs",
+          "Advanced usage analytics in DZD",
+        ],
+      },
+    ],
     seoContent: {
       whatIs:
         "Hawiyat AI Composer Pro is the execution layer for solo developers in Algeria. It sits between frontier AI models (GPT, Claude, Gemini, open models) and the systems you work with, deciding the best way to accomplish each task: which model to route to, what context to carry, and when to fall back. Every run is evaluated and logged, so you see the result, the quality score, and the cost in dinars. Priced at 6,000 DA/month, Pro is built for individual developers and freelancers who want to ship AI-powered work without managing model APIs, keys, or fallbacks. It includes context-aware execution against your systems, semantic caching so repeated work never pays twice, and a transparent per-task cost. Model-agnostic by design, the layer outlives any single model: when a provider changes, your pipeline does not.",
@@ -797,12 +841,12 @@ export const services: Service[] = [
 ]
 
 /**
- * Composer services are not sold on public service pages — home Pricing is the
- * sole purchase path (components/pricing.tsx reads them straight from the
- * `services` array by id). Keep them in the data for pricing, but exclude them
- * from the public catalog/static-generation/sitemap helpers.
+ * Composer MAX tiers fold into the Composer Pro card and detail page, so they
+ * stay out of the catalog, static generation, and sitemap. Composer Pro is sold
+ * on /services like any other tiered service. Home pricing reads all three
+ * Composer entries straight from the `services` array by id.
  */
-export const EXCLUDED_SERVICE_IDS: string[] = ["composer-pro", "composer-max5x", "composer-max20x"]
+export const EXCLUDED_SERVICE_IDS: string[] = ["composer-max5x", "composer-max20x"]
 
 export function getServiceBySlug(slug: string): Service | undefined {
   if (EXCLUDED_SERVICE_IDS.includes(slug)) return undefined
