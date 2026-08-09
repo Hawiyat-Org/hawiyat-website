@@ -93,7 +93,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
 
   return (
     <Dialog open onOpenChange={(open) => { if (!open) onClose() }}>
-      <DialogContent className="max-h-[90vh] w-full max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
+      <DialogContent className="max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
         <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
           <DialogTitle className="sr-only">{service.name}</DialogTitle>
 
@@ -115,13 +115,13 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 href={`https://wa.me/213559555951?text=Hello%20Hawiyat!%20My%20order%20${orderId}%20is%20submitted.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+                className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
               >
                 Chat on WhatsApp to confirm payment
               </a>
               <button
                 onClick={onClose}
-                className="px-6 py-2 rounded-lg border border-border text-ink font-medium text-sm hover:bg-surface-dim transition-colors"
+                className="min-h-[44px] px-6 py-2 rounded-lg border border-border text-ink font-medium text-sm hover:bg-surface-dim transition-colors"
               >
                 Close
               </button>
@@ -129,7 +129,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
           </div>
         ) : (
           <>
-            <div className="mb-6 p-4 rounded-lg bg-surface-dim/50 border border-border/40">
+            <div className="mb-6 p-4 pr-12 rounded-lg bg-surface-dim/50 border border-border/40">
               <div className="flex items-start gap-3">
                 <div className="shrink-0 w-14 h-14 rounded-lg bg-surface border border-border flex items-center justify-center overflow-hidden">
                   <Image
@@ -223,7 +223,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                         type="button"
                         onClick={() => setFormData((prev) => ({ ...prev, paymentMethod: option.value }))}
                         className={cn(
-                          "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all",
+                          "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all min-h-[44px]",
                           isSelected
                             ? "border-signal bg-signal-bg text-signal-contrast"
                             : "border-border/40 bg-surface-dim/30 text-muted-ink hover:border-border hover:bg-surface-dim/50"

@@ -130,15 +130,15 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 max-md:rounded-none max-md:border-t-0 max-md:border-b-0">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
             <div>
               <div className="mb-4 flex flex-col items-start gap-2">
                 <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                   {activeTier.label}
                 </span>
-                <div className="flex w-full items-center justify-between gap-2">
+                <div className="flex w-full flex-col items-start gap-2 lg:flex-row lg:items-center lg:justify-between">
                   <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
-                  <div className="flex items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
+                  <div className="flex shrink-0 items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
                     {maxTiers.map((tier) => (
                       <button
                         key={tier.key}

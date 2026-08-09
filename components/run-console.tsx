@@ -201,7 +201,7 @@ export function RunConsole() {
             aria-pressed={taskIndex === index}
             onClick={() => selectTask(index)}
             className={cn(
-              "rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-widest transition-colors",
+              "rounded-full border px-3 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors min-h-[44px]",
               taskIndex === index
                 ? "border-signal bg-signal text-signal-text"
                 : "border-border text-muted-ink hover:border-signal/50 hover:text-ink"
@@ -244,7 +244,7 @@ export function RunConsole() {
           <button
             type="button"
             onClick={handleReplay}
-            className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg border border-border px-4 py-2 font-mono text-xs text-ink transition-colors hover:border-signal hover:bg-signal-bg"
+            className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg border border-border px-4 py-2.5 font-mono text-xs text-ink transition-colors hover:border-signal hover:bg-signal-bg min-h-[44px]"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             Replay run

@@ -12,7 +12,7 @@ const HeroSection = () => {
           The AI that does the work for you
         </p>
 
-        <h1 className="max-w-3xl text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl xl:text-7xl">
+        <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl md:text-6xl xl:text-7xl">
           Hawiyat AI Composer
         </h1>
 

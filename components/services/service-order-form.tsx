@@ -138,7 +138,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 type="button"
                 onClick={() => setSelectedPayment(option.value)}
                 className={cn(
-                  "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all",
+                  "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all min-h-[44px]",
                   isSelected
                     ? "border-signal bg-signal-bg text-signal-contrast"
                     : "border-border/40 bg-surface-dim/30 text-muted-ink hover:border-border hover:bg-surface-dim/50"
@@ -173,7 +173,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       type="button"
                       onClick={() => setSelectedPayment(option.value)}
                       className={cn(
-                        "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all",
+                        "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all min-h-[44px]",
                         isSelected
                           ? "border-signal bg-signal-bg text-signal-contrast"
                           : "border-border/40 bg-surface-dim/30 text-muted-ink"
@@ -195,7 +195,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
             </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-h-[90vh] w-full max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
+        <DialogContent className="max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
           <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
             <DialogTitle className="sr-only">{service.name}</DialogTitle>
 
@@ -214,14 +214,14 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 )}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+                  className="min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
                 >
                   Close
                 </button>
               </div>
             ) : (
               <>
-                <div className="mb-6 p-4 rounded-lg bg-surface-dim/50 border border-border/40">
+                <div className="mb-6 p-4 pr-12 rounded-lg bg-surface-dim/50 border border-border/40">
                   <div className="flex items-center gap-3">
                     <div className="shrink-0 w-14 h-14 rounded-lg bg-surface border border-border flex items-center justify-center overflow-hidden">
                       <Image
