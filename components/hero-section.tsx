@@ -2,13 +2,14 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { MessageCircle, Play } from "lucide-react"
+import { ExternalLink, MessageCircle, Play } from "lucide-react"
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 
 const HeroSection = () => {
   const [introOpen, setIntroOpen] = useState(false)
@@ -69,6 +70,16 @@ const HeroSection = () => {
             </DialogContent>
           </Dialog>
         </div>
+
+        <a
+          href={USAGE_DASHBOARD_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-ink transition-colors hover:text-ink"
+        >
+          <ExternalLink className="h-4 w-4" />
+          Already a Composer client? Open your usage dashboard
+        </a>
 
         <a
           href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20have%20a%20question%20about%20Composer."

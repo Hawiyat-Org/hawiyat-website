@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 export const SITE_URL = "https://www.hawiyat.org"
 export const SITE_NAME = "Hawiyat"
+export const USAGE_DASHBOARD_URL = "https://usage.ai.hawiyat.cloud"
 
 export function createMetadata({
   title,
