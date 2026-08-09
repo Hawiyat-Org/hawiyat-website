@@ -198,7 +198,7 @@ export const services: Service[] = [
     price: "6000",
     priceLabel: "DA/month",
     cta: "See plans in DZD",
-    category: "Execution Layer",
+    category: "AI Infrastructure",
     useCases: "Individual developers and freelancers shipping AI-powered work without managing model APIs, keys, or fallbacks.",
     features: [
       "Model-agnostic routing per task",
@@ -574,7 +574,7 @@ export const services: Service[] = [
     price: "15000",
     priceLabel: "DA/month",
     cta: "See plans in DZD",
-    category: "Execution Layer",
+    category: "AI Infrastructure",
     tag: "Max 5X",
     useCases: "Professional developers, startups, and small teams shipping daily that need more parallel runs and higher task throughput.",
     features: [
@@ -666,7 +666,7 @@ export const services: Service[] = [
     price: "30000",
     priceLabel: "DA/month",
     cta: "See plans in DZD",
-    category: "Execution Layer",
+    category: "AI Infrastructure",
     tag: "Max 20X",
     useCases: "Agencies, engineering teams, and power users who need maximum parallel throughput on the execution layer with enterprise-grade compliance.",
     features: [
