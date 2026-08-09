@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import Link from "next/link"
-import { services } from "@/lib/data/services"
+import { services, type Service } from "@/lib/data/services"
 import { cn } from "@/lib/utils"
 
 interface CatalogCard {
@@ -26,31 +26,62 @@ interface CatalogCard {
   useCases: string
 }
 
-/* Expand services: services with plans become one card per plan (Freelance / Startup / Enterprise) */
+/* Composer tiers live on the home pricing page only — never in the services catalog. */
+const COMPOSER_SERVICE_IDS = ["composer-pro", "composer-max5x", "composer-max20x", "llm-credit"]
+
+/* Lowest plan price (as a display string) for "from X DA" cards. */
+function lowestPlanPrice(plans?: Service["plans"]): string | undefined {
+  if (!plans || plans.length === 0) return undefined
+  let lowest: string | undefined
+  let lowestValue = Number.POSITIVE_INFINITY
+  for (const plan of plans) {
+    const value = Number.parseInt(plan.price.replace(/[^\d]/g, ""), 10)
+    if (!Number.isNaN(value) && value < lowestValue) {
+      lowestValue = value
+      lowest = plan.price
+    }
+  }
+  return lowest
+}
+
+/* Tier services become ONE card each (plan choice happens on the detail page).
+   hosting-basic + hosting-vip fold into a single "Hosting" card. */
 function buildCatalogCards(): CatalogCard[] {
   const cards: CatalogCard[] = []
 
   for (const service of services) {
+    if (COMPOSER_SERVICE_IDS.includes(service.id)) continue
+    if (service.id === "hosting-vip") continue // folded into the Hosting card below
+
+    // hosting-basic + hosting-vip → one "Hosting" card (Basic or VIP chosen on the detail page)
+    if (service.id === "hosting-basic") {
+      cards.push({
+        key: "hosting",
+        slug: "hosting-basic",
+        name: "Hosting",
+        description:
+          "Managed app hosting for one or two applications, with SSL, automatic Git deploys, and an optional managed database. Choose Basic or VIP on the page.",
+        image: service.image,
+        images: service.images,
+        price: "from 1,000",
+        priceLabel: "DA/month",
+        category: service.category,
+        tag: "Basic / VIP",
+        features: [
+          "1 or 2 applications",
+          "Managed database (PostgreSQL or MySQL)",
+          "Free SSL certificate",
+          "Automatic deployments from Git",
+          "Priority support",
+        ],
+        useCases:
+          "Personal portfolios, small websites, full-stack apps, SaaS projects, and apps that need a database.",
+      })
+      continue
+    }
+
     if (service.plans && service.plans.length > 0) {
-      for (const plan of service.plans) {
-        cards.push({
-          key: `${service.id}--${plan.name.toLowerCase().replace(/\s+/g, "-")}`,
-          slug: service.slug,
-          plan: plan.name,
-          name: `${service.name} - ${plan.name}`,
-          description: plan.tagline || service.description,
-          image: service.image,
-          images: service.images,
-          price: plan.price,
-          originalPrice: plan.originalPrice,
-          priceLabel: plan.priceLabel,
-          category: service.category,
-          tag: plan.name,
-          features: plan.features,
-          useCases: service.useCases,
-        })
-      }
-    } else {
+      const fromPrice = lowestPlanPrice(service.plans)
       cards.push({
         key: service.id,
         slug: service.slug,
@@ -58,35 +89,41 @@ function buildCatalogCards(): CatalogCard[] {
         description: service.description,
         image: service.image,
         images: service.images,
-        price: service.price,
-        originalPrice: service.originalPrice,
+        price: fromPrice ? `from ${fromPrice}` : service.price,
         priceLabel: service.priceLabel,
         category: service.category,
         tag: service.tag,
         features: service.features,
         useCases: service.useCases,
       })
+      continue
     }
+
+    cards.push({
+      key: service.id,
+      slug: service.slug,
+      name: service.name,
+      description: service.description,
+      image: service.image,
+      images: service.images,
+      price: service.price,
+      originalPrice: service.originalPrice,
+      priceLabel: service.priceLabel,
+      category: service.category,
+      tag: service.tag,
+      features: service.features,
+      useCases: service.useCases,
+    })
   }
 
   return cards
 }
 
-/* Display order: the execution layer sorts first (Composer tiers + AI Composer access),
-   then the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
+/* Display order: the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
 const CARD_ORDER: Record<string, number> = {
-  "composer-pro": 1,
-  "composer-max5x": 2,
-  "composer-max20x": 3,
-  "llm-credit": 4,
-  "n8n-hosting--freelance": 5,
-  "n8n-hosting--startup": 6,
-  "n8n-hosting--enterprise": 7,
-  "evolution-api--whatsapp": 8,
-  "evolution-api--startup": 9,
-  "evolution-api--enterprise": 10,
-  "hosting-basic": 11,
-  "hosting-vip": 12,
+  "n8n-hosting": 1,
+  "evolution-api": 2,
+  "hosting": 3,
 }
 
 const categoryStyles: Record<string, string> = {
