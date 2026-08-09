@@ -1,7 +1,18 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
-import { MessageCircle } from "lucide-react"
+import { MessageCircle, Play } from "lucide-react"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 const HeroSection = () => {
+  const [introOpen, setIntroOpen] = useState(false)
+
   return (
     <section
       className="hero-section relative flex min-h-[80vh] w-full max-w-[100vw] flex-col overflow-hidden"
@@ -30,12 +41,33 @@ const HeroSection = () => {
             See Composer plans
             <span aria-hidden="true" className="text-base leading-none">→</span>
           </Link>
-          <Link
-            href="/composer"
-            className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink"
-          >
-            Watch a run execute
-          </Link>
+          <Dialog open={introOpen} onOpenChange={setIntroOpen}>
+            <DialogTrigger
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink"
+              aria-label="Watch the Hawiyat AI Composer intro video"
+            >
+              <Play className="h-4 w-4" />
+              Watch the intro
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl">
+              <DialogTitle className="sr-only">
+                Hawiyat AI Composer intro video
+              </DialogTitle>
+              <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+                <iframe
+                  src={
+                    introOpen
+                      ? "https://www.youtube-nocookie.com/embed/V2N9RvzCdnM?autoplay=1"
+                      : ""
+                  }
+                  title="Hawiyat AI Composer intro"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="aspect-video h-full w-full rounded-md border-0"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <a
