@@ -1,19 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, MessageCircle, Package } from "lucide-react"
 import AlgeriaBand from "@/components/algeria-band"
 
 export default function AboutPage() {
-  const { theme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* ─── Hero + Gallery ─── */}
@@ -234,36 +226,6 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Trusted By ─── */}
-      <section className="w-full py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-14 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl max-md:text-2xl text-ink">Partners &amp; early customers</h2>
-          </div>
-
-          <div className="grid grid-cols-3 gap-12 md:gap-16 lg:gap-20 max-md:gap-8">
-            {[
-              { name: "Itihad", logo: "/trust/itihad-logo.svg", url: "https://itihad.group" },
-              { name: "ESTIN", logo: "/trust/estin-logo.svg", url: "https://estin.dz/" },
-              { name: "IT Solutions", logo: mounted && (resolvedTheme === "dark" || theme === "dark") ? "/trust/itsol-dark.svg" : "/trust/itsol.svg", url: "https://itsolutions.dz/" },
-            ].map((brand) => (
-              <div key={brand.name} className="group relative flex items-center justify-center">
-                <a href={brand.url} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                  <div className="relative w-full h-32 md:h-40 lg:h-52 max-md:h-28">
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      fill
-                      className="object-contain transition-all duration-300 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
-                    />
-                  </div>
-                </a>
-              </div>
-            ))}
           </div>
         </div>
       </section>
