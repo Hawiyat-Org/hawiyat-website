@@ -66,9 +66,11 @@ export default function Pricing() {
 
   const enterpriseFeatures = [
     "Full stack: Composer + n8n + Evolution + Platform",
-    "Dedicated account manager",
-    "Priority WhatsApp support",
-    "Usage analytics and reporting in DZD",
+    "Dedicated account manager who knows your stack and your runs",
+    "Priority WhatsApp support from the local team in AR, FR, and EN",
+    "Usage analytics in DZD for the whole stack, one view",
+    "Custom infrastructure with an SLA built around your workloads",
+    "Single contract, one invoice, everything billed in DZD",
   ]
 
   return (

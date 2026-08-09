@@ -91,18 +91,19 @@ FAQ:
 - 20× the base execution capacity of Pro, maximum parallel throughput, with hybrid data compliance and multi-agent traffic resolution. Built for agencies and engineering teams running AI at scale.
 
 Features:
-- 20X base execution capacity, maximum parallel throughput
-- Model-agnostic routing per task
-- Exact-match and semantic caching
-- Automatic model fallbacks on failure
-- Hybrid data compliance (GDPR ready)
-- Multi-agent traffic resolution
-- Evaluation and quality score for every run
+- 20X base execution capacity, maximum parallel runs and tasks
+- Multi-agent traffic resolution that keeps dozens of concurrent runs stable
+- Exact-match and vector-based semantic caching so repeated work is instant
+- Automatic fallback cascades across models when one is slow or down
+- Hybrid data compliance, GDPR ready for strict enterprise requirements
+- Dedicated account manager who knows your runs and your workloads
+- Advanced usage analytics in DZD, per run, per task, per day
+- Priority WhatsApp support from the local team in AR, FR, and EN
 
 What you get:
-- Dedicated account manager
-- Advanced usage analytics and reporting in DZD
-- Priority support via WhatsApp
+- Route every task to the best model by quality, latency, and cost
+- Evaluation log with a quality score for every run
+- IDE integrations (VS Code, JetBrains) and API access
 
 FAQ:
 - What does 20X execution capacity mean in practice? MAX 20X gives you twenty times the base execution capacity of Pro, maximum parallel runs and tasks on the layer. It is enough for teams running dozens of concurrent workloads.
