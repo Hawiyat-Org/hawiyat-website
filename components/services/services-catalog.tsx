@@ -259,8 +259,8 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
       {/* Why Choose Hawiyat */}
       <div className="mt-24 mb-10 w-full flex flex-col items-center">
         <h2 className="text-5xl font-medium max-md:text-3xl text-center leading-normal mb-10">Why Choose Hawiyat</h2>
-        <p className="text-muted-ink mt-[-24px] mb-10 text-center text-sm max-w-lg">The execution layer, locally supported and billed in DZD.</p>
-        <div className="w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
+        <p className="text-muted-ink mt-[-24px] mb-10 text-center text-sm max-w-lg">The execution layer, billed in DZD.</p>
+        <div className="w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 place-items-stretch p-4">
           {[
             { icon: DollarSign, title: "Billed in DZD", desc: "Pay in dinars with CCP or Baridi Mob. No foreign cards, no forex drift." },
             { icon: Bot, title: "Model-Agnostic", desc: "Models are routes, not SKUs. Composer picks the right one for each task." },
