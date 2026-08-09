@@ -111,49 +111,6 @@ const FULLSTACK = [
   { name: "Platform", icon: ServerCog, note: "cloud runtime: servers, storage, and databases under one roof" },
 ]
 
-const COMPARISON = [
-  {
-    label: "Routing",
-    composer: "One layer picks the best model per task",
-    diy: "You wire each model into each flow by hand",
-  },
-  {
-    label: "Reliability",
-    composer: "Automatic fallbacks between models and tools",
-    diy: "One dead key takes down the flow",
-  },
-  {
-    label: "Evaluation",
-    composer: "Every run graded, logged, and auditable",
-    diy: "You learn from tickets, not telemetry",
-  },
-  {
-    label: "Billing",
-    composer: "One contract, one invoice, in DZD",
-    diy: "Five vendors, USD cards, forex drift",
-  },
-  {
-    label: "Support",
-    composer: "Local team in your timezone",
-    diy: "You are the support",
-  },
-]
-
-const DIY_FRAGMENTS = [
-  { tool: "openai key", friction: "USD card, per-token" },
-  { tool: "claude key", friction: "a second USD card" },
-  { tool: "n8n flow", friction: "your glue code" },
-  { tool: "whatsapp api", friction: "your uptime" },
-  { tool: "db creds", friction: "your backups" },
-]
-
-const COMPOSER_RUN = {
-  task: '"Quote 150 SIM activations"',
-  path: "route → context → tools → evaluate → result",
-  result: "3-line quote, PDF, sent at 9pm",
-  cost: "1.1 DZD",
-}
-
 const FULLSTACK_WHATSAPP_URL =
   "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
@@ -482,81 +439,6 @@ export default function ComposerPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Why not DIY ─── */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <div className="trace-line h-px w-12 bg-signal" />
-              <SectionEyebrow>WHY NOT DIY</SectionEyebrow>
-            </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              Five tools, one you.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              OpenAI + Claude + n8n + WhatsApp + a database can all work, if you&rsquo;re happy
-              being the layer. Composer runs the layer; you run the business.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-surface p-6 md:p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                DIY · FIVE TOOLS, HAND-GLUED
-              </p>
-              <ul className="mt-6">
-                {DIY_FRAGMENTS.map((fragment) => (
-                  <li
-                    key={fragment.tool}
-                    className="flex items-baseline justify-between gap-3 border-b border-border py-3 last:border-0"
-                  >
-                    <span className="font-mono text-sm text-muted-ink">{fragment.tool}</span>
-                    <span className="font-mono text-[11px] text-muted-ink">{fragment.friction}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-sm text-muted-ink">you are the layer</p>
-            </div>
-
-            <div className="rounded-lg border-2 border-signal bg-surface p-6 md:p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-signal-contrast">
-                COMPOSER · ONE RUN
-              </p>
-              <div className="mt-6 space-y-3 font-mono text-sm">
-                <p className="text-ink">task ▸ {COMPOSER_RUN.task}</p>
-                <p className="text-ink">run ▸ {COMPOSER_RUN.path}</p>
-                <p className="text-ink">result ▸ {COMPOSER_RUN.result}</p>
-                <p className="text-ink">cost ▸ {COMPOSER_RUN.cost}</p>
-              </div>
-              <p className="mt-6 text-sm font-semibold text-ink">you run the business</p>
-            </div>
-          </div>
-
-          <div className="mt-10 overflow-hidden rounded-lg border border-border">
-            {COMPARISON.map((row, i) => (
-              <div
-                key={row.label}
-                className={`grid gap-0 md:grid-cols-3 ${i > 0 ? "border-t border-border" : ""}`}
-              >
-                <div className="p-5 md:p-6">
-                  <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                    {row.label}
-                  </p>
-                </div>
-                <div className="flex items-start gap-2.5 border-t border-border p-5 md:border-l md:border-t-0 md:p-6">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-ok" />
-                  <p className="text-sm leading-relaxed text-ink">{row.composer}</p>
-                </div>
-                <div className="flex items-start gap-2.5 border-t border-border p-5 md:border-l md:border-t-0 md:p-6">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full border border-muted-ink" />
-                  <p className="text-sm leading-relaxed text-muted-ink">{row.diy}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
