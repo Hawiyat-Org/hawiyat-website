@@ -254,7 +254,7 @@ export const services: Service[] = [
     plans: [
       {
         name: "Pro",
-        price: "6000",
+        price: "6,000",
         priceLabel: "DA/month",
         tagline: "For solo builders. Give it a task, get a checked result.",
         features: [
@@ -268,7 +268,7 @@ export const services: Service[] = [
       },
       {
         name: "MAX 5X",
-        price: "15000",
+        price: "15,000",
         priceLabel: "DA/month",
         tagline: "5× more tasks at the same time, for startups and teams shipping daily.",
         features: [
@@ -282,7 +282,7 @@ export const services: Service[] = [
       },
       {
         name: "MAX 20X",
-        price: "30000",
+        price: "30,000",
         priceLabel: "DA/month",
         tagline: "20× more tasks at the same time, for agencies running AI at scale.",
         features: [
