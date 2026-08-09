@@ -344,6 +344,104 @@ export default function ComposerPage() {
         </div>
       </section>
 
+      {/* ─── Comparison table ─── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-12 max-w-2xl">
+            <div className="flex items-center gap-3">
+              <div className="trace-line h-px w-12 bg-signal" />
+              <SectionEyebrow>COMPARE</SectionEyebrow>
+            </div>
+            <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
+              The layer vs the alternatives.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-ink">
+              The execution layer vs chat, workflow triggers, and a plain gateway. Facts only.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+            <table className="w-full min-w-[720px] border-collapse text-left">
+              <thead>
+                <tr className="border-b border-border">
+                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
+                    &nbsp;
+                  </th>
+                  <th scope="col" className="p-5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">
+                    Hawiyat AI Composer
+                  </th>
+                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
+                    ChatGPT
+                  </th>
+                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
+                    n8n Cloud
+                  </th>
+                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
+                    OpenRouter
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    label: "Execution loop",
+                    composer: "Runs, evaluates, learns",
+                    chatgpt: "Chat replies",
+                    n8n: "Workflow triggers",
+                    openrouter: "API gateway",
+                  },
+                  {
+                    label: "Model routing",
+                    composer: "Per task, per cost",
+                    chatgpt: "Fixed model",
+                    n8n: "Fixed",
+                    openrouter: "You choose",
+                  },
+                  {
+                    label: "Business context",
+                    composer: "Your WhatsApp, CRM, ERP wired in",
+                    chatgpt: "Prompt-only",
+                    n8n: "Workflow data",
+                    openrouter: "None",
+                  },
+                  {
+                    label: "Evaluation",
+                    composer: "Graded result, telemetry",
+                    chatgpt: "None",
+                    n8n: "None",
+                    openrouter: "None",
+                  },
+                  {
+                    label: "Billing",
+                    composer: "DZD, per run",
+                    chatgpt: "USD",
+                    n8n: "USD",
+                    openrouter: "USD",
+                  },
+                  {
+                    label: "Support",
+                    composer: "Local AR, FR, EN",
+                    chatgpt: "None",
+                    n8n: "None",
+                    openrouter: "None",
+                  },
+                ].map((row) => (
+                  <tr key={row.label} className="border-b border-border last:border-b-0">
+                    <th scope="row" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink align-top">
+                      {row.label}
+                    </th>
+                    <td className="p-5 text-sm font-medium text-ink">{row.composer}</td>
+                    <td className="p-5 text-sm text-muted-ink">{row.chatgpt}</td>
+                    <td className="p-5 text-sm text-muted-ink">{row.n8n}</td>
+                    <td className="p-5 text-sm text-muted-ink">{row.openrouter}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Engine capabilities ─── */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
