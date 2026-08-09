@@ -48,7 +48,7 @@ function buildCatalogCards(): CatalogCard[] {
 
   for (const service of services) {
     if (EXCLUDED_SERVICE_IDS.includes(service.id)) continue
-    if (service.id === "hosting-vip") continue // folded into the Hosting card below
+    if (service.id === "hosting-vip") continue // folded into the Hawiyat Cloud card below
 
     // hosting-basic + hosting-vip → one "Hawiyat Cloud" card (Basic or VIP chosen on the detail page)
     if (service.id === "hosting-basic") {
