@@ -95,7 +95,7 @@ Features:
 - Multi-agent traffic resolution that keeps dozens of concurrent runs stable
 - Exact-match and vector-based semantic caching so repeated work is instant
 - Automatic fallback cascades across models when one is slow or down
-- Hybrid data compliance, GDPR ready for strict enterprise requirements
+- Hybrid data compliance for strict enterprise requirements
 - Dedicated account manager who knows your runs and your workloads
 - Advanced usage analytics in DZD, per run, per task, per day
 - Priority WhatsApp support from the local team in AR, FR, and EN
@@ -107,7 +107,7 @@ What you get:
 
 FAQ:
 - What does 20X execution capacity mean in practice? MAX 20X gives you twenty times the base execution capacity of Pro, maximum parallel runs and tasks on the layer. It is enough for teams running dozens of concurrent workloads.
-- Is MAX 20X GDPR compliant? Yes. MAX 20X includes hybrid data compliance ready for GDPR, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.
+- Does MAX 20X meet enterprise compliance needs? Yes. MAX 20X includes hybrid data compliance, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.
 - Who is MAX 20X designed for? Agencies, engineering teams, and power users who need maximum parallel throughput. It includes a dedicated account manager, advanced analytics in DZD, and priority WhatsApp support.
 
 ### n8n Hosting — managed workflow automation

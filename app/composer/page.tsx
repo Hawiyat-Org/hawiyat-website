@@ -113,7 +113,7 @@ const FULLSTACK = [
 ]
 
 const FULLSTACK_WHATSAPP_URL =
-  "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
+  "https://wa.me/213559555951?text=Hello%20Hawiyat%2C%20we%20need%20the%20full%20stack%20for%20our%20operation."
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -401,11 +401,11 @@ export default function ComposerPage() {
                   <SectionEyebrow>ONE CONTRACT</SectionEyebrow>
                 </div>
                 <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-                  The whole stack. One contract.
+                  The layer. One contract.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  Composer runs the layer; the rest of the stack runs Composer. Deployment,
-                  support, telemetry, and billing: one team, one invoice, in DZD.
+                  The execution layer runs every model, channel, and workflow you depend on.
+                  Deployment, support, telemetry, and billing: one team, one invoice, in DZD.
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
@@ -452,7 +452,7 @@ export default function ComposerPage() {
             Start your first run today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a Composer plan in DZD, or bring the whole stack. Composer handles the
+            Pick a Composer plan in DZD, or bring the whole layer. Composer handles the
             models. You focus on your business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

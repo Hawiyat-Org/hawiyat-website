@@ -616,14 +616,14 @@ export const services: Service[] = [
       "Multi-agent traffic resolution that keeps dozens of concurrent runs stable",
       "Exact-match and vector-based semantic caching so repeated work is instant",
       "Automatic fallback cascades across models when one is slow or down",
-      "Hybrid data compliance, GDPR ready for strict enterprise requirements",
+      "Hybrid data compliance for strict enterprise requirements",
       "Dedicated account manager who knows your runs and your workloads",
       "Advanced usage analytics in DZD, per run, per task, per day",
       "Priority WhatsApp support from the local team in AR, FR, and EN",
     ],
     bulletPoints: [
       { icon: Zap, text: "20X Capacity" },
-      { icon: Shield, text: "GDPR Ready" },
+      { icon: Shield, text: "Hybrid Compliance" },
       { icon: Clock, text: "Evaluate Every Run" },
     ],
     seo: {
@@ -639,7 +639,7 @@ export const services: Service[] = [
         "ai execution platform algeria team",
         "parallel ai tasks algeria enterprise",
         "model agnostic ai algeria",
-        "gdpr compliant ai algeria",
+        "enterprise ai execution algeria",
         "ai developer tools algeria agency",
       ],
     },
@@ -652,7 +652,7 @@ export const services: Service[] = [
         "Multi-agent traffic resolution that keeps every concurrent run stable and fast",
         "Exact-match and vector-based semantic caching so repeated work is instant",
         "Automatic fallback cascades across models when one is slow or down",
-        "Hybrid data compliance, GDPR ready for strict enterprise deployments",
+        "Hybrid data compliance for strict enterprise deployments",
         "Evaluation log with a quality score for every run",
         "Advanced usage analytics in DZD, per run, per task, per day",
         "Dedicated account manager who knows your runs and your workloads",
@@ -663,7 +663,7 @@ export const services: Service[] = [
         "Model routes: GPT, Claude, Gemini, and open models",
         "Exact-match and vector-based semantic caching",
         "Automatic fallback cascades",
-        "Hybrid data compliance for GDPR",
+        "Hybrid data compliance",
         "Multi-agent traffic resolution",
         "Per-run evaluation and logging",
         "IDE integrations (VS Code, JetBrains)",
@@ -674,9 +674,9 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Hawiyat AI Composer MAX 20X is the highest-capacity tier of the Hawiyat AI Composer execution layer in Algeria. At 30,000 DA/month, it gives agencies, engineering teams, and power users twenty times the base execution capacity of Pro, maximum parallel runs and tasks. Composer routes each task to the best model by quality, latency, and cost, carries your context, falls back automatically when a model is slow or down, and evaluates every result. Exact-match and vector-based semantic caching keep repeat work instant, hybrid data compliance makes deployments GDPR-ready, and multi-agent traffic resolution keeps performance stable under heavy concurrent load. Every run is logged with a quality score and a transparent per-task cost in dinars. Models are routes, not SKUs, so the layer outlives any single provider.",
+        "Hawiyat AI Composer MAX 20X is the highest-capacity tier of the Hawiyat AI Composer execution layer in Algeria. At 30,000 DA/month, it gives agencies, engineering teams, and power users twenty times the base execution capacity of Pro, maximum parallel runs and tasks. Composer routes each task to the best model by quality, latency, and cost, carries your context, falls back automatically when a model is slow or down, and evaluates every result. Exact-match and vector-based semantic caching keep repeat work instant, hybrid data compliance keeps enterprise deployments compliant, and multi-agent traffic resolution keeps performance stable under heavy concurrent load. Every run is logged with a quality score and a transparent per-task cost in dinars. Models are routes, not SKUs, so the layer outlives any single provider.",
       whyChoose:
-        "Agencies and engineering teams choose Hawiyat AI Composer MAX 20X for maximum parallel throughput on the execution layer. Twenty times the base execution capacity of Pro means dozens of runs at once without queueing behind a model. Composer handles routing, context, fallbacks, and evaluation, so client deliverables are the outcome, not the plumbing. Hybrid data compliance makes it GDPR-ready for customers with strict requirements, and multi-agent traffic resolution keeps performance stable under heavy load. Every run is evaluated and costed in dinars, with no daily or weekly caps on the layer. You pay 30,000 DA/month with CCP or Baridi Mob, and a dedicated account manager plus priority WhatsApp support come with the plan. For teams that live in the layer, MAX 20X removes every ceiling on throughput.",
+        "Agencies and engineering teams choose Hawiyat AI Composer MAX 20X for maximum parallel throughput on the execution layer. Twenty times the base execution capacity of Pro means dozens of runs at once without queueing behind a model. Composer handles routing, context, fallbacks, and evaluation, so client deliverables are the outcome, not the plumbing. Hybrid data compliance keeps it enterprise-ready for customers with strict requirements, and multi-agent traffic resolution keeps performance stable under heavy load. Every run is evaluated and costed in dinars, with no daily or weekly caps on the layer. You pay 30,000 DA/month with CCP or Baridi Mob, and a dedicated account manager plus priority WhatsApp support come with the plan. For teams that live in the layer, MAX 20X removes every ceiling on throughput.",
       howItWorks:
         "Getting started with Hawiyat AI Composer MAX 20X takes three steps. First, order the plan at 30,000 DA/month with CCP, Baridi Mob, or USD. Second, our team activates your workspace and assigns your account manager within 24 hours. Third, connect your tools, IDE integrations for VS Code and JetBrains or the API for custom workflows, and run your first tasks. Composer executes each task through a run: plan, route to the best model, execute with your context, evaluate the result, and log the cost in DZD. With 20X base execution capacity, teams run many tasks in parallel; exact-match and semantic caching make repeated work instant, and multi-agent traffic resolution keeps everything stable. Advanced analytics show consumption in dinars. Our team monitors the service 24/7, and priority support is available via WhatsApp.",
     },
@@ -687,9 +687,9 @@ export const services: Service[] = [
           "MAX 20X gives you twenty times the base execution capacity of Pro, maximum parallel runs and tasks on the layer. It is measured in runs and tasks, not model credits, and it is enough for teams running dozens of concurrent workloads.",
       },
       {
-        question: "Is MAX 20X GDPR compliant?",
+        question: "Does MAX 20X meet enterprise compliance needs?",
         answer:
-          "Yes. MAX 20X includes hybrid data compliance ready for GDPR, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.",
+          "Yes. MAX 20X includes hybrid data compliance, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.",
       },
       {
         question: "Who is MAX 20X designed for?",

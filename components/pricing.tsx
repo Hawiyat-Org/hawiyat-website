@@ -42,7 +42,7 @@ const maxTiers: Array<{
     key: "composer-max20x",
     label: "MAX 20X",
     service: max20xService,
-    capacity: "20× more tasks at the same time, with GDPR-ready compliance.",
+    capacity: "20× more tasks at the same time, with hybrid data compliance.",
     blurb: "For agencies and teams running AI at scale.",
   },
 ]
@@ -62,14 +62,13 @@ export default function Pricing() {
   const activeTier = maxTiers.find((t) => t.key === activeMax)!
 
   const enterpriseWhatsappUrl =
-    "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
+    "https://wa.me/213559555951?text=Hello%20Hawiyat%2C%20we%20need%20an%20Enterprise%20plan%20for%20our%20operation."
 
   const enterpriseFeatures = [
-    "Full stack: Composer + n8n + Evolution + Platform",
-    "Dedicated account manager who knows your stack and your runs",
+    "The execution layer, tuned for your whole operation",
+    "Dedicated account manager who knows your runs and your stack",
     "Priority WhatsApp support from the local team in AR, FR, and EN",
-    "Usage analytics in DZD for the whole stack, one view",
-    "Custom infrastructure with an SLA built around your workloads",
+    "Custom infrastructure and capacity built around your workloads",
     "Single contract, one invoice, everything billed in DZD",
   ]
 
@@ -206,7 +205,8 @@ export default function Pricing() {
                   <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
                 </div>
                 <p className="mt-2 text-sm text-muted-ink">
-                  The whole stack under one contract: Composer + n8n + Evolution API + Platform.
+                  The execution layer, sized for your entire operation. Custom infrastructure,
+                  capacity, and support.
                 </p>
               </div>
 
