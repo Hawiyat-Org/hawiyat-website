@@ -34,7 +34,7 @@ export default function AboutPage() {
               Built on our own cloud.
             </p>
             <p className="text-sm text-muted-ink">
-              Founded in Algiers • Incubated by Itihad • 100+ clients
+              Founded in Algiers • Incubated by Itihad
             </p>
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link

@@ -10,7 +10,7 @@ const FAQ = () => {
     {
       question: "What does Hawiyat actually do?",
       answer:
-        "Think of Hawiyat as the layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems your business actually runs: WhatsApp, CRM, ERP, email, databases, workflows. It decides the best way to accomplish each task: which model to route to, what context to carry, when to fall back, and whether the result is good enough. Whatever AI exists tomorrow, you'll need a layer that decides how to use it.",
+        "Hawiyat takes a task you would normally do by hand and makes it run itself. You describe what you want, like a WhatsApp order confirmed or a support reply sent, and it picks the AI, pulls in the context from your tools, and checks the answer before it goes anywhere. Whatever AI exists tomorrow, you'll need a layer that decides how to use it.",
     },
     {
       question: "Am I locked into one AI model?",

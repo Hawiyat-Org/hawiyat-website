@@ -470,11 +470,11 @@ export default function ComposerPage() {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <SectionEyebrow>START</SectionEyebrow>
           <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-            Have your first task running today.
+            See what Composer does.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
             Pick a Composer plan on the home page, or bring the whole stack. Composer handles the
-            models. You handle the business.
+            models. You focus on your business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

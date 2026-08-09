@@ -36,10 +36,6 @@ const HeroSection = () => {
           </Link>
         </div>
 
-        <p className="font-mono text-xs text-muted-ink">
-          100+ paying clients · 100B+ tokens
-        </p>
-
         <a
           href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20have%20a%20question%20about%20Composer."
           target="_blank"
