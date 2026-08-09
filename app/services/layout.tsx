@@ -41,7 +41,7 @@ function offerCatalogFor(service: Service) {
 const composer = getService("composer-pro")
 const n8n = getService("n8n-hosting")
 const evolution = getService("evolution-api")
-const cloud = getService("hosting-basic")
+const cloud = getService("hawiyat-cloud")
 
 const serviceSchema = {
   "@context": "https://schema.org",
