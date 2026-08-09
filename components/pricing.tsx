@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Check, MessageCircle, Mail, ArrowRight, ExternalLink } from "lucide-react"
 import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
+import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 
 interface OrderService {
   id: string
@@ -78,7 +79,7 @@ export default function Pricing() {
             One layer, every model, and everything billed in dinars.
           </p>
           <a
-            href="https://usage.ai.hawiyat.cloud"
+            href={USAGE_DASHBOARD_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors hover:text-ink"

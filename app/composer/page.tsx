@@ -2,6 +2,7 @@ import Link from "next/link"
 import ScrollAnimations from "@/components/scroll-animations"
 import { RunConsole } from "@/components/run-console"
 import { AnimatedNumber } from "@/components/animated-number"
+import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import {
   ArrowRight,
   Boxes,
@@ -197,7 +198,7 @@ export default function ComposerPage() {
             </div>
             <div className="-mt-3 flex items-center justify-center reveal-up">
               <a
-                href="https://usage.ai.hawiyat.cloud"
+                href={USAGE_DASHBOARD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors duration-300 hover:text-ink"
