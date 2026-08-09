@@ -1,6 +1,6 @@
 import Link from "next/link"
 import ScrollAnimations from "@/components/scroll-animations"
-import { ExecutionTrace } from "@/components/execution-trace"
+import { RunConsole } from "@/components/run-console"
 import {
   ArrowRight,
   Boxes,
@@ -135,6 +135,21 @@ const COMPARISON = [
   },
 ]
 
+const DIY_FRAGMENTS = [
+  { tool: "openai key", friction: "USD card, per-token" },
+  { tool: "claude key", friction: "a second USD card" },
+  { tool: "n8n flow", friction: "your glue code" },
+  { tool: "whatsapp api", friction: "your uptime" },
+  { tool: "db creds", friction: "your backups" },
+]
+
+const COMPOSER_RUN = {
+  task: '"Quote 150 SIM activations"',
+  path: "route → context → tools → evaluate → result",
+  result: "3-line quote, PDF, sent at 9pm",
+  cost: "1.1 DZD",
+}
+
 const FULLSTACK_WHATSAPP_URL =
   "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
@@ -205,29 +220,7 @@ export default function ComposerPage() {
             </p>
           </div>
 
-          <div className="reveal-up">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <span className="rounded-lg border border-border bg-surface px-4 py-2 font-mono text-xs text-ink">
-                task ▸ &ldquo;Resolve the refund for order 3051 on WhatsApp in Algerian Arabic&rdquo;
-              </span>
-              <span className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                RUN 02 · COMPLETED
-              </span>
-            </div>
-            <ExecutionTrace
-              active={5}
-              telemetry={[
-                "route: auto",
-                "model: gpt-4o → claude-sonnet",
-                "ctx: order 3051 + policy · 9k",
-                "tools: [whatsapp, crm]",
-                "cost: ~0.4 DZD",
-                "latency: 210ms",
-                "quality: 0.98",
-              ]}
-              className="p-5 md:p-7"
-            />
-          </div>
+          <RunConsole />
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {STAGES.map((stage, i) => (
@@ -451,7 +444,7 @@ export default function ComposerPage() {
               <SectionEyebrow>WHY NOT DIY</SectionEyebrow>
             </div>
             <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              The fragments are the trap.
+              Five tools, one you.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
               OpenAI + Claude + n8n + WhatsApp + a database can all work, if you&rsquo;re happy
@@ -459,34 +452,57 @@ export default function ComposerPage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-border">
-            <div className="hidden grid-cols-12 gap-0 bg-surface-dim md:grid">
-              <div className="col-span-4 p-6 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                &nbsp;
-              </div>
-              <div className="col-span-4 border-l border-border bg-surface p-6 font-mono text-xs font-semibold uppercase tracking-widest text-signal-contrast">
-                Composer: the layer
-              </div>
-              <div className="col-span-4 border-l border-border p-6 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                DIY: 5 tools, hand-glued
-              </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border border-border bg-surface p-6 md:p-8">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                DIY · FIVE TOOLS, HAND-GLUED
+              </p>
+              <ul className="mt-6">
+                {DIY_FRAGMENTS.map((fragment) => (
+                  <li
+                    key={fragment.tool}
+                    className="flex items-baseline justify-between gap-3 border-b border-border py-3 last:border-0"
+                  >
+                    <span className="font-mono text-sm text-muted-ink">{fragment.tool}</span>
+                    <span className="font-mono text-[11px] text-muted-ink">{fragment.friction}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm text-muted-ink">you are the layer</p>
             </div>
 
-            {COMPARISON.map((row) => (
+            <div className="rounded-lg border-2 border-signal bg-surface p-6 md:p-8">
+              <p className="font-mono text-xs uppercase tracking-widest text-signal-contrast">
+                COMPOSER · ONE RUN
+              </p>
+              <div className="mt-6 space-y-3 font-mono text-sm">
+                <p className="text-ink">task ▸ {COMPOSER_RUN.task}</p>
+                <p className="text-ink">run ▸ {COMPOSER_RUN.path}</p>
+                <p className="text-ink">result ▸ {COMPOSER_RUN.result}</p>
+                <p className="text-ink">cost ▸ {COMPOSER_RUN.cost}</p>
+              </div>
+              <p className="mt-6 text-sm font-semibold text-ink">you run the business</p>
+            </div>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-lg border border-border">
+            {COMPARISON.map((row, i) => (
               <div
                 key={row.label}
-                className="grid grid-cols-12 gap-0 border-t border-border"
+                className={`grid gap-0 md:grid-cols-3 ${i > 0 ? "border-t border-border" : ""}`}
               >
-                <div className="col-span-12 p-5 md:col-span-4 md:p-6">
+                <div className="p-5 md:p-6">
                   <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
                     {row.label}
                   </p>
                 </div>
-                <div className="col-span-12 border-t border-border p-5 md:col-span-4 md:border-l md:border-t-0 md:p-6">
-                  <p className="bg-surface rounded-lg px-4 py-3 text-sm text-ink">{row.composer}</p>
+                <div className="flex items-start gap-2.5 border-t border-border p-5 md:border-l md:border-t-0 md:p-6">
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-ok" />
+                  <p className="text-sm leading-relaxed text-ink">{row.composer}</p>
                 </div>
-                <div className="col-span-12 border-t border-border p-5 md:col-span-4 md:border-l md:border-t-0 md:p-6">
-                  <p className="text-sm text-muted-ink">{row.diy}</p>
+                <div className="flex items-start gap-2.5 border-t border-border p-5 md:border-l md:border-t-0 md:p-6">
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full border border-muted-ink" />
+                  <p className="text-sm leading-relaxed text-muted-ink">{row.diy}</p>
                 </div>
               </div>
             ))}

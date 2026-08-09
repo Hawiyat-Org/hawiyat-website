@@ -6,24 +6,39 @@ export interface ExecutionTraceProps {
   active?: number
   telemetry?: string[]
   className?: string
+  onStageClick?: (index: number) => void
 }
 
-const DEFAULT_STAGES = ["UNDERSTAND", "PLAN", "ROUTE", "EXECUTE", "EVALUATE", "RESULT"]
+export const DEFAULT_STAGES = ["UNDERSTAND", "PLAN", "ROUTE", "EXECUTE", "EVALUATE", "RESULT"]
 
-export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry = [], className }: ExecutionTraceProps) {
+export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry = [], className, onStageClick }: ExecutionTraceProps) {
   return (
     <div className={cn("rounded-lg border border-border bg-surface p-4 md:p-6 font-mono text-xs", className)}>
       <div className="flex items-center justify-between gap-2 overflow-x-auto">
         {stages.map((stage, i) => (
           <div key={stage} className="flex flex-1 items-center gap-2 last:flex-none">
-            <span
-              className={cn(
-                "whitespace-nowrap rounded-md px-2 py-1 transition-colors",
-                i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted-ink"
-              )}
-            >
-              {stage}
-            </span>
+            {onStageClick ? (
+              <button
+                type="button"
+                onClick={() => onStageClick(i)}
+                aria-pressed={i === active}
+                className={cn(
+                  "whitespace-nowrap rounded-md px-2 py-1 transition-colors",
+                  i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted-ink"
+                )}
+              >
+                {stage}
+              </button>
+            ) : (
+              <span
+                className={cn(
+                  "whitespace-nowrap rounded-md px-2 py-1 transition-colors",
+                  i <= active ? "bg-signal text-signal-text" : "bg-surface-dim text-muted-ink"
+                )}
+              >
+                {stage}
+              </span>
+            )}
             {i < stages.length - 1 && <span className="h-px flex-1 bg-border" />}
           </div>
         ))}
