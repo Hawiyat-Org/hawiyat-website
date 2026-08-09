@@ -115,7 +115,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 href={`https://wa.me/213559555951?text=Hello%20Hawiyat!%20My%20order%20${orderId}%20is%20submitted.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.02] transition-colors"
+                className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover"
               >
                 Chat on WhatsApp to confirm payment
               </a>
@@ -255,7 +255,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm hover:scale-[1.01] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

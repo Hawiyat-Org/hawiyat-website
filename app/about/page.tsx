@@ -39,7 +39,7 @@ export default function AboutPage() {
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-signal text-signal-text font-medium text-sm shadow-lg hover:scale-x-[1.03] transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-signal text-signal-text font-medium text-sm shadow-lg transition-colors duration-300 hover:bg-signal-hover"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -153,7 +153,7 @@ export default function AboutPage() {
                     src={event.img}
                     alt={event.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover"
                     style={event.img.includes("label-projet") ? { objectPosition: "70% center" } : event.img.includes("itihad-incubation") ? { objectPosition: "30% center" } : undefined}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -210,7 +210,7 @@ export default function AboutPage() {
                     </div>
                   ) : (
                     <div className="relative aspect-[4/3] overflow-hidden bg-surface-dim">
-                      <Image src={cert.img} alt={cert.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <Image src={cert.img} alt={cert.title} fill className="object-cover" />
                     </div>
                   )}
                   <div className="p-4">
@@ -225,7 +225,7 @@ export default function AboutPage() {
             <div className="flex-[1.25] max-md:w-full">
               <div className="group bg-surface-dim rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-surface-dim">
-                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
@@ -252,7 +252,7 @@ export default function AboutPage() {
             ].map((brand) => (
               <div key={brand.name} className="group relative flex items-center justify-center">
                 <a href={brand.url} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                  <div className="relative w-full h-32 md:h-40 lg:h-52 max-md:h-28 transition-transform duration-300 ease-out group-hover:scale-110">
+                  <div className="relative w-full h-32 md:h-40 lg:h-52 max-md:h-28">
                     <Image
                       src={brand.logo}
                       alt={brand.name}
@@ -307,14 +307,14 @@ export default function AboutPage() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-surface-dim rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-300"
+                className="group relative bg-surface-dim rounded-lg overflow-hidden transition-colors duration-300 hover:border-signal/50"
               >
                 <div className="relative h-56 max-md:h-48 overflow-hidden">
                   <Image
                     src={p.image}
                     alt={p.name}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent" />
                 </div>
@@ -396,7 +396,7 @@ export default function AboutPage() {
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
             <Link
               href="/services"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-signal text-signal-text font-medium hover:scale-[1.03] transition-all duration-300 active:scale-[0.97]"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-signal text-signal-text font-medium transition-colors duration-300 hover:bg-signal-hover"
             >
               <span>Explore Services</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -412,7 +412,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-xs text-muted-ink mt-8">
-            Free consultation, no pressure. Talk to a real Algerian team.
+            Free consultation, no pressure. Chat with a real Algerian team on WhatsApp.
           </p>
         </div>
       </section>

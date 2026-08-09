@@ -396,7 +396,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
           </div>
         </div>
 
-        <div className="mx-auto mt-20 max-w-6xl px-6">
+        <div className="mx-auto mt-20 max-w-7xl px-6">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
             Keep building the stack
           </p>

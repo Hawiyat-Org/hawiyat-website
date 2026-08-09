@@ -21,9 +21,8 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
     const target = container.querySelector<HTMLElement>(`[data-stage="${active}"]`)
     if (!target) return
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    target.scrollIntoView({
-      inline: "center",
-      block: "nearest",
+    container.scrollTo({
+      left: target.offsetLeft - (container.clientWidth - target.offsetWidth) / 2,
       behavior: reduceMotion ? "auto" : "smooth",
     })
   }, [active])
