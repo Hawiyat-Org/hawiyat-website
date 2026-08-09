@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Check, MessageCircle, Mail, ArrowRight } from "lucide-react"
+import { Check, MessageCircle, Mail, ArrowRight, ExternalLink } from "lucide-react"
 import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 
@@ -77,12 +77,21 @@ export default function Pricing() {
           <p className="text-base text-muted-ink">
             One layer, every model, and everything billed in dinars.
           </p>
+          <a
+            href="https://usage.ai.hawiyat.cloud"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors hover:text-ink"
+          >
+            Open your usage dashboard
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </div>
 
         <div className="mt-12 grid md:grid-cols-3">
           {/* PRO */}
           <div className="rounded-lg flex flex-col justify-between border border-border bg-surface p-6 max-md:rounded-b-none max-md:border-b-0 md:rounded-r-none md:border-r-0 lg:p-8">
-            <div className="space-y-5">
+            <div className="flex-1 space-y-5">
               <div>
                 <div className="flex flex-col items-start gap-1">
                   <span className="rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
@@ -114,7 +123,7 @@ export default function Pricing() {
 
             <button
               onClick={() => setSelectedService(toOrderService(proService))}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
               Order Pro, live in 24h
               <ArrowRight className="h-4 w-4" />
@@ -126,34 +135,30 @@ export default function Pricing() {
 
           {/* MAX switchable */}
           <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
-            <div>
-              <div className="mb-4 flex flex-col items-start gap-2">
-                <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
-                  {activeTier.label}
-                </span>
-                <div className="flex w-full flex-col items-start gap-2 lg:flex-row lg:items-center lg:justify-between">
-                  <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
-                  <div className="flex shrink-0 items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
-                    {maxTiers.map((tier) => (
-                      <button
-                        key={tier.key}
-                        onClick={() => setActiveMax(tier.key)}
-                        className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
-                          activeMax === tier.key
-                            ? "bg-signal text-signal-text"
-                            : "text-muted-ink hover:text-ink"
-                        }`}
-                        aria-pressed={activeMax === tier.key}
-                      >
-                        {tier.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-sm text-muted-ink">{activeTier.capacity}</p>
+            <div className="flex-1">
+              <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
+                {activeTier.label}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
+              <p className="mt-2 text-sm text-muted-ink">{activeTier.capacity}</p>
               <p className="mt-1 text-sm text-muted-ink">{activeTier.blurb}</p>
+
+              <div className="mt-4 flex shrink-0 items-center gap-1 rounded-md border border-border bg-surface-dim p-1 self-start w-fit">
+                {maxTiers.map((tier) => (
+                  <button
+                    key={tier.key}
+                    onClick={() => setActiveMax(tier.key)}
+                    className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
+                      activeMax === tier.key
+                        ? "bg-signal text-signal-text"
+                        : "text-muted-ink hover:text-ink"
+                    }`}
+                    aria-pressed={activeMax === tier.key}
+                  >
+                    {tier.label}
+                  </button>
+                ))}
+              </div>
 
               <div className="mt-5 flex items-baseline gap-1.5">
                 <span className="font-mono text-4xl font-bold text-ink">
@@ -176,7 +181,7 @@ export default function Pricing() {
 
             <button
               onClick={() => setSelectedService(toOrderService(activeTier.service))}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3.5 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Order MAX, live in 24h
               <ArrowRight className="h-4 w-4" />
@@ -188,11 +193,11 @@ export default function Pricing() {
 
           {/* ENTERPRISE */}
           <div className="rounded-lg flex flex-col justify-between border-2 border-ink bg-surface p-6 max-md:rounded-t-none max-md:border-t-0 md:rounded-l-none md:border-l-0 lg:p-8">
-            <div className="space-y-5">
+            <div className="flex-1 space-y-5">
               <div>
                 <div className="flex flex-col items-start gap-1">
                   <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
-                    Custom pricing
+                    Enterprise
                   </span>
                   <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
                 </div>
@@ -200,11 +205,6 @@ export default function Pricing() {
                   The execution layer, sized for your entire operation. Custom infrastructure,
                   capacity, and support.
                 </p>
-              </div>
-
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-mono text-4xl font-bold text-ink">Custom</span>
-                <span className="font-mono text-sm text-muted-ink">pricing</span>
               </div>
 
               <ul className="space-y-3">
@@ -222,14 +222,14 @@ export default function Pricing() {
                 href={enterpriseWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3.5 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
-                Book the full stack
+                Book an Enterprise plan
                 <MessageCircle className="h-4 w-4" />
               </a>
               <a
                 href="mailto:contact@hawiyat.org"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 Email us instead
                 <Mail className="h-4 w-4" />
