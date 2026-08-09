@@ -9,15 +9,15 @@ const HeroSection = () => {
     >
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-6 pb-16 pt-32 text-center md:pt-40">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-          AI that works for your business
+          The AI that does the work for you
         </p>
 
         <h1 className="max-w-3xl text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl xl:text-7xl">
-          Your AI just works.
+          Hawiyat AI Composer
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
-          Hawiyat picks the best AI for the job, connects your systems, and checks the result, billed in DZD, supported from Algeria.
+          We pick the best AI for each job, connect your systems, check the result, and run it all on our own infrastructure. Billed in DZD, built in Algeria.
         </p>
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
@@ -37,7 +37,7 @@ const HeroSection = () => {
         </div>
 
         <p className="font-mono text-xs text-muted-ink">
-          100+ paying clients · 100B+ tokens · ≈2.6M DZD ARR
+          100+ paying clients · 100B+ tokens
         </p>
 
         <a
@@ -60,7 +60,7 @@ const HeroSection = () => {
             "@type": "WebPage",
             url: "https://www.hawiyat.org/",
             name: "Hawiyat, AI infrastructure platform",
-            headline: "Your AI just works.",
+            headline: "Hawiyat AI Composer",
             about: {
               "@type": "Organization",
               name: "Hawiyat",
