@@ -274,10 +274,10 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               {service.seoContent && (
                 <details className="group rounded-lg border border-border bg-surface open:shadow-sm">
                   <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden list-none">
-                    <span className="text-xs font-mono uppercase tracking-widest text-ink">
+                    <span className="text-xs font-mono uppercase tracking-widest text-muted-ink">
                       More about {service.name}
                     </span>
-                    <ChevronDown className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
+                    <ChevronDown aria-hidden="true" className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
                   </summary>
                   <div className="space-y-8 px-5 pb-5">
                     <div>
@@ -306,10 +306,10 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               {service.faq && service.faq.length > 0 && (
                 <details className="group rounded-lg border border-border bg-surface open:shadow-sm">
                   <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden list-none">
-                    <span className="text-xs font-mono uppercase tracking-widest text-ink">
+                    <span className="text-xs font-mono uppercase tracking-widest text-muted-ink">
                       Questions &amp; answers
                     </span>
-                    <ChevronDown className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
+                    <ChevronDown aria-hidden="true" className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
                   </summary>
                   <div className="space-y-4 px-5 pb-5">
                     {service.faq.map((item, idx) => (
