@@ -269,7 +269,7 @@ body.booking-modal-open .fixed.inset-0 {
 }
 
 .marquee-track {
-  animation: marquee 36s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 
 .marquee:hover .marquee-track {

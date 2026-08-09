@@ -197,7 +197,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 - Keeps the WebPage JSON-LD block for AI search.
 
 ### 3. Partners Marquee (`components/partners-marquee.tsx`) — "Partners & early customers"
-- Two identical logo rows in one track, animated `translateX(-50% → 0)` on a 36s loop (`marquee-track` in globals.css); pauses on hover; disabled under `prefers-reduced-motion`.
+- Two identical logo rows in one track, animated `translateX(-50% → 0)` on a 26s loop (`marquee-track` in globals.css); pauses on hover; disabled under `prefers-reduced-motion`.
 - Logos grayscale → full color on hover (`group-hover:grayscale-0`).
 - **A11y:** the duplicate second track is `aria-hidden`, and its links carry `tabIndex={-1}` so keyboard users don't tab through invisible copies.
 - Embeds an `ItemList` JSON-LD (partners as organizations) for search/AI crawlers.
@@ -281,7 +281,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 ## Interactive Behaviors
 
 - Theme switch persisted (`localStorage`) via next-themes `class`. Header toggle is **mounted-guard**: a same-size neutral placeholder until mounted, then Sun/Moon — no hydration mismatch, no CLS.
-- Mobile menu: slide with `500ms`, Esc/close, body scroll lock.
+- Mobile menu: slide with `300ms`, Esc/close, body scroll lock.
 - Marquee: infinite loop, pauses on hover, disabled under reduced-motion; duplicate track `aria-hidden` + `tabIndex={-1}`.
 - MAX tier switch: plain `aria-pressed` pill toggle (no spring).
 - Form interactions unchanged (order forms, schedule booking, services).
@@ -291,7 +291,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 
 | Animation | Where | Property | Notes |
 |-----------|-------|----------|-------|
-| marquee | Partners row (home) | transform `translateX(-50% → 0)`, 36s linear infinite | CSS in globals.css; pauses on hover; off under reduced-motion |
+| marquee | Partners row (home) | transform `translateX(-50% → 0)`, 26s linear infinite | CSS in globals.css; pauses on hover; off under reduced-motion |
 | reveal-up | `/composer` only | opacity/transform 0.8s, stagger 0.2 | GSAP ScrollTrigger; reduced-motion keeps elements visible |
 | trace-line | `/composer` only | scaleX 0→1, scroll-scrubbed | GSAP ScrollTrigger draw-on-scroll |
 

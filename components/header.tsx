@@ -60,10 +60,10 @@ const Header = () => {
   if (pathname?.startsWith("/services/") && pathname !== "/services") return null
 
   return (
-    <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-500 ease-out ${
+    <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-300 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-lg sm:rounded-lg border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-500 ease-out overflow-hidden ${
+      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-lg sm:rounded-lg border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-300 ease-out overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
 
@@ -153,7 +153,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         <div
           id="mobile-menu"
-          className={`lg:hidden transition-all duration-500 ease-out ${
+          className={`lg:hidden transition-all duration-300 ease-out ${
             isMobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
           } overflow-y-auto`}
         >

@@ -153,7 +153,7 @@ export default function AboutPage() {
                     src={event.img}
                     alt={event.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                     style={event.img.includes("label-projet") ? { objectPosition: "70% center" } : event.img.includes("itihad-incubation") ? { objectPosition: "30% center" } : undefined}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -210,7 +210,7 @@ export default function AboutPage() {
                     </div>
                   ) : (
                     <div className="relative aspect-[4/3] overflow-hidden bg-surface-dim">
-                      <Image src={cert.img} alt={cert.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <Image src={cert.img} alt={cert.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
                   )}
                   <div className="p-4">
@@ -225,7 +225,7 @@ export default function AboutPage() {
             <div className="flex-[1.25] max-md:w-full">
               <div className="group bg-surface-dim rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-surface-dim">
-                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
@@ -252,12 +252,12 @@ export default function AboutPage() {
             ].map((brand) => (
               <div key={brand.name} className="group relative flex items-center justify-center">
                 <a href={brand.url} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                  <div className="relative w-full h-32 md:h-40 lg:h-52 max-md:h-28 transition-transform duration-500 ease-out group-hover:scale-110">
+                  <div className="relative w-full h-32 md:h-40 lg:h-52 max-md:h-28 transition-transform duration-300 ease-out group-hover:scale-110">
                     <Image
                       src={brand.logo}
                       alt={brand.name}
                       fill
-                      className="object-contain transition-all duration-500 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+                      className="object-contain transition-all duration-300 drop-shadow-[0_0_12px_rgba(0,0,0,0.2)] dark:hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
                     />
                   </div>
                 </a>
@@ -307,14 +307,14 @@ export default function AboutPage() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-surface-dim rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-500"
+                className="group relative bg-surface-dim rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-300"
               >
                 <div className="relative h-56 max-md:h-48 overflow-hidden">
                   <Image
                     src={p.image}
                     alt={p.name}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent" />
                 </div>

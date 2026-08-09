@@ -159,7 +159,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
     <div>
       {/* Search */}
       <div
-        className={`max-w-lg mx-auto mb-16 transition-all duration-500 delay-100 ${
+        className={`max-w-lg mx-auto mb-16 transition-all duration-300 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
