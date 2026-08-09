@@ -262,6 +262,16 @@ export default function TermsPage() {
                 It connects your WhatsApp number to our infrastructure, and our responsibility is limited to what we
                 control: hosting, setup, and support.
               </p>
+
+              <h3 className="mt-4 font-medium text-foreground">5.7 Service Level Agreement</h3>
+              <p className="mt-2">
+                Where a plan specifies an uptime commitment (for example, the 99.9% uptime guarantee on n8n and
+                WhatsApp infrastructure Enterprise plans), uptime is measured per billing cycle as the percentage of
+                time the managed service is reachable and responding, excluding scheduled maintenance and outages
+                caused by third-party providers described in Section 13. If Hawiyat misses the specified uptime
+                commitment in a billing cycle and the plan states that compensation applies, Hawiyat will provide the
+                compensation described for that plan, which is your sole remedy for such a failure.
+              </p>
             </section>
 
             <section id="api-keys" className="scroll-mt-24">

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/privacy",
   },
+  other: {
+    "article:modified_time": "2026-08-01",
+  },
 }
 
 const sections = [
@@ -38,6 +41,7 @@ export default function PrivacyPage() {
         <div className="mt-8 space-y-2">
           <h1 className="text-4xl font-semibold">Privacy Policy</h1>
           <p className="text-muted-foreground">Effective: August 8, 2026</p>
+          <p className="text-muted-foreground text-xs">Last Updated: August 2026</p>
         </div>
 
         <div className="mt-12 flex gap-12 lg:gap-20 relative">

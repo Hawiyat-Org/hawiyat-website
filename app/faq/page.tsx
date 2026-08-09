@@ -8,6 +8,7 @@ export const metadata = createMetadata({
   description:
     "Questions and answers about Hawiyat: what the AI Composer does, how it routes tasks, DZD pricing and payment methods, data privacy, and getting started.",
   path: "/faq",
+  modifiedTime: "2026-08-01",
 })
 
 const faqSchema = {
@@ -38,6 +39,9 @@ export default function FaqPage() {
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
               What Hawiyat does, how the AI Composer decides and evaluates every task, what
               it costs in dinars, how you pay, and where your data sits.
+            </p>
+            <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-ink">
+              Last updated: August 2026
             </p>
           </div>
 

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Copyright and DMCA Takedown Policy",
   description: "How to submit copyright infringement and takedown notices to Hawiyat, including required information and counter-notice procedures.",
   alternates: { canonical: "/dmca" },
+  other: {
+    "article:modified_time": "2026-08-01",
+  },
 }
 
 export default function DMCAPage() {
@@ -15,6 +18,7 @@ export default function DMCAPage() {
         <header className="mt-8 space-y-2">
           <h1 className="text-4xl font-semibold">Copyright and DMCA Takedown Policy</h1>
           <p className="text-muted-foreground">Effective: October 4, 2025</p>
+          <p className="text-muted-foreground text-xs">Last Updated: August 2026</p>
         </header>
         <div className="mt-12 space-y-10 text-sm leading-relaxed text-muted-foreground">
           <section><h2 className="text-lg font-medium text-foreground">1. Overview</h2><p className="mt-3">Hawiyat respects intellectual property rights and responds to complete, valid copyright notices concerning content hosted through its services.</p></section>
