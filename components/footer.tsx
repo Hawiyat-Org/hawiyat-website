@@ -87,7 +87,7 @@ const Footer = () => {
       <hr className="mt-8" />
 
       <div className="mt-2 flex gap-2 flex-col text-muted-ink place-items-center text-[12px] w-full text-center place-content-around">
-        <span>Copyright © 2023-2026 Hawiyat</span>
+        <span>Copyright © 2025-2026 Hawiyat</span>
         <span>All trademarks and copyrights belong to their respective owners.</span>
       </div>
     </footer>
