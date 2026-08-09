@@ -343,16 +343,16 @@ export default function ComposerPage() {
           </div>
 
           <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
-            <div className="rounded-3xl border border-border bg-surface p-8 text-center">
-              <p className="font-mono text-5xl font-bold text-signal md:text-6xl">100+</p>
+            <div className="rounded-md border border-border bg-surface p-8 text-center">
+              <p className="font-mono text-5xl font-bold text-ink md:text-6xl">100+</p>
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 clients on the platform
               </p>
             </div>
-            <div className="rounded-3xl border border-border bg-surface p-8 text-center">
-              <p className="font-mono text-4xl font-bold text-signal md:text-5xl">≈2.6M DZD</p>
+            <div className="rounded-md border border-border bg-surface p-8 text-center">
+              <p className="font-mono text-5xl font-bold text-ink md:text-6xl">100B+</p>
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                annual recurring revenue
+                tokens
               </p>
             </div>
           </div>
