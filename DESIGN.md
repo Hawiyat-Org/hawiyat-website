@@ -252,9 +252,10 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 3. Partners marquee
 4. Our Numbers
 5. Pricing (PRO / MAX switchable / Enterprise)
-6. FAQ
-7. CTA
-8. Footer
+6. Testimonials
+7. FAQ
+8. CTA
+9. Footer
 *(no newsletter — removed)*
 
 ### `/composer` — engine page (redirect from legacy `/hawiyat-composer`; `/ai-algeria` → `/` redirect)
