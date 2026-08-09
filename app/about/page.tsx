@@ -28,6 +28,9 @@ export default function AboutPage() {
             <p className="text-sm text-muted-ink">
               Founded in Algiers • Incubated by Itihad
             </p>
+            <p className="text-xs text-muted-ink">
+              Last updated: August 2026
+            </p>
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
                 href="/services"
