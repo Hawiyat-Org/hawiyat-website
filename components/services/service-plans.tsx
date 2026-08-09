@@ -1,17 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { Check } from "lucide-react"
+import { Check, Mail, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ServiceOrderForm } from "./service-order-form"
 
-interface ServicePlan {
+export interface ServicePlan {
   name: string
   price: string
   priceLabel: string
   tagline?: string
   originalPrice?: string
   launchNote?: string
+  custom?: boolean
   features: string[]
 }
 
@@ -42,7 +43,10 @@ export function ServicePlans({
   })
 
   const plan = plans[activeIdx]
-  const isPopular = plans.length >= 3 && activeIdx === 1
+
+  const contactWhatsappUrl = `https://wa.me/213559555951?text=${encodeURIComponent(
+    `Hello Hawiyat! I would like a custom plan for ${serviceName}.`
+  )}`
 
   const serviceData = {
     id: serviceId,
@@ -77,7 +81,7 @@ export function ServicePlans({
             >
               <span className="text-sm font-semibold">{p.name}</span>
               <span className={cn("text-xs", active ? "text-signal-text/90" : "text-muted-ink")}>
-                {p.price} {p.priceLabel}
+                {p.custom ? "Custom" : `${p.price} ${p.priceLabel}`}
               </span>
             </button>
           )
@@ -87,19 +91,12 @@ export function ServicePlans({
       {/* Active plan card */}
       <div
         key={plan.name}
-        className={`rounded-md border bg-surface shadow-sm overflow-hidden ${
-          isPopular ? "border-signal/40 ring-1 ring-signal/10" : "border-border/60"
-        }`}
+        className="rounded-md border border-border/60 bg-surface shadow-sm overflow-hidden"
       >
         {/* Header */}
         <div className="bg-gradient-to-br from-surface-dim/50 to-surface-dim/20 border-b border-border/60 p-5">
           <div className="flex items-center justify-between gap-3 mb-2">
             <h3 className="text-lg font-semibold text-ink">{plan.name}</h3>
-            {isPopular && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-signal text-signal-text">
-                Most Popular
-              </span>
-            )}
           </div>
           {plan.tagline && (
             <p className="text-sm text-muted-ink mb-3">{plan.tagline}</p>
@@ -107,11 +104,17 @@ export function ServicePlans({
 
           {/* Price */}
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-ink">{plan.price}</span>
-            {plan.originalPrice && (
-              <span className="text-lg text-muted-ink line-through">{plan.originalPrice}</span>
+            {plan.custom ? (
+              <span className="text-3xl font-bold text-ink">Custom</span>
+            ) : (
+              <>
+                <span className="text-3xl font-bold text-ink">{plan.price}</span>
+                {plan.originalPrice && (
+                  <span className="text-lg text-muted-ink line-through">{plan.originalPrice}</span>
+                )}
+                <span className="text-sm text-muted-ink">{plan.priceLabel}</span>
+              </>
             )}
-            <span className="text-sm text-muted-ink">{plan.priceLabel}</span>
           </div>
         </div>
 
@@ -135,7 +138,28 @@ export function ServicePlans({
           )}
 
           {/* CTA */}
-          <ServiceOrderForm service={serviceData} />
+          {plan.custom ? (
+            <div className="space-y-3">
+              <a
+                href={contactWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+              >
+                Contact us on WhatsApp
+                <MessageCircle className="h-4 w-4" />
+              </a>
+              <a
+                href="mailto:contact@hawiyat.org"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+              >
+                Email us instead
+                <Mail className="h-4 w-4" />
+              </a>
+            </div>
+          ) : (
+            <ServiceOrderForm service={serviceData} />
+          )}
         </div>
       </div>
 

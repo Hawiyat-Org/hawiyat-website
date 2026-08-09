@@ -4,7 +4,7 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ChevronDown } from "lucide-react"
-import { ServicePlans } from "@/components/services/service-plans"
+import { ServicePlans, type ServicePlan } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
 
 export async function generateStaticParams() {
@@ -43,7 +43,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   const isHosting = HOSTING_SLUGS.includes(params.slug)
 
-  let plans = service.plans
+  let plans: ServicePlan[] | undefined = service.plans
   if (isHosting) {
     const hostingBasic = getServiceBySlug("hosting-basic")
     const hostingVip = getServiceBySlug("hosting-vip")
@@ -62,6 +62,18 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
           priceLabel: "DA/month",
           tagline: "Two apps plus a managed database, with priority support.",
           features: hostingVip.features,
+        },
+        {
+          name: "Custom",
+          price: "",
+          priceLabel: "",
+          tagline: "More apps, more RAM, dedicated infrastructure, SLAs.",
+          features: [
+            "Bespoke app counts and resources",
+            "Dedicated infrastructure options",
+            "Custom SLAs and priority support",
+          ],
+          custom: true,
         },
       ]
     }
@@ -97,7 +109,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
         ? {
             "@type": "OfferCatalog",
             name: `${service.name} Plans`,
-            itemListElement: plans.map((plan) => ({
+            itemListElement: plans.filter((plan) => !plan.custom).map((plan) => ({
               "@type": "Offer",
               name: plan.name,
               price: plan.price.replace(/,/g, ""),
