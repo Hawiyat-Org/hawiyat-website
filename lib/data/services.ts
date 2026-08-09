@@ -7,6 +7,7 @@ export interface ServicePlan {
   tagline: string
   originalPrice?: string
   launchNote?: string
+  custom?: boolean
   features: string[]
 }
 
@@ -292,6 +293,20 @@ export const services: Service[] = [
           "Hybrid data compliance for strict enterprise requirements",
           "Dedicated account manager who knows your runs",
           "Advanced usage analytics in DZD",
+        ],
+      },
+      {
+        name: "Enterprise",
+        price: "",
+        priceLabel: "",
+        tagline: "The execution layer, sized for your entire operation.",
+        custom: true,
+        features: [
+          "The execution layer, tuned for your whole operation",
+          "Dedicated account manager who knows your runs and your stack",
+          "Priority WhatsApp support from the local team in AR, FR, and EN",
+          "Custom infrastructure and capacity built around your workloads",
+          "Single contract, one invoice, everything billed in DZD",
         ],
       },
     ],
