@@ -212,14 +212,6 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                 </div>
               )}
 
-              {service.availability === "contact" && (
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-signal/10 text-signal-contrast border border-signal/30">
-                    By quote
-                  </span>
-                </div>
-              )}
-
               {service.availability === "unavailable" && (
                 <div className="absolute top-3 left-3 z-10">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-surface-dim text-muted-ink border border-border">
@@ -259,7 +251,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                       "inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-medium",
                       categoryStyles[service.category] ?? "bg-surface-dim text-muted-ink border border-border"
                     )}>
-                      hosting
+                      Hosting
                     </span>
                   )}
                 </div>
