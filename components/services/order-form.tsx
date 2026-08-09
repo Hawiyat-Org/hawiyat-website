@@ -59,7 +59,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
         throw new Error(data.error || "Failed to submit order")
       }
 
-      const price = Number(service.price) || 0
+      const price = Number(String(service.price).replace(/,/g, "")) || 0
       const usdValue = price / 250
 
       const firePixel = () => {

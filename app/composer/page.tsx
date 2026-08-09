@@ -131,7 +131,7 @@ const COMPARISON = [
 ]
 
 const FULLSTACK_WHATSAPP_URL =
-  "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%E2%80%94%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
+  "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -163,7 +163,7 @@ export default function ComposerPage() {
             </p>
             <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
               <Link
-                href="/services"
+                href="/#pricing"
                 className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
               >
                 Start building
@@ -228,7 +228,7 @@ export default function ComposerPage() {
             {STAGES.map((stage, i) => (
               <div
                 key={stage.name}
-                className="rounded-3xl border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
+                className="rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
               >
                 <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
                   {String(i + 1).padStart(2, "0")}
@@ -281,7 +281,7 @@ export default function ComposerPage() {
                 {SYSTEMS.map((system) => (
                   <div
                     key={system.name}
-                    className="group rounded-3xl border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
+                    className="group rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
                   >
                     <system.icon className="h-8 w-8 text-signal" />
                     <h3 className="mt-4 text-lg font-semibold text-ink">{system.name}</h3>
@@ -318,7 +318,7 @@ export default function ComposerPage() {
             {CAPABILITIES.map((cap) => (
               <div
                 key={cap.title}
-                className="rounded-3xl border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98] md:p-8"
+                className="rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98] md:p-8"
               >
                 <cap.icon className="h-7 w-7 text-signal" />
                 <h3 className="mt-5 text-xl font-semibold text-ink">{cap.title}</h3>
@@ -362,7 +362,7 @@ export default function ComposerPage() {
       {/* ─── Enterprise full-stack ─── */}
       <section className="py-16 md:py-28">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="rounded-3xl border border-border bg-surface p-6 md:p-12">
+          <div className="rounded-lg border border-border bg-surface p-6 md:p-12">
             <div className="grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <div className="flex items-center gap-3">
@@ -430,7 +430,7 @@ export default function ComposerPage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-border">
+          <div className="overflow-hidden rounded-lg border border-border">
             <div className="hidden grid-cols-12 gap-0 bg-surface-dim md:grid">
               <div className="col-span-4 p-6 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 &nbsp;
@@ -473,12 +473,12 @@ export default function ComposerPage() {
             Have your first task running today.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a plan on the services page, or bring the whole stack. Composer handles the
+            Pick a Composer plan on the home page, or bring the whole stack. Composer handles the
             models. You handle the business.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/services"
+              href="/#pricing"
               className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
             >
               Browse services

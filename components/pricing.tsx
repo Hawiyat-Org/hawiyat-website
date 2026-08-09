@@ -62,7 +62,7 @@ export default function Pricing() {
   const activeTier = maxTiers.find((t) => t.key === activeMax)!
 
   const enterpriseWhatsappUrl =
-    "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%E2%80%94%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
+    "https://wa.me/213559555951?text=Hello%2C%20we%20need%20the%20full%20stack%20%2C%20Composer%20%2B%20n8n%20%2B%20Evolution%20%2B%20Platform"
 
   const enterpriseFeatures = [
     "Full stack: Composer + n8n + Evolution + Platform",

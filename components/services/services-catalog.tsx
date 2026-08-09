@@ -194,7 +194,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
             <Link
               key={service.key}
               href={`/services/${service.slug}${service.plan ? `?plan=${encodeURIComponent(service.plan)}` : ""}`}
-              className={`group relative rounded-3xl border border-border bg-surface overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
+              className={`group relative rounded-lg border border-border bg-surface overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
               style={{ transitionDelay: `${i * 80}ms` }}

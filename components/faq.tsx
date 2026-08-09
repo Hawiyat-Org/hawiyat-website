@@ -35,7 +35,7 @@ const FAQ = () => {
     {
       question: "How do I get started?",
       answer:
-        "Pick a plan on the services page: Composer Pro for solo builders, a MAX tier for teams, or Enterprise for the full stack. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day. Prefer to talk first? Chat with us on WhatsApp and we'll set you up.",
+        "Pick a Composer plan on the home page, or browse n8n, WhatsApp, and hosting on the services page. We activate your workspace within 24 hours, you connect your tools, and run your first task. A WhatsApp workflow can be executing the same day. Prefer to talk first? Chat with us on WhatsApp and we'll set you up.",
     },
   ]
 

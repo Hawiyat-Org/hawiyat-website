@@ -307,7 +307,7 @@ export default function AboutPage() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-surface-dim rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-500"
+                className="group relative bg-surface-dim rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-500"
               >
                 <div className="relative h-56 max-md:h-48 overflow-hidden">
                   <Image
