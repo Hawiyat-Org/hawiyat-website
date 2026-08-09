@@ -43,6 +43,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   const isHosting = HOSTING_SLUGS.includes(params.slug)
   const isUnavailable = service.availability === "unavailable"
+  const isContact = service.availability === "contact"
 
   let plans: ServicePlan[] | undefined = service.plans
   if (isHosting) {
@@ -188,11 +189,12 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   // Mobile quick price: shown under the title/description on small screens only
   // (desktop already shows it in the sticky pricing card on the right).
   // Single-price services, or a single plan filtered by ?plan=, get their price here.
-  // Hosting renders the Basic/VIP selector, so pricing lives in the selector card.
+  // Hosting renders the Basic/VIP selector, so the price lives in the selector card
+  // unless it is contact-only (then the price is real and worth showing here).
   const singlePlan = plans && plans.length === 1 ? plans[0] : null
   const mobilePrice = isUnavailable
     ? null
-    : isHosting
+    : isHosting && !isContact
       ? null
       : singlePlan
         ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
@@ -398,6 +400,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   fairUse={service.fairUse}
                   disclaimer={service.disclaimer}
                   defaultPlan={defaultPlan}
+                  contactOnly={isContact}
                 />
               ) : (
                 /* Single Price Card */

@@ -84,19 +84,21 @@ Official WhatsApp Business API access for messaging and automation: webhook inte
 
 ## Cloud Runtime — Hosting
 
+> **Contact to order:** Cloud runtime plans are available by contacting the team on WhatsApp or email; we will set it up and confirm payment.
+
 | Plan | Price | What you get |
 | --- | --- | --- |
-| Hosting Basic | 1,000 DA/month | 1 application, 512MB RAM, free SSL, automatic Git deployments, custom domain, weekly backups, email support |
-| Hosting VIP | 2,000 DA/month | 2 applications, 1GB RAM, managed database (PostgreSQL or MySQL), daily backups, priority WhatsApp support |
+| Cloud Basic | 1,000 DA/month | 1 application, 512MB RAM, free SSL, automatic Git deployments, custom domain, weekly backups, email support |
+| Cloud VIP | 2,000 DA/month | 2 applications, 1GB RAM, managed database (PostgreSQL or MySQL), daily backups, priority WhatsApp support |
 
-### Hosting Basic — 1,000 DA/month
-Single app hosting for personal projects, portfolios, and small websites.
+### Cloud Basic — 1,000 DA/month
+Managed cloud runtime for a single application, for personal projects, portfolios, and small websites.
 - 1 application, free SSL certificate, automatic deployments, basic monitoring
 - 512MB RAM, custom domain support, weekly backups
 - Node.js, Python, or static sites. Support by email.
 
-### Hosting VIP — 2,000 DA/month
-Premium hosting for up to 2 apps with a managed database.
+### Cloud VIP — 2,000 DA/month
+Managed cloud runtime for up to 2 apps with a managed database.
 - 2 applications, managed database (PostgreSQL or MySQL), free SSL, automatic deployments
 - 1GB RAM, daily backups, advanced resource monitoring
 - Priority support via WhatsApp

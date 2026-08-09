@@ -160,13 +160,13 @@ FAQ:
 - Is the Evolution API an official WhatsApp or Meta product? No. It is a third-party tool that connects your WhatsApp number to Hawiyat's infrastructure using official Meta Business API access. We follow best practices, but we are not responsible for issues caused by the tool itself or by WhatsApp.
 - How do I connect my WhatsApp number to the Evolution API? After you order, our team deploys your instance and walks you through onboarding: linking your WhatsApp number, configuring webhooks and message templates, and testing your first automation.
 
-### Hosting Basic — 1,000 DA/month
+### Cloud Basic — 1,000 DA/month
 
-> **Availability:** Hosting is temporarily unavailable for new orders. Composer plans, n8n, and WhatsApp infrastructure remain available.
+> **Availability:** Available by contacting the team. Tell us which plan you need and we will set it up and confirm payment on WhatsApp or email.
 
 - [Service page](https://www.hawiyat.org/services/hosting-basic)
 - Category: Cloud Runtime
-- Simple managed hosting for a single application. Personal projects, portfolios, small websites. Free SSL, auto-deploy, and basic monitoring included.
+- Managed cloud runtime for a single application. Personal projects, portfolios, small websites. Free SSL, auto-deploy, and basic monitoring included.
 
 Features:
 - 1 application
@@ -180,15 +180,17 @@ Features:
 - Support by email
 
 FAQ:
-- What can I host on the Basic hosting plan? One application — personal portfolios, small websites, demo projects, and single-page applications. It supports Node.js, Python, and static sites with 512MB RAM, free SSL, and automatic Git deployments.
-- Do I need a foreign credit card to pay for hosting? No. All Hawiyat hosting plans are priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.
-- How do deployments work on Hosting Basic? Deployments are automatic from Git. Connect your repository, and every push deploys your changes with zero configuration.
+- What can I run on the Cloud Basic plan? One application — personal portfolios, small websites, demo projects, and single-page applications. It supports Node.js, Python, and static sites with 512MB RAM, free SSL, and automatic Git deployments.
+- Do I need a foreign credit card to pay for cloud runtime plans? No. All Hawiyat cloud runtime plans are priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.
+- How do deployments work on Cloud Basic? Deployments are automatic from Git. Connect your repository, and every push deploys your changes with zero configuration.
 
-### Hosting VIP — 2,000 DA/month
+### Cloud VIP — 2,000 DA/month
+
+> **Availability:** Available by contacting the team. Tell us which plan you need and we will set it up and confirm payment on WhatsApp or email.
 
 - [Service page](https://www.hawiyat.org/services/hosting-vip)
 - Category: Cloud Runtime
-- Premium hosting for up to 2 apps with a managed database. For full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.
+- Managed cloud runtime for up to 2 apps with a managed database. For full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.
 
 Features:
 - 2 applications
@@ -201,9 +203,9 @@ Features:
 - Daily backups and advanced resource monitoring
 
 FAQ:
-- What is the difference between Hosting Basic and Hosting VIP? Basic hosts one application at 1,000 DA/month with 512MB RAM. VIP hosts two applications plus a managed PostgreSQL or MySQL database at 2,000 DA/month, with 1GB RAM, daily backups, advanced monitoring, and priority WhatsApp support.
-- Which databases are supported on Hosting VIP? A managed PostgreSQL or MySQL database, provisioned and maintained by our team, with daily backups and advanced resource monitoring included.
-- Can I host a SaaS or e-commerce site on Hosting VIP? Yes. Hosting VIP is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access, custom domains, automatic HTTPS, and priority support.
+- What is the difference between Cloud Basic and Cloud VIP? Basic runs one application at 1,000 DA/month with 512MB RAM. VIP runs two applications plus a managed PostgreSQL or MySQL database at 2,000 DA/month, with 1GB RAM, daily backups, advanced monitoring, and priority WhatsApp support.
+- Which databases are supported on Cloud VIP? A managed PostgreSQL or MySQL database, provisioned and maintained by our team, with daily backups and advanced resource monitoring included.
+- Can I run a SaaS or e-commerce site on Cloud VIP? Yes. Cloud VIP is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access, custom domains, automatic HTTPS, and priority support.
 
 ## Contact
 

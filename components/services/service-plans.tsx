@@ -25,6 +25,7 @@ interface ServicePlansProps {
   serviceImage?: string | null
   serviceImages?: string[] | null
   defaultPlan?: string
+  contactOnly?: boolean
 }
 
 export function ServicePlans({
@@ -36,6 +37,7 @@ export function ServicePlans({
   serviceImage,
   serviceImages,
   defaultPlan,
+  contactOnly = false,
 }: ServicePlansProps) {
   const [activeIdx, setActiveIdx] = useState(() => {
     const match = plans.findIndex((p) => p.name === defaultPlan)
@@ -46,6 +48,10 @@ export function ServicePlans({
 
   const contactWhatsappUrl = `https://wa.me/213559555951?text=${encodeURIComponent(
     `Hello Hawiyat! I would like a custom plan for ${serviceName}.`
+  )}`
+
+  const contactOrderUrl = `https://wa.me/213559555951?text=${encodeURIComponent(
+    `Hello Hawiyat! I would like to order Cloud ${plan.name}.`
   )}`
 
   const serviceData = {
@@ -138,7 +144,30 @@ export function ServicePlans({
           )}
 
           {/* CTA */}
-          {plan.custom ? (
+          {contactOnly ? (
+            <div className="space-y-4">
+              <h4 className="text-base font-semibold text-ink">Order by contacting the team</h4>
+              <p className="text-sm text-muted-ink leading-relaxed">
+                Tell us which plan you need and we will set it up and confirm payment on WhatsApp.
+              </p>
+              <a
+                href={contactOrderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+              >
+                Order on WhatsApp
+                <MessageCircle className="h-4 w-4" />
+              </a>
+              <a
+                href="mailto:contact@hawiyat.org"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+              >
+                Email us
+                <Mail className="h-4 w-4" />
+              </a>
+            </div>
+          ) : plan.custom ? (
             <div className="space-y-3">
               <a
                 href={contactWhatsappUrl}

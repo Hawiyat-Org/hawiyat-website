@@ -50,14 +50,14 @@ function buildCatalogCards(): CatalogCard[] {
     if (EXCLUDED_SERVICE_IDS.includes(service.id)) continue
     if (service.id === "hosting-vip") continue // folded into the Hosting card below
 
-    // hosting-basic + hosting-vip → one "Hosting" card (Basic or VIP chosen on the detail page)
+    // hosting-basic + hosting-vip → one "Hawiyat Cloud" card (Basic or VIP chosen on the detail page)
     if (service.id === "hosting-basic") {
       cards.push({
         key: "hosting",
         slug: "hosting-basic",
-        name: "Hosting",
+        name: "Hawiyat Cloud",
         description:
-          "Managed app hosting for one or two applications, with SSL, automatic Git deploys, and an optional managed database. Choose Basic or VIP on the page.",
+          "Managed cloud runtime for one or two apps with databases, containers, SSL, and automatic deploys. Basic or VIP, ordered via the team.",
         image: service.image,
         images: service.images,
         price: "from 1,000",
@@ -212,6 +212,14 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                 </div>
               )}
 
+              {service.availability === "contact" && (
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-signal/10 text-signal-contrast border border-signal/30">
+                    By quote
+                  </span>
+                </div>
+              )}
+
               {service.availability === "unavailable" && (
                 <div className="absolute top-3 left-3 z-10">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-surface-dim text-muted-ink border border-border">
@@ -258,12 +266,19 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                       Unavailable for now
                     </span>
                   ) : (
-                    <div className="flex items-baseline gap-1.5 flex-wrap">
-                      <span className="text-2xl font-bold text-ink">{service.price}</span>
-                      {service.originalPrice && (
-                        <span className="text-sm text-muted-ink line-through">{service.originalPrice}</span>
+                    <div>
+                      <div className="flex items-baseline gap-1.5 flex-wrap">
+                        <span className="text-2xl font-bold text-ink">{service.price}</span>
+                        {service.originalPrice && (
+                          <span className="text-sm text-muted-ink line-through">{service.originalPrice}</span>
+                        )}
+                        <span className="text-xs text-muted-ink">{service.priceLabel}</span>
+                      </div>
+                      {service.availability === "contact" && (
+                        <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
+                          Ordered via the team
+                        </p>
                       )}
-                      <span className="text-xs text-muted-ink">{service.priceLabel}</span>
                     </div>
                   )}
                 </div>
