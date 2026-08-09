@@ -86,7 +86,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
         throw new Error(data.error || "Failed to submit order")
       }
 
-      const price = Number(service.price) || 0
+      const price = Number(String(service.price).replace(/,/g, "")) || 0
       const usdValue = price / 250
 
       const firePixel = () => {

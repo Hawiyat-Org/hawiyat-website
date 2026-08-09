@@ -42,7 +42,7 @@ export function ServicePlans({
   })
 
   const plan = plans[activeIdx]
-  const isPopular = activeIdx === 1
+  const isPopular = plans.length >= 3 && activeIdx === 1
 
   const serviceData = {
     id: serviceId,
