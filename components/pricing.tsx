@@ -92,11 +92,11 @@ export default function Pricing() {
           <div className="rounded-lg flex flex-col justify-between border border-border bg-surface p-6 max-md:rounded-b-none max-md:border-b-0 md:rounded-r-none md:border-r-0 lg:p-8">
             <div className="space-y-5">
               <div>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-ink">{proService.name}</h3>
+                <div className="flex flex-col items-start gap-1">
                   <span className="rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
                     Pro
                   </span>
+                  <h3 className="text-lg font-semibold text-ink">{proService.name}</h3>
                 </div>
                 <p className="mt-2 text-sm text-muted-ink">
                   For solo builders. Give it a task, get a checked result.
@@ -132,23 +132,28 @@ export default function Pricing() {
           {/* MAX switchable */}
           <div className="relative flex flex-col justify-between rounded-lg border border-border bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 max-md:rounded-none max-md:border-t-0 max-md:border-b-0">
             <div>
-              <div className="mb-4 flex items-center justify-between gap-2">
-                <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
-                <div className="flex items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
-                  {maxTiers.map((tier) => (
-                    <button
-                      key={tier.key}
-                      onClick={() => setActiveMax(tier.key)}
-                      className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
-                        activeMax === tier.key
-                          ? "bg-signal text-signal-text"
-                          : "text-muted-ink hover:text-ink"
-                      }`}
-                      aria-pressed={activeMax === tier.key}
-                    >
-                      {tier.label}
-                    </button>
-                  ))}
+              <div className="mb-4 flex flex-col items-start gap-2">
+                <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
+                  {activeTier.label}
+                </span>
+                <div className="flex w-full items-center justify-between gap-2">
+                  <h3 className="text-lg font-semibold text-ink">Hawiyat AI Composer MAX</h3>
+                  <div className="flex items-center gap-1 rounded-md border border-border bg-surface-dim p-1">
+                    {maxTiers.map((tier) => (
+                      <button
+                        key={tier.key}
+                        onClick={() => setActiveMax(tier.key)}
+                        className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
+                          activeMax === tier.key
+                            ? "bg-signal text-signal-text"
+                            : "text-muted-ink hover:text-ink"
+                        }`}
+                        aria-pressed={activeMax === tier.key}
+                      >
+                        {tier.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -187,11 +192,11 @@ export default function Pricing() {
           <div className="rounded-lg flex flex-col justify-between border-2 border-ink bg-surface p-6 max-md:rounded-t-none max-md:border-t-0 md:rounded-l-none md:border-l-0 lg:p-8">
             <div className="space-y-5">
               <div>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
+                <div className="flex flex-col items-start gap-1">
                   <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                     Custom pricing
                   </span>
+                  <h3 className="text-lg font-semibold text-ink">Enterprise</h3>
                 </div>
                 <p className="mt-2 text-sm text-muted-ink">
                   The whole stack under one contract: Composer + n8n + Evolution API + Platform.
