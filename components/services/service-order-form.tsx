@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { createPortal } from "react-dom"
-import { X, Loader2, CheckCircle2, Building2, Wallet, DollarSign, ArrowRight, Check } from "lucide-react"
+import { Loader2, CheckCircle2, Building2, Wallet, DollarSign, ArrowRight, Check } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface ServiceOrderFormProps {
   service: {
@@ -194,22 +194,10 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               </button>
             </div>
 
-      {isOpen && typeof document !== 'undefined' && createPortal(
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg border border-border/60 bg-surface shadow-2xl p-6 scrollbar-hide"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 p-1 rounded-lg hover:bg-surface-dim transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="max-h-[90vh] w-full max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
+          <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
+            <DialogTitle className="sr-only">{service.name}</DialogTitle>
 
             {isSuccess ? (
               <div className="text-center py-8">
@@ -397,10 +385,9 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 </form>
               </>
             )}
-          </div>
-        </div>,
-        document.body
-      )}
+            </div>
+          </DialogContent>
+        </Dialog>
     </div>
   )
 }

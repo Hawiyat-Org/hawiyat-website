@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { X, Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-react"
+import { Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface OrderFormProps {
   service: {
@@ -91,21 +92,10 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
   }
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-      onClick={onClose}
-    >
-      <div
-        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-lg border border-border/60 bg-surface p-6 shadow-2xl scrollbar-hide"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1 rounded-lg hover:bg-surface-dim transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <Dialog open onOpenChange={(open) => { if (!open) onClose() }}>
+      <DialogContent className="max-h-[90vh] w-full max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
+        <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
+          <DialogTitle className="sr-only">{service.name}</DialogTitle>
 
         {isSuccess ? (
           <div className="text-center py-8">
@@ -284,7 +274,8 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             </form>
           </>
         )}
-      </div>
-    </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
