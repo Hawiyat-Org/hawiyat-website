@@ -49,14 +49,12 @@ For solo builders. Execution layer with routing, context, fallbacks, and evaluat
 
 ### Hawiyat AI Composer MAX 20X — 30,000 DA/month
 20× base execution capacity + hybrid data compliance. For agencies, engineering teams, and power users running AI at scale.
-- 20X base execution capacity, maximum parallel runs and tasks
-- Multi-agent traffic resolution that keeps dozens of concurrent runs stable
-- Exact-match and vector-based semantic caching so repeated work is instant
-- Automatic fallback cascades across models when one is slow or down
+- Everything in MAX 5X
+- 20× the base execution capacity of Pro, maximum parallel throughput
+- Multi-agent traffic resolution for heavy concurrent load
 - Hybrid data compliance for strict enterprise requirements
-- Dedicated account manager who knows your runs and your workloads
-- Advanced usage analytics in DZD, per run, per task, per day
-- Priority WhatsApp support from the local team in AR, FR, and EN
+- Dedicated account manager who knows your runs
+- Advanced usage analytics in DZD
 
 ---
 
