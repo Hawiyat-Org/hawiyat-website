@@ -257,9 +257,9 @@ export default function ComposerPage() {
                   One layer. Every model. Every system.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  You already run your business on WhatsApp, a CRM, and spreadsheets. Composer
-                  connects to all of it, and to every major AI, so you never pick a
-                  &ldquo;model.&rdquo; You just pick a task.
+                  Your stack is already wired in: WhatsApp, CRM, ERP, email, databases, and
+                  n8n, each as a route the layer can reach. Models are routes too. Here is
+                  the guest list.
                 </p>
               </div>
             </div>

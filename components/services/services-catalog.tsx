@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import Link from "next/link"
-import { services, type Service } from "@/lib/data/services"
+import { services, EXCLUDED_SERVICE_IDS, type Service } from "@/lib/data/services"
 import { cn } from "@/lib/utils"
 
 interface CatalogCard {
@@ -25,9 +25,6 @@ interface CatalogCard {
   features: string[]
   useCases: string
 }
-
-/* Composer tiers live on the home pricing page only — never in the services catalog. */
-const COMPOSER_SERVICE_IDS = ["composer-pro", "composer-max5x", "composer-max20x", "llm-credit"]
 
 /* Lowest plan price (as a display string) for "from X DA" cards. */
 function lowestPlanPrice(plans?: Service["plans"]): string | undefined {
@@ -50,7 +47,7 @@ function buildCatalogCards(): CatalogCard[] {
   const cards: CatalogCard[] = []
 
   for (const service of services) {
-    if (COMPOSER_SERVICE_IDS.includes(service.id)) continue
+    if (EXCLUDED_SERVICE_IDS.includes(service.id)) continue
     if (service.id === "hosting-vip") continue // folded into the Hosting card below
 
     // hosting-basic + hosting-vip → one "Hosting" card (Basic or VIP chosen on the detail page)
