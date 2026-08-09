@@ -115,14 +115,16 @@ function buildCatalogCards(): CatalogCard[] {
   return cards
 }
 
-/* Display order: the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
+/* Display order: the execution layer first, then the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
 const CARD_ORDER: Record<string, number> = {
+  "llm-credit": 0,
   "n8n-hosting": 1,
   "evolution-api": 2,
   "hosting": 3,
 }
 
 const categoryStyles: Record<string, string> = {
+  "AI Execution": "bg-signal text-signal-text border border-signal/20",
   "Managed Systems": "bg-surface-dim text-muted-ink border border-border",
   "Cloud Runtime": "bg-surface-dim text-muted-ink border border-border",
 }

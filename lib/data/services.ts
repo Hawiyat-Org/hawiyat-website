@@ -873,7 +873,7 @@ export const services: Service[] = [
  * `services` array by id). Keep them in the data for pricing, but exclude them
  * from the public catalog/static-generation/sitemap helpers.
  */
-export const EXCLUDED_SERVICE_IDS: string[] = ["composer-pro", "composer-max5x", "composer-max20x", "llm-credit"]
+export const EXCLUDED_SERVICE_IDS: string[] = ["composer-pro", "composer-max5x", "composer-max20x"]
 
 export function getServiceBySlug(slug: string): Service | undefined {
   if (EXCLUDED_SERVICE_IDS.includes(slug)) return undefined

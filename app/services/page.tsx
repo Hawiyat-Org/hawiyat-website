@@ -3,9 +3,9 @@ import ServicesCatalog from "@/components/services/services-catalog"
 import { createMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createMetadata({
-  title: "Managed Services in Algeria | n8n, WhatsApp API, Hosting",
+  title: "Services in Algeria | AI Composer, n8n, WhatsApp API, Hosting",
   description:
-    "Managed services in Algeria: n8n automation, WhatsApp API, and app hosting, priced in DZD with local support.",
+    "Services in Algeria: AI Composer access, n8n automation, WhatsApp API, and app hosting, priced in DZD with local support.",
   path: "/services",
 })
 
@@ -19,7 +19,7 @@ export default function ServicesPage({ searchParams }: { searchParams: { q?: str
         <header className="mx-auto mb-10 max-w-3xl text-center">
           <h1 className="text-4xl font-bold md:text-5xl text-ink">Managed services for your AI stack, in DZD</h1>
           <p className="mt-5 text-lg text-muted-ink">
-            n8n automation, WhatsApp API, and app hosting, operated by the Hawiyat team and billed in dinars, with support in Arabic, French, and English. Run them alongside the execution layer for a full pipeline.
+            AI Composer access, n8n automation, WhatsApp API, and app hosting, operated by the Hawiyat team and billed in dinars, with support in Arabic, French, and English. Run them on the execution layer for a full pipeline.
           </p>
         </header>
         <ServicesCatalog initialQuery={typeof searchParams.q === "string" ? searchParams.q : ""} />
