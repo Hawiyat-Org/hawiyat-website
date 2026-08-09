@@ -50,30 +50,29 @@ function buildCatalogCards(): CatalogCard[] {
     if (EXCLUDED_SERVICE_IDS.includes(service.id)) continue
     if (service.id === "hosting-vip") continue // folded into the Hawiyat Cloud card below
 
-    // hosting-basic + hosting-vip → one "Hawiyat Cloud" card (Basic or VIP chosen on the detail page)
+    // hosting-basic + hosting-vip → one "Hawiyat Cloud" card, sized to your needs (by order)
     if (service.id === "hosting-basic") {
       cards.push({
         key: "hosting",
         slug: "hosting-basic",
         name: "Hawiyat Cloud",
         description:
-          "Managed cloud runtime for one or two apps with databases, containers, SSL, and automatic deploys. Basic or VIP, ordered via the team.",
+          "Managed cloud on our infrastructure: containers, VPS, or Kubernetes, sized to your needs. Contact us to plan your deployment and get a quote in DZD.",
         image: service.image,
         images: service.images,
-        price: "from 1,000",
-        priceLabel: "DA/month",
+        price: "",
+        priceLabel: "",
         category: service.category,
-        tag: "Basic / VIP",
         availability: service.availability,
         features: [
-          "1 or 2 applications",
-          "Managed database (PostgreSQL or MySQL)",
-          "Free SSL certificate",
-          "Automatic deployments from Git",
-          "Priority support",
+          "Managed containers",
+          "VPS and Kubernetes options",
+          "Managed databases",
+          "SSL and automatic deploys",
+          "Monitoring and backups",
         ],
         useCases:
-          "Personal portfolios, small websites, full-stack apps, SaaS projects, and apps that need a database.",
+          "Websites, applications, full-stack apps, SaaS projects, and apps that need a database.",
       })
       continue
     }
@@ -265,6 +264,10 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                     <span className="font-mono text-xs uppercase tracking-widest text-muted-ink">
                       Unavailable for now
                     </span>
+                  ) : service.availability === "contact" ? (
+                    <span className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                      By order
+                    </span>
                   ) : (
                     <div>
                       <div className="flex items-baseline gap-1.5 flex-wrap">
@@ -274,11 +277,6 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                         )}
                         <span className="text-xs text-muted-ink">{service.priceLabel}</span>
                       </div>
-                      {service.availability === "contact" && (
-                        <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
-                          Ordered via the team
-                        </p>
-                      )}
                     </div>
                   )}
                 </div>

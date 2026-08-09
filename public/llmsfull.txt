@@ -160,52 +160,28 @@ FAQ:
 - Is the Evolution API an official WhatsApp or Meta product? No. It is a third-party tool that connects your WhatsApp number to Hawiyat's infrastructure using official Meta Business API access. We follow best practices, but we are not responsible for issues caused by the tool itself or by WhatsApp.
 - How do I connect my WhatsApp number to the Evolution API? After you order, our team deploys your instance and walks you through onboarding: linking your WhatsApp number, configuring webhooks and message templates, and testing your first automation.
 
-### Cloud Basic — 1,000 DA/month
+### Hawiyat Cloud — by order
 
-> **Availability:** Available by contacting the team. Tell us which plan you need and we will set it up and confirm payment on WhatsApp or email.
+> **Availability:** Available by contacting the team. Tell us what you need to run and we will plan the deployment and confirm details on WhatsApp or email.
 
 - [Service page](https://www.hawiyat.org/services/hosting-basic)
 - Category: Cloud Runtime
-- Managed cloud runtime for a single application. Personal projects, portfolios, small websites. Free SSL, auto-deploy, and basic monitoring included.
+- Managed cloud on Hawiyat's own infrastructure: containers, VPS, or Kubernetes, sized to your needs. No fixed plans. Contact us to plan your deployment and get a quote in DZD.
 
 Features:
-- 1 application
-- Free SSL certificate
+- Managed containers, VPS, and Kubernetes options
+- Managed database options
+- Free SSL certificates
 - Automatic deployments from Git
-- Basic monitoring and uptime tracking
-- 512MB RAM
+- Monitoring and uptime tracking
+- Backups
 - Custom domain support
-- Weekly backups
-- Node.js, Python, or static site support
-- Support by email
+- Support in Arabic, French, and English
 
 FAQ:
-- What can I run on the Cloud Basic plan? One application — personal portfolios, small websites, demo projects, and single-page applications. It supports Node.js, Python, and static sites with 512MB RAM, free SSL, and automatic Git deployments.
-- Do I need a foreign credit card to pay for cloud runtime plans? No. All Hawiyat cloud runtime plans are priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.
-- How do deployments work on Cloud Basic? Deployments are automatic from Git. Connect your repository, and every push deploys your changes with zero configuration.
-
-### Cloud VIP — 2,000 DA/month
-
-> **Availability:** Available by contacting the team. Tell us which plan you need and we will set it up and confirm payment on WhatsApp or email.
-
-- [Service page](https://www.hawiyat.org/services/hosting-vip)
-- Category: Cloud Runtime
-- Managed cloud runtime for up to 2 apps with a managed database. For full-stack apps, SaaS projects, and e-commerce sites that need database access and priority support.
-
-Features:
-- 2 applications
-- Managed database (PostgreSQL or MySQL)
-- Free SSL certificate
-- Automatic deployments from Git
-- Priority support via WhatsApp
-- 1GB RAM
-- Custom domain support
-- Daily backups and advanced resource monitoring
-
-FAQ:
-- What is the difference between Cloud Basic and Cloud VIP? Basic runs one application at 1,000 DA/month with 512MB RAM. VIP runs two applications plus a managed PostgreSQL or MySQL database at 2,000 DA/month, with 1GB RAM, daily backups, advanced monitoring, and priority WhatsApp support.
-- Which databases are supported on Cloud VIP? A managed PostgreSQL or MySQL database, provisioned and maintained by our team, with daily backups and advanced resource monitoring included.
-- Can I run a SaaS or e-commerce site on Cloud VIP? Yes. Cloud VIP is designed for full-stack apps, SaaS projects, and e-commerce sites that need database access, custom domains, automatic HTTPS, and priority support.
+- How much does Hawiyat Cloud cost? By order. Tell us what you need to run and the team plans the deployment on containers, VPS, or Kubernetes and sends you a quote in DZD, so you only pay for what you actually need.
+- How do I order Hawiyat Cloud? Contact the team on WhatsApp or email, describe what you need to run, and we plan the deployment, set it up, and confirm the quote in DZD.
+- Do I need a foreign credit card to pay for Hawiyat Cloud? No. Hawiyat Cloud is billed in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.
 
 ## Contact
 

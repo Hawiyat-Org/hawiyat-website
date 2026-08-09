@@ -27,10 +27,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   })
 }
 
-// hosting-basic and hosting-vip are separate single-price services. The detail page
-// folds them into a synthetic Basic/VIP plan list so either URL renders the tier selector.
-const HOSTING_SLUGS = ["hosting-basic", "hosting-vip"]
-
+// hosting-basic and hosting-vip are one "Hawiyat Cloud" by-order offering. There are
+// no Basic/VIP tiers: both URLs render the contact card and the team plans the deployment.
 export default function ServicePage({ params, searchParams }: { params: { slug: string }, searchParams?: { plan?: string } }) {
   const service = getServiceBySlug(params.slug)
   if (!service) notFound()
@@ -41,45 +39,10 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     .filter(Boolean)
     .slice(0, 4)
 
-  const isHosting = HOSTING_SLUGS.includes(params.slug)
   const isUnavailable = service.availability === "unavailable"
   const isContact = service.availability === "contact"
 
-  let plans: ServicePlan[] | undefined = service.plans
-  if (isHosting) {
-    const hostingBasic = getServiceBySlug("hosting-basic")
-    const hostingVip = getServiceBySlug("hosting-vip")
-    if (hostingBasic && hostingVip) {
-      plans = [
-        {
-          name: "Basic",
-          price: "1,000",
-          priceLabel: "DA/month",
-          tagline: "One app in a managed container. SSL, auto-deploy, monitoring.",
-          features: hostingBasic.features,
-        },
-        {
-          name: "VIP",
-          price: "2,000",
-          priceLabel: "DA/month",
-          tagline: "Two apps plus a managed database, with priority support.",
-          features: hostingVip.features,
-        },
-        {
-          name: "Custom",
-          price: "",
-          priceLabel: "",
-          tagline: "More apps, more RAM, dedicated infrastructure, SLAs.",
-          features: [
-            "Bespoke app counts and resources",
-            "Dedicated infrastructure options",
-            "Custom SLAs and priority support",
-          ],
-          custom: true,
-        },
-      ]
-    }
-  }
+  const plans: ServicePlan[] | undefined = service.plans
 
   // Preselect a plan when arriving with ?plan= (matches a plan name)
   const defaultPlan =
@@ -122,14 +85,16 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 : "https://schema.org/InStock",
             })),
           }
-        : {
-            "@type": "Offer",
-            price: service.price.replace(/,/g, ""),
-            priceCurrency: "DZD",
-            availability: isUnavailable
-              ? "https://schema.org/OutOfStock"
-              : "https://schema.org/InStock",
-          },
+        : isContact
+          ? undefined
+          : {
+              "@type": "Offer",
+              price: service.price.replace(/,/g, ""),
+              priceCurrency: "DZD",
+              availability: isUnavailable
+                ? "https://schema.org/OutOfStock"
+                : "https://schema.org/InStock",
+            },
     dateModified: new Date().toISOString().split("T")[0],
   }
 
@@ -189,18 +154,16 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
   // Mobile quick price: shown under the title/description on small screens only
   // (desktop already shows it in the sticky pricing card on the right).
   // Single-price services, or a single plan filtered by ?plan=, get their price here.
-  // Hosting renders the Basic/VIP selector, so the price lives in the selector card
-  // unless it is contact-only (then the price is real and worth showing here).
+  // By-order (contact) services show no price on mobile either; the price lives
+  // in the "By order" cloud card.
   const singlePlan = plans && plans.length === 1 ? plans[0] : null
-  const mobilePrice = isUnavailable
+  const mobilePrice = isUnavailable || isContact
     ? null
-    : isHosting && !isContact
-      ? null
-      : singlePlan
-        ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
-        : !service.plans || service.plans.length === 0
-          ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
-          : null
+    : singlePlan
+      ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
+      : !service.plans || service.plans.length === 0
+        ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
+        : null
 
   return (
     <>
@@ -386,6 +349,57 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
                       >
                         Chat on WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ) : isContact ? (
+                /* By Order Cloud Card (Hawiyat Cloud). No tiers, no fixed price: the
+                   team plans the deployment and quotes in DZD. */
+                <div className="rounded-lg border border-border/60 bg-surface shadow-sm overflow-hidden">
+                  <div className="border-b border-border/60 bg-surface-dim/30 p-6">
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                      Cloud
+                    </p>
+                    <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink">
+                      By order
+                    </h2>
+                    <p className="mt-3 text-sm text-muted-ink leading-relaxed">
+                      Tell us what you need to run, and we will plan the deployment on our cloud, containers, VPS, or Kubernetes, and quote you in DZD.
+                    </p>
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <div className="space-y-3">
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-ink">
+                        What&apos;s included
+                      </h3>
+                      <ul className="space-y-2">
+                        {[...service.features, "Support in Arabic, French, and English"].map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-ink/80">
+                            <span className="text-muted-ink mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="space-y-3 pt-2">
+                      <a
+                        href={`https://wa.me/213559555951?text=${encodeURIComponent(
+                          "Hello Hawiyat! I would like to plan a Cloud deployment."
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+                      >
+                        Plan a Cloud deployment
+                      </a>
+                      <a
+                        href="mailto:contact@hawiyat.org"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                      >
+                        Email the team
                       </a>
                     </div>
                   </div>
