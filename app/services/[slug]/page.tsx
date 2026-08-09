@@ -287,7 +287,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-xl font-semibold text-ink mb-3">Why Choose Hawiyat for {service.name}?</h2>
+                      <h2 className="text-xl font-semibold text-ink mb-3">Why {service.name}?</h2>
                       <p className="text-sm text-muted-ink leading-relaxed">
                         {service.seoContent.whyChoose}
                       </p>

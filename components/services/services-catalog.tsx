@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { Search, Users, DollarSign, Bot, CheckCircle, PhoneCall, Activity } from "lucide-react"
+import { Search, DollarSign, Bot, CheckCircle, Activity } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
@@ -262,11 +262,9 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
         <p className="text-muted-ink mt-[-24px] mb-10 text-center text-sm max-w-lg">The execution layer, locally supported and billed in DZD.</p>
         <div className="w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-stretch p-4">
           {[
-            { icon: Users, title: "Local Team", desc: "Based in Algiers. Same timezone, support in Arabic, French, and English." },
             { icon: DollarSign, title: "Billed in DZD", desc: "Pay in dinars with CCP or Baridi Mob. No foreign cards, no forex drift." },
             { icon: Bot, title: "Model-Agnostic", desc: "Models are routes, not SKUs. Composer picks the right one for each task." },
             { icon: Activity, title: "Telemetry & Evaluation", desc: "Every run is logged and evaluated, quality, latency, and cost in DZD." },
-            { icon: PhoneCall, title: "Reachable", desc: "Support via WhatsApp, not a foreign ticket system." },
             { icon: CheckCircle, title: "Production-Tested", desc: "The same execution layer that ships 100+ client deployments." },
           ].map((item, i) => (
             <div key={i} className="w-full max-w-[420px] mx-auto rounded-lg p-6 bg-surface border border-border flex flex-col gap-4 box-border">
