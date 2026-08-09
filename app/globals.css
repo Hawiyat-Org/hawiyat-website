@@ -552,6 +552,44 @@ body.booking-modal-open .fixed.inset-0 {
   }
 }
 
+/* Composer switchboard route line: a tiny packet travels left to right between
+   the THINK (routes in) and ACT (routes out) lanes. Reduced-motion users get a
+   static dashed rule. */
+.composer-route-line {
+  position: relative;
+  height: 2px;
+  background-image: linear-gradient(90deg, var(--border) 50%, transparent 50%);
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+}
+
+.composer-route-line::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--signal);
+  animation: composer-packet 3.5s linear infinite;
+}
+
+@keyframes composer-packet {
+  from {
+    left: -8px;
+  }
+  to {
+    left: calc(100% - 6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .composer-route-line::after {
+    display: none;
+  }
+}
+
 @media not all and (min-width: 1024px) {
   .collapsible-header {
     position: fixed;

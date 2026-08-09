@@ -4,16 +4,15 @@ import { ExecutionTrace } from "@/components/execution-trace"
 import {
   ArrowRight,
   Boxes,
+  BrainCircuit,
   Database,
-  FileSearch,
-  Gauge,
   GitMerge,
   Mail,
   MessageCircle,
-  Network,
   RefreshCw,
   ServerCog,
   ShieldCheck,
+  TrendingDown,
   Users,
   Workflow,
 } from "lucide-react"
@@ -46,11 +45,11 @@ const STAGES = [
 ]
 
 const MODEL_CHIPS = [
-  { name: "GPT", dot: "bg-ink" },
-  { name: "Claude", dot: "bg-ember" },
-  { name: "Gemini", dot: "bg-signal" },
-  { name: "Llama", dot: "bg-muted-ink" },
-  { name: "Open models", dot: "bg-signal-contrast" },
+  { name: "GPT", dot: "bg-ink", why: "structure" },
+  { name: "Claude", dot: "bg-ember", why: "nuance" },
+  { name: "Gemini", dot: "bg-signal", why: "speed" },
+  { name: "Llama", dot: "bg-muted-ink", why: "open, at cost" },
+  { name: "Open models", dot: "bg-signal-contrast", why: "self-host" },
 ]
 
 const SYSTEMS = [
@@ -64,34 +63,40 @@ const SYSTEMS = [
 
 const CAPABILITIES = [
   {
-    title: "Model Gateway",
-    icon: Network,
-    body: "Routes every task to the best model for the job, by quality, latency, and cost. GPT, Claude, Gemini, and open models sit behind one route.",
+    title: "Picks the best brain per task",
+    icon: BrainCircuit,
+    body: "GPT for structure, Claude for nuance, Gemini for speed, open models when you want them at cost. You hand over the task, never the model pick.",
+    telemetry: "route: auto",
   },
   {
-    title: "Context Selector",
-    icon: FileSearch,
-    body: "Pulls the right context per task: CRM records, docs, order history, so answers are grounded in your business, not the model's memory.",
+    title: "Grounds every answer in your business",
+    icon: Database,
+    body: "Composer pulls the record, the order, the policy from your systems before it writes a word. Answers come from your data, not a model's memory.",
+    telemetry: "ctx: grounded",
   },
   {
-    title: "Tool Router",
+    title: "Calls tools only when a task needs them",
     icon: Workflow,
-    body: "Calls WhatsApp, CRM, ERP, databases, and n8n only when a task needs them. Tools stay connected; workflows stay clean.",
+    body: "WhatsApp, CRM, ERP, databases, n8n. Each run gets the tools it needs and nothing stuck on. The wiring is Composer's job, not yours.",
+    telemetry: "tools: on-demand",
   },
   {
-    title: "Reliability & Fallbacks",
+    title: "Keeps runs alive when a model doesn't",
     icon: RefreshCw,
-    body: "When a route fails or a model degrades, Composer cascades to the next best route automatically. No dead runs.",
+    body: "A route slows down or goes dark, Composer cascades to the next best one. No dead runs, no stuck queues, no 3am rebuilds.",
+    telemetry: "fallback: cascades",
   },
   {
-    title: "Guardrails & Evaluations",
+    title: "Grades every single run",
     icon: ShieldCheck,
-    body: "Every result is graded on quality, latency, and cost, with logs you can audit. Runs ship evaluated, or they don't ship.",
+    body: "Quality, latency, and cost are checked before anything ships. If a result isn't good enough, it doesn't reach your customer.",
+    telemetry: "quality: checked",
   },
   {
-    title: "Cost Controls",
-    icon: Gauge,
-    body: "Caching, compression, and budgets, with per-task cost in DZD. Cost is measured and managed, never guessed.",
+    title: "Learns so the next run costs less",
+    icon: TrendingDown,
+    body: "Cache hits, tighter context, smarter routes. Repeated work drops in cost over time, and every dinar shows on the receipt.",
+    telemetry: "cost: trending down",
   },
 ]
 
@@ -164,14 +169,14 @@ export default function ComposerPage() {
             <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
               <Link
                 href="/#pricing"
-                className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
               >
                 Start building
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#trace"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
               >
                 See how it executes
                 <ArrowRight className="h-4 w-4 rotate-90" />
@@ -193,17 +198,17 @@ export default function ComposerPage() {
               Every task becomes a run.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              Think of Composer as a careful coworker. You hand it a task, &ldquo;reply to order
-              1024 on WhatsApp in Arabic&rdquo;, and it figures out the rest: which AI is best,
-              what it needs to know, and whether the answer is good enough before it reaches your
-              customer.
+              Think of Composer as a careful coworker. You hand it a task like &ldquo;resolve the
+              refund for order 3051 on WhatsApp in Algerian Arabic.&rdquo; It pulls the order and
+              the policy, picks the right model, and checks the answer before it reaches your
+              customer. Done in seconds, for a fraction of a dinar.
             </p>
           </div>
 
           <div className="reveal-up">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <span className="rounded-lg border border-border bg-surface px-4 py-2 font-mono text-xs text-ink">
-                task ▸ &ldquo;Reply to order 1024 on WhatsApp in Arabic&rdquo;
+                task ▸ &ldquo;Resolve the refund for order 3051 on WhatsApp in Algerian Arabic&rdquo;
               </span>
               <span className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
                 RUN 02 · COMPLETED
@@ -214,7 +219,7 @@ export default function ComposerPage() {
               telemetry={[
                 "route: auto",
                 "model: gpt-4o → claude-sonnet",
-                "ctx: docs/FAQ · 12k",
+                "ctx: order 3051 + policy · 9k",
                 "tools: [whatsapp, crm]",
                 "cost: ~0.4 DZD",
                 "latency: 210ms",
@@ -228,7 +233,7 @@ export default function ComposerPage() {
             {STAGES.map((stage, i) => (
               <div
                 key={stage.name}
-                className="rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
+                className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50"
               >
                 <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
                   {String(i + 1).padStart(2, "0")}
@@ -265,30 +270,52 @@ export default function ComposerPage() {
             </div>
 
             <div className="md:col-span-7">
+              <div className="mb-3 flex items-center gap-3">
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                  THINK · ROUTES IN
+                </p>
+                <span className="h-px flex-1 bg-border" />
+              </div>
               <div className="flex flex-wrap gap-3">
                 {MODEL_CHIPS.map((chip) => (
                   <span
                     key={chip.name}
-                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm text-ink"
+                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm text-ink transition-colors duration-300 hover:border-signal/50"
                   >
                     <span className={`h-2 w-2 rounded-full ${chip.dot}`} />
                     {chip.name}
+                    <span className="text-[10px] uppercase tracking-widest text-muted-ink">
+                      · {chip.why}
+                    </span>
                   </span>
                 ))}
               </div>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="composer-route-line my-8" />
+
+              <div className="mb-3 flex items-center gap-3">
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                  ACT · ROUTES OUT
+                </p>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {SYSTEMS.map((system) => (
                   <div
                     key={system.name}
-                    className="group rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98]"
+                    className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50"
                   >
                     <system.icon className="h-8 w-8 text-signal" />
                     <h3 className="mt-4 text-lg font-semibold text-ink">{system.name}</h3>
-                    <p className="mt-1 text-sm text-muted-ink">{system.note}</p>
-                    <p className="mt-4 font-mono text-[11px] uppercase tracking-widest text-muted-ink group-hover:text-signal">
-                      Route to →
-                    </p>
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+                      <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+                        role ▸ {system.note}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-dim px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink">
+                        <span className="h-1.5 w-1.5 rounded-full bg-ok" />
+                        ACTIVE
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -303,14 +330,13 @@ export default function ComposerPage() {
           <div className="mb-12 max-w-2xl">
             <div className="flex items-center gap-3">
               <div className="trace-line h-px w-12 bg-signal" />
-              <SectionEyebrow>ENGINE</SectionEyebrow>
+              <SectionEyebrow>HABITS</SectionEyebrow>
             </div>
             <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
               What Composer does with every run.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              Six capabilities working as one engine. You bring the business problem; Composer
-              decides the how.
+              Six habits, one engine. You bring the business problem, Composer handles the how.
             </p>
           </div>
 
@@ -318,11 +344,14 @@ export default function ComposerPage() {
             {CAPABILITIES.map((cap) => (
               <div
                 key={cap.title}
-                className="rounded-lg border border-border bg-surface p-6 transition-transform duration-300 hover:scale-[0.98] md:p-8"
+                className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50 md:p-8"
               >
                 <cap.icon className="h-7 w-7 text-signal" />
                 <h3 className="mt-5 text-xl font-semibold text-ink">{cap.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-ink">{cap.body}</p>
+                <p className="mt-5 border-t border-border pt-3 font-mono text-[11px] text-muted-ink">
+                  {cap.telemetry}
+                </p>
               </div>
             ))}
           </div>
@@ -381,14 +410,14 @@ export default function ComposerPage() {
                     href={FULLSTACK_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
                   >
                     Book with the team
                     <MessageCircle className="h-4 w-4" />
                   </a>
                   <Link
                     href="/services"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
                   >
                     Browse services
                     <ArrowRight className="h-4 w-4" />
@@ -479,7 +508,7 @@ export default function ComposerPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/#pricing"
-              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
             >
               Browse services
               <ArrowRight className="h-4 w-4" />
@@ -488,7 +517,7 @@ export default function ComposerPage() {
               href="https://wa.me/213559555951"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
             >
               Talk to the team
               <MessageCircle className="h-4 w-4" />
