@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils"
 interface CatalogCard {
   key: string
   slug: string
-  plan?: string
   name: string
   description: string
   image?: string
@@ -124,7 +123,6 @@ const CARD_ORDER: Record<string, number> = {
 }
 
 const categoryStyles: Record<string, string> = {
-  "AI Execution": "bg-signal-bg text-signal-contrast border border-signal/20",
   "Managed Systems": "bg-surface-dim text-muted-ink border border-border",
   "Cloud Runtime": "bg-surface-dim text-muted-ink border border-border",
 }
@@ -193,7 +191,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
           {filteredCards.map((service, i) => (
             <Link
               key={service.key}
-              href={`/services/${service.slug}${service.plan ? `?plan=${encodeURIComponent(service.plan)}` : ""}`}
+              href={`/services/${service.slug}`}
               className={`group relative rounded-lg border border-border bg-surface overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}

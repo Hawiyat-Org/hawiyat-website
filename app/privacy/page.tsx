@@ -65,7 +65,7 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-medium text-foreground">1. Introduction</h2>
               <p className="mt-3">
                 Hawiyat (we, our, or us) operates hawiyat.org and provides AI infrastructure services
-                including the Hawiyat AI Composer execution layer, virtual private servers, and managed hosting.
+                including the Hawiyat AI Composer execution layer, container-based app hosting, and managed hosting.
                 We are based in Algiers, Algeria.
               </p>
               <p className="mt-3">
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
               <h3 className="mt-4 font-medium text-foreground">Usage and Service Data</h3>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>API request metadata (timestamps, model IDs, token counts, latency, HTTP status codes)</li>
-                <li>VPS configuration and deployment metadata</li>
+                <li>Container deployment and configuration metadata</li>
                 <li>Support ticket content and diagnostic information</li>
               </ul>
               <p className="mt-2 text-xs">We do not log API prompt or completion content. Users are prohibited from submitting special categories of personal data (sensitive data) through the Hawiyat AI Composer execution layer or any of our services.</p>
@@ -152,7 +152,7 @@ export default function PrivacyPage() {
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>
                   <span className="text-foreground">Provide and Operate Services.</span>
-                  {" "}Provision VPS instances, route API requests through Hawiyat AI Composer, manage your
+                  {" "}                  Provision managed containers, route API requests through Hawiyat AI Composer, manage your
                   account, and maintain platform availability.
                 </li>
                 <li>

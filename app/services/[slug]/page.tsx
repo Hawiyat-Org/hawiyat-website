@@ -87,11 +87,11 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
     },
     serviceType: service.category,
     hasOfferCatalog:
-      service.plans && service.plans.length > 0
+      plans && plans.length > 0
         ? {
             "@type": "OfferCatalog",
             name: `${service.name} Plans`,
-            itemListElement: service.plans.map((plan) => ({
+            itemListElement: plans.map((plan) => ({
               "@type": "Offer",
               name: plan.name,
               price: plan.price.replace(/,/g, ""),
