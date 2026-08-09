@@ -1,12 +1,12 @@
 "use client"
 
 import { useState, useMemo, useEffect } from "react"
-import { Search, DollarSign, Bot, CheckCircle, Server } from "lucide-react"
+import { Search, DollarSign, Bot, CheckCircle, Server, ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import Link from "next/link"
-import { services, EXCLUDED_SERVICE_IDS, type Service } from "@/lib/data/services"
+import { services, EXCLUDED_SERVICE_IDS, getComposerService, type Service } from "@/lib/data/services"
 import { cn } from "@/lib/utils"
 
 interface CatalogCard {
@@ -24,6 +24,9 @@ interface CatalogCard {
   availability?: Service["availability"]
   features: string[]
   useCases: string
+  isComposer?: boolean
+  tierRows?: Array<{ label: string; price: string }>
+  cta?: string
 }
 
 /* Lowest plan price (as a display string) for "from X DA" cards. */
@@ -118,8 +121,33 @@ function buildCatalogCards(): CatalogCard[] {
   return cards
 }
 
-/* Display order: n8n, then the systems you connect (Evolution), then the cloud runtime (hosting). */
+const composerPro = getComposerService("composer-pro")
+const composerMax5x = getComposerService("composer-max5x")
+const composerMax20x = getComposerService("composer-max20x")
+
+const composerCard: CatalogCard = {
+  key: "composer",
+  slug: "",
+  name: "Hawiyat AI Composer",
+  description: composerPro.description,
+  image: composerPro.image,
+  price: "",
+  priceLabel: composerPro.priceLabel,
+  category: composerPro.category,
+  features: composerPro.features,
+  useCases: composerPro.useCases,
+  isComposer: true,
+  tierRows: [
+    { label: "Pro", price: Number(composerPro.price).toLocaleString("en-US") },
+    { label: "MAX 5X", price: Number(composerMax5x.price).toLocaleString("en-US") },
+    { label: "MAX 20X", price: Number(composerMax20x.price).toLocaleString("en-US") },
+  ],
+  cta: composerPro.cta,
+}
+
+/* Display order: Composer, n8n, then the systems you connect (Evolution), then the cloud runtime (hosting). */
 const CARD_ORDER: Record<string, number> = {
+  composer: 0,
   "n8n-hosting": 1,
   "evolution-api": 2,
   "hosting": 3,
@@ -131,9 +159,68 @@ const categoryStyles: Record<string, string> = {
   "Cloud Runtime": "bg-surface-dim text-muted-ink border border-border",
 }
 
-const catalogCards = buildCatalogCards().sort(
+const catalogCards = [composerCard, ...buildCatalogCards()].sort(
   (a, b) => (CARD_ORDER[a.key] ?? 99) - (CARD_ORDER[b.key] ?? 99)
 )
+
+function ComposerCardView({
+  card,
+  index,
+  isVisible,
+}: {
+  card: CatalogCard
+  index: number
+  isVisible: boolean
+}) {
+  return (
+    <div
+      className={`relative rounded-lg border border-border bg-surface overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-surface-dim/40 to-surface-dim/10 dark:from-surface-dim/20 dark:to-surface-dim/10 flex items-center justify-center p-4">
+        <div className="relative w-24 h-24">
+          <Image src={card.image || "/logo.svg"} alt={card.name} fill className="object-contain drop-shadow-lg" loading="lazy" />
+        </div>
+      </div>
+
+      <div className="relative p-4 flex flex-col gap-2">
+        <span className={cn(
+          "inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-medium",
+          categoryStyles[card.category] ?? "bg-surface-dim text-muted-ink border border-border"
+        )}>
+          {card.category}
+        </span>
+
+        <h2 className="text-base font-semibold text-ink transition-colors line-clamp-1">{card.name}</h2>
+
+        <p className="text-xs text-muted-ink leading-relaxed line-clamp-2">
+          {card.description}
+        </p>
+
+        <div className="mt-2 pt-3 border-t border-border/30 space-y-1.5">
+          {card.tierRows?.map((tier) => (
+            <div key={tier.label} className="flex items-center justify-between gap-2">
+              <span className="font-mono text-xs uppercase tracking-widest text-muted-ink">{tier.label}</span>
+              <span className="text-sm font-semibold text-ink">
+                {tier.price}
+                <span className="text-xs font-normal text-muted-ink"> {card.priceLabel}</span>
+              </span>
+            </div>
+          ))}
+          <Link
+            href="/#pricing"
+            className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-4 py-2.5 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+          >
+            {card.cta}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: string }) {
   const router = useRouter()
@@ -192,7 +279,10 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {filteredCards.map((service, i) => (
+          {filteredCards.map((service, i) =>
+            service.isComposer ? (
+              <ComposerCardView key={service.key} card={service} index={i} isVisible={isVisible} />
+            ) : (
             <Link
               key={service.key}
               href={`/services/${service.slug}`}
@@ -282,7 +372,8 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                 </div>
               </div>
             </Link>
-          ))}
+            )
+          )}
         </div>
       )}
 
