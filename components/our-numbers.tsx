@@ -26,6 +26,8 @@ function AnimatedNumber({ value }: { value: string }) {
       return
     }
 
+    let rafId = 0
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries.some((entry) => entry.isIntersecting) || startedRef.current) return
@@ -35,24 +37,27 @@ function AnimatedNumber({ value }: { value: string }) {
         const startTime = performance.now()
 
         const tick = (now: number) => {
-          const progress = Math.min((now - startTime) / ANIMATION_DURATION, 1)
+          const progress = Math.min(Math.max((now - startTime) / ANIMATION_DURATION, 0), 1)
           const eased = easeOutCubic(progress)
           const current = Math.round(target * eased)
           setDisplay(`${current}${suffix}`)
           if (progress < 1) {
-            requestAnimationFrame(tick)
+            rafId = requestAnimationFrame(tick)
           } else {
             setDisplay(value)
           }
         }
 
-        requestAnimationFrame(tick)
+        rafId = requestAnimationFrame(tick)
       },
       { threshold: 0.4 }
     )
 
     observer.observe(node)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(rafId)
+    }
   }, [target, suffix, value])
 
   return <span ref={rootRef}>{display}</span>

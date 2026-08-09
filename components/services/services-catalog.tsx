@@ -115,7 +115,7 @@ function buildCatalogCards(): CatalogCard[] {
   return cards
 }
 
-/* Display order: the execution layer first, then the systems you connect (n8n, Evolution), then the cloud runtime (hosting). */
+/* Display order: n8n, then the systems you connect (Evolution), then the cloud runtime (hosting). */
 const CARD_ORDER: Record<string, number> = {
   "n8n-hosting": 1,
   "evolution-api": 2,

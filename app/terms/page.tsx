@@ -323,10 +323,6 @@ export default function TermsPage() {
                   runs or tasks, as defined in the plan. Payment: DZD via approved methods.
                 </li>
                 <li>
-                  <span className="text-foreground font-medium">AI Composer Access (pay-per-run).</span>{" "}
-                  Billing: per-run or per-task usage. Payment: DZD via approved methods.
-                </li>
-                <li>
                   <span className="text-foreground font-medium">Managed Services.</span>{" "}
                   Hosting, n8n, and WhatsApp infrastructure plans are billed monthly or yearly in DZD, as defined in
                   the plan.

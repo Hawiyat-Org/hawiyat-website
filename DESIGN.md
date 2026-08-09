@@ -203,7 +203,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 - Embeds an `ItemList` JSON-LD (partners as organizations) for search/AI crawlers.
 
 ### 4. Our Numbers (`components/our-numbers.tsx`) — stat band
-- Static 4 verified stats: `100+` paying clients, `10+` resellers, `100B+` tokens executed, `≈2.6M DZD` ARR. Mono numerals. No animated counters, no scroll-triggered counting.
+- Static 4 verified stats: `100+` paying clients, `10+` resellers, `100B+` tokens executed, `≈2.6M DZD` ARR. Mono numerals. Proof stats: static mono numerals, or a smooth fast count-up on first view (~800ms ease-out, `prefers-reduced-motion` respected).
 
 ### 5. Pricing (`components/pricing.tsx`)
 - 3 cards, `rounded-lg`, `bg-surface border border-border`, data from `lib/data/services.ts` (untouched).
@@ -295,7 +295,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 | reveal-up | `/composer` only | opacity/transform 0.8s, stagger 0.2 | GSAP ScrollTrigger; reduced-motion keeps elements visible |
 | trace-line | `/composer` only | scaleX 0→1, scroll-scrubbed | GSAP ScrollTrigger draw-on-scroll |
 
-- **No motion on home beyond the marquee.** No hero console typewriter, no scroll-reveal dashboard, no counting numbers, no spark-lines.
+- **No motion on home beyond the marquee.** No hero console typewriter, no scroll-reveal dashboard, no spark-lines. Exception: the proof stats may run a smooth fast count-up on first view (~800ms ease-out, `prefers-reduced-motion` respected).
 - All motion respects `@media (prefers-reduced-motion: reduce)`.
 
 ## Responsive Breakpoints
