@@ -3,7 +3,7 @@ import { getServiceBySlug, getAllServiceSlugs } from "@/lib/data/services"
 import { createMetadata, SITE_URL } from "@/lib/seo"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ChevronDown } from "lucide-react"
 import { ServicePlans } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
 
@@ -244,6 +244,16 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                   <p className="text-lg text-muted-ink leading-relaxed">
                     {service.description}
                   </p>
+                  {service.details.idealFor && (
+                    <div className="space-y-1.5 pt-1">
+                      <p className="text-xs font-mono uppercase tracking-widest text-muted-ink">
+                        Ideal For
+                      </p>
+                      <p className="text-sm text-muted-ink leading-relaxed">
+                        {service.details.idealFor}
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Mobile quick price (desktop shows it in the sticky pricing card) */}
@@ -260,43 +270,48 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                 )}
               </div>
 
-              {/* Ideal For */}
-              <div className="pt-8 border-t border-border/40">
-                <h2 className="text-sm font-semibold text-ink mb-3">Ideal For</h2>
-                <p className="text-sm text-muted-ink leading-relaxed">
-                  {service.details.idealFor}
-                </p>
-              </div>
-
-              {/* SEO Content Blocks for AI Search */}
+              {/* SEO Content Blocks for AI Search - collapsed behind a disclosure */}
               {service.seoContent && (
-                <div className="space-y-8 pt-8 border-t border-border/40">
-                  <div>
-                    <h2 className="text-xl font-semibold text-ink mb-3">What is {service.name}?</h2>
-                    <p className="text-sm text-muted-ink leading-relaxed">
-                      {service.seoContent.whatIs}
-                    </p>
+                <details className="group rounded-lg border border-border bg-surface open:shadow-sm">
+                  <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden list-none">
+                    <span className="text-xs font-mono uppercase tracking-widest text-ink">
+                      More about {service.name}
+                    </span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <div className="space-y-8 px-5 pb-5">
+                    <div>
+                      <h2 className="text-xl font-semibold text-ink mb-3">What is {service.name}?</h2>
+                      <p className="text-sm text-muted-ink leading-relaxed">
+                        {service.seoContent.whatIs}
+                      </p>
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-semibold text-ink mb-3">Why Choose Hawiyat for {service.name}?</h2>
+                      <p className="text-sm text-muted-ink leading-relaxed">
+                        {service.seoContent.whyChoose}
+                      </p>
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-semibold text-ink mb-3">How Does {service.name} Work?</h2>
+                      <p className="text-sm text-muted-ink leading-relaxed">
+                        {service.seoContent.howItWorks}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-ink mb-3">Why Choose Hawiyat for {service.name}?</h2>
-                    <p className="text-sm text-muted-ink leading-relaxed">
-                      {service.seoContent.whyChoose}
-                    </p>
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-ink mb-3">How Does {service.name} Work?</h2>
-                    <p className="text-sm text-muted-ink leading-relaxed">
-                      {service.seoContent.howItWorks}
-                    </p>
-                  </div>
-                </div>
+                </details>
               )}
 
-              {/* FAQ Section */}
+              {/* FAQ Section - collapsed behind a disclosure */}
               {service.faq && service.faq.length > 0 && (
-                <div className="space-y-4 pt-8 border-t border-border/40">
-                  <h2 className="text-xl font-semibold text-ink">Frequently Asked Questions</h2>
-                  <div className="space-y-4">
+                <details className="group rounded-lg border border-border bg-surface open:shadow-sm">
+                  <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden list-none">
+                    <span className="text-xs font-mono uppercase tracking-widest text-ink">
+                      Questions &amp; answers
+                    </span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <div className="space-y-4 px-5 pb-5">
                     {service.faq.map((item, idx) => (
                       <div key={idx}>
                         <h3 className="text-base font-medium text-ink mb-2">{item.question}</h3>
@@ -304,7 +319,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                       </div>
                     ))}
                   </div>
-                </div>
+                </details>
               )}
             </div>
 
