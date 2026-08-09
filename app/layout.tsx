@@ -157,6 +157,8 @@ const organizationSchema = {
     "https://www.linkedin.com/company/hawiyat",
     "https://github.com/Hawiyat-Org",
     "https://instagram.com/hawiyat.cloud",
+    "https://www.youtube.com/@Hawiyat",
+    "https://www.facebook.com/people/Hawiyat/61577698462110/",
   ],
   contactPoint: [
     {
