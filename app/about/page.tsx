@@ -47,6 +47,7 @@ export default function AboutPage() {
               <Link
                 href="https://wa.me/213559555951"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-ink border border-ink/30 hover:bg-surface-dim transition-all duration-300 active:scale-95"
               >
                 <span>Contact Us</span>
@@ -404,6 +405,7 @@ export default function AboutPage() {
             <Link
               href="https://wa.me/213559555951"
               target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-lg border border-ink/30 text-ink hover:bg-surface-dim hover:border-ink/50 transition-all duration-300 active:scale-[0.97]"
             >
               <span>Contact Us</span>

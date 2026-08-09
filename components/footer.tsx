@@ -1,6 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Github, Instagram, Facebook, Mail, Twitter, Linkedin } from "lucide-react"
+import { Github, Instagram, Facebook, Mail, Linkedin } from "lucide-react"
+
+const isExternal = (href: string) =>
+  href.startsWith("http://") || href.startsWith("https://")
 
 const Footer = () => {
   const footerSections = [
@@ -36,7 +39,6 @@ const Footer = () => {
     { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", Icon: Instagram },
     { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", Icon: Facebook },
     { name: "Email", href: "mailto:contact@hawiyat.org", Icon: Mail },
-    { name: "X (Twitter)", href: "https://x.com/hawiyat", Icon: Twitter },
     { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", Icon: Linkedin },
   ]
 
@@ -51,16 +53,20 @@ const Footer = () => {
           </Link>
 
           <div className="flex gap-4 text-lg">
-            {socialLinks.map((social) => (
-              <Link
-                key={social.name}
-                href={social.href}
-                aria-label={social.name}
-                className="footer-link hover:opacity-80 transition-opacity duration-200"
-              >
-                <social.Icon className="w-5 h-5" />
-              </Link>
-            ))}
+            {socialLinks.map((social) => {
+              const external = isExternal(social.href)
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.name}
+                  className="footer-link hover:opacity-80 transition-opacity duration-200"
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  <social.Icon className="w-5 h-5" />
+                </a>
+              )
+            })}
           </div>
         </div>
 
@@ -70,15 +76,27 @@ const Footer = () => {
             <div key={section.title} className="flex h-full w-[200px] flex-col gap-4">
               <h2 className="text-xl">{section.title}</h2>
               <div className="flex flex-col gap-3">
-                {section.links.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="footer-link hover:opacity-80 transition-opacity duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {section.links.map((link) =>
+                  isExternal(link.href) ? (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-link hover:opacity-80 transition-opacity duration-200"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="footer-link hover:opacity-80 transition-opacity duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           ))}

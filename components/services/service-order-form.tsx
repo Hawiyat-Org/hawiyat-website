@@ -361,11 +361,11 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                     </span>
                     <span className="text-xs text-muted-ink leading-relaxed">
                       I agree to the{" "}
-                      <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline" target="_blank">
+                      <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline">
                         Terms of Service
                       </Link>{" "}
                       and{" "}
-                      <Link href="/privacy" className="font-medium text-signal-contrast underline hover:no-underline" target="_blank">
+                      <Link href="/privacy" className="font-medium text-signal-contrast underline hover:no-underline">
                         Privacy Policy
                       </Link>
                     </span>
