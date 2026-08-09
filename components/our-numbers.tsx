@@ -2,6 +2,7 @@
 
 import { Users, Handshake, Zap } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import Link from 'next/link'
 import { AnimatedNumber } from '@/components/animated-number'
 
 function StatCard({ icon: Icon, value, label }: { icon: LucideIcon; value: string; label: string }) {
@@ -23,7 +24,11 @@ const OurNumbers = () => (
           Proof it works.
         </h2>
         <p className="mt-3 text-sm text-muted-ink">
-          Straight from our own operations, we only print what&rsquo;s real.
+          Straight from our own operations, we only print what&rsquo;s real. Figures verified against
+          the Hawiyat operations dashboard as of August 9, 2026.{" "}
+          <Link href="/about" className="underline transition-colors hover:text-ink">
+            See how we count.
+          </Link>
         </p>
       </div>
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">

@@ -158,6 +158,11 @@ export default function ComposerPage() {
                 price: "30000",
                 priceCurrency: "DZD",
               },
+              {
+                "@type": "Offer",
+                name: "Enterprise",
+                description: "Custom, billed in DZD. Contact us for a quote.",
+              },
             ],
           }),
         }}
@@ -382,7 +387,7 @@ export default function ComposerPage() {
               What&rsquo;s live on the layer.
             </h2>
             <p className="mt-3 text-sm text-muted-ink">
-              Verified figures from the Hawiyat operations dashboard. Nothing else gets printed.
+              Verified figures from the Hawiyat operations dashboard as of August 9, 2026. Nothing else gets printed.
             </p>
           </div>
 

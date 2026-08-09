@@ -27,6 +27,7 @@ The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE 
 | Hawiyat AI Composer Pro | 6,000 DA/month | Solo builders |
 | Hawiyat AI Composer MAX 5X | 15,000 DA/month | Professional developers, startups, small teams |
 | Hawiyat AI Composer MAX 20X | 30,000 DA/month | Agencies, engineering teams running AI at scale |
+| Hawiyat AI Composer Enterprise | Custom | Sized for your entire operation |
 
 ### Hawiyat AI Composer Pro — 6,000 DA/month
 For solo builders. Execution layer with routing, context, fallbacks, and evaluation.
@@ -55,6 +56,9 @@ For solo builders. Execution layer with routing, context, fallbacks, and evaluat
 - Hybrid data compliance for strict enterprise requirements
 - Dedicated account manager who knows your runs
 - Advanced usage analytics in DZD
+
+### Hawiyat AI Composer Enterprise — Custom pricing
+The execution layer, sized for your entire operation: dedicated account manager, priority WhatsApp support in AR/FR/EN, custom infrastructure/capacity, single contract billed in DZD. Contact us for a quote.
 
 ---
 

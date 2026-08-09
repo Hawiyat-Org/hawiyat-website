@@ -111,6 +111,30 @@ FAQ:
 - Does MAX 20X meet enterprise compliance needs? Yes. MAX 20X includes hybrid data compliance, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.
 - Who is MAX 20X designed for? Agencies, engineering teams, and power users who need maximum parallel throughput. It includes a dedicated account manager, advanced analytics in DZD, and priority WhatsApp support.
 
+### Hawiyat AI Composer Enterprise — custom
+
+- [Service page](https://www.hawiyat.org/composer) · [Composer plans](https://www.hawiyat.org/#pricing)
+- Category: AI Execution
+- The execution layer, sized for your entire operation: dedicated account manager, priority WhatsApp support in AR/FR/EN, custom infrastructure/capacity, single contract billed in DZD. Contact us for a quote.
+
+Features:
+- Everything in MAX 20X
+- Dedicated account manager who knows your runs
+- Priority WhatsApp support in Arabic, French, and English
+- Custom infrastructure and capacity sizing
+- Single contract billed in DZD
+
+What you get:
+- The execution layer sized to your operation, with hybrid data compliance and maximum parallel throughput
+- Custom infrastructure and capacity, planned with the team
+- Dedicated account manager and priority WhatsApp support
+- One contract, one invoice, billed in DZD
+
+FAQ:
+- How much does Enterprise cost? Custom, contact the team for a quote in DZD.
+- What does Enterprise include? Everything in MAX 20X, plus custom infrastructure and capacity sizing, a dedicated account manager, priority WhatsApp support in Arabic, French, and English, and a single contract billed in DZD.
+- How do I get an Enterprise quote? Contact the Hawiyat team, describe what you need to run, and we plan the deployment and confirm a custom quote in DZD.
+
 ### n8n Hosting — managed workflow automation
 
 - [Service page](https://www.hawiyat.org/services/n8n-hosting)
