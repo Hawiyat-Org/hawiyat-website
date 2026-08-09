@@ -162,6 +162,8 @@ FAQ:
 
 ### Hosting Basic — 1,000 DA/month
 
+> **Availability:** Hosting is temporarily unavailable for new orders. Composer plans, n8n, and WhatsApp infrastructure remain available.
+
 - [Service page](https://www.hawiyat.org/services/hosting-basic)
 - Category: Cloud Runtime
 - Simple managed hosting for a single application. Personal projects, portfolios, small websites. Free SSL, auto-deploy, and basic monitoring included.

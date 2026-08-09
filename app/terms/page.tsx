@@ -285,29 +285,29 @@ export default function TermsPage() {
               <h3 className="mt-4 font-medium text-foreground">6.3 Your Obligations</h3>
               <p className="mt-2">You must:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>Keep your API Key(s) confidential and secure;</li>
-                <li>Not share, publish, or expose your API Key(s) to any unauthorized party;</li>
+                <li>Keep your workspace credentials confidential and secure;</li>
+                <li>Not share, publish, or expose your workspace credentials to any unauthorized party;</li>
                 <li>
-                  Not embed API Key(s) in client-side applications, public code repositories, or publicly accessible
+                  Not embed workspace credentials in client-side applications, public code repositories, or publicly accessible
                   locations;
                 </li>
                 <li>Contact support immediately to rotate your key if you suspect it has been compromised;</li>
-                <li>Use API Keys only for purposes authorized under these Terms;</li>
+                <li>Use workspace credentials only for purposes authorized under these Terms;</li>
                 <li>
-                  Accept responsibility for all usage and charges incurred through your API Key(s), whether you
+                  Accept responsibility for all usage and charges incurred through your workspace credentials, whether you
                   authorized them or not.
                 </li>
               </ul>
 
               <h3 className="mt-4 font-medium text-foreground">6.4 Key Rotation</h3>
               <p className="mt-2">
-                Hawiyat may require API Key rotation at any time for security reasons. You will be notified in advance
+                Hawiyat may require workspace credential rotation at any time for security reasons. You will be notified in advance
                 except in emergencies where immediate rotation is needed to protect the Service.
               </p>
 
               <h3 className="mt-4 font-medium text-foreground">6.5 Termination of Keys</h3>
               <p className="mt-2">
-                When your Account or subscription is terminated, all associated API Keys are revoked immediately.
+                When your Account or subscription is terminated, all associated workspace credentials are revoked immediately.
               </p>
             </section>
 
@@ -1146,7 +1146,7 @@ export default function TermsPage() {
               <div className="mt-8 rounded-lg border border-border/60 bg-surface-dim/30 p-6">
                 <p className="text-sm font-medium text-foreground">HAWIYAT Terms of Use v1.2</p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Effective Date: August 2026 &middot; Last Updated: August 6, 2026
+                  Effective Date: August 2026 &middot; Last Updated: August 9, 2026
                 </p>
                 <p className="mt-3 text-xs text-muted-foreground">&copy; 2026 Hawiyat. All rights reserved.</p>
               </div>

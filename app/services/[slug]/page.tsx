@@ -351,7 +351,9 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
             {/* Right Column - Pricing & CTA */}
             <div className="lg:sticky lg:top-8">
               {isUnavailable ? (
-                /* Availability Notice */
+                /* Availability Notice. Copy is hardcoded for hosting (the only gated service).
+                   When a second service is gated, derive heading/body from `service` + the
+                   still-open services instead of hardcoding. */
                 <div className="rounded-lg border border-border/60 bg-surface shadow-sm overflow-hidden">
                   <div className="border-b border-border/60 bg-surface-dim/30 p-6">
                     <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
