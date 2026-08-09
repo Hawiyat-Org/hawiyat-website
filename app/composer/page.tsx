@@ -375,7 +375,7 @@ export default function ComposerPage() {
 
           <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
             <div className="rounded-md border border-border bg-surface p-8 text-center">
-              <AnimatedNumber value="100+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
+              <AnimatedNumber value="200+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
               <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 clients on the platform
               </p>
