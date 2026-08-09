@@ -57,7 +57,7 @@ function buildCatalogCards(): CatalogCard[] {
         slug: "hosting-basic",
         name: "Hawiyat Cloud",
         description:
-          "Managed cloud on our infrastructure: containers, VPS, or Kubernetes, sized to your needs. Contact us to plan your deployment and get a quote in DZD.",
+          "Managed cloud on our infrastructure: containers and VPS, sized to your needs. Contact us to plan your deployment and get a quote in DZD.",
         image: service.image,
         images: service.images,
         price: "",
@@ -66,7 +66,7 @@ function buildCatalogCards(): CatalogCard[] {
         availability: service.availability,
         features: [
           "Managed containers",
-          "VPS and Kubernetes options",
+          "VPS and container options",
           "Managed databases",
           "SSL and automatic deploys",
           "Monitoring and backups",
@@ -247,12 +247,19 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
 
               {/* Content */}
               <div className="relative p-4 flex flex-col gap-2">
-                <span className={cn(
-                  "inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-medium",
-                  categoryStyles[service.category] ?? "bg-surface-dim text-muted-ink border border-border"
-                )}>
-                  {service.category}
-                </span>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className={cn(
+                    "inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-medium",
+                    categoryStyles[service.category] ?? "bg-surface-dim text-muted-ink border border-border"
+                  )}>
+                    {service.category}
+                  </span>
+                  {service.key === "hosting" && (
+                    <span className="inline-flex items-center self-start px-2 py-0.5 rounded-md text-xs font-mono uppercase tracking-widest bg-surface-dim text-muted-ink border border-border">
+                      hosting
+                    </span>
+                  )}
+                </div>
 
                 <h2 className="text-base font-semibold text-ink group-hover:text-ink transition-colors line-clamp-1">{service.name}</h2>
 

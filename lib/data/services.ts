@@ -190,8 +190,8 @@ export const services: Service[] = [
   {
     id: "composer-pro",
     slug: "composer-pro",
-    name: "Hawiyat AI Composer Pro",
-    shortDesc: "The execution layer for solo builders",
+    name: "Hawiyat AI Composer",
+    shortDesc: "The execution layer for your AI tasks",
     description:
       "Run your AI tasks on the Hawiyat execution layer. Composer routes each task to the right model, carries your context, and evaluates the result, so you ship work, not prompt plumbing.",
     image: "/services/hawiyat%20composer.png",
@@ -199,7 +199,6 @@ export const services: Service[] = [
     priceLabel: "DA/month",
     cta: "See plans in DZD",
     category: "AI Execution",
-    tag: "Pro",
     useCases: "Individual developers and freelancers shipping AI-powered work without managing model APIs, keys, or fallbacks.",
     features: [
       "Model-agnostic routing per task",
@@ -215,7 +214,7 @@ export const services: Service[] = [
       { icon: Clock, text: "Evaluate Every Run" },
     ],
     seo: {
-      title: "Hawiyat AI Composer Pro | AI Execution Layer in Algeria",
+      title: "Hawiyat AI Composer | AI Execution Layer in Algeria",
       description:
         "Run AI tasks on the Hawiyat AI Composer execution layer. Model-agnostic routing, context, fallbacks, and evaluation for solo builders. 6,000 DA/month.",
       keywords: [
@@ -233,7 +232,7 @@ export const services: Service[] = [
     },
     details: {
       overview:
-        "Hawiyat AI Composer Pro gives solo builders the execution layer behind every AI task: routing, context, fallbacks, and evaluation, priced in DZD and supported locally.",
+        "Hawiyat AI Composer gives solo builders the execution layer behind every AI task: routing, context, fallbacks, and evaluation, priced in DZD and supported locally.",
       whatYouGet: [
         "Route every task to the best model by quality, latency, and cost",
         "Carry business context from your CRM, ERP, email, and databases",
@@ -312,15 +311,15 @@ export const services: Service[] = [
     ],
     seoContent: {
       whatIs:
-        "Hawiyat AI Composer Pro is the execution layer for solo developers in Algeria. It sits between frontier AI models (GPT, Claude, Gemini, open models) and the systems you work with, deciding the best way to accomplish each task: which model to route to, what context to carry, and when to fall back. Every run is evaluated and logged, so you see the result, the quality score, and the cost in dinars. Priced at 6,000 DA/month, Pro is built for individual developers and freelancers who want to ship AI-powered work without managing model APIs, keys, or fallbacks. It includes context-aware execution against your systems, semantic caching so repeated work never pays twice, and a transparent per-task cost. Model-agnostic by design, the layer outlives any single model: when a provider changes, your pipeline does not.",
+        "Hawiyat AI Composer is the execution layer for solo developers in Algeria. It sits between frontier AI models (GPT, Claude, Gemini, open models) and the systems you work with, deciding the best way to accomplish each task: which model to route to, what context to carry, and when to fall back. Every run is evaluated and logged, so you see the result, the quality score, and the cost in dinars. Priced at 6,000 DA/month, Pro is built for individual developers and freelancers who want to ship AI-powered work without managing model APIs, keys, or fallbacks. It includes context-aware execution against your systems, semantic caching so repeated work never pays twice, and a transparent per-task cost. Model-agnostic by design, the layer outlives any single model: when a provider changes, your pipeline does not.",
       whyChoose:
-        "Solo developers in Algeria choose Hawiyat AI Composer Pro because it runs the layer, not a model. Instead of wiring OpenAI, Claude, and Gemini by hand and keeping every key alive, you describe the task and Composer routes it to the best model by quality, latency, and cost. Fallbacks absorb outages: if a model is slow or down, the task still completes. Every run is evaluated, so you ship outcomes you can measure, not prompts you hope worked. You pay 6,000 DA/month in dinars with CCP or Baridi Mob, and every run shows a transparent per-task cost. Support is local, in Arabic, French, and English, via WhatsApp. For a freelancer shipping client work, the execution layer is the difference between a deliverable that works and plumbing you own forever.",
+        "Solo developers in Algeria choose Hawiyat AI Composer because it runs the layer, not a model. Instead of wiring OpenAI, Claude, and Gemini by hand and keeping every key alive, you describe the task and Composer routes it to the best model by quality, latency, and cost. Fallbacks absorb outages: if a model is slow or down, the task still completes. Every run is evaluated, so you ship outcomes you can measure, not prompts you hope worked. You pay 6,000 DA/month in dinars with CCP or Baridi Mob, and every run shows a transparent per-task cost. Support is local, in Arabic, French, and English, via WhatsApp. For a freelancer shipping client work, the execution layer is the difference between a deliverable that works and plumbing you own forever.",
       howItWorks:
-        "Getting started with Hawiyat AI Composer Pro takes three steps. First, order the plan on our services page at 6,000 DA/month with CCP, Baridi Mob, or USD. Second, our team activates your Composer workspace within 24 hours. Third, connect your tools, IDE integrations for VS Code and JetBrains or the API for custom workflows, and run your first task. Composer takes it through a run: plan, route to the best model for the job, execute with your context, evaluate the result, and log the cost in DZD. Semantic caching makes repeated work instant, and fallbacks keep tasks moving when a model is slow or down. Every run leaves an evaluation log you can audit. Our team monitors the service 24/7, and priority support is available via WhatsApp.",
+        "Getting started with Hawiyat AI Composer takes three steps. First, order the plan on our services page at 6,000 DA/month with CCP, Baridi Mob, or USD. Second, our team activates your Composer workspace within 24 hours. Third, connect your tools, IDE integrations for VS Code and JetBrains or the API for custom workflows, and run your first task. Composer takes it through a run: plan, route to the best model for the job, execute with your context, evaluate the result, and log the cost in DZD. Semantic caching makes repeated work instant, and fallbacks keep tasks moving when a model is slow or down. Every run leaves an evaluation log you can audit. Our team monitors the service 24/7, and priority support is available via WhatsApp.",
     },
     faq: [
       {
-        question: "What exactly does Hawiyat AI Composer Pro do?",
+        question: "What exactly does Hawiyat AI Composer do?",
         answer:
           "Composer is the execution layer between AI models and your systems. For each task it decides which model to route to, which context to carry, when to fall back, and whether the result is good enough, then logs the run and its cost in DZD.",
       },
