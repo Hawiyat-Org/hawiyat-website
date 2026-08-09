@@ -362,9 +362,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                         </span>
                       </div>
                       <p className="text-sm text-muted-ink">
-                        {service.id === "llm-credit"
-                          ? "Access fee: 2,500 DA/month · pay per run"
-                          : "All-inclusive pricing • No hidden fees"}
+                        All-inclusive pricing • No hidden fees
                       </p>
                     </div>
                   </div>

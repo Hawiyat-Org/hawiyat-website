@@ -107,26 +107,6 @@ FAQ:
 - Is MAX 20X GDPR compliant? Yes. MAX 20X includes hybrid data compliance ready for GDPR, with exact-match and vector-based semantic caching and multi-agent traffic resolution for enterprise-grade deployments.
 - Who is MAX 20X designed for? Agencies, engineering teams, and power users who need maximum parallel throughput. It includes a dedicated account manager, advanced analytics in DZD, and priority WhatsApp support.
 
-### AI Composer access — 2,500 DA/month
-
-- [Service page](https://www.hawiyat.org/services/llm-credit)
-- Category: AI Execution
-- Access to the Hawiyat AI Composer execution layer for your own tasks. Pay-per-run, with routing, caching, fallbacks, and a transparent per-task cost, billed in DZD. For individuals and teams who want the layer without committing to a fixed capacity plan.
-
-Features:
-- Model-agnostic routing per task (GPT, Claude, Gemini, open models)
-- Transparent per-task cost in DZD
-- Semantic caching to cut repeat spend
-- Automatic model fallbacks on failure
-- Evaluation log for every run
-- API access for custom integrations
-- Priority support via WhatsApp
-
-FAQ:
-- What do I actually get with AI Composer access? Access to the Hawiyat execution layer, priced in dinars with a transparent per-task cost. Composer routes each task to the best model, carries your context, falls back automatically, and evaluates the result.
-- Can I pay for AI Composer access with Baridi Mob or CCP? Yes. AI Composer access is priced in Algerian dinars and can be paid with CCP, Baridi Mob, or USD. No foreign card is needed.
-- How is the per-task cost calculated? Each run is evaluated and logged with its cost in dinars. Caching and routing keep the cost down: repeated work is served from cache, and each task goes to the most efficient model for the job.
-
 ### n8n Hosting — managed workflow automation
 
 - [Service page](https://www.hawiyat.org/services/n8n-hosting)

@@ -364,8 +364,8 @@ export default function TermsPage() {
               <h2 className="text-lg font-medium text-foreground">8. Usage and Capacity Policy</h2>
               <Note>
                 <p>
-                  This section applies to Composer Pro and MAX subscription plans. Pay-per-run AI Composer access and
-                  managed services may use different usage models, as described at the time of purchase.
+                  This section applies to Composer Pro and MAX subscription plans. Managed services may use
+                  different usage models, as described at the time of purchase.
                 </p>
               </Note>
 
