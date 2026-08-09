@@ -336,37 +336,36 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "hosting-basic",
-    slug: "hosting-basic",
-    // hosting-basic and hosting-vip are two live slugs for the same single
-    // "Hawiyat Cloud" by-order offering (no tiers); both render the same card.
+    id: "hawiyat-cloud",
+    slug: "hawiyat-cloud",
     name: "Hawiyat Cloud",
-    shortDesc: "Managed cloud, sized to your needs",
-    description: "A managed cloud runtime on our infrastructure: containers, VPS, or Kubernetes, planned with our team. Contact us to start.",
+    shortDesc: "Managed cloud with databases and priority support",
+    description: "A managed cloud runtime on our infrastructure: containers, VPS, or Kubernetes, with managed databases and priority support. Contact us to plan your deployment.",
     image: "/logo.svg",
     price: "",
     priceLabel: "By order",
-    cta: "Plan your deployment",
+    cta: "See plans in DZD",
     category: "Cloud Runtime",
     availability: "contact",
-    useCases: "Websites, applications, full-stack projects, and SaaS that need managed containers, VPS, or Kubernetes.",
+    useCases: "Websites, applications, full-stack projects, SaaS, and e-commerce sites that need managed containers, VPS, Kubernetes, or a managed database.",
     features: [
       "Managed containers",
       "VPS and Kubernetes options",
-      "Managed database options",
+      "Managed database (PostgreSQL or MySQL)",
       "Free SSL certificate",
       "Automatic deployments from Git",
       "Monitoring and uptime tracking",
       "Backups",
+      "Priority support",
     ],
     bulletPoints: [
       { icon: Server, text: "Managed Containers" },
       { icon: Shield, text: "Free SSL" },
-      { icon: Zap, text: "Auto Deploy" },
+      { icon: Clock, text: "Priority Support" },
     ],
     seo: {
-      title: "Hawiyat Cloud by Order in Algeria | Managed Cloud Hosting",
-      description: "Managed cloud hosting by order in Algeria: containers, VPS, or Kubernetes on our infrastructure, planned with our team and quoted in DZD. Contact us to start.",
+      title: "Hawiyat Cloud by Order in Algeria | Managed Cloud Runtime",
+      description: "Managed cloud by order in Algeria: containers, VPS, managed databases, priority support. Contact us to plan your deployment and get a quote in DZD.",
       keywords: [
         "managed cloud hosting algeria",
         "cloud hosting algeria",
@@ -374,30 +373,39 @@ export const services: Service[] = [
         "vps hosting algeria",
         "kubernetes hosting algeria",
         "managed hosting algeria",
+        "managed containers algeria",
         "managed containers dz",
+        "hosting with database algeria",
+        "managed database hosting algeria",
+        "full stack hosting algeria",
+        "hosting for saas algeria",
+        "priority support hosting algeria",
         "hebergement web algerie",
         "hebergement cloud algerie",
+        "hebergement professionnel algerie",
         "cloud by order algeria",
         "app hosting algeria",
         "hosting for developers algeria",
       ],
     },
     details: {
-      overview: "A managed cloud runtime on our own infrastructure. Tell us what you need to run and we plan the right setup for you: containers, VPS, or Kubernetes, with SSL, automatic deployments, monitoring, and backups. Every deployment is managed by our Algerian team and quoted in DZD, so you pay for what you actually need.",
+      overview: "A managed cloud runtime on our own infrastructure with databases, containers, and priority support. Tell us what you need to run and we plan the right setup on containers, VPS, or Kubernetes, with managed databases, SSL, automatic deployments, monitoring, and backups. Every deployment is managed by our Algerian team and quoted in DZD.",
       whatYouGet: [
         "Managed containers, VPS, or Kubernetes sized to your needs",
+        "Managed database (PostgreSQL or MySQL)",
         "Free SSL certificate for secure connections",
         "Automatic deployments from Git",
+        "Priority support via WhatsApp",
         "Monitoring and uptime tracking",
         "Backups",
         "Custom domain support",
         "Support in Arabic, French, and English",
       ],
-      idealFor: "Websites, applications, full-stack projects, and SaaS that need managed infrastructure without managing servers.",
+      idealFor: "Websites, applications, full-stack projects, SaaS, and e-commerce sites that need managed infrastructure, a managed database, or priority support.",
       technicalSpecs: [
         "Containers, VPS, or Kubernetes runtimes",
         "Node.js, Python, or static site support",
-        "Managed database options",
+        "PostgreSQL or MySQL managed database",
         "Git-based deployments",
         "Custom domain with DNS management",
         "Automatic HTTPS with Let's Encrypt",
@@ -407,17 +415,22 @@ export const services: Service[] = [
     },
     seoContent: {
       whatIs:
-        "Hawiyat Cloud is a managed cloud runtime by order in Algeria. Instead of fixed plans, you tell the team what you need to run and Hawiyat plans the right deployment on its own infrastructure: containers, VPS, or Kubernetes, with a quote in DZD. Every deployment includes free SSL certificates, automatic deployments from Git, monitoring, and backups. Managed databases are available when your application needs them, and Node.js, Python, and static sites are all supported. Everything is managed by our Algerian team, so you never touch a server or read a line of configuration. For businesses in Algeria that want production-grade cloud infrastructure without fixed tiers, Hawiyat Cloud is planned with you, priced in dinars, and billed locally with CCP or Baridi Mob.",
+        "Hawiyat Cloud is a managed cloud runtime by order in Algeria, with databases, containers, and priority support. Instead of fixed plans, you tell the team what you need to run and Hawiyat plans the right deployment on its own infrastructure: containers, VPS, or Kubernetes, with a quote in DZD. Every deployment includes managed PostgreSQL or MySQL databases, free SSL certificates, automatic deployments from Git, monitoring, and backups. Priority support is available via WhatsApp. Node.js, Python, and static sites are all supported, and billing is in dinars with CCP or Baridi Mob. For full-stack applications, SaaS projects, and e-commerce sites that need a database and priority support, Hawiyat Cloud is planned with you and quoted in DZD.",
       whyChoose:
-        "Hawiyat Cloud is a managed cloud runtime by order in Algeria, planned around what you need to run and quoted in DZD. You get containers, VPS, or Kubernetes on our own infrastructure, with SSL, automatic deployments, monitoring, and backups handled by our team. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you in Arabic, French, and English from the same timezone. Your workloads run on production-tested infrastructure that powers 200+ clients, with no fixed tiers to outgrow: when your needs change, we size the deployment to match.",
+        "Hawiyat Cloud is a managed cloud runtime by order in Algeria, planned around what you need to run and quoted in DZD. You get containers, VPS, or Kubernetes on our own infrastructure, with managed PostgreSQL or MySQL databases, SSL, automatic deployments, monitoring, and backups handled by our team. Priority WhatsApp support comes in Arabic, French, and English. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you from the same timezone. Your workloads run on production-tested infrastructure that powers 200+ clients, with no fixed tiers to outgrow: when your needs change, we size the deployment to match.",
       howItWorks:
-        "Getting your workload live on Hawiyat Cloud takes three steps. First, contact the team on WhatsApp or email and describe what you need to run. Second, the team plans the right setup for you: containers, VPS, or Kubernetes, with the resources and services you need, and sends you a quote in DZD. Third, our team deploys your applications, connects your domains with free SSL, and keeps everything monitored with backups. Deployments are automatic from Git, so push and your changes go live. Support is available by email and WhatsApp in Arabic, French, and English, and billing is in dinars with CCP or Baridi Mob.",
+        "Getting your workload live on Hawiyat Cloud takes three steps. First, contact the team on WhatsApp or email and describe what you need to run. Second, the team plans the right setup for you: containers, VPS, or Kubernetes, with the databases, resources, and services you need, and sends you a quote in DZD. Third, our team deploys your applications, provisions your managed PostgreSQL or MySQL database, connects your domains with free SSL, and keeps everything monitored with backups. Deployments are automatic from Git, so push and your changes go live. Priority support is available via WhatsApp, and billing is in dinars with CCP or Baridi Mob.",
     },
     faq: [
       {
         question: "What can I run on Hawiyat Cloud?",
         answer:
-          "Websites, applications, full-stack projects, and SaaS. Hawiyat plans the deployment on containers, VPS, or Kubernetes with the resources and services you need, including managed databases when required.",
+          "Websites, applications, full-stack projects, SaaS, and e-commerce sites. Hawiyat plans the deployment on containers, VPS, or Kubernetes with the resources and services you need, including managed databases when required.",
+      },
+      {
+        question: "How does Hawiyat Cloud work with databases?",
+        answer:
+          "Hawiyat plans your deployment around your needs and can include managed PostgreSQL or MySQL databases, provisioned and maintained by our team, with backups included.",
       },
       {
         question: "How much does Hawiyat Cloud cost?",
@@ -427,12 +440,17 @@ export const services: Service[] = [
       {
         question: "Do I need a foreign credit card to pay for Hawiyat Cloud?",
         answer:
-          "No. Hawiyat Cloud is billed in Algerian dinars and can be paid with CCP, Baridi Mob, or USD. We accept local Algerian payment methods.",
+          "No. Hawiyat Cloud is billed in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.",
       },
       {
         question: "How do deployments work on Hawiyat Cloud?",
         answer:
           "Deployments are automatic from Git. Connect your repository, and every push deploys your changes. You also get a free SSL certificate and custom domain support.",
+      },
+      {
+        question: "Can I run a SaaS or e-commerce site on Hawiyat Cloud?",
+        answer:
+          "Yes. Hawiyat Cloud supports full-stack apps, SaaS projects, and e-commerce sites that need a managed database, custom domains, automatic HTTPS, and priority support.",
       },
     ],
   },
@@ -747,108 +765,6 @@ export const services: Service[] = [
         question: "Who is MAX 20X designed for?",
         answer:
           "Agencies, engineering teams, and power users who need maximum parallel throughput. It includes a dedicated account manager, advanced analytics in DZD, and priority WhatsApp support.",
-      },
-    ],
-  },
-  {
-    id: "hosting-vip",
-    slug: "hosting-vip",
-    name: "Hawiyat Cloud",
-    shortDesc: "Managed cloud with databases and priority support",
-    description: "A managed cloud runtime with databases, containers, and priority support. Contact us to plan your deployment.",
-    image: "/logo.svg",
-    price: "",
-    priceLabel: "By order",
-    cta: "Plan your deployment",
-    category: "Cloud Runtime",
-    availability: "contact",
-    useCases: "Full-stack apps, SaaS projects, apps with databases, and e-commerce sites that need managed infrastructure.",
-    features: [
-      "Managed containers",
-      "VPS and Kubernetes options",
-      "Managed database (PostgreSQL or MySQL)",
-      "Free SSL certificate",
-      "Automatic deployments from Git",
-      "Monitoring and uptime tracking",
-      "Backups",
-      "Priority support",
-    ],
-    bulletPoints: [
-      { icon: Server, text: "Managed Containers" },
-      { icon: Shield, text: "Free SSL" },
-      { icon: Clock, text: "Priority Support" },
-    ],
-    seo: {
-      title: "Hawiyat Cloud by Order in Algeria | Databases and Priority Support",
-      description: "Managed cloud by order in Algeria with containers, VPS, or Kubernetes, managed databases, and priority support. Contact us to plan your deployment and get a quote in DZD.",
-      keywords: [
-        "managed cloud hosting algeria",
-        "cloud hosting algeria",
-        "vps hosting algeria",
-        "kubernetes hosting algeria",
-        "hosting with database algeria",
-        "managed database hosting algeria",
-        "full stack hosting algeria",
-        "managed containers algeria",
-        "hebergement cloud algerie",
-        "hebergement professionnel algerie",
-        "hosting for saas algeria",
-        "priority support hosting algeria",
-      ],
-    },
-    details: {
-      overview: "A managed cloud runtime with databases, containers, and priority support. Tell us what you need to run and we plan the right setup on containers, VPS, or Kubernetes, with managed databases, SSL, automatic deployments, monitoring, and backups. Every deployment is managed by our Algerian team and quoted in DZD.",
-      whatYouGet: [
-        "Managed containers, VPS, or Kubernetes sized to your needs",
-        "Managed database (PostgreSQL or MySQL)",
-        "Free SSL certificate for secure connections",
-        "Automatic deployments from Git",
-        "Priority support via WhatsApp",
-        "Monitoring and uptime tracking",
-        "Backups",
-        "Custom domain support",
-        "Support in Arabic, French, and English",
-      ],
-      idealFor: "Full-stack applications, SaaS projects, e-commerce sites, and any workload that needs a managed database and priority support.",
-      technicalSpecs: [
-        "Containers, VPS, or Kubernetes runtimes",
-        "Node.js, Python, or static site support",
-        "PostgreSQL or MySQL managed database",
-        "Git-based deployments",
-        "Custom domain with DNS management",
-        "Automatic HTTPS with Let's Encrypt",
-        "Resource monitoring",
-        "Backups",
-      ],
-    },
-    seoContent: {
-      whatIs:
-        "Hawiyat Cloud is a managed cloud runtime by order in Algeria, with databases, containers, and priority support. Instead of fixed plans, you tell the team what you need to run and Hawiyat plans the right deployment on its own infrastructure: containers, VPS, or Kubernetes, with a quote in DZD. Every deployment includes managed PostgreSQL or MySQL databases, free SSL certificates, automatic deployments from Git, monitoring, and backups. Priority support is available via WhatsApp. Node.js, Python, and static sites are all supported, and billing is in dinars with CCP or Baridi Mob. For full-stack applications, SaaS projects, and e-commerce sites that need a database and priority support, Hawiyat Cloud is planned with you and quoted in DZD.",
-      whyChoose:
-        "Hawiyat Cloud is a managed cloud runtime by order in Algeria, planned around what you need to run and quoted in DZD. You get containers, VPS, or Kubernetes on our own infrastructure, with managed PostgreSQL or MySQL databases, SSL, automatic deployments, monitoring, and backups handled by our team. Priority WhatsApp support comes in Arabic, French, and English. Unlike big international hosts that require foreign credit cards and charge in euros or dollars, Hawiyat accepts CCP and Baridi Mob and supports you from the same timezone. Your workloads run on production-tested infrastructure that powers 200+ clients, with no fixed tiers to outgrow: when your needs change, we size the deployment to match.",
-      howItWorks:
-        "Getting your workload live on Hawiyat Cloud takes three steps. First, contact the team on WhatsApp or email and describe what you need to run. Second, the team plans the right setup for you: containers, VPS, or Kubernetes, with the databases, resources, and services you need, and sends you a quote in DZD. Third, our team deploys your applications, provisions your managed PostgreSQL or MySQL database, connects your domains with free SSL, and keeps everything monitored with backups. Deployments are automatic from Git, so push and your changes go live. Priority support is available via WhatsApp, and billing is in dinars with CCP or Baridi Mob.",
-    },
-    faq: [
-      {
-        question: "How does Hawiyat Cloud work with databases?",
-        answer:
-          "Hawiyat plans your deployment around your needs and can include managed PostgreSQL or MySQL databases, provisioned and maintained by our team, with backups included.",
-      },
-      {
-        question: "How much does Hawiyat Cloud cost?",
-        answer:
-          "By order. Tell us what you need to run and the team plans the deployment and sends you a quote in DZD, so you only pay for what you actually need.",
-      },
-      {
-        question: "Do I need a foreign credit card to pay for Hawiyat Cloud?",
-        answer:
-          "No. Hawiyat Cloud is billed in Algerian dinars and can be paid with CCP, Baridi Mob, or USD.",
-      },
-      {
-        question: "Can I run a SaaS or e-commerce site on Hawiyat Cloud?",
-        answer:
-          "Yes. Hawiyat Cloud supports full-stack apps, SaaS projects, and e-commerce sites that need a managed database, custom domains, automatic HTTPS, and priority support.",
       },
     ],
   },

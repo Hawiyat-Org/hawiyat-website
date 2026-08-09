@@ -189,7 +189,7 @@ FAQ:
 
 > **Availability:** Available by contacting the team. Tell us what you need to run and we will plan the deployment and confirm details on WhatsApp or email.
 
-- [Service page](https://www.hawiyat.org/services/hosting-basic)
+- [Service page](https://www.hawiyat.org/services/hawiyat-cloud)
 - Category: Cloud Runtime
 - Managed cloud on Hawiyat's own infrastructure: containers, VPS, or Kubernetes, sized to your needs. No fixed plans. Contact us to plan your deployment and get a quote in DZD.
 

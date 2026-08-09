@@ -42,19 +42,18 @@ function lowestPlanPrice(plans?: Service["plans"]): string | undefined {
 }
 
 /* Tier services become ONE card each (plan choice happens on the detail page).
-   hosting-basic + hosting-vip fold into a single "Hosting" card. */
+   hawiyat-cloud is the single "Hosting" card (hosting-basic/hosting-vip collapsed). */
 function buildCatalogCards(): CatalogCard[] {
   const cards: CatalogCard[] = []
 
   for (const service of services) {
     if (EXCLUDED_SERVICE_IDS.includes(service.id)) continue
-    if (service.id === "hosting-vip") continue // folded into the Hawiyat Cloud card below
 
-    // hosting-basic + hosting-vip → one "Hawiyat Cloud" card, sized to your needs (by order)
-    if (service.id === "hosting-basic") {
+    // hawiyat-cloud → one "Hawiyat Cloud" card, sized to your needs (by order)
+    if (service.id === "hawiyat-cloud") {
       cards.push({
         key: "hosting",
-        slug: "hosting-basic",
+        slug: "hawiyat-cloud",
         name: "Hawiyat Cloud",
         description:
           "Managed cloud on our infrastructure: containers and VPS, sized to your needs. Contact us to plan your deployment and get a quote in DZD.",

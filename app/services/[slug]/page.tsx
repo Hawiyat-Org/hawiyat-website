@@ -27,8 +27,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   })
 }
 
-// hosting-basic and hosting-vip are one "Hawiyat Cloud" by-order offering. There are
-// no Basic/VIP tiers: both URLs render the contact card and the team plans the deployment.
+// hawiyat-cloud is the single "Hawiyat Cloud" by-order offering (hosting-basic and
+// hosting-vip 308-redirect here). There are no Basic/VIP tiers: the URL renders the
+// contact card and the team plans the deployment.
 export default function ServicePage({ params, searchParams }: { params: { slug: string }, searchParams?: { plan?: string } }) {
   const service = getServiceBySlug(params.slug)
   if (!service) notFound()
