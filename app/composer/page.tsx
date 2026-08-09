@@ -8,6 +8,7 @@ import {
   Braces,
   BrainCircuit,
   Database,
+  ExternalLink,
   FileText,
   GitMerge,
   Mail,
@@ -192,6 +193,17 @@ export default function ComposerPage() {
               >
                 Watch a run
                 <ArrowRight className="h-4 w-4 rotate-90" />
+              </a>
+            </div>
+            <div className="-mt-3 flex items-center justify-center reveal-up">
+              <a
+                href="https://usage.ai.hawiyat.cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors duration-300 hover:text-ink"
+              >
+                Open your usage dashboard
+                <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
