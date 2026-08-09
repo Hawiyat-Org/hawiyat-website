@@ -57,9 +57,9 @@ const ScrollAnimations = () => {
           })
           .to(revealElements, {
             opacity: 1,
-            duration: 0.8,
+            duration: 0.35,
             y: "0%",
-            stagger: 0.2,
+            stagger: 0.08,
           })
       }
     })

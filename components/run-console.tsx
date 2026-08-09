@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DEFAULT_STAGES, ExecutionTrace } from "@/components/execution-trace"
 
-const STAGE_MS = 900
+const STAGE_MS = 600
 const FINISHED = DEFAULT_STAGES.length - 1
 
 type RunTask = {
