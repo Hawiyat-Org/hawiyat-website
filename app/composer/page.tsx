@@ -3,6 +3,7 @@ import ScrollAnimations from "@/components/scroll-animations"
 import { RunConsole } from "@/components/run-console"
 import { AnimatedNumber } from "@/components/animated-number"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 import {
   ArrowRight,
   Boxes,
@@ -114,8 +115,7 @@ const FULLSTACK = [
   { name: "Platform", icon: ServerCog, note: "cloud runtime: servers, storage, and databases under one roof" },
 ]
 
-const FULLSTACK_WHATSAPP_URL =
-  "https://wa.me/213559555951?text=Hello%20Hawiyat%2C%20we%20need%20the%20full%20stack%20for%20our%20operation."
+const FULLSTACK_WHATSAPP_URL = waLink("Hello Hawiyat, we need the full stack for our operation.")
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -580,7 +580,7 @@ export default function ComposerPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="https://wa.me/213559555951"
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"

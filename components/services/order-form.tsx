@@ -5,6 +5,7 @@ import { Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-rea
 import { SkeletonImage } from "@/components/image-with-skeleton"
 import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface OrderFormProps {
@@ -115,7 +116,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             )}
             <div className="flex flex-col gap-2">
               <a
-                href={`https://wa.me/213559555951?text=Hello%20Hawiyat!%20My%20order%20${orderId}%20is%20submitted.`}
+                href={waLink(`Hello Hawiyat! My order ${orderId} is submitted.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover"

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Check, Mail, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { waLink } from "@/lib/contact"
 import { ServiceOrderForm } from "./service-order-form"
 
 export interface ServicePlan {
@@ -46,18 +47,14 @@ export function ServicePlans({
 
   const plan = plans[activeIdx]
 
-  const contactWhatsappUrl = `https://wa.me/213559555951?text=${encodeURIComponent(
-    `Hello Hawiyat! I would like a custom plan for ${serviceName}.`
-  )}`
+  const contactWhatsappUrl = waLink(`Hello Hawiyat! I would like a custom plan for ${serviceName}.`)
 
-  const contactOrderUrl = `https://wa.me/213559555951?text=${encodeURIComponent(
-    `Hello Hawiyat! I would like to order Cloud ${plan.name}.`
-  )}`
+  const contactOrderUrl = waLink(`Hello Hawiyat! I would like to order Cloud ${plan.name}.`)
 
   const serviceData = {
     id: serviceId,
     // Clean display name; the form appends " {tag}" to the order record
-    // so orders/emails show e.g. "n8n Hosting  Enterprise"
+    // so orders/emails show e.g. "n8n Hosting Enterprise"
     name: serviceName,
     tag: plan.name,
     price: plan.price,

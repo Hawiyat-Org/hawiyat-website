@@ -5,6 +5,7 @@ import { Loader2, CheckCircle2, Building2, Wallet, DollarSign, ArrowRight, Check
 import { SkeletonImage } from "@/components/image-with-skeleton"
 import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
@@ -218,7 +219,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                   <p className="text-xs text-muted-ink mb-3">Order ID: {orderId}</p>
                 )}
                 <a
-                  href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20just%20placed%20an%20order%2C%20please%20confirm%20payment."
+                  href={waLink("Hello Hawiyat! I just placed an order, please confirm payment.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center border border-border rounded-lg px-6 py-2 min-h-[44px] text-sm font-medium text-ink hover:bg-surface-dim transition-colors mb-4"

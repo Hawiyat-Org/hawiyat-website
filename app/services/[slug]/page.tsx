@@ -4,6 +4,7 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 import { SkeletonImage } from "@/components/image-with-skeleton"
 import Link from "next/link"
 import { ArrowLeft, ChevronDown } from "lucide-react"
+import { waLink } from "@/lib/contact"
 import { ServicePlans, type ServicePlan } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
 
@@ -103,7 +104,7 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
                 ? "https://schema.org/OutOfStock"
                 : "https://schema.org/InStock",
             },
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: "2026-08-09",
   }
 
   const breadcrumbSchema = {
@@ -322,9 +323,7 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
                         See Composer plans in DZD
                       </Link>
                       <a
-                        href={`https://wa.me/213559555951?text=${encodeURIComponent(
-                          "Hello Hawiyat! I have a question about Hosting availability."
-                        )}`}
+                        href={waLink("Hello Hawiyat! I have a question about Hosting availability.")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
@@ -367,9 +366,7 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
                     {/* CTA */}
                     <div className="space-y-3 pt-2">
                       <a
-                        href={`https://wa.me/213559555951?text=${encodeURIComponent(
-                          "Hello Hawiyat! I would like to plan a Cloud deployment."
-                        )}`}
+                        href={waLink("Hello Hawiyat! I would like to plan a Cloud deployment.")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"

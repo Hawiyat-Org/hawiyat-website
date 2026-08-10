@@ -4,6 +4,7 @@ import { Check, MessageCircle, Mail, ArrowRight, ExternalLink } from "lucide-rea
 import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 
 interface OrderService {
   id: string
@@ -54,8 +55,7 @@ export default function Pricing() {
 
   const activeTier = maxTiers.find((t) => t.key === activeMax)!
 
-  const enterpriseWhatsappUrl =
-    "https://wa.me/213559555951?text=Hello%20Hawiyat%2C%20we%20need%20an%20Enterprise%20plan%20for%20our%20operation."
+  const enterpriseWhatsappUrl = waLink("Hello Hawiyat, we need an Enterprise plan for our operation.")
 
   const enterpriseFeatures = [
     "The execution layer, tuned for your whole operation",
