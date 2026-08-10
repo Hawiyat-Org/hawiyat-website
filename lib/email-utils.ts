@@ -1,5 +1,34 @@
-import { createTransport } from 'nodemailer';
+import { createTransport, type Transporter } from 'nodemailer';
 import juice from 'juice';
+
+function createTransporter(): { transporter: Transporter; from: string } | null {
+  const {
+    SMTP_HOST,
+    SMTP_PORT,
+    SMTP_SECURE,
+    SMTP_USER,
+    SMTP_PASS,
+    SMTP_FROM
+  } = process.env;
+
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
+    console.error('Missing SMTP configuration in environment variables');
+    return null;
+  }
+
+  return {
+    transporter: createTransport({
+      host: SMTP_HOST,
+      port: parseInt(SMTP_PORT),
+      secure: SMTP_SECURE === 'true',
+      auth: {
+        user: SMTP_USER,
+        pass: SMTP_PASS
+      }
+    }),
+    from: SMTP_FROM
+  };
+}
 
 // HTML-encode user-controlled values before they are interpolated into email
 // templates, so order fields cannot inject markup into emails that appear to
@@ -70,29 +99,9 @@ export async function sendOrderNotification({
   order
 }: SendOrderNotificationProps): Promise<boolean> {
   try {
-    const {
-      SMTP_HOST,
-      SMTP_PORT,
-      SMTP_SECURE,
-      SMTP_USER,
-      SMTP_PASS,
-      SMTP_FROM
-    } = process.env;
-
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-      console.error('Missing SMTP configuration in environment variables');
-      return false;
-    }
-
-    const transporter = createTransport({
-      host: SMTP_HOST,
-      port: parseInt(SMTP_PORT),
-      secure: SMTP_SECURE === 'true',
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS
-      }
-    });
+    const smtp = createTransporter();
+    if (!smtp) return false;
+    const { transporter, from } = smtp;
 
     const htmlTemplate = `
       <style>
@@ -151,7 +160,7 @@ ${order.notes ? `Notes: ${order.notes}\n` : ''}
     `;
 
     const info = await transporter.sendMail({
-      from: SMTP_FROM,
+      from,
       to: ADMIN_EMAILS.join(', '),
       subject: `New Order: ${order.serviceName} from ${order.customerName}`,
       text: textContent,
@@ -183,29 +192,9 @@ export async function sendOrderConfirmation({
   order
 }: SendOrderConfirmationProps): Promise<boolean> {
   try {
-    const {
-      SMTP_HOST,
-      SMTP_PORT,
-      SMTP_SECURE,
-      SMTP_USER,
-      SMTP_PASS,
-      SMTP_FROM
-    } = process.env;
-
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-      console.error('Missing SMTP configuration in environment variables');
-      return false;
-    }
-
-    const transporter = createTransport({
-      host: SMTP_HOST,
-      port: parseInt(SMTP_PORT),
-      secure: SMTP_SECURE === 'true',
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS
-      }
-    });
+    const smtp = createTransporter();
+    if (!smtp) return false;
+    const { transporter, from } = smtp;
 
     // Friendly label for the payment method actually selected by the customer
     const paymentLabel = order.preferredPayment
@@ -423,7 +412,7 @@ Questions? contact@hawiyat.org
     `;
 
     const info = await transporter.sendMail({
-      from: SMTP_FROM,
+      from,
       to,
       subject: `Order Received  ${order.serviceName} | Hawiyat`,
       text: textContent,
@@ -434,278 +423,6 @@ Questions? contact@hawiyat.org
     return true;
   } catch (error) {
     console.error('Error sending customer confirmation:', error);
-    return false;
-  }
-}
-
-interface SendBootcampConfirmationProps {
-  to: string;
-  registration: {
-    fullName: string;
-    email: string;
-    phone: string;
-    university: string;
-    major: string;
-    graduationYear: string;
-    topic?: string | null;
-    deadline?: Date | null;
-  };
-}
-
-export async function sendBootcampConfirmation({
-  to,
-  registration
-}: SendBootcampConfirmationProps): Promise<boolean> {
-  try {
-    const {
-      SMTP_HOST,
-      SMTP_PORT,
-      SMTP_SECURE,
-      SMTP_USER,
-      SMTP_PASS,
-      SMTP_FROM
-    } = process.env;
-
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-      console.error('Missing SMTP configuration in environment variables');
-      return false;
-    }
-
-    const transporter = createTransport({
-      host: SMTP_HOST,
-      port: parseInt(SMTP_PORT),
-      secure: SMTP_SECURE === 'true',
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS
-      }
-    });
-
-    const deadlineStr = registration.deadline
-      ? new Date(registration.deadline).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
-      : 'Non spécifiée';
-
-    const htmlTemplate = `
-      <!DOCTYPE html>
-      <html lang="fr">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bienvenue au Hawiyat AI Bootcamp</title>
-      </head>
-      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0a;">
-          <tr>
-            <td align="center" style="padding: 40px 20px;">
-              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color: #141414; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4);">
-                <!-- Top Accent Line -->
-                <tr>
-                  <td style="height: 3px; background: linear-gradient(90deg, #ffffff, #a3a3a3, #ffffff);"></td>
-                </tr>
-                <!-- Header -->
-                <tr>
-                  <td style="padding: 48px 40px 32px; text-align: center;">
-                    <img src="https://hawiyat.org/logo.svg" alt="Hawiyat" width="56" height="56" style="display: block; margin: 0 auto 24px;" />
-                    <p style="margin: 0 0 8px; color: #737373; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Hawiyat</p>
-                    <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">AI Bootcamp</h1>
-                  </td>
-                </tr>
-                <!-- Confirmation Badge -->
-                <tr>
-                  <td style="padding: 0 40px 32px; text-align: center;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" style="display: inline-block; background-color: #22c55e; border-radius: 100px;">
-                      <tr>
-                        <td style="padding: 8px 20px;">
-                          <p style="margin: 0; color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;">✓ Inscription Confirmée</p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <!-- Body -->
-                <tr>
-                  <td style="padding: 0 40px 40px;">
-                    <h2 style="margin: 0 0 16px; color: #ffffff; font-size: 22px; font-weight: 600;">Bonjour ${escapeHtml(registration.fullName)},</h2>
-                    <p style="margin: 0 0 32px; color: #a3a3a3; font-size: 15px; line-height: 1.7;">
-                      Ton inscription au <strong style="color: #ffffff;">Hawiyat AI Bootcamp</strong> a été enregistrée avec succès. Prépare-toi à transformer ton mémoire en un vrai produit et à acquérir des compétences qui valent de l'argent.
-                    </p>
-                    <!-- Details Card -->
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
-                      <tr>
-                        <td style="padding: 24px;">
-                          <p style="margin: 0 0 16px; color: #737373; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;">Ton profil</p>
-                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    <td style="color: #737373; font-size: 13px; width: 100px;">Université</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${escapeHtml(registration.university)}</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    <td style="color: #737373; font-size: 13px;">Filière</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${escapeHtml(registration.major)}</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    <td style="color: #737373; font-size: 13px;">Graduation</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${registration.graduationYear}</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding: 10px 0; border-bottom: 1px solid #262626;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    <td style="color: #737373; font-size: 13px;">Deadline</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right;">${deadlineStr}</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            ${registration.topic ? `<tr>
-                              <td style="padding: 10px 0;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    <td style="color: #737373; font-size: 13px; vertical-align: top;">Sujet PFE</td>
-                                    <td style="color: #ffffff; font-size: 13px; font-weight: 500; text-align: right; max-width: 300px;">${escapeHtml(registration.topic)}</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>` : ''}
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!-- Next Steps -->
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #1a1a1a; border-radius: 12px; border: 1px solid #262626; margin-bottom: 28px;">
-                      <tr>
-                        <td style="padding: 24px;">
-                          <p style="margin: 0 0 12px; color: #ffffff; font-size: 14px; font-weight: 600;">Prochaines étapes</p>
-                          <table role="presentation" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td style="padding-right: 12px; vertical-align: top;">
-                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
-                                  <tr>
-                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">1</td>
-                                  </tr>
-                                </table>
-                              </td>
-                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
-                                On te contactera sur WhatsApp au <strong style="color: #ffffff;">${escapeHtml(registration.phone)}</strong> dans les prochaines 48h.
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding-right: 12px; vertical-align: top;">
-                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
-                                  <tr>
-                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">2</td>
-                                  </tr>
-                                </table>
-                              </td>
-                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6; padding-bottom: 8px;">
-                                Session de kickoff gratuite pour clarifier ton projet et définir ton MVP.
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding-right: 12px; vertical-align: top;">
-                                <table role="presentation" cellpadding="0" cellspacing="0" style="background-color: #22c55e; border-radius: 50%; width: 24px; height: 24px;">
-                                  <tr>
-                                    <td align="center" style="color: #ffffff; font-size: 14px; font-weight: 700; line-height: 24px;">3</td>
-                                  </tr>
-                                </table>
-                              </td>
-                              <td style="color: #a3a3a3; font-size: 13px; line-height: 1.6;">
-                                Début des sessions  mémoire, MVP, déploiement, et module freelance.
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!-- Contact -->
-                    <p style="margin: 0; color: #737373; font-size: 14px; line-height: 1.6; text-align: center;">
-                      Des questions ? Écris-nous à <a href="mailto:contact@hawiyat.org" style="color: #ffffff; text-decoration: none; border-bottom: 1px solid #404040;">contact@hawiyat.org</a>
-                    </p>
-                  </td>
-                </tr>
-                <!-- Footer -->
-                <tr>
-                  <td style="background-color: #0f0f0f; padding: 24px 40px; text-align: center; border-top: 1px solid #1a1a1a;">
-                    <p style="margin: 0 0 4px; color: #525252; font-size: 12px;">
-                      &copy; ${new Date().getFullYear()} Hawiyat. Tous droits réservés.
-                    </p>
-                    <p style="margin: 0; color: #404040; font-size: 11px;">
-                      Construis. Déploie. Scale.
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </body>
-      </html>
-    `;
-
-    const inlinedHtml = juice(htmlTemplate);
-
-    const textContent = `
-══════════════════════════════════════════╗
-║         HAWIYAT AI BOOTCAMP              ║
-║       Inscription Confirmée              ║
-╚══════════════════════════════════════════╝
-
-Bonjour ${registration.fullName},
-
-Ton inscription au Hawiyat AI Bootcamp a été enregistrée avec succès.
-Prépare-toi à transformer ton mémoire en un vrai produit.
-
-──────────────────────────────────────────
-  TON PROFIL
-──────────────────────────────────────────
-  Université :  ${registration.university}
-  Filière    :  ${registration.major}
-  Graduation :  ${registration.graduationYear}
-  Deadline   :  ${deadlineStr}
-${registration.topic ? `  Sujet PFE  :  ${registration.topic}` : ''}
-
-──────────────────────────────────────────
-  PROCHAINES ÉTAPES
-──────────────────────────────────────────
-  1. Contact WhatsApp au ${registration.phone} (sous 48h)
-  2. Session de kickoff gratuite
-  3. Début des sessions  mémoire, MVP, déploiement
-
-Des questions ? contact@hawiyat.org
-
-© ${new Date().getFullYear()} Hawiyat  Construis. Déploie. Scale.
-    `;
-
-    const info = await transporter.sendMail({
-      from: SMTP_FROM,
-      to,
-      subject: 'Bienvenue au Hawiyat AI Bootcamp',
-      text: textContent,
-      html: inlinedHtml
-    });
-
-    console.log('Bootcamp confirmation sent successfully:', info.messageId);
-    return true;
-  } catch (error) {
-    console.error('Error sending bootcamp confirmation:', error);
     return false;
   }
 }
