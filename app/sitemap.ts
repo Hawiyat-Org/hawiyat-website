@@ -13,7 +13,7 @@ const routes = [
   "/dmca",
 ]
 
-const lastModified = new Date().toISOString().split("T")[0]
+const lastModified = "2026-08-09"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = routes.map((route) => ({

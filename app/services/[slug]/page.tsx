@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: service.seo.description,
     path: `/services/${slug}` as `/${string}`,
     image: serviceImage,
-    modifiedTime: new Date().toISOString(),
+    modifiedTime: "2026-08-09",
   })
 }
 
@@ -149,8 +149,8 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
 
   const serviceData = {
     id: service.id,
-    // Clean display name; the form appends " {tag}" to the order record
-    // so orders/emails show e.g. "Hawiyat AI Composer Pro  Pro"
+    // Clean display name; the form joins "name {tag}" into the order record
+    // so orders/emails show e.g. "Hawiyat AI Composer Pro"
     name: service.name,
     tag: service.tag,
     price: service.price,
@@ -158,20 +158,6 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
     image: service.image,
     images: service.images
   }
-
-  // Mobile quick price: shown under the title/description on small screens only
-  // (desktop already shows it in the sticky pricing card on the right).
-  // Single-price services, or a single plan filtered by ?plan=, get their price here.
-  // By-order (contact) services show no price on mobile either; the price lives
-  // in the "By order" cloud card.
-  const singlePlan = plans && plans.length === 1 ? plans[0] : null
-  const mobilePrice = isUnavailable || isContact
-    ? null
-    : singlePlan
-      ? { price: singlePlan.price, priceLabel: singlePlan.priceLabel, originalPrice: singlePlan.originalPrice }
-      : !service.plans || service.plans.length === 0
-        ? { price: service.price, priceLabel: service.priceLabel, originalPrice: service.originalPrice }
-        : null
 
   return (
     <>
@@ -253,19 +239,6 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
                     </div>
                   )}
                 </div>
-
-                {/* Mobile quick price (desktop shows it in the sticky pricing card) */}
-                {mobilePrice && (
-                  <div className="lg:hidden -mt-2">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold tracking-tight text-ink">{mobilePrice.price}</span>
-                      {mobilePrice.originalPrice && (
-                        <span className="text-2xl text-muted-ink line-through">{mobilePrice.originalPrice}</span>
-                      )}
-                      <span className="text-lg text-muted-ink font-medium">{mobilePrice.priceLabel}</span>
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* SEO Content Blocks for AI Search - collapsed behind a disclosure */}

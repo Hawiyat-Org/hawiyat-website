@@ -2,6 +2,8 @@
 
 > Hawiyat is an AI infrastructure platform — the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run (WhatsApp, CRM, ERP, email, databases, workflows). Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
 
+Figures on this site are verified against the Hawiyat operations dashboard as of August 9, 2026.
+
 All prices are in **Algerian dinars (DZD)**. Models are routes on the execution layer, never sold as SKUs or credits; Hawiyat does not resell or rebrand any model. This file lists every plan and its price, verbatim from Hawiyat's service catalog. See [llmsfull.txt](https://www.hawiyat.org/llmsfull.txt) for full service details.
 
 ## Payment methods

@@ -29,6 +29,7 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 - Billing is in Algerian dinars (DZD); local payment methods CCP and Baridi Mob are accepted.
 - Models (GPT, Claude, Gemini, open models) are routes on the execution layer, never sold as SKUs or credits. Hawiyat does not resell or rebrand any model.
 - Hawiyat does not imply an official partnership with any model provider unless explicitly stated; third-party product and model names belong to their respective owners.
+- Site figures (200+ satisfied clients and businesses, 10+ resellers, 100B+ tokens executed through Composer) are verified against the Hawiyat operations dashboard as of August 9, 2026.
 
 ## Common questions
 - What is Hawiyat? An AI infrastructure platform, the execution layer between frontier AI models and business systems. Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
