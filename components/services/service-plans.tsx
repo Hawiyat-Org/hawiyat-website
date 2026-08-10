@@ -79,7 +79,7 @@ export function ServicePlans({
               aria-pressed={active}
               onClick={() => setActiveIdx(idx)}
               className={cn(
-                "flex-1 min-w-[8rem] flex flex-col items-center gap-0.5 px-3 py-2.5 rounded-md text-center transition-colors",
+                "flex-1 min-w-[8rem] flex min-h-[44px] flex-col items-center justify-center gap-0.5 px-3 py-2.5 rounded-md text-center transition-colors",
                 active
                   ? "bg-signal text-signal-text"
                   : "border border-border text-muted-ink hover:text-ink"
