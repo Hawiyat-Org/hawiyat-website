@@ -49,7 +49,7 @@ const Footer = () => {
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
           <Link href="/" className="w-full place-items-center flex flex-col gap-6" aria-label="Hawiyat homepage">
-            <Image src="/logo.png" alt="Hawiyat" width={120} height={120} className="max-w-[120px]" />
+            <Image src="/logo.png" alt="" width={120} height={120} className="max-w-[120px]" />
             <div className="max-w-[120px] text-center text-3xl h-fit">Hawiyat</div>
           </Link>
 
