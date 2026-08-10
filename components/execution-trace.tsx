@@ -14,6 +14,7 @@ export const DEFAULT_STAGES = ["UNDERSTAND", "PLAN", "ROUTE", "EXECUTE", "EVALUA
 
 export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry = [], className, onStageClick }: ExecutionTraceProps) {
   const rowRef = useRef<HTMLDivElement>(null)
+  const userInteractedRef = useRef(false)
 
   useEffect(() => {
     const container = rowRef.current
@@ -23,8 +24,9 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     container.scrollTo({
       left: target.offsetLeft - (container.clientWidth - target.offsetWidth) / 2,
-      behavior: reduceMotion ? "auto" : "smooth",
+      behavior: userInteractedRef.current && !reduceMotion ? "smooth" : "auto",
     })
+    userInteractedRef.current = false
   }, [active])
 
   return (
@@ -35,7 +37,10 @@ export function ExecutionTrace({ stages = DEFAULT_STAGES, active = 0, telemetry 
             {onStageClick ? (
               <button
                 type="button"
-                onClick={() => onStageClick(i)}
+                onClick={() => {
+                  userInteractedRef.current = true
+                  onStageClick(i)
+                }}
                 aria-pressed={i === active}
                 className={cn(
                   "whitespace-nowrap rounded-md px-2 py-2 transition-colors min-h-[44px]",

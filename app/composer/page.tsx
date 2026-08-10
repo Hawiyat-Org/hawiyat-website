@@ -175,7 +175,7 @@ export default function ComposerPage() {
             <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
               THE ENGINE BEHIND HAWIYAT
             </p>
-            <h1 className="text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-7xl reveal-up">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-ink reveal-up">
               Hawiyat AI Composer
             </h1>
             <p className="text-2xl font-semibold text-ink md:text-3xl reveal-up">
@@ -361,10 +361,10 @@ export default function ComposerPage() {
           </div>
 
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
-            <table className="w-full min-w-[720px] border-collapse text-left">
+            <table className="w-full min-w-[640px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-border">
-                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
+                  <th scope="col" className="sticky left-0 z-10 bg-surface p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
                     &nbsp;
                   </th>
                   <th scope="col" className="p-5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">
@@ -427,7 +427,7 @@ export default function ComposerPage() {
                   },
                 ].map((row) => (
                   <tr key={row.label} className="border-b border-border last:border-b-0">
-                    <th scope="row" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink align-top">
+                    <th scope="row" className="sticky left-0 z-10 bg-surface p-5 font-mono text-xs uppercase tracking-widest text-muted-ink align-top">
                       {row.label}
                     </th>
                     <td className="p-5 text-sm font-medium text-ink">{row.composer}</td>
