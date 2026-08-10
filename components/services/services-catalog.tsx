@@ -169,6 +169,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-ink z-10 pointer-events-none" />
           <Input
             type="search"
+            aria-label="Search services"
             placeholder="Search services..."
             value={searchQuery}
             onChange={(e) => {
@@ -186,7 +187,7 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
       {filteredCards.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-muted-ink mb-3">No services found.</p>
-          <button onClick={() => { setSearchQuery(""); router.replace("/services", { scroll: false }) }} className="text-sm underline hover:no-underline">
+          <button onClick={() => { setSearchQuery(""); router.replace("/services", { scroll: false }) }} className="inline-flex min-h-[44px] items-center text-sm underline hover:no-underline">
             Clear search
           </button>
         </div>

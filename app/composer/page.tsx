@@ -206,7 +206,7 @@ export default function ComposerPage() {
                 href={USAGE_DASHBOARD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors duration-300 hover:text-ink"
+                className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors duration-300 hover:text-ink"
               >
                 Open your usage dashboard
                 <ExternalLink className="h-3.5 w-3.5" />
