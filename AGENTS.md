@@ -73,7 +73,7 @@ Copy `.env.example` → `.env` if missing.
 - Note: `/templates`, `/bootcamp`, `/schedule`, `/cyber-security`, `/guides`, `/ai-algeria` were removed from the repo — do not reference them in nav/footer/sitemap.
 
 **Services data** — source of truth is the `services` array in **`lib/data/services.ts`** (type `Service`/`ServicePlan`, 8 entries with `seo`, `details`, `seoContent`, `faq`, optional `plans`, payment-method aware). `components/services/services-catalog.tsx` renders the `/services` grid from it; each service also has a detail page at `/services/[slug]` (`app/services/[slug]/page.tsx`) with `components/services/service-order-form.tsx` + `components/services/service-plans.tsx`. To add/modify services or DZD pricing, edit `lib/data/services.ts` (not the page components).
-**Models:** Order, Waitlist, BootcampRegistration. API: `/api/orders`, `/api/waitlist`.
+**Models:** Order. API: `/api/orders`.
 
 ## Testing
 No formal suite. Verify with `npx tsc --noEmit`, `pnpm lint`, `pnpm build`, then manual browser checks via `pnpm dev`.

@@ -26,13 +26,13 @@ const nextConfig = {
     const csp = isProd
       ? [
           "default-src 'none'",
-          "script-src 'self' 'unsafe-inline' https://connect.facebook.net https://app.chatwoot.com",
+          "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
           "style-src 'self'",
           "style-src-attr 'unsafe-inline'",
-          "img-src 'self' data: blob: https://*.facebook.com https://*.fbcdn.net https://app.chatwoot.com",
+          "img-src 'self' data: blob: https://*.facebook.com https://*.fbcdn.net",
           "font-src 'self'",
-          "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://*.facebook.com https://*.fbcdn.net https://*.on.aws https://app.chatwoot.com wss://app.chatwoot.com",
-          "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com https://www.google.com/maps https://app.chatwoot.com",
+          "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://*.facebook.com https://*.fbcdn.net https://*.on.aws",
+          "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com https://www.google.com/maps",
           "object-src 'none'",
           "base-uri 'self'",
           "form-action 'self'",
