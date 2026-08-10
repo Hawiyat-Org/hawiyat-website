@@ -5,7 +5,6 @@ type Testimonial = {
   quote: string
   role: string
   icon: LucideIcon
-  initials: string
 }
 
 const testimonials: Testimonial[] = [
@@ -15,7 +14,6 @@ const testimonials: Testimonial[] = [
       "Very good, it works really well. Très bien, ça marche très bien. Our greenhouse automation just runs, day after day.",
     role: "Startup, agrotech (greenhouse IoT and industrial automation)",
     icon: Sprout,
-    initials: "GD",
   },
   {
     id: "moncef",
@@ -23,7 +21,6 @@ const testimonials: Testimonial[] = [
       "I came in as a beginner and support walked me through every step. When I needed more tokens, they topped me up. Support 100/10.",
     role: "Data analyst",
     icon: BarChart3,
-    initials: "MA",
   },
   {
     id: "benar",
@@ -31,7 +28,6 @@ const testimonials: Testimonial[] = [
       "We started with n8n hosting and came back six months later for Composer MAX 5X. When a provider grows with you, you stay.",
     role: "Automation agency",
     icon: Workflow,
-    initials: "BA",
   },
   {
     id: "johnny",
@@ -39,7 +35,6 @@ const testimonials: Testimonial[] = [
       "I had never touched Claude Code before. They explained it step by step until I understood what was actually running.",
     role: "Security analyst",
     icon: ShieldCheck,
-    initials: "JW",
   },
   {
     id: "samy",
@@ -47,7 +42,6 @@ const testimonials: Testimonial[] = [
       "I did not know n8n at all and had no time to babysit servers. They set it up hosted and ready, so I could get back to client work.",
     role: "International developer and freelancer",
     icon: Globe,
-    initials: "SO",
   },
 ]
 
@@ -95,10 +89,7 @@ const Testimonials = () => (
                     {t.quote}
                   </p>
 
-                  <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-signal font-mono text-[10px] font-semibold text-signal-text">
-                      {t.initials}
-                    </span>
+                  <div className="mt-6 border-t border-border pt-4">
                     <span className="text-sm font-medium text-ink">{t.role}</span>
                   </div>
                 </div>
