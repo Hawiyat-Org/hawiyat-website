@@ -9,7 +9,7 @@ export default function AboutPage() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* ─── Hero + Gallery ─── */}
-      <section className="relative flex min-h-[85vh] w-full flex-col place-content-center overflow-hidden mt-[70px] md:mt-[100px]">
+      <section className="relative flex min-h-[85vh] w-full flex-col place-content-center overflow-hidden mt-[72px] md:mt-[100px]">
         <div className="mx-auto w-full max-w-6xl px-6 flex max-lg:flex-col items-center justify-center gap-8 max-lg:gap-6 min-h-[85vh] py-10">
           {/* Left  Text */}
           <div className="flex flex-col gap-5 flex-1 max-w-lg">
@@ -122,7 +122,7 @@ export default function AboutPage() {
             <h2 className="text-5xl max-md:text-3xl font-medium mt-2">From a small team in Algiers to a recognized AI infrastructure company.</h2>
           </div>
 
-          <div className="flex max-lg:flex-col gap-6">
+          <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6">
             {[
               {
                 year: "2025",

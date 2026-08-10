@@ -196,7 +196,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
             </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
+        <DialogContent className="z-[60] max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
           <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
             <DialogTitle className="sr-only">{service.name}</DialogTitle>
 
@@ -285,7 +285,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerName}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                      className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="Your name"
                     />
                   </div>
@@ -301,7 +301,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerEmail}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                      className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="you@example.com"
                     />
                   </div>
@@ -317,7 +317,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                       required
                       value={formData.customerPhone}
                       onChange={handleChange}
-                      className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                      className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                       placeholder="+213 ..."
                     />
                   </div>

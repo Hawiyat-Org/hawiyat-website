@@ -44,7 +44,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="mt-auto flex flex-col w-full gap-4 text-sm pt-[5%] pb-10 px-[10%] text-ink max-md:flex-col">
+    <footer className="mt-auto flex flex-col w-full gap-4 text-sm pt-[5%] pb-10 px-6 md:px-[5%] xl:px-[10%] text-ink max-md:flex-col">
       <div className="flex max-md:flex-col max-md:gap-6 gap-3 w-full place-content-around">
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
@@ -61,7 +61,7 @@ const Footer = () => {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="footer-link hover:opacity-80 transition-opacity duration-200"
+                  className="inline-flex items-center justify-center h-11 w-11 footer-link hover:opacity-80 transition-opacity duration-200"
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
                   <social.Icon className="w-5 h-5" />

@@ -177,7 +177,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                   required
                   value={formData.customerName}
                   onChange={handleChange}
-                  className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                  className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                   placeholder="Your name"
                 />
               </div>
@@ -193,7 +193,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                   required
                   value={formData.customerEmail}
                   onChange={handleChange}
-                  className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                  className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                   placeholder="you@example.com"
                 />
               </div>
@@ -209,7 +209,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                   required
                   value={formData.customerPhone}
                   onChange={handleChange}
-                  className="w-full h-10 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
+                  className="w-full h-11 px-3 rounded-lg border border-border bg-surface text-ink text-sm focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal"
                   placeholder="+213 ..."
                 />
               </div>
