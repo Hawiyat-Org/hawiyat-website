@@ -1,6 +1,11 @@
 {
   "installCommand": "pnpm install",
   "redirects": [
-    { "source": "/(.*)", "destination": "https://www.hawiyat.org/$1", "permanent": true }
+    {
+      "source": "/:path*",
+      "destination": "https://www.hawiyat.org/:path*",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "hawiyat.org" }]
+    }
   ]
 }
