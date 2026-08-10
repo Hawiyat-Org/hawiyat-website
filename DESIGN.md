@@ -237,7 +237,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 - Mounted on `/about` (société, facturation, DZD, Itihad / Label Projet Innovant). Not on home.
 
 ### 12. Widgets
-- `whatsapp-widget.tsx` + `chatwoot-widget.tsx`: keep positioning `bottom-6 right-6`.
+- `whatsapp-widget.tsx`: keep positioning `bottom-6 right-6`.
 
 ### 13. Scroll animations (`components/scroll-animations.tsx`)
 - GSAP reveal-up + `trace-line` draw-on-scroll, **used on `/composer` only**. Respects `prefers-reduced-motion` (elements stay visible). No `#dashboard` blocks remain.
@@ -335,7 +335,7 @@ NEXT_PUBLIC_CHATWOOT_TOKEN=...
 
 ## File Structure Summary
 - `app/`: page.tsx, layout.tsx, globals.css, composer/, services/ (+`[slug]/page.tsx`), about/, privacy/, terms/, dmca/, api/…, robots.ts, sitemap.ts. (`hawiyat-composer` + `ai-algeria` redirect via next.config.mjs; `templates/` & `bootcamp/` removed.)
-- `components/`: header, footer, hero-section, partners-marquee, our-numbers, pricing, faq, call-to-action, execution-trace (composer), scroll-animations (composer), algeria-band (about), whatsapp-widget, chatwoot-widget, theme-provider
+- `components/`: header, footer, hero-section, partners-marquee, our-numbers, pricing, faq, call-to-action, execution-trace (composer), scroll-animations (composer), algeria-band (about), whatsapp-widget, theme-provider
 - `components/services/…` (catalog + order-form + service-order-form + service-plans), `components/ui/` (shadcn)
 - `lib/` (utils, seo, email-utils, auth, prisma, **data/services.ts**), `prisma/`, `public/` (logos, trust, assets, dots)
 
