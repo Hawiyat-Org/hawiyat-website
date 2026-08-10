@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function DMCAPage() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-3xl px-6 py-32">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">← Back to home</Link>
         <header className="mt-8 space-y-2">
@@ -30,6 +30,6 @@ export default function DMCAPage() {
           <section><h2 className="text-lg font-medium text-foreground">7. Legal contact</h2><p className="mt-3">For legal questions, email <a href="mailto:legal@hawiyat.org" className="underline">legal@hawiyat.org</a>. Submitting false or misleading claims may carry legal consequences.</p></section>
         </div>
       </div>
-    </main>
+    </div>
   )
 }

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <WhatsAppWidget />
-      <main>
+      <div>
         <HeroSection />
         <PartnersMarquee />
         <OurNumbers />
@@ -19,7 +19,7 @@ export default function Home() {
         <Testimonials />
         <FAQ />
         <CallToAction />
-      </main>
+      </div>
     </>
   )
 }

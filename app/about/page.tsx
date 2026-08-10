@@ -118,7 +118,7 @@ export default function AboutPage() {
       <section className="w-full py-16 md:py-24 bg-foreground/[0.01] border-y border-foreground/5">
         <div className="mx-auto max-w-6xl px-6 relative">
           <div className="mb-14">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">Our Story</span>
+            <span className="text-xs text-muted-ink uppercase tracking-widest">Our Story</span>
             <h2 className="text-5xl max-md:text-3xl font-medium mt-2">From a small team in Algiers to a recognized AI infrastructure company.</h2>
           </div>
 
@@ -169,7 +169,7 @@ export default function AboutPage() {
       <section className="w-full py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-14">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">Credentials</span>
+            <span className="text-xs text-muted-ink uppercase tracking-widest">Credentials</span>
             <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Certifications</h2>
           </div>
 
@@ -211,7 +211,7 @@ export default function AboutPage() {
                   )}
                   <div className="p-4">
                     <h3 className="font-semibold text-sm mb-1">{cert.title}</h3>
-                    <p className="text-[11px] leading-relaxed text-foreground/50">{cert.by}</p>
+                    <p className="text-[11px] leading-relaxed text-muted-ink">{cert.by}</p>
                   </div>
                 </div>
               ))}
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
-                  <p className="text-[11px] leading-relaxed text-foreground/50">Green Duty AI delivered via Hawiyat AI Composer</p>
+                  <p className="text-[11px] leading-relaxed text-muted-ink">Green Duty AI delivered via Hawiyat AI Composer</p>
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function AboutPage() {
       <section className="w-full py-20 md:py-28 relative overflow-hidden">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col gap-4 mb-14">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">People</span>
+            <span className="text-xs text-muted-ink uppercase tracking-widest">People</span>
             <h2 className="text-5xl max-md:text-3xl font-medium">Collaborations</h2>
             <p className="text-muted-ink max-w-md text-sm">
               People we work with.
@@ -291,7 +291,7 @@ export default function AboutPage() {
                     </div>
                     <div className="pt-4">
                       <h3 className="font-semibold text-lg">{p.name}</h3>
-                      <span className="text-xs font-medium text-foreground/50 uppercase tracking-wider">{p.role}</span>
+                      <span className="text-xs font-medium text-muted-ink uppercase tracking-wider">{p.role}</span>
                     </div>
                   </div>
                   <p className="text-sm text-muted-ink leading-relaxed mt-4">{p.desc}</p>
@@ -306,13 +306,14 @@ export default function AboutPage() {
       <section className="w-full py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-12">
-            <span className="text-xs text-foreground/40 uppercase tracking-widest">HQ</span>
+            <span className="text-xs text-muted-ink uppercase tracking-widest">HQ</span>
             <h2 className="text-5xl max-md:text-3xl font-medium mt-2">Where We&apos;re At</h2>
           </div>
           <div className="flex max-md:flex-col gap-5">
             <div className="flex-1 bg-surface-dim rounded-lg overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200.3!2d3.4671314!3d36.7607705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e69f0bb134dd5%3A0x5c74ae92a333fc22!2sItihad!5e1!3m2!1sen!2sdz!4v1"
+                title="Hawiyat headquarters map"
                 width="100%"
                 height="100%"
                 style={{ minHeight: "280px" }}

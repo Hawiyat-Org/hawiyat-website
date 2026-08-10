@@ -197,7 +197,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main id="content" className="flex-1">
+          <main id="content" tabIndex={-1} className="flex-1">
             {children}
           </main>
 
