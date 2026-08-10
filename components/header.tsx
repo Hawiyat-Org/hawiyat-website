@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react"
-import Image from "next/image"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 const Header = () => {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -71,12 +71,12 @@ const Header = () => {
         <div className="flex items-center justify-between px-3 sm:px-6 min-h-[64px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-10" onClick={closeMobileMenu}>
-            <Image
+            <SkeletonImage
               src="/logo.svg"
               alt="Hawiyat Logo"
               width={60}
               height={40}
-              className="w-10 h-8 sm:w-12 sm:h-10"
+              imgClassName="w-10 h-8 sm:w-12 sm:h-10"
             />
             <span className="text-lg sm:text-xl font-semibold text-ink">
               Hawiyat

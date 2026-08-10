@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 import Link from "next/link"
 import { ArrowRight, MapPin, MessageCircle, Package } from "lucide-react"
 import AlgeriaBand from "@/components/algeria-band"
@@ -56,55 +56,55 @@ export default function AboutPage() {
             <div className="grid grid-cols-3 gap-2 auto-rows-[80px] max-md:auto-rows-[65px]">
               {/* Row 1-2 col 1-2  Label */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 col-span-2 row-span-2">
-                <Image src="/aboutus/label-projet-inovant.webp" alt="Label" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/label-projet-inovant.webp" alt="Label" fill imgClassName="object-cover" />
               </div>
               {/* Row 1-2 col 3  Composer1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
-                <Image src="/aboutus/hawiyat-composer/image1.webp" alt="Composer" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/hawiyat-composer/image1.webp" alt="Composer" fill imgClassName="object-cover" />
               </div>
               {/* Row 3 col 1  Itihad */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/itihad-incubation.webp" alt="Incubation" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/itihad-incubation.webp" alt="Incubation" fill imgClassName="object-cover" />
               </div>
               {/* Row 3 col 2  Week1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image1.webp" alt="Week" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/semaine-enteurprunariat-international/image1.webp" alt="Week" fill imgClassName="object-cover" />
               </div>
               {/* Row 3 col 3  Week2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image2.webp" alt="Event" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/semaine-enteurprunariat-international/image2.webp" alt="Event" fill imgClassName="object-cover" />
               </div>
               {/* Row 4 col 1  Week3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/semaine-enteurprunariat-international/image3.webp" alt="Event" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/semaine-enteurprunariat-international/image3.webp" alt="Event" fill imgClassName="object-cover" />
               </div>
               {/* Row 4 col 2  Comp2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/hawiyat-composer/image2.webp" alt="Composer" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/hawiyat-composer/image2.webp" alt="Composer" fill imgClassName="object-cover" />
               </div>
               {/* Row 4 col 3  Nexus1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image1.webp" alt="Nexus" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/Sponsoring-nexus-cybersecurty-club/image1.webp" alt="Nexus" fill imgClassName="object-cover" />
               </div>
               {/* Row 5-6 col 1  Green Duty (bottom left, tall) */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5 row-span-2">
-                <Image src="/aboutus/certiifcations/greenduty.webp" alt="Green Duty" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/certiifcations/greenduty.webp" alt="Green Duty" fill imgClassName="object-cover" />
               </div>
               {/* Row 5 col 2  COSI1 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Cosi-2025/image1.webp" alt="COSI" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/Cosi-2025/image1.webp" alt="COSI" fill imgClassName="object-cover" />
               </div>
               {/* Row 5 col 3  Comp3 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/hawiyat-composer/image3.webp" alt="Composer" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/hawiyat-composer/image3.webp" alt="Composer" fill imgClassName="object-cover" />
               </div>
               {/* Row 6 col 2  Nexus2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Sponsoring-nexus-cybersecurty-club/image2.webp" alt="Nexus" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/Sponsoring-nexus-cybersecurty-club/image2.webp" alt="Nexus" fill imgClassName="object-cover" />
               </div>
               {/* Row 6 col 3  COSI2 */}
               <div className="relative rounded-lg overflow-hidden bg-foreground/5">
-                <Image src="/aboutus/Cosi-2025/image2.webp" alt="COSI" fill className="object-cover" />
+                <SkeletonImage src="/aboutus/Cosi-2025/image2.webp" alt="COSI" fill imgClassName="object-cover" />
               </div>
             </div>
           </div>
@@ -145,12 +145,12 @@ export default function AboutPage() {
             ].map((event, i) => (
               <div key={i} className="flex-1 relative group">
                 <div className="relative rounded-lg overflow-hidden aspect-[3/4] mb-4 bg-surface-dim">
-                  <Image
+                  <SkeletonImage
                     src={event.img}
                     alt={event.title}
                     fill
-                    className="object-cover"
-                    style={event.img.includes("label-projet") ? { objectPosition: "70% center" } : event.img.includes("itihad-incubation") ? { objectPosition: "30% center" } : undefined}
+                    imgClassName="object-cover"
+                    imgStyle={event.img.includes("label-projet") ? { objectPosition: "70% center" } : event.img.includes("itihad-incubation") ? { objectPosition: "30% center" } : undefined}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -206,7 +206,7 @@ export default function AboutPage() {
                     </div>
                   ) : (
                     <div className="relative aspect-[4/3] overflow-hidden bg-surface-dim">
-                      <Image src={cert.img} alt={cert.title} fill className="object-cover" />
+                      <SkeletonImage src={cert.img} alt={cert.title} fill imgClassName="object-cover" />
                     </div>
                   )}
                   <div className="p-4">
@@ -221,7 +221,7 @@ export default function AboutPage() {
             <div className="flex-[1.25] max-md:w-full">
               <div className="group bg-surface-dim rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col shadow-md">
                 <div className="relative flex-1 min-h-[300px] overflow-hidden bg-surface-dim">
-                  <Image src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill className="object-cover" />
+                  <SkeletonImage src="/aboutus/certiifcations/greenduty.webp" alt="Attestation de Bonne Exécution" fill imgClassName="object-cover" />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm mb-1">Attestation de Bonne Exécution</h3>
@@ -276,18 +276,18 @@ export default function AboutPage() {
                 className="group relative bg-surface-dim rounded-lg overflow-hidden transition-colors duration-300 hover:border-signal/50"
               >
                 <div className="relative h-56 max-md:h-48 overflow-hidden">
-                  <Image
+                  <SkeletonImage
                     src={p.image}
                     alt={p.name}
                     fill
-                    className="object-cover"
+                    imgClassName="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent" />
                 </div>
                 <div className="relative -mt-12 px-6 pb-6">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-white dark:border-surface-dim shadow-lg shrink-0 -mt-7">
-                      <Image src={p.image} alt={p.name} width={56} height={56} className="w-full h-full object-cover" />
+                      <SkeletonImage src={p.image} alt={p.name} width={56} height={56} imgClassName="w-full h-full object-cover" />
                     </div>
                     <div className="pt-4">
                       <h3 className="font-semibold text-lg">{p.name}</h3>

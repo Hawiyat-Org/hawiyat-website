@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import { Loader2, CheckCircle2, Building2, Wallet, DollarSign, ArrowRight, Check } from "lucide-react"
-import Image from "next/image"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import Link from "next/link"
@@ -245,12 +245,12 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 <div className="mb-6 p-4 pr-12 rounded-lg bg-surface-dim/50 border border-border/40">
                   <div className="flex items-center gap-3">
                     <div className="shrink-0 w-14 h-14 rounded-lg bg-surface border border-border flex items-center justify-center overflow-hidden">
-                      <Image
+                      <SkeletonImage
                         src={serviceImage}
                         alt={service.name}
                         width={48}
                         height={48}
-                        className="object-contain w-10 h-10"
+                        imgClassName="object-contain w-10 h-10"
                       />
                     </div>
                     <div className="flex-1 min-w-0">

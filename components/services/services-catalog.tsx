@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from "react"
 import { Search, DollarSign, Bot, CheckCircle, Server } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
-import Image from "next/image"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 import Link from "next/link"
 import { services, EXCLUDED_SERVICE_IDS, type Service } from "@/lib/data/services"
 import { cn } from "@/lib/utils"
@@ -226,13 +226,13 @@ export default function ServicesCatalog({ initialQuery = "" }: { initialQuery?: 
                   <div className="flex items-center justify-center gap-3">
                     {service.images.map((img, idx) => (
                       <div key={idx} className="relative w-20 h-20">
-                        <Image src={img} alt={service.name} fill className="object-contain drop-shadow-md" loading="lazy" />
+                        <SkeletonImage src={img} alt={service.name} fill imgClassName="object-contain drop-shadow-md" loading="lazy" />
                       </div>
                     ))}
                   </div>
                 ) : (
                   <div className="relative w-24 h-24">
-                    <Image src={service.image || "/logo.svg"} alt={service.name} fill className="object-contain drop-shadow-lg" loading="lazy" />
+                    <SkeletonImage src={service.image || "/logo.svg"} alt={service.name} fill imgClassName="object-contain drop-shadow-lg" loading="lazy" />
                   </div>
                 )}
               </div>

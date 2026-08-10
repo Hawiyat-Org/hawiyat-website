@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Github, Instagram, Facebook, Mail, Linkedin, Youtube } from "lucide-react"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 
 const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://")
@@ -49,7 +49,7 @@ const Footer = () => {
         {/* Logo and Social Links */}
         <div className="flex h-full w-[250px] flex-col place-items-center gap-6 max-md:w-full">
           <Link href="/" className="w-full place-items-center flex flex-col gap-6" aria-label="Hawiyat homepage">
-            <Image src="/logo.png" alt="" width={120} height={120} className="max-w-[120px]" />
+            <SkeletonImage src="/logo.png" alt="" width={120} height={120} imgClassName="max-w-[120px]" />
             <div className="max-w-[120px] text-center text-3xl h-fit">Hawiyat</div>
           </Link>
 

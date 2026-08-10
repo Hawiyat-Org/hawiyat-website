@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { getServiceBySlug, getAllServiceSlugs } from "@/lib/data/services"
 import { createMetadata, SITE_URL } from "@/lib/seo"
-import Image from "next/image"
+import { SkeletonImage } from "@/components/image-with-skeleton"
 import Link from "next/link"
 import { ArrowLeft, ChevronDown } from "lucide-react"
 import { ServicePlans, type ServicePlan } from "@/components/services/service-plans"
@@ -203,11 +203,11 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                       <div className="flex items-center justify-center gap-4 sm:gap-8">
                         {service.images.map((img, idx) => (
                           <div key={idx} className="relative w-20 h-20 sm:w-32 sm:h-32 lg:w-40 lg:h-40">
-                            <Image
+                            <SkeletonImage
                               src={img}
                               alt={`${service.name} ${idx + 1}`}
                               fill
-                              className="object-contain drop-shadow-lg"
+                              imgClassName="object-contain drop-shadow-lg"
                               priority
                             />
                           </div>
@@ -215,11 +215,11 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                       </div>
                     ) : (
                       <div className="relative w-24 h-24 sm:w-36 sm:h-36 lg:w-64 lg:h-64">
-                        <Image
+                        <SkeletonImage
                           src={service.image!}
                           alt={service.name}
                           fill
-                          className="object-contain drop-shadow-lg"
+                          imgClassName="object-contain drop-shadow-lg"
                           priority
                         />
                       </div>
