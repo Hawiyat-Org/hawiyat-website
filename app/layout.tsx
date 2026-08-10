@@ -7,6 +7,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { SITE_URL } from "@/lib/seo";
 
 const space = Space_Grotesk({
   subsets: ["latin"],
@@ -22,7 +23,6 @@ const mono = JetBrains_Mono({
 });
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Hawiyat";
-const SITE_URL = "https://www.hawiyat.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -133,10 +133,17 @@ const organizationSchema = {
     "AI infrastructure in Algeria",
     "Execution layer in Algeria",
   ],
+  foundingDate: "2025",
   foundingLocation: {
     "@type": "Place",
     name: "Algiers, Algeria",
   },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Algiers",
+    addressCountry: "DZ",
+  },
+  email: "contact@hawiyat.org",
   sameAs: [
     "https://www.linkedin.com/company/hawiyat",
     "https://github.com/Hawiyat-Org",

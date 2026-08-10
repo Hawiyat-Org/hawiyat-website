@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, MessageCircle } from "lucide-react"
+import { waLink } from "@/lib/contact"
 
 export default function NotFound() {
   return (
@@ -30,7 +31,7 @@ export default function NotFound() {
             See Composer in action
           </Link>
           <a
-            href="https://wa.me/213559555951"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"

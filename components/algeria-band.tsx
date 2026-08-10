@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { waLink } from "@/lib/contact"
 import {
   Landmark,
   MapPin,
@@ -75,7 +76,7 @@ const AlgeriaBand = () => {
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="https://wa.me/213559555951"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"

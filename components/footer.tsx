@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Github, Instagram, Facebook, Mail, Linkedin, Youtube } from "lucide-react"
 import { SkeletonImage } from "@/components/image-with-skeleton"
+import { CONTACT_EMAIL, waLink } from "@/lib/contact"
 
 const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://")
@@ -18,7 +19,7 @@ const Footer = () => {
     {
       title: "Company",
       links: [
-        { name: "Support", href: "https://wa.me/213559555951" },
+        { name: "Support", href: waLink() },
         { name: "FAQ", href: "/faq" },
         { name: "Github", href: "https://github.com/Hawiyat-Org" },
       ],
@@ -38,7 +39,7 @@ const Footer = () => {
     { name: "Github", href: "https://github.com/Hawiyat-Org", Icon: Github },
     { name: "Instagram", href: "https://instagram.com/hawiyat.cloud", Icon: Instagram },
     { name: "Facebook", href: "https://www.facebook.com/people/Hawiyat/61577698462110/", Icon: Facebook },
-    { name: "Email", href: "mailto:contact@hawiyat.org", Icon: Mail },
+    { name: "Email", href: `mailto:${CONTACT_EMAIL}`, Icon: Mail },
     { name: "LinkedIn", href: "https://www.linkedin.com/company/hawiyat", Icon: Linkedin },
     { name: "YouTube", href: "https://www.youtube.com/@Hawiyat", Icon: Youtube },
   ]

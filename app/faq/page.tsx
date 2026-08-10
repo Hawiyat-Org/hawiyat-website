@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, MessageCircle } from "lucide-react"
 import { createMetadata } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 import { faqs } from "@/lib/data/faqs"
 
 export const metadata = createMetadata({
@@ -74,7 +75,7 @@ export default function FaqPage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="https://wa.me/213559555951"
+                href={waLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"

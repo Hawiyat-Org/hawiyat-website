@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { waLink } from '@/lib/contact'
 
 export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
@@ -10,9 +11,7 @@ export default function WhatsAppWidget() {
     return () => clearTimeout(timer)
   }, [])
 
-  const phoneNumber = '213559555951'
-  const message = encodeURIComponent('Hello Hawiyat! I have a question about the Composer.')
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+  const whatsappUrl = waLink('Hello Hawiyat! I have a question about the Composer.')
 
   const handleClick = () => {
     window.open(whatsappUrl, '_blank')

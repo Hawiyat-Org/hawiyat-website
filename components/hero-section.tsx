@@ -9,7 +9,8 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { SITE_URL, USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { waLink } from "@/lib/contact"
 
 const HeroSection = () => {
   const [introOpen, setIntroOpen] = useState(false)
@@ -82,7 +83,7 @@ const HeroSection = () => {
         </a>
 
         <a
-          href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20have%20a%20question%20about%20Composer."
+          href={waLink("Hello Hawiyat! I have a question about Composer.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex min-h-[44px] items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
@@ -99,7 +100,7 @@ const HeroSection = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            url: "https://www.hawiyat.org/",
+            url: SITE_URL,
             name: "Hawiyat, AI infrastructure platform",
             headline: "Hawiyat AI Composer",
             about: {
