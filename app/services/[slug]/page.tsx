@@ -11,8 +11,13 @@ export async function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const service = getServiceBySlug(params.slug)
+// Only the static slugs below exist (composer, n8n, evolution, hawiyat-cloud);
+// anything else is a real 404, not a soft one.
+export const dynamicParams = false
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
   if (!service) return {}
 
   // Use the service's own product image for social/WhatsApp previews
@@ -21,7 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return createMetadata({
     title: service.seo.title,
     description: service.seo.description,
-    path: `/services/${params.slug}` as `/${string}`,
+    path: `/services/${slug}` as `/${string}`,
     image: serviceImage,
     modifiedTime: new Date().toISOString(),
   })
@@ -30,13 +35,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 // hawiyat-cloud is the single "Hawiyat Cloud" by-order offering (hosting-basic and
 // hosting-vip 308-redirect here). There are no Basic/VIP tiers: the URL renders the
 // contact card and the team plans the deployment.
-export default function ServicePage({ params, searchParams }: { params: { slug: string }, searchParams?: { plan?: string } }) {
-  const service = getServiceBySlug(params.slug)
+export default async function ServicePage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams?: Promise<{ plan?: string }> }) {
+  const { slug } = await params
+  const { plan } = (await searchParams) ?? {}
+  const service = getServiceBySlug(slug)
   if (!service) notFound()
 
   const relatedServices = getAllServiceSlugs()
-    .filter((slug) => slug !== params.slug)
-    .map((slug) => getServiceBySlug(slug)!)
+    .filter((s) => s !== slug)
+    .map((s) => getServiceBySlug(s)!)
     .filter(Boolean)
     .slice(0, 4)
 
@@ -47,8 +54,8 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
 
   // Preselect a plan when arriving with ?plan= (matches a plan name)
   const defaultPlan =
-    plans && searchParams?.plan && plans.some((p) => p.name === searchParams.plan)
-      ? searchParams.plan
+    plans && plan && plans.some((p) => p.name === plan)
+      ? plan
       : undefined
 
   const serviceSchema = {

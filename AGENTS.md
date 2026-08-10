@@ -15,7 +15,7 @@ pnpm prisma generate        # Generate Prisma client only
 
 ## Architecture
 
-**Stack:** Next.js 14 (App Router, `next@^14.2.32`) • React 18 • TypeScript • Tailwind CSS • Prisma/Postgres • shadcn/ui • Framer Motion + GSAP (ScrollTrigger)
+**Stack:** Next.js 15 (App Router, `next@^15.5.16`) • React 19 • TypeScript • Tailwind CSS • Prisma/Postgres • shadcn/ui • Framer Motion + GSAP (ScrollTrigger)
 
 **Key dirs:**
 - `app/` — pages + API routes (`app/api/*`)

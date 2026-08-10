@@ -9,7 +9,8 @@ export const metadata: Metadata = createMetadata({
   path: "/services",
 })
 
-export default function ServicesPage({ searchParams }: { searchParams: { q?: string | string[] } }) {
+export default async function ServicesPage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
+  const { q } = await searchParams
   return (
     <div className="relative min-h-screen overflow-hidden pb-20 pt-32">
       <div className="pointer-events-none absolute inset-0 opacity-10 dark:opacity-80">
@@ -22,7 +23,7 @@ export default function ServicesPage({ searchParams }: { searchParams: { q?: str
             AI Composer plans, n8n automation, WhatsApp API, and app hosting, operated by the Hawiyat team and billed in dinars, with support in Arabic, French, and English. Run them on the execution layer for a full pipeline.
           </p>
         </header>
-        <ServicesCatalog initialQuery={typeof searchParams.q === "string" ? searchParams.q : ""} />
+        <ServicesCatalog initialQuery={typeof q === "string" ? q : ""} />
       </div>
     </div>
   )
