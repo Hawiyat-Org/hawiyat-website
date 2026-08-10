@@ -273,6 +273,11 @@ body.booking-modal-open .fixed.inset-0 {
   animation: marquee 26s linear infinite;
 }
 
+/* Testimonial cards are text-heavy, so they scroll slower than logos. */
+.testimonials-track {
+  animation-duration: 48s;
+}
+
 .marquee:hover .marquee-track {
   animation-play-state: paused;
 }

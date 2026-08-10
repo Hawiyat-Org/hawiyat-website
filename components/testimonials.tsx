@@ -1,8 +1,43 @@
-const testimonialSlots = [
-  { id: "slot-1" },
-  { id: "slot-2" },
-  { id: "slot-3" },
+const testimonials = [
+  {
+    id: "green-duty",
+    quote:
+      "Very good, it works really well. Très bien, ça marche très bien.",
+    role: "Startup, agrotech (greenhouse IoT and industrial automation)",
+    verified: true,
+  },
+  {
+    id: "moncef",
+    quote:
+      "Support 100/10. I was a beginner and they walked me through everything step by step, even topped up my tokens when I needed more.",
+    role: "Data analyst",
+    verified: true,
+  },
+  {
+    id: "benar",
+    quote:
+      "Started with n8n hosting, came back six months later for Composer MAX 5X. That is what the layer does, it grows with you.",
+    role: "Automation agency",
+    verified: true,
+  },
+  {
+    id: "johnny",
+    quote:
+      "I had never touched Claude Code before. They walked me through it step by step until it clicked.",
+    role: "Security analyst",
+    verified: false,
+  },
+  {
+    id: "samy",
+    quote:
+      "I did not know n8n at all. They set it up hosted and ready to use, so I could get back to running my business.",
+    role: "International developer and freelancer",
+    verified: false,
+  },
 ]
+
+// Two identical halves so the -50% marquee loop wraps seamlessly.
+const marqueeHalves = [testimonials, testimonials]
 
 const Testimonials = () => (
   <section className="w-full py-16 md:py-20">
@@ -13,31 +48,43 @@ const Testimonials = () => (
           What clients say
         </h2>
         <p className="mt-3 text-sm text-muted-ink">
-          Real operators running on the Hawiyat execution layer.
+          Real people, running real work on the Hawiyat execution layer.
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
-        {testimonialSlots.map((slot) => (
-          <div
-            key={slot.id}
-            className="flex flex-col rounded-lg border border-border bg-surface p-6"
-          >
-            <p className="flex-1 text-sm italic leading-relaxed text-muted-ink">
-              Client quote coming soon
-            </p>
-            <div className="mt-6 border-t border-border pt-4">
-              <p className="font-mono text-xs font-semibold uppercase tracking-widest text-ink">
-                Client name
-              </p>
-              <p className="mt-1 text-xs text-muted-ink">Company / role</p>
+      <div className="marquee relative w-full overflow-hidden">
+        <div className="marquee-track testimonials-track flex w-max">
+          {marqueeHalves.map((half, halfIndex) => (
+            <div
+              key={halfIndex}
+              aria-hidden={halfIndex === 1 || undefined}
+              className="flex shrink-0 items-stretch gap-5 pr-5"
+            >
+              {half.map((t) => (
+                <div
+                  key={t.id}
+                  className="flex w-[300px] shrink-0 flex-col justify-between rounded-lg border border-border bg-surface p-6 md:w-[360px]"
+                >
+                  <p className="text-sm leading-relaxed text-muted-ink">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="mt-6 border-t border-border pt-4">
+                    <p className="text-sm font-medium text-ink">{t.role}</p>
+                    {t.verified && (
+                      <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ok">
+                        Verified customer
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <p className="mx-auto mt-8 max-w-xl text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-        Testimonials are anonymized customer quotes, shared with permission.
+        Customer quotes shared with permission. Roles shown, names kept private.
       </p>
     </div>
   </section>
