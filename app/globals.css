@@ -29,7 +29,7 @@
   --footer-link-hover: #000;
   --header-bg: #edececa5;
   --hero-gradient: #fcfcfc;
-  --hero-bg-img: url("/dots-dark.svg?height=100&width=100");
+  --hero-bg-img: radial-gradient(circle, #e2dada 1px, transparent 1.5px);
   
   /* Fixed HSL values for proper Tailwind integration */
   --background: 0 0% 100%;
@@ -120,7 +120,7 @@
   --header-bg: #18181B;
 
   --hero-gradient: linear-gradient(135deg, #18181B, #101013);
-  --hero-bg-img: url("/dots.svg?height=100&width=100");
+  --hero-bg-img: radial-gradient(circle, rgba(255,255,255,0.14) 1px, transparent 1.5px);
 
   --background: 220 8% 11%;
   --foreground: 0 0% 98%;
@@ -245,8 +245,8 @@ body.booking-modal-open .fixed.inset-0 {
   pointer-events: none;
   background-image: var(--hero-bg-img);
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: repeat;
+  background-size: 18px 18px;
   -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 98%);
   mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 98%);
 }

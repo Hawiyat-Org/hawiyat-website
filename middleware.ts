@@ -79,10 +79,20 @@ export function middleware(request: NextRequest) {
   const result = checkGlobalRateLimit(ip)
 
   if (!result.allowed) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Too many requests. Please try again later.", retryAfter: result.retryAfter },
       { status: 429 }
     )
+    // Match the security headers next.config.mjs sends on normal responses, so
+    // 429s (which bypass next.config headers) still carry HSTS/CSP/COOP/CORP.
+    response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
+    response.headers.set("X-Content-Type-Options", "nosniff")
+    response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
+    response.headers.set("X-Frame-Options", "DENY")
+    response.headers.set("Cross-Origin-Opener-Policy", "same-origin")
+    response.headers.set("Cross-Origin-Resource-Policy", "same-origin")
+    response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+    return response
   }
 
   return NextResponse.next()
