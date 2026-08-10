@@ -28,6 +28,7 @@ const nextConfig = {
           "default-src 'none'",
           "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
           "style-src 'self'",
+          "style-src-elem 'self' 'unsafe-inline'",
           "style-src-attr 'unsafe-inline'",
           "img-src 'self' data: blob: https://*.facebook.com https://*.fbcdn.net",
           "font-src 'self'",
