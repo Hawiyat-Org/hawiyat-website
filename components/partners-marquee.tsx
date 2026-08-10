@@ -106,14 +106,23 @@ const PartnersMarquee = () => {
             </div>
           )
 
+        // The row repeats partners so the -50% loop stays seamless; the second
+        // copy is only there for visual continuity, so keep it out of the tab
+        // order and the accessibility tree.
+        const isDuplicate = index >= partners.length
+
         return (
-          <div key={index} className="group relative flex shrink-0 items-center justify-center">
+          <div
+            key={index}
+            aria-hidden={(hidden || isDuplicate) || undefined}
+            className="group relative flex shrink-0 items-center justify-center"
+          >
             {partner.url ? (
               <Link
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                tabIndex={hidden ? -1 : undefined}
+                tabIndex={hidden || isDuplicate ? -1 : undefined}
                 className="block h-full w-full"
               >
                 {logo}

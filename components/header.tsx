@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -10,14 +10,21 @@ const Header = () => {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const mobileMenuToggleRef = useRef<HTMLButtonElement>(null)
+  const isMobileMenuOpenRef = useRef(isMobileMenuOpen)
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    isMobileMenuOpenRef.current = isMobileMenuOpen
+  }, [isMobileMenuOpen])
 
   useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && isMobileMenuOpenRef.current) {
         setIsMobileMenuOpen(false)
+        mobileMenuToggleRef.current?.focus()
       }
     }
 
@@ -138,6 +145,7 @@ const Header = () => {
             </button>
 
             <button
+              ref={mobileMenuToggleRef}
               className="p-3 touch-manipulation rounded-lg text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
