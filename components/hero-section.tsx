@@ -75,7 +75,7 @@ const HeroSection = () => {
           href={USAGE_DASHBOARD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-ink transition-colors hover:text-ink"
+          className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-sm text-muted-ink transition-colors hover:text-ink"
         >
           <ExternalLink className="h-4 w-4" />
           Already a Composer client? Open your usage dashboard
@@ -85,7 +85,7 @@ const HeroSection = () => {
           href="https://wa.me/213559555951?text=Hello%20Hawiyat!%20I%20have%20a%20question%20about%20Composer."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
+          className="inline-flex min-h-[44px] items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
         >
           <MessageCircle className="h-4 w-4" />
           Questions? Reply in Arabic, French, or English on WhatsApp

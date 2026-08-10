@@ -82,7 +82,7 @@ export default function Pricing() {
             href={USAGE_DASHBOARD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors hover:text-ink"
+            className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors hover:text-ink"
           >
             Open your usage dashboard
             <ExternalLink className="h-3.5 w-3.5" />
@@ -135,7 +135,7 @@ export default function Pricing() {
           </div>
 
           {/* MAX switchable */}
-          <div className="relative flex flex-col justify-between rounded-lg border border-border border-t-[3px] border-t-signal bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 lg:shadow-2xl lg:shadow-ink/10 lg:-translate-y-3 lg:z-10 max-md:rounded-none max-md:border-t-0 max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
+          <div className="relative flex flex-col justify-between rounded-lg border border-border border-t-[3px] border-t-signal bg-surface-dim p-6 shadow-lg shadow-ink/5 lg:p-8 lg:shadow-2xl lg:shadow-ink/10 lg:-translate-y-3 lg:z-10 max-md:rounded-none max-md:border-l-[3px] max-md:border-l-signal max-md:border-b-0 md:rounded-l-none md:rounded-r-none">
             <div className="flex-1">
               <span className="rounded-md bg-signal px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-signal-text">
                 {activeTier.label}
@@ -149,7 +149,7 @@ export default function Pricing() {
                   <button
                     key={tier.key}
                     onClick={() => setActiveMax(tier.key)}
-                    className={`rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
+                    className={`flex min-h-[44px] items-center rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
                       activeMax === tier.key
                         ? "bg-signal text-signal-text"
                         : "text-muted-ink hover:text-ink"
