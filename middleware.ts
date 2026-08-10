@@ -57,6 +57,11 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|public/|api/health).*)",
+    // Static/SEO/AI-agent endpoints are excluded from the rate limiter: crawler
+    // and audit bursts (Lighthouse, PSI, LLM agents) must always be able to fetch
+    // them. `/public/` matches URLs starting with /public/, NOT files served from
+    // the public dir at root (e.g. /llms.txt) — those are listed explicitly.
+    // `/api/*` stays protected; only /api/health is exempt.
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|llmsfull.txt|pricing.md|public/|api/health).*)",
   ],
 }
