@@ -48,7 +48,7 @@ export function SkeletonImage({
         height={fill ? undefined : height}
         sizes={sizes}
         priority={priority}
-        loading={loading}
+        loading={priority ? "eager" : loading}
         onLoad={() => setLoaded(true)}
         className={cn(
           "transition-opacity duration-300",

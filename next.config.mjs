@@ -63,6 +63,7 @@ const nextConfig = {
       { source: "/ai-algeria", destination: "/", permanent: true },
       { source: "/services/hosting-basic", destination: "/services/hawiyat-cloud", permanent: true },
       { source: "/services/hosting-vip", destination: "/services/hawiyat-cloud", permanent: true },
+      { source: "/services/composer-pro", destination: "/services/composer", permanent: true },
     ]
   },
 }

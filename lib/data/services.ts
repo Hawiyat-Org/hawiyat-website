@@ -189,7 +189,7 @@ export const services: Service[] = [
   },
   {
     id: "composer-pro",
-    slug: "composer-pro",
+    slug: "composer",
     name: "Hawiyat AI Composer",
     shortDesc: "The execution layer for your AI tasks",
     description:

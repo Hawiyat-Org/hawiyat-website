@@ -119,7 +119,7 @@ const Header = () => {
             </button>
 
             <Link
-              href="/services/composer-pro"
+              href="/services/composer"
               className="bg-signal text-signal-text px-6 py-3 min-h-[44px] rounded-lg font-medium transition-colors hover:bg-signal-hover flex items-center gap-2 whitespace-nowrap"
             >
               Start Building
@@ -197,7 +197,7 @@ const Header = () => {
             {/* Mobile CTA Section */}
             <div className="p-4 border-t border-border bg-surface-dim/40">
               <Link
-                href="/services/composer-pro"
+                href="/services/composer"
                 className="flex items-center justify-center w-full bg-signal text-signal-text px-6 py-4 rounded-lg font-medium transition-colors hover:bg-signal-hover touch-manipulation gap-2 shadow-lg"
                 onClick={closeMobileMenu}
               >
