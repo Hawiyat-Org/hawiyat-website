@@ -63,7 +63,7 @@ const Header = () => {
     <header className={`fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-2 sm:px-4 transition-all duration-300 ease-out ${
       isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
     }`}>
-      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-lg sm:rounded-lg border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-300 ease-out overflow-hidden ${
+      <div className={`bg-paper/70 dark:bg-surface-dim/50 backdrop-blur-xl rounded-lg sm:rounded-lg border border-border shadow-md dark:shadow-lg dark:shadow-black/20 transition-all duration-300 ease-out overflow-x-clip overflow-y-visible ${
         isMobileMenuOpen ? 'max-h-[90vh]' : 'max-h-20'
       }`}>
 
@@ -88,18 +88,21 @@ const Header = () => {
             <Link
               href="/composer"
               className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
+              aria-current={pathname === "/composer" ? "page" : undefined}
             >
               Composer
             </Link>
             <Link
               href="/services"
               className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
+              aria-current={pathname === "/services" ? "page" : undefined}
             >
               Services
             </Link>
             <Link
               href="/about"
               className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
+              aria-current={pathname === "/about" ? "page" : undefined}
             >
               About
             </Link>
@@ -109,7 +112,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
+              className="p-2.5 min-h-[44px] min-w-[44px] rounded-lg border border-border text-muted-ink hover:text-ink hover:bg-surface-dim transition-all duration-200"
               aria-label="Toggle theme"
             >
               {themeIcon}
@@ -117,7 +120,7 @@ const Header = () => {
 
             <Link
               href="/services/composer-pro"
-              className="bg-signal text-signal-text px-6 py-2.5 rounded-lg font-medium transition-colors hover:bg-signal-hover flex items-center gap-2 whitespace-nowrap"
+              className="bg-signal text-signal-text px-6 py-3 min-h-[44px] rounded-lg font-medium transition-colors hover:bg-signal-hover flex items-center gap-2 whitespace-nowrap"
             >
               Start Building
               <ArrowRight className="w-4 h-4" />
@@ -164,6 +167,7 @@ const Header = () => {
                 href="/composer"
                 className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
+                aria-current={pathname === "/composer" ? "page" : undefined}
               >
                 <span className="font-medium">Composer</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
@@ -173,6 +177,7 @@ const Header = () => {
                 href="/services"
                 className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
+                aria-current={pathname === "/services" ? "page" : undefined}
               >
                 <span className="font-medium">Services</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
@@ -182,6 +187,7 @@ const Header = () => {
                 href="/about"
                 className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
+                aria-current={pathname === "/about" ? "page" : undefined}
               >
                 <span className="font-medium">About</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />

@@ -53,7 +53,7 @@ const Footer = () => {
             <div className="max-w-[120px] text-center text-3xl h-fit">Hawiyat</div>
           </Link>
 
-          <div className="flex gap-4 text-lg">
+          <div className="flex flex-wrap justify-center gap-4 text-lg">
             {socialLinks.map((social) => {
               const external = isExternal(social.href)
               return (
@@ -84,7 +84,7 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="footer-link hover:opacity-80 transition-opacity duration-200"
+                      className="footer-link inline-flex items-center min-h-[44px] hover:opacity-80 transition-opacity duration-200"
                     >
                       {link.name}
                     </a>
@@ -92,7 +92,7 @@ const Footer = () => {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className="footer-link hover:opacity-80 transition-opacity duration-200"
+                      className="footer-link inline-flex items-center min-h-[44px] hover:opacity-80 transition-opacity duration-200"
                     >
                       {link.name}
                     </Link>
