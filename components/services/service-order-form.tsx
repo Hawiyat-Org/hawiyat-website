@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Loader2, CheckCircle2, Building2, Wallet, DollarSign, ArrowRight, Check } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -51,6 +51,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
+  const successHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -107,6 +108,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       firePixel()
       setOrderId(data.order.id)
       setIsSuccess(true)
+      setTimeout(() => successHeadingRef.current?.focus(), 0)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong")
     } finally {
@@ -126,10 +128,10 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
     <div className="space-y-4">
       {/* Desktop: Payment Method Selector */}
       <div className="hidden lg:block space-y-2">
-        <label className="block text-sm font-medium text-ink">
+        <label id="payment-method-label" className="block text-sm font-medium text-ink">
           Payment Method <span className="text-danger">*</span>
         </label>
-        <div className="grid grid-cols-3 gap-2">
+        <div role="radiogroup" aria-labelledby="payment-method-label" className="grid grid-cols-3 gap-2">
           {paymentOptions.map((option) => {
             const Icon = option.icon
             const isSelected = selectedPayment === option.value
@@ -137,6 +139,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               <button
                 key={option.value}
                 type="button"
+                aria-pressed={isSelected}
                 onClick={() => setSelectedPayment(option.value)}
                 className={cn(
                   "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all min-h-[44px]",
@@ -164,7 +167,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
             {/* Mobile: Floating Bottom Bar */}
             <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 border-t border-border/60 bg-paper/95 backdrop-blur-xl px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-              <div className="grid grid-cols-3 gap-2 mb-2.5">
+              <div role="radiogroup" aria-label="Payment Method" className="grid grid-cols-3 gap-2 mb-2.5">
                 {paymentOptions.map((option) => {
                   const Icon = option.icon
                   const isSelected = selectedPayment === option.value
@@ -172,6 +175,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                     <button
                       key={option.value}
                       type="button"
+                      aria-pressed={isSelected}
                       onClick={() => setSelectedPayment(option.value)}
                       className={cn(
                         "flex items-center justify-center gap-1.5 py-2 rounded-lg border text-xs font-medium transition-all min-h-[44px]",
@@ -198,12 +202,12 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="z-[60] max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
           <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
-            <DialogTitle className="sr-only">{service.name}</DialogTitle>
+            <DialogTitle className="sr-only">{isSuccess ? "Order Submitted" : service.name}</DialogTitle>
 
             {isSuccess ? (
-              <div className="text-center py-8">
+              <div role="status" aria-live="polite" className="text-center py-8">
                 <CheckCircle2 className="w-16 h-16 text-ok mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2 text-ink">Order Submitted!</h3>
+                <h3 ref={successHeadingRef} tabIndex={-1} className="text-xl font-semibold mb-2 text-ink">Order Submitted!</h3>
                 <p className="text-muted-ink text-sm mb-1">
                   Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
                 </p>
@@ -268,7 +272,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 </div>
 
                 {error && (
-                  <div className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
+                  <div role="alert" className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
                     {error}
                   </div>
                 )}
@@ -337,37 +341,36 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                     />
                   </div>
 
-                  <label
-                    htmlFor="acceptTerms"
-                    className="flex items-start gap-2.5 p-3 rounded-lg bg-surface-dim/30 border border-border/20 cursor-pointer select-none"
-                  >
-                    <input
-                      id="acceptTerms"
-                      name="acceptTerms"
-                      type="checkbox"
-                      checked={formData.acceptTerms}
-                      onChange={handleChange}
-                      className="sr-only peer"
-                      required
-                    />
-                    {/* Custom checkbox */}
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "flex-shrink-0 w-[18px] h-[18px] rounded border-2 flex items-center justify-center transition-colors",
-                        formData.acceptTerms
-                          ? "bg-signal border-signal"
-                          : "border-border bg-surface"
-                      )}
-                    >
-                      <Check
-                        strokeWidth={3}
-                        className={cn(
-                          "w-3 h-3 text-signal-text transition-opacity",
-                          formData.acceptTerms ? "opacity-100" : "opacity-0"
-                        )}
+                  <div className="flex items-start gap-2.5 p-3 rounded-lg bg-surface-dim/30 border border-border/20">
+                    <label htmlFor="acceptTerms" className="cursor-pointer select-none shrink-0">
+                      <input
+                        id="acceptTerms"
+                        name="acceptTerms"
+                        type="checkbox"
+                        checked={formData.acceptTerms}
+                        onChange={handleChange}
+                        className="sr-only peer"
+                        required
                       />
-                    </span>
+                      {/* Custom checkbox */}
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "flex-shrink-0 w-[18px] h-[18px] rounded border-2 flex items-center justify-center transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-signal peer-focus-visible:ring-offset-2",
+                          formData.acceptTerms
+                            ? "bg-signal border-signal"
+                            : "border-border bg-surface"
+                        )}
+                      >
+                        <Check
+                          strokeWidth={3}
+                          className={cn(
+                            "w-3 h-3 text-signal-text transition-opacity",
+                            formData.acceptTerms ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </span>
+                    </label>
                     <span className="text-xs text-muted-ink leading-relaxed">
                       I agree to the{" "}
                       <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline">
@@ -378,7 +381,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                         Privacy Policy
                       </Link>
                     </span>
-                  </label>
+                  </div>
 
                   <button
                     type="submit"

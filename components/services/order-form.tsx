@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -30,6 +30,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
+  const successHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -81,6 +82,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       firePixel()
       setOrderId(data.order.id)
       setIsSuccess(true)
+      setTimeout(() => successHeadingRef.current?.focus(), 0)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong")
     } finally {
@@ -96,12 +98,12 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     <Dialog open onOpenChange={(open) => { if (!open) onClose() }}>
       <DialogContent className="max-h-[90vh] w-full max-w-[calc(100vw-2rem)] sm:max-w-md gap-0 overflow-hidden rounded-lg border-border/60 bg-surface p-0 shadow-2xl sm:rounded-lg">
         <div className="max-h-[90vh] w-full overflow-y-auto scrollbar-hide p-6">
-          <DialogTitle className="sr-only">{service.name}</DialogTitle>
+          <DialogTitle className="sr-only">{isSuccess ? "Order Submitted" : service.name}</DialogTitle>
 
         {isSuccess ? (
-          <div className="text-center py-8">
+          <div role="status" aria-live="polite" className="text-center py-8">
             <CheckCircle2 className="w-16 h-16 text-ok mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-ink">Order Submitted!</h3>
+            <h3 ref={successHeadingRef} tabIndex={-1} className="text-xl font-semibold mb-2 text-ink">Order Submitted!</h3>
             <p className="text-muted-ink text-sm mb-1">
               Thank you, {formData.customerName}. We&apos;ll contact you at {formData.customerEmail} shortly.
             </p>
@@ -160,7 +162,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
             </div>
 
             {error && (
-              <div className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
+              <div role="alert" className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
                 {error}
               </div>
             )}
@@ -215,10 +217,10 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-ink mb-2">
+                <label id="payment-method-label" className="block text-sm font-medium text-ink mb-2">
                   Payment Method <span className="text-danger">*</span>
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div role="radiogroup" aria-labelledby="payment-method-label" className="grid grid-cols-3 gap-2">
                     {[
                       { value: "CCP", label: "CCP", icon: Building2 },
                       { value: "BARIDI_MOB", label: "Baridi Mob", icon: Wallet },
@@ -230,6 +232,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                       <button
                         key={option.value}
                         type="button"
+                        aria-pressed={isSelected}
                         onClick={() => setFormData((prev) => ({ ...prev, paymentMethod: option.value }))}
                         className={cn(
                           "flex flex-col items-center gap-1.5 p-3 rounded-lg border-2 text-sm font-medium transition-all min-h-[44px]",
