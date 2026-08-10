@@ -5,7 +5,7 @@ export default function LoadingSpinner() {
     <div
       role="status"
       aria-label="Loading"
-      className="flex min-h-[50vh] items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-paper/60"
     >
       <Loader2
         className="h-8 w-8 animate-spin motion-reduce:animate-none text-signal"

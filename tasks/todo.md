@@ -1,100 +1,90 @@
-# Todo — Hawiyat SEO + Trust + Hosting Collapse Round
+# Todo — PageSpeed Recovery + Metric Maximization
 
-Gate (every task): `npx tsc --noEmit` exit 0 · `pnpm lint` 0 errors · `pnpm build` succeeds · no em dashes in changed .tsx · no "cheap" · design tokens only.
+Gate (every task): `npx tsc --noEmit` exit 0 · `pnpm lint` 0 errors · `pnpm build` succeeds · no em dashes · `pnpm audit` 0 · no a11y/CSP/identity regressions.
 
-## Phase 1: Technical SEO
+## Phase 1: Root-cause analysis (research, per-metric specialist)
 
-- [ ] Task 1: 301 non-www → www redirect
-  - Acceptance: `vercel.json` has `redirects: [{ source: "/(.*)", destination: "https://www.hawiyat.org/$1", permanent: true }]`; next.config.mjs redirects unchanged.
-  - Verify: build passes; `curl -sI https://hawiyat.org/` → 301 (after deploy).
-  - Files: `vercel.json`
+- [ ] Task 1: CLS analysis — footer shift source (image space before load)
+  - Acceptance: root cause identified with file:line; fix approach chosen.
+  - Verify: findings doc written.
+  - Files: components/footer.tsx, partners-marquee.tsx, testimonials.tsx, image-with-skeleton.tsx
 
-- [ ] Task 2: Service + hasOfferCatalog schema on /services
-  - Acceptance: `app/services/layout.tsx` emits `@type: "Service"` + `hasOfferCatalog` with DZD offers for Composer (6,000/15,000/30,000 DA/mo), n8n (8,000/30,000/80,000 DA/yr), Evolution (7,000/30,000/80,000 DA/yr), Hawiyat Cloud (by-order, DZD, no fixed price); stale bare-name ItemList replaced/fixed.
-  - Verify: build + view-source /services → Service schema present; gate passes.
-  - Files: `app/services/layout.tsx` (+ `app/services/page.tsx` if needed)
+- [ ] Task 2: CSP inline-style analysis — source of injected `<style>`
+  - Acceptance: exact injector identified (next-themes/framer-motion/GSAP); fix chosen (nonce/hash/scoped style-src-elem) without weakening script-src.
+  - Verify: findings doc written.
+  - Files: app/layout.tsx, theme-provider, next.config.mjs, components
 
-- [ ] Task 3: Enterprise tier in AI-SEO files + schema
-  - Acceptance: `public/pricing.md`, `public/llmsfull.txt`, `public/llms.txt` each contain a Composer Enterprise (custom, DZD) entry; composer `SoftwareApplication.offers` in `app/composer/page.tsx` gains a 4th Enterprise offer (no price, custom contact).
-  - Verify: `grep -i enterprise public/pricing.md public/llmsfull.txt public/llms.txt` → match; build passes.
-  - Files: `public/pricing.md`, `public/llmsfull.txt`, `public/llms.txt`, `app/composer/page.tsx`
+- [ ] Task 3: robots.txt + llms.txt fetch analysis
+  - Acceptance: root cause of timeout identified (headers/middleware matcher/quirk); fix if real.
+  - Verify: curl -sI on /robots.txt and /llms.txt; findings doc.
+  - Files: app/robots.ts, middleware.ts, next.config.mjs, public/llms*
 
-- [ ] Task 4: Remove meta-keywords
-  - Acceptance: `keywords` array removed from `app/layout.tsx` root metadata.
-  - Verify: `grep -c 'name="keywords"'` on built HTML → 0; gate passes.
-  - Files: `app/layout.tsx`
+- [ ] Task 4: TBT analysis — 1st-party long task source
+  - Acceptance: chunk 726-* / run-console / GSAP contribution measured; Meta Pixel confirmed lazyOnload.
+  - Verify: findings doc.
+  - Files: app/layout.tsx, app/composer/page.tsx, components/run-console.tsx
 
-### Checkpoint: Phase 1
-- [ ] Full gate passes
-- [ ] Build HTML shows Service schema on /services; no keywords meta
-- [ ] Machine files contain Enterprise
+- [ ] Task 5: Accessibility manual-check review
+  - Acceptance: 10 Lighthouse manual items reviewed; fixable items listed.
+  - Verify: findings doc.
+  - Files: site-wide (app/, components/)
 
-## Phase 2: Trust & Claims
+### Checkpoint: Root cause approved
+- [ ] 5 findings written + reviewed by metric specialists
+- [ ] Founder decision: Meta Pixel keep vs remove/scope
 
-- [ ] Task 5: Align 100+ → 200+ in service SEO blocks
-  - Acceptance: zero "100+ clients" in `lib/data/services.ts` (n8n, Cloud Basic, Evolution, Cloud VIP → "200+ clients").
-  - Verify: `rg -n "100\+ clients" lib/data/services.ts` → none; gate passes.
-  - Files: `lib/data/services.ts`
+## Phase 2: CLS fix
 
-- [ ] Task 6: Dated provenance under proof bands
-  - Acceptance: home (`components/our-numbers.tsx`) and composer telemetry (`app/composer/page.tsx`) show "Figures verified against the Hawiyat operations dashboard as of August 9, 2026."; link (if any) → `/about`, no dangling href.
-  - Verify: build + `pnpm dev` shows both lines; no link to non-existent /stats.
-  - Files: `components/our-numbers.tsx`, `app/composer/page.tsx`
+- [ ] Task 6: Reserve layout space for footer + marquee images
+  - Acceptance: mobile CLS < 0.1; no visual change.
+  - Verify: gate + PSI mobile CLS.
+  - Files: components/footer.tsx, partners-marquee.tsx, testimonials.tsx, image-with-skeleton.tsx
 
-- [ ] Task 7: SLA clause in Terms
-  - Acceptance: `app/terms/page.tsx` adds an SLA clause (uptime definition, measurement window, compensation mechanics) backing the 99.9% promise; no em dashes.
-  - Verify: Terms page contains the clause; gate passes.
-  - Files: `app/terms/page.tsx`
+### Checkpoint: CLS
+- [ ] PSI CLS < 0.1; Performance improved
 
-### Checkpoint: Phase 2
-- [ ] Full gate passes
-- [ ] Zero "100+ clients" in data; provenance lines render; SLA present
+## Phase 3: CSP inline-style fix
 
-## Phase 3: Hosting Collapse
+- [ ] Task 7: Apply CSP fix (nonce or scoped style-src-elem)
+  - Acceptance: Best Practices 100; zero CSP console violations; script-src unchanged (no unsafe-inline re-add).
+  - Verify: browser console on /, /composer, /services, /about, /faq + theme toggle; gate.
+  - Files: app/layout.tsx, theme-provider, next.config.mjs
 
-- [ ] Task 8: Single /services/hawiyat-cloud route
-  - Acceptance: `lib/data/services.ts` consolidated to one cloud entry (id/slug `hawiyat-cloud`, by-order contact); `/services/hosting-basic` + `/services/hosting-vip` 308-redirect to `/services/hawiyat-cloud`; existing detail page renders the cloud card.
-  - Verify: gate passes; routes redirect in build/dev.
-  - Files: `lib/data/services.ts`, `app/services/[slug]/page.tsx`, `next.config.mjs` (redirects)
+### Checkpoint: CSP
+- [ ] No CSP violations; Best Practices 100
 
-- [ ] Task 9: Update links + sitemap + meta to single URL
-  - Acceptance: sitemap lists only `/services/hawiyat-cloud`; llms.txt/llmsfull.txt hosting links point to it; catalog card + footer + related-links use it; meta description ≤155 chars.
-  - Verify: `rg "services/hosting-" app components lib public` → none (except redirect source); gate passes.
-  - Files: `app/sitemap.ts`, `public/llms.txt`, `public/llmsfull.txt`, `components/services/services-catalog.tsx`, `components/footer.tsx`, `app/services/[slug]/page.tsx`
+## Phase 4: robots.txt + llms.txt fetch
 
-### Checkpoint: Phase 3
-- [ ] Full gate passes
-- [ ] hosting-basic/vip redirect; single cloud URL everywhere
+- [ ] Task 8: Ensure robots + llms fetchable (200, correct content-type, not middleware-blocked)
+  - Acceptance: SEO 3/3 + Agentic 3/3; curl 200.
+  - Verify: curl + PSI.
+  - Files: app/robots.ts, middleware.ts, next.config.mjs, public/llms*
 
-## Phase 4: Content Placeholders + Perf + P2
+### Checkpoint: Fetchability
+- [ ] robots.txt + llms.txt 200; SEO + Agentic 3/3
 
-- [ ] Task 10: Testimonials section (home)
-  - Acceptance: home page has a testimonials section (2-3 quote slots, role/company placeholders, token styling, no fake content).
-  - Verify: `pnpm dev` shows the section; gate passes.
-  - Files: `components/testimonials.tsx` (new), `app/page.tsx`
+## Phase 5: TBT reduction
 
-- [ ] Task 11: Team grid (/about)
-  - Acceptance: `/about` has a 5-member team grid (photo/role/credential placeholder slots, token styling).
-  - Verify: `pnpm dev` /about shows grid; gate passes.
-  - Files: `app/about/page.tsx`
+- [ ] Task 9: Reduce 1st-party main-thread cost
+  - Acceptance: TBT < 200ms where possible; Performance ≥ 90; no a11y regression.
+  - Verify: PSI + gate.
+  - Files: app/layout.tsx, app/composer/page.tsx, components/run-console.tsx
 
-- [ ] Task 12: Compress assets
-  - Acceptance: partner SVGs (itihad, itsol, estin) via SVGO + compress `public/hawiyat.png` (og) + favicon; page weight target < 800 KB; logos still crisp.
-  - Verify: file sizes drop materially; `pnpm dev` logos render correctly.
-  - Files: `public/trust/*.svg`, `public/hawiyat.png`, `public/favlogo.ico`
+### Checkpoint: Performance
+- [ ] Performance ≥ 90; TBT reduced
 
-- [ ] Task 13: Comparison table on /composer
-  - Acceptance: semantic `<table>` on `/composer` comparing Hawiyat AI Composer vs ChatGPT / n8n Cloud / OpenRouter (execution loop, routing, context, evaluation, fallbacks, DZD, WhatsApp/CRM wiring); factual, on-identity, no `reveal-up`.
-  - Verify: `pnpm dev` /composer shows table; gate passes.
-  - Files: `app/composer/page.tsx`
+## Phase 6: Accessibility hold + final
 
-- [ ] Task 14: E-E-A-T dates
-  - Acceptance: `/about`, `/faq`, `/privacy`, `/dmca` have "Last updated" lines + `dateModified`/`modifiedTime` metadata.
-  - Verify: each page shows a date; gate passes.
-  - Files: `app/about/layout.tsx`, `app/faq/page.tsx`, `app/privacy/page.tsx`, `app/dmca/page.tsx` (+ layouts)
+- [ ] Task 10: Apply fixable a11y manual-check items; hold a11y at 100
+  - Acceptance: a11y stays 100.
+  - Verify: PSI + gate.
+  - Files: site-wide as needed
+
+- [ ] Task 11: Final gate + audit + PSI re-run + commit + push
+  - Acceptance: all SPEC success criteria met; audit 0; pushed.
+  - Verify: full gate; PSI mobile/desktop.
 
 ### Checkpoint: Complete
-- [ ] Full gate passes
-- [ ] All 13 SPEC success criteria met
-- [ ] Manual `pnpm dev` walkthrough clean
+- [ ] All SPEC success criteria met
+- [ ] Full gate + audit 0
 - [ ] Human review before deploy
