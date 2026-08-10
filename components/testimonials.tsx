@@ -1,38 +1,53 @@
-const testimonials = [
+import { Sprout, BarChart3, Workflow, ShieldCheck, Globe, type LucideIcon } from "lucide-react"
+
+type Testimonial = {
+  id: string
+  quote: string
+  role: string
+  icon: LucideIcon
+  initials: string
+}
+
+const testimonials: Testimonial[] = [
   {
     id: "green-duty",
     quote:
-      "Very good, it works really well. Très bien, ça marche très bien.",
+      "Very good, it works really well. Très bien, ça marche très bien. Our greenhouse automation just runs, day after day.",
     role: "Startup, agrotech (greenhouse IoT and industrial automation)",
-    verified: true,
+    icon: Sprout,
+    initials: "GD",
   },
   {
     id: "moncef",
     quote:
-      "Support 100/10. I was a beginner and they walked me through everything step by step, even topped up my tokens when I needed more.",
+      "I came in as a beginner and support walked me through every step. When I needed more tokens, they topped me up. Support 100/10.",
     role: "Data analyst",
-    verified: true,
+    icon: BarChart3,
+    initials: "MA",
   },
   {
     id: "benar",
     quote:
-      "Started with n8n hosting, came back six months later for Composer MAX 5X. That is what the layer does, it grows with you.",
+      "We started with n8n hosting and came back six months later for Composer MAX 5X. When a provider grows with you, you stay.",
     role: "Automation agency",
-    verified: true,
+    icon: Workflow,
+    initials: "BA",
   },
   {
     id: "johnny",
     quote:
-      "I had never touched Claude Code before. They walked me through it step by step until it clicked.",
+      "I had never touched Claude Code before. They explained it step by step until I understood what was actually running.",
     role: "Security analyst",
-    verified: false,
+    icon: ShieldCheck,
+    initials: "JW",
   },
   {
     id: "samy",
     quote:
-      "I did not know n8n at all. They set it up hosted and ready to use, so I could get back to running my business.",
+      "I did not know n8n at all and had no time to babysit servers. They set it up hosted and ready, so I could get back to client work.",
     role: "International developer and freelancer",
-    verified: false,
+    icon: Globe,
+    initials: "SO",
   },
 ]
 
@@ -40,7 +55,7 @@ const testimonials = [
 const marqueeHalves = [testimonials, testimonials]
 
 const Testimonials = () => (
-  <section className="w-full py-16 md:py-20">
+  <section className="w-full py-16 md:py-24">
     <div className="mx-auto max-w-6xl px-6">
       <div className="mx-auto mb-12 max-w-2xl text-center">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Social proof</p>
@@ -63,18 +78,28 @@ const Testimonials = () => (
               {half.map((t) => (
                 <div
                   key={t.id}
-                  className="flex w-[300px] shrink-0 flex-col justify-between rounded-lg border border-border bg-surface p-6 md:w-[360px]"
+                  className="relative flex w-[300px] shrink-0 flex-col rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/40 md:w-[360px]"
                 >
-                  <p className="text-sm leading-relaxed text-muted-ink">
-                    &ldquo;{t.quote}&rdquo;
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-5 top-3 select-none font-mono text-5xl leading-none text-signal/10"
+                  >
+                    &rdquo;
+                  </span>
+
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-dim">
+                    <t.icon className="h-5 w-5 text-signal" strokeWidth={1.5} />
+                  </div>
+
+                  <p className="flex-1 text-[15px] leading-relaxed text-ink">
+                    {t.quote}
                   </p>
-                  <div className="mt-6 border-t border-border pt-4">
-                    <p className="text-sm font-medium text-ink">{t.role}</p>
-                    {t.verified && (
-                      <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ok">
-                        Verified customer
-                      </p>
-                    )}
+
+                  <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-signal font-mono text-[10px] font-semibold text-signal-text">
+                      {t.initials}
+                    </span>
+                    <span className="text-sm font-medium text-ink">{t.role}</span>
                   </div>
                 </div>
               ))}
