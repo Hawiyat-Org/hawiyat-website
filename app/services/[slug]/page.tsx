@@ -191,7 +191,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
               <div className="space-y-6">
                 {/* Hero Image */}
                 {(service.image || service.images) && (
-                  <div className="relative aspect-video rounded-lg border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-8 flex items-center justify-center overflow-hidden">
+                  <div className="relative aspect-video rounded-lg border border-border/60 bg-gradient-to-br from-surface-dim/40 to-surface-dim/20 p-6 sm:p-8 flex items-center justify-center overflow-hidden">
                     {service.tag && (
                       <div className="absolute top-3 right-3 z-10">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-signal text-signal-text">
@@ -200,9 +200,9 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                       </div>
                     )}
                     {service.images ? (
-                      <div className="flex items-center justify-center gap-8">
+                      <div className="flex items-center justify-center gap-4 sm:gap-8">
                         {service.images.map((img, idx) => (
-                          <div key={idx} className="relative w-32 h-32 lg:w-40 lg:h-40">
+                          <div key={idx} className="relative w-20 h-20 sm:w-32 sm:h-32 lg:w-40 lg:h-40">
                             <Image
                               src={img}
                               alt={`${service.name} ${idx + 1}`}
@@ -214,7 +214,7 @@ export default function ServicePage({ params, searchParams }: { params: { slug: 
                         ))}
                       </div>
                     ) : (
-                      <div className="relative w-48 h-48 lg:w-64 lg:h-64">
+                      <div className="relative w-24 h-24 sm:w-36 sm:h-36 lg:w-64 lg:h-64">
                         <Image
                           src={service.image!}
                           alt={service.name}
