@@ -72,8 +72,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceId: service.id,
-          // Keep the tier in the order record/emails (e.g. "Hawiyat AI Composer Pro  Pro")
-          serviceName: service.tag ? `${service.name}  ${service.tag}` : service.name,
+          // Keep the tier in the order record/emails (e.g. "Hawiyat AI Composer Pro")
+          serviceName: [service.name, service.tag].filter(Boolean).join(" "),
           customerName: formData.customerName,
           customerEmail: formData.customerEmail,
           customerPhone: formData.customerPhone,

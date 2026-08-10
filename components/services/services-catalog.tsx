@@ -42,7 +42,8 @@ function lowestPlanPrice(plans?: Service["plans"]): string | undefined {
 }
 
 /* Tier services become ONE card each (plan choice happens on the detail page).
-   hawiyat-cloud is the single "Hosting" card (hosting-basic/hosting-vip collapsed). */
+   hawiyat-cloud is the single "Hosting" card (hosting-basic/hosting-vip are legacy
+   slugs that 308-redirect to /services/hawiyat-cloud). */
 function buildCatalogCards(): CatalogCard[] {
   const cards: CatalogCard[] = []
 
@@ -117,7 +118,7 @@ function buildCatalogCards(): CatalogCard[] {
   return cards
 }
 
-/* Display order: Composer Pro, n8n, then the systems you connect (Evolution), then the cloud runtime (hosting). */
+/* Display order: Hawiyat AI Composer, n8n, then the systems you connect (Evolution), then the cloud runtime (Hawiyat Cloud). */
 const CARD_ORDER: Record<string, number> = {
   "composer-pro": 0,
   "n8n-hosting": 1,
