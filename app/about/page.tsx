@@ -302,40 +302,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Core Team ─── */}
-      <section className="w-full py-16 md:py-24 bg-foreground/[0.01] border-y border-foreground/5">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col gap-4 mb-14">
-            <span className="font-mono text-xs text-muted-ink uppercase tracking-widest">The Team</span>
-            <h2 className="text-5xl max-md:text-3xl font-medium">The people behind the layer.</h2>
-            <p className="text-muted-ink max-w-md text-sm">
-              The founders and operators building the Hawiyat execution layer. Profiles and photos
-              coming soon.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[1, 2, 3, 4, 5].map((member) => (
-              <div
-                key={member}
-                className="bg-surface rounded-lg border border-border p-6 flex flex-col items-center text-center"
-              >
-                <div className="w-20 h-20 rounded-full bg-surface-dim border border-border flex items-center justify-center">
-                  <span className="font-mono text-sm text-muted-ink">Name</span>
-                </div>
-                <h3 className="font-semibold text-ink text-lg mt-4">Member name</h3>
-                <span className="text-xs font-medium text-muted-ink uppercase tracking-wider mt-1">
-                  Role / credential
-                </span>
-                <p className="text-sm text-muted-ink leading-relaxed mt-4">
-                  Credentials coming soon
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── Location ─── */}
       <section className="w-full py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
