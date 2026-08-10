@@ -11,7 +11,7 @@ const testimonials: Testimonial[] = [
   {
     id: "green-duty",
     quote:
-      "Very good, it works really well. Très bien, ça marche très bien. Our greenhouse automation just runs, day after day.",
+      "Very good, it works really well. Our greenhouse automation just runs, day after day.",
     role: "Startup, agrotech (greenhouse IoT and industrial automation)",
     icon: Sprout,
   },
