@@ -8,6 +8,7 @@ import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import posthog from "posthog-js"
 
 interface ServiceOrderFormProps {
   service: {
@@ -107,6 +108,10 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       }
 
       firePixel()
+      posthog.capture("order_submitted", {
+        service_id: service.id,
+        payment_method: selectedPayment,
+      })
       setOrderId(data.order.id)
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
@@ -159,7 +164,12 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
       {/* Desktop: Order Now button */}
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                posthog.capture("service_order_form_opened", {
+                  service_id: service.id,
+                })
+                setIsOpen(true)
+              }}
               className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-signal text-signal-text font-semibold text-base transition-colors duration-200 shadow-lg hover:bg-signal-hover"
             >
               Order Now
@@ -192,7 +202,12 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 })}
               </div>
               <button
-                onClick={() => setIsOpen(true)}
+                onClick={() => {
+                  posthog.capture("service_order_form_opened", {
+                    service_id: service.id,
+                  })
+                  setIsOpen(true)
+                }}
                 className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-lg bg-signal text-signal-text font-semibold text-base shadow-lg"
               >
                 Order Now

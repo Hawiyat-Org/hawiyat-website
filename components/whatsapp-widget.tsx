@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { waLink } from '@/lib/contact'
+import posthog from 'posthog-js'
 
 export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
@@ -14,6 +15,9 @@ export default function WhatsAppWidget() {
   const whatsappUrl = waLink('Hello Hawiyat! I have a question about the Composer.')
 
   const handleClick = () => {
+    posthog.capture('whatsapp_contact_started', {
+      source: 'floating_widget',
+    })
     window.open(whatsappUrl, '_blank')
   }
 

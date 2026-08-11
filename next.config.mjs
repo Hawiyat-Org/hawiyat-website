@@ -26,13 +26,14 @@ const nextConfig = {
     const csp = isProd
       ? [
           "default-src 'none'",
-          "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
+          "script-src 'self' 'unsafe-inline' https://connect.facebook.net https://*.posthog.com",
           "style-src 'self'",
           "style-src-elem 'self' 'unsafe-inline'",
           "style-src-attr 'unsafe-inline'",
           "img-src 'self' data: blob: https://*.facebook.com https://*.fbcdn.net",
           "font-src 'self'",
-          "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://*.facebook.com https://*.fbcdn.net https://*.on.aws",
+          "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://*.facebook.com https://*.fbcdn.net https://*.on.aws https://us.i.posthog.com",
+          "worker-src 'self' blob:",
           "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com https://www.google.com/maps",
           "object-src 'none'",
           "base-uri 'self'",
@@ -40,7 +41,7 @@ const nextConfig = {
           "frame-ancestors 'none'",
         ].join("; ")
       : // dev: lenient (Next HMR uses eval + inline)
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'"
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://us.i.posthog.com; worker-src 'self' blob:"
 
     return [
       {

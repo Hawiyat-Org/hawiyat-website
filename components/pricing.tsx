@@ -5,6 +5,7 @@ import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
+import posthog from "posthog-js"
 
 interface OrderService {
   id: string
@@ -56,6 +57,13 @@ export default function Pricing() {
   const activeTier = maxTiers.find((t) => t.key === activeMax)!
 
   const enterpriseWhatsappUrl = waLink("Hello Hawiyat, we need an Enterprise plan for our operation.")
+
+  const selectPlan = (service: OrderService) => {
+    posthog.capture("pricing_plan_selected", {
+      service_id: service.id,
+    })
+    setSelectedService(service)
+  }
 
   const enterpriseFeatures = [
     "The execution layer, tuned for your whole operation",
@@ -123,7 +131,7 @@ export default function Pricing() {
             </div>
 
             <button
-              onClick={() => setSelectedService(toOrderService(proService))}
+              onClick={() => selectPlan(toOrderService(proService))}
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
             >
               Order Pro, live in 24h
@@ -181,7 +189,7 @@ export default function Pricing() {
             </div>
 
             <button
-              onClick={() => setSelectedService(toOrderService(activeTier.service))}
+              onClick={() => selectPlan(toOrderService(activeTier.service))}
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3.5 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Order MAX, live in 24h

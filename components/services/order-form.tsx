@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import posthog from "posthog-js"
 
 interface OrderFormProps {
   service: {
@@ -81,6 +82,10 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       }
 
       firePixel()
+      posthog.capture("order_submitted", {
+        service_id: service.id,
+        payment_method: formData.paymentMethod,
+      })
       setOrderId(data.order.id)
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
