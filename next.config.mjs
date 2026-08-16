@@ -63,9 +63,17 @@ const nextConfig = {
     return [
       { source: "/hawiyat-composer", destination: "/composer", permanent: true },
       { source: "/ai-algeria", destination: "/", permanent: true },
-      { source: "/services/hosting-basic", destination: "/services/hawiyat-cloud", permanent: true },
-      { source: "/services/hosting-vip", destination: "/services/hawiyat-cloud", permanent: true },
+      // Legacy service aliases — 301 per kanban W6 (Next.js permanent:true would emit 308)
+      { source: "/services/hosting-basic", destination: "/services/hawiyat-cloud", statusCode: 301 },
+      { source: "/services/hosting-vip", destination: "/services/hawiyat-cloud", statusCode: 301 },
       { source: "/services/composer-pro", destination: "/services/composer", permanent: true },
+      // Unregistered soft-404 slugs (SEO audit v3, 2026-08-16): redirect to their real targets.
+      // Claude Code is an integration, not a SKU (0xkatana) — /services/claude-code and its
+      // -algeria variant go to /composer, never a sales page.
+      { source: "/services/n8n-hosting-algeria", destination: "/services/n8n-hosting", statusCode: 301 },
+      { source: "/services/ai-provider-algeria", destination: "/services/composer", statusCode: 301 },
+      { source: "/services/claude-code-algeria", destination: "/composer", statusCode: 301 },
+      { source: "/services/claude-code", destination: "/composer", statusCode: 301 },
     ]
   },
 }
