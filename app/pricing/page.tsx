@@ -3,7 +3,7 @@ import Pricing from "@/components/pricing"
 import { createMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createMetadata({
-  title: "Pricing | Hawiyat AI Composer & Services in Algeria",
+  title: "Pricing | AI Composer & Services in Algeria",
   description:
     "Hawiyat pricing in Algerian dinars (DZD): AI Composer Pro 6,000 DA/month, MAX 5X 15,000, MAX 20X 30,000, Enterprise custom. n8n hosting, Evolution API, and Hawiyat Cloud. Pay with CCP, Baridi Mob, or USD.",
   path: "/pricing",
