@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "ChatGPT Alternatives in Algeria: What Actually Works in 2026"
 description: "ChatGPT plus alternatives that actually work in Algeria: local AI API access to GPT, Claude, and Gemini billed in DZD, plus what to avoid when choosing an AI provider."
 date: "2026-08-17"

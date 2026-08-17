@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "Claude Code in Algeria: How to Use It Without a Foreign Card"
 description: "Claude Code is trending among Algerian developers, but paying Anthropic directly requires a foreign card. Here's how to use Claude Code through an Algerian AI provider, billed in DZD."
 date: "2026-08-17"

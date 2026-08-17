@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "WhatsApp Business API in Algeria: A Practical Guide with Evolution API"
 description: "How WhatsApp Business API works in Algeria: Evolution API hosting, pricing in DZD, connecting to n8n and AI, and the difference between the official API and open-source alternatives."
 date: "2026-08-17"

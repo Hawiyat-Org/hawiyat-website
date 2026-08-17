@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "n8n Hosting in Algeria: DZD Pricing, Setup, and What You Get"
 description: "The complete guide to n8n hosting in Algeria: managed n8n plans priced in Algerian dinars, what's included (PostgreSQL, SSL, webhooks), and how to pay with CCP or Baridi Mob."
 date: "2026-08-17"

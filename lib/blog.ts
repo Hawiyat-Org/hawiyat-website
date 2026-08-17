@@ -13,6 +13,11 @@ export interface BlogPost {
   readingTime: string
   content: string
   faqs: Array<{ question: string; answer: string }>
+  /**
+   * Review gate: `draft: true` (default) hides the post from /blog, sitemap,
+   * RSS, and related links; the page itself 404s. Flip to `false` to publish.
+   */
+  draft: boolean
 }
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
@@ -41,7 +46,8 @@ function extractFaqs(content: string): Array<{ question: string; answer: string 
   return faqs
 }
 
-export function getAllPosts(): BlogPost[] {
+export function getAllPosts(opts?: { includeDrafts?: boolean }): BlogPost[] {
+  const includeDrafts = opts?.includeDrafts ?? false
   if (!fs.existsSync(BLOG_DIR)) return []
   const files = fs.readdirSync(BLOG_DIR).filter((f) => /\.mdx?$/.test(f))
   const posts = files.map((file) => {
@@ -58,9 +64,13 @@ export function getAllPosts(): BlogPost[] {
       readingTime: readingTime(content),
       content,
       faqs: extractFaqs(content),
+      // Review gate: a post is a draft unless explicitly published.
+      draft: data.draft !== false,
     }
   })
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1))
+  return posts
+    .filter((p) => includeDrafts || !p.draft)
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

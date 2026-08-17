@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "AI API in Algeria: Costs, Payment Methods, and How to Get One"
 description: "Everything about getting an AI API in Algeria: which providers accept DZD, what GPT, Claude, and open-model APIs cost in dinars, and how to pay with CCP or Baridi Mob."
 date: "2026-08-17"

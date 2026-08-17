@@ -1,4 +1,5 @@
 ---
+draft: false
 title: "AI for Business in Algeria: From ChatGPT to Production Pipelines"
 description: "How Algerian businesses move from chatting with AI to running production AI pipelines: API keys, workflow automation, DZD billing, and what a full AI stack looks like."
 date: "2026-08-17"
