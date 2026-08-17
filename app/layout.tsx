@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description:
-    "Execution layer between frontier AI models and business systems. Composer routes each task to the best model, context, and tools. Priced in DZD.",
+    "Hawiyat is the AI provider in Algeria — LLM API access to GPT, Claude, Gemini, and open models through the Composer execution layer, priced in DZD with local support.",
   applicationName: APP_NAME,
   authors: [{ name: `${APP_NAME} Team`, url: SITE_URL }],
   creator: `${APP_NAME} Team`,

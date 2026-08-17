@@ -5,6 +5,7 @@ import { getAllServiceSlugs } from "@/lib/data/services"
 const routes = [
   "",
   "/composer",
+  "/ai-api-algeria",
   "/services",
   "/pricing",
   "/faq",

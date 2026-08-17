@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import ServicesCatalog from "@/components/services/services-catalog"
 import { createMetadata } from "@/lib/seo"
 
@@ -21,6 +22,13 @@ export default async function ServicesPage({ searchParams }: { searchParams: Pro
           <h1 className="text-4xl font-bold md:text-5xl text-ink">Managed services for your AI stack, in DZD</h1>
           <p className="mt-5 text-lg text-muted-ink">
             AI Composer plans, n8n automation, WhatsApp API, and app hosting, operated by the Hawiyat team and billed in dinars, with support in Arabic, French, and English. Run them on the execution layer for a full pipeline.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-ink">
+            Starting with the API: one key to GPT, Claude, Gemini, and open LLMs —{" "}
+            <Link href="/ai-api-algeria" className="text-signal underline underline-offset-4">
+              the AI API in Algeria
+            </Link>
+            .
           </p>
         </header>
         <ServicesCatalog initialQuery={typeof q === "string" ? q : ""} />

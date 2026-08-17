@@ -6,6 +6,7 @@ This optional file helps compatible non-Google systems discover Hawiyat's main p
 ## Main pages
 - [Home](https://www.hawiyat.org/): The execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run — WhatsApp, CRM, ERP, email, databases, workflows.
 - [Hawiyat AI Composer](https://www.hawiyat.org/composer): The AI execution engine — every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
+- [AI API in Algeria](https://www.hawiyat.org/ai-api-algeria): The AI API for Algeria — one key to GPT, Claude, Gemini, and open LLMs through the Composer execution layer, billed in DZD, paid with CCP or Baridi Mob.
 - [Services](https://www.hawiyat.org/services): Hawiyat AI Composer plans, n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting — all billed in Algerian dinars.
 - [FAQ](https://www.hawiyat.org/faq): Questions and answers about Hawiyat AI Composer, pricing in DZD, payments, and data.
 - [About Hawiyat](https://www.hawiyat.org/about): Company, team, credentials, and Algeria presence.
