@@ -8,23 +8,24 @@ tags: [whatsapp, api, evolution, algeria, business]
 keywords: [whatsapp api algeria, whatsapp business api algeria, evolution api, evolution api whatsapp, whatsapp automation algeria]
 ---
 
-WhatsApp is how Algerian businesses actually communicate with customers. So it's no surprise that **WhatsApp Business API** and automation are among the most requested services in the country.
+WhatsApp is how Algerian businesses actually communicate with customers. So it is no surprise that **WhatsApp Business API** and automation are among the most requested services in the country.
 
 This guide explains the options, what Evolution API is, what it costs in DZD, and how to build a WhatsApp automation stack locally.
+
+![Hawiyat services in DZD](/blog/homepage.webp)
 
 ## WhatsApp Business API: the landscape
 
 There are two ways to automate WhatsApp:
 
-1. **Official WhatsApp Business Platform (Meta)** — the enterprise route. Powerful but expensive, requires Meta business verification, per-conversation fees in USD, and foreign-card payment. Overkill for most Algerian SMBs.
-
-2. **Evolution API (open source)** — a self-hosted WhatsApp API server. You connect a WhatsApp number, and it exposes HTTP endpoints to send/receive messages, manage sessions, and build bots. No Meta fees, no foreign card, full control.
+1. **Official WhatsApp Business Platform (Meta).** The enterprise route. Powerful but expensive, requires Meta business verification, per-conversation fees in USD, and foreign-card payment. Overkill for most Algerian SMBs.
+2. **Evolution API (open source).** A self-hosted WhatsApp API server. You connect a WhatsApp number, and it exposes HTTP endpoints to send and receive messages, manage sessions, and build bots. No Meta fees, no foreign card, full control.
 
 For most Algerian businesses, **Evolution API is the practical choice**.
 
 ## What is Evolution API?
 
-Evolution API is an open-source project that turns a WhatsApp account into a programmatic API:
+[Evolution API](https://github.com/EvolutionAPI/evolution-api) is an open-source project that turns a WhatsApp account into a programmatic API:
 
 - Send and receive messages via HTTP endpoints
 - Manage multiple WhatsApp sessions
@@ -32,7 +33,7 @@ Evolution API is an open-source project that turns a WhatsApp account into a pro
 - Integrates with n8n, chatbots, and AI pipelines
 - No per-message fees (you pay only for infrastructure)
 
-It's the backbone of most serious WhatsApp automation in Algeria — from support bots to order notifications.
+It is the backbone of most serious WhatsApp automation in Algeria, from support bots to order notifications.
 
 ## Evolution API hosting in Algeria
 
@@ -44,6 +45,7 @@ Hawiyat offers **Evolution API hosting** as part of its managed services, priced
 - Monitoring and updates
 - Payment with **CCP or Baridi Mob**
 - Local support in Arabic, French, and English
+- Pricing from 6,000 DA/month for an AI API bundle, or custom quotes for WhatsApp-scale setups
 
 See the [Evolution API service page](/services/evolution-api) and [pricing in DZD](/pricing).
 
@@ -51,18 +53,27 @@ See the [Evolution API service page](/services/evolution-api) and [pricing in DZ
 
 The most powerful setup for an Algerian business:
 
-```flow
-WhatsApp message → Evolution API → n8n workflow → AI reply (Composer) → Sent back
+```mermaid
+flowchart LR
+    N0["WhatsApp message"]
+    N1["Evolution API"]
+    N2["n8n workflow"]
+    N3["AI reply (Composer)"]
+    N4["Sent back"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
 ```
 
-1. **Evolution API** handles WhatsApp messaging (sessions, send/receive)
-2. **n8n** automates the workflows (triggers, conditions, CRM sync)
-3. **AI API** (Composer) adds intelligence (auto-replies, summarization, classification)
+1. **Evolution API** handles WhatsApp messaging (sessions, send/receive).
+2. **n8n** automates the workflows (triggers, conditions, CRM sync).
+3. **AI API (Composer)** adds intelligence (auto-replies, summarization, classification).
 
 All three can be hosted locally in Algeria, all billed in DZD, all on one invoice. This is what "WhatsApp automation in Algeria" looks like in practice:
 
 - A customer sends "hello" on WhatsApp
-- n8n workflow triggers
+- An n8n workflow triggers
 - An AI model drafts the reply (via your Composer key)
 - Evolution API sends it back automatically
 
@@ -74,11 +85,11 @@ Start from either side: [n8n hosting in Algeria](/blog/n8n-hosting-algeria-guide
 
 **Is WhatsApp automation legal in Algeria?** WhatsApp automation via Evolution API is widely used for business messaging. Follow WhatsApp's terms, avoid spam, and message customers who contacted you first.
 
-**What does WhatsApp API cost in DZD?** Meta's official platform bills in USD per conversation. Managed Evolution API hosting in Algeria is billed in DZD — see the [services page](/services) for current pricing.
+**What does WhatsApp API cost in DZD?** Meta's official platform bills in USD per conversation. Managed Evolution API hosting in Algeria is billed in DZD; see the [services page](/services) for current pricing.
 
-**Can Evolution API connect to n8n?** Yes — n8n has native HTTP/webhook nodes, and Evolution API exposes REST endpoints. They pair out of the box.
+**Can Evolution API connect to n8n?** Yes. n8n has native HTTP/webhook nodes, and Evolution API exposes REST endpoints. They pair out of the box.
 
-**Can an AI reply to my WhatsApp automatically?** Yes — combine Evolution API with a Composer key and an n8n workflow.
+**Can an AI reply to my WhatsApp automatically?** Yes. Combine Evolution API with a Composer key and an n8n workflow.
 
 ---
 

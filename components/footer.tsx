@@ -25,6 +25,7 @@ const Footer = () => {
         { name: "Support", href: waLink() },
         { name: "FAQ", href: "/faq" },
         { name: "Github", href: "https://github.com/Hawiyat-Org" },
+        { name: "Reviews on Trustpilot", href: "https://www.trustpilot.com/review/hawiyat.org" },
       ],
       
     },

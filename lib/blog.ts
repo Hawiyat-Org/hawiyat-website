@@ -13,6 +13,8 @@ export interface BlogPost {
   readingTime: string
   content: string
   faqs: Array<{ question: string; answer: string }>
+  /** Table of contents: H2 headings with anchor slugs. */
+  toc: Array<{ text: string; id: string }>
   /**
    * Review gate: `draft: true` (default) hides the post from /blog, sitemap,
    * RSS, and related links; the page itself 404s. Flip to `false` to publish.
@@ -46,6 +48,25 @@ function extractFaqs(content: string): Array<{ question: string; answer: string 
   return faqs
 }
 
+/** Extracts H2 headings for the table of contents (matches rehype-slug ids). */
+function extractToc(content: string): Array<{ text: string; id: string }> {
+  const toc: Array<{ text: string; id: string }> = []
+  const re = /^##\s+(.+)$/gm
+  let m: RegExpExecArray | null
+  while ((m = re.exec(content)) !== null) {
+    const text = m[1].replace(/\*\*/g, "").trim()
+    if (!text) continue
+    const id = text
+      .toLowerCase()
+      .replace(/[`*]/g, "")
+      .replace(/[^\w\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-")
+    toc.push({ text, id })
+  }
+  return toc
+}
+
 export function getAllPosts(opts?: { includeDrafts?: boolean }): BlogPost[] {
   const includeDrafts = opts?.includeDrafts ?? false
   if (!fs.existsSync(BLOG_DIR)) return []
@@ -64,6 +85,7 @@ export function getAllPosts(opts?: { includeDrafts?: boolean }): BlogPost[] {
       readingTime: readingTime(content),
       content,
       faqs: extractFaqs(content),
+      toc: extractToc(content),
       // Review gate: a post is a draft unless explicitly published.
       draft: data.draft !== false,
     }
