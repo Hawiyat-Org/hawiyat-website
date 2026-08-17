@@ -107,6 +107,13 @@ const Header = () => {
               Services
             </Link>
             <Link
+              href="/blog"
+              className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
+              aria-current={pathname.startsWith("/blog") ? "page" : undefined}
+            >
+              Blog
+            </Link>
+            <Link
               href="/about"
               className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
               aria-current={pathname === "/about" ? "page" : undefined}
@@ -188,6 +195,16 @@ const Header = () => {
                 aria-current={pathname === "/services" ? "page" : undefined}
               >
                 <span className="font-medium">Services</span>
+                <ArrowRight className="w-4 h-4 opacity-60" />
+              </Link>
+
+              <Link
+                href="/blog"
+                className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
+                onClick={closeMobileMenu}
+                aria-current={pathname.startsWith("/blog") ? "page" : undefined}
+              >
+                <span className="font-medium">Blog</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
 

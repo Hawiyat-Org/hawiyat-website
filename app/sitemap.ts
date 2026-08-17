@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/seo"
 import { getAllServiceSlugs } from "@/lib/data/services"
+import { getAllPosts } from "@/lib/blog"
 
 const routes = [
   "",
   "/composer",
   "/ai-api-algeria",
+  "/blog",
   "/services",
   "/pricing",
   "/faq",
@@ -40,5 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...servicePages]
+  // Add all blog posts (weekly cadence)
+  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: post.date,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...servicePages, ...blogPages]
 }

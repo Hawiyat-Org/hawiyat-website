@@ -8,6 +8,7 @@ This file expands on [llms.txt](https://www.hawiyat.org/llms.txt) with full pric
 
 - [Home](https://www.hawiyat.org/): The execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run — WhatsApp, CRM, ERP, email, databases, workflows.
 - [AI API in Algeria](https://www.hawiyat.org/ai-api-algeria): The AI API for Algeria — one key to GPT, Claude, Gemini, and open LLMs through the Composer execution layer, billed in DZD, paid with CCP or Baridi Mob.
+- [Blog](https://www.hawiyat.org/blog): Practical guides on AI in Algeria — AI APIs, Claude Code, n8n hosting, WhatsApp automation, and DZD pricing.
 - [Hawiyat AI Composer](https://www.hawiyat.org/composer): The AI execution engine — every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
 - [Services](https://www.hawiyat.org/services): The full catalog of Hawiyat AI Composer plans, n8n hosting, Evolution API (WhatsApp infrastructure), and application hosting.
 - [FAQ](https://www.hawiyat.org/faq): Questions and answers about Hawiyat, Composer, pricing in DZD, payments, and data.
