@@ -100,11 +100,11 @@ const Header = () => {
               Composer
             </Link>
             <Link
-              href="/services"
+              href="/pricing"
               className="text-muted-ink hover:text-ink transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-surface-dim"
-              aria-current={pathname === "/services" ? "page" : undefined}
+              aria-current={pathname === "/pricing" ? "page" : undefined}
             >
-              Services
+              Pricing
             </Link>
             <Link
               href="/blog"
@@ -189,12 +189,12 @@ const Header = () => {
               </Link>
 
               <Link
-                href="/services"
+                href="/pricing"
                 className="flex items-center justify-between w-full p-4 text-muted-ink hover:text-ink rounded-lg hover:bg-surface-dim transition-all duration-200 touch-manipulation active:scale-[0.98]"
                 onClick={closeMobileMenu}
-                aria-current={pathname === "/services" ? "page" : undefined}
+                aria-current={pathname === "/pricing" ? "page" : undefined}
               >
-                <span className="font-medium">Services</span>
+                <span className="font-medium">Pricing</span>
                 <ArrowRight className="w-4 h-4 opacity-60" />
               </Link>
 

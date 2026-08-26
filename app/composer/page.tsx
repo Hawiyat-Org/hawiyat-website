@@ -185,6 +185,19 @@ export default function ComposerPage() {
               Give Composer a task. It picks the best AI, pulls in the context from your systems,
               and hands you back a result it has already checked. No model juggling, no glue code.
             </p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
+              One API key for all your tools
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2 reveal-up">
+              {["Cursor", "Claude Code", "Codex", "Antigravity", "GitHub Copilot"].map((tool) => (
+                <span
+                  key={tool}
+                  className="rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-xs text-muted-ink"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
             <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
               <Link
                 href="/#pricing"

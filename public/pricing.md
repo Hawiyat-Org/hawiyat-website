@@ -22,7 +22,7 @@ Support is provided in **Arabic, French, and English** via WhatsApp and Chatwoot
 
 ## AI Execution — Hawiyat AI Composer
 
-The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD.
+The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD. One API key works with Cursor, Claude Code, Codex, Antigravity, and GitHub Copilot — you activate once and get the quota the plan gives you, with no 5-hour cap and no weekly cap.
 
 | Plan | Price | Who it's for |
 | --- | --- | --- |

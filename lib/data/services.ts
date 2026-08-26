@@ -201,6 +201,7 @@ export const services: Service[] = [
     category: "AI Infrastructure",
     useCases: "Individual developers and freelancers shipping AI-powered work without managing model APIs, keys, or fallbacks.",
     features: [
+      "One API key for Cursor, Claude Code, Codex, Antigravity & GitHub Copilot",
       "Model-agnostic routing per task",
       "Context-aware execution against your systems",
       "Automatic model fallbacks on failure",
@@ -335,6 +336,21 @@ export const services: Service[] = [
         question: "How are costs billed?",
         answer:
           "In Algerian dinars with CCP or Baridi Mob. Pro is 6,000 DA/month, and every run shows a transparent per-task cost, so you always know what you paid and what you got.",
+      },
+      {
+        question: "How do I activate my account, and what quota do I get?",
+        answer:
+          "You activate your account with your API key just one time, then enjoy the quota. The quota you get is exactly what the plan really gives you: for example, a Claude Max subscription gives you around 1.8 billion tokens (input and output combined), and with Composer you get the same kind of quota — but with no 5-hour cap and no weekly cap.",
+      },
+      {
+        question: "Is my API key guaranteed? What happens if something goes wrong?",
+        answer:
+          "It is guaranteed. With your API key, Hawiyat is responsible for the service and will solve any kind of problem with you — no bans, no account freezes, no surprises. If anything breaks, the team steps in and fixes it.",
+      },
+      {
+        question: "Do you store my data?",
+        answer:
+          "No. Hawiyat does not store your data. Everything goes to the provider and comes straight back to you; nothing is kept, nothing is trained on.",
       },
     ],
   },
