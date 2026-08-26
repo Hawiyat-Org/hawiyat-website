@@ -124,6 +124,11 @@ const CARD_ORDER: Record<string, number> = {
   "n8n-hosting": 1,
   "evolution-api": 2,
   hosting: 3,
+  "composer-cursor": 4,
+  "composer-claude-code": 5,
+  "composer-codex": 6,
+  "composer-antigravity": 7,
+  "composer-copilot": 8,
 }
 
 const categoryStyles: Record<string, string> = {

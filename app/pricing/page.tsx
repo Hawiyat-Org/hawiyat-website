@@ -34,7 +34,7 @@ const CARDS: PricingCard[] = [
     logos: [TOOL_LOGO, "/Compatible/cursor.webp"],
     tagline: "The AI-first code editor, powered by the Composer execution layer.",
     offers: COMPOSER_OFFERS,
-    href: "/services/composer",
+    href: "/services/composer-cursor",
   },
   {
     name: "Composer with Claude Code",
@@ -42,7 +42,7 @@ const CARDS: PricingCard[] = [
     logos: [TOOL_LOGO, "/Compatible/claude-code.webp"],
     tagline: "Agentic coding in your terminal, without a foreign card.",
     offers: COMPOSER_OFFERS,
-    href: "/services/composer",
+    href: "/services/composer-claude-code",
   },
   {
     name: "Composer with Codex",
@@ -50,7 +50,7 @@ const CARDS: PricingCard[] = [
     logos: [TOOL_LOGO, "/Compatible/codex.webp"],
     tagline: "OpenAI's coding agent, routed through Composer in DZD.",
     offers: COMPOSER_OFFERS,
-    href: "/services/composer",
+    href: "/services/composer-codex",
   },
   {
     name: "Composer with Antigravity",
@@ -58,7 +58,7 @@ const CARDS: PricingCard[] = [
     logos: [TOOL_LOGO, "/Compatible/antigravity.webp"],
     tagline: "Google's agentic coding workspace, billed in dinars.",
     offers: COMPOSER_OFFERS,
-    href: "/services/composer",
+    href: "/services/composer-antigravity",
   },
   {
     name: "Composer with GitHub Copilot",
@@ -66,7 +66,7 @@ const CARDS: PricingCard[] = [
     logos: [TOOL_LOGO, "/Compatible/github-copilot.svg"],
     tagline: "Your pair programmer, with every task evaluated by Composer.",
     offers: COMPOSER_OFFERS,
-    href: "/services/composer",
+    href: "/services/composer-copilot",
   },
 ]
 

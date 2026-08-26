@@ -60,6 +60,147 @@ export interface Service {
   }>
 }
 
+/**
+ * Composer-with-tool services: the same execution-layer plans (Pro / MAX 5X / MAX 20X)
+ * sold under the tool the developer already uses. Each gets its own detail page with
+ * tool-specific Q&A: quota = same monthly tokens the tool gives, no weekly/5-hour caps.
+ */
+function composerToolService(opts: {
+  id: string
+  slug: string
+  tool: string
+  logo: string
+  shortTagline: string
+  seoTitle: string
+  seoDescription: string
+  seoKeywords: string[]
+  whatIs: string
+  whyChoose: string
+  howItWorks: string
+  faq: Array<{ question: string; answer: string }>
+}): Service {
+  const plans: ServicePlan[] = [
+    {
+      name: "Pro",
+      price: "6,000",
+      priceLabel: "DA/month",
+      tagline: "For solo builders. Give it a task, get a checked result.",
+      features: [
+        "One API key for your tools, activated once",
+        "Model-agnostic routing per task",
+        "Context-aware execution against your systems",
+        "Automatic model fallbacks on failure",
+        "Evaluation and quality score for every run",
+        "Semantic caching to cut repeat spend",
+        "Billed in DZD with a transparent per-task cost",
+      ],
+    },
+    {
+      name: "MAX 5X",
+      price: "15,000",
+      priceLabel: "DA/month",
+      tagline: "5× more tasks at the same time, for startups and teams shipping daily.",
+      features: [
+        "5X base execution capacity, more parallel runs and tasks",
+        "Everything in Pro",
+        "Advanced semantic caching (vector-based)",
+        "Automatic model fallbacks on failure",
+        "Evaluation and quality score for every run",
+        "Billed in DZD with a transparent per-task cost",
+      ],
+    },
+    {
+      name: "MAX 20X",
+      price: "30,000",
+      priceLabel: "DA/month",
+      tagline: "20× more tasks at the same time, for agencies running AI at scale.",
+      features: [
+        "Everything in MAX 5X",
+        "20× the base execution capacity of Pro, maximum parallel throughput",
+        "Multi-agent traffic resolution for heavy concurrent load",
+        "Hybrid data compliance for strict enterprise requirements",
+        "Dedicated account manager who knows your runs",
+        "Advanced usage analytics in DZD",
+      ],
+    },
+  ]
+  return {
+    id: opts.id,
+    slug: opts.slug,
+    name: `Composer with ${opts.tool}`,
+    shortDesc: `The Composer execution layer for ${opts.tool} users`,
+    description: opts.shortTagline,
+    image: opts.logo,
+    price: "6000",
+    priceLabel: "DA/month",
+    cta: "See plans in DZD",
+    category: "AI Infrastructure",
+    useCases: `Developers who use ${opts.tool} and want frontier models through one key, billed in DZD.`,
+    features: [
+      `One API key for ${opts.tool}, with Anthropic + OpenAI models through Composer`,
+      "Model-agnostic routing per task",
+      "Context-aware execution against your systems",
+      "Automatic model fallbacks on failure",
+      "Evaluation and quality score for every run",
+      "Semantic caching to cut repeat spend",
+      "Billed in DZD with a transparent per-task cost",
+    ],
+    bulletPoints: [
+      { icon: Zap, text: "Route per Task" },
+      { icon: Shield, text: "Fallbacks Built-In" },
+      { icon: Clock, text: "Evaluate Every Run" },
+    ],
+    seo: {
+      title: opts.seoTitle,
+      description: opts.seoDescription,
+      keywords: opts.seoKeywords,
+    },
+    details: {
+      overview: opts.whatIs,
+      whatYouGet: [
+        "Anthropic and OpenAI models, plus Gemini and open models, behind one key",
+        "The same monthly token quota the tool gives you — without weekly or 5-hour caps",
+        "Automatic fallback to a second model when one is slow or down",
+        "Evaluation log with a quality score for every run",
+        "Semantic caching so repeated work never pays twice",
+        "Priority support via WhatsApp in AR, FR, EN",
+      ],
+      idealFor: `Developers and freelancers who use ${opts.tool} and want frontier models without a foreign card, billed in DZD.`,
+      technicalSpecs: [
+        "Model routes: Anthropic Claude, OpenAI GPT, Gemini, open models",
+        `Connect your Composer API key to ${opts.tool} once — activation is one time`,
+        "Monthly billing in DZD via CCP or Baridi Mob",
+        "No weekly limit, no 5-hour limit — only the monthly quota",
+      ],
+    },
+    plans,
+    seoContent: {
+      whatIs: opts.whatIs,
+      whyChoose: opts.whyChoose,
+      howItWorks: opts.howItWorks,
+    },
+    faq: opts.faq,
+  }
+}
+
+const ACTIVATION_FAQ = {
+  question: "How do I activate my account, and what quota do I get?",
+  answer:
+    "You activate your account with your API key just one time, then enjoy the quota. The quota you get is exactly what the plan really gives you: the same monthly tokens the tool gives you — with no 5-hour cap and no weekly cap, only the monthly limit.",
+}
+
+const GUARANTEE_FAQ = {
+  question: "Is my API key guaranteed? What happens if something goes wrong?",
+  answer:
+    "It is guaranteed. With your API key, Hawiyat is responsible for the service and will solve any kind of problem with you — no bans, no account freezes, no surprises. If anything breaks, the team steps in and fixes it.",
+}
+
+const NO_DATA_STORAGE_FAQ = {
+  question: "Do you store my data?",
+  answer:
+    "No. Hawiyat does not store your data. Everything goes to the provider and comes straight back to you; nothing is kept, nothing is trained on.",
+}
+
 export const services: Service[] = [
   {
     id: "n8n-hosting",
@@ -354,6 +495,208 @@ export const services: Service[] = [
       },
     ],
   },
+  composerToolService({
+    id: "composer-cursor",
+    slug: "composer-cursor",
+    tool: "Cursor",
+    logo: "/Compatible/cursor.webp",
+    shortTagline: "The AI-first code editor, powered by the Composer execution layer.",
+    seoTitle: "Composer with Cursor | AI API for Cursor in Algeria | Hawiyat",
+    seoDescription:
+      "Use Cursor in Algeria with one Composer API key: Anthropic + OpenAI models, the same monthly token quota as Cursor but no weekly or 5-hour limits. From 6,000 DA/month, CCP or Baridi Mob.",
+    seoKeywords: [
+      "composer with cursor",
+      "cursor algeria",
+      "ai api for cursor",
+      "cursor without foreign card",
+      "cursor api dzd",
+      "ai coding algeria",
+      "claude for cursor algeria",
+    ],
+    whatIs:
+      "Composer with Cursor is the Hawiyat execution layer wired for Cursor users: one API key that brings Anthropic and OpenAI models, plus Gemini and open models, into your Cursor workflows. Composer routes each task to the best model, carries your context, and evaluates the result, so you ship work, not prompt plumbing. Billed in DZD, paid with CCP or Baridi Mob, no foreign card needed.",
+    whyChoose:
+      "Cursor gives you excellent models but strict usage limits. With Composer with Cursor, the token quota you get is the same as what Cursor gives you in one month — but there is no weekly limit and no 5-hour limit, only a monthly limit. You also get both Anthropic and OpenAI models behind one key, with automatic fallbacks and per-run evaluation, all billed in dinars.",
+    howItWorks:
+      "Order the plan (Pro 6,000 / MAX 5X 15,000 / MAX 20X 30,000 DA/month), pay with CCP or Baridi Mob, and we activate your account with your API key just once. Point Cursor at the Composer endpoint, and every request is routed to the best model for the task — with fallbacks, semantic caching, and a transparent per-task cost in DZD.",
+    faq: [
+      {
+        question: "What models do I get with Composer with Cursor?",
+        answer:
+          "You get Anthropic and OpenAI models, plus Gemini and open models, through one Composer API key. Composer routes each task to the best model by quality, latency, and cost, so you are never locked into a single provider.",
+      },
+      {
+        question: "How many tokens do I get, and are there limits?",
+        answer:
+          "The token quota you get is the same as what Cursor gives you in one month. But there is no weekly limit and no 5-hour limit — only a monthly limit, so you can use your quota however your work demands.",
+      },
+      {
+        question: "Do I still need a foreign card or a Cursor subscription?",
+        answer:
+          "No. Everything is billed in DZD with CCP or Baridi Mob. You get the execution layer and the models behind it; connect your Composer key to Cursor once and work.",
+      },
+      ACTIVATION_FAQ,
+      GUARANTEE_FAQ,
+      NO_DATA_STORAGE_FAQ,
+    ],
+  }),
+  composerToolService({
+    id: "composer-claude-code",
+    slug: "composer-claude-code",
+    tool: "Claude Code",
+    logo: "/Compatible/claude-code.webp",
+    shortTagline: "Agentic coding in your terminal, without a foreign card.",
+    seoTitle: "Composer with Claude Code | Claude API in Algeria | Hawiyat",
+    seoDescription:
+      "Use Claude Code in Algeria without a foreign card: Anthropic models via one Composer API key, the same kind of quota as Claude Max (around 1.8B tokens) with no 5-hour or weekly caps. From 6,000 DA/month.",
+    seoKeywords: [
+      "composer with claude code",
+      "claude code algeria",
+      "claude code without foreign card",
+      "claude api algeria",
+      "claude code dzd",
+      "claude max algeria",
+      "ai coding terminal algeria",
+    ],
+    whatIs:
+      "Composer with Claude Code is the Hawiyat execution layer wired for Claude Code: one API key that gives your terminal agentic coding Anthropic models, plus OpenAI GPT, Gemini, and open models, through Composer. You keep using Claude Code exactly as you do today — the layer handles routing, fallbacks, context, and evaluation. Billed in DZD, paid with CCP or Baridi Mob.",
+    whyChoose:
+      "Anthropic's own billing requires a foreign card, and Claude Max-style plans carry 5-hour and weekly caps. With Composer with Claude Code, you get the same kind of quota — around 1.8 billion tokens (input and output combined), the ballpark of a Claude Max subscription — but with no 5-hour cap and no weekly cap, only a monthly limit. And with your API key, Hawiyat is responsible: no bans, no account freezes.",
+    howItWorks:
+      "Order the plan (Pro 6,000 / MAX 5X 15,000 / MAX 20X 30,000 DA/month) and pay with CCP or Baridi Mob. We activate your account with your API key just once. Point Claude Code at the Composer endpoint like any OpenAI-compatible API, and every task is routed to the best model with fallbacks and per-run evaluation, billed transparently in DZD.",
+    faq: [
+      {
+        question: "Is this an official Claude or Anthropic subscription?",
+        answer:
+          "No. Hawiyat does not sell Claude Code or Claude subscriptions. You buy the API key and connect the tools yourself; Composer is the infrastructure between you and the models. Claude is one of the model routes behind your key.",
+      },
+      {
+        question: "How many tokens do I get, and are there limits?",
+        answer:
+          "The quota is what the plan really gives you: on the MAX tier that is around 1.8 billion tokens (input and output combined), the same ballpark as a Claude Max subscription — but with no 5-hour cap and no weekly cap, only the monthly limit.",
+      },
+      ACTIVATION_FAQ,
+      GUARANTEE_FAQ,
+      NO_DATA_STORAGE_FAQ,
+    ],
+  }),
+  composerToolService({
+    id: "composer-codex",
+    slug: "composer-codex",
+    tool: "Codex",
+    logo: "/Compatible/codex.webp",
+    shortTagline: "OpenAI's coding agent, routed through Composer in DZD.",
+    seoTitle: "Composer with Codex | OpenAI Codex in Algeria | Hawiyat",
+    seoDescription:
+      "Use OpenAI Codex in Algeria through one Composer API key: OpenAI, Anthropic, and Gemini models, the same monthly token quota as Codex but no weekly caps. From 6,000 DA/month, CCP or Baridi Mob.",
+    seoKeywords: [
+      "composer with codex",
+      "openai codex algeria",
+      "codex without foreign card",
+      "codex api algeria",
+      "codex dzd",
+      "ai coding agent algeria",
+    ],
+    whatIs:
+      "Composer with Codex is the Hawiyat execution layer wired for Codex, OpenAI's coding agent: one API key that brings OpenAI models, plus Anthropic Claude and Gemini, into your Codex workflows through Composer. Routing, fallbacks, context, and evaluation are handled by the layer, and everything is billed in DZD with CCP or Baridi Mob.",
+    whyChoose:
+      "Codex plans bill in dollars and carry usage limits. With Composer with Codex, the token quota you get is the same as what Codex gives you in one month — but there is no weekly limit and no 5-hour limit, only a monthly limit. You also get Anthropic and Gemini as fallback routes, so your agent keeps working even when one provider is down.",
+    howItWorks:
+      "Order the plan (Pro 6,000 / MAX 5X 15,000 / MAX 20X 30,000 DA/month), pay with CCP or Baridi Mob, and we activate your account with your API key just once. Connect Codex to the Composer endpoint and run: every task is routed to the best model with fallbacks and per-run evaluation, billed transparently in DZD.",
+    faq: [
+      {
+        question: "What models do I get with Composer with Codex?",
+        answer:
+          "OpenAI models first, with Anthropic Claude and Gemini as automatic fallback routes behind the same key. Composer picks the best model per task by quality, latency, and cost.",
+      },
+      {
+        question: "How many tokens do I get, and are there limits?",
+        answer:
+          "The token quota you get is the same as what Codex gives you in one month — but with no weekly limit and no 5-hour limit, only a monthly limit, so your agent can work at your pace.",
+      },
+      ACTIVATION_FAQ,
+      GUARANTEE_FAQ,
+      NO_DATA_STORAGE_FAQ,
+    ],
+  }),
+  composerToolService({
+    id: "composer-antigravity",
+    slug: "composer-antigravity",
+    tool: "Antigravity",
+    logo: "/Compatible/antigravity.webp",
+    shortTagline: "Google's agentic coding workspace, billed in dinars.",
+    seoTitle: "Composer with Antigravity | Antigravity API in Algeria | Hawiyat",
+    seoDescription:
+      "Use Google Antigravity in Algeria through one Composer API key: Gemini, Anthropic, and OpenAI models, the same monthly token quota as Antigravity but no weekly caps. From 6,000 DA/month.",
+    seoKeywords: [
+      "composer with antigravity",
+      "google antigravity algeria",
+      "antigravity without foreign card",
+      "antigravity api algeria",
+      "gemini api algeria",
+      "antigravity dzd",
+    ],
+    whatIs:
+      "Composer with Antigravity is the Hawiyat execution layer wired for Antigravity, Google's agentic coding workspace: one API key that brings Gemini, plus Anthropic Claude and OpenAI GPT, into your Antigravity workflows through Composer. The layer handles routing, fallbacks, context, and evaluation, and everything is billed in DZD with CCP or Baridi Mob.",
+    whyChoose:
+      "Antigravity plans bill in foreign currency and carry usage limits. With Composer with Antigravity, the token quota you get is the same as what Antigravity gives you in one month — but there is no weekly limit and no 5-hour limit, only a monthly limit. Anthropic and OpenAI routes sit behind Gemini as fallbacks, so your workspace never stalls.",
+    howItWorks:
+      "Order the plan (Pro 6,000 / MAX 5X 15,000 / MAX 20X 30,000 DA/month), pay with CCP or Baridi Mob, and we activate your account with your API key just once. Connect Antigravity to the Composer endpoint and run: every task is routed to the best model with fallbacks and per-run evaluation, billed transparently in DZD.",
+    faq: [
+      {
+        question: "What models do I get with Composer with Antigravity?",
+        answer:
+          "Gemini models first, with Anthropic Claude and OpenAI GPT as automatic fallback routes behind the same key. Composer picks the best model per task by quality, latency, and cost.",
+      },
+      {
+        question: "How many tokens do I get, and are there limits?",
+        answer:
+          "The token quota you get is the same as what Antigravity gives you in one month — but with no weekly limit and no 5-hour limit, only a monthly limit.",
+      },
+      ACTIVATION_FAQ,
+      GUARANTEE_FAQ,
+      NO_DATA_STORAGE_FAQ,
+    ],
+  }),
+  composerToolService({
+    id: "composer-copilot",
+    slug: "composer-copilot",
+    tool: "GitHub Copilot",
+    logo: "/Compatible/github-copilot.svg",
+    shortTagline: "Your pair programmer, with every task evaluated by Composer.",
+    seoTitle: "Composer with GitHub Copilot | Copilot API in Algeria | Hawiyat",
+    seoDescription:
+      "Use GitHub Copilot in Algeria with one Composer API key: Anthropic + OpenAI models in your IDE, the same monthly token quota as Copilot but no weekly caps. From 6,000 DA/month, CCP or Baridi Mob.",
+    seoKeywords: [
+      "composer with github copilot",
+      "github copilot algeria",
+      "copilot without foreign card",
+      "copilot api algeria",
+      "github copilot dzd",
+      "ai pair programming algeria",
+    ],
+    whatIs:
+      "Composer with GitHub Copilot is the Hawiyat execution layer wired for Copilot: one API key that brings Anthropic and OpenAI models, plus Gemini and open models, into your IDE workflows through Composer. Routing, fallbacks, context, and evaluation are handled by the layer, and everything is billed in DZD with CCP or Baridi Mob.",
+    whyChoose:
+      "Copilot plans bill in dollars and carry usage limits. With Composer with GitHub Copilot, the token quota you get is the same as what Copilot gives you in one month — but there is no weekly limit and no 5-hour limit, only a monthly limit. Anthropic, OpenAI, and Gemini routes sit behind one key with automatic fallbacks.",
+    howItWorks:
+      "Order the plan (Pro 6,000 / MAX 5X 15,000 / MAX 20X 30,000 DA/month), pay with CCP or Baridi Mob, and we activate your account with your API key just once. Point Copilot at the Composer endpoint, and every request is routed to the best model with fallbacks and per-run evaluation, billed transparently in DZD.",
+    faq: [
+      {
+        question: "What models do I get with Composer with GitHub Copilot?",
+        answer:
+          "Anthropic and OpenAI models, plus Gemini and open models, through one Composer API key. Composer routes each task to the best model by quality, latency, and cost.",
+      },
+      {
+        question: "How many tokens do I get, and are there limits?",
+        answer:
+          "The token quota you get is the same as what Copilot gives you in one month — but with no weekly limit and no 5-hour limit, only a monthly limit.",
+      },
+      ACTIVATION_FAQ,
+      GUARANTEE_FAQ,
+      NO_DATA_STORAGE_FAQ,
+    ],
+  }),
   {
     id: "hawiyat-cloud",
     slug: "hawiyat-cloud",
