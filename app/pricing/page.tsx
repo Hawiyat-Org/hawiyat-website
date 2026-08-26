@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight, Check } from "lucide-react"
 import { createMetadata } from "@/lib/seo"
 import { getServiceBySlug } from "@/lib/data/services"
+import { PricingCatalog, type PricingCard } from "@/components/pricing-catalog"
 
 export const metadata: Metadata = createMetadata({
   title: "Pricing | AI Composer & Services in Algeria",
@@ -17,15 +16,6 @@ const COMPOSER_OFFERS = [
   { label: "MAX 5X", price: "15,000", per: "DA/month" },
   { label: "MAX 20X", price: "30,000", per: "DA/month" },
 ]
-
-interface PricingCard {
-  name: string
-  label: string
-  logos: string[]
-  tagline: string
-  offers: Array<{ label: string; price: string; per: string }>
-  href: string
-}
 
 const TOOL_LOGO = "/logo.svg"
 
@@ -103,9 +93,7 @@ if (evolutionService) {
     label: evolutionService.name,
     logos: [evolutionService.image ?? "/logos/evolutionapi_evolutionapi.png"],
     tagline: evolutionService.description,
-    offers: [
-      { label: "Start", price: evolutionService.price, per: evolutionService.priceLabel },
-    ],
+    offers: [{ label: "Start", price: evolutionService.price, per: evolutionService.priceLabel }],
     href: "/services/evolution-api",
   })
 }
@@ -126,77 +114,7 @@ export default function PricingPage() {
           </p>
         </header>
 
-        {/* One grid — every product at the same level */}
-        <section className="mx-auto max-w-6xl" id="pricing-catalog">
-          <div className="mx-auto max-w-2xl space-y-4 text-center">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-              One API key for all your tools
-            </p>
-            <h2 className="text-4xl font-semibold text-ink lg:text-5xl">
-              Everything, in one place
-            </h2>
-            <p className="text-base text-muted-ink">
-              One API key, activated once, works with every tool — and the quota is what the plan
-              really gives you, with no 5-hour cap and no weekly cap. Pick a product, see the info,
-              and choose your plan.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {CARDS.map((card) => (
-              <div
-                key={card.name}
-                className="flex flex-col justify-between rounded-lg border border-border bg-surface p-6 transition-colors hover:border-signal"
-              >
-                <div>
-                  <div className="flex items-center gap-3">
-                    {card.logos.map((logo) => (
-                      <img
-                        key={logo}
-                        src={logo}
-                        alt={`${card.name} logo`}
-                        className="h-10 w-10 rounded-md border border-border bg-surface-dim object-contain p-1"
-                      />
-                    ))}
-                  </div>
-                  <span className="mt-4 inline-block rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
-                    {card.label}
-                  </span>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-ink">{card.tagline}</p>
-                  <ul className="mt-5 space-y-3">
-                    {card.offers.map((offer) => (
-                      <li
-                        key={offer.label}
-                        className="flex items-center justify-between gap-2 text-sm text-muted-ink"
-                      >
-                        <span className="flex items-center gap-2.5">
-                          <Check className="h-4 w-4 shrink-0 text-ink" />
-                          <span className="font-mono text-[11px] uppercase tracking-wider">
-                            {offer.label}
-                          </span>
-                        </span>
-                        <span className="font-mono font-semibold text-ink">
-                          {offer.price}{" "}
-                          <span className="text-xs text-muted-ink">{offer.per}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Link
-                  href={card.href}
-                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
-                >
-                  {card.name === "Composer" ? "See plans and choose" : `Order ${card.name}`}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                  No card needed. CCP or Baridi Mob.
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <PricingCatalog cards={CARDS} />
       </div>
     </div>
   )
