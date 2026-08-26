@@ -195,8 +195,8 @@ export default function AiApiAlgeriaPage() {
               how the Composer execution layer routes and evaluates
             </Link>
             . Full catalog:{" "}
-            <Link href="/services" className="text-signal underline underline-offset-4">
-              services in Algeria
+            <Link href="/pricing" className="text-signal underline underline-offset-4">
+              pricing in Algeria
             </Link>
             .
           </p>

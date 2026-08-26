@@ -13,7 +13,6 @@ const Footer = () => {
       links: [
         { name: "AI Composer", href: "/composer" },
         { name: "AI API in Algeria", href: "/ai-api-algeria" },
-        { name: "Services", href: "/services" },
         { name: "Pricing", href: "/pricing" },
         { name: "Blog", href: "/blog" },
         { name: "About", href: "/about" },

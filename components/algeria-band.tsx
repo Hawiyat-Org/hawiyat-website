@@ -85,10 +85,10 @@ const AlgeriaBand = () => {
             <MessageCircle className="h-4 w-4" />
           </a>
           <Link
-            href="/services"
+            href="/pricing"
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
           >
-            See services in DZD
+            See pricing in DZD
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -8,7 +8,6 @@ const routes = [
   "/composer",
   "/ai-api-algeria",
   "/blog",
-  "/services",
   "/pricing",
   "/faq",
   "/about",
@@ -27,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       route === ""
         ? 1
-        : route === "/composer" || route === "/services"
+        : route === "/composer"
           ? 0.9
           : route === "/faq"
             ? 0.8

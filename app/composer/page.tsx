@@ -547,10 +547,10 @@ export default function ComposerPage() {
                     <MessageCircle className="h-4 w-4" />
                   </a>
                   <Link
-                    href="/services"
+                    href="/pricing"
                     className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
                   >
-                    See services in DZD
+                    See pricing in DZD
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>

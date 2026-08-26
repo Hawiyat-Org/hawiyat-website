@@ -34,10 +34,10 @@ export default function AboutPage() {
             </p>
             <div className="flex gap-4 max-md:flex-col justify-start mt-1">
               <Link
-                href="/services"
+                href="/pricing"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-signal text-signal-text font-medium text-sm shadow-lg transition-colors duration-300 hover:bg-signal-hover"
               >
-                <span>Explore Services</span>
+                <span>Explore Pricing</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
               <Link
@@ -363,10 +363,10 @@ export default function AboutPage() {
 
           <div className="flex gap-5 max-md:flex-col justify-center mt-6">
             <Link
-              href="/services"
+              href="/pricing"
               className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-signal text-signal-text font-medium transition-colors duration-300 hover:bg-signal-hover"
             >
-              <span>Explore Services</span>
+              <span>Explore Pricing</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
             <Link

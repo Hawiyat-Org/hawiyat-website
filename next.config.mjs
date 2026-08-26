@@ -62,6 +62,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/hawiyat-composer", destination: "/composer", permanent: true },
+      { source: "/services", destination: "/pricing", permanent: true },
       { source: "/ai-algeria", destination: "/", permanent: true },
       // Legacy service aliases — 301 per kanban W6 (Next.js permanent:true would emit 308)
       { source: "/services/hosting-basic", destination: "/services/hawiyat-cloud", statusCode: 301 },

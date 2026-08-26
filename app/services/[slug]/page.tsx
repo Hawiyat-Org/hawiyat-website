@@ -168,11 +168,11 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
         {/* Back Navigation */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6">
           <Link
-            href="/services"
+            href="/pricing"
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-ink transition-colors hover:text-ink"
           >
             <ArrowLeft className="h-4 w-4" />
-            All Services
+            All products
           </Link>
         </div>
 
