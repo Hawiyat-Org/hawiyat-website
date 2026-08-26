@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight, Check } from "lucide-react"
 import Pricing from "@/components/pricing"
 import { createMetadata } from "@/lib/seo"
+import { getServiceBySlug } from "@/lib/data/services"
 
 export const metadata: Metadata = createMetadata({
   title: "Pricing | AI Composer & Services in Algeria",
@@ -15,22 +16,27 @@ export const metadata: Metadata = createMetadata({
 const COMPOSER_TOOLS = [
   {
     name: "Cursor",
+    logo: "/Compatible/cursor.webp",
     tagline: "The AI-first code editor, powered by the Composer execution layer.",
   },
   {
     name: "Claude Code",
+    logo: "/Compatible/claude-code.webp",
     tagline: "Agentic coding in your terminal, without a foreign card.",
   },
   {
     name: "Codex",
+    logo: "/Compatible/codex.webp",
     tagline: "OpenAI's coding agent, routed through Composer in DZD.",
   },
   {
     name: "Antigravity",
+    logo: "/Compatible/antigravity.webp",
     tagline: "Google's agentic coding workspace, billed in dinars.",
   },
   {
     name: "GitHub Copilot",
+    logo: "/Compatible/github-copilot.svg",
     tagline: "Your pair programmer, with every task evaluated by Composer.",
   },
 ]
@@ -40,6 +46,34 @@ const TOOL_OFFERS = [
   { label: "MAX 5X", price: "15,000", per: "DA/month" },
   { label: "MAX 20X", price: "30,000", per: "DA/month" },
 ]
+
+const n8nService = getServiceBySlug("n8n-hosting")
+const evolutionService = getServiceBySlug("evolution-api")
+
+const MANAGED_SERVICES = [
+  n8nService && {
+    name: n8nService.name,
+    logo: n8nService.image ?? "/logos/n8n_n8n.png",
+    description: n8nService.description,
+    offers: (n8nService.plans ?? [])
+      .filter((p) => !p.custom)
+      .map((p) => ({ label: p.name, price: p.price, per: p.priceLabel })),
+    href: "/services/n8n-hosting",
+  },
+  evolutionService && {
+    name: evolutionService.name,
+    logo: evolutionService.image ?? "/logos/evolutionapi_evolutionapi.png",
+    description: evolutionService.description,
+    offers: [{ label: "Start", price: evolutionService.price, per: evolutionService.priceLabel }],
+    href: "/services/evolution-api",
+  },
+].filter(Boolean) as Array<{
+  name: string
+  logo: string
+  description: string
+  offers: Array<{ label: string; price: string; per: string }>
+  href: string
+}>
 
 export default function PricingPage() {
   return (
@@ -57,6 +91,71 @@ export default function PricingPage() {
           </p>
         </header>
         <Pricing />
+
+        {/* Managed services — n8n Hosting & Evolution API */}
+        <section className="mx-auto mt-24 max-w-6xl" id="managed-services">
+          <div className="mx-auto max-w-2xl space-y-4 text-center">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+              Managed services
+            </p>
+            <h2 className="text-4xl font-semibold text-ink lg:text-5xl">
+              n8n, WhatsApp, and hosting — billed in DZD
+            </h2>
+            <p className="text-base text-muted-ink">
+              Managed automation and messaging infrastructure, operated by the Hawiyat team and
+              priced in dinars.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            {MANAGED_SERVICES.map((service) => (
+              <div
+                key={service.name}
+                className="flex flex-col justify-between rounded-lg border border-border bg-surface p-6 transition-colors hover:border-signal"
+              >
+                <div>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={service.logo}
+                      alt={`${service.name} logo`}
+                      className="h-10 w-10 rounded-md border border-border bg-surface-dim object-contain p-1"
+                    />
+                    <h3 className="text-lg font-semibold text-ink">{service.name}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-ink">{service.description}</p>
+                  <ul className="mt-5 space-y-3">
+                    {service.offers.map((offer) => (
+                      <li
+                        key={offer.label}
+                        className="flex items-center justify-between gap-2 text-sm text-muted-ink"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Check className="h-4 w-4 shrink-0 text-ink" />
+                          <span className="font-mono text-[11px] uppercase tracking-wider">
+                            {offer.label}
+                          </span>
+                        </span>
+                        <span className="font-mono font-semibold text-ink">
+                          {offer.price} <span className="text-xs text-muted-ink">{offer.per}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  href={service.href}
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                >
+                  Order {service.name}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+                  No card needed. CCP or Baridi Mob.
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Composer for your tools — one API key for all your tools */}
         <section className="mx-auto mt-24 max-w-6xl" id="composer-tools">
@@ -81,7 +180,19 @@ export default function PricingPage() {
                 className="flex flex-col justify-between rounded-lg border border-border bg-surface p-6 transition-colors hover:border-signal"
               >
                 <div>
-                  <span className="rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/logo.svg"
+                      alt="Hawiyat Composer logo"
+                      className="h-10 w-10 rounded-md border border-border bg-surface-dim object-contain p-1"
+                    />
+                    <img
+                      src={tool.logo}
+                      alt={`${tool.name} logo`}
+                      className="h-10 w-10 rounded-md border border-border bg-surface-dim object-contain p-1"
+                    />
+                  </div>
+                  <span className="mt-4 inline-block rounded-md border border-border bg-surface-dim px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-ink">
                     Composer with {tool.name}
                   </span>
                   <p className="mt-3 text-sm leading-relaxed text-muted-ink">{tool.tagline}</p>

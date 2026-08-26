@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="GitHub Copilot">
+  <rect width="64" height="64" rx="14" fill="#24292F"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Space Grotesk, Arial, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">GH</text>
+  <circle cx="46" cy="18" r="4" fill="#10A37F"/>
+</svg>
