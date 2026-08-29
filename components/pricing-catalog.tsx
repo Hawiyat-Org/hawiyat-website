@@ -157,9 +157,6 @@ export function PricingCatalog({ sections }: PricingCatalogProps) {
                         {card.cta ?? (card.name === "Composer" ? "See plans and choose" : `Order ${card.name}`)}
                         <ArrowRight className="h-4 w-4" />
                       </Link>
-                      <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                        No card needed. CCP or Baridi Mob.
-                      </p>
                     </div>
                   </div>
                 ))}
