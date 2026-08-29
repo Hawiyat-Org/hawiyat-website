@@ -137,9 +137,6 @@ export default function Pricing() {
               Order Pro, live in 24h
               <ArrowRight className="h-4 w-4" />
             </button>
-            <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-              No card needed. CCP or Baridi Mob.
-            </p>
           </div>
 
           {/* MAX switchable */}
@@ -195,9 +192,6 @@ export default function Pricing() {
               Order MAX, live in 24h
               <ArrowRight className="h-4 w-4" />
             </button>
-            <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-              No card needed. CCP or Baridi Mob.
-            </p>
           </div>
 
           {/* ENTERPRISE */}

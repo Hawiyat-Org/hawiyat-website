@@ -105,11 +105,11 @@ export function PricingCatalog({ sections }: PricingCatalogProps) {
                   >
                     <div>
                       <div className="flex items-center gap-3">
-                        {card.logos.map((logo) => (
+                        {card.logos.map((logo, i) => (
                           <img
                             key={logo}
                             src={logo}
-                            alt={`${card.name} logo`}
+                            alt={card.logos.length > 1 && i === 0 ? "Hawiyat" : card.name}
                             className="h-10 w-10 rounded-md border border-border bg-surface-dim object-contain p-1"
                           />
                         ))}

@@ -6,7 +6,7 @@ import { Coins, Infinity as InfinityIcon, Gauge, ShieldCheck } from "lucide-reac
 import { CREDITS_FAQ, CREDITS_MIN_DA, formatDA } from "@/lib/data/llm-credits"
 
 export const metadata: Metadata = createMetadata({
-  title: "LLM Credits | Buy AI API Credits in DZD | Hawiyat",
+  title: "LLM Credits | Buy AI API Credits in DZD",
   description:
     "Buy Hawiyat LLM credits in Algerian dinars - any amount from 2,000 DA, for any model: GPT, Claude, Gemini, DeepSeek, Qwen, and more. Prepaid balance, no subscription, no expiry. Pay with CCP or Baridi Mob.",
   path: "/credits",
