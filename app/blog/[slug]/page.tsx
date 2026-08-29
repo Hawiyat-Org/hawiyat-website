@@ -115,6 +115,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <p className="mt-5 text-base leading-relaxed text-muted-ink md:text-lg">
               {post.description}
             </p>
+            {post.tags.length > 0 && (
+              <ul className="mt-5 flex flex-wrap gap-1.5">
+                {post.tags.map((tag) => (
+                  <li key={tag}>
+                    <Link
+                      href="/blog"
+                      className="inline-block rounded border border-border/60 bg-surface-dim/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted-ink transition-colors hover:border-signal/50 hover:text-ink"
+                    >
+                      {tag}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </header>
 
           <div className="mt-10 grid gap-10 border-t border-border pt-8 lg:grid-cols-[220px_1fr]">
