@@ -7,6 +7,7 @@ const routes = [
   "",
   "/composer",
   "/ai-api-algeria",
+  "/credits",
   "/blog",
   "/pricing",
   "/faq",

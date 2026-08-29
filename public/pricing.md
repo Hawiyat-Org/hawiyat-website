@@ -4,7 +4,7 @@
 
 Figures on this site are verified against the Hawiyat operations dashboard as of August 9, 2026.
 
-All prices are in **Algerian dinars (DZD)**. Models are routes on the execution layer, never sold as SKUs or credits; Hawiyat does not resell or rebrand any model. This file lists every plan and its price, verbatim from Hawiyat's service catalog. See [llmsfull.txt](https://www.hawiyat.org/llmsfull.txt) for full service details.
+All prices are in **Algerian dinars (DZD)**. Models are routes on the execution layer, never sold as SKUs or subscriptions; Hawiyat does not resell or rebrand any model. **LLM credits** are a prepaid balance in DZD that unlocks any model on the platform. This file lists every plan and its price, verbatim from Hawiyat's service catalog. See [llmsfull.txt](https://www.hawiyat.org/llmsfull.txt) for full service details.
 
 ## Payment methods
 
@@ -17,6 +17,22 @@ Orders are placed through the Hawiyat website, and billing is in DZD with a tran
 ## Support languages
 
 Support is provided in **Arabic, French, and English** via WhatsApp and Chatwoot. These are support languages — Hawiyat's site content is in English, but you can be helped in any of the three.
+
+---
+
+## LLM Credits
+
+Prepaid balance on your Hawiyat API key — any amount from 1,000 DA, for any model. No subscription, no tier, no expiry. Choose your models (GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral) or let Composer route each task to the best available model. Models not listed can be requested and are enabled on your key.
+
+| Amount | What you get |
+| --- | --- |
+| 2,000 DA | Starter — try the API on a real project |
+| 5,000 DA | Builder — steady dev + testing usage |
+| 10,000 DA | Team — production workloads |
+| 25,000 DA | Scale — high-volume agents and pipelines |
+| Custom | Any amount from 1,000 DA (up to 500,000 DA; contact us above that) |
+
+Credits are metered per request on the usage dashboard; the balance never expires and can be topped up at any time. Order at https://www.hawiyat.org/credits.
 
 ---
 

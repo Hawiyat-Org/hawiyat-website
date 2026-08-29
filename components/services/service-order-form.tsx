@@ -108,10 +108,12 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       }
 
       firePixel()
-      posthog.capture("order_submitted", {
-        service_id: service.id,
-        payment_method: selectedPayment,
-      })
+      try {
+        posthog.capture("order_submitted", {
+          service_id: service.id,
+          payment_method: selectedPayment,
+        })
+      } catch { /* analytics is best-effort — never turn a successful order into an error */ }
       setOrderId(data.order.id)
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
@@ -165,10 +167,11 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       {/* Desktop: Order Now button */}
             <button
               onClick={() => {
-                posthog.capture("service_order_form_opened", {
-                  service_id: service.id,
-                })
                 setIsOpen(true)
+                // analytics is best-effort — never block opening the order dialog
+                try {
+                  posthog.capture("service_order_form_opened", { service_id: service.id })
+                } catch { /* ignore */ }
               }}
               className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-signal text-signal-text font-semibold text-base transition-colors duration-200 shadow-lg hover:bg-signal-hover"
             >
@@ -203,10 +206,10 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
               </div>
               <button
                 onClick={() => {
-                  posthog.capture("service_order_form_opened", {
-                    service_id: service.id,
-                  })
                   setIsOpen(true)
+                  try {
+                    posthog.capture("service_order_form_opened", { service_id: service.id })
+                  } catch { /* ignore */ }
                 }}
                 className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-lg bg-signal text-signal-text font-semibold text-base shadow-lg"
               >
