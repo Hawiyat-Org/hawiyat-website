@@ -15,6 +15,10 @@ export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
+// Only statically-generated (published) slugs are valid; drafts and unknown
+// slugs must return a real 404, not a soft-404 with HTTP 200.
+export const dynamicParams = false
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
