@@ -4,7 +4,7 @@ title: "How We Migrated Hundreds of Client Workloads Onto a Single Server Withou
 description: "Hawiyat consolidated hundreds of client workloads from multiple servers and data centers onto a single server: 95% lower infrastructure cost, 150% more capacity, zero data loss, zero downtime."
 date: "2026-08-17"
 author: "0xA1M"
-tags: [infrastructure, migration, docker, n8n, devops]
+tags: [cloud, infrastructure, migration, docker, n8n, devops]
 keywords: [infrastructure migration, docker swarm algeria, n8n hosting, zero downtime migration, hawiya cloud]
 ---
 
