@@ -112,9 +112,15 @@ function buildSections(): PricingSection[] {
 
   return [
     {
+      id: "composer",
+      title: "AI Composer",
+      subtitle: "One API key to GPT, Claude, Gemini, and open models - with the execution layer on top.",
+      cards: composerCards,
+    },
+    {
       id: "credits",
       title: "LLM Credits",
-      subtitle: "Prepaid balance on your API key — any amount, any model, no subscription.",
+      subtitle: "Prepaid balance on your API key - any amount from 2,000 DA, no subscription.",
       cards: [
         {
           name: "LLM Credits",
@@ -124,19 +130,13 @@ function buildSections(): PricingSection[] {
           offers: [
             { label: "Starter", price: "2,000", per: "DA" },
             { label: "Builder", price: "5,000", per: "DA" },
-            { label: "Any amount", price: "1,000+", per: "DA" },
+            { label: "Any amount", price: "2,000+", per: "DA" },
           ],
           href: "/credits",
           cta: "Buy credits",
           badge: "New",
         },
       ],
-    },
-    {
-      id: "composer",
-      title: "AI Composer",
-      subtitle: "One API key to GPT, Claude, Gemini, and open models — with the execution layer on top.",
-      cards: composerCards,
     },
     {
       id: "managed",
@@ -165,7 +165,7 @@ export default function PricingPage() {
         <header className="mx-auto mb-10 max-w-3xl text-center">
           <h1 className="text-4xl font-bold md:text-5xl text-ink">Pricing in DZD</h1>
           <p className="mt-5 text-lg text-muted-ink">
-            AI Composer, LLM credits, n8n hosting, and Hawiyat Cloud — all billed in Algerian
+            AI Composer, LLM credits, n8n hosting, and Hawiyat Cloud - all billed in Algerian
             dinars. Pay with CCP, Baridi Mob, or USD.
           </p>
         </header>

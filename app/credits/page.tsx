@@ -8,14 +8,14 @@ import { CREDITS_FAQ, CREDITS_MIN_DA, formatDA } from "@/lib/data/llm-credits"
 export const metadata: Metadata = createMetadata({
   title: "LLM Credits | Buy AI API Credits in DZD | Hawiyat",
   description:
-    "Buy Hawiyat LLM credits in Algerian dinars — any amount from 1,000 DA, for any model: GPT, Claude, Gemini, DeepSeek, Qwen, and more. Prepaid balance, no subscription, no expiry. Pay with CCP or Baridi Mob.",
+    "Buy Hawiyat LLM credits in Algerian dinars - any amount from 2,000 DA, for any model: GPT, Claude, Gemini, DeepSeek, Qwen, and more. Prepaid balance, no subscription, no expiry. Pay with CCP or Baridi Mob.",
   path: "/credits",
   modifiedTime: "2026-08-29",
 })
 
 const FEATURES = [
   { icon: Coins, title: "Any amount", text: `From ${formatDA(CREDITS_MIN_DA)} DA up. No tier, no plan, no subscription.` },
-  { icon: InfinityIcon, title: "Any model", text: "GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral — or ask us to add a model." },
+  { icon: InfinityIcon, title: "Any model", text: "GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral - or ask us to add a model." },
   { icon: Gauge, title: "No expiry", text: "Your balance stays on your key until you spend it. Top up whenever." },
   { icon: ShieldCheck, title: "DZD + local payment", text: "Billed in dinars. Pay with CCP or Baridi Mob. No foreign card." },
 ]
@@ -37,7 +37,7 @@ export default function CreditsPage() {
             Buy AI credits in dinars, use them on any model
           </h1>
           <p className="mt-5 text-lg text-muted-ink">
-            Prepaid balance on your Hawiyat API key — from {formatDA(CREDITS_MIN_DA)} DA. No
+            Prepaid balance on your Hawiyat API key - from {formatDA(CREDITS_MIN_DA)} DA. No
             subscription, no tier, no expiry. Pick your models, pay with CCP or Baridi Mob,
             and spend on GPT, Claude, Gemini, and more.
           </p>
@@ -67,10 +67,10 @@ export default function CreditsPage() {
           <h2 className="mb-6 text-center text-2xl font-bold text-ink">How it works</h2>
           <ol className="space-y-4">
             {[
-              ["1", "Choose your amount", "Pick a preset or type any amount from 1,000 DA."],
-              ["2", "Pick your models", "Open the tree, tick the models you want, or choose \u201CAny model\u201D. Not listed? Type it — we add it to your key."],
+              ["1", "Choose your amount", "Pick a preset or type any amount from 2,000 DA."],
+              ["2", "Pick your models", "Open the tree, tick the models you want, or choose \u201CAny model\u201D. Not listed? Type it - we add it to your key."],
               ["3", "Pay with CCP or Baridi Mob", "No card needed. We confirm payment with you on WhatsApp."],
-              ["4", "Activate and spend", "We activate your key, add your models, and every request draws from your balance — metered live on the usage dashboard."],
+              ["4", "Activate and spend", "We activate your key, add your models, and every request draws from your balance - metered live on the usage dashboard."],
             ].map(([step, title, text]) => (
               <li key={step} className="flex gap-4 rounded-lg border border-border bg-surface p-4">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-signal font-mono text-sm font-bold text-signal-text">
@@ -125,7 +125,7 @@ export default function CreditsPage() {
         {/* FAQ */}
         <section className="mx-auto max-w-3xl">
           <h2 className="mb-6 text-center text-2xl font-bold text-ink">
-            Credits — frequently asked
+            Credits - frequently asked
           </h2>
           <div className="space-y-3">
             {CREDITS_FAQ.map((item) => (
@@ -146,7 +146,7 @@ export default function CreditsPage() {
             <Link href="/about" className="font-medium text-signal-contrast underline hover:no-underline">
               Contact us
             </Link>{" "}
-            — we answer in Arabic, French, and English.
+            - we answer in Arabic, French, and English.
           </p>
         </section>
       </div>

@@ -1,6 +1,6 @@
 # Hawiyat Pricing
 
-> Hawiyat is an AI infrastructure platform — the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run (WhatsApp, CRM, ERP, email, databases, workflows). Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
+> Hawiyat is an AI infrastructure platform - the execution layer between frontier AI models (GPT, Claude, Gemini, open models) and the systems businesses run (WhatsApp, CRM, ERP, email, databases, workflows). Hawiyat AI Composer decides the best way to accomplish each task: which model to route to, what context to carry, and whether the result is good enough.
 
 Figures on this site are verified against the Hawiyat operations dashboard as of August 9, 2026.
 
@@ -8,37 +8,37 @@ All prices are in **Algerian dinars (DZD)**. Models are routes on the execution 
 
 ## Payment methods
 
-- **CCP** — Algerian postal checking account transfer
-- **Baridi Mob** — Algeria Post mobile payment
-- **USD** — for international customers
+- **CCP** - Algerian postal checking account transfer
+- **Baridi Mob** - Algeria Post mobile payment
+- **USD** - for international customers
 
 Orders are placed through the Hawiyat website, and billing is in DZD with a transparent per-task cost on the execution layer.
 
 ## Support languages
 
-Support is provided in **Arabic, French, and English** via WhatsApp and Chatwoot. These are support languages — Hawiyat's site content is in English, but you can be helped in any of the three.
+Support is provided in **Arabic, French, and English** via WhatsApp and Chatwoot. These are support languages - Hawiyat's site content is in English, but you can be helped in any of the three.
 
 ---
 
 ## LLM Credits
 
-Prepaid balance on your Hawiyat API key — any amount from 1,000 DA, for any model. No subscription, no tier, no expiry. Choose your models (GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral) or let Composer route each task to the best available model. Models not listed can be requested and are enabled on your key.
+Prepaid balance on your Hawiyat API key - any amount from 2,000 DA, for any model. No subscription, no tier, no expiry. Choose your models (GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral) or let Composer route each task to the best available model. Models not listed can be requested and are enabled on your key.
 
 | Amount | What you get |
 | --- | --- |
-| 2,000 DA | Starter — try the API on a real project |
-| 5,000 DA | Builder — steady dev + testing usage |
-| 10,000 DA | Team — production workloads |
-| 25,000 DA | Scale — high-volume agents and pipelines |
-| Custom | Any amount from 1,000 DA (up to 500,000 DA; contact us above that) |
+| 2,000 DA | Starter - try the API on a real project |
+| 5,000 DA | Builder - steady dev + testing usage |
+| 10,000 DA | Team - production workloads |
+| 25,000 DA | Scale - high-volume agents and pipelines |
+| Custom | Any amount from 2,000 DA (up to 500,000 DA; contact us above that) |
 
 Credits are metered per request on the usage dashboard; the balance never expires and can be topped up at any time. Order at https://www.hawiyat.org/credits.
 
 ---
 
-## AI Execution — Hawiyat AI Composer
+## AI Execution - Hawiyat AI Composer
 
-The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD. One API key works with Cursor, Claude Code, Codex, Antigravity, and GitHub Copilot — you activate once and get the quota the plan gives you, with no 5-hour cap and no weekly cap.
+The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE → EVALUATE → RESULT, model-agnostic, evaluated, and priced in DZD. One API key works with Cursor, Claude Code, Codex, Antigravity, and GitHub Copilot - you activate once and get the quota the plan gives you, with no 5-hour cap and no weekly cap.
 
 | Plan | Price | Who it's for |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ The execution engine. Every task runs UNDERSTAND → PLAN → ROUTE → EXECUTE 
 | Hawiyat AI Composer MAX 20X | 30,000 DA/month | Agencies, engineering teams running AI at scale |
 | Hawiyat AI Composer Enterprise | Custom | Sized for your entire operation |
 
-### Hawiyat AI Composer Pro — 6,000 DA/month
+### Hawiyat AI Composer Pro - 6,000 DA/month
 For solo builders. Execution layer with routing, context, fallbacks, and evaluation.
 - Model-agnostic routing per task
 - Context-aware execution against your systems
@@ -57,8 +57,8 @@ For solo builders. Execution layer with routing, context, fallbacks, and evaluat
 - Billed in DZD with a transparent per-task cost
 - Priority support via WhatsApp
 
-### Hawiyat AI Composer MAX 5X — 15,000 DA/month
-5× base execution capacity — more parallel runs and tasks. For professional developers, startups, and small teams shipping daily.
+### Hawiyat AI Composer MAX 5X - 15,000 DA/month
+5× base execution capacity - more parallel runs and tasks. For professional developers, startups, and small teams shipping daily.
 - 5X base execution capacity, more parallel runs and tasks
 - Advanced semantic caching (vector-based)
 - Automatic model fallbacks on failure
@@ -66,7 +66,7 @@ For solo builders. Execution layer with routing, context, fallbacks, and evaluat
 - Billed in DZD with a transparent per-task cost
 - Priority support via WhatsApp
 
-### Hawiyat AI Composer MAX 20X — 30,000 DA/month
+### Hawiyat AI Composer MAX 20X - 30,000 DA/month
 20× base execution capacity + hybrid data compliance. For agencies, engineering teams, and power users running AI at scale.
 - Everything in MAX 5X
 - 20× the base execution capacity of Pro, maximum parallel throughput
@@ -75,14 +75,14 @@ For solo builders. Execution layer with routing, context, fallbacks, and evaluat
 - Dedicated account manager who knows your runs
 - Advanced usage analytics in DZD
 
-### Hawiyat AI Composer Enterprise — Custom pricing
+### Hawiyat AI Composer Enterprise - Custom pricing
 The execution layer, sized for your entire operation: dedicated account manager, priority WhatsApp support in AR/FR/EN, custom infrastructure/capacity, single contract billed in DZD. Contact us for a quote.
 
 ---
 
 ## Managed Systems
 
-### n8n Hosting — managed workflow automation
+### n8n Hosting - managed workflow automation
 Fully managed n8n instances: auto-scaling infrastructure, 99.9% uptime guarantee, one-click deployment, 24/7 monitoring. Every plan includes a PostgreSQL database, unlimited workflows, custom domain support, and webhook endpoints.
 
 | Plan | Price | What you get |
@@ -91,7 +91,7 @@ Fully managed n8n instances: auto-scaling infrastructure, 99.9% uptime guarantee
 | Startup | 30,000 DA/year | Worker-based setup: parallel execution, handles heavier load, unlimited executions, 99% uptime. Support by email. |
 | Enterprise | 80,000 DA/year | Worker-based setup, automatic backups (the only tier with backups), 99.9% uptime with compensation if missed. Support by WhatsApp. |
 
-### Evolution API — WhatsApp Business API infrastructure
+### Evolution API - WhatsApp Business API infrastructure
 Official WhatsApp Business API access for messaging and automation: webhook integrations, message queuing, rate limiting and throttling to prevent bans. Fully managed by Hawiyat.
 
 | Plan | Price | What you get |
@@ -102,7 +102,7 @@ Official WhatsApp Business API access for messaging and automation: webhook inte
 
 ---
 
-## Cloud Runtime — Hawiyat Cloud
+## Cloud Runtime - Hawiyat Cloud
 
 > **By order:** No fixed plans. Tell us what you need to run and we plan the deployment on our cloud (containers, VPS, or Kubernetes) and send you a quote in DZD.
 
@@ -110,7 +110,7 @@ Official WhatsApp Business API access for messaging and automation: webhook inte
 | --- | --- | --- |
 | Hawiyat Cloud | By order | Managed containers, VPS, or Kubernetes on our infrastructure, sized to your needs. Quote in DZD. |
 
-### Hawiyat Cloud — by order
+### Hawiyat Cloud - by order
 Managed cloud on Hawiyat's own infrastructure, planned with our team and quoted in DZD.
 - Containers, VPS, or Kubernetes, sized to your needs
 - Managed database options, free SSL, automatic deploys from Git

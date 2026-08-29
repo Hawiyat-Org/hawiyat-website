@@ -37,7 +37,7 @@ import {
 /**
  * Analytics must never block the UI: if PostHog is not initialized (no
  * NEXT_PUBLIC_POSTHOG_KEY, blocked by an ad blocker, or init fails), the
- * uninitialized SDK can throw synchronously — and any capture() called before
+ * uninitialized SDK can throw synchronously - and any capture() called before
  * setState would prevent the dialog from opening. Wrap every capture.
  */
 function track(event: string, props?: Record<string, unknown>) {
@@ -212,7 +212,7 @@ export function CreditsCalculator() {
 
     const modelsSummary = selectionSummary(selection)
     const notes = [
-      `LLM Credits order — ${formatDA(normalized)} DA`,
+      `LLM Credits order - ${formatDA(normalized)} DA`,
       `Models: ${modelsSummary}`,
       formData.paymentMethod === "USD" ? "" : "",
     ]
@@ -355,7 +355,7 @@ export function CreditsCalculator() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-base text-ink">Hawiyat LLM Credits</h3>
                       <p className="text-sm text-muted-ink">
-                        Prepaid balance on your API key — no subscription, no tier.
+                        Prepaid balance on your API key - no subscription, no tier.
                       </p>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ export function CreditsCalculator() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Step 1 — amount */}
+                  {/* Step 1 - amount */}
                   <fieldset>
                     <legend className="block text-sm font-medium text-ink mb-3">
                       1. Choose your amount <span className="text-danger">*</span>
@@ -430,7 +430,7 @@ export function CreditsCalculator() {
                     </div>
                   </fieldset>
 
-                  {/* Step 2 — models (tree) */}
+                  {/* Step 2 - models (tree) */}
                   <fieldset>
                     <legend className="block text-sm font-medium text-ink mb-1">
                       2. Which models? <span className="text-danger">*</span>
@@ -554,7 +554,7 @@ export function CreditsCalculator() {
                       })}
                       {visibleGroups.length === 0 && (
                         <p className="text-sm text-muted-ink py-3 text-center">
-                          No models match “{query}” — add it below and we&apos;ll enable it.
+                          No models match “{query}” - add it below and we&apos;ll enable it.
                         </p>
                       )}
                     </div>
@@ -612,7 +612,7 @@ export function CreditsCalculator() {
                     )}
                   </fieldset>
 
-                  {/* Step 3 — contact */}
+                  {/* Step 3 - contact */}
                   <fieldset className="space-y-3">
                     <legend className="block text-sm font-medium text-ink">3. Your details</legend>
                     <div>
@@ -765,7 +765,7 @@ export function CreditsCalculator() {
 
                   <p className="text-xs text-muted-ink">
                     No card needed. We&apos;ll confirm payment with you on WhatsApp, then activate your
-                    key — including any model you asked us to add.
+                    key - including any model you asked us to add.
                   </p>
                 </form>
               </>

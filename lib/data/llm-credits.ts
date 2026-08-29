@@ -1,5 +1,5 @@
 /**
- * LLM Credits — prepaid, pay-as-you-go balance on a Hawiyat API key.
+ * LLM Credits - prepaid, pay-as-you-go balance on a Hawiyat API key.
  *
  * The difference from the Composer monthly plans: no subscription, no tier.
  * The customer buys any amount in DZD and spends it on whichever models they
@@ -10,7 +10,7 @@
  * rate card is an owner decision (margin), not a copy decision.
  */
 
-export const CREDITS_MIN_DA = 1000
+export const CREDITS_MIN_DA = 2000
 export const CREDITS_MAX_DA = 500000
 
 /** Preset top-up amounts in DZD. `popular` drives the recommended badge. */
@@ -30,14 +30,14 @@ export const CREDIT_PACKS: CreditPack[] = [
 
 /**
  * Model picker = TREE of top global models grouped by vendor (public brand
- * names only — never our gateway route/alias names).
+ * names only - never our gateway route/alias names).
  *
  * Each vendor node offers:
  *   - a group wildcard: "All <vendor> models"
  *   - individual model checkboxes
  * The top-level "Any model" wildcard covers everything via Composer routing.
  * Anything not listed can be added via the free-text "add another model" field
- * — the order notes tell the team to enable it on the customer's key.
+ * - the order notes tell the team to enable it on the customer's key.
  *
  * Version-agnostic on purpose: vendors bump versions constantly; the site must
  * not carry a stale or invented version string. The enabled versions on the key
@@ -161,12 +161,12 @@ export const CREDITS_FAQ: Array<{ question: string; answer: string }> = [
   {
     question: "Can I use credits on any model?",
     answer:
-      "Yes. Pick the global models you want when you order — GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral — or let Composer route each task to the best one. If the model you need is not in the list, name it in your order and we enable it on your key. The same balance covers every model you use.",
+      "Yes. Pick the global models you want when you order - GPT, Claude, Gemini, Grok, DeepSeek, Qwen, Llama, Kimi, Mistral - or let Composer route each task to the best one. If the model you need is not in the list, name it in your order and we enable it on your key. The same balance covers every model you use.",
   },
   {
     question: "How much can I buy?",
     answer:
-      "Any amount from 1,000 DA upward. Pick one of the preset amounts or type your own. If you need a volume amount above 500,000 DA, contact us and we will prepare it for you.",
+      "Any amount from 2,000 DA upward. Pick one of the preset amounts or type your own. If you need a volume amount above 500,000 DA, contact us and we will prepare it for you.",
   },
   {
     question: "Do credits expire?",
