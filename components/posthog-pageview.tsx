@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
-import posthog from "posthog-js"
+import { capture } from "@/lib/posthog"
 
 /**
  * Fires a $pageview on every route change so soft navigations in the App
@@ -20,11 +20,7 @@ import posthog from "posthog-js"
  * call is wrapped and never allowed to break navigation or rendering.
  */
 function trackPageview() {
-  try {
-    posthog.capture("$pageview")
-  } catch {
-    /* analytics is best-effort; never break navigation */
-  }
+  void capture("$pageview")
 }
 
 function PostHogPageView() {

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import posthog from "posthog-js"
+import { track } from "@/lib/analytics"
 
 interface OrderFormProps {
   service: {
@@ -82,7 +82,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       }
 
       firePixel()
-      posthog.capture("order_submitted", {
+      track("order_submitted", {
         service_id: service.id,
         payment_method: formData.paymentMethod,
       })

@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import HeroSection from "@/components/hero-section"
-import PartnersMarquee from "@/components/partners-marquee"
 import Pricing from "@/components/pricing"
 import OurNumbers from "@/components/our-numbers"
 import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
 import CallToAction from "@/components/call-to-action"
-import WhatsAppWidget from "@/components/whatsapp-widget"
 import { createMetadata } from "@/lib/seo"
+import { BelowFold } from "@/components/home/below-fold"
+import { partners } from "@/lib/data/partners"
 
 export const metadata: Metadata = createMetadata({
   title: "AI Infrastructure in Algeria | Composer & LLM API",
@@ -20,16 +20,41 @@ export const metadata: Metadata = createMetadata({
 export default function Home() {
   return (
     <>
-      <WhatsAppWidget />
       <div>
         <HeroSection />
-        <PartnersMarquee />
+        <BelowFold />
         <OurNumbers />
         <Pricing />
         <Testimonials />
         <FAQ />
         <CallToAction />
       </div>
+
+      {/* Structured data: search engines & AI crawlers read the references as entities.
+          Rendered server-side because the marquee itself is deferred (ssr:false). */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Hawiyat partners and early customers",
+            description:
+              "Partners and early customers working with the Hawiyat execution layer.",
+            numberOfItems: partners.length,
+            itemListElement: partners.map((partner, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: {
+                "@type": "Organization",
+                name: partner.name,
+                url: partner.url,
+                description: partner.desc,
+              },
+            })),
+          }),
+        }}
+      />
     </>
   )
 }

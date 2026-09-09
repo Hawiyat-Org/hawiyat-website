@@ -1,11 +1,18 @@
 "use client"
 import { useState } from "react"
+import dynamic from "next/dynamic"
 import { Check, MessageCircle, Mail, ArrowRight, ExternalLink } from "lucide-react"
-import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import { track } from "@/lib/analytics"
+
+// The order modal only renders after a plan is clicked, so its JS (form,
+// SkeletonImage, dialog) is split out of the critical path.
+const OrderForm = dynamic(
+  () => import("@/components/services/order-form").then((m) => m.OrderForm),
+  { ssr: false, loading: () => null }
+)
 
 interface OrderService {
   id: string

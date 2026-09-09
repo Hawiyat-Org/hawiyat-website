@@ -8,7 +8,7 @@ import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import posthog from "posthog-js"
+import { track } from "@/lib/analytics"
 
 interface ServiceOrderFormProps {
   service: {
@@ -109,7 +109,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
       firePixel()
       try {
-        posthog.capture("order_submitted", {
+        track("order_submitted", {
           service_id: service.id,
           payment_method: selectedPayment,
         })
@@ -170,7 +170,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 setIsOpen(true)
                 // analytics is best-effort — never block opening the order dialog
                 try {
-                  posthog.capture("service_order_form_opened", { service_id: service.id })
+                  track("service_order_form_opened", { service_id: service.id })
                 } catch { /* ignore */ }
               }}
               className="hidden lg:flex w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-signal text-signal-text font-semibold text-base transition-colors duration-200 shadow-lg hover:bg-signal-hover"
@@ -208,7 +208,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                 onClick={() => {
                   setIsOpen(true)
                   try {
-                    posthog.capture("service_order_form_opened", { service_id: service.id })
+                    track("service_order_form_opened", { service_id: service.id })
                   } catch { /* ignore */ }
                 }}
                 className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-lg bg-signal text-signal-text font-semibold text-base shadow-lg"
