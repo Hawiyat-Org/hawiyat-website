@@ -22,7 +22,9 @@ export default function Home() {
     <>
       <div>
         <HeroSection />
-        <BelowFold />
+        <div className="min-h-[220px] md:min-h-[260px]">
+          <BelowFold />
+        </div>
         <OurNumbers />
         <Pricing />
         <Testimonials />

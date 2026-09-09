@@ -56,6 +56,25 @@ export async function capture(event: string, props?: Record<string, unknown>): P
   }
 }
 
+/**
+ * Apply a consent choice. Awaiting loadPosthog first guarantees init runs
+ * before opt_in/opt_out: calling those on an uninitialized SDK would persist
+ * consent under the wrong storage key and silently drop the choice.
+ * Best-effort, never throws.
+ */
+export async function setConsent(granted: boolean, silent: boolean): Promise<void> {
+  try {
+    const mod = await loadPosthog()
+    if (granted) {
+      mod.default.opt_in_capturing(silent ? { captureEventName: false } : undefined)
+    } else {
+      mod.default.opt_out_capturing()
+    }
+  } catch {
+    // Analytics is best-effort; never let it break the UI.
+  }
+}
+
 /** Kick off the SDK load after the main thread is idle. */
 export function deferPosthogLoad(): void {
   if (typeof window === "undefined") return
