@@ -1,7 +1,15 @@
+"use client"
+
 import Link from "next/link"
 import { Github, Instagram, Facebook, Mail, Linkedin, Youtube } from "lucide-react"
 import { SkeletonImage } from "@/components/image-with-skeleton"
 import { CONTACT_EMAIL, waLink } from "@/lib/contact"
+
+const OPEN_CONSENT_EVENT = "hawiyat:open-consent"
+
+const openConsentSettings = () => {
+  window.dispatchEvent(new CustomEvent(OPEN_CONSENT_EVENT))
+}
 
 const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://")
@@ -121,6 +129,13 @@ const Footer = () => {
       <div className="mt-2 flex gap-2 flex-col text-muted-ink place-items-center text-[12px] w-full text-center place-content-around">
         <span>Copyright © 2025-2026 Hawiyat</span>
         <span>All trademarks and copyrights belong to their respective owners.</span>
+        <button
+          type="button"
+          onClick={openConsentSettings}
+          className="footer-link underline underline-offset-4 transition-colors hover:text-ink"
+        >
+          Cookie settings
+        </button>
       </div>
     </footer>
   )
