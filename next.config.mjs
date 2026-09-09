@@ -92,6 +92,11 @@ const nextConfig = {
       { source: "/hawiyat-composer", destination: "/composer", permanent: true },
       { source: "/services", destination: "/pricing", permanent: true },
       { source: "/ai-algeria", destination: "/", permanent: true },
+      // SEO quick-win batch Q1 (2026-09): /dcma served 200 as a duplicate of /dmca
+      // (346 impressions); removed /templates 404'd while holding 1,280 impressions.
+      // statusCode: 301 (not permanent:true) — Next.js permanent:true emits 308.
+      { source: "/dcma", destination: "/dmca", statusCode: 301 },
+      { source: "/templates", destination: "/pricing", statusCode: 301 },
       // Legacy service aliases — 301 per kanban W6 (Next.js permanent:true would emit 308)
       { source: "/services/hosting-basic", destination: "/services/hawiyat-cloud", statusCode: 301 },
       { source: "/services/hosting-vip", destination: "/services/hawiyat-cloud", statusCode: 301 },

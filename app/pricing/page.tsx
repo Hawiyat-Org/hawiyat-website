@@ -5,11 +5,11 @@ import { PricingCatalog, type PricingSection } from "@/components/pricing-catalo
 import { Building2, Clock, ShieldCheck, Wallet } from "lucide-react"
 
 export const metadata: Metadata = createMetadata({
-  title: "Pricing | AI Composer & Services in Algeria",
+  title: "AI Pricing in Algeria | Composer from 6,000 DA",
   description:
-    "Hawiyat pricing in Algerian dinars (DZD): AI Composer Pro 6,000 DA/month, MAX 5X 15,000, MAX 20X 30,000, Enterprise custom. n8n hosting, Evolution API, LLM credits, and Hawiyat Cloud. Pay with CCP, Baridi Mob, or USD.",
+    "AI Composer from 6,000 DA/month, MAX 5X 15,000, MAX 20X 30,000. LLM credits, n8n, WhatsApp API, and cloud in DZD. Pay with CCP or Baridi Mob, no foreign card.",
   path: "/pricing",
-  modifiedTime: "2026-08-29",
+  modifiedTime: "2026-09-09",
 })
 
 const COMPOSER_OFFERS = [
@@ -163,7 +163,7 @@ export default function PricingPage() {
       </div>
       <div className="relative mx-auto max-w-7xl px-6">
         <header className="mx-auto mb-10 max-w-3xl text-center">
-          <h1 className="text-4xl font-bold md:text-5xl text-ink">Pricing in DZD</h1>
+          <h1 className="text-4xl font-bold md:text-5xl text-ink">AI pricing in DZD</h1>
           <p className="mt-5 text-lg text-muted-ink">
             AI Composer, LLM credits, n8n hosting, and Hawiyat Cloud - all billed in Algerian
             dinars. Pay with CCP, Baridi Mob, or USD.

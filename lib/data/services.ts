@@ -356,9 +356,9 @@ export const services: Service[] = [
       { icon: Clock, text: "Evaluate Every Run" },
     ],
     seo: {
-      title: "AI API in Algeria | Hawiyat AI Composer | 6,000 DA/month",
+      title: "AI API in Algeria | Composer from 6,000 DA",
       description:
-        "The AI API in Algeria: one key to GPT, Claude, Gemini, and open LLMs through the Composer execution layer. Model-agnostic routing, context, fallbacks, evaluation. 6,000 DA/month, pay with CCP or Baridi Mob.",
+        "One key to GPT, Claude, Gemini, and open LLMs via the Composer execution layer. LLM routing, context, fallbacks, evaluation. 6,000 DA/month, CCP or Baridi Mob.",
       keywords: [
         "ai api algeria",
         "llm api algeria",

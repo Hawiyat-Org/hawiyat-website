@@ -1,8 +1,9 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import ScrollAnimations from "@/components/scroll-animations"
 import { RunConsole } from "@/components/run-console"
 import { AnimatedNumber } from "@/components/animated-number"
-import { USAGE_DASHBOARD_URL } from "@/lib/seo"
+import { createMetadata, USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import {
   ArrowRight,
@@ -116,6 +117,14 @@ const FULLSTACK = [
 ]
 
 const FULLSTACK_WHATSAPP_URL = waLink("Hello Hawiyat, we need the full stack for our operation.")
+
+export const metadata: Metadata = createMetadata({
+  title: "AI Composer | LLM Routing & AI Agents in Algeria",
+  description:
+    "Routes each task to the best model, carries your context, and evaluates every result. Build AI agents on GPT, Claude, Gemini, and open models, billed in DZD.",
+  path: "/composer",
+  modifiedTime: "2026-09-09",
+})
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
