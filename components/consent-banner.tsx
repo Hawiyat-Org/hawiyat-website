@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
-import posthog from 'posthog-js'
 
 /*
  * First-party analytics consent (Task B4).
@@ -81,18 +80,14 @@ const persistConsent = (choice: ConsentChoice) => {
   }
 }
 
+import { setConsent } from "@/lib/posthog"
+
 /** Keep PostHog's own consent state in sync. silent restores a stored choice
- *  without emitting an $opt_in event on every page load. */
+ *  without emitting an $opt_in event on every page load. Delegates to the
+ *  lazy loader so init always runs before opt_in/opt_out (see lib/posthog.ts)
+ *  and posthog-js stays out of the critical bundle. */
 const syncPostHog = (choice: ConsentChoice, silent: boolean) => {
-  try {
-    if (choice === "granted") {
-      posthog.opt_in_capturing(silent ? { captureEventName: false } : undefined)
-    } else {
-      posthog.opt_out_capturing()
-    }
-  } catch {
-    // Analytics must never break the banner.
-  }
+  void setConsent(choice === "granted", silent)
 }
 
 // Restore a stored choice at module evaluation (pre-hydration) so PostHog is

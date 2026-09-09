@@ -1,16 +1,11 @@
-import posthog from "posthog-js"
+import { capture } from "@/lib/posthog"
 
 /**
- * Analytics must never block the UI: if PostHog is not initialized (no
- * NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, blocked by an ad blocker, or init fails)
- * the uninitialized SDK can throw synchronously. Wrap every capture so a
- * tracking failure can never prevent an order, an outbound redirect, or a
- * page render.
+ * Fire a PostHog event without ever blocking the UI or the critical bundle:
+ * the SDK loads lazily on first use (see lib/posthog.ts), so statically
+ * importing this helper keeps posthog-js out of initial render. Best-effort
+ * and synchronous at the call site; failures stay silent.
  */
 export function track(event: string, props?: Record<string, unknown>): void {
-  try {
-    posthog.capture(event, props)
-  } catch {
-    /* analytics is best-effort; never break the UI */
-  }
+  void capture(event, props)
 }

@@ -3,51 +3,7 @@ import { SkeletonImage } from "@/components/image-with-skeleton"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-
-const partners = [
-  {
-    name: "Itihad",
-    logo: "/trust/itihad-logo.svg",
-    url: "https://itihad.group",
-    alt: "Itihad Group logo, accelerator partner",
-    desc: "Itihad Group, acceleration partner at Itihad Campus, Boumerdes.",
-  },
-  {
-    name: "ESTIN",
-    logo: "/trust/estin-logo.svg",
-    url: "https://estin.dz/",
-    alt: "ESTIN logo, partner institution",
-    desc: "ESTIN (École Supérieure en Informatique), partner institution.",
-  },
-  {
-    name: "IT Solutions",
-    logo: "itsol",
-    url: "https://itsolutions.dz/",
-    alt: "IT Solutions, partner company",
-    desc: "IT Solutions, partner company.",
-  },
-  {
-    name: "RMASC",
-    logo: "/trust/rmasc-logo.webp",
-    url: "https://www.sarlrmasc.com/",
-    alt: "RMASC logo, SARL RMASC, an Algerian elevator design, installation, and repair company",
-    desc: "RMASC, Algerian elevator company trusting Hawiyat.",
-  },
-  {
-    name: "Green Duty",
-    logo: "green-duty",
-    url: "",
-    alt: "Green Duty logo, a company that trusts Hawiyat",
-    desc: "Green Duty, a company that trusts Hawiyat.",
-  },
-  {
-    name: "Mercus Academy",
-    logo: "mercus",
-    url: "https://www.mercus-academy.com/",
-    alt: "Mercus Academy logo, a training institution that trusts Hawiyat",
-    desc: "Mercus Academy, training institution.",
-  },
-]
+import { partners } from "@/lib/data/partners"
 
 const PartnersMarquee = () => {
   const { theme, resolvedTheme } = useTheme()
@@ -149,31 +105,6 @@ const PartnersMarquee = () => {
           </div>
         </div>
       </div>
-
-      {/* Structured data: search engines & AI crawlers read the references as entities */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Hawiyat partners and early customers",
-            description:
-              "Partners and early customers working with the Hawiyat execution layer.",
-            numberOfItems: partners.length,
-            itemListElement: partners.map((partner, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              item: {
-                "@type": "Organization",
-                name: partner.name,
-                url: partner.url,
-                description: partner.desc,
-              },
-            })),
-          }),
-        }}
-      />
     </section>
   )
 }
