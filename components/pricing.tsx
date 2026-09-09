@@ -5,22 +5,7 @@ import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
-import posthog from "posthog-js"
-
-/* --------------------------- safe analytics ------------------------------ */
-/**
- * Analytics must never block the UI: if PostHog is not initialized (no
- * NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, blocked by an ad blocker, or init fails)
- * the uninitialized SDK can throw synchronously. Wrap every capture so a
- * tracking failure can never prevent a plan order or an outbound redirect.
- */
-function track(event: string, props?: Record<string, unknown>) {
-  try {
-    posthog.capture(event, props)
-  } catch {
-    /* analytics is best-effort; never break the purchase flow */
-  }
-}
+import { track } from "@/lib/analytics"
 
 interface OrderService {
   id: string

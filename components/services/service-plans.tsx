@@ -4,18 +4,8 @@ import { useState } from "react"
 import { Check, Mail, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { waLink } from "@/lib/contact"
-import posthog from "posthog-js"
+import { track } from "@/lib/analytics"
 import { ServiceOrderForm } from "./service-order-form"
-
-/** Analytics must never block the UI: if PostHog is uninitialized (no token,
- * blocked by an ad blocker, or init fails) capture() can throw. Wrap every call. */
-function track(event: string, props?: Record<string, unknown>) {
-  try {
-    posthog.capture(event, props)
-  } catch {
-    /* analytics is best-effort; never break an outbound redirect */
-  }
-}
 
 export interface ServicePlan {
   name: string

@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils"
 import { waLink } from "@/lib/contact"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import posthog from "posthog-js"
+import { track } from "@/lib/analytics"
 import {
   CREDITS_MAX_DA,
   CREDITS_MIN_DA,
@@ -32,21 +32,6 @@ import {
   type ModelGroup,
   type ModelNode,
 } from "@/lib/data/llm-credits"
-
-/* --------------------------- safe analytics ------------------------------ */
-/**
- * Analytics must never block the UI: if PostHog is not initialized (no
- * NEXT_PUBLIC_POSTHOG_KEY, blocked by an ad blocker, or init fails), the
- * uninitialized SDK can throw synchronously - and any capture() called before
- * setState would prevent the dialog from opening. Wrap every capture.
- */
-function track(event: string, props?: Record<string, unknown>) {
-  try {
-    posthog.capture(event, props)
-  } catch {
-    /* analytics is best-effort; never break the purchase flow */
-  }
-}
 
 /* ---------------------------------- types --------------------------------- */
 

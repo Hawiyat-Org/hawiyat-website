@@ -34,6 +34,30 @@ const HAWIYAT_CONSENT_KEY = "hawiyat-consent"
 type ConsentChoice = "granted" | "denied"
 type ConsentState = ConsentChoice | "loading" | null
 
+type PanelStatus = "pending" | "granted" | "denied"
+
+type PanelButton = {
+  label: string
+  variant: "primary" | "secondary" | "ghost"
+  onClick: () => void
+}
+
+type PanelContent = {
+  eyebrow: string
+  title: string
+  body: string
+  buttons: PanelButton[]
+}
+
+const BUTTON_CLASSES: Record<PanelButton["variant"], string> = {
+  primary:
+    "rounded-lg bg-signal px-5 py-2.5 text-sm font-medium text-signal-text transition-colors hover:bg-signal-hover",
+  secondary:
+    "rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface-dim",
+  ghost:
+    "rounded-lg px-4 py-2.5 text-sm font-medium text-muted-ink transition-colors hover:text-ink",
+}
+
 const META_PIXEL_SNIPPET = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`
 
 const readStoredConsent = (): ConsentChoice | null => {
@@ -103,12 +127,73 @@ export default function ConsentBanner() {
     [consent],
   )
 
-  const reopen = useCallback(() => setIsOpen(true), [])
-
   const loading = consent === "loading"
   const pending = consent === null
   const showPanel = !loading && (isOpen || pending)
   const showChip = !loading && !pending && !isOpen
+
+  const panelStatus: PanelStatus | null =
+    pending
+      ? "pending"
+      : consent === "granted" || consent === "denied"
+        ? consent
+        : null
+
+  const statusPanels: Record<PanelStatus, PanelContent> = {
+    pending: {
+      eyebrow: "Privacy",
+      title: "Analytics run only after you accept",
+      body: "We use privacy-focused analytics to understand how this site is used. Accepting enables PostHog tracking and loads the Meta Pixel. Declining keeps PostHog cookieless and never loads the pixel. You can change your choice at any time.",
+      buttons: [
+        {
+          label: "Accept analytics",
+          variant: "primary",
+          onClick: () => decide("granted"),
+        },
+        {
+          label: "Decline",
+          variant: "secondary",
+          onClick: () => decide("denied"),
+        },
+      ],
+    },
+    granted: {
+      eyebrow: "Consent granted",
+      title: "Analytics are enabled",
+      body: "PostHog stores cookies on this device and the Meta Pixel is active. Withdrawing consent stops both. You can re-enable them later from the cookie settings button.",
+      buttons: [
+        {
+          label: "Withdraw consent",
+          variant: "secondary",
+          onClick: () => decide("denied"),
+        },
+        {
+          label: "Close",
+          variant: "ghost",
+          onClick: () => setIsOpen(false),
+        },
+      ],
+    },
+    denied: {
+      eyebrow: "Consent declined",
+      title: "Analytics stay off",
+      body: "PostHog runs in cookieless mode and the Meta Pixel is not loaded. Enabling analytics turns both back on.",
+      buttons: [
+        {
+          label: "Enable analytics",
+          variant: "primary",
+          onClick: () => decide("granted"),
+        },
+        {
+          label: "Close",
+          variant: "ghost",
+          onClick: () => setIsOpen(false),
+        },
+      ],
+    },
+  }
+
+  const panel = panelStatus ? statusPanels[panelStatus] : null
 
   return (
     <>
@@ -125,98 +210,28 @@ export default function ConsentBanner() {
           aria-label="Cookie and analytics consent"
           className="fixed bottom-4 left-4 right-4 z-50 rounded-lg border border-border bg-surface p-6 shadow-lg sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-lg"
         >
-          {pending && (
+          {panel && (
             <>
               <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                Privacy
+                {panel.eyebrow}
               </p>
               <h2 className="mt-2 text-base font-medium text-ink">
-                Analytics run only after you accept
+                {panel.title}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                We use privacy-focused analytics to understand how this site is
-                used. Accepting enables PostHog tracking and loads the Meta
-                Pixel. Declining keeps PostHog cookieless and never loads the
-                pixel. You can change your choice at any time.
+                {panel.body}
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => decide("granted")}
-                  className="rounded-lg bg-signal px-5 py-2.5 text-sm font-medium text-signal-text transition-colors hover:bg-signal-hover"
-                >
-                  Accept analytics
-                </button>
-                <button
-                  type="button"
-                  onClick={() => decide("denied")}
-                  className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface-dim"
-                >
-                  Decline
-                </button>
-              </div>
-            </>
-          )}
-
-          {consent === "granted" && (
-            <>
-              <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                Consent granted
-              </p>
-              <h2 className="mt-2 text-base font-medium text-ink">
-                Analytics are enabled
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                PostHog stores cookies on this device and the Meta Pixel is
-                active. Withdrawing consent stops both. You can re-enable them
-                later from the cookie settings button.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => decide("denied")}
-                  className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface-dim"
-                >
-                  Withdraw consent
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-lg px-4 py-2.5 text-sm font-medium text-muted-ink transition-colors hover:text-ink"
-                >
-                  Close
-                </button>
-              </div>
-            </>
-          )}
-
-          {consent === "denied" && (
-            <>
-              <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                Consent declined
-              </p>
-              <h2 className="mt-2 text-base font-medium text-ink">
-                Analytics stay off
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                PostHog runs in cookieless mode and the Meta Pixel is not
-                loaded. Enabling analytics turns both back on.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => decide("granted")}
-                  className="rounded-lg bg-signal px-5 py-2.5 text-sm font-medium text-signal-text transition-colors hover:bg-signal-hover"
-                >
-                  Enable analytics
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-lg px-4 py-2.5 text-sm font-medium text-muted-ink transition-colors hover:text-ink"
-                >
-                  Close
-                </button>
+                {panel.buttons.map((button) => (
+                  <button
+                    key={button.label}
+                    type="button"
+                    onClick={button.onClick}
+                    className={BUTTON_CLASSES[button.variant]}
+                  >
+                    {button.label}
+                  </button>
+                ))}
               </div>
             </>
           )}
@@ -233,7 +248,7 @@ export default function ConsentBanner() {
       {showChip && (
         <button
           type="button"
-          onClick={reopen}
+          onClick={() => setIsOpen(true)}
           aria-label="Cookie settings"
           className="fixed bottom-4 left-4 z-50 flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 shadow-md transition-colors hover:bg-surface-dim"
         >
