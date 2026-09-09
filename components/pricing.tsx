@@ -5,7 +5,7 @@ import { OrderForm } from "@/components/services/order-form"
 import { getComposerService } from "@/lib/data/services"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
-import posthog from "posthog-js"
+import { track } from "@/lib/analytics"
 
 interface OrderService {
   id: string
@@ -59,10 +59,18 @@ export default function Pricing() {
   const enterpriseWhatsappUrl = waLink("Hello Hawiyat, we need an Enterprise plan for our operation.")
 
   const selectPlan = (service: OrderService) => {
-    posthog.capture("pricing_plan_selected", {
+    track("pricing_plan_selected", {
       service_id: service.id,
     })
     setSelectedService(service)
+  }
+
+  const selectMaxTier = (tier: (typeof maxTiers)[number]) => {
+    setActiveMax(tier.key)
+    track("pricing_max_tier_selected", {
+      service_id: tier.key,
+      tier: tier.label,
+    })
   }
 
   const enterpriseFeatures = [
@@ -90,6 +98,12 @@ export default function Pricing() {
             href={USAGE_DASHBOARD_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              track("outbound_cta_clicked", {
+                destination: "usage_dashboard",
+                source: "pricing_header",
+              })
+            }
             className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors hover:text-ink"
           >
             Open your usage dashboard
@@ -153,7 +167,7 @@ export default function Pricing() {
                 {maxTiers.map((tier) => (
                   <button
                     key={tier.key}
-                    onClick={() => setActiveMax(tier.key)}
+                    onClick={() => selectMaxTier(tier)}
                     className={`flex min-h-[44px] items-center rounded-md px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors ${
                       activeMax === tier.key
                         ? "bg-signal text-signal-text"
@@ -225,6 +239,13 @@ export default function Pricing() {
                 href={enterpriseWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "whatsapp",
+                    source: "pricing_enterprise",
+                    plan: "enterprise",
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3.5 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
                 Book an Enterprise plan
@@ -232,6 +253,13 @@ export default function Pricing() {
               </a>
               <a
                 href="mailto:contact@hawiyat.org"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "email",
+                    source: "pricing_enterprise",
+                    plan: "enterprise",
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 Email us instead

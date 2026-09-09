@@ -15,9 +15,15 @@ export default function WhatsAppWidget() {
   const whatsappUrl = waLink('Hello Hawiyat! I have a question about the Composer.')
 
   const handleClick = () => {
-    posthog.capture('whatsapp_contact_started', {
-      source: 'floating_widget',
-    })
+    // Analytics must never block the chat: if PostHog is uninitialized the SDK
+    // can throw, which would prevent window.open from ever running.
+    try {
+      posthog.capture('whatsapp_contact_started', {
+        source: 'floating_widget',
+      })
+    } catch {
+      /* analytics is best-effort; never block the WhatsApp redirect */
+    }
     window.open(whatsappUrl, '_blank')
   }
 

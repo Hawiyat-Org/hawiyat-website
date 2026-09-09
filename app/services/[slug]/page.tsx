@@ -7,6 +7,7 @@ import { ArrowLeft, ChevronDown } from "lucide-react"
 import { waLink } from "@/lib/contact"
 import { ServicePlans, type ServicePlan } from "@/components/services/service-plans"
 import { ServiceOrderForm } from "@/components/services/service-order-form"
+import { ServiceViewTracker } from "@/components/services/service-view-tracker"
 
 export async function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }))
@@ -162,6 +163,7 @@ export default async function ServicePage({ params, searchParams }: { params: Pr
 
   return (
     <>
+      <ServiceViewTracker serviceId={service.id} slug={service.slug} plan={defaultPlan} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema, faqSchema].filter(Boolean)) }} />
 
       <div className="min-h-screen">

@@ -5,11 +5,11 @@ import { waLink } from "@/lib/contact"
 import { faqs } from "@/lib/data/faqs"
 
 export const metadata = createMetadata({
-  title: "FAQ | AI Composer & Services in Algeria",
+  title: "AI Composer FAQ | LLM API, DZD Pricing & Payments",
   description:
-    "Questions and answers about Hawiyat: what the AI Composer does, how it routes tasks, DZD pricing and payment methods, data privacy, and getting started.",
+    "How the AI Composer routes tasks to GPT, Claude, and Gemini, what it costs in DZD, how to pay with CCP or Baridi Mob, and where your data stays.",
   path: "/faq",
-  modifiedTime: "2026-08-01",
+  modifiedTime: "2026-09-09",
 })
 
 const faqSchema = {
@@ -35,7 +35,7 @@ export default function FaqPage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">FAQ</p>
             <h1 className="mt-4 text-4xl font-semibold text-ink md:text-5xl">
-              Questions, answered straight
+              AI Composer questions, answered straight
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-ink">
               What Hawiyat does, how the AI Composer decides and evaluates every task, what

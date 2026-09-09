@@ -5,11 +5,11 @@ import { createMetadata, SITE_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 
 export const metadata: Metadata = createMetadata({
-  title: "AI API in Algeria | LLM API Provider",
+  title: "AI API in Algeria | LLM API from 6,000 DA/month",
   description:
-    "Get an AI API in Algeria: one key to GPT, Claude, Gemini, and open LLMs through the Hawiyat Composer execution layer. Billed in DZD, pay with CCP or Baridi Mob, no foreign card needed.",
+    "One key to GPT, Claude, Gemini, and open LLMs through the Composer execution layer. LLM routing, DZD billing, CCP or Baridi Mob, no foreign card needed.",
   path: "/ai-api-algeria",
-  modifiedTime: "2026-08-17",
+  modifiedTime: "2026-09-09",
 })
 
 const schema = {

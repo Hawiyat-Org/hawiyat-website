@@ -58,7 +58,8 @@ import prisma from '@/lib/prisma/prismaClient'     // ✗ undefined errors
 DATABASE_URL=postgresql://...
 NEXT_PUBLIC_APP_NAME=Hawiyat
 NEXT_PUBLIC_URL=http://localhost:3000
-NEXT_PUBLIC_CHATWOOT_TOKEN=...   # your chat widget token
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=your_posthog_project_token_here
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 Copy `.env.example` → `.env` if missing.
 

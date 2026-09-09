@@ -7,6 +7,15 @@ import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
 const IP_RATE_LIMIT = { maxRequests: 5, windowMs: 60 * 60 * 1000 }
 const EMAIL_RATE_LIMIT = { maxRequests: 4, windowMs: 60 * 60 * 1000 }
 
+function orderError(code: string, message: string, resolution: string, status: number) {
+  return NextResponse.json(
+    {
+      error: { code, message, resolution },
+    },
+    { status }
+  )
+}
+
 async function sendTelegramNotification(message: string) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
@@ -45,9 +54,11 @@ export async function POST(request: NextRequest) {
       typeof customerName !== "string" || !customerName ||
       typeof customerEmail !== "string" || !customerEmail
     ) {
-      return NextResponse.json(
-        { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
-        { status: 400 }
+      return orderError(
+        "missing_fields",
+        "Missing required fields: serviceId, serviceName, customerName, customerEmail",
+        "Provide all required fields as strings: serviceId, serviceName, customerName, customerEmail.",
+        400
       )
     }
 
@@ -56,46 +67,50 @@ export async function POST(request: NextRequest) {
       customerEmail.length > 254 ||
       (typeof customerPhone === "string" && customerPhone.length > 32)
     ) {
-      return NextResponse.json(
-        { error: "Field too long" },
-        { status: 400 }
+      return orderError(
+        "field_too_long",
+        "One or more fields exceed the maximum length: customerName is capped at 120 characters, customerEmail at 254, customerPhone at 32.",
+        "Shorten the offending field(s) to the cap and resubmit: customerName <= 120, customerEmail <= 254, customerPhone <= 32 characters.",
+        400
       )
     }
 
     if (typeof notes === "string" && notes.length > 2000) {
-      return NextResponse.json(
-        { error: "Notes too long" },
-        { status: 400 }
+      return orderError(
+        "field_too_long",
+        "notes exceeds the maximum length of 2000 characters.",
+        "Shorten notes to 2000 characters or fewer and resubmit.",
+        400
       )
     }
 
     const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
     if (!ipLimit.allowed) {
-      return NextResponse.json(
-        {
-          error: `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
-          retryAfter: ipLimit.retryAfter,
-        },
-        { status: 429 }
+      return orderError(
+        "rate_limited_ip",
+        `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
+        `Wait ${ipLimit.retryAfter} seconds before submitting another order, or contact Hawiyat support if you believe this is a mistake.`,
+        429
       )
     }
 
     const emailLimit = checkRateLimit(`email:${customerEmail}`, EMAIL_RATE_LIMIT.maxRequests, EMAIL_RATE_LIMIT.windowMs)
     if (!emailLimit.allowed) {
-      return NextResponse.json(
-        {
-          error: `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
-          retryAfter: emailLimit.retryAfter,
-        },
-        { status: 429 }
+      return orderError(
+        "rate_limited_email",
+        `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
+        `Wait ${emailLimit.retryAfter} seconds or use a different email address before submitting another order.`,
+        429
       )
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(customerEmail)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 }
+      return orderError(
+        "invalid_email",
+        "Invalid email format.",
+        "Provide a valid email address, e.g. name@example.com, and resubmit.",
+        400
       )
     }
 
@@ -126,9 +141,11 @@ export async function POST(request: NextRequest) {
 
     const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
     if (normalizedPayment && !validPaymentMethods.includes(normalizedPayment)) {
-      return NextResponse.json(
-        { error: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD" },
-        { status: 400 }
+      return orderError(
+        "invalid_payment_method",
+        "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD",
+        "Set preferredPayment to one of CCP, BARIDI_MOB, or USD, or omit it.",
+        400
       )
     }
 
@@ -199,9 +216,11 @@ ${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}
     )
   } catch (error) {
     console.error("Order creation error:", error)
-    return NextResponse.json(
-      { error: "Failed to create order" },
-      { status: 500 }
+    return orderError(
+      "internal_error",
+      "Failed to create order",
+      "No order was saved. Please try again in a few moments; if the problem persists, contact Hawiyat support.",
+      500
     )
   }
 }
