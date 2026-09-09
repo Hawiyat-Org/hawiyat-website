@@ -1,12 +1,13 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import PostHogPageView from "@/components/posthog-pageview";
+import ConsentBanner from "@/components/consent-banner";
 import { SITE_URL } from "@/lib/seo";
 
 const space = Space_Grotesk({
@@ -176,6 +177,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
         <link rel="alternate" type="text/plain" href="/llms.txt" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" />
 
 
         {/* Organization + WebSite structured data, split per schema.org spec */}
@@ -198,6 +200,10 @@ export default function RootLayout({
           Skip to content
         </Link>
 
+        {/* SPA pageview tracking. Renders null; mounted in the root layout so
+            it survives soft navigations and fires $pageview per route change. */}
+        <PostHogPageView />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -218,13 +224,13 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/*
-          Meta Pixel deferred to lazyOnload so it does not block the main
-          thread during page load (was afterInteractive, still after interactive
-          but after ALL resources are loaded).
+          Consent-gated analytics. The Meta Pixel <Script> previously lived
+          here and fired unconsented on every page; it now lives inside
+          components/consent-banner.tsx and renders (strategy stays lazyOnload)
+          only after the visitor accepts. PostHog persistence is paired via
+          cookieless_mode: "on_reject" in instrumentation-client.ts.
         */}
-        <Script id="meta-pixel" strategy="lazyOnload">
-          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1489709689056564');fbq('track', 'PageView');`}
-        </Script>
+        <ConsentBanner />
       </body>
     </html>
   );

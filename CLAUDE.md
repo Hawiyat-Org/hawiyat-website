@@ -46,7 +46,8 @@ import prisma from '@/lib/prisma/prismaClient'     // ✗ Causes undefined error
 DATABASE_URL=postgresql://...
 NEXT_PUBLIC_APP_NAME=Hawiyat
 NEXT_PUBLIC_URL=http://localhost:3000
-NEXT_PUBLIC_CHATWOOT_TOKEN=your-token
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=your_posthog_project_token_here
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 Copy `.env.example` to `.env` if it exists, or create from scratch.

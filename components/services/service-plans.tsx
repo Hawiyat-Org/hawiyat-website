@@ -4,7 +4,18 @@ import { useState } from "react"
 import { Check, Mail, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { waLink } from "@/lib/contact"
+import posthog from "posthog-js"
 import { ServiceOrderForm } from "./service-order-form"
+
+/** Analytics must never block the UI: if PostHog is uninitialized (no token,
+ * blocked by an ad blocker, or init fails) capture() can throw. Wrap every call. */
+function track(event: string, props?: Record<string, unknown>) {
+  try {
+    posthog.capture(event, props)
+  } catch {
+    /* analytics is best-effort; never break an outbound redirect */
+  }
+}
 
 export interface ServicePlan {
   name: string
@@ -151,6 +162,14 @@ export function ServicePlans({
                 href={contactOrderUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "whatsapp",
+                    source: "service_plans",
+                    service_id: serviceId,
+                    plan: plan.name,
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
                 Order on WhatsApp
@@ -158,6 +177,14 @@ export function ServicePlans({
               </a>
               <a
                 href="mailto:contact@hawiyat.org"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "email",
+                    source: "service_plans",
+                    service_id: serviceId,
+                    plan: plan.name,
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 Email us
@@ -170,6 +197,14 @@ export function ServicePlans({
                 href={contactWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "whatsapp",
+                    source: "service_plans_custom",
+                    service_id: serviceId,
+                    plan: plan.name,
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
               >
                 Contact us on WhatsApp
@@ -177,6 +212,14 @@ export function ServicePlans({
               </a>
               <a
                 href="mailto:contact@hawiyat.org"
+                onClick={() =>
+                  track("outbound_cta_clicked", {
+                    destination: "email",
+                    source: "service_plans_custom",
+                    service_id: serviceId,
+                    plan: plan.name,
+                  })
+                }
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
               >
                 Email us instead

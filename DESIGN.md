@@ -330,7 +330,8 @@ NEXT_PUBLIC_URL=https://www.hawiyat.org   # must match app/layout.tsx SITE_URL
 NEXT_PUBLIC_APP_URL=https://app.hawiyat.org
 NEXT_PUBLIC_DOCS_URL=https://docs.hawiyat.org
 NEXT_PUBLIC_BLOG_URL=https://blog.hawiyat.org
-NEXT_PUBLIC_CHATWOOT_TOKEN=...
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=...
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 ## File Structure Summary

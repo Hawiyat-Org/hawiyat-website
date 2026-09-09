@@ -46,7 +46,13 @@ export async function POST(request: NextRequest) {
       typeof customerEmail !== "string" || !customerEmail
     ) {
       return NextResponse.json(
-        { error: "Missing required fields: serviceId, serviceName, customerName, customerEmail" },
+        {
+          error: {
+            code: "missing_fields",
+            message: "Missing required fields: serviceId, serviceName, customerName, customerEmail",
+            resolution: "Provide all required fields as strings: serviceId, serviceName, customerName, customerEmail.",
+          },
+        },
         { status: 400 }
       )
     }
@@ -57,14 +63,26 @@ export async function POST(request: NextRequest) {
       (typeof customerPhone === "string" && customerPhone.length > 32)
     ) {
       return NextResponse.json(
-        { error: "Field too long" },
+        {
+          error: {
+            code: "field_too_long",
+            message: "One or more fields exceed the maximum length: customerName is capped at 120 characters, customerEmail at 254, customerPhone at 32.",
+            resolution: "Shorten the offending field(s) to the cap and resubmit: customerName <= 120, customerEmail <= 254, customerPhone <= 32 characters.",
+          },
+        },
         { status: 400 }
       )
     }
 
     if (typeof notes === "string" && notes.length > 2000) {
       return NextResponse.json(
-        { error: "Notes too long" },
+        {
+          error: {
+            code: "field_too_long",
+            message: "notes exceeds the maximum length of 2000 characters.",
+            resolution: "Shorten notes to 2000 characters or fewer and resubmit.",
+          },
+        },
         { status: 400 }
       )
     }
@@ -73,8 +91,11 @@ export async function POST(request: NextRequest) {
     if (!ipLimit.allowed) {
       return NextResponse.json(
         {
-          error: `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
-          retryAfter: ipLimit.retryAfter,
+          error: {
+            code: "rate_limited_ip",
+            message: `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
+            resolution: `Wait ${ipLimit.retryAfter} seconds before submitting another order, or contact Hawiyat support if you believe this is a mistake.`,
+          },
         },
         { status: 429 }
       )
@@ -84,8 +105,11 @@ export async function POST(request: NextRequest) {
     if (!emailLimit.allowed) {
       return NextResponse.json(
         {
-          error: `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
-          retryAfter: emailLimit.retryAfter,
+          error: {
+            code: "rate_limited_email",
+            message: `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
+            resolution: `Wait ${emailLimit.retryAfter} seconds or use a different email address before submitting another order.`,
+          },
         },
         { status: 429 }
       )
@@ -94,7 +118,13 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(customerEmail)) {
       return NextResponse.json(
-        { error: "Invalid email format" },
+        {
+          error: {
+            code: "invalid_email",
+            message: "Invalid email format.",
+            resolution: "Provide a valid email address, e.g. name@example.com, and resubmit.",
+          },
+        },
         { status: 400 }
       )
     }
@@ -127,7 +157,13 @@ export async function POST(request: NextRequest) {
     const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
     if (normalizedPayment && !validPaymentMethods.includes(normalizedPayment)) {
       return NextResponse.json(
-        { error: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD" },
+        {
+          error: {
+            code: "invalid_payment_method",
+            message: "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD",
+            resolution: "Set preferredPayment to one of CCP, BARIDI_MOB, or USD, or omit it.",
+          },
+        },
         { status: 400 }
       )
     }
@@ -200,7 +236,13 @@ ${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}
   } catch (error) {
     console.error("Order creation error:", error)
     return NextResponse.json(
-      { error: "Failed to create order" },
+      {
+        error: {
+          code: "internal_error",
+          message: "Failed to create order",
+          resolution: "No order was saved. Please try again in a few moments; if the problem persists, contact Hawiyat support.",
+        },
+      },
       { status: 500 }
     )
   }
