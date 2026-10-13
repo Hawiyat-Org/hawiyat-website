@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ArrowRight, Cpu, Zap, Database, Layers, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown } from "lucide-react"
 import { createMetadata, SITE_URL, USAGE_DASHBOARD_URL } from "@/lib/seo"
 
 export const metadata: Metadata = createMetadata({
@@ -15,8 +15,9 @@ const DASHBOARD = USAGE_DASHBOARD_URL
 type PricedModel = {
   id: string
   name: string
+  context: string
   tagline: string
-  note: string
+  badge?: string
   rows: { label: string; value: string }[]
 }
 
@@ -24,43 +25,44 @@ const MODELS: PricedModel[] = [
   {
     id: "glm-5-3-flash",
     name: "GLM 5.3 Flash",
-    tagline: "The half-price workhorse for high-volume calls.",
-    note: "1M-token context, half price",
+    context: "1M ctx",
+    tagline: "The workhorse. Cheapest line we run, built for volume.",
+    badge: "HALF PRICE",
     rows: [
-      { label: "Input", value: "$0.03 / 1M tokens" },
-      { label: "Output", value: "$0.105 / 1M tokens" },
-      { label: "Cache read", value: "$0.0085 / 1M tokens" },
+      { label: "Input", value: "$0.03" },
+      { label: "Output", value: "$0.105" },
+      { label: "Cache read", value: "$0.0085" },
     ],
   },
   {
     id: "deepseek-v4-1-flash",
     name: "DeepSeek V4.1 Flash",
-    tagline: "High-throughput model for agents and pipelines.",
-    note: "1M-token context, peak pricing",
+    context: "1M ctx",
+    tagline: "High-throughput line for agents and long pipelines.",
     rows: [
-      { label: "Input", value: "$0.15 / 1M tokens" },
-      { label: "Output", value: "$0.60 / 1M tokens" },
-      { label: "Cache hit", value: "$0.003 / 1M tokens" },
+      { label: "Input", value: "$0.15" },
+      { label: "Output", value: "$0.60" },
+      { label: "Cache hit", value: "$0.003" },
     ],
   },
   {
     id: "glm-5-2",
     name: "GLM 5.2",
-    tagline: "Flagship open-weights model for long-horizon work.",
-    note: "1M-token context",
+    context: "1M ctx",
+    tagline: "Flagship line for long-horizon, project-scale work.",
     rows: [
-      { label: "Input", value: "$0.60 / 1M tokens" },
-      { label: "Output", value: "$2.10 / 1M tokens" },
-      { label: "Cache read", value: "$0.15 / 1M tokens" },
+      { label: "Input", value: "$0.60" },
+      { label: "Output", value: "$2.10" },
+      { label: "Cache read", value: "$0.15" },
     ],
   },
 ]
 
 const METRICS = [
-  { icon: Zap, label: "Uptime", value: "99.9%" },
-  { icon: Database, label: "Cache hit rate", value: "98.7%" },
-  { icon: Cpu, label: "Latency", value: "Low latency" },
-  { icon: Layers, label: "Pricing", value: "Optimized to half" },
+  { label: "Uptime", value: "99.9%", note: "confirmed on every line" },
+  { label: "Cache hit", value: "98.7%", note: "on repeated context" },
+  { label: "Latency", value: "Low", note: "served from local GPU" },
+  { label: "Pricing", value: "Half", note: "of official rates" },
 ]
 
 const faqs = [
@@ -77,7 +79,7 @@ const faqs = [
   {
     question: "How do you keep uptime at 99.9%?",
     answer:
-      "The models run on our own rented GPU capacity, and that capacity is one line in a fallback chain that also includes the official providers. If a line degrades, the request is carried by another one, so the service stays up without us charging platform-level prices.",
+      "The models already run on our own rented GPU capacity, and that capacity is one line in a fallback chain that also includes the official providers. If a line degrades, the request is carried by another one, so the service stays up without us charging platform-level prices.",
   },
   {
     question: "What does 'optimized to half' mean?",
@@ -117,6 +119,12 @@ const serviceSchema = {
   areaServed: { "@type": "Country", name: "Algeria" },
 }
 
+const LINES = [
+  { name: "OUR GPU", role: "primary" },
+  { name: "OFFICIAL", role: "fallback 1" },
+  { name: "OFFICIAL", role: "fallback 2" },
+]
+
 export default function ApiPage() {
   return (
     <>
@@ -130,76 +138,89 @@ export default function ApiPage() {
       />
 
       {/* Hero */}
-      <section className="relative flex w-full flex-col place-content-center place-items-center px-6 pb-12 pt-32 md:pt-40">
-        <div className="mx-auto w-full max-w-4xl text-center">
+      <section className="relative flex w-full flex-col place-content-center place-items-center px-6 pb-14 pt-32 md:pt-40">
+        <div className="mx-auto w-full max-w-3xl text-center">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-            Hawiyat API / self-hosted models / pay per token
+            Hawiyat API
           </p>
-          <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-ink md:text-6xl">
-            The Hawiyat API
+          <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl">
+            Self-hosted models,
+            <br />
+            priced per token
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg">
-            GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2, self-hosted on our own GPU capacity.
-            One API key, per-token pricing, balance topped up from the dashboard.
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-ink md:text-lg">
+            GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 on one key. Balance topped up from the
+            dashboard, spent per request.
           </p>
           <div className="mt-8 flex justify-center">
             <a
               href={DASHBOARD}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+              className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Top up and start
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
+          <p className="mt-6 font-mono text-xs text-muted-ink">
+            3 models · 1M context · pay per 1M tokens
+          </p>
         </div>
       </section>
 
-      {/* Metrics */}
+      {/* Telemetry band */}
       <section className="px-6 pb-16">
-        <div className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-4 md:grid-cols-4">
-          {METRICS.map((m) => (
-            <div key={m.label} className="rounded-lg border border-border bg-surface p-6">
-              <m.icon className="h-5 w-5 text-muted-ink" aria-hidden="true" />
-              <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                {m.label}
-              </p>
-              <p className="mt-2 font-mono text-base font-semibold text-ink">{m.value}</p>
-            </div>
-          ))}
+        <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-lg border border-border">
+          <div className="grid divide-y divide-border md:grid-cols-4 md:divide-x md:divide-y-0">
+            {METRICS.map((m) => (
+              <div key={m.label} className="bg-surface px-6 py-5">
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
+                  {m.label}
+                </p>
+                <p className="mt-2 font-mono text-2xl font-semibold text-ink">{m.value}</p>
+                <p className="mt-1 font-mono text-xs text-muted-ink">{m.note}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Models */}
-      <section id="models" className="scroll-mt-28 px-6 pb-16">
+      <section id="models" className="scroll-mt-28 px-6 pb-16 md:pb-24">
         <div className="mx-auto w-full max-w-5xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Models</p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight text-ink md:text-3xl">
             Three models, one key
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-ink">
-            Prices per million tokens. Cache reads and cache hits are billed separately from fresh
-            input.
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-ink">
+            Prices per 1M tokens, in dollars. Cache rows are billed separately from fresh input.
           </p>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
             {MODELS.map((model) => (
-              <div
-                key={model.id}
-                className="flex flex-col rounded-lg border border-border bg-surface p-6 md:p-8"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-bold tracking-tight text-ink">{model.name}</h3>
-                  <span className="whitespace-nowrap rounded-lg border border-border bg-surface-dim px-3 py-1 font-mono text-xs text-muted-ink">
-                    {model.note}
-                  </span>
+              <div key={model.id} className="flex flex-col bg-surface p-6 md:p-8">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-bold tracking-tight text-ink">{model.name}</h3>
+                  {model.badge ? (
+                    <span className="rounded-full bg-signal px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-text">
+                      {model.badge}
+                    </span>
+                  ) : (
+                    <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
+                      {model.context}
+                    </span>
+                  )}
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-ink">{model.tagline}</p>
+                <p className="mt-3 min-h-10 text-sm leading-relaxed text-muted-ink">
+                  {model.tagline}
+                </p>
 
-                <dl className="mt-6 grow space-y-3 border-t border-border pt-6">
+                <dl className="mt-6 grow">
                   {model.rows.map((row) => (
-                    <div key={row.label} className="flex items-baseline justify-between gap-4">
+                    <div
+                      key={row.label}
+                      className="flex items-baseline justify-between gap-3 border-t border-border py-3"
+                    >
                       <dt className="font-mono text-xs uppercase tracking-widest text-muted-ink">
                         {row.label}
                       </dt>
@@ -220,19 +241,39 @@ export default function ApiPage() {
               </div>
             ))}
           </div>
+          <p className="mt-3 font-mono text-xs text-muted-ink">
+            DeepSeek V4.1 Flash shown at peak rates.
+          </p>
         </div>
       </section>
 
-      {/* Self-hosted */}
-      <section className="px-6 pb-16">
-        <div className="mx-auto w-full max-w-5xl rounded-lg border border-border bg-surface-dim p-8 md:p-12">
+      {/* Fallback lines */}
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="mx-auto w-full max-w-5xl rounded-lg border border-border bg-surface-dim p-6 md:p-10">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-            Our own hosted models
+            How a request is carried
           </p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
-            Served from our own GPU capacity
+            One key, several lines
           </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-ink md:text-base">
+
+          <div className="mt-8 flex flex-col gap-4 md:flex-row md:items-stretch">
+            {LINES.map((line, i) => (
+              <div key={line.role} className="flex flex-1 items-center gap-4">
+                <div className="flex-1 rounded-lg border border-border bg-surface px-5 py-4">
+                  <p className="font-mono text-xs uppercase tracking-widest text-ink">
+                    {line.name}
+                  </p>
+                  <p className="mt-1 font-mono text-xs text-muted-ink">{line.role}</p>
+                </div>
+                {i < LINES.length - 1 && (
+                  <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-ink md:block" aria-hidden="true" />
+                )}
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted-ink md:text-base">
             These models already run on rented GPU capacity that we operate ourselves. That
             capacity is one line in a fallback chain that also includes the official providers, so
             a request is always carried by a line that is up. Confirming uptime on several lines at
@@ -240,57 +281,26 @@ export default function ApiPage() {
             single endpoint. It is also why you keep our prices: you are not paying the expensive
             platform rates on top.
           </p>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                Infrastructure
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                Rented GPU capacity under our operation, one line in a fallback chain behind the
-                official providers.
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                Caching layer
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                98.7% cache hit rate on repeated context, billed at cache-read prices.
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                Availability
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                99.9% uptime, confirmed across every line and monitored continuously from Algiers.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Top up */}
-      <section className="px-6 pb-20">
+      <section className="px-6 pb-16 md:pb-24">
         <div className="mx-auto w-full max-w-5xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-            Balance and billing
-          </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight text-ink md:text-3xl">
             Top up from the dashboard
           </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-ink md:text-base">
-            No subscription and no monthly cap to fit inside. You add balance to your key in the
-            usage dashboard, and every request draws from it at the per-token rates above. Usage,
-            spend, and cache savings are all visible in the same place.
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-ink md:text-base">
+            No subscription and no monthly cap to fit inside. You add balance to your key, and
+            every request draws from it at the rates above. Usage, spend and cache savings sit in
+            the same place.
           </p>
           <div className="mt-8 flex">
             <a
               href={DASHBOARD}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Add balance
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -302,8 +312,7 @@ export default function ApiPage() {
       {/* FAQ */}
       <section className="px-6 pb-24">
         <div className="mx-auto w-full max-w-3xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">FAQ</p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">Questions</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-ink md:text-3xl">Questions</h2>
           <div className="mt-6 border-t border-border">
             {faqs.map((faq) => (
               <details key={faq.question} className="group border-b border-border">
