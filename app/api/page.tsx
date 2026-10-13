@@ -7,7 +7,7 @@ import { waLink } from "@/lib/contact"
 export const metadata: Metadata = createMetadata({
   title: "Hawiyat API - Self-Hosted Models, Pay Per Token",
   description:
-    "GLM 5.2 and DeepSeek V4.1 Flash on the Hawiyat API. Self-hosted on our own GPU capacity, priced per million tokens, topped up from the dashboard.",
+    "GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash on the Hawiyat API. Self-hosted on our own GPU capacity, priced per million tokens, topped up from the dashboard.",
   path: "/api",
   modifiedTime: "2026-10-12",
 })
@@ -30,6 +30,17 @@ const MODELS: PricedModel[] = [
       { label: "Input", value: "$0.60 / 1M tokens" },
       { label: "Output", value: "$2.10 / 1M tokens" },
       { label: "Cache read", value: "$0.15 / 1M tokens" },
+    ],
+  },
+  {
+    id: "glm-5-3-flash",
+    name: "GLM 5.3 Flash",
+    tagline: "The half-price workhorse for high-volume calls.",
+    note: "1M-token context, half price",
+    rows: [
+      { label: "Input", value: "$0.03 / 1M tokens" },
+      { label: "Output", value: "$0.105 / 1M tokens" },
+      { label: "Cache read", value: "$0.0085 / 1M tokens" },
     ],
   },
   {
@@ -61,7 +72,7 @@ const faqs = [
   {
     question: "Which models are available?",
     answer:
-      "GLM 5.2 and DeepSeek V4.1 Flash run on our own GPU capacity. Both carry a 1M-token context window and are served from the same endpoint with the same API key.",
+      "GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash run on our own GPU capacity. GLM 5.3 Flash is priced at half the standard rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
   },
   {
     question: "What does 'optimized to half' mean?",
@@ -123,8 +134,8 @@ export default function ApiPage() {
             The Hawiyat API
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg">
-            GLM 5.2 and DeepSeek V4.1 Flash, self-hosted on our own GPU capacity. One API key,
-            per-token pricing, balance topped up from the dashboard.
+            GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash, self-hosted on our own GPU capacity.
+            One API key, per-token pricing, balance topped up from the dashboard.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -170,14 +181,14 @@ export default function ApiPage() {
         <div className="mx-auto w-full max-w-5xl">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Models</p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
-            Two models, one key
+            Three models, one key
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-ink">
             Prices per million tokens. Cache reads and cache hits are billed separately from
             fresh input.
           </p>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             {MODELS.map((model) => (
               <div
                 key={model.id}
