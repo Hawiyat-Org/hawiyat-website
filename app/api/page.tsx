@@ -26,12 +26,12 @@ const MODELS: PricedModel[] = [
     id: "glm-5-3-flash",
     name: "GLM 5.3 Flash",
     context: "1M ctx",
-    tagline: "The workhorse. Cheapest line we run, built for volume.",
-    badge: "HALF PRICE",
+    tagline: "The workhorse. Cheapest line we run, 60% under official rates.",
+    badge: "SAVE 60%",
     rows: [
-      { label: "Input", value: "$0.03" },
-      { label: "Output", value: "$0.105" },
-      { label: "Cache read", value: "$0.0085" },
+      { label: "Input", value: "$0.06" },
+      { label: "Output", value: "$0.21" },
+      { label: "Cache read", value: "$0.017" },
     ],
   },
   {
@@ -62,7 +62,7 @@ const METRICS = [
   { label: "Uptime", value: "99.9%", note: "confirmed on every line" },
   { label: "Cache hit", value: "98.7%", note: "on repeated context" },
   { label: "Latency", value: "Low", note: "served from local GPU" },
-  { label: "Pricing", value: "Half", note: "of official rates" },
+  { label: "Pricing", value: "Up to half", note: "of official rates" },
 ]
 
 const faqs = [
@@ -74,7 +74,7 @@ const faqs = [
   {
     question: "Which models are available?",
     answer:
-      "GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 run on our own GPU capacity. GLM 5.3 Flash is priced at half the standard rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
+      "GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 run on our own GPU capacity. GLM 5.3 Flash is priced 60% below the official rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
   },
   {
     question: "How do you keep uptime at 99.9%?",
