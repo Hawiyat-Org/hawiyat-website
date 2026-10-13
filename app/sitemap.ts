@@ -6,6 +6,7 @@ import { getAllPosts } from "@/lib/blog"
 const routes = [
   "",
   "/composer",
+  "/api",
   "/ai-api-algeria",
   "/credits",
   "/blog",
