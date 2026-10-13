@@ -26,8 +26,8 @@ const MODELS: PricedModel[] = [
     id: "glm-5-3-flash",
     name: "GLM 5.3 Flash",
     context: "1M ctx",
-    tagline: "The workhorse. Cheapest line we run, 60% under official rates.",
-    badge: "SAVE 60%",
+    tagline: "The workhorse. Cheapest line we run, built for volume.",
+    badge: "HALF PRICE",
     rows: [
       { label: "Input", value: "$0.06" },
       { label: "Output", value: "$0.21" },
@@ -39,6 +39,7 @@ const MODELS: PricedModel[] = [
     name: "DeepSeek V4.1 Flash",
     context: "1M ctx",
     tagline: "High-throughput line for agents and long pipelines.",
+    badge: "HALF PRICE",
     rows: [
       { label: "Input", value: "$0.15" },
       { label: "Output", value: "$0.60" },
@@ -50,6 +51,7 @@ const MODELS: PricedModel[] = [
     name: "GLM 5.2",
     context: "1M ctx",
     tagline: "Flagship line for long-horizon, project-scale work.",
+    badge: "HALF PRICE",
     rows: [
       { label: "Input", value: "$0.60" },
       { label: "Output", value: "$2.10" },
@@ -62,7 +64,7 @@ const METRICS = [
   { label: "Uptime", value: "99.9%", note: "confirmed on every line" },
   { label: "Cache hit", value: "98.7%", note: "on repeated context" },
   { label: "Latency", value: "Low", note: "served from local GPU" },
-  { label: "Pricing", value: "Up to half", note: "of official rates" },
+  { label: "Pricing", value: "Half", note: "of official rates" },
 ]
 
 const faqs = [
@@ -74,7 +76,7 @@ const faqs = [
   {
     question: "Which models are available?",
     answer:
-      "GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 run on our own GPU capacity. GLM 5.3 Flash is priced 60% below the official rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
+      "GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 run on our own GPU capacity, all three at half the official rate. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
   },
   {
     question: "How do you keep uptime at 99.9%?",
@@ -199,17 +201,16 @@ export default function ApiPage() {
           <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
             {MODELS.map((model) => (
               <div key={model.id} className="flex flex-col bg-surface p-7 md:p-9">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-xl font-bold tracking-tight text-ink">{model.name}</h3>
-                  {model.badge ? (
+                <h3 className="text-xl font-bold tracking-tight text-ink">{model.name}</h3>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  {model.badge && (
                     <span className="rounded-full bg-signal px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-text">
                       {model.badge}
                     </span>
-                  ) : (
-                    <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
-                      {model.context}
-                    </span>
                   )}
+                  <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
+                    {model.context}
+                  </span>
                 </div>
                 <p className="mt-4 min-h-12 text-sm leading-relaxed text-muted-ink">
                   {model.tagline}
