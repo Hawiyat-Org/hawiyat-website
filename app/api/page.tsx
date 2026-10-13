@@ -1,16 +1,16 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight, MessageCircle, Cpu, Zap, Database, Layers } from "lucide-react"
+import { ArrowRight, Cpu, Zap, Database, Layers, ChevronDown } from "lucide-react"
 import { createMetadata, SITE_URL, USAGE_DASHBOARD_URL } from "@/lib/seo"
-import { waLink } from "@/lib/contact"
 
 export const metadata: Metadata = createMetadata({
   title: "Hawiyat API - Self-Hosted Models, Pay Per Token",
   description:
-    "GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash on the Hawiyat API. Self-hosted on our own GPU capacity, priced per million tokens, topped up from the dashboard.",
+    "GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash on the Hawiyat API. Self-hosted GPU capacity, priced per million tokens, topped up from the dashboard.",
   path: "/api",
   modifiedTime: "2026-10-12",
 })
+
+const DASHBOARD = USAGE_DASHBOARD_URL
 
 type PricedModel = {
   id: string
@@ -21,17 +21,6 @@ type PricedModel = {
 }
 
 const MODELS: PricedModel[] = [
-  {
-    id: "glm-5-2",
-    name: "GLM 5.2",
-    tagline: "Flagship open-weights model for long-horizon work.",
-    note: "1M-token context",
-    rows: [
-      { label: "Input", value: "$0.60 / 1M tokens" },
-      { label: "Output", value: "$2.10 / 1M tokens" },
-      { label: "Cache read", value: "$0.15 / 1M tokens" },
-    ],
-  },
   {
     id: "glm-5-3-flash",
     name: "GLM 5.3 Flash",
@@ -54,13 +43,24 @@ const MODELS: PricedModel[] = [
       { label: "Cache hit", value: "$0.003 / 1M tokens" },
     ],
   },
+  {
+    id: "glm-5-2",
+    name: "GLM 5.2",
+    tagline: "Flagship open-weights model for long-horizon work.",
+    note: "1M-token context",
+    rows: [
+      { label: "Input", value: "$0.60 / 1M tokens" },
+      { label: "Output", value: "$2.10 / 1M tokens" },
+      { label: "Cache read", value: "$0.15 / 1M tokens" },
+    ],
+  },
 ]
 
 const METRICS = [
   { icon: Zap, label: "Uptime", value: "99.9%" },
   { icon: Database, label: "Cache hit rate", value: "98.7%" },
-  { icon: Cpu, label: "Latency", value: "Low-latency local serving" },
-  { icon: Layers, label: "Optimization", value: "Optimized to half" },
+  { icon: Cpu, label: "Latency", value: "Low latency" },
+  { icon: Layers, label: "Pricing", value: "Optimized to half" },
 ]
 
 const faqs = [
@@ -72,7 +72,12 @@ const faqs = [
   {
     question: "Which models are available?",
     answer:
-      "GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash run on our own GPU capacity. GLM 5.3 Flash is priced at half the standard rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
+      "GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2 run on our own GPU capacity. GLM 5.3 Flash is priced at half the standard rate for high-volume calls. All three carry a 1M-token context window and are served from the same endpoint with the same API key.",
+  },
+  {
+    question: "How do you keep uptime at 99.9%?",
+    answer:
+      "The models run on our own rented GPU capacity, and that capacity is one line in a fallback chain that also includes the official providers. If a line degrades, the request is carried by another one, so the service stays up without us charging platform-level prices.",
   },
   {
     question: "What does 'optimized to half' mean?",
@@ -101,7 +106,7 @@ const serviceSchema = {
   "@type": "Service",
   name: "Hawiyat API - self-hosted AI models",
   description:
-    "Pay-per-token access to GLM 5.2 and DeepSeek V4.1 Flash, self-hosted on Hawiyat GPU capacity and topped up from the usage dashboard.",
+    "Pay-per-token access to GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2, self-hosted on Hawiyat GPU capacity and topped up from the usage dashboard.",
   url: `${SITE_URL}/api`,
   provider: {
     "@type": "Organization",
@@ -134,25 +139,18 @@ export default function ApiPage() {
             The Hawiyat API
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg">
-            GLM 5.2, GLM 5.3 Flash and DeepSeek V4.1 Flash, self-hosted on our own GPU capacity.
+            GLM 5.3 Flash, DeepSeek V4.1 Flash and GLM 5.2, self-hosted on our own GPU capacity.
             One API key, per-token pricing, balance topped up from the dashboard.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/credits"
+          <div className="mt-8 flex justify-center">
+            <a
+              href={DASHBOARD}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Top up and start
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-            <a
-              href={waLink("Hello Hawiyat! I want to use the Hawiyat API.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Ask on WhatsApp
             </a>
           </div>
         </div>
@@ -162,30 +160,27 @@ export default function ApiPage() {
       <section className="px-6 pb-16">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-4 md:grid-cols-4">
           {METRICS.map((m) => (
-            <div
-              key={m.label}
-              className="rounded-lg border border-border bg-surface p-6"
-            >
+            <div key={m.label} className="rounded-lg border border-border bg-surface p-6">
               <m.icon className="h-5 w-5 text-muted-ink" aria-hidden="true" />
               <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-ink">
                 {m.label}
               </p>
-              <p className="mt-2 font-mono text-lg font-semibold text-ink">{m.value}</p>
+              <p className="mt-2 font-mono text-base font-semibold text-ink">{m.value}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Models */}
-      <section className="px-6 pb-16">
+      <section id="models" className="scroll-mt-28 px-6 pb-16">
         <div className="mx-auto w-full max-w-5xl">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">Models</p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
             Three models, one key
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-ink">
-            Prices per million tokens. Cache reads and cache hits are billed separately from
-            fresh input.
+            Prices per million tokens. Cache reads and cache hits are billed separately from fresh
+            input.
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -196,13 +191,13 @@ export default function ApiPage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="text-xl font-bold tracking-tight text-ink">{model.name}</h3>
-                  <span className="rounded-lg border border-border bg-surface-dim px-3 py-1 font-mono text-xs text-muted-ink">
+                  <span className="whitespace-nowrap rounded-lg border border-border bg-surface-dim px-3 py-1 font-mono text-xs text-muted-ink">
                     {model.note}
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-muted-ink">{model.tagline}</p>
 
-                <dl className="mt-6 space-y-3 border-t border-border pt-6">
+                <dl className="mt-6 grow space-y-3 border-t border-border pt-6">
                   {model.rows.map((row) => (
                     <div key={row.label} className="flex items-baseline justify-between gap-4">
                       <dt className="font-mono text-xs uppercase tracking-widest text-muted-ink">
@@ -213,13 +208,15 @@ export default function ApiPage() {
                   ))}
                 </dl>
 
-                <Link
-                  href="/credits"
-                  className="mt-6 inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                <a
+                  href={DASHBOARD}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
                 >
                   Use {model.name}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+                </a>
               </div>
             ))}
           </div>
@@ -236,10 +233,12 @@ export default function ApiPage() {
             Served from our own GPU capacity
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-ink md:text-base">
-            These models run on rented GPU capacity that we operate ourselves. Your requests go
-            straight to our own endpoints, not through a foreign gateway. That is what lets us
-            hold uptime at 99.9%, keep latency low, and land a 98.7% cache hit rate on repeated
-            context. The same layer is what optimizes your bill to half.
+            These models already run on rented GPU capacity that we operate ourselves. That
+            capacity is one line in a fallback chain that also includes the official providers, so
+            a request is always carried by a line that is up. Confirming uptime on several lines at
+            once is what lets us hold availability at 99.9% instead of betting the service on a
+            single endpoint. It is also why you keep our prices: you are not paying the expensive
+            platform rates on top.
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -248,7 +247,8 @@ export default function ApiPage() {
                 Infrastructure
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                Dedicated GPU capacity under our operation, provisioned for inference.
+                Rented GPU capacity under our operation, one line in a fallback chain behind the
+                official providers.
               </p>
             </div>
             <div>
@@ -264,7 +264,7 @@ export default function ApiPage() {
                 Availability
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-ink">
-                99.9% uptime, monitored continuously from Algiers.
+                99.9% uptime, confirmed across every line and monitored continuously from Algiers.
               </p>
             </div>
           </div>
@@ -285,21 +285,15 @@ export default function ApiPage() {
             usage dashboard, and every request draws from it at the per-token rates above. Usage,
             spend, and cache savings are all visible in the same place.
           </p>
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/credits"
+          <div className="mt-8 flex">
+            <a
+              href={DASHBOARD}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors hover:bg-signal-hover"
             >
               Add balance
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-            <a
-              href={USAGE_DASHBOARD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink"
-            >
-              Open the dashboard
             </a>
           </div>
         </div>
@@ -309,16 +303,18 @@ export default function ApiPage() {
       <section className="px-6 pb-24">
         <div className="mx-auto w-full max-w-3xl">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">FAQ</p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">
-            Questions
-          </h2>
-          <div className="mt-6 divide-y divide-border border-y border-border">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">Questions</h2>
+          <div className="mt-6 border-t border-border">
             {faqs.map((faq) => (
-              <details key={faq.question} className="group py-5">
-                <summary className="cursor-pointer list-none text-sm font-semibold text-ink">
+              <details key={faq.question} className="group border-b border-border">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {faq.question}
+                  <ChevronDown
+                    className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden="true"
+                  />
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-muted-ink">{faq.answer}</p>
+                <p className="pb-5 text-sm leading-relaxed text-muted-ink">{faq.answer}</p>
               </details>
             ))}
           </div>
