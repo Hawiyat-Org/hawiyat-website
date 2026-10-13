@@ -174,12 +174,12 @@ export default function ApiPage() {
         <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-lg border border-border">
           <div className="grid divide-y divide-border md:grid-cols-4 md:divide-x md:divide-y-0">
             {METRICS.map((m) => (
-              <div key={m.label} className="bg-surface px-6 py-5">
+              <div key={m.label} className="bg-surface px-6 py-6 md:px-8">
                 <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
                   {m.label}
                 </p>
-                <p className="mt-2 font-mono text-2xl font-semibold text-ink">{m.value}</p>
-                <p className="mt-1 font-mono text-xs text-muted-ink">{m.note}</p>
+                <p className="mt-3 font-mono text-3xl font-semibold text-ink">{m.value}</p>
+                <p className="mt-2 font-mono text-xs text-muted-ink">{m.note}</p>
               </div>
             ))}
           </div>
@@ -198,9 +198,9 @@ export default function ApiPage() {
 
           <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
             {MODELS.map((model) => (
-              <div key={model.id} className="flex flex-col bg-surface p-6 md:p-8">
+              <div key={model.id} className="flex flex-col bg-surface p-7 md:p-9">
                 <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-lg font-bold tracking-tight text-ink">{model.name}</h3>
+                  <h3 className="text-xl font-bold tracking-tight text-ink">{model.name}</h3>
                   {model.badge ? (
                     <span className="rounded-full bg-signal px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-text">
                       {model.badge}
@@ -211,15 +211,15 @@ export default function ApiPage() {
                     </span>
                   )}
                 </div>
-                <p className="mt-3 min-h-10 text-sm leading-relaxed text-muted-ink">
+                <p className="mt-4 min-h-12 text-sm leading-relaxed text-muted-ink">
                   {model.tagline}
                 </p>
 
-                <dl className="mt-6 grow">
+                <dl className="mt-7 grow">
                   {model.rows.map((row) => (
                     <div
                       key={row.label}
-                      className="flex items-baseline justify-between gap-3 border-t border-border py-3"
+                      className="flex items-baseline justify-between gap-3 border-t border-border py-4"
                     >
                       <dt className="font-mono text-xs uppercase tracking-widest text-muted-ink">
                         {row.label}
@@ -233,7 +233,7 @@ export default function ApiPage() {
                   href={DASHBOARD}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
+                  className="mt-7 inline-flex items-center justify-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-dim"
                 >
                   Use {model.name}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -260,11 +260,11 @@ export default function ApiPage() {
           <div className="mt-8 flex flex-col gap-4 md:flex-row md:items-stretch">
             {LINES.map((line, i) => (
               <div key={line.role} className="flex flex-1 items-center gap-4">
-                <div className="flex-1 rounded-lg border border-border bg-surface px-5 py-4">
+                <div className="flex-1 rounded-lg border border-border bg-surface px-6 py-5">
                   <p className="font-mono text-xs uppercase tracking-widest text-ink">
                     {line.name}
                   </p>
-                  <p className="mt-1 font-mono text-xs text-muted-ink">{line.role}</p>
+                  <p className="mt-1.5 font-mono text-xs text-muted-ink">{line.role}</p>
                 </div>
                 {i < LINES.length - 1 && (
                   <ArrowRight className="hidden h-4 w-4 shrink-0 text-muted-ink md:block" aria-hidden="true" />
@@ -316,14 +316,14 @@ export default function ApiPage() {
           <div className="mt-6 border-t border-border">
             {faqs.map((faq) => (
               <details key={faq.question} className="group border-b border-border">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {faq.question}
                   <ChevronDown
                     className="h-4 w-4 shrink-0 text-muted-ink transition-transform duration-200 group-open:rotate-180"
                     aria-hidden="true"
                   />
                 </summary>
-                <p className="pb-5 text-sm leading-relaxed text-muted-ink">{faq.answer}</p>
+                <p className="pb-6 text-sm leading-relaxed text-muted-ink">{faq.answer}</p>
               </details>
             ))}
           </div>
