@@ -5,24 +5,7 @@ import { RunConsole } from "@/components/run-console"
 import { AnimatedNumber } from "@/components/animated-number"
 import { createMetadata, USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
-import {
-  ArrowRight,
-  Boxes,
-  Braces,
-  BrainCircuit,
-  Database,
-  ExternalLink,
-  FileText,
-  GitMerge,
-  Mail,
-  MessageCircle,
-  RefreshCw,
-  ServerCog,
-  ShieldCheck,
-  TrendingDown,
-  Users,
-  Workflow,
-} from "lucide-react"
+import { ArrowRight, ExternalLink, MessageCircle } from "lucide-react"
 
 const STAGES = [
   {
@@ -60,60 +43,99 @@ const MODEL_CHIPS = [
 ]
 
 const SYSTEMS = [
-  { name: "WhatsApp", icon: MessageCircle, note: "support, sales, back-office" },
-  { name: "CRM", icon: Users, note: "records in, answers out" },
-  { name: "ERP", icon: Boxes, note: "orders, stock, invoicing" },
-  { name: "Email", icon: Mail, note: "sequences and triage" },
-  { name: "Databases", icon: Database, note: "grounded, queried, updated" },
-  { name: "n8n", icon: Workflow, note: "existing workflows, routed" },
-  { name: "Docs & Sheets", icon: FileText, note: "reports, briefs, shared tables" },
-  { name: "API endpoints", icon: Braces, note: "your other tools, called on demand" },
+  { name: "WhatsApp", note: "support, sales, back-office" },
+  { name: "CRM", note: "records in, answers out" },
+  { name: "ERP", note: "orders, stock, invoicing" },
+  { name: "Email", note: "sequences and triage" },
+  { name: "Databases", note: "grounded, queried, updated" },
+  { name: "n8n", note: "existing workflows, routed" },
+  { name: "Docs & Sheets", note: "reports, briefs, shared tables" },
+  { name: "API endpoints", note: "your other tools, called on demand" },
 ]
 
 const CAPABILITIES = [
   {
     title: "Picks the best brain per task",
-    icon: BrainCircuit,
     body: "GPT for structure, Claude for nuance, Gemini for speed, open models when you want them at cost. You hand over the task, never the model pick.",
     telemetry: "route: auto",
   },
   {
     title: "Grounds every answer in your business",
-    icon: Database,
     body: "Composer pulls the record, the order, the policy from your systems before it writes a word. Answers come from your data, not a model's memory.",
     telemetry: "ctx: grounded",
   },
   {
     title: "Calls tools only when a task needs them",
-    icon: Workflow,
     body: "WhatsApp, CRM, ERP, databases, n8n, and anything else you already run. Each run gets the tools it needs and nothing stuck on. The wiring is Composer's job, not yours.",
     telemetry: "tools: on-demand",
   },
   {
     title: "Keeps runs alive when a model doesn't",
-    icon: RefreshCw,
     body: "A route slows down or goes dark, Composer cascades to the next best one. No dead runs, no stuck queues, no 3am rebuilds.",
     telemetry: "fallback: cascades",
   },
   {
     title: "Grades every single run",
-    icon: ShieldCheck,
     body: "Quality, latency, and cost are checked before anything ships. If a result isn't good enough, it doesn't reach your customer.",
     telemetry: "quality: checked",
   },
   {
     title: "Learns so the next run costs less",
-    icon: TrendingDown,
     body: "Cache hits, tighter context, smarter routes. Repeated work drops in cost over time, and every dinar shows on the receipt.",
     telemetry: "cost: trending down",
   },
 ]
 
 const FULLSTACK = [
-  { name: "Composer", icon: GitMerge, note: "execution engine: routes, runs, and evaluates every task" },
-  { name: "n8n", icon: Workflow, note: "workflow runtime: your flows, hosted and supervised" },
-  { name: "Evolution API", icon: MessageCircle, note: "WhatsApp infrastructure: the channel to your customers" },
-  { name: "Platform", icon: ServerCog, note: "cloud runtime: servers, storage, and databases under one roof" },
+  { name: "Composer", note: "execution engine: routes, runs, and evaluates every task" },
+  { name: "n8n", note: "workflow runtime: your flows, hosted and supervised" },
+  { name: "Evolution API", note: "WhatsApp infrastructure: the channel to your customers" },
+  { name: "Platform", note: "cloud runtime: servers, storage, and databases under one roof" },
+]
+
+const COMPARISON = [
+  {
+    label: "Execution loop",
+    composer: "Runs, evaluates, learns",
+    chatgpt: "Chat replies",
+    n8n: "Workflow triggers",
+    openrouter: "API gateway",
+  },
+  {
+    label: "Model routing",
+    composer: "Per task, per cost",
+    chatgpt: "Fixed model",
+    n8n: "Fixed",
+    openrouter: "You choose",
+  },
+  {
+    label: "Business context",
+    composer: "Your WhatsApp, CRM, ERP wired in",
+    chatgpt: "Prompt-only",
+    n8n: "Workflow data",
+    openrouter: "None",
+  },
+  {
+    label: "Evaluation",
+    composer: "Graded result, telemetry",
+    chatgpt: "None",
+    n8n: "None",
+    openrouter: "None",
+  },
+  {
+    label: "Billing",
+    composer: "DZD, per run",
+    chatgpt: "USD",
+    n8n: "USD",
+    openrouter: "USD",
+  },
+  {
+    label: "Support",
+    composer: "Local AR, FR, EN",
+    chatgpt: "None",
+    n8n: "None",
+    openrouter: "None",
+  },
 ]
 
 const FULLSTACK_WHATSAPP_URL = waLink("Hello Hawiyat, we need the full stack for our operation.")
@@ -123,12 +145,78 @@ export const metadata: Metadata = createMetadata({
   description:
     "Routes each task to the best model, carries your context, and evaluates every result. Build AI agents on GPT, Claude, Gemini, and open models, billed in DZD.",
   path: "/composer",
-  modifiedTime: "2026-09-09",
+  modifiedTime: "2026-10-15",
 })
 
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
+/* ── Layout primitives ─────────────────────────────────────────────────────
+ * The page reads as a spec sheet, not a card wall. Structure comes from one
+ * bordered container per band, hairline dividers between cells, mono labels
+ * and scale contrast. No per-item icon, no per-item border, no colour.
+ * ------------------------------------------------------------------------ */
+
+function SectionHeader({
+  eyebrow,
+  title,
+  lede,
+  align = "left",
+}: {
+  eyebrow: string
+  title: string
+  lede?: string
+  align?: "left" | "center"
+}) {
+  const centered = align === "center"
   return (
-    <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">{children}</p>
+    <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+      <div className={`flex items-center gap-3 ${centered ? "justify-center" : ""}`}>
+        <span className="trace-line h-px w-12 bg-signal" />
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">{eyebrow}</p>
+      </div>
+      <h2 className="mt-5 text-3xl font-semibold leading-[1.15] tracking-tight text-ink md:text-[2.6rem]">
+        {title}
+      </h2>
+      {lede && <p className="mt-4 text-base leading-relaxed text-muted-ink">{lede}</p>}
+    </div>
+  )
+}
+
+/** One bordered container, hairline-separated cells, any column count. */
+function Band({
+  cols = 3,
+  children,
+}: {
+  cols?: 1 | 2 | 3
+  children: React.ReactNode
+}) {
+  const colClass =
+    cols === 1 ? "" : cols === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"
+  return (
+    <div className="overflow-hidden rounded-lg border border-border bg-border">
+      <div className={`grid gap-px ${colClass}`}>{children}</div>
+    </div>
+  )
+}
+
+function Cell({
+  label,
+  title,
+  body,
+  meta,
+}: {
+  label: string
+  title: string
+  body: string
+  meta?: string
+}) {
+  return (
+    <div className="flex min-w-0 flex-col bg-surface p-6 transition-colors duration-300 hover:bg-surface-dim/50">
+      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">{label}</p>
+      <h3 className="mt-3 text-base font-semibold text-ink">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-ink">{body}</p>
+      {meta && (
+        <p className="mt-4 border-t border-border pt-3 font-mono text-[11px] text-muted-ink">{meta}</p>
+      )}
+    </div>
   )
 }
 
@@ -178,284 +266,215 @@ export default function ComposerPage() {
       />
 
       {/* ─── Hero ─── */}
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-44 md:pb-20">
+      <section className="relative overflow-hidden pb-16 pt-32 md:pb-20 md:pt-44">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
-              THE ENGINE BEHIND HAWIYAT
+          <div className="max-w-3xl">
+            <p className="reveal-up flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+              <span className="h-px w-12 bg-signal" />
+              The engine behind Hawiyat
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-ink reveal-up">
+            <h1 className="reveal-up mt-6 text-5xl font-bold leading-[1.02] tracking-tight text-ink md:text-6xl xl:text-7xl">
               Hawiyat AI Composer
             </h1>
-            <p className="text-2xl font-semibold text-ink md:text-3xl reveal-up">
+            <p className="reveal-up mt-6 text-xl font-medium leading-snug tracking-tight text-ink md:text-2xl">
               The engine that figures out the best way to do each task.
             </p>
-            <p className="max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg reveal-up">
-              Give Composer a task. It picks the best AI, pulls in the context from your systems,
-              and hands you back a result it has already checked. No model juggling, no glue code.
+            <p className="reveal-up mt-5 max-w-2xl text-base leading-relaxed text-muted-ink md:text-lg">
+              Give Composer a task. It picks the best AI, pulls in the context from your systems, and
+              hands you back a result it has already checked. No model juggling, no glue code.
             </p>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-ink reveal-up">
-              One API key for all your tools
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2 reveal-up">
-              {["Cursor", "Claude Code", "Codex", "Antigravity", "GitHub Copilot"].map((tool) => (
-                <span
-                  key={tool}
-                  className="rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-xs text-muted-ink"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-            <div className="mt-2 flex flex-col items-center gap-4 sm:flex-row reveal-up">
+
+            <div className="reveal-up mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/#pricing"
-                className="inline-flex items-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
               >
                 See Composer plans
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="#trace"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
               >
                 Watch a run
                 <ArrowRight className="h-4 w-4 rotate-90" />
               </Link>
-            </div>
-            <div className="-mt-3 flex items-center justify-center reveal-up">
               <a
                 href={USAGE_DASHBOARD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-ink transition-colors duration-300 hover:text-ink"
+                className="inline-flex min-h-[44px] items-center justify-center gap-1.5 px-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink transition-colors duration-300 hover:text-ink sm:ml-1"
               >
-                Open your usage dashboard
+                Usage dashboard
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
+          </div>
+
+          <div className="reveal-up mt-12 border-t border-border pt-5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+              One API key for all your tools
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              {["Cursor", "Claude Code", "Codex", "Antigravity", "GitHub Copilot"].map((tool) => (
+                <li key={tool} className="font-mono text-sm text-ink">
+                  {tool}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
       {/* ─── Execution loop ─── */}
-      <section id="trace" className="scroll-mt-32 py-16 md:py-24">
+      <section id="trace" className="scroll-mt-32 border-t border-border py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <div className="trace-line h-px w-12 bg-signal" />
-              <SectionEyebrow>EXECUTION LOOP</SectionEyebrow>
-            </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              Every task becomes a run.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              Think of Composer as a careful coworker. You hand it a task like &ldquo;resolve the
-              refund for order 3051 on WhatsApp in Algerian Arabic&rdquo;, or a report, an invoice,
-              a research brief, a code change. It pulls the order and the policy, picks the right
-              model, and checks the answer before it reaches your customer. Done in seconds, for a
-              fraction of a dinar.
-            </p>
+          <SectionHeader
+            eyebrow="Execution loop"
+            title="Every task becomes a run."
+            lede="Think of Composer as a careful coworker. You hand it a task like “resolve the refund for order 3051 on WhatsApp in Algerian Arabic”, or a report, an invoice, a research brief, a code change. It pulls the order and the policy, picks the right model, and checks the answer before it reaches your customer. Done in seconds, for a fraction of a dinar."
+          />
+
+          <div className="mt-10">
+            <RunConsole />
           </div>
 
-          <RunConsole />
+          <div className="mt-10">
+            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+              The six stages, in order
+            </p>
+            <Band cols={3}>
+              {STAGES.map((stage, i) => (
+                <Cell
+                  key={stage.name}
+                  label={String(i + 1).padStart(2, "0")}
+                  title={stage.name}
+                  body={stage.body}
+                />
+              ))}
+            </Band>
+          </div>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 text-center">
+          <div className="mt-10 flex flex-col items-start gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted-ink">Your task can be the next run.</p>
             <Link
               href="/#pricing"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
             >
               Try it for your business
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {STAGES.map((stage, i) => (
-              <div
-                key={stage.name}
-                className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-2 font-mono text-sm font-semibold text-signal-contrast">
-                  {stage.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-ink">{stage.body}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ─── Any Model. Any System. ─── */}
-      <section className="py-16 md:py-24">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 md:grid-cols-12">
+          <div className="grid gap-12 md:grid-cols-12 md:gap-10">
             <div className="md:col-span-5">
               <div className="md:sticky md:top-32">
-                <div className="flex items-center gap-3">
-                  <div className="trace-line h-px w-12 bg-signal" />
-                  <SectionEyebrow>ANY MODEL · ANY SYSTEM</SectionEyebrow>
-                </div>
-                <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-                  One layer. Every model. Every system.
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  Your stack is already wired in: WhatsApp, CRM, ERP, email, databases, n8n,
-                  and anything else you already run, each as a route the layer can reach.
-                  Models are routes too. Here is the guest list.
-                </p>
+                <SectionHeader
+                  eyebrow="Any model · any system"
+                  title="One layer. Every model. Every system."
+                  lede="Your stack is already wired in: WhatsApp, CRM, ERP, email, databases, n8n, and anything else you already run, each as a route the layer can reach. Models are routes too. Here is the guest list."
+                />
               </div>
             </div>
 
             <div className="md:col-span-7">
-              <div className="mb-3 flex items-center gap-3">
-                <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                  THINK · ROUTES IN
+              <div className="mb-4 flex items-center gap-3">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+                  Think · routes in
                 </p>
                 <span className="h-px flex-1 bg-border" />
               </div>
-              <div className="flex flex-wrap gap-3">
+              <ul className="flex flex-wrap gap-2">
                 {MODEL_CHIPS.map((chip) => (
-                  <span
+                  <li
                     key={chip.name}
-                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 font-mono text-sm text-ink transition-colors duration-300 hover:border-signal/50"
+                    className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3.5 py-2 font-mono text-sm text-ink"
                   >
-                    <span className={`h-2 w-2 rounded-full ${chip.dot}`} />
+                    <span className={`h-1.5 w-1.5 rounded-full ${chip.dot}`} />
                     {chip.name}
-                    <span className="text-[10px] uppercase tracking-widest text-muted-ink">
-                      · {chip.why}
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-ink">
+                      {chip.why}
                     </span>
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               <div className="composer-route-line my-8" />
 
-              <div className="mb-3 flex items-center gap-3">
-                <p className="font-mono text-xs uppercase tracking-widest text-muted-ink">
-                  ACT · ROUTES OUT
+              <div className="mb-4 flex items-center gap-3">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+                  Act · routes out
                 </p>
                 <span className="h-px flex-1 bg-border" />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Band cols={2}>
                 {SYSTEMS.map((system) => (
-                  <div
+                  <Cell
                     key={system.name}
-                    className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50"
-                  >
-                    <system.icon className="h-8 w-8 text-signal" />
-                    <h3 className="mt-4 text-lg font-semibold text-ink">{system.name}</h3>
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-                      <p className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                        role ▸ {system.note}
-                      </p>
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-dim px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink">
-                        <span className="h-1.5 w-1.5 rounded-full bg-ok" />
-                        ACTIVE
-                      </span>
-                    </div>
-                  </div>
+                    label="connected"
+                    title={system.name}
+                    body={system.note}
+                  />
                 ))}
-              </div>
+              </Band>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── Comparison table ─── */}
-      <section className="py-16 md:py-24">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <div className="trace-line h-px w-12 bg-signal" />
-              <SectionEyebrow>COMPARE</SectionEyebrow>
-            </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              The layer vs the alternatives.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              The execution layer vs chat, workflow triggers, and a plain gateway. Facts only.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Compare"
+            title="The layer vs the alternatives."
+            lede="The execution layer vs chat, workflow triggers, and a plain gateway. Facts only."
+          />
 
-          <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+          <div className="mt-10 overflow-x-auto rounded-lg border border-border bg-surface">
             <table className="w-full min-w-[640px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-border">
-                  <th scope="col" className="sticky left-0 z-10 bg-surface p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                    &nbsp;
+                  <th scope="col" className="sticky left-0 z-10 w-40 bg-surface px-5 py-4">
+                    <span className="sr-only">Criteria</span>
                   </th>
-                  <th scope="col" className="p-5 font-mono text-xs font-semibold uppercase tracking-widest text-ink">
+                  <th
+                    scope="col"
+                    className="bg-signal-bg/40 px-5 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink"
+                  >
                     Hawiyat AI Composer
                   </th>
-                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                    ChatGPT
-                  </th>
-                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                    n8n Cloud
-                  </th>
-                  <th scope="col" className="p-5 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                    OpenRouter
-                  </th>
+                  {["ChatGPT", "n8n Cloud", "OpenRouter"].map((col) => (
+                    <th
+                      key={col}
+                      scope="col"
+                      className="px-5 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink"
+                    >
+                      {col}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {[
-                  {
-                    label: "Execution loop",
-                    composer: "Runs, evaluates, learns",
-                    chatgpt: "Chat replies",
-                    n8n: "Workflow triggers",
-                    openrouter: "API gateway",
-                  },
-                  {
-                    label: "Model routing",
-                    composer: "Per task, per cost",
-                    chatgpt: "Fixed model",
-                    n8n: "Fixed",
-                    openrouter: "You choose",
-                  },
-                  {
-                    label: "Business context",
-                    composer: "Your WhatsApp, CRM, ERP wired in",
-                    chatgpt: "Prompt-only",
-                    n8n: "Workflow data",
-                    openrouter: "None",
-                  },
-                  {
-                    label: "Evaluation",
-                    composer: "Graded result, telemetry",
-                    chatgpt: "None",
-                    n8n: "None",
-                    openrouter: "None",
-                  },
-                  {
-                    label: "Billing",
-                    composer: "DZD, per run",
-                    chatgpt: "USD",
-                    n8n: "USD",
-                    openrouter: "USD",
-                  },
-                  {
-                    label: "Support",
-                    composer: "Local AR, FR, EN",
-                    chatgpt: "None",
-                    n8n: "None",
-                    openrouter: "None",
-                  },
-                ].map((row) => (
+                {COMPARISON.map((row) => (
                   <tr key={row.label} className="border-b border-border last:border-b-0">
-                    <th scope="row" className="sticky left-0 z-10 bg-surface p-5 font-mono text-xs uppercase tracking-widest text-muted-ink align-top">
+                    <th
+                      scope="row"
+                      className="sticky left-0 z-10 bg-surface px-5 py-4 align-top font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink"
+                    >
                       {row.label}
                     </th>
-                    <td className="p-5 text-sm font-medium text-ink">{row.composer}</td>
-                    <td className="p-5 text-sm text-muted-ink">{row.chatgpt}</td>
-                    <td className="p-5 text-sm text-muted-ink">{row.n8n}</td>
-                    <td className="p-5 text-sm text-muted-ink">{row.openrouter}</td>
+                    <td className="bg-signal-bg/40 px-5 py-4 align-top text-sm font-medium text-ink">
+                      {row.composer}
+                    </td>
+                    <td className="px-5 py-4 align-top text-sm text-muted-ink">{row.chatgpt}</td>
+                    <td className="px-5 py-4 align-top text-sm text-muted-ink">{row.n8n}</td>
+                    <td className="px-5 py-4 align-top text-sm text-muted-ink">{row.openrouter}</td>
                   </tr>
                 ))}
               </tbody>
@@ -465,151 +484,139 @@ export default function ComposerPage() {
       </section>
 
       {/* ─── Engine capabilities ─── */}
-      <section className="py-16 md:py-24">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <div className="trace-line h-px w-12 bg-signal" />
-              <SectionEyebrow>HABITS</SectionEyebrow>
-            </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              What Composer does with every run.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-ink">
-              Six habits, one engine. You bring the business problem, Composer handles the how.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Habits"
+            title="What Composer does with every run."
+            lede="Six habits, one engine. You bring the business problem, Composer handles the how."
+          />
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {CAPABILITIES.map((cap) => (
-              <div
-                key={cap.title}
-                className="rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-signal/50 md:p-8"
-              >
-                <cap.icon className="h-7 w-7 text-signal" />
-                <h3 className="mt-5 text-xl font-semibold text-ink">{cap.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-ink">{cap.body}</p>
-                <p className="mt-5 border-t border-border pt-3 font-mono text-[11px] text-muted-ink">
-                  {cap.telemetry}
-                </p>
-              </div>
-            ))}
+          <div className="mt-10">
+            <Band cols={3}>
+              {CAPABILITIES.map((cap, i) => (
+                <Cell
+                  key={cap.title}
+                  label={String(i + 1).padStart(2, "0")}
+                  title={cap.title}
+                  body={cap.body}
+                  meta={cap.telemetry}
+                />
+              ))}
+            </Band>
           </div>
         </div>
       </section>
 
       {/* ─── Telemetry / metrics band ─── */}
-      <section className="bg-surface-dim py-16 md:py-24">
+      <section className="border-t border-border bg-surface-dim py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <SectionEyebrow>TELEMETRY</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              What&rsquo;s live on the layer.
-            </h2>
-            <p className="mt-3 text-sm text-muted-ink">
-              Verified figures from the Hawiyat operations dashboard as of August 9, 2026. Nothing else gets printed.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Telemetry"
+            title="What's live on the layer."
+            lede="Verified figures from the Hawiyat operations dashboard as of August 9, 2026. Nothing else gets printed."
+          />
 
-          <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
-            <div className="rounded-md border border-border bg-surface p-8 text-center">
-              <AnimatedNumber value="200+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
-              <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                clients on the platform
-              </p>
-            </div>
-            <div className="rounded-md border border-border bg-surface p-8 text-center">
-              <AnimatedNumber value="100B+" className="font-mono text-5xl font-bold text-ink md:text-6xl" />
-              <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-ink">
-                tokens executed through Composer
-              </p>
+          <div className="mt-10 overflow-hidden rounded-lg border border-border bg-border">
+            <div className="grid gap-px sm:grid-cols-2">
+              <div className="bg-surface p-8">
+                <AnimatedNumber
+                  value="200+"
+                  className="font-mono text-4xl font-semibold tracking-tight text-ink md:text-5xl"
+                />
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+                  clients on the platform
+                </p>
+              </div>
+              <div className="bg-surface p-8">
+                <AnimatedNumber
+                  value="100B+"
+                  className="font-mono text-4xl font-semibold tracking-tight text-ink md:text-5xl"
+                />
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
+                  tokens executed through Composer
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── Enterprise full-stack ─── */}
-      <section className="py-16 md:py-28">
+      <section className="border-t border-border py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="rounded-lg border border-border bg-surface p-6 md:p-12">
-            <div className="grid gap-10 lg:grid-cols-12">
-              <div className="lg:col-span-5">
-                <div className="flex items-center gap-3">
-                  <div className="trace-line h-px w-12 bg-signal" />
-                  <SectionEyebrow>ONE CONTRACT</SectionEyebrow>
-                </div>
-                <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-                  The layer. One contract.
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-muted-ink">
-                  The execution layer runs every model, channel, and workflow you depend on.
-                  Deployment, support, telemetry, and billing: one team, one invoice, in DZD.
-                </p>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <a
-                    href={FULLSTACK_WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
-                  >
-                    Book the full stack
-                    <MessageCircle className="h-4 w-4" />
-                  </a>
-                  <Link
-                    href="/pricing"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
-                  >
-                    See pricing in DZD
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <SectionHeader
+                eyebrow="One contract"
+                title="The layer. One contract."
+                lede="The execution layer runs every model, channel, and workflow you depend on. Deployment, support, telemetry, and billing: one team, one invoice, in DZD."
+              />
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={FULLSTACK_WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-6 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
+                >
+                  Book the full stack
+                  <MessageCircle className="h-4 w-4" />
+                </a>
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
+                >
+                  See pricing in DZD
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
+            </div>
 
-              <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            <div className="lg:col-span-7">
+              <Band cols={2}>
                 {FULLSTACK.map((item) => (
-                  <div
+                  <Cell
                     key={item.name}
-                    className="rounded-lg border border-border bg-surface-dim p-6"
-                  >
-                    <item.icon className="h-7 w-7 text-signal" />
-                    <h3 className="mt-4 font-mono text-sm font-semibold text-ink">{item.name}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-ink">{item.note}</p>
-                  </div>
+                    label="included"
+                    title={item.name}
+                    body={item.note}
+                  />
                 ))}
-              </div>
+              </Band>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── Final CTA ─── */}
-      <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <SectionEyebrow>START</SectionEyebrow>
-          <h2 className="mt-4 text-4xl font-bold leading-tight text-ink md:text-5xl">
-            Start your first run today.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-ink">
-            Pick a Composer plan in DZD, or bring the whole layer. Composer handles the
-            models. You focus on your business.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/#pricing"
-              className="inline-flex items-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
-            >
-              See plans in DZD
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
-            >
-              Chat on WhatsApp
-              <MessageCircle className="h-4 w-4" />
-            </Link>
+      <section className="border-t border-border py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <SectionHeader
+                eyebrow="Start"
+                title="Start your first run today."
+                lede="Pick a Composer plan in DZD, or bring the whole layer. Composer handles the models. You focus on your business."
+              />
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
+              <Link
+                href="/#pricing"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-signal px-8 py-3 text-sm font-semibold text-signal-text transition-colors duration-300 hover:bg-signal-hover"
+              >
+                See plans in DZD
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href={waLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-8 py-3 text-sm font-semibold text-ink transition-colors duration-300 hover:border-signal hover:bg-signal-bg"
+              >
+                Chat on WhatsApp
+                <MessageCircle className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
