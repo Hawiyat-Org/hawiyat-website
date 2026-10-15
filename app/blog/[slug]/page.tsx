@@ -9,6 +9,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { createMetadata, SITE_URL } from "@/lib/seo"
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog"
 import { MermaidDiagram } from "@/components/blog/mermaid-diagram"
+import { BlogWidget } from "@/components/blog/widgets/blog-widget"
 import { UtterancesComments } from "@/components/blog/utterances-comments"
 
 export function generateStaticParams() {
@@ -190,6 +191,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       const trimmed = body.replace(/\n$/, "")
                       if (match && match[1] === "mermaid") {
                         return <MermaidDiagram code={trimmed} />
+                      }
+                      // Interactive/animated figure: the block body names the widget.
+                      if (match && match[1] === "widget") {
+                        return <BlogWidget name={trimmed.split("\n")[0]} />
                       }
                       return <code className={className}>{children}</code>
                     },

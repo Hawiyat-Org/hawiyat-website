@@ -14,6 +14,10 @@ On 26 August 2026, Z.ai released GLM-5.3-Flash: a 320-billion-parameter mixture-
 
 One of those copies shipped with a full writeup of how it was made, numbers included. This post walks that teardown from the ground up: what a model is, where refusal lives inside it, how it was removed, and the one thing the technique could not touch. No background in machine learning is assumed. Start at the top and the rest follows.
 
+```widget
+stat-band
+```
+
 ## What happened, in numbers
 
 | Measure | Base model | Uncensored build | How it was measured |
@@ -43,15 +47,8 @@ The model never sees words. Text is split into **tokens** (word-pieces, roughly 
 
 Those points travel through the model along the **residual stream**, a shared highway carrying each token's running state. Every component reads the highway, does its work, and adds its result back. By the top, the highway holds enough information to predict the next token.
 
-```mermaid
-flowchart BT
-    subgraph RS["the residual stream - one shared highway"]
-    direction BT
-    T["tokens in: The / cat / sat / on"] --> L1["Layer 1 - attention + experts"]
-    L1 --> L22["Layer 22 - refusal is read here"]
-    L22 --> L45["Layer 45 - attention + experts"]
-    L45 --> P["predict the next token"]
-    end
+```widget
+stream-flow
 ```
 
 ### 4. Layers are attention plus an MLP
@@ -62,17 +59,8 @@ Both parts are built from **weight matrices**, grids of numbers fixed during tra
 
 GLM-5.3-Flash adds one twist. It is a **mixture-of-experts** model: rather than one MLP per layer, it holds 288 small expert MLPs plus a router that picks 8 of them for each token. The teardown finds refusal living almost entirely inside those experts.
 
-```mermaid
-flowchart LR
-    T["token"] --> R["router"]
-    R --> E1["expert"]
-    R --> E2["expert"]
-    R --> E3["8 of 288 experts"]
-    R --> E4["expert"]
-    E1 --> O["back to the residual stream"]
-    E2 --> O
-    E3 --> O
-    E4 --> O
+```widget
+moe-router
 ```
 
 ### 5. Attention in one minute
@@ -83,9 +71,23 @@ Every token offers two things: a **query** (what am I looking for?) and a **key*
 
 Take "The cat sat on the mat." When the model processes "sat", attention lets it look back and notice that "cat" is the one doing the sitting, so "cat" gets a high weight and the articles get almost none. Repeated across 45 layers, this is how the model builds a rich sense of each word in context.
 
+```widget
+attention-lab
+```
+
+Click any word to make it the focus. The lines show how much that word pulls from each other word as the model builds its meaning in context. "sat" leans on "cat" (who sat); "mat" leans on "on" and "sat". Stack this across 45 layers and the model develops a rich sense of each word in context.
+
 ### 6. Concepts live as directions
 
 Here is the idea that ties it together. Since each token's state is a point in 4,096-dimensional space, a concept can be a **direction** through that space, an arrow pointing a particular way. The model's tendency to refuse rides on roughly a single direction. Move the state along it and the model refuses; take away its ability to move that way and it cannot refuse at all. That one finding is the hinge of everything below.
+
+```widget
+refusal-axis
+```
+
+Harmful and harmless prompts sit apart along one direction, `r`. Abliteration erases movement along `r`, so the two clouds slide together and the model loses the axis it used to tell "refuse" from "answer". Capability survives because only this single direction is touched.
+
+> **In one sentence:** find the refusal direction in the residual stream, then edit every residual-writing matrix so it can no longer write along that direction. That is **abliteration**, and the rest of this piece is how it played out on GLM-5.3-Flash.
 
 | Term | Meaning |
 |---|---|
@@ -105,11 +107,8 @@ Three things make this model a good subject. It is capable: 320B total parameter
 
 It also pulls apart two things people tend to blur together. Model safety can sit in three places: the **weights**, from training; the **serving layer**, meaning API filters and system prompts; and the **prompt** itself. GLM's political censorship sits in the serving layer, so the raw weights are already politically open. What the teardown removes is the weight-level refusal, the safety training and heavy over-refusal baked into the checkpoint.
 
-```mermaid
-flowchart TB
-    A["In the weights - set during training"] --> D["ships with the download"]
-    B["In the serving layer - API filters, system prompt"] --> E["stripped the moment you self-host"]
-    C["In the prompt - the current request"] --> F["per request"]
+```widget
+safety-layers
 ```
 
 | Specification | Value |
@@ -135,6 +134,12 @@ W' = W - r(rᵀW)
 
 What each symbol means:
 
+```widget
+vector-decomp
+```
+
+The geometry behind the formula. A residual writer's output `W` splits in two: the part pointing along `r` (removed) and the remainder `W'` (kept). Strip the `r`-part from every writer and the model keeps everything else. It just cannot steer toward refusal.
+
 | Symbol | Meaning |
 |---|---|
 | `W` | A residual writer: one weight matrix whose output is added to the stream |
@@ -146,15 +151,15 @@ What each symbol means:
 
 **3. Bake it onto disk.** Most models can be edited in memory. GLM-5.3-Flash cannot, for three reasons: its weights are a compressed FP8 format that corrupts if you touch the raw codes, its expert matrices are fused at load time, and the tooling silently drops the model's speculative-decoding block on load. So the file is rewritten shard by shard.
 
-```mermaid
-flowchart LR
-    A["harmful vs harmless prompts"] --> B["measure r at layer 22 of 45"]
-    B --> C["for each residual writer: W' = W - r(rᵀW)"]
-    C --> D["requantize to FP8, rewrite 62 shards"]
-    D --> E["306 GB checkpoint with no refusal direction"]
+```widget
+method-pipeline
 ```
 
 One idea does all the geometric work: take an arrow, chop off the part pointing along `r`, keep the rest. In two dimensions, if your writer's output is `x = (3, 4)` and `r` is the "up" direction, removing the up-part drops the arrow to `(3, 0)`. The refuse part is gone; the sideways part is untouched.
+
+```widget
+projection-2d
+```
 
 In symbols, scale `r` to length 1. For any arrow `x`, the dot product `rᵀx` is how much of `x` points along `r` (in the picture, that is 4). Multiply it back by `r` to get that part as an arrow, `r(rᵀx)`, and subtract it:
 
@@ -196,12 +201,8 @@ This is where knowing the architecture pays off. Ablate each group of writers in
 
 Editing the writers even beats hooking the layer's output. The model's hyper-connection structure lets a layer re-read its own attention before the MLP runs, so the writer edit cleans that in-between state where an output hook misses it.
 
-```mermaid
-flowchart LR
-    B["baseline 87.5%"] --> A["attention only 81.2%"]
-    A --> M["+ shared MLP 84.4%"]
-    M --> E["+ routed experts 3.1%"]
-    E --> H["layer hook 12.5%"]
+```widget
+stage-ladder
 ```
 
 ## The requantization tax
@@ -211,6 +212,10 @@ One more idea is needed here: **quantization**. A model's weights are just numbe
 That coarseness fights the edit. The subtraction has to be computed in full precision to be exact, but when the result is written back it must snap to the nearest FP8 mark. That rounding nudges the weight slightly off target, and a sliver of the refusal direction survives. On one matrix it is nothing. Across the 12,442 compressed matrices it adds up to measurable leftover refusal, called **leakage**.
 
 The fix is to repeat the edit. Each refinement pass shaves the leftover closer to zero, but each pass also drags the weights a little further from the original, which risks capability.
+
+```widget
+requant-slider
+```
 
 | Refinement iterations | Residual leakage | Weight perturbation |
 |---|---|---|
@@ -225,6 +230,10 @@ Harmful-prompt refusal across seven red-team benchmarks, base model against the 
 
 | Benchmark | n | Base | Abliterated |
 |---|---|---|---|
+```widget
+safety-bars
+```
+
 | MaliciousInstruct | 100 | 96.0% | 11.0% |
 | JailbreakBench (harmful) | 100 | 93.0% | 12.0% |
 | ForbiddenQuestions | 150 | 59.3% | 12.0% |
@@ -260,12 +269,8 @@ The authors' reading: GLM-5.3-Flash's safety is not carried by one direction. Pa
 
 Everything so far was one technique. Abliteration is the fastest, and it is the one that reveals where refusal lives, but it is a single rung on a ladder. The other rungs trade more effort for either more control or less damage.
 
-```mermaid
-flowchart LR
-    P["Prompt - the prompt"] --> S["Steering - activations"]
-    S --> AB["Abliteration - weights, cut"]
-    AB --> DPO["DPO - weights, train"]
-    DPO --> SFT["SFT - weights, train"]
+```widget
+technique-ladder
 ```
 
 ### Activation steering: a detour, not a demolition
@@ -282,10 +287,8 @@ The heaviest options actually train the model a little more. **Fine-tuning** mea
 
 **DPO**, direct preference optimization, works from pairs instead of single answers. For each prompt you provide a chosen response and a rejected one, and training pulls the model toward the first and away from the second. To uncensor, the compliant answer is chosen and the refusal is rejected. Standard safety training does the exact reverse, which is a neat way to see that aligning and uncensoring are the same machine run in opposite directions.
 
-```mermaid
-flowchart LR
-    P["a prompt"] -->|toward| C["chosen: a helpful answer"]
-    P -->|away| R["rejected: the refusal"]
+```widget
+dpo-pairs
 ```
 
 Why go to this trouble when abliteration is a one-liner? Because cutting a direction is blunt, and that direction is tangled up with other abilities, so pushing it hard can dent reasoning. Gradient-based training can route around that tangle, suppressing refusal on the prompts you target while leaving general ability intact. Higher fidelity, more cost. In practice the two are often combined: abliterate first for speed, then a small fine-tune to heal any damage.
@@ -294,13 +297,9 @@ Why go to this trouble when abliteration is a one-liner? Because cutting a direc
 
 One base model produced a whole family of uncensored variants within a week, splitting by method. Some permanently rewrite the weights. One changes nothing on disk and steers the model at runtime instead. Others re-pack the edited weights for different hardware.
 
-| Build | Kind | What it does |
-|---|---|---|
-| Weight-level abliteration, FP8 | Weight edit | The subject of this teardown: layer-22 direction orthogonalized out of 12,479 residual writers, baked into the official FP8 shards |
-| A second independent abliteration | Weight edit | Permanent tensor edit, no SFT, no LoRA, framed around over-refusal on copyright and benign-flagged prompts |
-| Prefill-only steering vectors | Runtime | Two refusal-direction vectors injected at prompt time after layers 25 and 26, about 180 KB, no weights changed |
-| Quantized re-packs (NVFP4, MLX, GGUF) | Re-quantization | The edited weights re-packed for vLLM, Apple Silicon, and llama.cpp stacks |
-| Attention-only abliteration | Weight edit | Abliterated by editing the attention output projections directly, then quantized to 4-bit |
+```widget
+builds-grid
+```
 
 ## Governance caught up slowly
 
@@ -324,16 +323,8 @@ Treat this as an interpretability and red-team exercise. Measure refusal with pu
 
 The lab is a loop. Build a scoreboard once, then run each technique and re-measure against it. The shape never changes: measure, change the model, measure again.
 
-```mermaid
-flowchart TB
-    H["0 - build the eval harness"] --> T1["1 - prompt only"]
-    H --> T2["2 - activation steering"]
-    H --> T3["3 - abliteration"]
-    H --> T4["4 - fine-tune"]
-    T1 --> C["compare: refusal, over-refusal, capability, KL"]
-    T2 --> C
-    T3 --> C
-    T4 --> C
+```widget
+lab-loop
 ```
 
 ### Setup
@@ -500,6 +491,16 @@ Doing abliteration by hand leaves you with knobs to tune. Which layer should you
 | Steering | Activations | Runtime | Low | Refusal is one direction |
 | Abliteration | Weights | Yes | Low to medium | Where refusal is written |
 | DPO / SFT | Weights | Yes | Lowest | How production uncensoring is done |
+
+### What good looks like
+
+Illustrative targets for harmful-refusal on a small model. Your exact numbers will shift with the layer, the dose and the data, but the shape should look like this: a big first drop from steering, then diminishing returns as you go deeper.
+
+```widget
+target-ladder
+```
+
+Track four numbers per row (harmful refusal, over-refusal, a capability score, and KL divergence from the base) and you have reproduced the entire method on hardware you own. Removing refusal is easy; removing it without denting capability is the real craft. The only way to know which one you did is to measure.
 
 ## Running GLM-5.3-Flash without the 306 GB download
 
