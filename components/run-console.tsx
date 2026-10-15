@@ -16,7 +16,8 @@ type RunTask = {
   chip: string
   run: string
   detail: string[]
-  telemetry: string[]
+  /** The four cells of the config row: route, model, context, tools. */
+  config: Metric[]
   /** The four cells of the panel footer. */
   metrics: Metric[]
   outcome: string
@@ -36,15 +37,11 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ quality 0.97 · policy 1.0 · latency 340ms · cost so far 0.6 DZD",
       "RESULT ▸ delivered in 11s · customer kept · cost 0.6 DZD",
     ],
-    telemetry: [
-      "route: auto",
-      "model: claude-sonnet → gpt-4o (fallback armed)",
-      "ctx: order 3051 + refund policy · 4k",
-      "tools: [whatsapp, crm, erp]",
-      "cost: 0.6 DZD",
-      "latency: 340ms",
-      "quality: 0.97",
-      "policy: 1.0",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "claude-sonnet \u2192 gpt-4o", k: "model" },
+      { v: "order 3051 + policy \u00b7 4k", k: "context" },
+      { v: "whatsapp, crm, erp", k: "tools" },
     ],
     metrics: [
       { v: "0.6 DZD", k: "cost" },
@@ -68,14 +65,11 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ quality 1.0 (math verified) · latency 480ms · cost so far 1.1 DZD",
       "RESULT ▸ quote out Friday night · sale moved to now · cost 1.1 DZD",
     ],
-    telemetry: [
-      "route: auto",
-      "model: gpt-4o → gemini-2.5 (fallback armed)",
-      "ctx: ERP deal table · 6k",
-      "tools: [whatsapp, erp, db]",
-      "cost: 1.1 DZD",
-      "latency: 480ms",
-      "quality: 1.0 (math verified)",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "gpt-4o \u2192 gemini-2.5", k: "model" },
+      { v: "ERP deal table \u00b7 6k", k: "context" },
+      { v: "whatsapp, erp, db", k: "tools" },
     ],
     metrics: [
       { v: "1.1 DZD", k: "cost" },
@@ -99,14 +93,11 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ delivered 36 · replies 9 · flagged 0 · quality 0.94 avg",
       "RESULT ▸ 9 replies from one run · cost 3.2 DZD · lines that worked remembered",
     ],
-    telemetry: [
-      "route: auto",
-      "model: claude-sonnet (ar) + gpt-4o (fr) + gemini-2.5 (en), staggered",
-      "tools: [whatsapp, crm]",
-      "cost: 3.2 DZD total (~0.08 each)",
-      "delivered: 36",
-      "replies: 9",
-      "flagged: 0",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "claude-sonnet + gpt-4o + gemini-2.5", k: "model" },
+      { v: "promo + policy \u00b7 9k", k: "context" },
+      { v: "whatsapp, crm", k: "tools" },
     ],
     metrics: [
       { v: "3.2 DZD", k: "cost" },
@@ -255,7 +246,6 @@ export function RunConsole() {
         <ExecutionTrace
           stages={DEFAULT_STAGES}
           active={stageIndex}
-          telemetry={task.telemetry}
           onStageClick={handleStageClick}
           bare
         />
@@ -268,6 +258,24 @@ export function RunConsole() {
             {task.detail[stageIndex]}
           </p>
         </div>
+      </div>
+
+      {/* config - route / model / context / tools, one cell each */}
+      <div className="grid grid-cols-2 border-t border-border md:grid-cols-4">
+        {task.config.map((c, i) => (
+          <div
+            key={c.k}
+            className={cn(
+              "min-w-0 px-4 py-3 md:px-5",
+              i % 2 === 1 && "border-l border-border",
+              i >= 2 && "border-t border-border md:border-t-0",
+              i > 0 && "md:border-l md:border-border"
+            )}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-ink">{c.k}</p>
+            <p className="mt-1 break-words font-mono text-[11px] leading-snug text-ink">{c.v}</p>
+          </div>
+        ))}
       </div>
 
       {/* row - outcome + replay */}
