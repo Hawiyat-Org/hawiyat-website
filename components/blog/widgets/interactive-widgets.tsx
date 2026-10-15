@@ -27,15 +27,15 @@ export function StatBand() {
       {STATS.map((s, i) => (
         <div
           key={s.k}
-          className={`border-border px-5 py-4 ${i % 2 === 1 ? "border-l" : ""} ${i >= 2 ? "border-t lg:border-t-0" : ""} ${i > 0 ? "lg:border-l" : ""}`}
+          className={`min-w-0 border-border px-4 py-4 sm:px-5 ${i % 2 === 1 ? "border-l" : ""} ${i >= 2 ? "border-t lg:border-t-0" : ""} ${i > 0 ? "lg:border-l" : ""}`}
         >
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-ink">{s.k}</p>
-          <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-ink">
+          <p className="mt-2 font-mono text-xl font-semibold tabular-nums text-ink sm:text-2xl">
             {s.v[0]}
             {s.v[1] && <span className="px-1.5 text-base font-normal text-muted-ink">&rarr;</span>}
             {s.v[1] && <span className="text-hw-cool">{s.v[1]}</span>}
           </p>
-          <p className="mt-1 font-mono text-[10px] text-muted-ink">{s.d}</p>
+          <p className="mt-1 break-words font-mono text-[10px] leading-snug text-muted-ink">{s.d}</p>
         </div>
       ))}
     </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import type { ReactElement, ReactNode } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight, Star } from "lucide-react"
@@ -42,6 +43,26 @@ const headingLink = {
       children: [{ type: "text", value: "#" }],
     },
   ],
+}
+
+/**
+ * Recursively flattens a react-markdown children tree to plain text. Fenced
+ * block bodies arrive as strings, arrays or hast nodes depending on the
+ * plugin set, so extract defensively.
+ */
+function extractText(node: unknown): string {
+  if (node == null || node === false) return ""
+  if (typeof node === "string" || typeof node === "number") return String(node)
+  if (Array.isArray(node)) return node.map(extractText).join("")
+  if (typeof node === "object") {
+    const obj = node as Record<string, unknown>
+    if ("props" in obj && obj.props && typeof obj.props === "object") {
+      const props = obj.props as { children?: unknown }
+      return extractText(props.children)
+    }
+    if ("value" in obj && typeof obj.value === "string") return obj.value
+  }
+  return ""
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -170,33 +191,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeSlug, [rehypeAutolinkHeadings, headingLink]]}
                   components={{
+                    // Fenced blocks are handled at `pre` level, NOT `code`, so that
+                    // live figures never end up inside a <pre>. A <pre> sets
+                    // `white-space: pre`, which stops a widget's prose from wrapping
+                    // and blows the page width out on mobile.
+                    pre({ children }) {
+                      const child = Array.isArray(children) ? children[0] : children
+                      const codeProps = (
+                        child as ReactElement<{ className?: string; children?: ReactNode }> | null | undefined
+                      )?.props
+                      const lang = /language-(\w+)/.exec(codeProps?.className ?? "")?.[1]
+                      if (lang === "mermaid" || lang === "widget") {
+                        const body = extractText(codeProps?.children).replace(/\n$/, "")
+                        return lang === "mermaid" ? (
+                          <MermaidDiagram code={body} />
+                        ) : (
+                          <BlogWidget name={body.split("\n")[0]} />
+                        )
+                      }
+                      return (
+                        <pre className="my-5 max-w-full overflow-x-auto rounded-lg border border-border bg-surface-dim/50 p-4 text-[12px] leading-relaxed md:text-[13px] [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-[length:inherit]">
+                          {children}
+                        </pre>
+                      )
+                    },
                     code({ className, children }) {
-                      const match = /language-(\w+)/.exec(className ?? "")
-                      // children may be strings or nested React/hast nodes; extract text recursively
-                      const extractText = (node: unknown): string => {
-                        if (node == null || node === false) return ""
-                        if (typeof node === "string" || typeof node === "number") return String(node)
-                        if (Array.isArray(node)) return node.map(extractText).join("")
-                        if (typeof node === "object") {
-                          const obj = node as Record<string, unknown>
-                          if ("props" in obj && obj.props && typeof obj.props === "object") {
-                            const props = obj.props as { children?: unknown }
-                            return extractText(props.children)
-                          }
-                          if ("value" in obj && typeof obj.value === "string") return obj.value
-                        }
-                        return ""
-                      }
-                      const body = extractText(children)
-                      const trimmed = body.replace(/\n$/, "")
-                      if (match && match[1] === "mermaid") {
-                        return <MermaidDiagram code={trimmed} />
-                      }
-                      // Interactive/animated figure: the block body names the widget.
-                      if (match && match[1] === "widget") {
-                        return <BlogWidget name={trimmed.split("\n")[0]} />
-                      }
                       return <code className={className}>{children}</code>
+                    },
+                    // Tables scroll inside their own box instead of stretching the page.
+                    table({ children }) {
+                      return (
+                        <div className="my-4 w-full max-w-full overflow-x-auto">
+                          <table className="min-w-full">{children}</table>
+                        </div>
+                      )
                     },
                     img({ src, alt }) {
                       return (
