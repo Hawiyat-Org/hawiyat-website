@@ -728,3 +728,49 @@ body.booking-modal-open .fixed.inset-0 {
   .hw-stream, .hw-stream-delay, .hw-dash, .hw-grow, .hw-blink { animation: none !important; }
   .hw-shift { transition: none !important; }
 }
+
+/* ── Composer execution trace: travelling bracket + dashed rail ─────────── */
+.composer-bracket {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    width 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    height 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.composer-bracket::before,
+.composer-bracket::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgb(var(--hw-cool-rgb));
+}
+.composer-bracket::before {
+  left: 0;
+  top: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.composer-bracket::after {
+  right: 0;
+  bottom: 0;
+  border-left: 0;
+  border-top: 0;
+}
+/* the connector between stages: dashed while untraversed */
+.composer-rail {
+  height: 1px;
+  flex: 1 1 0%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(var(--border-rgb)) 0 4px,
+    transparent 4px 8px
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .composer-bracket {
+    transition: none;
+  }
+}
