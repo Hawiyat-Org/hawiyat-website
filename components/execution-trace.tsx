@@ -8,6 +8,12 @@ export interface ExecutionTraceProps {
   telemetry?: string[]
   className?: string
   onStageClick?: (index: number) => void
+  /**
+   * Drop the trace's own border/background. Use when the trace sits inside a
+   * larger panel that already draws the container, so the panel does not read
+   * as a card inside a card.
+   */
+  bare?: boolean
 }
 
 export const DEFAULT_STAGES = ["UNDERSTAND", "PLAN", "ROUTE", "EXECUTE", "EVALUATE", "RESULT"]
@@ -28,6 +34,7 @@ export function ExecutionTrace({
   telemetry = [],
   className,
   onStageClick,
+  bare = false,
 }: ExecutionTraceProps) {
   const rowRef = useRef<HTMLDivElement>(null)
   const userInteractedRef = useRef(false)
@@ -77,7 +84,13 @@ export function ExecutionTrace({
   }, [active, stages])
 
   return (
-    <div className={cn("rounded-lg border border-border bg-surface p-4 md:p-6 font-mono text-xs", className)}>
+    <div
+      className={cn(
+        "font-mono text-xs",
+        bare ? "bg-transparent" : "rounded-lg border border-border bg-surface p-4 md:p-6",
+        className
+      )}
+    >
       <div
         ref={rowRef}
         className="relative flex snap-x snap-mandatory items-center justify-between gap-2 overflow-x-auto"
