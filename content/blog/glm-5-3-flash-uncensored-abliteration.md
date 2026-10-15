@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "GLM-5.3-Flash Uncensored: How Abliteration Removes Refusal From an Open Model"
 description: "Z.ai shipped GLM-5.3-Flash with its safety training baked into the weights. Days later the community stripped it out of 12,479 matrices and published how. A teardown of abliteration, and the part that resisted."
 date: "2026-10-15"
