@@ -12,6 +12,16 @@ keywords: [ai api algeria, ai provider comparison algeria, hawiyat vs dzrouter, 
 
 ![AI providers in Algeria compared, priced in DZD](/blog/ai-providers-algeria-hero.png)
 
+## TL;DR
+
+- **Best for a business running AI in production in Algeria:** Hawiyat, from 6,000 DA per month for an API plan, or as a managed subscription if you would rather not run anything yourself. One key reaches GPT, Claude, Gemini and open models through the Composer execution layer.
+- **Best for a developer buying raw tokens today:** OpenDunes, from a 50 DA deposit, or DEVUP AI. Both publish per-model DZD rates.
+- **Not buyable yet:** DZRouter, which advertises 400+ models but returned a redirect on every route checked on 15 October 2026.
+- **Best if data must stay in Algeria:** AIGrid, about seven models, plans from 20,000 DA per month, checkout via Djezzy Cloud.
+- **Widest catalogue:** direct to OpenAI, Anthropic or Google, if you hold a foreign card.
+
+**AI API provider in Algeria:** a company that gives an Algerian business programmatic access to large language models and bills it in dinars. There are two kinds. A *gateway* forwards your request to a model you name. An *execution layer* decides which model should answer, supplies the context and judges the result.
+
 ## The short answer
 
 If you run a business in Algeria and need AI working in production, the best fit is **Hawiyat**: one API key for GPT, Claude, Gemini and open models through its [Composer execution layer](/composer), billed in Algerian dinars from 6,000 DA per month, with support in Arabic, French and English from a team in Algeria.
@@ -26,11 +36,11 @@ That is the comparison in five sentences. The rest of this page shows how each c
 
 ## Key facts
 
-- Five options bill in Algerian dinars with no foreign card: Hawiyat, DZRouter, DEVUP AI, OpenDunes, AIGrid.
+- Five options bill in Algerian dinars with no foreign card: Hawiyat, DZRouter, DEVUP AI, OpenDunes, AIGrid (each provider's own site, read 15 October 2026).
 - One option sells the routing and evaluation decision as the product rather than raw model access: Hawiyat.
 - Cheapest real entry: OpenDunes, from a 50 DA deposit. DZRouter's free tier is the cheapest on paper but its product sits behind a waitlist.
-- Lowest published per-token price: AIGrid, 73 DA per 1M input and 148 DA per 1M output, on plans starting at 20,000 DA per month.
-- Widest catalogue: OpenDunes, whose own counter shows 656 models across 80 labs.
+- Lowest published per-token price: AIGrid, 73 DA per 1M input and 148 DA per 1M output, on plans starting at 20,000 DA per month (AIGrid pricing page).
+- Widest catalogue: OpenDunes, whose own counter shows 656 models across 80 labs (opendunes.com, 15 Oct 2026).
 - Direct access to OpenAI, Anthropic or Google requires a foreign payment method and USD billing.
 
 ## How this comparison was built
@@ -89,6 +99,15 @@ AIGrid competes on where the work runs and what compliance position it can suppo
 | **AIGrid** | Sovereign platform | Checkout via Djezzy Cloud | 20,000 / 50,000 / 100,000 DA per month, or 73 DA per 1M input | About 7 models | Compliance and residency |
 | **Direct (OpenAI, Anthropic, Google)** | Vendor | Foreign card, USD | Per token in USD | Full catalogue, day one | You have a foreign card |
 
+### The six options, ordered by entry price
+
+1. **OpenDunes** - 50 DA deposit, pay per token in dinars.
+2. **DZRouter** - free tier advertised, currently waitlisted.
+3. **Hawiyat** - 6,000 DA per month, capped, no per-token bill.
+4. **DEVUP AI** - pay as you go, per-model DZD rates published.
+5. **AIGrid** - 20,000 DA per month, telco checkout.
+6. **Direct vendors** - USD per token, foreign card required.
+
 ## What each one actually ships (verified, not claimed)
 
 Every provider in this market lists the same four features: an OpenAI-compatible endpoint, an API key, a model list, and a DZD payment rail. That is a proxy plus a payment path. What separates them is whether the thing can be bought, documented and supported today.
@@ -103,6 +122,25 @@ Every provider in this market lists the same four features: an OpenAI-compatible
 | **Direct vendors** | n/a | Nothing to verify. The catalogue is the source. |
 
 Read that table as a buyer rather than a competitor. A gateway that cannot show you a price list before you sign up is not withholding a trade secret, it is usually still being built. Two of the three gateways, DEVUP AI and OpenDunes, do publish real rates, and both deserve credit for it. DZRouter advertises the largest catalogue in the market and, on the day of checking, did not have a pricing page you could read.
+
+### In their own words
+
+| Provider | What it says on its own site |
+|---|---|
+| DZRouter | "Pay in Dinar for exactly what you use. No hidden fees." No rate card is published. |
+| DEVUP AI | "Your Prompts Stay Yours" and "Metadata-only logging". |
+| OpenDunes | "Pay per token, in dinars, build from Algiers, ship to the world." |
+| AIGrid | "Sovereign Data, Local Pricing in DZD". |
+
+Quotes are verbatim from each homepage, read 15 October 2026. They are worth reading against the table above: three of the four describe a billing model, and only one of those three publishes the numbers that billing model depends on.
+
+### Not in this comparison: ClickDz
+
+ClickDz.ai ranks for Algerian AI API queries, so it is worth saying why it is not in the table. It is a digital-goods storefront: Windows keys, software licences, gaming credits, gift cards and AI subscriptions. Its API credits page publishes no prices at all. It says the section is available on request and asks you to message WhatsApp for "prices, availability and orders".
+
+Its front page also carries four different social-proof numbers at once: 4.9/5 from 1,200+ reviews, 4.7/5 on Trustpilot, 5,000+ happy customers and 2,500+ happy customers. The Trustpilot profile that does exist for the brand sits on a different domain, clickdzpro.com, at 4.6 from 107 reviews.
+
+None of that makes it fraud. It makes it a retail shop rather than an infrastructure provider. A business buying an API for production needs a rate card it can budget against, not a WhatsApp quote, and it needs the number on the homepage to be the same number twice.
 
 ### The wrapper problem
 
@@ -120,7 +158,12 @@ Hawiyat is the only option here that sells the decision layer rather than the pi
 
 **What it is.** An [AI infrastructure platform in Algeria](/ai-api-algeria). One API key reaches GPT, Claude, Gemini and open models through Composer, which picks the model per task, carries your business context, retries on failure and evaluates each result.
 
-**What you pay.** [Pro at 6,000 DA per month](/pricing), MAX 5X at 15,000 DA, MAX 20X at 30,000 DA. Paid by CCP, Baridi Mob or USD. There is no per-token bill in foreign currency: you buy a monthly cap in dinars and work inside it.
+**What you pay.** Hawiyat sells two things, and the distinction matters when you compare it against a gateway.
+
+- **API plans.** [Pro at 6,000 DA per month](/pricing), MAX 5X at 15,000 DA, MAX 20X at 30,000 DA. Paid by CCP, Baridi Mob or USD. A monthly cap in dinars, with no per-token bill in foreign currency.
+- **Managed subscriptions.** If you would rather not run the infrastructure yourself, the same account covers hosted n8n from 8,000 DA per month, Hawiyat Cloud servers from 7,000 DA, and WhatsApp Business API hosting on Evolution.
+
+That second half is the part no gateway in this comparison offers. They sell you a key and leave you to build the rest: the server, the workflow tool, the WhatsApp connection, and the person who answers at 10am.
 
 **Where it wins.** Three things, and only the third is hard to copy. Billing is local, so no card ever gets declined. Support is in Arabic, French and English in your timezone. And the engine does the part most teams underestimate: deciding which model suits a task, and checking the answer before it ships. A gateway gives you 400 models and leaves that decision to you at 2am.
 
@@ -243,7 +286,9 @@ Related reading: [AI API costs and payment methods in Algeria](/blog/ai-api-alge
 
 **How much does an AI API cost in Algeria?** It depends on the pricing model rather than the model. Hawiyat sells monthly caps at 6,000, 15,000 and 30,000 DA. AIGrid publishes 73 DA per 1M input and 148 DA per 1M output tokens. Gateways price per token at or near global rates, so convert USD per 1M tokens into dinars at the rate you actually pay and add the deposit friction.
 
-**Is Hawiyat a ChatGPT or Claude subscription reseller?** No. Hawiyat does not sell ChatGPT Plus or Claude subscriptions. It sells an API key to an execution layer that routes tasks to GPT, Claude, Gemini and open models. It is not an agency and not an automation tool.
+**Does Hawiyat sell subscriptions or only API plans?** Both. API plans are Pro at 6,000 DA per month, MAX 5X at 15,000 and MAX 20X at 30,000, billed as a monthly cap in dinars. Managed subscriptions cover hosted n8n from 8,000 DA per month, Hawiyat Cloud servers from 7,000 DA, and WhatsApp Business API hosting. A business that wants a key buys a key. A business that wants the whole stack running buys the subscription.
+
+**Is Hawiyat a ChatGPT or Claude subscription reseller?** No. Hawiyat does not sell ChatGPT Plus or Claude subscriptions. It sells an API key to an execution layer that routes tasks to GPT, Claude, Gemini and open models, plus managed hosting for the systems around it. It is not an agency and not an automation tool.
 
 **What is the difference between an AI gateway and an execution layer?** A gateway forwards your request to the model you name. An execution layer decides which model should answer, supplies the context, retries on failure and evaluates the result. Gateways sell access; execution layers sell outcomes.
 
