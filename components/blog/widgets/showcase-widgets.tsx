@@ -291,7 +291,7 @@ export function WrapperVsEngine() {
           "A gateway (wrapper)",
           WRAPPER,
           "dim",
-          "Four steps, one decision: which model you typed. Nothing judges the answer."
+          "Four steps: the model you named answers, and the judgement stays with your team."
         )}
         {lane(
           "Hawiyat (execution layer)",
@@ -315,7 +315,7 @@ const EVIDENCE: {
 }[] = [
   {
     name: "DZRouter",
-    verdict: "Not buyable. Every route redirected.",
+    verdict: "On early access. Routes redirected to the waitlist.",
     rows: [
       { route: "/pricing", code: "307", ok: false },
       { route: "/docs", code: "307", ok: false },
@@ -326,7 +326,7 @@ const EVIDENCE: {
   },
   {
     name: "DEVUP AI",
-    verdict: "Real rate card. No about page, no status page.",
+    verdict: "Full published rate card. No about or status page yet.",
     rows: [
       { route: "/pricing", code: "200", ok: true },
       { route: "/terms", code: "200", ok: true },
@@ -337,7 +337,7 @@ const EVIDENCE: {
   },
   {
     name: "OpenDunes",
-    verdict: "Complete public product. The fair fight.",
+    verdict: "The most complete public product in this group.",
     rows: [
       { route: "/pricing", code: "200", ok: true },
       { route: "/docs", code: "308", ok: true },
@@ -348,7 +348,7 @@ const EVIDENCE: {
   },
   {
     name: "AIGrid",
-    verdict: "Telco checkout. No legal pages on the public site.",
+    verdict: "Settles through telco credit. Legal pages not public yet.",
     rows: [
       { route: "/pricing", code: "200", ok: true },
       { route: "/docs", code: "200", ok: true },
@@ -359,7 +359,7 @@ const EVIDENCE: {
   },
   {
     name: "Thirra",
-    verdict: "Did not answer the request.",
+    verdict: "No response on the check date.",
     rows: [
       { route: "/", code: "no response", ok: false },
       { route: "/pricing", code: "no response", ok: false },
@@ -412,8 +412,7 @@ export function VerificationMatrix() {
         </ul>
       </div>
       <p className="mt-3 font-mono text-[10px] leading-relaxed text-muted-ink">
-        Click a provider. A 404 on a legal page is not a crime; it is a signal about how the company
-        treats paperwork, and paperwork is what your finance team needs.
+        Click a provider. Not every missing page matters. What matters is whether you can read a price before you commit, so this is a list of questions rather than a scorecard.
       </p>
     </Figure>
   )
@@ -475,8 +474,7 @@ export function PlanSplit() {
         )}
       </div>
       <p className="mt-4 font-mono text-[10px] leading-relaxed text-muted-ink">
-        No gateway in this comparison offers the right column. They hand you a key and leave the
-        server, the WhatsApp connection and the 10am phone call to you.
+        The right column covers what a per-token gateway does not: the server, the WhatsApp connection and the 10am phone call stay covered.
       </p>
     </Figure>
   )
@@ -540,9 +538,7 @@ export function RailsMatrix() {
         </table>
       </div>
       <p className="mt-3 font-mono text-[10px] leading-relaxed text-muted-ink">
-        AIGrid settles through Djezzy Cloud, which is a telco channel rather than a bank rail, so a
-        company that pays by CCP cannot use it. That is the practical difference between local
-        pricing and local payment.
+        AIGrid settles through Djezzy Cloud, a telco channel, so paying by CCP is not an option there. Local pricing and local payment are not always the same thing.
       </p>
     </Figure>
   )
