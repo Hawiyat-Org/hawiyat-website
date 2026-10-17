@@ -482,10 +482,10 @@ export function PlanSplit() {
 
 /* ─────────────── 6. who actually accepts what ─────────────── */
 
-const RAILS = ["CCP", "Baridi Mob / Edahabia", "CIB", "Bank transfer", "Chargily / Wimpay", "Foreign card"]
+const RAILS = ["CCP", "Baridi Mob / Edahabia", "CIB", "Bank transfer", "Chargily / Wimpay", "USD"]
 
 const ACCEPTS: Record<string, boolean[]> = {
-  Hawiyat: [true, true, false, false, false, false],
+  Hawiyat: [true, true, true, true, false, true],
   DZRouter: [true, true, true, true, true, false],
   DEVUP: [false, true, true, false, false, false],
   OpenDunes: [false, true, true, false, false, false],

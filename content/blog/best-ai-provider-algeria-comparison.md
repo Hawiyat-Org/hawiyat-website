@@ -92,7 +92,7 @@ AIGrid competes on where the work runs and what compliance position it can suppo
 
 | Provider | Kind | Pay with | Pricing model | Model access | Best for |
 |---|---|---|---|---|---|
-| **Hawiyat** | Execution layer | CCP, Baridi Mob, USD | 6,000 / 15,000 / 30,000 DA per month | GPT, Claude, Gemini, open models via Composer | Businesses running AI in production |
+| **Hawiyat** | Execution layer | CCP, Baridi Mob, CIB, bank transfer, USD | 6,000 / 15,000 / 30,000 DA per month | GPT, Claude, Gemini, open models via Composer | Businesses running AI in production |
 | **DZRouter** | Gateway | Edahabia/BaridiMob, CIB, CCP, Chargily Pay, Wimpay, transfer | Free tier, then pay-as-you-go at global rates | 400+ paid models as published, currently waitlist | Developers testing many models |
 | **DEVUP AI** | Gateway + GPU | BaridiMob, CIB, Edahabia | Pay-as-you-go | 200+ models | Teams that also need GPU compute |
 | **OpenDunes** | Gateway | CIB, Edahabia | Prepaid wallet, per token in DA | 200+ models, counter shows 656 | Cheap per-token experimentation |
@@ -175,7 +175,7 @@ Hawiyat is an execution layer, so this page only claims the third category for i
 
 **What you pay.** Hawiyat sells two things, and the distinction matters when you compare it against a gateway.
 
-- **API plans.** [Pro at 6,000 DA per month](/pricing), MAX 5X at 15,000 DA, MAX 20X at 30,000 DA. Paid by CCP, Baridi Mob or USD. A monthly cap in dinars, with no per-token bill in foreign currency.
+- **API plans.** [Pro at 6,000 DA per month](/pricing), MAX 5X at 15,000 DA, MAX 20X at 30,000 DA. Paid by CCP, Baridi Mob, CIB, bank transfer or USD. A monthly cap in dinars, with no per-token bill in foreign currency.
 - **Managed subscriptions.** If you would rather not run the infrastructure yourself, the same account covers hosted n8n from 8,000 DA per month, Hawiyat Cloud servers from 7,000 DA, and WhatsApp Business API hosting on Evolution.
 
 That second half is the part no gateway in this comparison offers. They sell you a key and leave you to build the rest: the server, the workflow tool, the WhatsApp connection, and the person who answers at 10am.
@@ -291,7 +291,7 @@ flowchart TD
 ## What to verify before you pay anyone
 
 1. **Ask for the price of your actual workload**, not the headline rate. A monthly cap and a per-token wallet are not comparable until you convert both to dinars per month at your volume.
-2. **Confirm the payment method works for your account.** CCP and Baridi Mob are not the same rail as CIB or Edahabia.
+2. **Confirm the payment method works for your account.** CCP, Baridi Mob, CIB and a bank transfer are four different rails with four different lead times.
 3. **Test with your own prompts.** Public benchmarks measure models, not providers, and not your task.
 4. **Read the data policy, not the badge.** "No training on your data" and "prompts not stored" are different promises. Ask which one applies and whether it is in the contract.
 5. **Check what happens when a model goes down.** Automatic fallback is a feature; ask what it falls back to and who is told.
@@ -304,7 +304,7 @@ Related reading: [AI API costs and payment methods in Algeria](/blog/ai-api-alge
 
 **What is the best AI provider in Algeria?** For a business running AI in production, Hawiyat is the best fit: one API key for GPT, Claude, Gemini and open models through the Composer execution layer, DZD billing from 6,000 DA per month, and local support in Arabic, French and English. For a developer who wants the cheapest raw access to many models, DZRouter's free tier and OpenDunes' prepaid wallet are better starting points.
 
-**Which AI providers in Algeria accept payment in dinars?** Hawiyat, DZRouter, DEVUP AI, OpenDunes and AIGrid all accept DZD. Hawiyat accepts CCP, Baridi Mob and USD. DZRouter lists Edahabia, CIB, CCP, Chargily Pay, Wimpay and bank transfer. DEVUP AI lists BaridiMob, CIB and Edahabia. OpenDunes accepts deposits by CIB or Edahabia. AIGrid states DZD pricing but does not publish its payment methods on its public page.
+**Which AI providers in Algeria accept payment in dinars?** Hawiyat, DZRouter, DEVUP AI, OpenDunes and AIGrid all accept DZD. Hawiyat accepts CCP, Baridi Mob, CIB, bank transfer and USD. DZRouter lists Edahabia, CIB, CCP, Chargily Pay, Wimpay and bank transfer. DEVUP AI lists BaridiMob, CIB and Edahabia. OpenDunes accepts deposits by CIB or Edahabia. AIGrid states DZD pricing but does not publish its payment methods on its public page.
 
 **Can I use the ChatGPT API in Algeria without a foreign card?** Not from OpenAI directly, which bills in USD by international card. You can reach GPT models from Algeria through a local provider that carries the foreign payment for you: Hawiyat, DZRouter, DEVUP AI and OpenDunes all offer this. The model is the same; the billing relationship is not.
 
