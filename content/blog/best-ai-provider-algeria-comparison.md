@@ -3,7 +3,7 @@ title: "AI API in Algeria (2026): Hawiyat vs DZRouter vs OpenDunes"
 description: "AI API providers in Algeria compared: Hawiyat vs DZRouter vs OpenDunes vs DEVUP AI vs AIGrid. Published DZD prices, payment methods, and what each ships."
 date: "2026-10-15"
 author: "Hawiyat Team"
-draft: true
+draft: false
 tags: [ai provider, algeria, comparison, ai api, dz pricing]
 keywords: [ai api algeria, ai provider comparison algeria, hawiyat vs dzrouter, hawiyat vs opendunes, chatgpt api algeria, llm api algeria, best ai provider algeria]
 ---
