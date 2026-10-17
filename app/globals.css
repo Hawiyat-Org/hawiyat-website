@@ -774,3 +774,20 @@ body.booking-modal-open .fixed.inset-0 {
     transition: none;
   }
 }
+
+/* ── Blog showcase widgets: entry ladder, cost bars, flow, matrix ───────── */
+@keyframes swGrow { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes swRise { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+@keyframes swFlow { 0% { offset-distance: 0% ; opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } 100% { offset-distance: 100%; opacity: 0 } }
+@keyframes swPulse { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+.sw-bar { transform-origin: left center; animation: swGrow .85s cubic-bezier(.22,.61,.36,1) both }
+.sw-rise { animation: swRise .55s cubic-bezier(.22,.61,.36,1) both }
+.sw-pulse { animation: swPulse 2.4s ease-in-out infinite }
+.sw-travel { animation: swFlow 3.6s cubic-bezier(.45,.05,.55,.95) infinite }
+.sw-travel.slow { animation-duration: 5.2s }
+.sw-travel.slow2 { animation-duration: 6.4s }
+@media (prefers-reduced-motion: reduce) {
+  .sw-bar, .sw-rise { animation: none }
+  .sw-pulse { animation: none; opacity: .8 }
+  .sw-travel { animation: none; opacity: 1 }
+}

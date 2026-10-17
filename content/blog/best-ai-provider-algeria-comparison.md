@@ -108,6 +108,15 @@ AIGrid competes on where the work runs and what compliance position it can suppo
 5. **AIGrid** - 20,000 DA per month, telco checkout.
 6. **Direct vendors** - USD per token, foreign card required.
 
+```widget
+entry-ladder
+```
+
+
+```widget
+rails-matrix
+```
+
 ## What each one actually ships (verified, not claimed)
 
 Every provider in this market lists the same four features: an OpenAI-compatible endpoint, an API key, a model list, and a DZD payment rail. That is a proxy plus a payment path. What separates them is whether the thing can be bought, documented and supported today.
@@ -122,6 +131,10 @@ Every provider in this market lists the same four features: an OpenAI-compatible
 | **Direct vendors** | n/a | Nothing to verify. The catalogue is the source. |
 
 Read that table as a buyer rather than a competitor. A gateway that cannot show you a price list before you sign up is not withholding a trade secret, it is usually still being built. Two of the three gateways, DEVUP AI and OpenDunes, do publish real rates, and both deserve credit for it. DZRouter advertises the largest catalogue in the market and, on the day of checking, did not have a pricing page you could read.
+
+```widget
+verification-matrix
+```
 
 ### In their own words
 
@@ -150,7 +163,12 @@ None of these providers is a product in the sense Hawiyat is. They are wrappers:
 2. **The intelligence in the loop stays yours.** A wrapper forwards. It does not decide which model suits the task, does not carry your business context, does not judge whether the answer was right, and does not retry a bad result. Every one of those decisions remains work your team does.
 3. **There is no support relationship.** A wrapper's support is the upstream vendor's documentation, in English, on a different timezone. When a payment fails or a model is retired, you are the one translating between your business and the vendor.
 
-Hawiyat is the only option here that sells the decision layer rather than the pipe. That is a narrower claim than "we have more models", and it is the only one this page will make.
+Hawiyat is the only option here that sells the decision layer rather than the pipe.
+
+```widget
+wrapper-vs-engine
+```
+ That is a narrower claim than "we have more models", and it is the only one this page will make.
 
 ## The six options, one by one
 
@@ -164,6 +182,11 @@ Hawiyat is the only option here that sells the decision layer rather than the pi
 - **Managed subscriptions.** If you would rather not run the infrastructure yourself, the same account covers hosted n8n from 8,000 DA per month, Hawiyat Cloud servers from 7,000 DA, and WhatsApp Business API hosting on Evolution.
 
 That second half is the part no gateway in this comparison offers. They sell you a key and leave you to build the rest: the server, the workflow tool, the WhatsApp connection, and the person who answers at 10am.
+
+```widget
+plan-split
+```
+
 
 **Where it wins.** Three things, and only the third is hard to copy. Billing is local, so no card ever gets declined. Support is in Arabic, French and English in your timezone. And the engine does the part most teams underestimate: deciding which model suits a task, and checking the answer before it ships. A gateway gives you 400 models and leaves that decision to you at 2am.
 
@@ -236,6 +259,10 @@ Direct access to OpenAI, Anthropic or Google is the technically best option and 
 ### For a business running AI in production in Algeria
 
 **Hawiyat.** Production is not a model choice, it is an operations problem: what happens when a route fails, who checks the output, who you call at 10am when it breaks, and whether finance can pay the invoice. A monthly dinar cap, local support and an engine that retries and evaluates answer all four. A gateway answers none of them.
+
+```widget
+frontier-cost
+```
 
 ### For the cheapest possible experiment
 

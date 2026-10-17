@@ -30,6 +30,14 @@ import {
   VectorDecomp,
 } from "./diagram-widgets"
 import { AttentionLab, RefusalAxis, RequantSlider, StatBand } from "./interactive-widgets"
+import {
+  EntryLadder,
+  FrontierCost,
+  PlanSplit,
+  RailsMatrix,
+  VerificationMatrix,
+  WrapperVsEngine,
+} from "./showcase-widgets"
 
 const REGISTRY: Record<string, React.ComponentType> = {
   "stat-band": StatBand,
@@ -49,6 +57,12 @@ const REGISTRY: Record<string, React.ComponentType> = {
   "lab-loop": LabLoop,
   "target-ladder": TargetLadder,
   "requant-slider": RequantSlider,
+  "entry-ladder": EntryLadder,
+  "frontier-cost": FrontierCost,
+  "wrapper-vs-engine": WrapperVsEngine,
+  "verification-matrix": VerificationMatrix,
+  "plan-split": PlanSplit,
+  "rails-matrix": RailsMatrix,
 }
 
 export function BlogWidget({ name }: { name: string }) {
