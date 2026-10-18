@@ -35,7 +35,7 @@ import {
   FrontierCost,
   PlanSplit,
   RailsMatrix,
-  VerificationMatrix,
+  ReachChart,
   WrapperVsEngine,
 } from "./showcase-widgets"
 
@@ -60,7 +60,7 @@ const REGISTRY: Record<string, React.ComponentType> = {
   "entry-ladder": EntryLadder,
   "frontier-cost": FrontierCost,
   "wrapper-vs-engine": WrapperVsEngine,
-  "verification-matrix": VerificationMatrix,
+  "reach-chart": ReachChart,
   "plan-split": PlanSplit,
   "rails-matrix": RailsMatrix,
 }

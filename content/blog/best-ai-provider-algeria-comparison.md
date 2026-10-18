@@ -56,7 +56,7 @@ For each provider, six things were checked:
 5. Which support languages are offered?
 6. What does the provider say about your data, and how hard is it to leave?
 
-This page also records what each provider's own domain actually serves. On 15 October 2026 the public routes of every provider were requested and their HTTP status recorded, along with whether a pricing page, documentation, status page, terms of service and about page exist. That is the difference between a claim and a product, and it is the part of this comparison you cannot get from a feature list.
+For reach, the checks are registry and third-party data rather than anything a provider writes about itself: domain registration dates from the registries' own RDAP records, presence in Tranco's aggregated top-1-million domain list, and published third-party traffic estimates where a tool actually models the domain. Where a number does not exist, this page says so instead of estimating it.
 
 **What was not checked:** throughput, uptime, latency measured from Algeria, invoice totals in practice, and support response times. No accounts were opened on competing services and no benchmarks were run. Treat any performance claim from any provider, including Hawiyat, as unverified until you test it on your own workload.
 
@@ -93,7 +93,7 @@ AIGrid competes on where the work runs and what compliance position it can suppo
 | Provider | Kind | Pay with | Pricing model | Model access | Best for |
 |---|---|---|---|---|---|
 | **Hawiyat** | Execution layer | CCP, Baridi Mob, CIB, bank transfer, USD | 6,000 / 15,000 / 30,000 DA per month | GPT, Claude, Gemini, open models via Composer | Businesses running AI in production |
-| **DZRouter** | Gateway | Edahabia/BaridiMob, CIB, CCP, Chargily Pay, Wimpay, transfer | Free tier, then pay-as-you-go at global rates | 400+ paid models as published, currently waitlist | Developers testing many models |
+| **DZRouter** | Gateway | Edahabia/BaridiMob, CIB, CCP, Chargily Pay, Wimpay, transfer | Free tier, then pay-as-you-go at global rates | 400+ paid models as published, early access | Developers testing many models |
 | **DEVUP AI** | Gateway + GPU | BaridiMob, CIB, Edahabia | Pay-as-you-go | 200+ models | Teams that also need GPU compute |
 | **OpenDunes** | Gateway | CIB, Edahabia | Prepaid wallet, per token in DA | 200+ models, counter shows 656 | Cheap per-token experimentation |
 | **AIGrid** | Sovereign platform | Checkout via Djezzy Cloud | 20,000 / 50,000 / 100,000 DA per month, or 73 DA per 1M input | About 7 models | Compliance and residency |
@@ -117,23 +117,26 @@ entry-ladder
 rails-matrix
 ```
 
-## What each one actually ships (verified, not claimed)
+## How long each one has been running
 
-Each provider in this market advertises the same four things: an OpenAI-compatible endpoint, an API key, a model list and a DZD payment rail. The useful question is not who lists the most, it is what is live on the day you are buying.
+The most useful thing you can check about a young provider is not its feature list, it is whether the company will still exist when you need support. Domain registration records answer that, and they cannot be edited by marketing.
 
-| Provider | What it claims | What its own domain served on 15 Oct 2026 |
-|---|---|---|
-| **DZRouter** | 400+ paid models, pay in DZD | Every route requested returned HTTP 307, a redirect. No public pricing page, documentation, terms or privacy page could be read. |
-| **DEVUP AI** | 200+ models, DZD billing | Real published rate card per 1M tokens in DZD. Pricing, terms and privacy exist. No about page, no status page. |
-| **OpenDunes** | 200+ models, 656 counter | Complete public product: pricing, docs, status, about, terms, privacy, and per-model DA rates. |
-| **AIGrid** | Sovereign, DZD pricing | Checkout runs through Djezzy Cloud. Plans at 20,000, 50,000 and 100,000 DA per month. No about, terms or privacy page on the public site. |
-| **Thirra** | Agentic AI infrastructure from Algeria | The domain did not answer the request. |
-| **Direct vendors** | n/a | Nothing to verify. The catalogue is the source. |
+| Provider | Domain registered | Months live | Traffic estimate | What it is |
+|---|---|---|---|---|
+| **AIGrid** | 20 Feb 2025 | 20 | none published | sovereign pitch, about 7 models, telco checkout |
+| **Hawiyat** | 11 Jun 2025 | 16 | ~214 visitors/day (estimate) | API plans plus managed subscriptions |
+| **Thirra** | 30 Aug 2025 | 14 | none published | domain in redemption period on 15 Oct 2026 |
+| **ClickDz** | 5 Feb 2026 | 8 | none published | digital-goods storefront |
+| **DZRouter** | 5 Mar 2026 | 7 | none published | early access |
+| **DEVUP AI** | 6 May 2026 | 5 | ~6 visitors/day (estimate) | published DZD rate card |
+| **OpenDunes** | 22 Jun 2026 | 4 | none published | the most complete public product here |
 
-A table like this is a snapshot, not a verdict, and every company here is moving. Two of the gateways, DEVUP AI and OpenDunes, publish full rate cards and deserve credit for it. The practical point for a buyer is simpler than any ranking: you cannot budget against a price you have not seen, so treat an unreadable pricing page as a reason to ask questions rather than a reason to walk.
+Read the traffic column honestly. Those two figures are third-party estimates from Hypestat, not measurements, and Hypestat only publishes an estimate for domains large enough to model. For the other five, no estimate exists, so this page prints none rather than a guess.
+
+The registry dates are harder data and more revealing. Every provider in this market except AIGrid and Hawiyat registered its domain in 2026, and the three youngest are between four and seven months old. None of the seven domains, Hawiyat included, appears in Tranco's top 1 million. Nobody here is big yet, which is why the sensible question is not who has the most traffic today, it is who is built to still be answering in twelve months.
 
 ```widget
-verification-matrix
+reach-chart
 ```
 
 ### In their own words
@@ -197,7 +200,7 @@ plan-split
 
 **Where it wins.** The free tier is the fastest legitimate way for an Algerian developer to test frontier models without a card. Breadth is real, and OpenAI compatibility means you can leave with one line changed.
 
-**Where it is not the answer.** "At global rates" means your invoice moves with USD pricing, so a heavy month is a surprise month. And availability is the bigger issue: on 15 October 2026 every route on the domain returned a redirect, with no readable price list, documentation or terms. Confirm you can buy it before you design around it.
+**Where it is not the answer.** "At global rates" means your invoice moves with USD pricing, so a heavy month is a surprise month. It was also still onboarding through early access on 15 October 2026, so confirm you can buy it before you design around it.
 
 ### DEVUP AI: gateway plus compute
 
@@ -320,7 +323,7 @@ Related reading: [AI API costs and payment methods in Algeria](/blog/ai-api-alge
 
 **What is the difference between a gateway and an execution layer?** A gateway forwards your prompt to the model you name and bills you for it, which makes local payment and one API key its main value. An execution layer decides which model should answer, supplies the context, retries on failure and evaluates the result. Gateways sell access; execution layers sell outcomes. Many teams use both.
 
-**How do I check whether a provider is live?** Ask for the price list and read it yourself. On 15 October 2026, DZRouter's routes redirected to early access rather than serving a pricing page, while DEVUP AI and OpenDunes had full rate cards published. Availability changes quickly, so re-check on the day you buy rather than trusting any comparison, including this one.
+**How do I check whether a provider is live?** Ask for the price list and read it yourself. On 15 October 2026, DZRouter was still onboarding through early access and had no price list published, while DEVUP AI and OpenDunes had full rate cards available. Availability changes quickly, so re-check on the day you buy rather than trusting any comparison, including this one.
 
 **Which provider is cheapest?** For raw tokens, AIGrid's published 73 DA per 1M input is the lowest in this comparison, and DZRouter's free tier costs nothing to start. For total cost at business volume, the cheapest option is usually the one that removes work you would otherwise pay a person to do, which is a different calculation.
 

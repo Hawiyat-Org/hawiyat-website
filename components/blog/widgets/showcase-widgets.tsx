@@ -304,116 +304,69 @@ export function WrapperVsEngine() {
   )
 }
 
-/* ───────────── 4. what each provider's own domain served ───────────── */
+/* ───────── 4. how long each has been running, and how much traffic ───────── */
 
-type Evidence = { route: string; code: string; ok: boolean | null }
+const REACH = [
+  { name: "AIGrid", reg: "20 Feb 2025", months: 20, traffic: "no estimate published", self: "~7 models, telco checkout" },
+  { name: "Hawiyat", reg: "11 Jun 2025", months: 16, traffic: "~214 visitors/day (estimate)", self: "API plans + managed subscriptions" },
+  { name: "Thirra", reg: "30 Aug 2025", months: 14, traffic: "no estimate published", self: "domain in redemption period" },
+  { name: "ClickDz", reg: "5 Feb 2026", months: 8, traffic: "no estimate published", self: "digital-goods storefront" },
+  { name: "DZRouter", reg: "5 Mar 2026", months: 7, traffic: "no estimate published", self: "early access" },
+  { name: "DEVUP AI", reg: "6 May 2026", months: 5, traffic: "~6 visitors/day (estimate)", self: "published DZD rate card" },
+  { name: "OpenDunes", reg: "22 Jun 2026", months: 4, traffic: "no estimate published", self: "most complete public product" },
+] as const
 
-const EVIDENCE: {
-  name: string
-  verdict: string
-  rows: Evidence[]
-}[] = [
-  {
-    name: "DZRouter",
-    verdict: "On early access. Routes redirected to the waitlist.",
-    rows: [
-      { route: "/pricing", code: "307", ok: false },
-      { route: "/docs", code: "307", ok: false },
-      { route: "/terms", code: "307", ok: false },
-      { route: "/privacy", code: "307", ok: false },
-      { route: "/sitemap.xml", code: "empty", ok: false },
-    ],
-  },
-  {
-    name: "DEVUP AI",
-    verdict: "Full published rate card. No about or status page yet.",
-    rows: [
-      { route: "/pricing", code: "200", ok: true },
-      { route: "/terms", code: "200", ok: true },
-      { route: "/about", code: "404", ok: false },
-      { route: "/status", code: "404", ok: false },
-      { route: "/blog", code: "404", ok: false },
-    ],
-  },
-  {
-    name: "OpenDunes",
-    verdict: "The most complete public product in this group.",
-    rows: [
-      { route: "/pricing", code: "200", ok: true },
-      { route: "/docs", code: "308", ok: true },
-      { route: "/status", code: "200", ok: true },
-      { route: "/about", code: "200", ok: true },
-      { route: "/terms", code: "200", ok: true },
-    ],
-  },
-  {
-    name: "AIGrid",
-    verdict: "Settles through telco credit. Legal pages not public yet.",
-    rows: [
-      { route: "/pricing", code: "200", ok: true },
-      { route: "/docs", code: "200", ok: true },
-      { route: "/about", code: "404", ok: false },
-      { route: "/terms", code: "404", ok: false },
-      { route: "/privacy", code: "404", ok: false },
-    ],
-  },
-  {
-    name: "Thirra",
-    verdict: "No response on the check date.",
-    rows: [
-      { route: "/", code: "no response", ok: false },
-      { route: "/pricing", code: "no response", ok: false },
-      { route: "/docs", code: "no response", ok: false },
-    ],
-  },
-]
-
-export function VerificationMatrix() {
-  const [index, setIndex] = useState(0)
-  const current = EVIDENCE[index]
+export function ReachChart() {
+  const motion = useMotionEnabled()
+  const step = useSteps(REACH.length, 260, motion)
+  const max = Math.max(...REACH.map((r) => r.months))
 
   return (
-    <Figure title="HTTP status of each provider's public routes" note="requested 15 Oct 2026">
-      <div className="mb-4 flex flex-wrap gap-2">
-        {EVIDENCE.map((e, i) => (
-          <button
-            key={e.name}
-            type="button"
-            aria-pressed={i === index}
-            onClick={() => setIndex(i)}
-            className={cn(
-              "min-h-[44px] rounded-full border px-3 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors",
-              i === index
-                ? "border-signal bg-signal text-signal-text"
-                : "border-border text-muted-ink hover:border-signal/50 hover:text-ink"
-            )}
-          >
-            {e.name}
-          </button>
-        ))}
+    <Figure title="How long each has been running" note="registry data, 15 Oct 2026">
+      <div className="space-y-3">
+        {REACH.map((r, i) => {
+          const on = i < step || !motion
+          return (
+            <div key={r.name}>
+              <div className="mb-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                <span className={cn("text-sm font-medium text-ink", r.name === "Hawiyat" && "font-semibold")}>
+                  {r.name}
+                  <span className="ml-2 font-normal text-muted-ink">{r.self}</span>
+                </span>
+                <span className="font-mono text-[11px] tabular-nums text-muted-ink">
+                  {r.reg} · {r.months} mo
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-3 flex-1 overflow-hidden rounded-sm bg-surface-dim">
+                  <div
+                    className={cn("sw-bar h-full rounded-sm", r.name === "Hawiyat" ? "bg-hw-cool" : "bg-ink/35")}
+                    style={{
+                      width: `${(r.months / max) * 100}%`,
+                      animationDelay: `${i * 120}ms`,
+                      opacity: on ? 1 : 0.2,
+                      transition: "opacity .35s ease",
+                    }}
+                  />
+                </div>
+                <span className="w-[13.5rem] shrink-0 font-mono text-[10px] text-muted-ink">{r.traffic}</span>
+              </div>
+            </div>
+          )
+        })}
       </div>
-
-      <div className="rounded-lg border border-border bg-surface-dim/40 p-4">
-        <p className="mb-3 text-sm font-medium text-ink">{current.verdict}</p>
-        <ul className="grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
-          {current.rows.map((r) => (
-            <li key={r.route} className="flex items-center justify-between gap-3 font-mono text-[11px]">
-              <span className="text-muted-ink">{r.route}</span>
-              <span
-                className={cn(
-                  "rounded border px-1.5 py-0.5 tabular-nums",
-                  r.ok ? "border-hw-cool/50 text-hw-cool" : "border-hw-hot/50 text-hw-hot"
-                )}
-              >
-                {r.code}
-              </span>
-            </li>
-          ))}
-        </ul>
+      <div className="mt-4 border-t border-border pt-3 font-mono text-[10px] leading-relaxed text-muted-ink">
+        <p>
+          Domain age comes from registry RDAP records, which are authoritative. The two traffic figures are
+          third-party estimates (Hypestat, 15 Oct 2026), not measurements, and they are only published for the
+          two domains large enough to model. The other five have no estimate published, so this page prints none.
+        </p>
+        <p className="mt-2">
+          None of the seven domains, Hawiyat included, appears in Tranco&apos;s top 1 million. Nobody in this
+          market is big yet, which makes age and shipping history a better question than size: what matters is
+          whether the provider is still there in twelve months.
+        </p>
       </div>
-      <p className="mt-3 font-mono text-[10px] leading-relaxed text-muted-ink">
-        Click a provider. Not every missing page matters. What matters is whether you can read a price before you commit, so this is a list of questions rather than a scorecard.
-      </p>
     </Figure>
   )
 }
