@@ -167,7 +167,10 @@ export default function PrivacyPage() {
                 <li>
                   <span className="text-foreground">Security and Abuse Prevention.</span>
                   {" "}Monitor for unauthorized access, detect abuse, enforce rate limits, and protect the
-                  integrity of our infrastructure.
+                  integrity of our infrastructure. This includes checking the email address you submit on an
+                  order form against a public list of temporary and disposable email providers, and verifying
+                  that the domain is syntactically deliverable, so that order confirmations are not used to
+                  relay mail to throwaway addresses.
                 </li>
                 <li>
                   <span className="text-foreground">Analytics and Improvement.</span>
@@ -341,6 +344,12 @@ export default function PrivacyPage() {
                 effects concerning you or similarly significantly affect you. Where we use automated systems
                 for fraud detection or rate limiting, these are subject to human oversight and do not
                 constitute solely automated decisions with legal effect.
+              </p>
+              <p className="mt-3">
+                Rejections of a temporary or disposable email address are based on a published domain list and
+                are not final: if you believe your address was rejected in error, contact
+                {" "}contact@hawiyat.org and we will review it and add your domain to our allowlist, so that
+                you can submit the form with that address.
               </p>
             </section>
 
