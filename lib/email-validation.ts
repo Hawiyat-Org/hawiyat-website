@@ -1,6 +1,13 @@
 import { domainToASCII } from "node:url"
 
 import blocklist from "@/lib/data/disposable-domains.json"
+import {
+  LABEL_RE,
+  MAX_DOMAIN_LENGTH,
+  MAX_EMAIL_LENGTH,
+  MAX_LOCAL_LENGTH,
+  hasForbiddenDomainChars,
+} from "@/lib/domain-rules"
 
 /**
  * Server-side email validation and disposable-domain blocking.
@@ -21,17 +28,6 @@ import blocklist from "@/lib/data/disposable-domains.json"
  * - This module does no I/O. The allowlist check is the route's job.
  */
 
-const MAX_EMAIL_LENGTH = 254
-const MAX_LOCAL_LENGTH = 64
-const MAX_DOMAIN_LENGTH = 253
-
-/** Must match LABEL_RE in scripts/sync-disposable-domains.ts. */
-const LABEL_RE = /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/
-
-/**
- * RFC 5322 dot-atom, restricted to printable ASCII. Rejects quoted local parts,
- * consecutive dots, and leading/trailing dots in one expression.
- */
 const LOCAL_RE = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*$/
 
 /**
@@ -45,9 +41,7 @@ const DEFAULT_EXEMPT_TLDS = ["dz"]
 const EXEMPT_TLDS = (() => {
   const raw = process.env.EMAIL_BLOCKLIST_EXEMPT_TLDS
   const source = raw && raw.trim() ? raw.split(",") : DEFAULT_EXEMPT_TLDS
-  return source
-    .map((tld) => tld.trim().toLowerCase().replace(/^\./, ""))
-    .filter(Boolean)
+  return source.map((tld) => tld.trim().toLowerCase().replace(/^\./, "")).filter(Boolean)
 })()
 
 const BLOCKED_DOMAINS: ReadonlySet<string> = new Set(
@@ -60,10 +54,33 @@ export const BLOCKLIST_META = Object.freeze({
   source: blocklist.source ?? null,
 })
 
+/**
+ * Providers that implement RFC 5233 subaddressing with `+`. Restricting the
+ * plus-strip to these avoids collapsing two genuinely different mailboxes
+ * (`a+b@company.com` and `a@company.com` can be two people) into one
+ * rate-limit bucket on servers that do not subaddress.
+ */
+const SUBADDRESSING_DOMAINS: ReadonlySet<string> = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "yahoo.com",
+  "yahoo.fr",
+  "icloud.com",
+  "me.com",
+  "protonmail.com",
+  "proton.me",
+  "fastmail.com",
+  "yandex.com",
+  "qq.com",
+])
+
 export type EmailCheck =
   | { ok: true; email: string; domain: string }
   | { ok: false; reason: "invalid" | "too_long" }
-  | { ok: false; reason: "blocked"; domain: string; matched: string }
+  | { ok: false; reason: "blocked"; email: string; domain: string; matched: string }
 
 /**
  * Lowercases, strips FQDN trailing dots, converts IDN to A-labels, and validates
@@ -79,9 +96,10 @@ export function normalizeDomain(raw: string): string | null {
   let domain = raw.trim().toLowerCase()
   if (!domain) return null
 
-  // Bracketed IP literals ("[1.2.3.4]") and any percent-encoding are not
-  // domains we can block or deliver to.
-  if (domain.includes("[") || domain.includes("]") || domain.includes("%")) return null
+  // Checked BEFORE conversion: domainToASCII truncates at these characters
+  // rather than failing, so `a@x.com/path` would otherwise be accepted as
+  // `a@x.com`. Bracketed IP literals and percent-encoding are rejected here too.
+  if (hasForbiddenDomainChars(domain)) return null
 
   domain = domain.replace(/\.+$/, "")
   if (!domain || domain.length > MAX_DOMAIN_LENGTH) return null
@@ -89,6 +107,10 @@ export function normalizeDomain(raw: string): string | null {
   // IDNA / UTS 46 to ASCII. Returns "" on failure (never throws for a string).
   const ascii = domainToASCII(domain)
   if (!ascii) return null
+
+  // Length must be re-checked AFTER conversion: punycode expands, so a domain
+  // that fits pre-IDNA can exceed the RFC 5321 limit afterwards.
+  if (ascii.length > MAX_DOMAIN_LENGTH) return null
 
   const labels = ascii.split(".")
   if (labels.length < 2) return null
@@ -124,13 +146,18 @@ export function parseEmail(raw: unknown): { local: string; domain: string } | nu
   const domain = normalizeDomain(rawDomain)
   if (!domain) return null
 
+  // Punycode expansion can push the whole address past the limit even when each
+  // part individually fits.
+  if (local.length + 1 + domain.length > MAX_EMAIL_LENGTH) return null
+
   return { local, domain }
 }
 
-function isExemptDomain(domain: string): boolean {
-  if (EXEMPT_TLDS.length === 0) return false
+/** True when `domain`'s TLD is on the exemption list. */
+export function isExemptDomain(domain: string, exemptTlds: readonly string[] = EXEMPT_TLDS): boolean {
+  if (exemptTlds.length === 0) return false
   const tld = domain.slice(domain.lastIndexOf(".") + 1)
-  return EXEMPT_TLDS.includes(tld)
+  return exemptTlds.includes(tld)
 }
 
 /**
@@ -163,8 +190,14 @@ export function normalizeEmail(raw: unknown): string | null {
  * not create case-variant rows. The local part is preserved verbatim otherwise
  * (no `+tag` stripping and no Gmail dot folding) — that would change the
  * customer's actual delivery address.
+ *
+ * The `blocked` variant also carries `email` so callers can store or allow the
+ * address without re-parsing it.
  */
-export function checkEmail(raw: unknown): EmailCheck {
+export function checkEmail(
+  raw: unknown,
+  options?: { exemptTlds?: readonly string[] }
+): EmailCheck {
   if (typeof raw !== "string") return { ok: false, reason: "invalid" }
 
   const trimmed = raw.trim()
@@ -176,13 +209,15 @@ export function checkEmail(raw: unknown): EmailCheck {
 
   const email = `${parsed.local.toLowerCase()}@${parsed.domain}`
 
-  if (isExemptDomain(parsed.domain)) {
+  // Exemption is checked first: the market-protection decision outranks the
+  // third-party list, and a .dz domain must never be rejected on its say-so.
+  if (isExemptDomain(parsed.domain, options?.exemptTlds)) {
     return { ok: true, email, domain: parsed.domain }
   }
 
   const matched = isBlockedDomain(parsed.domain)
   if (matched) {
-    return { ok: false, reason: "blocked", domain: parsed.domain, matched }
+    return { ok: false, reason: "blocked", email, domain: parsed.domain, matched }
   }
 
   return { ok: true, email, domain: parsed.domain }
@@ -192,10 +227,9 @@ export function checkEmail(raw: unknown): EmailCheck {
  * Canonical key for the per-address rate limit.
  *
  * Without this, `email:${raw}` gives an attacker a fresh bucket per variant:
- * `a+1@gmail.com`, `A@x.com`, and `a@x.com ` are three separate keys. Plus-tag
- * stripping and Gmail dot-folding are safe HERE because they only decide
- * whether two submissions are "the same person" — the stored address is never
- * altered by this function.
+ * `a+1@gmail.com`, `A@x.com`, and `a@x.com ` are three separate keys. The
+ * canonicalisation is safe HERE because it only decides whether two submissions
+ * are "the same person" — the stored address is never altered by this function.
  */
 export function toRateLimitKey(email: string): string {
   const trimmed = email.trim().toLowerCase()
@@ -205,10 +239,12 @@ export function toRateLimitKey(email: string): string {
   let local = trimmed.slice(0, at)
   const domain = trimmed.slice(at + 1).replace(/\.+$/, "")
 
-  // Subaddress delimiter (RFC 5233). Not universal, but the overwhelmingly
-  // common convention and the right default for abuse bucketing.
-  const plus = local.indexOf("+")
-  if (plus > 0) local = local.slice(0, plus)
+  // Only strip subaddress tags on providers known to support them, so two real
+  // mailboxes (`a+b@` and `a@`) are not merged on servers that do not.
+  if (SUBADDRESSING_DOMAINS.has(domain)) {
+    const plus = local.indexOf("+")
+    if (plus > 0) local = local.slice(0, plus)
+  }
 
   // Dots are ignored for consumer Gmail only. They are meaningful on Google
   // Workspace/custom domains, where jane.doe@ and janedoe@ can be two people.
@@ -219,31 +255,17 @@ export function toRateLimitKey(email: string): string {
   return `${local}@${domain}`
 }
 
-/** Common typos, so a mistake produces a suggestion instead of a dead end. */
-const TYPO_MAP: Readonly<Record<string, string>> = {
+/**
+ * Common typos, so a mistake produces a suggestion instead of a dead end.
+ *
+ * Every key MUST be present in the blocklist — this map is only consulted on the
+ * blocked path, so a key that is not blocklisted can never fire. The test suite
+ * enforces that invariant.
+ */
+export const TYPO_MAP: Readonly<Record<string, string>> = {
   "gmial.com": "gmail.com",
-  "gmai.com": "gmail.com",
-  "gmil.com": "gmail.com",
-  "gmal.com": "gmail.com",
-  "gnail.com": "gmail.com",
-  "gmail.con": "gmail.com",
-  "gmail.cm": "gmail.com",
-  "gmail.co": "gmail.com",
-  "gmail.comm": "gmail.com",
   "hotmial.com": "hotmail.com",
   "hotmai.com": "hotmail.com",
-  "hotmal.com": "hotmail.com",
-  "hotmail.con": "hotmail.com",
-  "outlok.com": "outlook.com",
-  "outllok.com": "outlook.com",
-  "outlook.con": "outlook.com",
-  "yaho.com": "yahoo.com",
-  "yahho.com": "yahoo.com",
-  "yahoo.con": "yahoo.com",
-  "iclould.com": "icloud.com",
-  "iclod.com": "icloud.com",
-  "protonmai.com": "protonmail.com",
-  "protonmal.com": "protonmail.com",
 }
 
 /** Returns the corrected domain for a known typo, or null. */
@@ -251,14 +273,16 @@ export function suggestDomainFix(domain: string): string | null {
   return TYPO_MAP[domain.toLowerCase()] ?? null
 }
 
+/** Domains that must resolve as blocked, used by the self-test and the tests. */
+export const SELF_TEST_DOMAINS = ["mailinator.com", "guerrillamail.com", "yopmail.com"] as const
+
 /**
  * Guards against the silent-no-op class of bug: the repo builds with
  * `typescript.ignoreBuildErrors: true`, so a malformed or empty list would ship
  * without failing anything. Called once at module load.
  */
 export function validateBlocklistOrWarn(): boolean {
-  const probes = ["mailinator.com", "guerrillamail.com", "yopmail.com"]
-  const missing = probes.filter((domain) => !BLOCKED_DOMAINS.has(domain))
+  const missing = SELF_TEST_DOMAINS.filter((domain) => !BLOCKED_DOMAINS.has(domain))
   if (missing.length > 0) {
     console.error(
       `CRITICAL: disposable-domain blocklist self-test failed; missing: ${missing.join(", ")}. ` +

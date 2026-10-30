@@ -168,9 +168,9 @@ export default function PrivacyPage() {
                   <span className="text-foreground">Security and Abuse Prevention.</span>
                   {" "}Monitor for unauthorized access, detect abuse, enforce rate limits, and protect the
                   integrity of our infrastructure. This includes checking the email address you submit on an
-                  order form against a public list of temporary and disposable email providers, and verifying
-                  that the domain is syntactically deliverable, so that order confirmations are not used to
-                  relay mail to throwaway addresses.
+                  order form against a public list of temporary and disposable email providers, and rejecting
+                  addresses whose domain is not syntactically well-formed, so that order confirmations are not
+                  used to relay mail to throwaway addresses.
                 </li>
                 <li>
                   <span className="text-foreground">Analytics and Improvement.</span>

@@ -6,7 +6,6 @@ import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
 import {
   BLOCKLIST_META,
   checkEmail,
-  normalizeEmail,
   suggestDomainFix,
   toRateLimitKey,
 } from "@/lib/email-validation"
@@ -92,46 +91,43 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Email syntax and blocklist checks run BEFORE the rate limiters on purpose.
-    // checkRateLimit() increments on allow and has no refund, so charging a
-    // customer's budget for an address we are about to reject would lock them
-    // out for an hour when they retry with a corrected address. This block does
-    // no I/O except the allowlist lookup, which only happens on a block.
+    // Payment validation is pure, so it runs before the limiters for the same
+    // reason as the email syntax check: a typo must not cost the customer quota.
+    const normalizedPayment = typeof preferredPayment === "string" && preferredPayment
+      ? preferredPayment.toUpperCase().replace(/\s+/g, "_")
+      : null
+
+    const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
+    if (normalizedPayment && !validPaymentMethods.includes(normalizedPayment)) {
+      return orderError(
+        "invalid_payment_method",
+        "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD",
+        "Set preferredPayment to one of CCP, BARIDI_MOB, or USD, or omit it.",
+        400
+      )
+    }
+
+    // Email syntax is checked BEFORE the rate limiters: checkRateLimit()
+    // increments on allow and has no refund, so charging a customer's budget for
+    // a typo would lock them out for an hour once they corrected it. The
+    // blocklist decision is deferred until after the IP limiter, because the
+    // allowlist lookup below is a database query and must not be reachable
+    // without limit.
     const emailCheck = checkEmail(customerEmail)
-    if (!emailCheck.ok) {
-      if (emailCheck.reason === "blocked") {
-        const allowlisted = await isDomainAllowlisted(emailCheck.domain)
-        if (!allowlisted) {
-          // Log the domain only: never the full address, and never the
-          // customer's name or phone. Enough to measure false positives and to
-          // tell which list revision caused a rejection.
-          console.warn(
-            `email_blocked domain=${emailCheck.domain} matched=${emailCheck.matched} ` +
-              `list=${BLOCKLIST_META.commit ?? "unknown"}`
-          )
-          const suggestion = suggestDomainFix(emailCheck.domain)
-          return orderError(
-            "disposable_email",
-            "Temporary or disposable email addresses can't be used for orders." +
-              (suggestion ? ` Did you mean ${suggestion}?` : ""),
-            "Use a permanent address you will keep access to — Gmail, Outlook, iCloud, or your work email all work. If you believe this is a mistake, contact contact@hawiyat.org and we will unblock your domain.",
-            400
-          )
-        }
-      } else {
-        return orderError(
-          emailCheck.reason === "too_long" ? "field_too_long" : "invalid_email",
-          emailCheck.reason === "too_long"
-            ? "customerEmail exceeds the maximum length of 254 characters."
-            : "Invalid email format.",
-          "Provide a valid email address, e.g. name@example.com, and resubmit.",
-          400
-        )
-      }
+
+    if (!emailCheck.ok && emailCheck.reason !== "blocked") {
+      return orderError(
+        emailCheck.reason === "too_long" ? "field_too_long" : "invalid_email",
+        emailCheck.reason === "too_long"
+          ? "customerEmail exceeds the maximum length of 254 characters."
+          : "Invalid email format.",
+        "Provide a valid email address, e.g. name@example.com, and resubmit.",
+        400
+      )
     }
 
     // Canonical form for storage and for the per-address rate-limit key.
-    const normalizedEmail = normalizeEmail(customerEmail) ?? customerEmail.trim().toLowerCase()
+    const normalizedEmail = emailCheck.email
 
     const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
     if (!ipLimit.allowed) {
@@ -141,6 +137,31 @@ export async function POST(request: NextRequest) {
         `Wait ${ipLimit.retryAfter} seconds before submitting another order, or contact Hawiyat support if you believe this is a mistake.`,
         429
       )
+    }
+
+    // Blocklist enforcement runs AFTER the IP limit so the allowlist query
+    // below cannot be reached without limit. A rejected address therefore does
+    // consume IP budget, which is the desired anti-abuse behaviour; a mere
+    // typo does not, because syntax is checked above.
+    if (!emailCheck.ok) {
+      const allowlisted = await isDomainAllowlisted(emailCheck.domain, emailCheck.matched)
+      if (!allowlisted) {
+        // Log the domain only: never the full address, and never the
+        // customer's name or phone. Enough to measure false positives and to
+        // tell which list revision caused a rejection.
+        console.warn(
+          `email_blocked domain=${emailCheck.domain} matched=${emailCheck.matched} ` +
+            `list=${BLOCKLIST_META.commit ?? "unknown"}`
+        )
+        const suggestion = suggestDomainFix(emailCheck.matched)
+        return orderError(
+          "disposable_email",
+          "Temporary or disposable email addresses can't be used for orders." +
+            (suggestion ? ` Did you mean ${suggestion}?` : ""),
+          "Use a permanent address you will keep access to — Gmail, Outlook, iCloud, or your work email all work. If you believe this is a mistake, contact contact@hawiyat.org and we will unblock your domain.",
+          400
+        )
+      }
     }
 
     // Keyed on the canonical form: otherwise `a+1@x.com`, `A@x.com`, and
@@ -175,20 +196,6 @@ export async function POST(request: NextRequest) {
     // notification templates — the templates must never escapeHtml() a
     // non-string (a truthy non-string would throw AFTER the order commits).
     const normalizedNotes = typeof notes === "string" ? notes : null
-
-    const normalizedPayment = typeof preferredPayment === "string" && preferredPayment
-      ? preferredPayment.toUpperCase().replace(/\s+/g, "_")
-      : null
-
-    const validPaymentMethods: string[] = ["CCP", "BARIDI_MOB", "USD"]
-    if (normalizedPayment && !validPaymentMethods.includes(normalizedPayment)) {
-      return orderError(
-        "invalid_payment_method",
-        "Invalid payment method. Must be one of: CCP, BARIDI_MOB, USD",
-        "Set preferredPayment to one of CCP, BARIDI_MOB, or USD, or omit it.",
-        400
-      )
-    }
 
     const order = await prisma.order.create({
       data: {

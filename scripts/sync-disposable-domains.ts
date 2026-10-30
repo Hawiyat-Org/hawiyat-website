@@ -16,14 +16,15 @@
  * Source: https://github.com/disposable-email-domains/disposable-email-domains
  * Licence: CC0 1.0 (public domain).
  *
- * This script deliberately does NOT import lib/email-validation.ts: that module
- * imports the JSON this script produces, so importing it here would fail on a
- * cold checkout where the JSON does not exist yet. The label regex is therefore
- * duplicated on purpose, and both copies must stay in sync.
+ * This script imports only lib/domain-rules.ts, which has no dependencies. It
+ * must NOT import lib/email-validation.ts: that module imports the JSON this
+ * script produces, so doing so would be circular on a cold checkout.
  */
 import { existsSync, readFileSync } from "node:fs"
 import { writeFile } from "node:fs/promises"
 import { join } from "node:path"
+
+import { isValidAsciiDomain } from "../lib/domain-rules"
 
 const SOURCE_REPO = "https://github.com/disposable-email-domains/disposable-email-domains"
 const SOURCE_URL = `${SOURCE_REPO}/raw/main/disposable_email_blocklist.conf`
@@ -31,21 +32,19 @@ const API_URL = "https://api.github.com/repos/disposable-email-domains/disposabl
 
 const OUTPUT_PATH = join(process.cwd(), "lib", "data", "disposable-domains.json")
 
-/** Must match LABEL_RE in lib/email-validation.ts. */
-const LABEL_RE = /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/
-
 /** Sanity floors. An upstream bug or a truncated response must never ship. */
 const MIN_ENTRIES = 5000
 const MAX_SHRINK = 0.05 // abort if the list lost more than 5%
 const MAX_GROWTH = 0.5 // abort if the list grew more than 50%
 
-function isValidDomain(domain: string): boolean {
-  if (!domain || domain.length > 253) return false
-  const labels = domain.split(".")
-  if (labels.length < 2) return false
-  if (!labels.every((label) => LABEL_RE.test(label))) return false
-  // A numeric TLD means we were handed an IP, not a domain.
-  return !/^\d+$/.test(labels[labels.length - 1])
+/**
+ * Stricter than the runtime validator on purpose: the list is shipped in ASCII
+ * with no trailing dots, so an entry that needs IDNA or FQDN normalization is
+ * evidence the upstream feed changed shape. Fail the sync and look at it rather
+ * than silently normalizing it into the list.
+ */
+function isValidUpstreamEntry(domain: string): boolean {
+  return isValidAsciiDomain(domain) && domain === domain.toLowerCase()
 }
 
 function readExistingDomains(): string[] {
@@ -89,7 +88,7 @@ async function main() {
   for (const line of lines) {
     const trimmed = line.trim().toLowerCase()
     if (!trimmed || trimmed.startsWith("#")) continue
-    if (!isValidDomain(trimmed)) {
+    if (!isValidUpstreamEntry(trimmed)) {
       invalid.push(trimmed)
       continue
     }
@@ -128,6 +127,13 @@ async function main() {
   }
 
   const commit = await fetchCommitSha()
+
+  // Provenance is the whole reason the list is committed rather than fetched at
+  // runtime. An unpinned list cannot answer "which revision blocked this
+  // customer?", and the test suite asserts the SHA is present.
+  if (!commit) {
+    throw new Error("Refusing to write: could not resolve the upstream commit SHA.")
+  }
 
   const payload = {
     source: SOURCE_REPO,

@@ -77,5 +77,14 @@ export async function parseOrderResponse<T>(response: Response): Promise<T> {
     throw error
   }
 
+  // A 2xx with an unreadable body would otherwise surface to the user as
+  // "Cannot read properties of null (reading 'order')" — the same class of bug
+  // as the [object Object] this module exists to fix.
+  if (body === null || typeof body !== "object") {
+    throw new Error(
+      "We could not read the server's response. Please refresh and try again, or contact support if the problem continues."
+    )
+  }
+
   return body as T
 }

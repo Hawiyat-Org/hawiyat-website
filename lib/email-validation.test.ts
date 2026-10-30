@@ -3,14 +3,18 @@ import { describe, it } from "node:test"
 
 import {
   BLOCKLIST_META,
+  SELF_TEST_DOMAINS,
+  TYPO_MAP,
   checkEmail,
   isBlockedDomain,
+  isExemptDomain,
   normalizeDomain,
   parseEmail,
   suggestDomainFix,
   toRateLimitKey,
   validateBlocklistOrWarn,
-} from "./email-validation"
+} from "@/lib/email-validation"
+import blocklist from "@/lib/data/disposable-domains.json"
 
 describe("blocklist integrity", () => {
   it("loads a plausible number of domains", () => {
@@ -29,6 +33,25 @@ describe("blocklist integrity", () => {
     assert.ok(BLOCKLIST_META.count > 0)
     assert.equal(isBlockedDomain("0-mailer.dynv6.net"), "0-mailer.dynv6.net")
   })
+
+  it("self-test domains are present", () => {
+    for (const domain of SELF_TEST_DOMAINS) {
+      assert.equal(isBlockedDomain(domain), domain)
+    }
+  })
+
+  it("the file's own count matches the loaded set", () => {
+    assert.equal(blocklist.domains.length, BLOCKLIST_META.count)
+    assert.equal(blocklist.count, BLOCKLIST_META.count)
+  })
+
+  it("contains no entries that would over-block a whole registry or public suffix", () => {
+    const suffixes = new Set(["co.uk", "com.br", "gov.uk", "com.au", "co.jp", "gmail.com", "outlook.com"])
+    for (const domain of blocklist.domains) {
+      assert.equal(suffixes.has(domain), false, `${domain} would over-block`)
+      assert.equal(domain.split(".").length >= 2, true, `${domain} has fewer than 2 labels`)
+    }
+  })
 })
 
 describe("normalizeDomain fails closed", () => {
@@ -45,6 +68,12 @@ describe("normalizeDomain fails closed", () => {
     "a b.com",
     "-leading.com",
     "trailing-.com",
+    // domainToASCII truncates at these instead of failing, so they are rejected
+    // before conversion: `x.com/path` would otherwise be accepted as `x.com`.
+    "x.com/path",
+    "x.com?y=1",
+    "x.com#frag",
+    "x.com\\path",
   ]
 
   for (const input of rejected) {
@@ -144,6 +173,7 @@ describe("checkEmail", () => {
     assert.deepEqual(result, {
       ok: false,
       reason: "blocked",
+      email: "user@mailinator.com",
       domain: "mailinator.com",
       matched: "mailinator.com",
     })
@@ -207,15 +237,73 @@ describe("toRateLimitKey", () => {
   it("does NOT fold dots on non-Gmail domains", () => {
     assert.notEqual(toRateLimitKey("jane.doe@company.com"), toRateLimitKey("janedoe@company.com"))
   })
+
+  it("does NOT merge plus-tagged mailboxes on providers without subaddressing", () => {
+    // On a server that does not implement RFC 5233 these can be two real people.
+    assert.notEqual(toRateLimitKey("a+b@company.com"), toRateLimitKey("a@company.com"))
+  })
+
+  it("strips plus-tags on providers that do subaddress", () => {
+    assert.equal(toRateLimitKey("a+b@outlook.com"), toRateLimitKey("a@outlook.com"))
+  })
 })
 
 describe("suggestDomainFix", () => {
   it("recognises common typos", () => {
     assert.equal(suggestDomainFix("gmial.com"), "gmail.com")
-    assert.equal(suggestDomainFix("gmail.con"), "gmail.com")
+    assert.equal(suggestDomainFix("hotmial.com"), "hotmail.com")
   })
 
   it("returns null for domains it does not know", () => {
     assert.equal(suggestDomainFix("example.com"), null)
+  })
+
+  it("only maps domains that are actually blocklisted", () => {
+    // The suggester is consulted only on the blocked path, so a key that is not
+    // in the blocklist can never fire. This pins that coupling.
+    for (const key of Object.keys(TYPO_MAP)) {
+      assert.notEqual(isBlockedDomain(key), null, `${key} is not on the blocklist; its suggestion is dead`)
+    }
+  })
+})
+
+describe("the .dz exemption outranks the blocklist", () => {
+  it("treats .dz as exempt", () => {
+    assert.equal(isExemptDomain("univ-alger.dz"), true)
+    assert.equal(isExemptDomain("example.com"), false)
+  })
+
+  it("exempts a domain even when the blocklist would catch it", () => {
+    // No .dz domain is on the list, so inject a TLD that is, to prove the
+    // ordering of the exemption and the blocklist check. If these two branches
+    // were swapped, this test fails.
+    const result = checkEmail("user@mailinator.com", { exemptTlds: ["com"] })
+    assert.equal(result.ok, true)
+  })
+
+  it("still blocks the same domain when the exemption does not apply", () => {
+    const result = checkEmail("user@mailinator.com", { exemptTlds: ["dz"] })
+    assert.equal(result.ok, false)
+    assert.equal(!result.ok && result.reason, "blocked")
+  })
+})
+
+describe("length limits survive punycode expansion", () => {
+  it("rejects a domain that only exceeds the limit after IDNA conversion", () => {
+    // 6 labels of 40 non-ASCII characters: 249 chars pre-IDNA (fits), 285
+    // post-IDNA (does not). The pre-conversion length check alone lets this
+    // through, so the post-conversion check is what makes it fail closed.
+    const label = "ü".repeat(40)
+    const domain = Array.from({ length: 6 }, () => label).join(".") + ".com"
+    assert.ok(domain.length <= 253, "pre-IDNA length should fit")
+    assert.equal(normalizeDomain(domain), null)
+  })
+
+  it("rejects an address that only exceeds 254 characters after IDNA conversion", () => {
+    const local = "a".repeat(64)
+    const label = "ü".repeat(40)
+    const domain = Array.from({ length: 6 }, () => label).join(".") + ".com"
+    const result = checkEmail(`${local}@${domain}`)
+    assert.equal(result.ok, false)
   })
 })
