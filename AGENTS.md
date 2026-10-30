@@ -77,9 +77,9 @@ Copy `.env.example` → `.env` if missing.
 **Models:** Order. API: `/api/orders`.
 
 ## Testing
-Unit tests cover the email validation module: `pnpm test` (`node --import tsx --test`, no extra tooling). Full verification: `npx tsc --noEmit`, `pnpm lint`, `pnpm test`, `pnpm build`, then manual browser checks via `pnpm dev`. There is no CI workflow, so these are manual gates.
+Unit tests cover the email validation module: `pnpm test` (`node --import tsx --test`, no extra tooling). Full verification: `npx tsc --noEmit`, `pnpm lint`, `pnpm test`, `pnpm build`, then manual browser checks via `pnpm dev`. `.github/workflows/ci.yml` runs the first four on every PR.
 
-**Disposable email blocking** — `lib/email-validation.ts` validates an address and matches its domain against `lib/data/disposable-domains.json` (9,963 domains, vendored from the CC0 `disposable-email-domains` list). Never hand-edit that JSON: run `pnpm sync:domains`, which validates every upstream entry, applies sanity floors, and pins the upstream commit SHA. Enforcement lives in `app/api/orders/route.ts`: syntax checks run before the rate limiters, the blocklist check after the IP limiter (its allowlist lookup hits the DB), and `*.dz` is exempt. Domains wrongly blocked are unblocked by inserting into the `EmailDomainAllowlist` table — no deploy needed.
+**Disposable email blocking** — `lib/email-validation.ts` validates an address and matches its domain against `lib/data/disposable-domains.json` (~10k domains, vendored from the CC0 `disposable-email-domains` list). Never hand-edit that JSON: run `pnpm sync:domains`, which pins the upstream commit, validates every entry, and refuses to write on a bad entry or an implausible list size. Enforcement lives in `app/api/orders/route.ts`; `*.dz` is exempt (`EMAIL_BLOCKLIST_EXEMPT_TLDS`). Domains wrongly blocked are unblocked by inserting into the `EmailDomainAllowlist` table — but that table must first be created: `psql "$DATABASE_URL" -f prisma/migrations/20261030000000_add_email_domain_allowlist/migration.sql` (idempotent, safe to re-run) or `pnpm db:push`.
 
 ## Gotchas
 1. `next.config.mjs` ignores TS/ESLint at build — fix errors, don't ignore.

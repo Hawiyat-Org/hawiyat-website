@@ -41,7 +41,16 @@ const DEFAULT_EXEMPT_TLDS = ["dz"]
 const EXEMPT_TLDS = (() => {
   const raw = process.env.EMAIL_BLOCKLIST_EXEMPT_TLDS
   const source = raw && raw.trim() ? raw.split(",") : DEFAULT_EXEMPT_TLDS
-  return source.map((tld) => tld.trim().toLowerCase().replace(/^\./, "")).filter(Boolean)
+  const parsed = source.map((tld) => tld.trim().toLowerCase().replace(/^\./, "")).filter(Boolean)
+  // Only plain TLD labels are meaningful here. Reject anything else loudly
+  // rather than silently ignoring it, so a typo in the env var is visible.
+  return parsed.filter((tld) => {
+    const valid = /^[a-z]{2,63}$/.test(tld)
+    if (!valid) {
+      console.error(`EMAIL_BLOCKLIST_EXEMPT_TLDS: ignoring invalid TLD entry "${tld}"`)
+    }
+    return valid
+  })
 })()
 
 const BLOCKED_DOMAINS: ReadonlySet<string> = new Set(
@@ -52,6 +61,7 @@ export const BLOCKLIST_META = Object.freeze({
   count: BLOCKED_DOMAINS.size,
   commit: blocklist.commit ?? null,
   source: blocklist.source ?? null,
+  exemptTlds: Object.freeze([...EXEMPT_TLDS]),
 })
 
 /**

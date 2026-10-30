@@ -34,8 +34,9 @@ const OUTPUT_PATH = join(process.cwd(), "lib", "data", "disposable-domains.json"
 
 /** Sanity floors. An upstream bug or a truncated response must never ship. */
 const MIN_ENTRIES = 5000
+const MAX_BODY_BYTES = 5_000_000
 const MAX_SHRINK = 0.05 // abort if the list lost more than 5%
-const MAX_GROWTH = 0.5 // abort if the list grew more than 50%
+const MAX_GROWTH = 0.1 // abort if the list grew more than 10% in one update
 
 /**
  * Stricter than the runtime validator on purpose: the list is shipped in ASCII
@@ -72,14 +73,39 @@ async function fetchCommitSha(): Promise<string | null> {
 }
 
 async function main() {
-  const response = await fetch(SOURCE_URL, {
+  // Resolve the commit BEFORE reading the content, then fetch that exact
+  // revision. Reading the mutable `main` branch and resolving its SHA with a
+  // second request leaves a window where a merge in between makes the recorded
+  // SHA describe a different tree than the domains we write — provenance that
+  // is wrong exactly when an incident review needs it.
+  const commit = await fetchCommitSha()
+  if (!commit) {
+    throw new Error("Refusing to write: could not resolve the upstream commit SHA.")
+  }
+
+  const url = `${SOURCE_REPO}/raw/${commit}/disposable_email_blocklist.conf`
+  const response = await fetch(url, {
     headers: { "User-Agent": "hawiyat-website/domain-sync" },
   })
   if (!response.ok) {
-    throw new Error(`Upstream returned HTTP ${response.status} for ${SOURCE_URL}`)
+    throw new Error(`Upstream returned HTTP ${response.status} for ${url}`)
   }
 
-  const text = await response.text()
+  const contentType = response.headers.get("content-type") ?? ""
+  if (!contentType.includes("text/plain") && !contentType.includes("octet-stream")) {
+    throw new Error(`Refusing to write: unexpected content-type "${contentType}" for ${url}`)
+  }
+
+  // Cap the body: a hostile or misconfigured endpoint should not be able to
+  // exhaust memory on the machine running the sync.
+  const buffer = await response.arrayBuffer()
+  if (buffer.byteLength > MAX_BODY_BYTES) {
+    throw new Error(
+      `Refusing to write: upstream body is ${buffer.byteLength} bytes (cap is ${MAX_BODY_BYTES}).`
+    )
+  }
+
+  const text = new TextDecoder("utf-8").decode(buffer)
   const lines = text.split(/\r?\n/)
 
   const invalid: string[] = []
@@ -126,18 +152,9 @@ async function main() {
     }
   }
 
-  const commit = await fetchCommitSha()
-
-  // Provenance is the whole reason the list is committed rather than fetched at
-  // runtime. An unpinned list cannot answer "which revision blocked this
-  // customer?", and the test suite asserts the SHA is present.
-  if (!commit) {
-    throw new Error("Refusing to write: could not resolve the upstream commit SHA.")
-  }
-
   const payload = {
     source: SOURCE_REPO,
-    sourceUrl: SOURCE_URL,
+    sourceUrl: url,
     commit,
     fetchedAt: new Date().toISOString(),
     count: domains.length,
@@ -147,6 +164,13 @@ async function main() {
   // Pretty-printed so every domain is its own line: makes the git diff
   // reviewable, which is the entire point of committing the list.
   await writeFile(OUTPUT_PATH, `${JSON.stringify(payload, null, 2)}\n`, "utf8")
+
+  const before = new Set(previous)
+  const after = new Set(domains)
+  const added = domains.filter((d) => !before.has(d))
+  const removed = previous.filter((d) => !after.has(d))
+  if (added.length > 0) console.log(`  added (${added.length}): ${added.slice(0, 40).join(", ")}${added.length > 40 ? ", …" : ""}`)
+  if (removed.length > 0) console.log(`  removed (${removed.length}): ${removed.slice(0, 40).join(", ")}${removed.length > 40 ? ", …" : ""}`)
 
   const delta = previous.length > 0 ? domains.length - previous.length : 0
   console.log(

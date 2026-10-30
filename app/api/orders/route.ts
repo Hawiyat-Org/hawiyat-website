@@ -11,8 +11,21 @@ import {
 } from "@/lib/email-validation"
 import { isDomainAllowlisted } from "@/lib/email-allowlist"
 
+// Pinned because lib/email-validation.ts uses node:url's domainToASCII, which
+// does not exist on the Edge runtime. Without this, a future `runtime = "edge"`
+// would fail at build time instead of degrading silently, but pinning makes the
+// dependency explicit.
+export const runtime = "nodejs"
+
 const IP_RATE_LIMIT = { maxRequests: 5, windowMs: 60 * 60 * 1000 }
 const EMAIL_RATE_LIMIT = { maxRequests: 4, windowMs: 60 * 60 * 1000 }
+// Blocked attempts get their own, more generous bucket. They must not spend the
+// 5/hour order budget: Algerian mobile carriers and ISPs run CGNAT, so unrelated
+// customers share a public IP, and a confused user retrying with a corrected
+// address must not be locked out an hour for someone else's rejects.
+const REJECT_RATE_LIMIT = { maxRequests: 20, windowMs: 60 * 60 * 1000 }
+// Upper bound on the JSON body we are willing to buffer and parse.
+const MAX_BODY_BYTES = 64 * 1024
 
 function orderError(code: string, message: string, resolution: string, status: number) {
   return NextResponse.json(
@@ -51,7 +64,40 @@ async function sendTelegramNotification(message: string) {
 export async function POST(request: NextRequest) {
   try {
     const ip = getClientIP(request)
-    const body = await request.json()
+
+    // Bound the body before buffering it. On Vercel the platform caps requests
+    // at ~4.5 MB, but a self-hosted deployment has no such limit and there is no
+    // reason to parse 4 MB to read five short fields.
+    const declaredLength = Number(request.headers.get("content-length") ?? "0")
+    if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+      return orderError(
+        "payload_too_large",
+        "That submission was too large.",
+        "Shorten your notes and resubmit.",
+        413
+      )
+    }
+
+    let body: Record<string, unknown>
+    try {
+      body = await request.json()
+    } catch {
+      return orderError(
+        "invalid_json",
+        "Malformed request body.",
+        "Send a valid JSON object with Content-Type: application/json and resubmit.",
+        400
+      )
+    }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return orderError(
+        "invalid_json",
+        "Malformed request body.",
+        "Send a valid JSON object with Content-Type: application/json and resubmit.",
+        400
+      )
+    }
 
     const { serviceId, serviceName, customerName, customerEmail, customerPhone, notes, preferredPayment } = body
 
@@ -129,23 +175,33 @@ export async function POST(request: NextRequest) {
     // Canonical form for storage and for the per-address rate-limit key.
     const normalizedEmail = emailCheck.email
 
-    const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
-    if (!ipLimit.allowed) {
-      return orderError(
-        "rate_limited_ip",
-        `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
-        `Wait ${ipLimit.retryAfter} seconds before submitting another order, or contact Hawiyat support if you believe this is a mistake.`,
-        429
-      )
-    }
-
-    // Blocklist enforcement runs AFTER the IP limit so the allowlist query
-    // below cannot be reached without limit. A rejected address therefore does
-    // consume IP budget, which is the desired anti-abuse behaviour; a mere
-    // typo does not, because syntax is checked above.
+    // Blocklist enforcement runs before the order limiter but behind its own
+    // bucket: the allowlist lookup below is a database query, so it must be
+    // rate limited, but a rejected address must not spend the 5/hour budget a
+    // customer needs to place a real order.
     if (!emailCheck.ok) {
+      const rejectLimit = checkRateLimit(
+        `reject:${ip}`,
+        REJECT_RATE_LIMIT.maxRequests,
+        REJECT_RATE_LIMIT.windowMs
+      )
+      if (!rejectLimit.allowed) {
+        return orderError(
+          "rate_limited_ip",
+          "Too many submissions from your connection. Please try again later.",
+          "Wait before submitting again, or use the contact details on our contact page if you need help placing an order.",
+          429
+        )
+      }
+
       const allowlisted = await isDomainAllowlisted(emailCheck.domain, emailCheck.matched)
-      if (!allowlisted) {
+      if (allowlisted) {
+        // Worth recording: a domain that was blocked but let through is how a
+        // false positive gets discovered in aggregate.
+        console.warn(
+          `email_allowlisted domain=${emailCheck.domain} matched=${emailCheck.matched}`
+        )
+      } else {
         // Log the domain only: never the full address, and never the
         // customer's name or phone. Enough to measure false positives and to
         // tell which list revision caused a rejection.
@@ -162,6 +218,16 @@ export async function POST(request: NextRequest) {
           400
         )
       }
+    }
+
+    const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
+    if (!ipLimit.allowed) {
+      return orderError(
+        "rate_limited_ip",
+        `Too many orders from your connection. Please try again in ${ipLimit.retryAfter} seconds.`,
+        `Wait ${ipLimit.retryAfter} seconds before submitting another order, or contact Hawiyat support if you believe this is a mistake.`,
+        429
+      )
     }
 
     // Keyed on the canonical form: otherwise `a+1@x.com`, `A@x.com`, and

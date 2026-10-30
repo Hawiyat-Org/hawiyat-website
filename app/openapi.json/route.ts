@@ -25,7 +25,7 @@ const spec = {
         operationId: "createOrder",
         summary: "Create a service order",
         description:
-          "Creates a new order for a service from the /services catalog. The request is validated (required fields, field length caps, email syntax, disposable-email blocking, supported payment methods) and rate limited per client IP (5 orders per hour) and per email address (4 orders per hour). Validation of the email address runs before the rate limiters, so a rejected address does not consume the caller's quota. On success the order is persisted with status PENDING and the relevant notifications are fired asynchronously and best effort.",
+          "Creates a new order for a service from the /services catalog. The request is validated (required fields, field length caps, email syntax, disposable-email blocking, supported payment methods) and rate limited per client IP (5 orders per hour, plus a separate 20/hour bucket for rejected submissions) and per email address (4 orders per hour). Email syntax and payment validation run before the rate limiters, so a malformed submission does not consume the caller's order quota; an email on a known disposable domain is rejected after the IP check and does consume its own reject bucket. On success the order is persisted with status PENDING and the relevant notifications are fired asynchronously and best effort.",
         tags: ["Orders"],
         requestBody: {
           required: true,
