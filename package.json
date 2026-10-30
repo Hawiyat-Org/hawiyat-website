@@ -9,7 +9,9 @@
     "start": "next start",
     "db:seed": "tsx ./lib/prisma/seed.ts",
     "db:reset": "prisma migrate reset && npm run db:seed",
-    "db:push": "prisma db push && npm run db:seed"
+    "db:push": "prisma db push && npm run db:seed",
+    "sync:domains": "tsx ./scripts/sync-disposable-domains.ts",
+    "test": "node --import tsx --test lib/email-validation.test.ts"
   },
   "prisma": {
     "seed": "tsx ./lib/prisma/seed.ts"
