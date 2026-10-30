@@ -115,15 +115,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // customerEmail's length is owned by checkEmail below (it maps too_long to
+    // field_too_long). Checking it here as well made that branch unreachable.
     if (
       customerName.length > 120 ||
-      customerEmail.length > 254 ||
       (typeof customerPhone === "string" && customerPhone.length > 32)
     ) {
       return orderError(
         "field_too_long",
-        "One or more fields exceed the maximum length: customerName is capped at 120 characters, customerEmail at 254, customerPhone at 32.",
-        "Shorten the offending field(s) to the cap and resubmit: customerName <= 120, customerEmail <= 254, customerPhone <= 32 characters.",
+        "One or more fields exceed the maximum length: customerName is capped at 120 characters, customerPhone at 32.",
+        "Shorten the offending field(s) to the cap and resubmit: customerName <= 120, customerPhone <= 32 characters.",
         400
       )
     }

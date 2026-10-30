@@ -13,6 +13,7 @@ import {
   parseEmail,
   suggestDomainFix,
   toRateLimitKey,
+  validateBlocklistFreshness,
   validateBlocklistOrWarn,
 } from "@/lib/email-validation"
 import {
@@ -837,5 +838,30 @@ describe("SELF_TEST_DOMAINS guard", () => {
       assert.equal(isBlockedDomain(domain), domain)
       assert.equal(checkEmail(`user@${domain}`).ok, false)
     }
+  })
+})
+
+describe("blocklist freshness", () => {
+  it("exposes the snapshot timestamp so staleness is observable", () => {
+    // Without this field the list ages invisibly: blocking keeps succeeding,
+    // just against providers nobody uses any more.
+    assert.equal(typeof BLOCKLIST_META.fetchedAt, "string")
+    assert.ok(!Number.isNaN(Date.parse(String(BLOCKLIST_META.fetchedAt))))
+  })
+
+  it("passes its freshness check against a generous limit", () => {
+    assert.equal(validateBlocklistFreshness(3650), true)
+  })
+
+  it("fails its freshness check against a zero-day limit", () => {
+    assert.equal(validateBlocklistFreshness(-1), false)
+  })
+})
+
+describe("the exemption is code, not an environment variable", () => {
+  it("has a fixed default that no env var can widen", () => {
+    // A TLD-sized override is the wrong tool: a single wrongly-caught domain is
+    // fixed through the allowlist table, without a deploy.
+    assert.deepEqual([...BLOCKLIST_META.exemptTlds], ["dz"])
   })
 })

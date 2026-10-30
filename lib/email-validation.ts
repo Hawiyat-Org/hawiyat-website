@@ -2,11 +2,10 @@ import { domainToASCII } from "node:url"
 
 import blocklist from "@/lib/data/disposable-domains.json"
 import {
-  LABEL_RE,
-  MAX_DOMAIN_LENGTH,
   MAX_EMAIL_LENGTH,
   MAX_LOCAL_LENGTH,
   hasForbiddenDomainChars,
+  isValidAsciiDomain,
 } from "@/lib/domain-rules"
 
 /**
@@ -36,22 +35,14 @@ const LOCAL_RE = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(\.[A-Za-z0-9!#$%&'*+/=?^_`{|}
  * national ISP would silently reject an entire institution in our core market.
  * Override with EMAIL_BLOCKLIST_EXEMPT_TLDS (comma separated, no dots).
  */
-const DEFAULT_EXEMPT_TLDS = ["dz"]
+const DEFAULT_EXEMPT_TLDS: readonly string[] = ["dz"]
 
-const EXEMPT_TLDS = (() => {
-  const raw = process.env.EMAIL_BLOCKLIST_EXEMPT_TLDS
-  const source = raw && raw.trim() ? raw.split(",") : DEFAULT_EXEMPT_TLDS
-  const parsed = source.map((tld) => tld.trim().toLowerCase().replace(/^\./, "")).filter(Boolean)
-  // Only plain TLD labels are meaningful here. Reject anything else loudly
-  // rather than silently ignoring it, so a typo in the env var is visible.
-  return parsed.filter((tld) => {
-    const valid = /^[a-z]{2,63}$/.test(tld)
-    if (!valid) {
-      console.error(`EMAIL_BLOCKLIST_EXEMPT_TLDS: ignoring invalid TLD entry "${tld}"`)
-    }
-    return valid
-  })
-})()
+// Deliberately code, not an env var: this is market policy, so it should be
+// reviewable in a diff rather than changeable by whoever can edit a project
+// setting. A TLD-sized override is also the wrong tool for the job — when one
+// .dz institution is wrongly caught, the fix is a single domain, and the
+// EmailDomainAllowlist table already does that without a deploy.
+const EXEMPT_TLDS: readonly string[] = DEFAULT_EXEMPT_TLDS
 
 const BLOCKED_DOMAINS: ReadonlySet<string> = new Set(
   Array.isArray(blocklist.domains) ? blocklist.domains.map((d) => d.toLowerCase()) : []
@@ -61,6 +52,9 @@ export const BLOCKLIST_META = Object.freeze({
   count: BLOCKED_DOMAINS.size,
   commit: blocklist.commit ?? null,
   source: blocklist.source ?? null,
+  // The age of the snapshot is the thing most likely to go wrong silently: a
+  // stale list keeps working, just against providers nobody uses any more.
+  fetchedAt: blocklist.fetchedAt ?? null,
   exemptTlds: Object.freeze([...EXEMPT_TLDS]),
 })
 
@@ -112,24 +106,17 @@ export function normalizeDomain(raw: string): string | null {
   if (hasForbiddenDomainChars(domain)) return null
 
   domain = domain.replace(/\.+$/, "")
-  if (!domain || domain.length > MAX_DOMAIN_LENGTH) return null
+  if (!domain) return null
 
   // IDNA / UTS 46 to ASCII. Returns "" on failure (never throws for a string).
   const ascii = domainToASCII(domain)
   if (!ascii) return null
 
-  // Length must be re-checked AFTER conversion: punycode expands, so a domain
-  // that fits pre-IDNA can exceed the RFC 5321 limit afterwards.
-  if (ascii.length > MAX_DOMAIN_LENGTH) return null
-
-  const labels = ascii.split(".")
-  if (labels.length < 2) return null
-  if (!labels.every((label) => LABEL_RE.test(label))) return null
-
-  // An all-numeric TLD means we were handed an IP address, not a domain.
-  if (/^\d+$/.test(labels[labels.length - 1])) return null
-
-  return ascii
+  // isValidAsciiDomain re-checks length AFTER conversion (punycode expands, so a
+  // domain that fits pre-IDNA can exceed the RFC 5321 limit), requires at least
+  // two legal labels, and rejects an all-numeric TLD. Sharing that predicate
+  // keeps one authority for the rule and keeps the sync script in step.
+  return isValidAsciiDomain(ascii) ? ascii : null
 }
 
 /**
@@ -188,9 +175,19 @@ export function isBlockedDomain(domain: string): string | null {
  * Lowercased `${local}@${domain}` for storage, or null when unparseable.
  * Used by the route so the stored address and the rate-limit key agree.
  */
+function canonicalAddress(parsed: { local: string; domain: string }): string {
+  return `${parsed.local.toLowerCase()}@${parsed.domain}`
+}
+
+/**
+ * Canonical storage form: lowercased local part, normalized domain.
+ *
+ * Not used by the route — `checkEmail` already returns this as `email`. Exported
+ * for tests and for any future caller holding a raw string.
+ */
 export function normalizeEmail(raw: unknown): string | null {
   const parsed = parseEmail(raw)
-  return parsed ? `${parsed.local.toLowerCase()}@${parsed.domain}` : null
+  return parsed ? canonicalAddress(parsed) : null
 }
 
 /**
@@ -217,7 +214,7 @@ export function checkEmail(
   const parsed = parseEmail(trimmed)
   if (!parsed) return { ok: false, reason: "invalid" }
 
-  const email = `${parsed.local.toLowerCase()}@${parsed.domain}`
+  const email = canonicalAddress(parsed)
 
   // Exemption is checked first: the market-protection decision outranks the
   // third-party list, and a .dz domain must never be rejected on its say-so.
@@ -303,4 +300,27 @@ export function validateBlocklistOrWarn(): boolean {
   return true
 }
 
+/**
+ * A stale list is a silent failure: blocking keeps succeeding, just against
+ * providers that have gone out of fashion. Surface the age in the logs rather
+ * than leaving it to somebody to run `git log` on the data file.
+ */
+export function validateBlocklistFreshness(maxAgeDays = 90): boolean {
+  const fetchedAt = BLOCKLIST_META.fetchedAt
+  if (!fetchedAt) {
+    console.error("CRITICAL: disposable-domain blocklist has no fetchedAt timestamp.")
+    return false
+  }
+  const ageDays = Math.floor((Date.now() - new Date(fetchedAt).getTime()) / 86_400_000)
+  if (!Number.isFinite(ageDays) || ageDays > maxAgeDays) {
+    console.error(
+      `CRITICAL: disposable-domain blocklist is ${ageDays} days old ` +
+        `(limit ${maxAgeDays}). Run \`pnpm sync:domains\`.`
+    )
+    return false
+  }
+  return true
+}
+
 validateBlocklistOrWarn()
+validateBlocklistFreshness()

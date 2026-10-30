@@ -1,0 +1,67 @@
+name: Sync disposable-domain blocklist
+
+# A stale blocklist fails silently: blocking keeps working, just against the
+# providers that were popular when it was last synced. This opens a reviewable PR
+# with the regenerated list so the data stays current without anyone remembering
+# to run the script.
+on:
+  schedule:
+    - cron: "0 6 1 * *" # monthly, 06:00 UTC on the 1st
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Regenerate the list
+        run: pnpm sync:domains
+
+      # The script refuses to write an implausible list, but a plausible-looking
+      # poisoned entry would still pass. The test suite pins the list's shape.
+      - name: Verify
+        run: pnpm test
+
+      - name: Open a pull request if the list changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- lib/data/disposable-domains.json; then
+            echo "Blocklist already current."
+            exit 0
+          fi
+
+          BRANCH="chore/sync-disposable-domains"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add lib/data/disposable-domains.json
+          git commit -m "chore(email): sync disposable-domain blocklist"
+          git push --force -u origin "$BRANCH"
+
+          if gh pr list --head "$BRANCH" --state open --json number --jq '.[].number' | grep -q .; then
+            echo "A sync PR is already open."
+            exit 0
+          fi
+
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore(email): sync disposable-domain blocklist" \
+            --body "Automated monthly sync of the CC0 disposable-domain blocklist.
+
+The regeneration script validates every upstream entry, pins the upstream commit,
+and refuses to write if the list drops below 5,000 entries or changes size
+implausibly. **Review the added/removed domains in the script output above** —
+that diff is the only defence against a poisoned upstream entry."
