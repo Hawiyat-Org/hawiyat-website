@@ -79,8 +79,10 @@ export async function parseOrderResponse<T>(response: Response): Promise<T> {
 
   // A 2xx with an unreadable body would otherwise surface to the user as
   // "Cannot read properties of null (reading 'order')" — the same class of bug
-  // as the [object Object] this module exists to fix.
-  if (body === null || typeof body !== "object") {
+  // as the [object Object] this module exists to fix. An empty object is just as
+  // bad as null here, so the success path requires a usable order id.
+  const order = (body as { order?: { id?: unknown } })?.order
+  if (typeof order !== "object" || order === null || typeof order.id !== "string" || !order.id) {
     throw new Error(
       "We could not read the server's response. Please refresh and try again, or contact support if the problem continues."
     )
