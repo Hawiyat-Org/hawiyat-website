@@ -148,6 +148,15 @@ export function isBlockedDomain(domain: string): string | null {
 }
 
 /**
+ * Lowercased `${local}@${domain}` for storage, or null when unparseable.
+ * Used by the route so the stored address and the rate-limit key agree.
+ */
+export function normalizeEmail(raw: unknown): string | null {
+  const parsed = parseEmail(raw)
+  return parsed ? `${parsed.local.toLowerCase()}@${parsed.domain}` : null
+}
+
+/**
  * The single entry point used by the API route.
  *
  * `email` is returned lowercased so repeat submissions from the same mailbox do

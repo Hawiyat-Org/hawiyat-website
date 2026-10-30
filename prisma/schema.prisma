@@ -67,3 +67,14 @@ model BootcampRegistration {
   @@index([status])
   @@map("bootcamp_registrations")
 }
+
+/// Operator-managed exemption that overrides the disposable-domain blocklist.
+/// A row here means "let this domain through", so a customer wrongly caught by
+/// a third-party list can be unblocked with one INSERT instead of a redeploy.
+model EmailDomainAllowlist {
+  domain    String   @id
+  reason    String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("email_domain_allowlist")
+}

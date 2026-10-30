@@ -3,6 +3,14 @@ import { prisma } from "@/lib/prisma/prismaClient"
 import { PaymentMethod } from "@prisma/client"
 import { sendOrderNotification, sendOrderConfirmation, sendWhatsAppNotification, escapeHtml } from "@/lib/email-utils"
 import { checkRateLimit, getClientIP } from "@/lib/rate-limiter"
+import {
+  BLOCKLIST_META,
+  checkEmail,
+  normalizeEmail,
+  suggestDomainFix,
+  toRateLimitKey,
+} from "@/lib/email-validation"
+import { isDomainAllowlisted } from "@/lib/email-allowlist"
 
 const IP_RATE_LIMIT = { maxRequests: 5, windowMs: 60 * 60 * 1000 }
 const EMAIL_RATE_LIMIT = { maxRequests: 4, windowMs: 60 * 60 * 1000 }
@@ -84,6 +92,47 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Email syntax and blocklist checks run BEFORE the rate limiters on purpose.
+    // checkRateLimit() increments on allow and has no refund, so charging a
+    // customer's budget for an address we are about to reject would lock them
+    // out for an hour when they retry with a corrected address. This block does
+    // no I/O except the allowlist lookup, which only happens on a block.
+    const emailCheck = checkEmail(customerEmail)
+    if (!emailCheck.ok) {
+      if (emailCheck.reason === "blocked") {
+        const allowlisted = await isDomainAllowlisted(emailCheck.domain)
+        if (!allowlisted) {
+          // Log the domain only: never the full address, and never the
+          // customer's name or phone. Enough to measure false positives and to
+          // tell which list revision caused a rejection.
+          console.warn(
+            `email_blocked domain=${emailCheck.domain} matched=${emailCheck.matched} ` +
+              `list=${BLOCKLIST_META.commit ?? "unknown"}`
+          )
+          const suggestion = suggestDomainFix(emailCheck.domain)
+          return orderError(
+            "disposable_email",
+            "Temporary or disposable email addresses can't be used for orders." +
+              (suggestion ? ` Did you mean ${suggestion}?` : ""),
+            "Use a permanent address you will keep access to — Gmail, Outlook, iCloud, or your work email all work. If you believe this is a mistake, contact contact@hawiyat.org and we will unblock your domain.",
+            400
+          )
+        }
+      } else {
+        return orderError(
+          emailCheck.reason === "too_long" ? "field_too_long" : "invalid_email",
+          emailCheck.reason === "too_long"
+            ? "customerEmail exceeds the maximum length of 254 characters."
+            : "Invalid email format.",
+          "Provide a valid email address, e.g. name@example.com, and resubmit.",
+          400
+        )
+      }
+    }
+
+    // Canonical form for storage and for the per-address rate-limit key.
+    const normalizedEmail = normalizeEmail(customerEmail) ?? customerEmail.trim().toLowerCase()
+
     const ipLimit = checkRateLimit(`ip:${ip}`, IP_RATE_LIMIT.maxRequests, IP_RATE_LIMIT.windowMs)
     if (!ipLimit.allowed) {
       return orderError(
@@ -94,23 +143,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const emailLimit = checkRateLimit(`email:${customerEmail}`, EMAIL_RATE_LIMIT.maxRequests, EMAIL_RATE_LIMIT.windowMs)
+    // Keyed on the canonical form: otherwise `a+1@x.com`, `A@x.com`, and
+    // `a@x.com ` are three separate buckets and the limit is meaningless.
+    const emailLimit = checkRateLimit(`email:${toRateLimitKey(normalizedEmail)}`, EMAIL_RATE_LIMIT.maxRequests, EMAIL_RATE_LIMIT.windowMs)
     if (!emailLimit.allowed) {
       return orderError(
         "rate_limited_email",
         `Too many orders with this email. Please try again in ${emailLimit.retryAfter} seconds.`,
         `Wait ${emailLimit.retryAfter} seconds or use a different email address before submitting another order.`,
         429
-      )
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(customerEmail)) {
-      return orderError(
-        "invalid_email",
-        "Invalid email format.",
-        "Provide a valid email address, e.g. name@example.com, and resubmit.",
-        400
       )
     }
 
@@ -154,7 +195,7 @@ export async function POST(request: NextRequest) {
         serviceId,
         serviceName: sanitizedServiceName,
         customerName: sanitizedCustomerName,
-        customerEmail,
+        customerEmail: normalizedEmail,
         customerPhone: normalizedPhone,
         notes: normalizedNotes,
         preferredPayment: normalizedPayment ? normalizedPayment as PaymentMethod : null,
@@ -165,7 +206,7 @@ export async function POST(request: NextRequest) {
 
 <b>Service:</b> ${escapeHtml(sanitizedServiceName)}
 <b>Customer:</b> ${escapeHtml(sanitizedCustomerName)}
-<b>Email:</b> ${escapeHtml(customerEmail)}
+<b>Email:</b> ${escapeHtml(normalizedEmail)}
 ${normalizedPhone ? `<b>Phone:</b> ${escapeHtml(normalizedPhone)}\n` : ""}${normalizedNotes ? `<b>Notes:</b> ${escapeHtml(normalizedNotes)}\n` : ""}
 <b>Order ID:</b> ${order.id}
 <b>Date:</b> ${new Date(order.createdAt).toLocaleString()}`
@@ -174,7 +215,7 @@ ${normalizedPhone ? `<b>Phone:</b> ${escapeHtml(normalizedPhone)}\n` : ""}${norm
 
 📦 *Service:* ${sanitizedServiceName}
 👤 *Customer:* ${sanitizedCustomerName}
-📧 *Email:* ${customerEmail}
+📧 *Email:* ${normalizedEmail}
 ${normalizedPhone ? `📱 *Phone:* ${normalizedPhone}\n` : ""}💳 *Payment:* ${normalizedPayment ?? 'Not specified'}
 ${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}
 🆔 *Order ID:* ${order.id}
@@ -186,7 +227,7 @@ ${normalizedNotes ? `📝 *Notes:* ${normalizedNotes}\n` : ""}
     const [emailNotificationResult, emailConfirmationResult] = await Promise.allSettled([
       sendOrderNotification({ order }),
       sendOrderConfirmation({
-        to: customerEmail,
+        to: normalizedEmail,
         order: {
           id: order.id,
           serviceName: order.serviceName,
