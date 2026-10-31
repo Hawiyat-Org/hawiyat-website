@@ -36,6 +36,7 @@ const KNOWN_PAGE_PATHS = new Set([
   "/pricing",
   "/privacy",
   "/services",
+  "/start",
   "/terms",
 ])
 
