@@ -20,6 +20,7 @@ const Footer = () => {
       title: "The Layer",
       links: [
         { name: "AI Composer", href: "/composer" },
+        { name: "Hawiyat API", href: "/api" },
         { name: "AI API in Algeria", href: "/ai-api-algeria" },
         { name: "Pricing", href: "/pricing" },
         { name: "Blog", href: "/blog" },

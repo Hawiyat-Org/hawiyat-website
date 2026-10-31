@@ -25,7 +25,7 @@ const spec = {
         operationId: "createOrder",
         summary: "Create a service order",
         description:
-          "Creates a new order for a service from the /services catalog. The request is validated (required fields, field length caps, email format, supported payment methods) and rate limited per client IP (5 orders per hour) and per email address (4 orders per hour). On success the order is persisted with status PENDING and the relevant notifications are fired asynchronously and best effort.",
+          "Creates a new order for a service from the /services catalog. The request is validated (required fields, field length caps, email syntax, disposable-email blocking, supported payment methods) and rate limited per client IP (5 orders per hour, plus a separate 20/hour bucket for rejected submissions) and per email address (4 orders per hour). Email syntax and payment validation run before the rate limiters, so a malformed submission does not consume the caller's order quota; an email on a known disposable domain is rejected after the IP check and does consume its own reject bucket. On success the order is persisted with status PENDING and the relevant notifications are fired asynchronously and best effort.",
         tags: ["Orders"],
         requestBody: {
           required: true,
@@ -47,7 +47,7 @@ const spec = {
           },
           "400": {
             description:
-              "Validation failed: a required field is missing or empty, a field exceeds its maximum length, the email format is invalid, or preferredPayment is not one of CCP, BARIDI_MOB, USD.",
+              "Validation failed: a required field is missing or empty, a field exceeds its maximum length, the email syntax is invalid, the email domain is a known disposable/temporary provider (error code 'disposable_email'), or preferredPayment is not one of CCP, BARIDI_MOB, USD.",
             content: {
               "application/json": {
                 schema: { $ref: "#/components/schemas/ErrorResponse" },
@@ -107,7 +107,7 @@ const spec = {
             format: "email",
             maxLength: 254,
             description:
-              "Email address of the customer. It receives the order confirmation and is used to enforce the per-email rate limit (4 orders per hour). Must match a basic email format. Required.",
+              "Email address of the customer. It receives the order confirmation and is used to enforce the per-email rate limit (4 orders per hour). Must be a deliverable-looking address. Disposable and temporary providers are rejected with error code 'disposable_email'; addresses on a domain the operator has allowlisted bypass that check. The address is stored lowercased, and the per-email rate limit ignores plus-tags and Gmail dot variants so they cannot be used to obtain extra quota. Required.",
           },
           customerPhone: {
             type: "string",

@@ -8,13 +8,18 @@ import { DEFAULT_STAGES, ExecutionTrace } from "@/components/execution-trace"
 const STAGE_MS = 600
 const FINISHED = DEFAULT_STAGES.length - 1
 
+type Metric = { v: string; k: string }
+
 type RunTask = {
   id: string
   label: string
   chip: string
   run: string
   detail: string[]
-  telemetry: string[]
+  /** The four cells of the config row: route, model, context, tools. */
+  config: Metric[]
+  /** The four cells of the panel footer. */
+  metrics: Metric[]
   outcome: string
 }
 
@@ -32,15 +37,17 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ quality 0.97 · policy 1.0 · latency 340ms · cost so far 0.6 DZD",
       "RESULT ▸ delivered in 11s · customer kept · cost 0.6 DZD",
     ],
-    telemetry: [
-      "route: auto",
-      "model: claude-sonnet → gpt-4o (fallback armed)",
-      "ctx: order 3051 + refund policy · 4k",
-      "tools: [whatsapp, crm, erp]",
-      "cost: 0.6 DZD",
-      "latency: 340ms",
-      "quality: 0.97",
-      "policy: 1.0",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "claude-sonnet \u2192 gpt-4o", k: "model" },
+      { v: "order 3051 + policy \u00b7 4k", k: "context" },
+      { v: "whatsapp, crm, erp", k: "tools" },
+    ],
+    metrics: [
+      { v: "0.6 DZD", k: "cost" },
+      { v: "340ms", k: "latency" },
+      { v: "0.97", k: "quality" },
+      { v: "1.0", k: "policy" },
     ],
     outcome:
       "Reply delivered in 11 seconds. Customer kept, no chargeback, ticket closed. Total cost: 0.6 DZD.",
@@ -58,14 +65,17 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ quality 1.0 (math verified) · latency 480ms · cost so far 1.1 DZD",
       "RESULT ▸ quote out Friday night · sale moved to now · cost 1.1 DZD",
     ],
-    telemetry: [
-      "route: auto",
-      "model: gpt-4o → gemini-2.5 (fallback armed)",
-      "ctx: ERP deal table · 6k",
-      "tools: [whatsapp, erp, db]",
-      "cost: 1.1 DZD",
-      "latency: 480ms",
-      "quality: 1.0 (math verified)",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "gpt-4o \u2192 gemini-2.5", k: "model" },
+      { v: "ERP deal table \u00b7 6k", k: "context" },
+      { v: "whatsapp, erp, db", k: "tools" },
+    ],
+    metrics: [
+      { v: "1.1 DZD", k: "cost" },
+      { v: "480ms", k: "latency" },
+      { v: "1.0", k: "quality" },
+      { v: "150", k: "units quoted" },
     ],
     outcome:
       "Quote out Friday night. That sale used to wait until Monday morning. Cost: 1.1 DZD.",
@@ -83,20 +93,34 @@ const TASKS: RunTask[] = [
       "EVALUATE ▸ delivered 36 · replies 9 · flagged 0 · quality 0.94 avg",
       "RESULT ▸ 9 replies from one run · cost 3.2 DZD · lines that worked remembered",
     ],
-    telemetry: [
-      "route: auto",
-      "model: claude-sonnet (ar) + gpt-4o (fr) + gemini-2.5 (en), staggered",
-      "tools: [whatsapp, crm]",
-      "cost: 3.2 DZD total (~0.08 each)",
-      "delivered: 36",
-      "replies: 9",
-      "flagged: 0",
+    config: [
+      { v: "auto", k: "route" },
+      { v: "claude-sonnet + gpt-4o + gemini-2.5", k: "model" },
+      { v: "promo + policy \u00b7 9k", k: "context" },
+      { v: "whatsapp, crm", k: "tools" },
+    ],
+    metrics: [
+      { v: "3.2 DZD", k: "cost" },
+      { v: "36", k: "delivered" },
+      { v: "9", k: "replies" },
+      { v: "0", k: "flagged" },
     ],
     outcome:
       "9 replies from one run, less than the price of a phone credit top-up. Composer remembers which lines worked for the next batch.",
   },
 ]
 
+/**
+ * The run console: one container, three hairlines.
+ *
+ *   strip  - task selector + run status
+ *   body   - the task, the trace, the per-stage detail
+ *   row    - outcome + replay
+ *   footer - four divided metric cells
+ *
+ * The trace renders `bare` here: the panel already draws the container, so
+ * nesting a second bordered card inside it just drew a box in a box.
+ */
 export function RunConsole() {
   const [taskIndex, setTaskIndex] = useState(0)
   const [stageIndex, setStageIndex] = useState(0)
@@ -189,67 +213,104 @@ export function RunConsole() {
   }
 
   return (
-    <div ref={rootRef} className="rounded-lg border border-border bg-surface p-4 md:p-6">
-      <div
-        className="mb-4 flex flex-wrap gap-2"
-        aria-label="Example tasks the Composer engine runs"
-      >
-        {TASKS.map((t, index) => (
-          <button
-            key={t.id}
-            type="button"
-            aria-pressed={taskIndex === index}
-            onClick={() => selectTask(index)}
-            className={cn(
-              "rounded-full border px-3 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors min-h-[44px]",
-              taskIndex === index
-                ? "border-signal bg-signal text-signal-text"
-                : "border-border text-muted-ink hover:border-signal/50 hover:text-ink"
-            )}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <span className="rounded-lg border border-border bg-surface-dim px-4 py-2 font-mono text-xs text-ink">
-          task ▸ {task.chip}
-        </span>
-        <span className="font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+    <div ref={rootRef} className="overflow-hidden rounded-lg border border-border bg-surface">
+      {/* strip - task selector + run status */}
+      <div className="flex flex-col gap-3 border-b border-border bg-surface-dim px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 md:px-5">
+        <div className="flex flex-wrap gap-2" aria-label="Example tasks the Composer engine runs">
+          {TASKS.map((t, index) => (
+            <button
+              key={t.id}
+              type="button"
+              aria-pressed={taskIndex === index}
+              onClick={() => selectTask(index)}
+              className={cn(
+                "min-h-[44px] rounded-full border px-3 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors",
+                taskIndex === index
+                  ? "border-signal bg-signal text-signal-text"
+                  : "border-border text-muted-ink hover:border-signal/50 hover:text-ink"
+              )}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <span className="shrink-0 font-mono text-[11px] uppercase tracking-widest text-muted-ink">
           {task.run} · {status}
         </span>
       </div>
 
-      <ExecutionTrace
-        stages={DEFAULT_STAGES}
-        active={stageIndex}
-        telemetry={task.telemetry}
-        onStageClick={handleStageClick}
-        className="p-5 md:p-7"
-      />
+      {/* body - task, trace, per-stage detail */}
+      <div className="px-4 py-5 md:px-5 md:py-6">
+        <p className="mb-5 font-mono text-xs text-ink">task ▸ {task.chip}</p>
 
-      <div className="mt-4 min-h-[2rem] border-t border-border pt-3">
-        <p
-          aria-live={userInteracted ? "polite" : "off"}
-          className="font-mono text-[11px] leading-relaxed text-signal-contrast"
-        >
-          {task.detail[stageIndex]}
-        </p>
+        <ExecutionTrace
+          stages={DEFAULT_STAGES}
+          active={stageIndex}
+          onStageClick={handleStageClick}
+          bare
+        />
+
+        <div className="mt-4 min-h-[2rem] border-t border-border pt-3">
+          <p
+            aria-live={userInteracted ? "polite" : "off"}
+            className="font-mono text-[11px] leading-relaxed text-signal-contrast"
+          >
+            {task.detail[stageIndex]}
+          </p>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3 border-t border-border pt-3 sm:flex-row sm:items-center sm:justify-between">
+      {/* config - route / model / context / tools, one cell each */}
+      <div className="grid grid-cols-2 border-t border-border md:grid-cols-4">
+        {task.config.map((c, i) => (
+          <div
+            key={c.k}
+            className={cn(
+              "min-w-0 px-4 py-3 md:px-5",
+              i % 2 === 1 && "border-l border-border",
+              i >= 2 && "border-t border-border md:border-t-0",
+              i > 0 && "md:border-l md:border-border"
+            )}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-ink">{c.k}</p>
+            <p className="mt-1 break-words font-mono text-[11px] leading-snug text-ink">{c.v}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* row - outcome + replay */}
+      <div className="flex flex-col gap-3 border-t border-border px-4 py-4 sm:flex-row sm:items-center sm:justify-between md:px-5">
         <p className="text-sm leading-relaxed text-muted-ink">→ {task.outcome}</p>
         {!reducedMotion && (
           <button
             type="button"
             onClick={handleReplay}
-            className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg border border-border px-4 py-2.5 font-mono text-xs text-ink transition-colors hover:border-signal hover:bg-signal-bg min-h-[44px]"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-2 self-start rounded-lg border border-border px-4 py-2.5 font-mono text-xs text-ink transition-colors hover:border-signal hover:bg-signal-bg"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             Replay run
           </button>
         )}
+      </div>
+
+      {/* footer - divided metric cells */}
+      <div className="grid grid-cols-2 border-t border-border md:grid-cols-4">
+        {task.metrics.map((m, i) => (
+          <div
+            key={m.k}
+            className={cn(
+              "px-4 py-3 md:px-5",
+              i % 2 === 1 && "border-l border-border",
+              i >= 2 && "border-t border-border md:border-t-0",
+              i > 0 && "md:border-l md:border-border"
+            )}
+          >
+            <p className="font-mono text-sm font-medium text-ink">{m.v}</p>
+            <p className="mt-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-ink">
+              {m.k}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   )

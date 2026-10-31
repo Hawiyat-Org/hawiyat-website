@@ -9,6 +9,7 @@ import { waLink } from "@/lib/contact"
 import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
+import { parseOrderResponse } from "@/lib/api-error"
 
 interface ServiceOrderFormProps {
   service: {
@@ -84,11 +85,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
         }),
       })
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit order")
-      }
+      const data = await parseOrderResponse<{ success: boolean; order: { id: string } }>(response)
 
       const price = Number(String(service.price).replace(/,/g, "")) || 0
       const usdValue = price / 250

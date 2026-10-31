@@ -36,6 +36,9 @@ module.exports = {
         "ember-deep": "rgb(var(--ember-deep-rgb) / <alpha-value>)",
         danger: "rgb(var(--danger-rgb) / <alpha-value>)",
         ok: "rgb(var(--ok-rgb) / <alpha-value>)",
+        /* Blog diagram data-ink: two-series encoding for the abliteration teardown */
+        "hw-hot": "rgb(var(--hw-hot-rgb) / <alpha-value>)",
+        "hw-cool": "rgb(var(--hw-cool-rgb) / <alpha-value>)",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

@@ -91,6 +91,10 @@
   --ember-deep-rgb: 74 74 74;
   --danger-rgb: 192 62 43;
   --ok-rgb: 14 159 110;
+
+  /* Blog diagram data-ink (two-series encoding, ported from the source teardown) */
+  --hw-hot-rgb: 193 58 39;
+  --hw-cool-rgb: 14 125 108;
 }
 
 .dark {
@@ -180,6 +184,8 @@
   --ember-deep-rgb: 212 212 212;
   --danger-rgb: 244 104 79;
   --ok-rgb: 55 214 122;
+  --hw-hot-rgb: 232 97 75;
+  --hw-cool-rgb: 63 182 160;
 }
 
 body {
@@ -696,3 +702,92 @@ body.booking-modal-open .fixed.inset-0 {
   animation: ringOuterExpand 3s ease-in-out infinite;
 }
 
+
+/* ── Blog widget animations (interactive diagrams in /blog posts) ────────── */
+@keyframes hwStreamFlow {
+  0%   { transform: translateY(0);      opacity: 0; }
+  14%  { opacity: 1; }
+  86%  { opacity: 1; }
+  100% { transform: translateY(-200px); opacity: 0; }
+}
+.hw-stream { animation: hwStreamFlow 3.4s ease-in-out infinite; }
+.hw-stream-delay { animation-delay: 1.7s; }
+
+@keyframes hwDashFlow { to { stroke-dashoffset: -20; } }
+.hw-dash { stroke-dasharray: 6 6; animation: hwDashFlow 1.1s linear infinite; }
+
+@keyframes hwGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hw-grow { transform-origin: left center; animation: hwGrow 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+.hw-shift { transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.3, 1); }
+
+@keyframes hwBlink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+.hw-blink { animation: hwBlink 2.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hw-stream, .hw-stream-delay, .hw-dash, .hw-grow, .hw-blink { animation: none !important; }
+  .hw-shift { transition: none !important; }
+}
+
+/* ── Composer execution trace: travelling bracket + dashed rail ─────────── */
+.composer-bracket {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    width 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    height 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.composer-bracket::before,
+.composer-bracket::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgb(var(--hw-cool-rgb));
+}
+.composer-bracket::before {
+  left: 0;
+  top: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.composer-bracket::after {
+  right: 0;
+  bottom: 0;
+  border-left: 0;
+  border-top: 0;
+}
+/* the connector between stages: dashed while untraversed */
+.composer-rail {
+  height: 1px;
+  flex: 1 1 0%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(var(--border-rgb)) 0 4px,
+    transparent 4px 8px
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .composer-bracket {
+    transition: none;
+  }
+}
+
+/* ── Blog showcase widgets: entry ladder, cost bars, flow, matrix ───────── */
+@keyframes swGrow { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes swRise { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+@keyframes swFlow { 0% { offset-distance: 0% ; opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } 100% { offset-distance: 100%; opacity: 0 } }
+@keyframes swPulse { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+.sw-bar { transform-origin: left center; animation: swGrow .85s cubic-bezier(.22,.61,.36,1) both }
+.sw-rise { animation: swRise .55s cubic-bezier(.22,.61,.36,1) both }
+.sw-pulse { animation: swPulse 2.4s ease-in-out infinite }
+.sw-travel { animation: swFlow 3.6s cubic-bezier(.45,.05,.55,.95) infinite }
+.sw-travel.slow { animation-duration: 5.2s }
+.sw-travel.slow2 { animation-duration: 6.4s }
+@media (prefers-reduced-motion: reduce) {
+  .sw-bar, .sw-rise { animation: none }
+  .sw-pulse { animation: none; opacity: .8 }
+  .sw-travel { animation: none; opacity: 1 }
+}

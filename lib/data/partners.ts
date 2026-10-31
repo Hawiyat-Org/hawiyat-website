@@ -8,25 +8,11 @@ export type Partner = {
 
 export const partners: Partner[] = [
   {
-    name: "Itihad",
-    logo: "/trust/itihad-logo.svg",
-    url: "https://itihad.group",
-    alt: "Itihad Group logo, accelerator partner",
-    desc: "Itihad Group, acceleration partner at Itihad Campus, Boumerdes.",
-  },
-  {
     name: "ESTIN",
     logo: "/trust/estin-logo.svg",
     url: "https://estin.dz/",
     alt: "ESTIN logo, partner institution",
     desc: "ESTIN (École Supérieure en Informatique), partner institution.",
-  },
-  {
-    name: "IT Solutions",
-    logo: "itsol",
-    url: "https://itsolutions.dz/",
-    alt: "IT Solutions, partner company",
-    desc: "IT Solutions, partner company.",
   },
   {
     name: "RMASC",

@@ -1,0 +1,80 @@
+name: Apply schema changes
+
+# Applies pending Prisma migrations to the production database, but ONLY on merge
+# to main and ONLY when the schema or migrations changed.
+#
+# Why `migrate deploy` and NOT `db push`:
+#   `db push` makes the database match prisma/schema.prisma by DROPPING anything
+#   the schema does not describe. This database still contains tables from earlier
+#   iterations of the app (bookings, services, email_subscriptions, blocked_dates,
+#   business_hours, VerificationCode) that the current schema no longer models.
+#   Running `db push` here would drop `bookings` and its rows as collateral damage.
+#   Verified on 2026-10-31: `prisma migrate diff` against production proposed 11
+#   destructive statements including DROP TABLE "bookings".
+#   `migrate deploy` only ever runs the pending migration SQL, so it is additive.
+#
+# Why not a Vercel buildCommand:
+#   - A Vercel build hook also runs for every preview deployment, so a PR branch
+#     could mutate production. This job is gated on `push` to `main`.
+#   - Vercel's build step cannot cheaply answer "did the schema change?". The
+#     `paths` filter below answers that for free.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "prisma/schema.prisma"
+      - "prisma/migrations/**"
+      # Including the workflow itself means a fix to this file re-runs the job,
+      # instead of silently leaving the database in whatever state the last
+      # broken run left it.
+      - ".github/workflows/apply-schema.yml"
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type 'apply' to run this against the production database"
+        required: true
+
+# Migrations take a database advisory lock; never run two at once and never
+# cancel one mid-flight.
+concurrency:
+  group: prisma-schema-apply
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.event_name == 'push' || inputs.confirm == 'apply'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Show what will be applied
+        # `prisma migrate status` EXITS 1 when migrations are pending, which is
+        # exactly the case we want to proceed with. Without this, GitHub's
+        # `bash -e` fails the job before the deploy step ever runs.
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm exec prisma migrate status
+
+      - name: Apply pending migrations
+        env:
+          # Must be the DIRECT (unpooled) connection string. `migrate deploy` takes
+          # a session-level advisory lock, which a transaction-mode pooler can
+          # invalidate; Neon exposes this as the "Direct" connection string (the
+          # host without the `-pooler` suffix).
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL secret is not set on this repository."
+            exit 1
+          fi
+          pnpm exec prisma migrate deploy

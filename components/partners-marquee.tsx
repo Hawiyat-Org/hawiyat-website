@@ -24,16 +24,7 @@ const PartnersMarquee = () => {
     >
       {[...partners, ...partners].map((partner, index) => {
         const logo =
-          partner.logo === "itsol" ? (
-            <div className="relative h-12 w-32 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
-              <SkeletonImage
-                src={isDark ? "/trust/itsol-dark.svg" : "/trust/itsol.svg"}
-                alt={partner.alt}
-                fill
-                sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 128px"
-                imgClassName="object-contain" />
-            </div>
-          ) : partner.logo === "green-duty" ? (
+          partner.logo === "green-duty" ? (
             <div className="relative h-12 w-32 opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:h-14 sm:w-36 md:h-16 md:w-40 lg:h-20 lg:w-48">
               <SkeletonImage
                 src={isDark ? "/trust/green-duty-dark.webp" : "/trust/green-duty-light.webp"}
