@@ -23,7 +23,7 @@ async function catchError(promise: Promise<unknown>): Promise<ParsedOrderError> 
 }
 
 describe("orderErrorMessage", () => {
-  it("reads the route's object envelope", () => {
+  it("reads the route's object envelope, keeping message and resolution apart", () => {
     const result = orderErrorMessage({
       error: {
         code: "disposable_email",
@@ -32,17 +32,22 @@ describe("orderErrorMessage", () => {
       },
     })
     assert.deepEqual(result, {
-      message:
-        "Temporary or disposable email addresses can't be used for orders. Use a permanent address.",
+      message: "Temporary or disposable email addresses can't be used for orders.",
+      resolution: "Use a permanent address.",
       code: "disposable_email",
     })
   })
 
-  it("appends the resolution when it adds information", () => {
+  it("keeps the resolution separate from the message", () => {
     const result = orderErrorMessage({
       error: { message: "Invalid email format.", resolution: "Provide a valid email address." },
     })
-    assert.equal(result.message, "Invalid email format. Provide a valid email address.")
+    // The toast shows the message as its title and the resolution as its
+    // description, so they must never be concatenated here.
+    assert.deepEqual(result, {
+      message: "Invalid email format.",
+      resolution: "Provide a valid email address.",
+    })
   })
 
   it("does not repeat a resolution that duplicates the message", () => {
@@ -50,11 +55,15 @@ describe("orderErrorMessage", () => {
       error: { message: "Invalid email format.", resolution: "Invalid email format." },
     })
     assert.equal(result.message, "Invalid email format.")
+    assert.equal(result.resolution, undefined)
   })
 
   it("falls back to the resolution when the message is empty", () => {
-    assert.equal(orderErrorMessage({ error: { message: "", resolution: "Try again." } }).message, "Try again.")
-    assert.equal(orderErrorMessage({ error: { message: "   ", resolution: "Try again." } }).message, "Try again.")
+    for (const message of ["", "   "]) {
+      const result = orderErrorMessage({ error: { message, resolution: "Try again." } })
+      assert.equal(result.message, "Try again.")
+      assert.equal(result.resolution, undefined)
+    }
   })
 
   it("handles middleware's string envelope", () => {
@@ -163,7 +172,7 @@ describe("parseOrderResponse", () => {
     assert.deepEqual(await parseOrderResponse<typeof body>(json(body, 200)), body)
   })
 
-  it("throws the route's message and code on a 400", async () => {
+  it("throws the route's message, resolution, and code on a 400", async () => {
     const error = await catchError(
       parseOrderResponse(
         json(
@@ -178,10 +187,8 @@ describe("parseOrderResponse", () => {
         )
       )
     )
-    assert.equal(
-      error.message,
-      "Temporary or disposable email addresses can't be used for orders. Use a permanent address you will keep access to."
-    )
+    assert.equal(error.message, "Temporary or disposable email addresses can't be used for orders.")
+    assert.equal(error.resolution, "Use a permanent address you will keep access to.")
     assert.equal(error.code, "disposable_email")
   })
 
@@ -202,6 +209,7 @@ describe("parseOrderResponse", () => {
   it("uses the 429 fallback when the body is unreadable", async () => {
     const error = await catchError(parseOrderResponse(raw("<html>too many</html>", 429)))
     assert.equal(error.message, "Too many requests. Please wait a moment and try again.")
+    assert.equal(error.resolution, undefined)
   })
 
   it("uses the 5xx fallback when an upstream proxy returns HTML", async () => {

@@ -9,6 +9,7 @@ import { waLink } from "@/lib/contact"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
 import { parseOrderResponse } from "@/lib/api-error"
+import { toastError, toastOrderError } from "@/lib/toast-error"
 
 interface OrderFormProps {
   service: {
@@ -31,18 +32,16 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
   const successHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.paymentMethod) {
-      setError("Please select a payment method")
+      toastError("Please select a payment method")
       return
     }
     setIsSubmitting(true)
-    setError(null)
 
     try {
       const response = await fetch("/api/orders", {
@@ -87,7 +86,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
+      toastOrderError(err)
     } finally {
       setIsSubmitting(false)
     }
@@ -163,12 +162,6 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 </div>
               </div>
             </div>
-
-            {error && (
-              <div role="alert" className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
-                {error}
-              </div>
-            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>

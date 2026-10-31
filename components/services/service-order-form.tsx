@@ -10,6 +10,7 @@ import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
 import { parseOrderResponse } from "@/lib/api-error"
+import { toastError, toastOrderError } from "@/lib/toast-error"
 
 interface ServiceOrderFormProps {
   service: {
@@ -52,22 +53,20 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
   const successHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!selectedPayment) {
-      setError("Please select a payment method")
+      toastError("Please select a payment method")
       return
     }
     if (!formData.acceptTerms) {
-      setError("You must accept the terms and conditions")
+      toastError("You must accept the terms and conditions")
       return
     }
     setIsSubmitting(true)
-    setError(null)
 
     try {
       const response = await fetch("/api/orders", {
@@ -115,7 +114,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
+      toastOrderError(err)
     } finally {
       setIsSubmitting(false)
     }
@@ -286,12 +285,6 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                     )}
                   </div>
                 </div>
-
-                {error && (
-                  <div role="alert" className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
-                    {error}
-                  </div>
-                )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>

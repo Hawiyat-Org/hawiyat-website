@@ -8,6 +8,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import PostHogPageView from "@/components/posthog-pageview";
 import ConsentBanner from "@/components/consent-banner";
+import { Toaster } from "@/components/ui/toaster";
 import { SITE_URL } from "@/lib/seo";
 
 const space = Space_Grotesk({
@@ -215,6 +216,11 @@ export default function RootLayout({
           </main>
 
           <Footer />
+
+          {/* Toast host for form errors. Inside ThemeProvider so toasts follow
+              the light/dark theme. Sonner renders its own aria-live region,
+              which Radix dialogs leave exposed even while they are modal. */}
+          <Toaster />
 
           <noscript>
             <div className="p-2 text-sm bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-100">

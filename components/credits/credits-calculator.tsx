@@ -22,6 +22,7 @@ import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
 import { parseOrderResponse } from "@/lib/api-error"
+import { toastError, toastOrderError } from "@/lib/toast-error"
 import {
   CREDITS_MAX_DA,
   CREDITS_MIN_DA,
@@ -101,7 +102,6 @@ export function CreditsCalculator() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
   const successHeadingRef = useRef<HTMLHeadingElement>(null)
 
@@ -186,15 +186,14 @@ export function CreditsCalculator() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.acceptTerms) {
-      setError("You must accept the terms and conditions")
+      toastError("You must accept the terms and conditions")
       return
     }
     if (selectionCount === 0) {
-      setError("Select at least one model, or choose \u201CAny model\u201D")
+      toastError("Select at least one model, or choose \u201CAny model\u201D")
       return
     }
     setIsSubmitting(true)
-    setError(null)
 
     const modelsSummary = selectionSummary(selection)
     const notes = [
@@ -245,7 +244,7 @@ export function CreditsCalculator() {
       setIsSuccess(true)
       setTimeout(() => successHeadingRef.current?.focus(), 0)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
+      toastOrderError(err)
     } finally {
       setIsSubmitting(false)
     }
@@ -343,12 +342,6 @@ export function CreditsCalculator() {
                     </div>
                   </div>
                 </div>
-
-                {error && (
-                  <div role="alert" className="mb-4 p-3 rounded-lg bg-danger/10 text-danger text-sm">
-                    {error}
-                  </div>
-                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Step 1 - amount */}
