@@ -21,6 +21,7 @@ import { waLink } from "@/lib/contact"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
+import { parseOrderResponse } from "@/lib/api-error"
 import {
   CREDITS_MAX_DA,
   CREDITS_MIN_DA,
@@ -219,10 +220,7 @@ export function CreditsCalculator() {
         }),
       })
 
-      const data = await response.json()
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit order")
-      }
+      const data = await parseOrderResponse<{ success: boolean; order: { id: string } }>(response)
 
       const firePixel = () => {
         if (typeof window !== "undefined") {

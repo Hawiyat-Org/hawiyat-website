@@ -77,7 +77,11 @@ Copy `.env.example` → `.env` if missing.
 **Models:** Order. API: `/api/orders`.
 
 ## Testing
-No formal suite. Verify with `npx tsc --noEmit`, `pnpm lint`, `pnpm build`, then manual browser checks via `pnpm dev`.
+Unit tests cover the email validation module: `pnpm test` (`node --import tsx --test`, no extra tooling). Full verification: `npx tsc --noEmit`, `pnpm lint`, `pnpm test`, `pnpm build`, then manual browser checks via `pnpm dev`. `.github/workflows/ci.yml` runs the first four on every PR.
+
+**Disposable email blocking** — `lib/email-validation.ts` validates an address and matches its domain against `lib/data/disposable-domains.json` (~10k domains, vendored from the CC0 `disposable-email-domains` list). Never hand-edit that JSON: run `pnpm sync:domains`, which pins the upstream commit, validates every entry, and refuses to write on a bad entry or an implausible list size. A monthly scheduled workflow opens a PR with the regenerated list. Enforcement lives in `app/api/orders/route.ts`; `*.dz` is exempt.
+
+Domains wrongly blocked are unblocked by inserting into the `EmailDomainAllowlist` table — no deploy needed. That table is created automatically: `.github/workflows/apply-schema.yml` runs `prisma migrate deploy` on merge to `main`, but only when `prisma/schema.prisma` or `prisma/migrations/**` changed (requires a `DATABASE_URL` repository secret pointing at the **direct/unpooled** database, because `migrate deploy` takes a session advisory lock). Never use `prisma db push` against this database: it would drop the tables the schema no longer models (bookings, services, email_subscriptions, …). Rejections are triaged at `contact@hawiyat.org` and `support@hawiyat.org`.
 
 ## Gotchas
 1. `next.config.mjs` ignores TS/ESLint at build — fix errors, don't ignore.

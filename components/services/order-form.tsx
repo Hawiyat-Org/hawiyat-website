@@ -8,6 +8,7 @@ import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
+import { parseOrderResponse } from "@/lib/api-error"
 
 interface OrderFormProps {
   service: {
@@ -58,11 +59,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
         }),
       })
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit order")
-      }
+      const data = await parseOrderResponse<{ success: boolean; order: { id: string } }>(response)
 
       const price = Number(String(service.price).replace(/,/g, "")) || 0
       const usdValue = price / 250

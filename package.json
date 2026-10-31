@@ -9,7 +9,9 @@
     "start": "next start",
     "db:seed": "tsx ./lib/prisma/seed.ts",
     "db:reset": "prisma migrate reset && npm run db:seed",
-    "db:push": "prisma db push && npm run db:seed"
+    "db:push": "prisma db push && npm run db:seed",
+    "sync:domains": "tsx ./scripts/sync-disposable-domains.ts",
+    "test": "node --experimental-test-module-mocks --import tsx --test \"lib/**/*.test.ts\""
   },
   "prisma": {
     "seed": "tsx ./lib/prisma/seed.ts"
@@ -48,7 +50,7 @@
     "juice": "^11.1.1",
     "lucide-react": "^0.454.0",
     "mermaid": "^11.16.1",
-    "next": "^15.5.16",
+    "next": "^15.5.28",
     "next-themes": "^0.4.6",
     "nodemailer": "^9.0.1",
     "posthog-js": "^1.414.0",
@@ -75,7 +77,7 @@
     "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.5.4",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.16",
+    "eslint-config-next": "^15.5.28",
     "postcss": "^8.5.26",
     "postcss-import": "^16.1.1",
     "prisma": "^6.19.3",
