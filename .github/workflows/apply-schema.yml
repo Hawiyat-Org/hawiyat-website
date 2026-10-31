@@ -24,6 +24,10 @@ on:
     paths:
       - "prisma/schema.prisma"
       - "prisma/migrations/**"
+      # Including the workflow itself means a fix to this file re-runs the job,
+      # instead of silently leaving the database in whatever state the last
+      # broken run left it.
+      - ".github/workflows/apply-schema.yml"
   workflow_dispatch:
     inputs:
       confirm:
@@ -53,6 +57,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Show what will be applied
+        # `prisma migrate status` EXITS 1 when migrations are pending, which is
+        # exactly the case we want to proceed with. Without this, GitHub's
+        # `bash -e` fails the job before the deploy step ever runs.
+        continue-on-error: true
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: pnpm exec prisma migrate status
