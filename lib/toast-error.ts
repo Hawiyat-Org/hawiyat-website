@@ -1,27 +1,23 @@
 import { toast } from "sonner"
 
-import type { ParsedOrderError } from "@/lib/api-error"
+import { buildOrderErrorPayload, errorToastOptions } from "@/lib/toast-payload"
 
-/**
- * Error toasts stay up much longer than Sonner's 4s default: a rejected order
- * usually asks the visitor to change something (the email address, the payment
- * method), and four seconds is not enough time to read the resolution and act.
- */
-const ERROR_TOAST_DURATION = 12_000
+export {
+  ERROR_TOAST_DURATION,
+  ERROR_TOAST_ID,
+  buildOrderErrorPayload,
+  errorToastOptions,
+  type ErrorToastOptions,
+  type ErrorToastPayload,
+} from "@/lib/toast-payload"
 
 /** One entry point for form errors, so every surface reports failures alike. */
 export function toastError(message: string, resolution?: string): void {
-  toast.error(message, {
-    // A stable id collapses a double submit into one toast instead of stacking
-    // identical copies on top of each other.
-    id: "form-error",
-    description: resolution,
-    duration: ERROR_TOAST_DURATION,
-  })
+  toast.error(message, errorToastOptions(resolution))
 }
 
 /** Reports a rejected order, keeping the API's message and resolution apart. */
 export function toastOrderError(error: unknown): void {
-  const message = error instanceof Error && error.message ? error.message : "Something went wrong"
-  toastError(message, (error as ParsedOrderError | null)?.resolution)
+  const { message, description } = buildOrderErrorPayload(error)
+  toastError(message, description)
 }

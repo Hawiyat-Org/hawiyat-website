@@ -1,112 +1,79 @@
 import assert from "node:assert/strict"
-import { before, beforeEach, describe, it, mock } from "node:test"
+import { describe, it } from "node:test"
+
+import {
+  ERROR_TOAST_DURATION,
+  ERROR_TOAST_ID,
+  buildOrderErrorPayload,
+  errorToastOptions,
+} from "@/lib/toast-payload"
 
 /**
  * Contract tests for the toast helper used by all three order forms.
  *
- * Sonner is mocked because it needs a DOM; what matters here is the payload the
- * forms rely on — a short title, the resolution as the description, and a
- * duration long enough to act on a fixable 400.
+ * These exercise the pure mapping — a short title, the resolution as the
+ * description, and a duration long enough to act on a fixable 400 — rather than
+ * `toast()` itself. Mocking `sonner` needs `--experimental-test-module-mocks`,
+ * whose behaviour differs across Node versions and broke on CI.
  */
+const orderError = () =>
+  Object.assign(
+    new Error("Temporary or disposable email addresses can't be used for orders."),
+    {
+      code: "disposable_email",
+      resolution: "Use a permanent address you will keep access to.",
+    }
+  )
 
-type ToastCall = { message: unknown; options: Record<string, unknown> }
-
-const calls: ToastCall[] = []
-
-before(() => {
-  mock.module("sonner", {
-    namedExports: {
-      toast: {
-        error: (message: unknown, options: Record<string, unknown> = {}) => {
-          calls.push({ message, options })
-          return "toast-id"
-        },
-      },
-    },
+describe("buildOrderErrorPayload", () => {
+  it("keeps the API message and the resolution apart", () => {
+    assert.deepEqual(buildOrderErrorPayload(orderError()), {
+      message: "Temporary or disposable email addresses can't be used for orders.",
+      description: "Use a permanent address you will keep access to.",
+    })
   })
-})
 
-beforeEach(() => {
-  calls.length = 0
-})
-
-// Imported after the mock is registered, so the helper binds to the fake.
-const load = () => import("@/lib/toast-error")
-
-describe("toastOrderError", () => {
-  it("shows the API message as the title and the resolution as the description", async () => {
-    const { toastOrderError } = await load()
-    const error = Object.assign(
-      new Error("Temporary or disposable email addresses can't be used for orders."),
-      {
-        code: "disposable_email",
-        resolution: "Use a permanent address you will keep access to.",
-      }
+  it("omits the description when the failure carries no resolution", () => {
+    const payload = buildOrderErrorPayload(
+      new Error("Too many requests. Please wait a moment and try again.")
     )
-
-    toastOrderError(error)
-
-    assert.deepEqual(calls, [
-      {
-        message: "Temporary or disposable email addresses can't be used for orders.",
-        options: {
-          id: "form-error",
-          description: "Use a permanent address you will keep access to.",
-          duration: 12_000,
-        },
-      },
-    ])
+    assert.equal(payload.message, "Too many requests. Please wait a moment and try again.")
+    assert.equal(payload.description, undefined)
   })
 
-  it("omits the description when the failure carries no resolution", async () => {
-    const { toastOrderError } = await load()
-
-    toastOrderError(new Error("Too many requests. Please wait a moment and try again."))
-
-    assert.equal(calls.length, 1)
-    assert.equal(calls[0].message, "Too many requests. Please wait a moment and try again.")
-    assert.equal(calls[0].options.description, undefined)
+  it("still reports something readable when a non-Error is thrown", () => {
+    for (const thrown of ["boom", null, undefined, 42, {}]) {
+      assert.equal(buildOrderErrorPayload(thrown).message, "Something went wrong")
+    }
   })
 
-  it("still reports something readable when a non-Error is thrown", async () => {
-    const { toastOrderError } = await load()
-
-    toastOrderError("boom")
-
-    assert.equal(calls[0].message, "Something went wrong")
+  it("ignores a blank or non-string resolution", () => {
+    assert.equal(buildOrderErrorPayload(Object.assign(new Error("x"), { resolution: "   " })).description, undefined)
+    assert.equal(buildOrderErrorPayload(Object.assign(new Error("x"), { resolution: 42 })).description, undefined)
   })
+})
 
-  it("keeps errors on screen longer than Sonner's 4s default", async () => {
-    const { toastOrderError } = await load()
-
-    toastOrderError(new Error("Invalid email format."))
-
+describe("errorToastOptions", () => {
+  it("keeps errors on screen longer than Sonner's 4s default", () => {
     assert.ok(
-      Number(calls[0].options.duration) > 6000,
+      ERROR_TOAST_DURATION > 6000,
       "a 400 the visitor must fix would vanish before they can act on it"
     )
+    assert.equal(errorToastOptions().duration, ERROR_TOAST_DURATION)
   })
 
-  it("reuses one toast id so a double submit does not stack duplicates", async () => {
-    const { toastOrderError } = await load()
-
-    toastOrderError(new Error("First failure"))
-    toastOrderError(new Error("Second failure"))
-
-    assert.deepEqual(
-      calls.map((call) => call.options.id),
-      ["form-error", "form-error"]
-    )
+  it("reuses one toast id so a double submit does not stack duplicates", () => {
+    assert.equal(errorToastOptions().id, ERROR_TOAST_ID)
+    assert.equal(ERROR_TOAST_ID, "form-error")
   })
-})
 
-describe("toastError", () => {
-  it("reports client-side validation without a description", async () => {
-    const { toastError } = await load()
-
-    toastError("You must accept the terms and conditions")
-
-    assert.equal(calls[0].message, "You must accept the terms and conditions")
-    assert.equal(calls[0].options.description, undefined)
+  it("only sets a description when one is supplied", () => {
+    assert.equal(errorToastOptions().description, undefined)
+    assert.equal("description" in errorToastOptions(), false)
+    assert.deepEqual(errorToastOptions("Do this next"), {
+      id: ERROR_TOAST_ID,
+      duration: ERROR_TOAST_DURATION,
+      description: "Do this next",
+    })
   })
 })
