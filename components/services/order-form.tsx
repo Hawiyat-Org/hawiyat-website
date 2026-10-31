@@ -1,11 +1,12 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Loader2, CheckCircle2, Building2, Wallet, DollarSign } from "lucide-react"
+import { Loader2, CheckCircle2, Building2, Wallet, DollarSign, Check } from "lucide-react"
 import { SkeletonImage } from "@/components/image-with-skeleton"
 import { cn } from "@/lib/utils"
 import { USAGE_DASHBOARD_URL } from "@/lib/seo"
 import { waLink } from "@/lib/contact"
+import Link from "next/link"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { track } from "@/lib/analytics"
 import { parseOrderResponse } from "@/lib/api-error"
@@ -29,6 +30,7 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     customerPhone: "",
     paymentMethod: "BARIDI_MOB",
     notes: "",
+    acceptTerms: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -39,6 +41,10 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
     e.preventDefault()
     if (!formData.paymentMethod) {
       toastError("Please select a payment method")
+      return
+    }
+    if (!formData.acceptTerms) {
+      toastError("You must accept the terms and conditions")
       return
     }
     setIsSubmitting(true)
@@ -93,7 +99,9 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    const target = e.target
+    const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value
+    setFormData((prev) => ({ ...prev, [target.name]: value }))
   }
 
   return (
@@ -260,9 +268,53 @@ export function OrderForm({ service, onClose }: OrderFormProps) {
                 />
               </div>
 
+              <div className="flex items-start gap-2.5 p-3 rounded-lg bg-surface-dim/30 border border-border/20">
+                <label htmlFor="acceptTerms" className="cursor-pointer select-none shrink-0">
+                  <input
+                    id="acceptTerms"
+                    name="acceptTerms"
+                    type="checkbox"
+                    checked={formData.acceptTerms}
+                    onChange={handleChange}
+                    className="sr-only peer"
+                    aria-labelledby="acceptTermsDescription"
+                    required
+                  />
+                  {/* Custom checkbox */}
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "flex-shrink-0 w-[18px] h-[18px] rounded border-2 flex items-center justify-center transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-signal peer-focus-visible:ring-offset-2",
+                      formData.acceptTerms
+                        ? "bg-signal border-signal"
+                        : "border-border bg-surface"
+                    )}
+                  >
+                    <Check
+                      strokeWidth={3}
+                      className={cn(
+                        "w-3 h-3 text-signal-text transition-opacity",
+                        formData.acceptTerms ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </span>
+                </label>
+                <span id="acceptTermsDescription" className="text-xs text-muted-ink leading-relaxed">
+                  I agree to the{" "}
+                  <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="font-medium text-signal-contrast underline hover:no-underline">
+                    Privacy Policy
+                  </Link>
+                </span>
+              </div>
+
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !formData.acceptTerms}
+                aria-describedby="acceptTermsDescription"
                 className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (

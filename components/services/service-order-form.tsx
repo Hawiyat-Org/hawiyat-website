@@ -359,6 +359,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                         checked={formData.acceptTerms}
                         onChange={handleChange}
                         className="sr-only peer"
+                        aria-labelledby="acceptTermsDescription"
                         required
                       />
                       {/* Custom checkbox */}
@@ -380,7 +381,7 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
                         />
                       </span>
                     </label>
-                    <span className="text-xs text-muted-ink leading-relaxed">
+                    <span className="text-xs text-muted-ink leading-relaxed" id="acceptTermsDescription">
                       I agree to the{" "}
                       <Link href="/terms" className="font-medium text-signal-contrast underline hover:no-underline">
                         Terms of Service
@@ -394,7 +395,8 @@ export function ServiceOrderForm({ service, paymentMethod = "BARIDI_MOB" }: Serv
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !formData.acceptTerms}
+                    aria-describedby="acceptTermsDescription"
                     className="w-full h-11 rounded-lg bg-signal text-signal-text font-medium text-sm transition-colors hover:bg-signal-hover disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
