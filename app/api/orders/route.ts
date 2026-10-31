@@ -215,7 +215,7 @@ export async function POST(request: NextRequest) {
           "disposable_email",
           "Temporary or disposable email addresses can't be used for orders." +
             (suggestion ? ` Did you mean ${suggestion}?` : ""),
-          "Use a permanent address you will keep access to — Gmail, Outlook, iCloud, or your work email all work. If you believe this is a mistake, contact contact@hawiyat.org and we will unblock your domain.",
+          "Use a permanent address you will keep access to — Gmail, Outlook, iCloud, or your work email all work. If you believe this is a mistake, email contact@hawiyat.org or support@hawiyat.org and we will unblock your domain.",
           400
         )
       }

@@ -347,9 +347,9 @@ export default function PrivacyPage() {
               </p>
               <p className="mt-3">
                 Rejections of a temporary or disposable email address are based on a published domain list and
-                are not final: if you believe your address was rejected in error, contact
-                {" "}contact@hawiyat.org and we will review it and add your domain to our allowlist, so that
-                you can submit the form with that address.
+                are not final: if you believe your address was rejected in error, email
+                {" "}contact@hawiyat.org or support@hawiyat.org and we will review it and add your domain to our
+                allowlist, so that you can submit the form with that address.
               </p>
             </section>
 

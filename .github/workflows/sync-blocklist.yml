@@ -57,11 +57,7 @@ jobs:
             exit 0
           fi
 
+          BODY="Automated monthly sync of the CC0 disposable-domain blocklist. The regeneration script validates every upstream entry, pins the upstream commit, and refuses to write if the list size changes implausibly. Review the added/removed domains printed above: that diff is the only defence against a poisoned upstream entry."
           gh pr create --base main --head "$BRANCH" \
             --title "chore(email): sync disposable-domain blocklist" \
-            --body "Automated monthly sync of the CC0 disposable-domain blocklist.
-
-The regeneration script validates every upstream entry, pins the upstream commit,
-and refuses to write if the list drops below 5,000 entries or changes size
-implausibly. **Review the added/removed domains in the script output above** —
-that diff is the only defence against a poisoned upstream entry."
+            --body "$BODY"

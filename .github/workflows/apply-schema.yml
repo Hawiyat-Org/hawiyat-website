@@ -1,0 +1,64 @@
+name: Apply schema changes
+
+# Applies prisma/schema.prisma to the production database, but ONLY on merge to
+# main and ONLY when the schema actually changed.
+#
+# Why a workflow rather than a Vercel buildCommand:
+#   - A Vercel build hook also runs for every preview deployment, so a PR branch
+#     could mutate production. This job is gated on `push` to `main`.
+#   - Vercel's build step has no reliable way to ask "did the schema change?".
+#     The `paths` filter below answers that question for free.
+#
+# Why `db push` rather than `migrate deploy`:
+#   This repo has no baseline migration for the `orders` table, so
+#   `prisma migrate deploy` fails with P3005 against any db-push-created
+#   database. `db push` reconciles the database to the schema without depending
+#   on migration history, which is the model the repo already uses
+#   (`pnpm db:push`).
+#
+# Safety: `--accept-data-loss` is deliberately ABSENT. If the schema change would
+# destroy data, the job fails loudly instead of silently dropping a column.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "prisma/schema.prisma"
+      - "prisma/migrations/**"
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type 'apply' to run this against the production database"
+        required: true
+
+# Never run two schema applications at once, and never cancel one half-applied.
+concurrency:
+  group: prisma-schema-apply
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.event_name == 'push' || inputs.confirm == 'apply'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Apply schema to the production database
+        env:
+          # Must be the DIRECT (unpooled) connection string. A pgbouncer-pooled
+          # URL breaks the schema engine.
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL secret is not set on this repository."
+            exit 1
+          fi
+          pnpm exec prisma db push --skip-generate
