@@ -203,7 +203,7 @@ UNDERSTAND ─ PLAN ─ ROUTE ─ EXECUTE ─ EVALUATE ─ RESULT
 - Embeds an `ItemList` JSON-LD (partners as organizations) for search/AI crawlers.
 
 ### 4. Our Numbers (`components/our-numbers.tsx`) — stat band
-- Static 4 verified stats: `100+` paying clients, `10+` resellers, `100B+` tokens executed, `≈2.6M DZD` ARR. Mono numerals. Proof stats: static mono numerals, or a smooth fast count-up on first view (~800ms ease-out, `prefers-reduced-motion` respected).
+- Static 4 verified stats: `100+` paying clients, `10+` resellers, `400B+` tokens executed, `≈2.6M DZD` ARR. Mono numerals. Proof stats: static mono numerals, or a smooth fast count-up on first view (~800ms ease-out, `prefers-reduced-motion` respected).
 
 ### 5. Pricing (`components/pricing.tsx`)
 - 3 cards, `rounded-lg`, `bg-surface border border-border`, data from `lib/data/services.ts` (untouched).

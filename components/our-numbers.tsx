@@ -25,7 +25,7 @@ const OurNumbers = () => (
         </h2>
         <p className="mt-3 text-sm text-muted-ink">
           Straight from our own operations, we only print what&rsquo;s real. Figures verified against
-          the Hawiyat operations dashboard as of August 9, 2026.{" "}
+          the Hawiyat operations dashboard as of November 3, 2026.{" "}
           <Link href="/about" className="underline transition-colors hover:text-ink">
             See how we count.
           </Link>
@@ -34,7 +34,7 @@ const OurNumbers = () => (
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">
         <StatCard icon={Users} value="200+" label="satisfied clients and businesses" />
         <StatCard icon={Handshake} value="10+" label="resellers" />
-        <StatCard icon={Zap} value="100B+" label="tokens executed through Composer" />
+        <StatCard icon={Zap} value="400B+" label="tokens executed through Composer" />
       </div>
     </div>
   </section>

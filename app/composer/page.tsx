@@ -530,7 +530,7 @@ export default function ComposerPage() {
               </div>
               <div className="bg-surface p-8">
                 <AnimatedNumber
-                  value="100B+"
+                  value="400B+"
                   className="font-mono text-4xl font-semibold tracking-tight text-ink md:text-5xl"
                 />
                 <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-ink">
