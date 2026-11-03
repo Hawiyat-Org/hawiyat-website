@@ -12,9 +12,11 @@ keywords: [weight-space programming, edit llm weights, small local models, custo
 
 ![Weight-space programming: a 0.016% weight edit against a 1.6 GB base model](/blog/weight-space-programming-small-local-models-hero.png)
 
-On 2 November 2026, four researchers at MIT CSAIL published [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/): Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab. Their claim is narrow and strange. A general-purpose language model, used as it ships, can read and write the weights of another neural network in natural language, without an optimizer and without gradient descent. They call it weight-space programming, and they are careful to call these sparks.
+Here is the strange part. Hand a language model 17,253 numbers, with no labels, no shapes and no way to run them, and it will tell you which game those numbers were trained to win. Not guess at it: name it, four times out of four, without being given a list of games to choose from.
 
-This post walks through what they measured, then does the part the paper leaves to the reader: what it would take to turn this into small, per-customer models you can customize on the fly, on hardware you actually own.
+That result is from a post published on 2 November 2026 by four researchers at MIT CSAIL, [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/): Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab. Their claim is narrow and strange. A general-purpose language model, used as it ships, can read and write the weights of another neural network in natural language, without an optimizer and without gradient descent. They call it weight-space programming, and they are careful to call these sparks.
+
+If it holds, the consequence is not that frontier models get better after release. It is that **customizing a small model stops meaning training it**. The edit in their best experiment touches 0.016% of a 0.8B model and moves MATH-500 from 7.9% to 48.1%. This post walks through what they measured, then does the part the paper leaves to the reader: what that would take in production, and where it breaks.
 
 ```widget
 wsp-stat-band
@@ -26,7 +28,11 @@ Weight-space programming means a language model reads and writes another network
 
 Until now, weights were written three ways: by optimization (Adam, Muon and their relatives), by separate networks trained to emit weights, or by compilers that turn a formal program into a network. All three put a symbolic procedure between the goal and the numbers. The new claim is that the procedure can be reasoning in natural language.
 
-That distinction matters commercially. A training procedure needs data, GPUs, and a new artifact at the end. A reasoning procedure needs the weights, a description of the goal, and enough context to hold both.
+```widget
+wsp-flow
+```
+
+That is the commercial difference in one line. A training procedure needs data, GPUs, and a new artifact at the end. A reasoning procedure needs the weights, a description of the goal, and enough context to hold both.
 
 ## The model can read a network it has never run
 
@@ -70,6 +76,15 @@ At 1.48M weights the parameters stop fitting in a prompt, so the harness changes
 Everything above is a toy network. The eighth experiment is a real 0.8B-parameter language model, Qwen3.5-0.8B, and it is the one to read twice. The model was asked to make it better at math with no gradients, no training and no test-set access, using a CPU Python kernel over the weights and a budget of 10, 25 or 50 forward passes on practice problems.
 
 It found loops, not weak arithmetic. The base model repeats itself and rarely finishes an answer: 85 of its first 96 practice answers ran to the 32,768-token limit, a failure Qwen's own model card warns about. The model traced the loop to one direction written by the MLPs in layers 15 and 19, and subtracted that direction from 64 output columns in each layer. 131,072 weights out of 0.8 billion, or 0.016% of the model.
+
+```python
+# The shape of that edit. Illustrative, not the model's own code: it wrote its
+# own in the sandbox, and the paper reports the result, not the listing.
+direction = mlp_direction(model.layers[15])          # one direction, found by reading the weights
+for layer in (15, 19):
+    model.layers[layer].out_columns[-64:] -= direction * gain   # 64 output columns per layer
+# 131,072 weights touched of 0.8 billion. No loss, no gradients, no backward pass.
+```
 
 ```widget
 wsp-loop

@@ -30,7 +30,7 @@ import {
   VectorDecomp,
 } from "./diagram-widgets"
 import { AttentionLab, RefusalAxis, RequantSlider, StatBand } from "./interactive-widgets"
-import { WspFwdBars, WspLayerMap, WspLoop, WspPatchSlider, WspStatBand, WspVerbs } from "./wsp-widgets"
+import { WspFlow, WspFwdBars, WspLayerMap, WspLoop, WspPatchSlider, WspStatBand, WspVerbs } from "./wsp-widgets"
 import {
   EntryLadder,
   FrontierCost,
@@ -65,6 +65,7 @@ const REGISTRY: Record<string, React.ComponentType> = {
   "plan-split": PlanSplit,
   "rails-matrix": RailsMatrix,
   "wsp-stat-band": WspStatBand,
+  "wsp-flow": WspFlow,
   "wsp-verbs": WspVerbs,
   "wsp-patch-slider": WspPatchSlider,
   "wsp-fwd-bars": WspFwdBars,
