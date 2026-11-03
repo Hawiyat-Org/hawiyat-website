@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
+import { ChevronUp, X } from 'lucide-react'
 
 /*
  * First-party analytics consent (Task B4).
@@ -29,6 +30,11 @@ import Link from 'next/link'
  * UX: a slim one-line bottom bar. It appears on first visit (no stored
  * choice) and re-opens when the footer "Cookie settings" link dispatches the
  * "hawiyat:open-consent" window event. There is no floating re-open chip.
+ *
+ * Mobile: the notice starts COLLAPSED as a one-line pill ("Cookies / Review")
+ * so it never covers the content above it, and expands to the full bar on tap.
+ * Desktop keeps the bar open by default. The pill stays in place until a choice
+ * is stored, so the notice is always visible, never dismissed without consent.
  */
 
 const HAWIYAT_CONSENT_KEY = "hawiyat-consent"
@@ -103,6 +109,7 @@ if (initialStoredConsent !== null) {
 export default function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>("loading")
   const [isOpen, setIsOpen] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     setConsent(initialStoredConsent)
@@ -111,10 +118,22 @@ export default function ConsentBanner() {
       setIsOpen(true)
     }
 
-    // Re-open from the footer "Cookie settings" link.
-    const openFromFooter = () => setIsOpen(true)
+    // Mobile starts collapsed (one-line pill); desktop starts open.
+    const desktop = window.matchMedia("(min-width: 768px)")
+    setExpanded(desktop.matches)
+    const onViewportChange = (event: MediaQueryListEvent) => setExpanded(event.matches)
+    desktop.addEventListener("change", onViewportChange)
+
+    // Re-open from the footer "Cookie settings" link, always expanded.
+    const openFromFooter = () => {
+      setIsOpen(true)
+      setExpanded(true)
+    }
     window.addEventListener(OPEN_CONSENT_EVENT, openFromFooter)
-    return () => window.removeEventListener(OPEN_CONSENT_EVENT, openFromFooter)
+    return () => {
+      desktop.removeEventListener("change", onViewportChange)
+      window.removeEventListener(OPEN_CONSENT_EVENT, openFromFooter)
+    }
   }, [])
 
   const decide = useCallback(
@@ -200,35 +219,75 @@ export default function ConsentBanner() {
       )}
 
       {showBar && bar && (
-        <aside
-          role="region"
-          aria-label="Cookie and analytics consent"
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 backdrop-blur-sm"
-        >
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 md:px-6">
-            <p className="min-w-0 flex-1 text-sm leading-snug text-muted-ink">
-              {bar.message}
-            </p>
-            <div className="flex flex-wrap items-center gap-2">
-              {bar.buttons.map((button) => (
-                <button
-                  key={button.label}
-                  type="button"
-                  onClick={button.onClick}
-                  className={BUTTON_CLASSES[button.variant]}
+        <>
+          {/* Mobile, default state: a one-line pill. Hidden from md up, and
+              hidden while the full bar is expanded. */}
+          <aside
+            role="region"
+            aria-label="Cookie and analytics consent"
+            aria-hidden={expanded}
+            className={`${expanded ? "hidden" : "flex"} fixed inset-x-0 bottom-0 z-50 items-center justify-between gap-3 border-t border-border bg-surface/95 px-4 py-2.5 backdrop-blur-sm md:hidden`}
+          >
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden="true" />
+              <span className="truncate font-mono text-[11px] uppercase tracking-widest text-muted-ink">
+                {pending ? "Cookies" : "Cookie settings"}
+              </span>
+            </span>
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              aria-expanded={expanded}
+              aria-controls="consent-panel"
+              className="flex shrink-0 items-center gap-1.5 rounded-md border border-border px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest text-ink transition-colors hover:bg-surface-dim"
+            >
+              {pending ? "Review" : "Open"}
+              <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" />
+            </button>
+          </aside>
+
+          <aside
+            id="consent-panel"
+            role="region"
+            aria-label="Cookie and analytics consent"
+            className={`${expanded ? "flex" : "hidden md:flex"} fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 backdrop-blur-sm`}
+          >
+            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 md:px-6">
+              <p className="min-w-0 flex-1 text-sm leading-snug text-muted-ink">
+                {bar.message}
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                {bar.buttons.map((button) => (
+                  <button
+                    key={button.label}
+                    type="button"
+                    onClick={button.onClick}
+                    className={BUTTON_CLASSES[button.variant]}
+                  >
+                    {button.label}
+                  </button>
+                ))}
+                <Link
+                  href="/privacy#cookies"
+                  className="px-2 py-1.5 font-mono text-xs text-muted-ink underline underline-offset-4 transition-colors hover:text-ink"
                 >
-                  {button.label}
-                </button>
-              ))}
-              <Link
-                href="/privacy#cookies"
-                className="px-2 py-1.5 font-mono text-xs text-muted-ink underline underline-offset-4 transition-colors hover:text-ink"
-              >
-                Privacy policy
-              </Link>
+                  Privacy policy
+                </Link>
+                {pending && (
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(false)}
+                    aria-label="Collapse cookie notice"
+                    aria-controls="consent-panel"
+                    className="rounded-md p-1.5 text-muted-ink transition-colors hover:text-ink md:hidden"
+                  >
+                    <X className="h-4 w-4" aria-hidden="true" />
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
+        </>
       )}
     </>
   )
