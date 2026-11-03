@@ -73,25 +73,41 @@ const HeroSection = () => {
           </Dialog>
         </div>
 
-        <a
-          href={USAGE_DASHBOARD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-sm text-muted-ink transition-colors hover:text-ink"
-        >
-          <ExternalLink className="h-4 w-4" />
-          Already a Composer client? Open your usage dashboard
-        </a>
+        <div className="mt-2 w-full max-w-xl border-t border-border text-left">
+          <a
+            href={USAGE_DASHBOARD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col gap-1 border-b border-border py-3 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+          >
+            <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-ink">
+              <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              Already a Composer client?
+            </span>
+            <span className="text-sm font-medium text-ink underline decoration-border underline-offset-4 group-hover:decoration-ink">
+              Open your usage dashboard
+            </span>
+          </a>
 
-        <a
-          href={waLink("Hello Hawiyat! I have a question about Composer.")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center gap-1.5 text-sm text-muted-ink transition-colors hover:text-ink"
-        >
-          <MessageCircle className="h-4 w-4" />
-          Questions? Reply in Arabic, French, or English on WhatsApp
-        </a>
+          <a
+            href={waLink("Hello Hawiyat! I have a question about Composer.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col gap-1 py-3 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+          >
+            <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-ink">
+              <MessageCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              Questions?
+            </span>
+            <span className="text-sm font-medium text-ink underline decoration-border underline-offset-4 group-hover:decoration-ink">
+              Chat on WhatsApp
+            </span>
+          </a>
+
+          <p className="pb-1 pt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-ink">
+            Replies in Arabic, French or English
+          </p>
+        </div>
       </div>
 
       {/* Machine-readable entity aliases for AI search / structured data. */}
