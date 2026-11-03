@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
-import { ChevronUp, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
 /*
  * First-party analytics consent (Task B4).
@@ -31,10 +31,11 @@ import { ChevronUp, X } from 'lucide-react'
  * choice) and re-opens when the footer "Cookie settings" link dispatches the
  * "hawiyat:open-consent" window event. There is no floating re-open chip.
  *
- * Mobile: the notice starts COLLAPSED as a one-line pill ("Cookies / Review")
- * so it never covers the content above it, and expands to the full bar on tap.
- * Desktop keeps the bar open by default. The pill stays in place until a choice
- * is stored, so the notice is always visible, never dismissed without consent.
+ * Mobile: NO popup. The notice never opens on its own, so it cannot cover the
+ * content or the WhatsApp button. It appears only when the visitor asks for it
+ * through the footer "Cookie settings" link, as a bottom card. Desktop keeps
+ * the bar open on first visit. Nothing is stored before a choice, so the
+ * absence of a mobile banner changes no data practice.
  */
 
 const HAWIYAT_CONSENT_KEY = "hawiyat-consent"
@@ -111,17 +112,16 @@ export default function ConsentBanner() {
   const [isOpen, setIsOpen] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const panelRef = useRef<HTMLElement | null>(null)
-  const pillRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     setConsent(initialStoredConsent)
-    if (initialStoredConsent === null) {
-      // First visit (or no stored choice): show the banner once.
+    const desktop = window.matchMedia("(min-width: 768px)")
+
+    // Desktop: show the notice once on first visit. Mobile: no popup at all,
+    // the notice opens only from the footer "Cookie settings" link.
+    if (initialStoredConsent === null && desktop.matches) {
       setIsOpen(true)
     }
-
-    // Mobile starts collapsed (one-line pill); desktop starts open.
-    const desktop = window.matchMedia("(min-width: 768px)")
     setExpanded(desktop.matches)
     const onViewportChange = (event: MediaQueryListEvent) => setExpanded(event.matches)
     desktop.addEventListener("change", onViewportChange)
@@ -245,33 +245,6 @@ export default function ConsentBanner() {
 
       {showBar && bar && (
         <>
-          {/* Mobile, default state: a compact pill that clears the WhatsApp
-              button (right-24) instead of covering it. */}
-          <aside
-            ref={pillRef}
-            role="region"
-            aria-label="Cookie and analytics consent"
-            aria-hidden={expanded}
-            className={`${expanded ? "hidden" : "flex"} fixed bottom-3 left-3 right-24 z-50 items-center justify-between gap-2 rounded-xl border border-border bg-surface/95 px-3 py-2.5 shadow-lg backdrop-blur-sm md:hidden`}
-          >
-            <span className="flex min-w-0 items-center gap-2">
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden="true" />
-              <span className="truncate font-mono text-[11px] uppercase tracking-widest text-muted-ink">
-                {pending ? "Cookies" : "Cookie settings"}
-              </span>
-            </span>
-            <button
-              type="button"
-              onClick={() => setExpanded(true)}
-              aria-expanded={expanded}
-              aria-controls="consent-panel"
-              className="flex shrink-0 items-center gap-1.5 rounded-md border border-border px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest text-ink transition-colors hover:bg-surface-dim"
-            >
-              {pending ? "Review" : "Open"}
-              <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" />
-            </button>
-          </aside>
-
           <aside
             id="consent-panel"
             ref={panelRef}
