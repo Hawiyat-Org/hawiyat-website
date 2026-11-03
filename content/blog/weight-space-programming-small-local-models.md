@@ -8,7 +8,7 @@ tags: [research, local models, fine-tuning, interpretability, ai infrastructure]
 keywords: [weight-space programming, edit llm weights, small local models, customize llm without training, llm weight editing, local ai algeria]
 ---
 
-**TL;DR.** A frontier model handed nothing but the raw numbers of a neural network named the game that network was trained to play, four times out of four. It repaired a broken robot policy by changing 3.5% of its weights, and it wrote working game players from scratch with no training at all. On Qwen3.5-0.8B it edited 0.016% of the weights and lifted MATH-500 from 7.9% to 48.1%. For small local models the interesting number is the 0.016%, not the score: customization starts to look like a 256 KiB patch on a shared 1.6 GB base model instead of a fine-tune per customer.
+**TL;DR.** A frontier model handed nothing but the raw numbers of a neural network named the game that network was trained to play, four times out of four. It repaired a stuck car policy by changing 3.5% of its weights, and it wrote working game players from scratch with no training at all. On Qwen3.5-0.8B it edited 0.016% of the weights and lifted MATH-500 from 7.9% to 48.1%. For small local models the interesting number is the 0.016%, not the score: customization starts to look like a 256 KiB patch on a shared 1.6 GB base model instead of a fine-tune per customer.
 
 ![Weight-space programming: a 0.016% weight edit against a 1.6 GB base model](/blog/weight-space-programming-small-local-models-hero.png)
 
@@ -71,6 +71,14 @@ Everything above is a toy network. The eighth experiment is a real 0.8B-paramete
 
 It found loops, not weak arithmetic. The base model repeats itself and rarely finishes an answer: 85 of its first 96 practice answers ran to the 32,768-token limit, a failure Qwen's own model card warns about. The model traced the loop to one direction written by the MLPs in layers 15 and 19, and subtracted that direction from 64 output columns in each layer. 131,072 weights out of 0.8 billion, or 0.016% of the model.
 
+```widget
+wsp-loop
+```
+
+```widget
+wsp-layer-map
+```
+
 | Setting | MATH-500 | GSM8K | IFEval | Answers hitting the token limit |
 |---|---|---|---|---|
 | Base | 7.9% | 13.8% | 21.0% | 93.0% |
@@ -105,8 +113,8 @@ Five things follow, and they are engineering consequences rather than measured r
 1. **The unit of customization becomes a patch, not a checkpoint.** 131,072 weights at 16-bit is 262,144 bytes, against about 1.6 GB for the full 0.8B base at the same precision. That is roughly one part in six thousand. A per-customer variant can be a small file applied to a shared base, instead of another complete model on disk.
 2. **There is no backward pass in the loop.** Training needs activation memory, optimizer state and gradient accumulation. The measured edit ran in a CPU Python kernel with a forward-pass budget. The scarce resource changes from GPU hours to a number of forward passes and someone's review time.
 3. **The blast radius is small by construction.** 0.016% of the weights moved. The authors argue this avoids the catastrophic forgetting that fine-tuning causes, and that specific claim is not measured in the post, but the mechanism is visible in the number.
-4. **Per-tenant variants become a load-time decision.** One base model, N patches, chosen when the model starts for a given client or workflow. For a market where a 1.6 GB download is a real logistics problem and a 256 KiB file is not, that difference decides whether per-customer customization is a product or a support ticket.
-5. **Small models are where the economics already work.** A 0.8B model in 16-bit needs roughly 1.6 GB of memory. That runs beside an application on ordinary hardware, which is the only kind of local deployment most Algerian businesses can buy this year.
+4. **Per-tenant variants become a load-time decision.** One base model, N patches, chosen when the model starts for a given client or workflow. Where moving 1.6 GB per customer is a real cost and 256 KiB is not, that difference decides whether per-customer customization is a product or a support ticket.
+5. **Small models are where the economics already work.** A 0.8B model in 16-bit needs roughly 1.6 GB of memory. That runs beside an application on ordinary hardware, which is the kind of machine a business can buy outright instead of renting tokens.
 
 ## What still has to be true before you ship one
 
@@ -119,7 +127,7 @@ The honest list, because a weight patch that changes behavior is a new kind of a
 
 ## What Hawiyat offers today
 
-Nothing in this post is a Hawiyat product. We do not serve locally edited models, and no vendor does this commercially yet.
+Nothing in this post is a Hawiyat product. We do not serve locally edited models, and we know of no vendor that does yet.
 
 What we do sell is access to frontier models through one API key, on monthly plans in dinars: Composer Pro at 6,000 DA per month, MAX 5X at 15,000 DA, and MAX 20X at 30,000 DA. If your goal is to run a small model yourself, [Hawiyat Cloud](/services/hawiyat-cloud) provides managed containers or a VPS with a managed database, quoted by order in DZD, which is the kind of machine a 0.8B model actually fits on. You can compare plans on the [pricing page](/pricing) or see the [API plans](/api).
 
