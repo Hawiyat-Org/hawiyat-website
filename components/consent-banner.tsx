@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
 import { ChevronUp, X } from 'lucide-react'
@@ -58,11 +58,11 @@ type BarContent = {
 
 const BUTTON_CLASSES: Record<BarButton["variant"], string> = {
   primary:
-    "rounded-md bg-signal px-3 py-1.5 text-sm font-medium text-signal-text transition-colors hover:bg-signal-hover",
+    "rounded-md bg-signal px-3 py-2.5 text-sm font-medium text-signal-text transition-colors hover:bg-signal-hover md:py-1.5",
   secondary:
-    "rounded-md border border-border px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-surface-dim",
+    "rounded-md border border-border px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface-dim md:py-1.5",
   ghost:
-    "rounded-md px-2 py-1.5 text-sm font-medium text-muted-ink transition-colors hover:text-ink",
+    "rounded-md px-2 py-2.5 text-sm font-medium text-muted-ink transition-colors hover:text-ink md:py-1.5",
 }
 
 const META_PIXEL_SNIPPET = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1043227882071238');fbq('track', 'PageView');`
@@ -110,6 +110,8 @@ export default function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>("loading")
   const [isOpen, setIsOpen] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const panelRef = useRef<HTMLElement | null>(null)
+  const pillRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     setConsent(initialStoredConsent)
@@ -135,6 +137,29 @@ export default function ConsentBanner() {
       window.removeEventListener(OPEN_CONSENT_EVENT, openFromFooter)
     }
   }, [])
+
+  // Publish the height of the OPEN notice so the WhatsApp button can float above
+  // it instead of being covered by it. The collapsed pill clears the button by
+  // width (right-24), so it publishes 0 and the button returns to bottom-6.
+  useEffect(() => {
+    const root = document.documentElement
+    const apply = () => {
+      const panel = panelRef.current
+      // The panel is only mounted while the notice is shown, so a present ref
+      // plus a non-hidden computed display means it is on screen.
+      const visible = panel !== null && window.getComputedStyle(panel).display !== "none"
+      root.style.setProperty("--hw-consent-offset", visible ? `${panel.offsetHeight}px` : "0px")
+    }
+    apply()
+    const observer = new ResizeObserver(apply)
+    if (panelRef.current) observer.observe(panelRef.current)
+    window.addEventListener("resize", apply)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", apply)
+      root.style.removeProperty("--hw-consent-offset")
+    }
+  }, [consent, isOpen, expanded])
 
   const decide = useCallback(
     (choice: ConsentChoice) => {
@@ -220,13 +245,14 @@ export default function ConsentBanner() {
 
       {showBar && bar && (
         <>
-          {/* Mobile, default state: a one-line pill. Hidden from md up, and
-              hidden while the full bar is expanded. */}
+          {/* Mobile, default state: a compact pill that clears the WhatsApp
+              button (right-24) instead of covering it. */}
           <aside
+            ref={pillRef}
             role="region"
             aria-label="Cookie and analytics consent"
             aria-hidden={expanded}
-            className={`${expanded ? "hidden" : "flex"} fixed inset-x-0 bottom-0 z-50 items-center justify-between gap-3 border-t border-border bg-surface/95 px-4 py-2.5 backdrop-blur-sm md:hidden`}
+            className={`${expanded ? "hidden" : "flex"} fixed bottom-3 left-3 right-24 z-50 items-center justify-between gap-2 rounded-xl border border-border bg-surface/95 px-3 py-2.5 shadow-lg backdrop-blur-sm md:hidden`}
           >
             <span className="flex min-w-0 items-center gap-2">
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden="true" />
@@ -248,42 +274,45 @@ export default function ConsentBanner() {
 
           <aside
             id="consent-panel"
+            ref={panelRef}
             role="region"
             aria-label="Cookie and analytics consent"
-            className={`${expanded ? "flex" : "hidden md:flex"} fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 backdrop-blur-sm`}
+            className={`${expanded ? "block" : "hidden md:block"} fixed inset-x-0 bottom-0 z-40 md:border-t md:border-border md:bg-surface/95 md:backdrop-blur-sm`}
           >
-            <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 md:px-6">
-              <p className="min-w-0 flex-1 text-sm leading-snug text-muted-ink">
-                {bar.message}
-              </p>
-              <div className="flex flex-wrap items-center gap-2">
-                {bar.buttons.map((button) => (
-                  <button
-                    key={button.label}
-                    type="button"
-                    onClick={button.onClick}
-                    className={BUTTON_CLASSES[button.variant]}
+            <div className="mx-3 mb-3 rounded-xl border border-border bg-surface/95 shadow-lg backdrop-blur-sm md:mx-0 md:mb-0 md:rounded-none md:border-0 md:shadow-none">
+              <div className="mx-auto w-full max-w-6xl px-4 py-3.5 md:flex md:flex-wrap md:items-center md:gap-x-6 md:gap-y-2 md:px-6 md:py-3">
+                <p className="text-sm leading-snug text-muted-ink md:min-w-0 md:flex-1">
+                  {bar.message}
+                </p>
+                <div className="mt-3 flex items-center gap-2 md:mt-0 md:flex-wrap">
+                  {bar.buttons.map((button) => (
+                    <button
+                      key={button.label}
+                      type="button"
+                      onClick={button.onClick}
+                      className={`${BUTTON_CLASSES[button.variant]} flex-1 md:flex-none`}
+                    >
+                      {button.label}
+                    </button>
+                  ))}
+                  {pending && (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(false)}
+                      aria-label="Collapse cookie notice"
+                      aria-controls="consent-panel"
+                      className="rounded-md p-2 text-muted-ink transition-colors hover:text-ink md:hidden"
+                    >
+                      <X className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  )}
+                  <Link
+                    href="/privacy#cookies"
+                    className="w-full px-1 py-1 font-mono text-xs text-muted-ink underline underline-offset-4 transition-colors hover:text-ink md:w-auto md:px-2 md:py-1.5"
                   >
-                    {button.label}
-                  </button>
-                ))}
-                <Link
-                  href="/privacy#cookies"
-                  className="px-2 py-1.5 font-mono text-xs text-muted-ink underline underline-offset-4 transition-colors hover:text-ink"
-                >
-                  Privacy policy
-                </Link>
-                {pending && (
-                  <button
-                    type="button"
-                    onClick={() => setExpanded(false)}
-                    aria-label="Collapse cookie notice"
-                    aria-controls="consent-panel"
-                    className="rounded-md p-1.5 text-muted-ink transition-colors hover:text-ink md:hidden"
-                  >
-                    <X className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                )}
+                    Privacy policy
+                  </Link>
+                </div>
               </div>
             </div>
           </aside>

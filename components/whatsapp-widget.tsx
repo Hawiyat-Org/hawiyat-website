@@ -24,7 +24,10 @@ export default function WhatsAppWidget() {
   if (!isVisible) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div
+      className="fixed right-6 z-[55] transition-[bottom] duration-300 ease-out motion-reduce:transition-none"
+      style={{ bottom: "calc(1.5rem + var(--hw-consent-offset, 0px))" }}
+    >
       <div className="relative">
         <div className="absolute inset-0 rounded-full bg-ink/20 animate-ping opacity-40 motion-reduce:animate-none motion-reduce:opacity-0" />
         <div className="absolute -inset-2 rounded-full bg-ink/15 animate-pulse opacity-30 blur-sm motion-reduce:animate-none motion-reduce:opacity-0" />
