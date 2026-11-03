@@ -30,6 +30,7 @@ import {
   VectorDecomp,
 } from "./diagram-widgets"
 import { AttentionLab, RefusalAxis, RequantSlider, StatBand } from "./interactive-widgets"
+import { WspFwdBars, WspPatchSlider, WspStatBand, WspVerbs } from "./wsp-widgets"
 import {
   EntryLadder,
   FrontierCost,
@@ -63,6 +64,10 @@ const REGISTRY: Record<string, React.ComponentType> = {
   "reach-chart": ReachChart,
   "plan-split": PlanSplit,
   "rails-matrix": RailsMatrix,
+  "wsp-stat-band": WspStatBand,
+  "wsp-verbs": WspVerbs,
+  "wsp-patch-slider": WspPatchSlider,
+  "wsp-fwd-bars": WspFwdBars,
 }
 
 export function BlogWidget({ name }: { name: string }) {
